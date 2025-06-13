@@ -333,7 +333,7 @@ $$\text{Logical Implication}(p, q) \equiv p \rightarrow q$$
 
 **核心概念**：
 
-#### 形式化存在论
+#### 形式化存在论1
 
 - **公理化系统**：存在论的公理化表达
 - **形式语义**：存在论的形式语义
@@ -396,6 +396,7 @@ data TypeOntology =
 $$\text{Ontological Framework} = \langle E, P, R, I \rangle$$
 
 其中：
+
 - $E$ 是实体集合
 - $P$ 是属性集合
 - $R$ 是关系集合
