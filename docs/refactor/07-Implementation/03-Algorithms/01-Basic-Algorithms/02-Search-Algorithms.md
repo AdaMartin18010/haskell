@@ -7,16 +7,19 @@
 ## 2. 算法分类
 
 ### 2.1 线性搜索算法
+
 - 线性搜索 (Linear Search)
 - 跳跃搜索 (Jump Search)
 - 插值搜索 (Interpolation Search)
 
 ### 2.2 分治搜索算法
+
 - 二分搜索 (Binary Search)
 - 三分搜索 (Ternary Search)
 - 指数搜索 (Exponential Search)
 
 ### 2.3 图搜索算法
+
 - 深度优先搜索 (Depth-First Search)
 - 广度优先搜索 (Breadth-First Search)
 - A*搜索 (A* Search)
@@ -26,6 +29,7 @@
 ### 3.1 线性搜索
 
 #### 算法描述
+
 线性搜索逐个检查数组中的每个元素，直到找到目标元素或遍历完整个数组。
 
 #### Haskell实现
@@ -59,6 +63,7 @@ linearSearchFold target = foldr f Nothing . zip [0..]
 ```
 
 #### 复杂度分析
+
 - **时间复杂度**: O(n) 最坏和平均情况
 - **空间复杂度**: O(1)
 - **适用场景**: 无序数组、小规模数据
@@ -67,7 +72,8 @@ linearSearchFold target = foldr f Nothing . zip [0..]
 
 **定理 3.1**: 线性搜索算法正确性
 
-**证明**: 
+**证明**:
+
 1. **基础情况**: 空列表返回Nothing
 2. **归纳假设**: 假设对长度为k的列表，算法正确工作
 3. **归纳步骤**: 对于长度为k+1的列表，检查第一个元素，如果匹配则返回0，否则递归搜索剩余k个元素
@@ -75,6 +81,7 @@ linearSearchFold target = foldr f Nothing . zip [0..]
 ### 3.2 跳跃搜索
 
 #### 算法描述
+
 跳跃搜索通过固定步长跳跃来减少比较次数，适用于有序数组。
 
 #### Haskell实现
@@ -123,6 +130,7 @@ jumpSearchOptimized target xs =
 ```
 
 #### 复杂度分析
+
 - **时间复杂度**: O(√n) 最优情况，O(n) 最坏情况
 - **空间复杂度**: O(1)
 - **适用场景**: 有序数组，比线性搜索更快
@@ -130,6 +138,7 @@ jumpSearchOptimized target xs =
 ### 3.3 插值搜索
 
 #### 算法描述
+
 插值搜索使用插值公式来估计目标元素的位置，适用于均匀分布的有序数组。
 
 #### Haskell实现
@@ -186,6 +195,7 @@ interpolationSearchSafe target xs =
 ```
 
 #### 复杂度分析
+
 - **时间复杂度**: O(log log n) 平均情况，O(n) 最坏情况
 - **空间复杂度**: O(1)
 - **适用场景**: 均匀分布的有序数组
@@ -195,6 +205,7 @@ interpolationSearchSafe target xs =
 ### 4.1 二分搜索
 
 #### 算法描述
+
 二分搜索在有序数组中通过比较中间元素来缩小搜索范围。
 
 #### Haskell实现
@@ -255,6 +266,7 @@ binarySearchLast target xs = binarySearchLast' target xs 0 (length xs)
 ```
 
 #### 复杂度分析
+
 - **时间复杂度**: O(log n) 所有情况
 - **空间复杂度**: O(1) 迭代版本，O(log n) 递归版本
 - **适用场景**: 有序数组
@@ -263,10 +275,11 @@ binarySearchLast target xs = binarySearchLast' target xs 0 (length xs)
 
 **定理 4.1**: 二分搜索算法正确性
 
-**证明**: 
+**证明**:
+
 1. **基础情况**: 空数组返回Nothing
 2. **归纳假设**: 假设对长度为k的数组，算法正确工作
-3. **归纳步骤**: 
+3. **归纳步骤**:
    - 比较中间元素
    - 如果匹配，返回位置
    - 如果目标小于中间元素，在左半部分搜索
@@ -276,6 +289,7 @@ binarySearchLast target xs = binarySearchLast' target xs 0 (length xs)
 ### 4.2 三分搜索
 
 #### 算法描述
+
 三分搜索用于在单峰函数中查找最大值或最小值。
 
 #### Haskell实现
@@ -316,6 +330,7 @@ ternarySearchInt f left right =
 ```
 
 #### 复杂度分析
+
 - **时间复杂度**: O(log n)
 - **空间复杂度**: O(1)
 - **适用场景**: 单峰函数优化
@@ -323,6 +338,7 @@ ternarySearchInt f left right =
 ### 4.3 指数搜索
 
 #### 算法描述
+
 指数搜索通过指数增长步长来找到目标元素的范围，然后使用二分搜索。
 
 #### Haskell实现
@@ -372,6 +388,7 @@ exponentialSearchOptimized target xs =
 ```
 
 #### 复杂度分析
+
 - **时间复杂度**: O(log n)
 - **空间复杂度**: O(1)
 - **适用场景**: 有序数组，目标元素靠近数组开头
@@ -381,6 +398,7 @@ exponentialSearchOptimized target xs =
 ### 5.1 深度优先搜索
 
 #### 算法描述
+
 深度优先搜索沿着图的边尽可能深入，直到无法继续，然后回溯。
 
 #### Haskell实现
@@ -450,6 +468,7 @@ dfsRecursive start graph = dfsRec' start [] graph
 ```
 
 #### 复杂度分析
+
 - **时间复杂度**: O(V + E) 其中V是顶点数，E是边数
 - **空间复杂度**: O(V) 最坏情况
 - **适用场景**: 图遍历、拓扑排序、连通分量
@@ -457,6 +476,7 @@ dfsRecursive start graph = dfsRec' start [] graph
 ### 5.2 广度优先搜索
 
 #### 算法描述
+
 广度优先搜索逐层访问图的顶点，先访问所有相邻顶点，再访问下一层。
 
 #### Haskell实现
@@ -522,6 +542,7 @@ bfsLevels start graph = bfsLevels' [[start]] [] graph
 ```
 
 #### 复杂度分析
+
 - **时间复杂度**: O(V + E)
 - **空间复杂度**: O(V)
 - **适用场景**: 最短路径、层次遍历、连通性检测
@@ -529,6 +550,7 @@ bfsLevels start graph = bfsLevels' [[start]] [] graph
 ### 5.3 A*搜索
 
 #### 算法描述
+
 A*搜索是一种启发式搜索算法，结合了Dijkstra算法和贪心最佳优先搜索。
 
 #### Haskell实现
@@ -621,6 +643,7 @@ aStarSimple start goal getNeighbors getCost heuristic =
 ```
 
 #### 复杂度分析
+
 - **时间复杂度**: O(b^d) 其中b是分支因子，d是解的深度
 - **空间复杂度**: O(b^d)
 - **适用场景**: 路径规划、游戏AI、机器人导航
@@ -695,6 +718,7 @@ runSearchTests = do
 3. **图搜索算法**: 深度优先搜索、广度优先搜索、A*搜索
 
 每个算法都包含：
+
 - 详细的算法描述
 - 完整的Haskell实现
 - 复杂度分析
@@ -702,7 +726,8 @@ runSearchTests = do
 - 性能测试
 
 这些实现展示了函数式编程在搜索算法中的优势，包括：
+
 - 简洁的递归实现
 - 强类型安全
 - 易于理解和维护
-- 良好的模块化设计 
+- 良好的模块化设计
