@@ -9,10 +9,12 @@
 ### 工作流的形式化模型
 
 #### 定义 1.1 (工作流)
+
 工作流定义为：
 $$\text{Workflow} = (S, T, \text{transition}, \text{initial}, \text{final})$$
 
 其中：
+
 - $S$ 是状态集合
 - $T$ 是任务集合
 - $\text{transition}$ 是状态转换函数
@@ -20,6 +22,7 @@ $$\text{Workflow} = (S, T, \text{transition}, \text{initial}, \text{final})$$
 - $\text{final}$ 是终止状态集合
 
 #### 定义 1.2 (工作流实例)
+
 工作流实例定义为：
 $$\text{WorkflowInstance} = (W, \text{currentState}, \text{history}, \text{data})$$
 
@@ -30,10 +33,12 @@ $$\text{WorkflowInstance} = (W, \text{currentState}, \text{history}, \text{data}
 ### 有限状态机
 
 #### 定义 2.1 (有限状态机)
+
 有限状态机定义为：
 $$\text{FSM} = (Q, \Sigma, \delta, q_0, F)$$
 
 其中：
+
 - $Q$ 是状态集合
 - $\Sigma$ 是输入字母表
 - $\delta : Q \times \Sigma \rightarrow Q$ 是转换函数
@@ -248,6 +253,7 @@ exampleWorkflow = do
 ### 形式化证明
 
 #### 定理 2.1 (状态机的确定性)
+
 对于任意有限状态机 $\text{FSM}$：
 $$\forall q \in Q, \forall a \in \Sigma, |\delta(q, a)| = 1$$
 
@@ -259,10 +265,12 @@ $$\forall q \in Q, \forall a \in \Sigma, |\delta(q, a)| = 1$$
 ### Petri网基础
 
 #### 定义 3.1 (Petri网)
+
 Petri网定义为：
 $$\text{PetriNet} = (P, T, F, M_0)$$
 
 其中：
+
 - $P$ 是库所集合
 - $T$ 是变迁集合
 - $F \subseteq (P \times T) \cup (T \times P)$ 是流关系
@@ -480,6 +488,7 @@ examplePetriNet = do
 ### 形式化证明
 
 #### 定理 3.1 (Petri网的有界性)
+
 对于任意Petri网 $\text{PetriNet}$，如果所有库所都有界，则：
 $$\forall p \in P, \exists k \in \mathbb{N}, \forall M \in \text{Reach}(M_0), M(p) \leq k$$
 
@@ -491,10 +500,12 @@ Petri网的有界性确保系统不会无限增长，保持资源控制。
 ### BPMN元素
 
 #### 定义 4.1 (BPMN)
+
 BPMN定义为：
 $$\text{BPMN} = (E, F, \text{gateway}, \text{event}, \text{task})$$
 
 其中：
+
 - $E$ 是事件集合
 - $F$ 是流对象集合
 - $\text{gateway}$ 是网关函数
@@ -707,6 +718,7 @@ exampleBPMN = do
 ### 形式化证明
 
 #### 定理 4.1 (BPMN的完整性)
+
 对于任意BPMN流程：
 $$\text{start} \rightarrow^* \text{end} \Rightarrow \text{complete}(\text{process})$$
 
@@ -790,4 +802,4 @@ collectMetrics executor metricName value =
 
 ---
 
-*本文档提供了工作流建模的完整形式化理论和Haskell实现，为工作流系统设计提供了坚实的理论基础。* 
+*本文档提供了工作流建模的完整形式化理论和Haskell实现，为工作流系统设计提供了坚实的理论基础。*

@@ -9,15 +9,18 @@
 ### 监控的形式化模型
 
 #### 定义 1.1 (监控系统)
+
 监控系统定义为：
 $$\text{Monitoring} = (M, L, T, \text{collect}, \text{analyze}, \text{alert})$$
 
 其中：
+
 - $M$ 是指标类型
 - $L$ 是日志类型
 - $T$ 是追踪类型
 
 #### 定义 1.2 (可观测性)
+
 可观测性定义为：
 $$\text{Observability} = \text{Metrics} \times \text{Logs} \times \text{Traces}$$
 
@@ -26,10 +29,12 @@ $$\text{Observability} = \text{Metrics} \times \text{Logs} \times \text{Traces}$
 ### 指标收集
 
 #### 定义 2.1 (指标)
+
 指标定义为：
 $$\text{Metric} = (N, V, T, \text{tags})$$
 
 其中：
+
 - $N$ 是指标名称
 - $V$ 是指标值
 - $T$ 是时间戳
@@ -227,6 +232,7 @@ exampleMetrics = do
 ### 形式化证明
 
 #### 定理 2.1 (指标的单调性)
+
 对于计数器 $C$：
 $$\text{increment}(C, v_1) \land \text{increment}(C, v_2) \Rightarrow \text{value}(C) = v_1 + v_2$$
 
@@ -238,10 +244,12 @@ $$\text{increment}(C, v_1) \land \text{increment}(C, v_2) \Rightarrow \text{valu
 ### 结构化日志
 
 #### 定义 3.1 (日志)
+
 日志定义为：
 $$\text{Log} = (L, T, \text{level}, \text{message}, \text{context})$$
 
 其中：
+
 - $L$ 是日志级别
 - $T$ 是时间戳
 - $\text{message}$ 是日志消息
@@ -384,6 +392,7 @@ exampleLogging = do
 ### 形式化证明
 
 #### 定理 3.1 (日志的完整性)
+
 对于任意日志系统：
 $$\text{log}(m, l) \Rightarrow \text{persistent}(m, l)$$
 
@@ -395,10 +404,12 @@ $$\text{log}(m, l) \Rightarrow \text{persistent}(m, l)$$
 ### 追踪系统
 
 #### 定义 4.1 (追踪)
+
 追踪定义为：
 $$\text{Trace} = (T, S, \text{span}, \text{context})$$
 
 其中：
+
 - $T$ 是追踪ID
 - $S$ 是跨度集合
 - $\text{span}$ 是跨度函数
@@ -566,6 +577,7 @@ exampleTracing = do
 ### 形式化证明
 
 #### 定理 4.1 (追踪的因果性)
+
 对于任意追踪系统：
 $$\text{span}_1 \rightarrow \text{span}_2 \Rightarrow \text{causal}(\text{span}_1, \text{span}_2)$$
 
@@ -577,10 +589,12 @@ $$\text{span}_1 \rightarrow \text{span}_2 \Rightarrow \text{causal}(\text{span}_
 ### 告警规则
 
 #### 定义 5.1 (告警)
+
 告警定义为：
 $$\text{Alert} = (R, C, \text{condition}, \text{action})$$
 
 其中：
+
 - $R$ 是规则类型
 - $C$ 是条件类型
 - $\text{condition}$ 是条件函数
@@ -785,6 +799,7 @@ exampleAlerting = do
 ### 形式化证明
 
 #### 定理 5.1 (告警的及时性)
+
 对于任意告警系统：
 $$\text{condition}(m) \land \text{threshold}(m) \Rightarrow \text{eventually}(\text{alert}(m))$$
 
@@ -830,4 +845,4 @@ $$\text{condition}(m) \land \text{threshold}(m) \Rightarrow \text{eventually}(\t
 
 ---
 
-*本文档提供了微服务监控的完整形式化理论和Haskell实现，为微服务架构提供了坚实的理论基础。* 
+*本文档提供了微服务监控的完整形式化理论和Haskell实现，为微服务架构提供了坚实的理论基础。*
