@@ -6,7 +6,7 @@
 
 ## 理论层次结构
 
-```
+```text
 03-Theory/
 ├── 01-Programming-Language-Theory/
 │   ├── 01-Syntax-Theory/
@@ -537,7 +537,7 @@ class Consistency a where
 
 ### 1. 层次关系
 
-```
+```text
 哲学层 → 形式科学层 → 理论层 → 应用科学层 → 行业领域层
 ```
 
