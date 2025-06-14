@@ -856,4 +856,4 @@ calculateScalability nodeCounts performanceMetrics =
 4. **容错性**: 算法必须能够处理节点故障
 5. **一致性**: 算法必须保证数据一致性
 
-通过Haskell的类型系统和函数式编程特性，我们可以构建出类型安全、可靠的分布式算法。 
+通过Haskell的类型系统和函数式编程特性，我们可以构建出类型安全、可靠的分布式算法。

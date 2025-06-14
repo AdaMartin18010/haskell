@@ -13,6 +13,7 @@
 给定字母表 $\Sigma$，字符串是 $\Sigma^*$ 中的元素，即字母表上所有有限序列的集合。
 
 **形式化定义**：
+
 - **字母表**：$\Sigma = \{a_1, a_2, \ldots, a_k\}$
 - **字符串**：$s = s_1s_2\ldots s_n$，其中 $s_i \in \Sigma$
 - **长度**：$|s| = n$
@@ -73,6 +74,7 @@ class StringAlgorithm alg where
 KMP算法是一种高效的字符串匹配算法，利用模式串的自身信息来避免不必要的比较。
 
 **算法描述**：
+
 1. 计算模式串的失败函数（next数组）
 2. 使用失败函数进行匹配，避免回溯
 
@@ -177,6 +179,7 @@ kmpComplexity =
 #### 性能分析
 
 **时间复杂度**：
+
 - 预处理：$O(m)$
 - 匹配：$O(n + m)$
 
@@ -189,6 +192,7 @@ kmpComplexity =
 Boyer-Moore算法是一种高效的字符串匹配算法，从右到左比较，利用坏字符规则和好后缀规则进行跳跃。
 
 **算法描述**：
+
 1. 计算坏字符表和好后缀表
 2. 从右到左比较模式串和文本
 3. 根据规则进行跳跃
@@ -294,6 +298,7 @@ boyerMooreComplexity =
 #### 性能分析
 
 **时间复杂度**：
+
 - 最好情况：$O(n/m)$
 - 最坏情况：$O(nm)$
 - 平均情况：$O(n/m)$
@@ -321,7 +326,7 @@ LCS[i-1,j-1] + 1 & \text{if } x_i = y_j \\
 ```haskell
 -- 最长公共子序列算法
 lcs :: String -> String -> String
-lcs str1 str2 = 
+lcs str1 str2 =
     let m = length str1
         n = length str2
         dp = computeLCSDP str1 str2
@@ -329,7 +334,7 @@ lcs str1 str2 =
 
 -- 计算动态规划表
 computeLCSDP :: String -> String -> Array (Int, Int) Int
-computeLCSDP str1 str2 = 
+computeLCSDP str1 str2 =
     let m = length str1
         n = length str2
         bounds = ((0, 0), (m, n))
@@ -340,11 +345,11 @@ computeLCSDP' :: String -> String -> Array (Int, Int) Int -> Int -> Int -> Array
 computeLCSDP' str1 str2 dp i j
   | i > length str1 = dp
   | j > length str2 = computeLCSDP' str1 str2 dp (i + 1) 1
-  | str1 !! (i - 1) == str2 !! (j - 1) = 
+  | str1 !! (i - 1) == str2 !! (j - 1) =
       let newValue = dp ! (i - 1, j - 1) + 1
           newDp = dp // [((i, j), newValue)]
       in computeLCSDP' str1 str2 newDp i (j + 1)
-  | otherwise = 
+  | otherwise =
       let maxValue = max (dp ! (i - 1, j)) (dp ! (i, j - 1))
           newDp = dp // [((i, j), maxValue)]
       in computeLCSDP' str1 str2 newDp i (j + 1)
@@ -353,11 +358,11 @@ computeLCSDP' str1 str2 dp i j
 reconstructLCS :: String -> String -> Array (Int, Int) Int -> Int -> Int -> String
 reconstructLCS str1 str2 dp i j
   | i == 0 || j == 0 = ""
-  | str1 !! (i - 1) == str2 !! (j - 1) = 
+  | str1 !! (i - 1) == str2 !! (j - 1) =
       reconstructLCS str1 str2 dp (i - 1) (j - 1) ++ [str1 !! (i - 1)]
-  | dp ! (i - 1, j) >= dp ! (i, j - 1) = 
+  | dp ! (i - 1, j) >= dp ! (i, j - 1) =
       reconstructLCS str1 str2 dp (i - 1) j
-  | otherwise = 
+  | otherwise =
       reconstructLCS str1 str2 dp i (j - 1)
 
 -- 带统计的LCS
@@ -372,7 +377,7 @@ lcsWithStats str1 str2 = StringAlgorithmResult
     (result, compCount, memory) = lcsStats str1 str2
 
 lcsStats :: String -> String -> (String, Int, Int)
-lcsStats str1 str2 = 
+lcsStats str1 str2 =
     let m = length str1
         n = length str2
         dp = computeLCSDP str1 str2
@@ -383,7 +388,7 @@ lcsStats str1 str2 =
 
 -- 复杂度分析
 lcsComplexity :: String
-lcsComplexity = 
+lcsComplexity =
     "时间复杂度: O(mn)\n" ++
     "空间复杂度: O(mn)\n" ++
     "应用: 生物信息学、版本控制、文本相似度\n" ++
@@ -419,7 +424,7 @@ ED[i-1,j-1] & \text{if } x_i = y_j \\
 ```haskell
 -- 编辑距离算法
 editDistance :: String -> String -> Int
-editDistance str1 str2 = 
+editDistance str1 str2 =
     let m = length str1
         n = length str2
         dp = computeEditDistanceDP str1 str2
@@ -427,11 +432,11 @@ editDistance str1 str2 =
 
 -- 计算编辑距离动态规划表
 computeEditDistanceDP :: String -> String -> Array (Int, Int) Int
-computeEditDistanceDP str1 str2 = 
+computeEditDistanceDP str1 str2 =
     let m = length str1
         n = length str2
         bounds = ((0, 0), (m, n))
-        initialArray = array bounds [(i, i) | i <- [0..m]] // 
+        initialArray = array bounds [(i, i) | i <- [0..m]] //
                                      [(j, j) | j <- [0..n]]
     in computeEditDistanceDP' str1 str2 initialArray 1 1
 
@@ -439,11 +444,11 @@ computeEditDistanceDP' :: String -> String -> Array (Int, Int) Int -> Int -> Int
 computeEditDistanceDP' str1 str2 dp i j
   | i > length str1 = dp
   | j > length str2 = computeEditDistanceDP' str1 str2 dp (i + 1) 1
-  | str1 !! (i - 1) == str2 !! (j - 1) = 
+  | str1 !! (i - 1) == str2 !! (j - 1) =
       let newValue = dp ! (i - 1, j - 1)
           newDp = dp // [((i, j), newValue)]
       in computeEditDistanceDP' str1 str2 newDp i (j + 1)
-  | otherwise = 
+  | otherwise =
       let deleteCost = dp ! (i - 1, j) + 1
           insertCost = dp ! (i, j - 1) + 1
           replaceCost = dp ! (i - 1, j - 1) + 1
@@ -463,7 +468,7 @@ editDistanceWithStats str1 str2 = StringAlgorithmResult
     (result, compCount, memory) = editDistanceStats str1 str2
 
 editDistanceStats :: String -> String -> (Int, Int, Int)
-editDistanceStats str1 str2 = 
+editDistanceStats str1 str2 =
     let m = length str1
         n = length str2
         dp = computeEditDistanceDP str1 str2
@@ -474,7 +479,7 @@ editDistanceStats str1 str2 =
 
 -- 复杂度分析
 editDistanceComplexity :: String
-editDistanceComplexity = 
+editDistanceComplexity =
     "时间复杂度: O(mn)\n" ++
     "空间复杂度: O(mn)\n" ++
     "应用: 拼写检查、DNA序列比对、自然语言处理\n" ++
@@ -502,21 +507,21 @@ $$H(s) = \sum_{i=0}^{n-1} s[i] \cdot p^i \bmod m$$
 ```haskell
 -- 字符串哈希算法
 stringHash :: String -> Int
-stringHash str = 
+stringHash str =
     let p = 31  -- 质数
         m = 1000000007  -- 大质数
     in stringHash' str p m 0 0
 
 stringHash' :: String -> Int -> Int -> Int -> Int -> Int
 stringHash' [] p m hash power = hash
-stringHash' (c:cs) p m hash power = 
+stringHash' (c:cs) p m hash power =
     let newHash = (hash + (ord c - ord 'a' + 1) * power) `mod` m
         newPower = (power * p) `mod` m
     in stringHash' cs p m newHash newPower
 
 -- 滚动哈希
 rollingHash :: String -> Int -> Int -> [Int]
-rollingHash str windowSize p = 
+rollingHash str windowSize p =
     let m = 1000000007
         initialHash = stringHash $ take windowSize str
     in rollingHash' str windowSize p m initialHash 1
@@ -524,17 +529,17 @@ rollingHash str windowSize p =
 rollingHash' :: String -> Int -> Int -> Int -> Int -> Int -> [Int]
 rollingHash' str windowSize p m hash power
   | length str <= windowSize = [hash]
-  | otherwise = 
+  | otherwise =
       let oldChar = ord $ head str
           newChar = ord $ str !! windowSize
-          newHash = ((hash - (oldChar - ord 'a' + 1) * power) * p + 
+          newHash = ((hash - (oldChar - ord 'a' + 1) * power) * p +
                      (newChar - ord 'a' + 1)) `mod` m
           newPower = (power * p) `mod` m
       in hash : rollingHash' (tail str) windowSize p m newHash newPower
 
 -- 复杂度分析
 stringHashComplexity :: String
-stringHashComplexity = 
+stringHashComplexity =
     "时间复杂度: O(n) 初始化, O(1) 滚动\n" ++
     "空间复杂度: O(1)\n" ++
     "应用: 字符串匹配、重复检测、数据去重\n" ++
@@ -624,14 +629,14 @@ testStringAlgorithmPerformance :: String -> String -> IO ()
 testStringAlgorithmPerformance pattern text = do
     putStrLn "字符串算法性能测试"
     putStrLn "=================="
-    
+
     let testAlgorithm name algFunc = do
             start <- getCurrentTime
             let result = algFunc pattern text
             end <- getCurrentTime
             let duration = diffUTCTime end start
             putStrLn $ name ++ ": " ++ show duration
-    
+
     testAlgorithm "KMP" kmpSearch
     testAlgorithm "Boyer-Moore" boyerMooreSearch
     testAlgorithm "LCS" (\p t -> lcs p t)
@@ -667,10 +672,10 @@ generateTestString n = do
 ```haskell
 -- 并行字符串匹配
 parallelStringSearch :: String -> String -> [Int]
-parallelStringSearch pattern text = 
+parallelStringSearch pattern text =
     let chunkSize = length text `div` numCapabilities
         chunks = chunksOf chunkSize text
-        searchChunk chunk offset = 
+        searchChunk chunk offset =
             let matches = kmpSearch pattern chunk
             in map (+ offset) matches
     in concat $ zipWith searchChunk chunks [0, chunkSize..]
@@ -690,4 +695,4 @@ chunksOf n xs = take n xs : chunksOf n (drop n xs)
 
 ---
 
-*本文档提供了字符串算法的完整形式化理论和Haskell实现，包括性能分析和实际应用指导。* 
+*本文档提供了字符串算法的完整形式化理论和Haskell实现，包括性能分析和实际应用指导。*

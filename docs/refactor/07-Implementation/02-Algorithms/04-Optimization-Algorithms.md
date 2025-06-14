@@ -75,6 +75,7 @@ class OptimizationAlgorithm alg where
 梯度下降是一种一阶优化算法，通过沿着目标函数梯度的反方向迭代更新参数。
 
 **算法描述**：
+
 1. 初始化参数 $x_0$
 2. 计算梯度 $\nabla f(x_k)$
 3. 更新参数：$x_{k+1} = x_k - \alpha \nabla f(x_k)$
@@ -181,6 +182,7 @@ gradientDescentComplexity =
 牛顿法是一种二阶优化算法，利用目标函数的梯度和海森矩阵进行优化。
 
 **算法描述**：
+
 1. 初始化参数 $x_0$
 2. 计算梯度 $\nabla f(x_k)$ 和海森矩阵 $\nabla^2 f(x_k)$
 3. 求解线性方程组：$\nabla^2 f(x_k) \Delta x = -\nabla f(x_k)$
@@ -321,6 +323,7 @@ newtonMethodComplexity =
 遗传算法是一种基于自然选择和遗传机制的优化算法，适用于复杂非线性优化问题。
 
 **算法描述**：
+
 1. 初始化种群
 2. 评估适应度
 3. 选择优秀个体
@@ -459,6 +462,7 @@ geneticAlgorithmComplexity =
 模拟退火算法是一种基于物理退火过程的优化算法，能够跳出局部最优解。
 
 **算法描述**：
+
 1. 初始化温度和当前解
 2. 生成邻域解
 3. 根据Metropolis准则决定是否接受新解
@@ -548,6 +552,7 @@ simulatedAnnealingComplexity =
 粒子群优化是一种基于群体智能的优化算法，模拟鸟群觅食行为。
 
 **算法描述**：
+
 1. 初始化粒子群
 2. 评估每个粒子的适应度
 3. 更新个体最优和全局最优
@@ -665,9 +670,9 @@ psoComplexity =
 |------|------------|------------|--------|----------|
 | 梯度下降 | O(n * iter) | O(n) | 线性 | 凸优化 |
 | 牛顿法 | O(n³ * iter) | O(n²) | 二次 | 凸优化 |
-| 遗传算法 | O(pop * gen * eval) | O(pop * chrom) | 概率性 | 复杂优化 |
+| 遗传算法 | O(pop *gen* eval) | O(pop * chrom) | 概率性 | 复杂优化 |
 | 模拟退火 | O(iter * neighbor) | O(n) | 概率性 | 组合优化 |
-| 粒子群优化 | O(swarm * iter * eval) | O(swarm * dim) | 概率性 | 连续优化 |
+| 粒子群优化 | O(swarm *iter* eval) | O(swarm * dim) | 概率性 | 连续优化 |
 
 ### 选择指南
 
@@ -700,6 +705,7 @@ smartOptimizationAlgorithm _ _ = "需要更多信息"
 **定理**：对于凸函数，梯度下降算法收敛到全局最优解。
 
 **证明**：
+
 1. **凸性条件**：$f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda)f(y)$
 2. **Lipschitz连续性**：$\|\nabla f(x) - \nabla f(y)\| \leq L\|x - y\|$
 3. **收敛性**：选择合适的步长，算法收敛到最优解
@@ -709,6 +715,7 @@ smartOptimizationAlgorithm _ _ = "需要更多信息"
 **定理**：对于强凸函数，牛顿法具有二次收敛性。
 
 **证明**：
+
 1. **强凸性**：$\nabla^2 f(x) \succeq \mu I$
 2. **Lipschitz连续性**：$\|\nabla^2 f(x) - \nabla^2 f(y)\| \leq M\|x - y\|$
 3. **二次收敛**：$\|x_{k+1} - x^*\| \leq \frac{M}{2\mu}\|x_k - x^*\|^2$
@@ -720,6 +727,7 @@ smartOptimizationAlgorithm _ _ = "需要更多信息"
 **定理**：遗传算法的期望收敛时间为 $O(pop\_size \cdot \log(pop\_size) \cdot generations)$。
 
 **证明**：
+
 - 选择操作：$O(pop\_size \cdot \log(pop\_size))$
 - 交叉操作：$O(pop\_size)$
 - 变异操作：$O(pop\_size)$
@@ -826,4 +834,4 @@ parallelGeneticAlgorithm' config fitnessFunc populationChunks generation
 
 ---
 
-*本文档提供了优化算法的完整形式化理论和Haskell实现，包括性能分析和实际应用指导。* 
+*本文档提供了优化算法的完整形式化理论和Haskell实现，包括性能分析和实际应用指导。*

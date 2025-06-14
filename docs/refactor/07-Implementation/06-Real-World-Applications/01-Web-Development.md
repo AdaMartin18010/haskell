@@ -11,6 +11,7 @@ Web开发是使用Haskell构建现代Web应用程序的技术，包括服务器�
 #### 客户端-服务器模型
 
 **Web应用模型**：
+
 - **客户端**：$C = \{c_1, c_2, \ldots, c_n\}$
 - **服务器**：$S = \{s_1, s_2, \ldots, s_m\}$
 - **通信协议**：$P = \{HTTP, HTTPS, WebSocket\}$
@@ -21,6 +22,7 @@ $$Request \xrightarrow{HTTP} Server \xrightarrow{Process} Response \xrightarrow{
 #### RESTful API设计
 
 **资源模型**：
+
 - **资源**：$R = \{r_1, r_2, \ldots, r_k\}$
 - **操作**：$O = \{GET, POST, PUT, DELETE\}$
 - **状态转移**：$T: R \times O \to R$
@@ -91,6 +93,7 @@ class WebApplication app where
 Scotty是一个轻量级的Web框架，提供声明式路由和中间件支持。
 
 **路由模型**：
+
 - **路由**：$Route = Path \times Method \times Handler$
 - **中间件**：$Middleware = Request \to Response \to Response$
 - **应用**：$App = \{Route\} \times \{Middleware\}$
@@ -241,6 +244,7 @@ instance FromJSON User
 数据库集成提供数据持久化功能，支持关系型和非关系型数据库。
 
 **数据模型**：
+
 - **实体**：$E = \{e_1, e_2, \ldots, e_n\}$
 - **关系**：$R \subseteq E \times E$
 - **查询**：$Q: E \to \{e_1, e_2, \ldots, e_k\}$
@@ -343,6 +347,7 @@ entityToUser entity =
 API设计定义Web服务的接口规范，包括端点、参数和响应格式。
 
 **API规范**：
+
 - **端点**：$Endpoint = Path \times Method \times Parameters \times Response$
 - **参数**：$Parameters = \{Query, Path, Body, Header\}$
 - **响应**：$Response = Status \times Headers \times Body$
@@ -479,6 +484,7 @@ emptySchema = JSONSchema
 前端集成提供与前端框架的交互能力，包括API调用和状态管理。
 
 **前端模型**：
+
 - **组件**：$Component = State \times Props \times Render$
 - **状态**：$State = \{s_1, s_2, \ldots, s_n\}$
 - **事件**：$Event = Component \times Action \times Payload$
@@ -578,6 +584,7 @@ deleteUser client userId = do
 安全认证提供用户身份验证和授权机制。
 
 **认证模型**：
+
 - **用户**：$User = \{u_1, u_2, \ldots, u_n\}$
 - **角色**：$Role = \{r_1, r_2, \ldots, r_m\}$
 - **权限**：$Permission = \{p_1, p_2, \ldots, p_k\}$
@@ -729,6 +736,7 @@ smartFramework _ _ = "需要更多信息"
 **定理**：RESTful API满足幂等性和无状态性。
 
 **证明**：
+
 1. **幂等性**：多次执行相同操作产生相同结果
 2. **无状态性**：每个请求包含完整信息，不依赖服务器状态
 
@@ -737,6 +745,7 @@ smartFramework _ _ = "需要更多信息"
 **定理**：JWT认证机制能够正确验证用户身份。
 
 **证明**：
+
 1. **完整性**：签名确保令牌未被篡改
 2. **真实性**：私钥签名确保来源可信
 3. **时效性**：过期时间防止重放攻击
@@ -748,6 +757,7 @@ smartFramework _ _ = "需要更多信息"
 **定理**：数据库查询的时间复杂度为 $O(\log n)$。
 
 **证明**：
+
 - 索引查询：$O(\log n)$
 - 全表扫描：$O(n)$
 - 平均复杂度：$O(\log n)$
@@ -859,4 +869,4 @@ compositeWebApplication app1 app2 = ScottyApp
 
 ---
 
-*本文档提供了Web开发的完整形式化理论和Haskell实现，包括性能分析和实际应用指导。* 
+*本文档提供了Web开发的完整形式化理论和Haskell实现，包括性能分析和实际应用指导。*
