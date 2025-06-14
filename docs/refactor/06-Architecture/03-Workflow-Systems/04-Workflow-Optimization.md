@@ -695,4 +695,4 @@ instance Monad m => MLOptimizerM (WorkflowOptimizerT m) where
 4. **性能提升**: 显著改善系统性能
 5. **自适应优化**: 动态调整优化策略
 
-通过Haskell的类型系统和函数式编程特性，我们可以构建出类型安全、高效的工作流优化系统。 
+通过Haskell的类型系统和函数式编程特性，我们可以构建出类型安全、高效的工作流优化系统。

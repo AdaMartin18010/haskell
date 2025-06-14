@@ -804,4 +804,4 @@ instance Monad m => TraceSystemM (MetricsCollectorT m) where
 4. **性能优化**: 优化监控系统的性能
 5. **可观测性**: 提供完整的系统可观测性
 
-通过Haskell的类型系统和函数式编程特性，我们可以构建出类型安全、高性能的工作流监控系统。 
+通过Haskell的类型系统和函数式编程特性，我们可以构建出类型安全、高性能的工作流监控系统。
