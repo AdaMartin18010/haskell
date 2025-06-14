@@ -182,6 +182,7 @@
 ## 🔗 快速导航
 
 ### 核心分支
+
 - [设计模式](01-Design-Patterns/) - 创建型、结构型、行为型、并发模式
 - [微服务架构](02-Microservices/) - 服务设计、服务通信、服务治理、服务运维
 - [工作流系统](03-Workflow-Systems/) - 工作流建模、执行、监控、优化
@@ -190,6 +191,7 @@
 - [云原生架构](06-Cloud-Native-Architecture/) - 容器架构、Kubernetes、无服务器、云安全
 
 ### 主题导航
+
 - [创建型模式](01-Design-Patterns/Creational-Patterns/) - 单例、工厂、建造者、原型
 - [服务设计](02-Microservices/Service-Design/) - 服务分解、粒度、边界、契约
 - [工作流建模](03-Workflow-Systems/Workflow-Modeling/) - 过程建模、活动图、状态机
@@ -199,9 +201,11 @@
 ## 📖 核心概念
 
 ### 设计模式 (Design Patterns)
+
 **解决软件设计中常见问题的可重用解决方案**
 
 #### 创建型模式 (Creational Patterns)
+
 - **单例模式**：确保一个类只有一个实例
 - **工厂方法模式**：定义创建对象的接口，让子类决定实例化
 - **抽象工厂模式**：创建一系列相关对象
@@ -209,6 +213,7 @@
 - **原型模式**：通过复制现有对象创建新对象
 
 #### 结构型模式 (Structural Patterns)
+
 - **适配器模式**：使不兼容接口能够合作
 - **桥接模式**：将抽象与实现分离
 - **组合模式**：将对象组合成树形结构
@@ -218,6 +223,7 @@
 - **代理模式**：控制对其他对象的访问
 
 #### 行为型模式 (Behavioral Patterns)
+
 - **责任链模式**：将请求沿着处理者链传递
 - **命令模式**：将请求封装为对象
 - **解释器模式**：定义语法表示和解释方法
@@ -231,105 +237,125 @@
 - **访问者模式**：在不改变类的前提下定义新操作
 
 ### 微服务架构 (Microservices Architecture)
+
 **将应用程序分解为小型、独立的服务**
 
 #### 服务设计 (Service Design)
+
 - **服务分解**：按业务能力或领域分解
 - **服务粒度**：确定合适的服务大小
 - **服务边界**：定义服务间的清晰边界
 - **服务契约**：定义服务接口和协议
 
 #### 服务通信 (Service Communication)
+
 - **同步通信**：REST、gRPC、GraphQL
 - **异步通信**：消息队列、事件流
 - **消息队列**：RabbitMQ、Apache Kafka
 - **事件驱动架构**：基于事件的松耦合通信
 
 #### 服务治理 (Service Governance)
+
 - **服务发现**：自动发现和注册服务
 - **负载均衡**：分发请求到多个实例
 - **熔断器**：防止级联故障
 - **限流**：控制请求速率
 
 ### 工作流系统 (Workflow Systems)
+
 **自动化业务流程和任务执行**
 
 #### 工作流建模 (Workflow Modeling)
+
 - **过程建模**：定义业务流程
 - **活动图**：可视化工作流程
 - **状态机**：建模状态转换
 - **Petri网**：形式化工作流模型
 
 #### 工作流执行 (Workflow Execution)
+
 - **执行引擎**：驱动工作流执行
 - **任务调度**：安排任务执行顺序
 - **资源管理**：分配和管理资源
 - **异常处理**：处理执行异常
 
 #### 工作流监控 (Workflow Monitoring)
+
 - **过程监控**：实时监控工作流状态
 - **性能分析**：分析执行性能
 - **合规跟踪**：确保流程合规
 - **审计跟踪**：记录执行历史
 
 ### 分布式系统 (Distributed Systems)
+
 **跨多个节点协调的系统**
 
 #### 一致性模型 (Consistency Models)
+
 - **强一致性**：所有节点看到相同数据
 - **最终一致性**：最终所有节点一致
 - **因果一致性**：保持因果关系
 - **顺序一致性**：保持全局顺序
 
 #### 容错机制 (Fault Tolerance)
+
 - **复制**：数据和服务复制
 - **故障检测**：检测节点故障
 - **恢复机制**：从故障中恢复
 - **拜占庭容错**：容忍恶意节点
 
 #### 可扩展性 (Scalability)
+
 - **水平扩展**：添加更多节点
 - **垂直扩展**：增强节点能力
 - **分片**：数据分片存储
 - **分区**：功能分区
 
 ### 事件驱动架构 (Event-Driven Architecture)
+
 **基于事件的生产、检测、消费和反应**
 
 #### 事件建模 (Event Modeling)
+
 - **事件溯源**：以事件为中心的数据模型
 - **领域事件**：业务领域中的事件
 - **事件模式**：事件的结构和格式
 - **事件版本化**：处理事件模式演化
 
 #### 事件处理 (Event Processing)
+
 - **流处理**：实时处理事件流
 - **复杂事件处理**：检测复杂事件模式
 - **事件模式**：识别事件序列
 - **事件聚合**：聚合多个事件
 
 #### 事件存储 (Event Storage)
+
 - **事件日志**：持久化事件序列
 - **事件存储**：专门的事件数据库
 - **事件投影**：从事件重建状态
 - **事件快照**：状态快照
 
 ### 云原生架构 (Cloud-Native Architecture)
+
 **专为云环境设计的应用程序架构**
 
 #### 容器架构 (Container Architecture)
+
 - **容器设计**：设计容器化应用
 - **多容器应用**：协调多个容器
 - **容器安全**：容器安全最佳实践
 - **容器网络**：容器间通信
 
 #### Kubernetes架构 (Kubernetes Architecture)
+
 - **Pod设计**：设计Pod和部署
 - **服务网格**：Istio、Linkerd
 - **存储架构**：持久化存储
 - **安全架构**：RBAC、网络策略
 
 #### 无服务器架构 (Serverless Architecture)
+
 - **函数设计**：设计无服务器函数
 - **事件触发器**：触发函数执行
 - **状态管理**：管理函数状态
@@ -338,6 +364,7 @@
 ## 🛠️ 技术实现
 
 ### 设计模式实现
+
 ```haskell
 -- 单例模式
 class Singleton a where
@@ -370,6 +397,7 @@ class Observer a where
 ```
 
 ### 微服务架构实现
+
 ```haskell
 -- 微服务
 class Microservice a where
@@ -408,6 +436,7 @@ class ServiceGovernance a where
 ```
 
 ### 工作流系统实现
+
 ```haskell
 -- 工作流引擎
 class WorkflowEngine a where
@@ -439,6 +468,7 @@ class TaskScheduler a where
 ```
 
 ### 分布式系统实现
+
 ```haskell
 -- 分布式节点
 class DistributedNode a where
@@ -472,18 +502,21 @@ class ConsistencyManager a where
 ## 📚 参考资源
 
 ### 架构标准
+
 - **设计模式**：GoF《设计模式》、Martin《敏捷软件开发》
 - **微服务**：Newman《构建微服务》、Lewis《微服务架构》
 - **工作流**：Hollingsworth《工作流管理联盟》、van der Aalst《工作流管理》
 - **分布式系统**：Tanenbaum《分布式系统》、Coulouris《分布式系统概念与设计》
 
 ### 技术框架
+
 - **设计模式**：Spring Framework、.NET Framework、Haskell Lens
 - **微服务**：Spring Boot、ASP.NET Core、Node.js
 - **工作流**：Apache Airflow、Camunda、Activiti
 - **分布式系统**：Apache ZooKeeper、etcd、Consul
 
 ### 最佳实践
+
 - **设计模式**：SOLID原则、DRY原则、KISS原则
 - **微服务**：12-Factor App、API设计、服务网格
 - **工作流**：BPMN标准、工作流模式、异常处理

@@ -183,7 +183,7 @@
 
 ### 数学基础 (Mathematical Foundations)
 
-**提供数学的严格基础**
+-**提供数学的严格基础**
 
 #### 集合论 (Set Theory)
 
@@ -208,7 +208,7 @@
 
 ### 形式逻辑 (Formal Logic)
 
-**提供严格的推理系统**
+-**提供严格的推理系统**
 
 #### 经典逻辑 (Classical Logic)
 
@@ -233,7 +233,7 @@
 
 ### 代数结构 (Algebraic Structures)
 
-**研究代数系统的结构**
+-**研究代数系统的结构**
 
 #### 群论 (Group Theory)
 
@@ -258,7 +258,7 @@
 
 ### 拓扑结构 (Topological Structures)
 
-**研究空间的结构和性质**
+-**研究空间的结构和性质**
 
 #### 点集拓扑 (Point-Set Topology)
 
@@ -283,7 +283,7 @@
 
 ### 分析学 (Analysis)
 
-**研究函数的性质和行为**
+-**研究函数的性质和行为**
 
 #### 实分析 (Real Analysis)
 
@@ -308,7 +308,7 @@
 
 ### 概率统计 (Probability and Statistics)
 
-**研究随机性和不确定性**
+-**研究随机性和不确定性**
 
 #### 概率论 (Probability Theory)
 
