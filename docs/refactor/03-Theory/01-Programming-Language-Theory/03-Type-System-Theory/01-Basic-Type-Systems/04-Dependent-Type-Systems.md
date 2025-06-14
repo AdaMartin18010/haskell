@@ -572,7 +572,8 @@ quotientEquality = TLam "x" TInt $ TLam "y" TInt $
 ---
 
 **相关链接**：
+
 - [类型系统理论总览](../README.md)
 - [简单类型系统](02-Simple-Type-Systems.md)
 - [多态类型系统](03-Polymorphic-Type-Systems.md)
-- [语义理论](../02-Semantics-Theory/语义理论.md) 
+- [语义理论](../02-Semantics-Theory/语义理论.md)

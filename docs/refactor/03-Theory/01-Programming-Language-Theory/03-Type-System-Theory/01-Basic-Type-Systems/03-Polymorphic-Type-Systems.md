@@ -597,7 +597,8 @@ instance Monad Maybe where
 ---
 
 **相关链接**：
+
 - [类型系统理论总览](../README.md)
 - [简单类型系统](02-Simple-Type-Systems.md)
 - [依赖类型系统](04-Dependent-Type-Systems.md)
-- [语义理论](../02-Semantics-Theory/语义理论.md) 
+- [语义理论](../02-Semantics-Theory/语义理论.md)
