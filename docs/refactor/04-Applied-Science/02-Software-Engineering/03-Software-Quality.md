@@ -1034,4 +1034,4 @@ executeActPhase improvement = ImprovementResult {
 
 ---
 
-*本文档提供了软件质量的完整形式化理论框架和Haskell实现，为质量保证实践提供理论基础。* 
+*本文档提供了软件质量的完整形式化理论框架和Haskell实现，为质量保证实践提供理论基础。*

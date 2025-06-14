@@ -49,6 +49,7 @@ data Resource = Resource {
 $$\text{Test}(P, S) = \forall x \in D: P(x) \implies S(x)$$
 
 其中：
+
 - $P$ 是程序实现
 - $S$ 是规约
 - $D$ 是输入域
@@ -967,4 +968,4 @@ generateReport reporting results =
 
 ---
 
-*本文档提供了软件测试的完整形式化理论框架和Haskell实现，为测试实践提供理论基础。* 
+*本文档提供了软件测试的完整形式化理论框架和Haskell实现，为测试实践提供理论基础。*

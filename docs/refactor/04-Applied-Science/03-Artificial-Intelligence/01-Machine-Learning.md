@@ -178,6 +178,7 @@ data PerformanceMetrics = PerformanceMetrics {
 $$\min_{\theta} \mathcal{L}(\theta) = \frac{1}{n} \sum_{i=1}^{n} \ell(f_\theta(x_i), y_i) + \lambda R(\theta)$$
 
 其中：
+
 - $\theta$ 是模型参数
 - $\mathcal{L}(\theta)$ 是损失函数
 - $\ell$ 是样本损失
@@ -1113,4 +1114,4 @@ calculateAccuracy samples predictor =
 
 ---
 
-*本文档提供了机器学习的完整形式化理论框架和Haskell实现，为机器学习实践提供理论基础。* 
+*本文档提供了机器学习的完整形式化理论框架和Haskell实现，为机器学习实践提供理论基础。*

@@ -142,6 +142,7 @@ data VerificationStatistics = VerificationStatistics {
 $$\text{Verify}(I, S) = \forall \phi \in S: I \models \phi$$
 
 其中：
+
 - $I$ 是程序实现
 - $S$ 是规约集合
 - $\phi$ 是规约中的性质
@@ -1201,4 +1202,4 @@ executeTool step input =
 
 ---
 
-*本文档提供了形式化验证的完整形式化理论框架和Haskell实现，为验证实践提供理论基础。* 
+*本文档提供了形式化验证的完整形式化理论框架和Haskell实现，为验证实践提供理论基础。*

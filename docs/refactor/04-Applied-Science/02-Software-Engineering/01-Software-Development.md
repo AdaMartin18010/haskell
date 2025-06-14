@@ -46,6 +46,7 @@ data Artifact =
 $$\mathcal{M} = (S, \Sigma, \delta, s_0, F)$$
 
 其中：
+
 - $S$ 是状态集合（项目状态）
 - $\Sigma$ 是输入字母表（开发活动）
 - $\delta: S \times \Sigma \rightarrow S$ 是状态转移函数
@@ -632,4 +633,4 @@ getDescription _ = "Function description"
 
 ---
 
-*本文档提供了软件开发的完整形式化理论框架和Haskell实现，为软件工程实践提供理论基础。* 
+*本文档提供了软件开发的完整形式化理论框架和Haskell实现，为软件工程实践提供理论基础。*

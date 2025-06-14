@@ -128,6 +128,7 @@ data AxiomType =
 $$\mathcal{K} = (\mathcal{C}, \mathcal{R}, \mathcal{I}, \mathcal{A})$$
 
 其中：
+
 - $\mathcal{C}$ 是概念集合
 - $\mathcal{R}$ 是关系集合
 - $\mathcal{I}$ 是实例集合
@@ -1591,4 +1592,4 @@ searchRepository repository query =
 
 ---
 
-*本文档提供了知识表示的完整形式化理论框架和Haskell实现，为知识工程实践提供理论基础。* 
+*本文档提供了知识表示的完整形式化理论框架和Haskell实现，为知识工程实践提供理论基础。*
