@@ -1,478 +1,608 @@
-# 03-Theory (理论层) - 核心理论与形式化框架
+# 03. 理论层 (Theory Layer)
 
-## 📚 理论层概述
+## 概述
 
-理论层是连接形式科学与具体应用的桥梁，将抽象的数学概念转化为可应用的理论框架。我们涵盖编程语言理论、系统理论、分布式系统理论、形式化方法、Petri网理论和自动机理论，为具体科学层提供理论基础。
+理论层是形式化知识体系的核心，它将哲学理念和形式科学转化为具体的数学理论和计算模型。这一层建立了从抽象概念到具体实现的桥梁，为应用科学和工程实践提供了坚实的理论基础。
 
-## 🏗️ 目录结构
+## 理论层次结构
 
-```text
+```
 03-Theory/
-├── README.md                           # 本文件 - 理论层总览
-├── 01-Programming-Language-Theory/     # 编程语言理论
-│   ├── README.md                       # 编程语言理论总览
-│   ├── Syntax/                         # 语法理论
-│   │   ├── Formal-Grammars.md          # 形式文法
-│   │   ├── Abstract-Syntax-Trees.md    # 抽象语法树
-│   │   ├── Parsing-Theory.md           # 解析理论
-│   │   └── Syntax-Synthesis.md         # 语法理论综合
-│   ├── Semantics/                      # 语义理论
-│   │   ├── Operational-Semantics.md    # 操作语义
-│   │   ├── Denotational-Semantics.md   # 指称语义
-│   │   ├── Axiomatic-Semantics.md      # 公理语义
-│   │   ├── Natural-Semantics.md        # 自然语义
-│   │   └── Semantics-Synthesis.md      # 语义理论综合
-│   ├── Type-Systems/                   # 类型系统
-│   │   ├── Simple-Type-Systems.md      # 简单类型系统
-│   │   ├── Polymorphic-Type-Systems.md # 多态类型系统
-│   │   ├── Dependent-Type-Systems.md   # 依赖类型系统
-│   │   ├── Linear-Type-Systems.md      # 线性类型系统
-│   │   └── Type-Systems-Synthesis.md   # 类型系统综合
-│   └── Language-Design/                # 语言设计
-│       ├── Language-Paradigms.md       # 语言范式
-│       ├── Language-Features.md        # 语言特性
-│       ├── Language-Implementation.md  # 语言实现
-│       └── Language-Design-Synthesis.md # 语言设计综合
-├── 02-System-Theory/                   # 系统理论
-│   ├── README.md                       # 系统理论总览
-│   ├── Complex-Systems/                # 复杂系统
-│   │   ├── Emergence.md                # 涌现
-│   │   ├── Self-Organization.md        # 自组织
-│   │   ├── Nonlinear-Dynamics.md       # 非线性动力学
-│   │   ├── Chaos-Theory.md             # 混沌理论
-│   │   └── Complex-Systems-Synthesis.md # 复杂系统综合
-│   ├── Cybernetics/                    # 控制论
-│   │   ├── Feedback-Systems.md         # 反馈系统
-│   │   ├── Control-Theory.md           # 控制理论
-│   │   ├── Information-Control.md      # 信息控制
-│   │   ├── Adaptive-Systems.md         # 自适应系统
-│   │   └── Cybernetics-Synthesis.md    # 控制论综合
-│   ├── Information-Theory/             # 信息论
-│   │   ├── Shannon-Information.md      # 香农信息论
-│   │   ├── Algorithmic-Information.md  # 算法信息论
-│   │   ├── Quantum-Information.md      # 量子信息论
-│   │   ├── Information-Processing.md   # 信息处理
-│   │   └── Information-Theory-Synthesis.md # 信息论综合
-│   └── Systems-Engineering/            # 系统工程
-│       ├── System-Architecture.md      # 系统架构
-│       ├── System-Integration.md       # 系统集成
-│       ├── System-Optimization.md      # 系统优化
-│       └── Systems-Engineering-Synthesis.md # 系统工程综合
-├── 03-Distributed-Systems-Theory/      # 分布式系统理论
-│   ├── README.md                       # 分布式系统理论总览
-│   ├── Consistency-Models/             # 一致性模型
-│   │   ├── Strong-Consistency.md       # 强一致性
-│   │   ├── Eventual-Consistency.md     # 最终一致性
-│   │   ├── Causal-Consistency.md       # 因果一致性
-│   │   ├── Sequential-Consistency.md   # 顺序一致性
-│   │   └── Consistency-Models-Synthesis.md # 一致性模型综合
-│   ├── Consensus-Algorithms/           # 共识算法
-│   │   ├── Paxos-Family.md             # Paxos族算法
-│   │   ├── Raft-Algorithm.md           # Raft算法
-│   │   ├── Byzantine-Fault-Tolerance.md # 拜占庭容错
-│   │   ├── Proof-of-Stake.md           # 权益证明
-│   │   └── Consensus-Algorithms-Synthesis.md # 共识算法综合
-│   ├── Fault-Tolerance/                # 容错理论
-│   │   ├── Fault-Models.md             # 故障模型
-│   │   ├── Failure-Detection.md        # 故障检测
-│   │   ├── Recovery-Mechanisms.md      # 恢复机制
-│   │   ├── Reliability-Theory.md       # 可靠性理论
-│   │   └── Fault-Tolerance-Synthesis.md # 容错理论综合
-│   └── Distributed-Algorithms/         # 分布式算法
-│       ├── Distributed-Sorting.md      # 分布式排序
-│       ├── Distributed-Graph-Algorithms.md # 分布式图算法
-│       ├── Distributed-Data-Structures.md # 分布式数据结构
-│       └── Distributed-Algorithms-Synthesis.md # 分布式算法综合
-├── 04-Formal-Methods/                  # 形式化方法
-│   ├── README.md                       # 形式化方法总览
-│   ├── Model-Checking/                 # 模型检测
-│   │   ├── Temporal-Logic.md           # 时态逻辑
-│   │   ├── State-Space-Exploration.md  # 状态空间探索
-│   │   ├── Symbolic-Model-Checking.md  # 符号模型检测
-│   │   ├── Bounded-Model-Checking.md   # 有界模型检测
-│   │   └── Model-Checking-Synthesis.md # 模型检测综合
-│   ├── Theorem-Proving/                # 定理证明
-│   │   ├── Interactive-Theorem-Proving.md # 交互式定理证明
-│   │   ├── Automated-Theorem-Proving.md # 自动定理证明
-│   │   ├── Proof-Assistants.md         # 证明助手
-│   │   ├── Formal-Verification.md      # 形式化验证
-│   │   └── Theorem-Proving-Synthesis.md # 定理证明综合
-│   ├── Abstract-Interpretation/        # 抽象解释
-│   │   ├── Abstract-Domains.md         # 抽象域
-│   │   ├── Widening-Narrowing.md       # 扩宽-缩窄
-│   │   ├── Fixpoint-Computation.md     # 不动点计算
-│   │   ├── Static-Analysis.md          # 静态分析
-│   │   └── Abstract-Interpretation-Synthesis.md # 抽象解释综合
-│   └── Formal-Specification/           # 形式化规约
-│       ├── Specification-Languages.md  # 规约语言
-│       ├── Refinement-Theory.md        # 精化理论
-│       ├── Contract-Theory.md          # 契约理论
-│       └── Formal-Specification-Synthesis.md # 形式化规约综合
-├── 05-Petri-Net-Theory/                # Petri网理论
-│   ├── README.md                       # Petri网理论总览
-│   ├── 01-基础Petri网/                 # 基础Petri网
-│   │   ├── 01-Basic-Concepts.md        # 基础概念与定义
-│   │   ├── 02-Markings-and-Transitions.md # 标记与变迁规则
-│   │   ├── 03-Reachability-Analysis.md # 可达性分析
-│   │   └── 04-Basic-Properties.md      # 基本性质
-│   ├── 02-高级Petri网/                 # 高级Petri网
-│   │   ├── 01-Timed-Petri-Nets.md      # 时间Petri网
-│   │   ├── 02-Colored-Petri-Nets.md    # 着色Petri网
-│   │   ├── 03-Hierarchical-Petri-Nets.md # 层次Petri网
-│   │   └── 04-Stochastic-Petri-Nets.md # 随机Petri网
-│   ├── 03-Petri网分析/                 # Petri网分析
-│   │   ├── 01-Structural-Analysis.md   # 结构分析
-│   │   ├── 02-Behavioral-Analysis.md   # 行为分析
-│   │   ├── 03-Performance-Analysis.md  # 性能分析
-│   │   └── 04-Verification-Techniques.md # 验证技术
-│   └── 04-Petri网应用/                 # Petri网应用
-│       ├── 01-Software-Engineering.md  # 软件工程
-│       ├── 02-Workflow-Modeling.md     # 工作流建模
-│   │   ├── 03-Concurrent-Systems.md    # 并发系统
-│   │   └── 04-Real-Time-Systems.md     # 实时系统
-│   └── 06-Automata-Theory/             # 自动机理论
-│       ├── 01-有限自动机/              # 有限自动机
-│       │   ├── 01-Basic-Concepts.md    # 基本概念
-│       │   ├── 02-Deterministic-Finite-Automata.md # 确定性有限自动机
-│       │   ├── 03-Nondeterministic-Finite-Automata.md # 非确定性有限自动机
-│       │   └── 04-Regular-Expressions.md   # 正则表达式
-│       ├── 02-上下文无关语言/          # 上下文无关语言
-│       │   ├── 01-Context-Free-Grammars.md # 上下文无关文法
-│       │   ├── 02-Pushdown-Automata.md     # 下推自动机
-│       │   ├── 03-Parsing.md               # 语法分析
-│       │   └── 04-Syntax-Trees.md          # 语法树
-│       ├── 03-图灵机理论/              # 图灵机理论
-│       │   ├── 01-Basic-Turing-Machines.md # 基本图灵机
-│       │   ├── 02-Universal-Turing-Machines.md # 通用图灵机
-│       │   ├── 03-Computability-Theory.md  # 可计算性理论
-│       │   └── 04-Halting-Problem.md       # 停机问题
-│       └── 04-形式语言理论/            # 形式语言理论
-│           ├── 01-Language-Hierarchy.md    # 语言层次
-│           ├── 02-Grammar-Theory.md        # 语法理论
-│           ├── 03-Language-Operations.md   # 语言运算
-│           └── 04-Language-Properties.md   # 语言性质
-└── 07-Temporal-Logic/                  # 时态逻辑
-    ├── README.md                       # 时态逻辑总览
-    ├── Linear-Temporal-Logic/          # 线性时态逻辑
-    │   ├── LTL-Syntax-Semantics.md     # LTL语法语义
-    │   ├── LTL-Model-Checking.md       # LTL模型检测
-    │   ├── LTL-Satisfiability.md       # LTL可满足性
-    │   ├── LTL-Synthesis.md            # LTL综合
-    │   └── Linear-Temporal-Logic-Synthesis.md # 线性时态逻辑综合
-    ├── Computation-Tree-Logic/         # 计算树逻辑
-    │   ├── CTL-Syntax-Semantics.md     # CTL语法语义
-    │   ├── CTL-Model-Checking.md       # CTL模型检测
-    │   ├── CTL-Satisfiability.md       # CTL可满足性
-    │   ├── CTL-Synthesis.md            # CTL综合
-    │   └── Computation-Tree-Logic-Synthesis.md # 计算树逻辑综合
-    ├── Real-Time-Temporal-Logic/       # 实时时态逻辑
-    │   ├── Timed-Automata.md           # 时间自动机
-    │   ├── Metric-Temporal-Logic.md    # 度量时态逻辑
-    │   ├── Real-Time-Verification.md   # 实时验证
-    │   ├── Timed-Systems.md            # 时间系统
-    │   └── Real-Time-Temporal-Logic-Synthesis.md # 实时时态逻辑综合
-    └── Temporal-Logic-Applications/    # 时态逻辑应用
-        ├── Hardware-Verification.md    # 硬件验证
-        ├── Software-Verification.md    # 软件验证
-        ├── Protocol-Verification.md    # 协议验证
-        └── Temporal-Logic-Applications-Synthesis.md # 时态逻辑应用综合
+├── 01-Programming-Language-Theory/
+│   ├── 01-Syntax-Theory/
+│   │   ├── 01-Formal-Grammars.md
+│   │   ├── 02-Parsing-Theory.md
+│   │   └── 03-Syntax-Analysis.md
+│   ├── 02-Semantics-Theory/
+│   │   ├── 01-Operational-Semantics.md
+│   │   ├── 02-Denotational-Semantics.md
+│   │   └── 03-Axiomatic-Semantics.md
+│   └── 03-Type-System-Theory/
+│       ├── 01-Basic-Type-Systems/
+│       │   ├── 01-Basic-Concepts.md
+│       │   ├── 02-Simple-Type-Systems.md
+│       │   ├── 03-Polymorphic-Type-Systems.md
+│       │   └── 04-Dependent-Type-Systems.md
+│       └── 02-Advanced-Type-Systems/
+│           ├── 01-Higher-Order-Type-Systems.md
+│           ├── 02-Subtyping-Theory.md
+│           └── 03-Type-Inference.md
+├── 02-System-Theory/
+│   ├── 01-Basic-System-Concepts.md
+│   ├── 02-System-Dynamics.md
+│   ├── 03-System-Architecture.md
+│   └── 04-System-Optimization.md
+├── 03-Control-Theory/
+│   ├── 01-Feedback-Systems.md
+│   ├── 02-Stability-Theory.md
+│   ├── 03-Optimal-Control.md
+│   └── 04-Adaptive-Control.md
+├── 04-Formal-Methods/
+│   ├── 01-Model-Checking/
+│   │   ├── 01-Temporal-Logic.md
+│   │   ├── 02-State-Space-Analysis.md
+│   │   └── 03-Property-Verification.md
+│   ├── 02-Theorem-Proving/
+│   │   ├── 01-Interactive-Theorem-Proving.md
+│   │   └── 02-Automated-Theorem-Proving.md
+│   └── 03-Abstract-Interpretation/
+│       └── 01-Abstract-Domains.md
+├── 05-Petri-Net-Theory/
+│   ├── 01-Basic-Petri-Nets/
+│   │   ├── 01-Basic-Concepts.md
+│   │   └── 02-Markings-and-Transitions.md
+│   ├── 02-Advanced-Petri-Nets/
+│   │   ├── 01-Colored-Petri-Nets.md
+│   │   ├── 02-Timed-Petri-Nets.md
+│   │   ├── 03-Stochastic-Petri-Nets.md
+│   │   └── 04-Hierarchical-Petri-Nets.md
+│   ├── 03-Petri-Net-Analysis/
+│   │   ├── 01-Reachability-Analysis.md
+│   │   ├── 02-Invariant-Analysis.md
+│   │   ├── 03-Deadlock-Analysis.md
+│   │   └── 04-Liveness-Analysis.md
+│   └── 04-Petri-Net-Applications/
+│       ├── 01-Concurrent-System-Modeling.md
+│       ├── 02-Protocol-Verification.md
+│       ├── 03-Manufacturing-System-Analysis.md
+│       └── 04-Software-Engineering-Applications.md
+├── 06-Automata-Theory/
+│   ├── 01-Finite-Automata/
+│   │   └── 01-Basic-Concepts.md
+│   ├── 02-Context-Free-Languages/
+│   │   ├── 01-Context-Free-Grammars.md
+│   │   ├── 02-Pushdown-Automata.md
+│   │   ├── 03-Parsing.md
+│   │   └── 04-Syntax-Trees.md
+│   ├── 03-Turing-Machine-Theory/
+│   │   └── 01-Basic-Turing-Machines.md
+│   └── 04-Formal-Language-Theory/
+│       └── 01-Language-Hierarchy.md
+├── 07-Temporal-Logic/
+│   └── 01-Linear-Temporal-Logic/
+│       └── 01-LTL-Syntax-Semantics.md
+├── 08-Linear-Type-Theory/
+│   ├── 01-Foundations/
+│   │   ├── 01-Linear-Logic-Basics.md
+│   │   ├── 02-Resource-Management.md
+│   │   └── 03-Linear-Implications.md
+│   ├── 02-Linear-Type-Systems/
+│   │   ├── 01-Basic-Linear-Types.md
+│   │   ├── 02-Linear-Functions.md
+│   │   ├── 03-Linear-Pairs.md
+│   │   └── 04-Linear-Sums.md
+│   ├── 03-Advanced-Linear-Theory/
+│   │   ├── 01-Graded-Monads.md
+│   │   ├── 02-Linear-Effects.md
+│   │   ├── 03-Linear-Containers.md
+│   │   └── 04-Linear-Protocols.md
+│   ├── 04-Haskell-Integration/
+│   │   ├── 01-Linear-Haskell.md
+│   │   ├── 02-Resource-Types.md
+│   │   ├── 03-Linear-IO.md
+│   │   └── 04-Linear-Concurrency.md
+│   └── 05-Applications/
+│       ├── 01-Memory-Management.md
+│       ├── 02-Concurrent-Programming.md
+│       ├── 03-Resource-Safety.md
+│       └── 04-Performance-Optimization.md
+├── 09-Affine-Type-Theory/
+│   ├── 01-Foundations/
+│   │   ├── 01-Affine-Logic-Basics.md
+│   │   ├── 02-Weakening-Rule.md
+│   │   └── 03-Affine-Implications.md
+│   ├── 02-Affine-Type-Systems/
+│   │   ├── 01-Basic-Affine-Types.md
+│   │   ├── 02-Affine-Functions.md
+│   │   ├── 03-Affine-Pairs.md
+│   │   └── 04-Affine-Sums.md
+│   ├── 03-Advanced-Affine-Theory/
+│   │   ├── 01-Affine-Monads.md
+│   │   ├── 02-Affine-Effects.md
+│   │   ├── 03-Affine-Containers.md
+│   │   └── 04-Affine-Protocols.md
+│   ├── 04-Haskell-Integration/
+│   │   ├── 01-Affine-Haskell.md
+│   │   ├── 02-Ownership-Types.md
+│   │   ├── 03-Affine-IO.md
+│   │   └── 04-Affine-Concurrency.md
+│   └── 05-Applications/
+│       ├── 01-Memory-Safety.md
+│       ├── 02-Concurrent-Programming.md
+│       ├── 03-Resource-Management.md
+│       └── 04-Performance-Optimization.md
+├── 10-Quantum-Type-Theory/
+│   ├── 01-Foundations/
+│   │   ├── 01-Quantum-Mechanics-Basics.md
+│   │   ├── 02-Quantum-Information-Theory.md
+│   │   └── 03-Quantum-Logic.md
+│   ├── 02-Quantum-Type-Systems/
+│   │   ├── 01-Basic-Quantum-Types.md
+│   │   ├── 02-Quantum-Functions.md
+│   │   ├── 03-Quantum-Pairs.md
+│   │   └── 04-Quantum-Sums.md
+│   ├── 03-Advanced-Quantum-Theory/
+│   │   ├── 01-Quantum-Monads.md
+│   │   ├── 02-Quantum-Effects.md
+│   │   ├── 03-Quantum-Containers.md
+│   │   └── 04-Quantum-Protocols.md
+│   ├── 04-Haskell-Integration/
+│   │   ├── 01-Quantum-Haskell.md
+│   │   ├── 02-Quantum-Circuits.md
+│   │   ├── 03-Quantum-Algorithms.md
+│   │   └── 04-Quantum-Simulation.md
+│   └── 05-Applications/
+│       ├── 01-Quantum-Computing.md
+│       ├── 02-Quantum-Cryptography.md
+│       ├── 03-Quantum-Machine-Learning.md
+│       └── 04-Quantum-Communication.md
+├── 11-Temporal-Type-Theory/
+│   ├── 01-Foundations/
+│   │   ├── 01-Temporal-Logic-Basics.md
+│   │   ├── 02-Time-Models.md
+│   │   └── 03-Temporal-Implications.md
+│   ├── 02-Temporal-Type-Systems/
+│   │   ├── 01-Basic-Temporal-Types.md
+│   │   ├── 02-Temporal-Functions.md
+│   │   ├── 03-Temporal-Pairs.md
+│   │   └── 04-Temporal-Sums.md
+│   ├── 03-Advanced-Temporal-Theory/
+│   │   ├── 01-Temporal-Monads.md
+│   │   ├── 02-Temporal-Effects.md
+│   │   ├── 03-Temporal-Containers.md
+│   │   └── 04-Temporal-Protocols.md
+│   ├── 04-Haskell-Integration/
+│   │   ├── 01-Temporal-Haskell.md
+│   │   ├── 02-Real-Time-Systems.md
+│   │   ├── 03-Temporal-Algorithms.md
+│   │   └── 04-Temporal-Simulation.md
+│   └── 05-Applications/
+│       ├── 01-Real-Time-Computing.md
+│       ├── 02-Concurrent-Programming.md
+│       ├── 03-Temporal-Databases.md
+│       └── 04-Temporal-Machine-Learning.md
+├── 12-Control-Theory/
+│   ├── 01-Foundations/
+│   │   ├── 01-System-Dynamics.md
+│   │   ├── 02-Feedback-Control.md
+│   │   └── 03-Control-Objectives.md
+│   ├── 02-Classical-Control/
+│   │   ├── 01-PID-Control.md
+│   │   ├── 02-Frequency-Domain.md
+│   │   ├── 03-Root-Locus.md
+│   │   └── 04-State-Space.md
+│   ├── 03-Modern-Control/
+│   │   ├── 01-Optimal-Control.md
+│   │   ├── 02-Robust-Control.md
+│   │   ├── 03-Adaptive-Control.md
+│   │   └── 04-Nonlinear-Control.md
+│   ├── 04-Digital-Control/
+│   │   ├── 01-Discrete-Time-Systems.md
+│   │   ├── 02-Digital-Controllers.md
+│   │   ├── 03-Sampling-Theory.md
+│   │   └── 04-Z-Transform.md
+│   └── 05-Applications/
+│       ├── 01-Software-Systems.md
+│       ├── 02-Network-Control.md
+│       ├── 03-Robotics.md
+│       └── 04-Autonomous-Systems.md
+└── 13-Distributed-Systems-Theory/
+    ├── 01-Foundations/
+    │   ├── 01-System-Models.md
+    │   ├── 02-Failure-Models.md
+    │   └── 03-Communication-Models.md
+    ├── 02-Consensus-Theory/
+    │   ├── 01-Basic-Consensus.md
+    │   ├── 02-Paxos-Algorithm.md
+    │   ├── 03-Raft-Algorithm.md
+    │   └── 04-Byzantine-Consensus.md
+    ├── 03-Distributed-Algorithms/
+    │   ├── 01-Leader-Election.md
+    │   ├── 02-Mutual-Exclusion.md
+    │   ├── 03-Distributed-Sorting.md
+    │   └── 04-Distributed-Graph-Algorithms.md
+    ├── 04-Fault-Tolerance/
+    │   ├── 01-Replication.md
+    │   ├── 02-Checkpointing.md
+    │   ├── 03-Recovery.md
+    │   └── 04-Self-Stabilization.md
+    └── 05-Applications/
+        ├── 01-Distributed-Databases.md
+        ├── 02-Distributed-File-Systems.md
+        ├── 03-Distributed-Computing.md
+        └── 04-Blockchain-Systems.md
 ```
 
-## 🔗 快速导航
+## 核心理论分支
 
-### 核心分支
+### 1. 编程语言理论 (01-Programming-Language-Theory)
 
-- [编程语言理论](01-Programming-Language-Theory/) - 语法、语义、类型系统、语言设计
-- [系统理论](02-System-Theory/) - 复杂系统、控制论、信息论、系统工程
-- [分布式系统理论](03-Distributed-Systems-Theory/) - 一致性、共识、容错、分布式算法
-- [形式化方法](04-Formal-Methods/) - 模型检测、定理证明、抽象解释、形式化规约
-- [Petri网理论](05-Petri-Net-Theory/) - 基础Petri网、高级Petri网、分析、应用
-- [自动机理论](06-Automata-Theory/) - 有限自动机、上下文无关语言、图灵机、形式语言
-- [时态逻辑](07-Temporal-Logic/) - 线性时态逻辑、计算树逻辑、实时时态逻辑、应用
+研究编程语言的语法、语义和类型系统，为语言设计和实现提供理论基础。
 
-### 主题导航
+**主要内容**：
 
-- [语法理论](01-Programming-Language-Theory/Syntax/) - 形式文法、抽象语法树、解析理论
-- [语义理论](01-Programming-Language-Theory/Semantics/) - 操作语义、指称语义、公理语义
-- [类型系统](01-Programming-Language-Theory/Type-Systems/) - 简单类型、多态类型、依赖类型
-- [复杂系统](02-System-Theory/Complex-Systems/) - 涌现、自组织、非线性动力学
-- [一致性模型](03-Distributed-Systems-Theory/Consistency-Models/) - 强一致性、最终一致性
-- [Petri网基础](05-Petri-Net-Theory/01-基础Petri网/) - 基础概念、标记变迁、可达性分析
-- [有限自动机](06-Automata-Theory/01-有限自动机/) - 基本概念、DFA、NFA、正则表达式
+- **语法理论**: 形式文法、解析理论、语法分析
+- **语义理论**: 操作语义、指称语义、公理语义
+- **类型系统理论**: 基本类型系统、高级类型系统、类型推断
 
-## 📖 核心概念
-
-### 编程语言理论 (Programming Language Theory)
-
-**研究编程语言的设计、实现和性质**
-
-#### 语法理论 (Syntax Theory)
-
-- **形式文法**：上下文无关文法、正则文法
-- **抽象语法树**：语法树的结构和操作
-- **解析理论**：自顶向下、自底向上解析
-- **语法理论综合**：语法理论的应用和发展
-
-#### 语义理论 (Semantics Theory)
-
-- **操作语义**：小步语义、大步语义
-- **指称语义**：数学函数作为语义
-- **公理语义**：霍尔逻辑、最弱前置条件
-- **自然语义**：推理规则系统
-
-#### 类型系统 (Type Systems)
-
-- **简单类型系统**：基本类型和函数类型
-- **多态类型系统**：参数多态、特设多态
-- **依赖类型系统**：Π类型、Σ类型
-- **线性类型系统**：资源敏感的类型
-
-### 系统理论 (System Theory)
-
-**研究复杂系统的结构和行为**
-
-#### 复杂系统 (Complex Systems)
-
-- **涌现**：整体大于部分之和
-- **自组织**：系统自发形成有序结构
-- **非线性动力学**：非线性系统的行为
-- **混沌理论**：确定性混沌现象
-
-#### 控制论 (Cybernetics)
-
-- **反馈系统**：正反馈、负反馈
-- **控制理论**：PID控制、最优控制
-- **信息控制**：信息在控制中的作用
-- **自适应系统**：能够自我调节的系统
-
-#### 信息论 (Information Theory)
-
-- **香农信息论**：信息熵、信道容量
-- **算法信息论**：柯尔莫哥洛夫复杂性
-- **量子信息论**：量子比特、量子纠缠
-- **信息处理**：信息的编码、传输、解码
-
-### 分布式系统理论 (Distributed Systems Theory)
-
-**研究分布式系统的设计和分析**
-
-#### 一致性模型 (Consistency Models)
-
-- **强一致性**：线性一致性、顺序一致性
-- **最终一致性**：BASE原则
-- **因果一致性**：因果关系的保持
-- **顺序一致性**：全局顺序的保持
-
-#### 共识算法 (Consensus Algorithms)
-
-- **Paxos族算法**：经典Paxos、Multi-Paxos
-- **Raft算法**：领导者选举、日志复制
-- **拜占庭容错**：PBFT、Tendermint
-- **权益证明**：PoS、DPoS
-
-#### 容错理论 (Fault Tolerance)
-
-- **故障模型**：崩溃故障、拜占庭故障
-- **故障检测**：心跳机制、超时检测
-- **恢复机制**：状态恢复、日志重放
-- **可靠性理论**：可用性、持久性
-
-### 形式化方法 (Formal Methods)
-
-**使用数学方法进行系统设计和验证**
-
-#### 模型检测 (Model Checking)
-
-- **时态逻辑**：LTL、CTL、CTL*
-- **状态空间探索**：显式搜索、符号搜索
-- **符号模型检测**：BDD、SAT求解
-- **有界模型检测**：k步可达性
-
-#### 定理证明 (Theorem Proving)
-
-- **交互式定理证明**：Coq、Isabelle
-- **自动定理证明**：SAT求解、SMT求解
-- **证明助手**：证明策略、证明自动化
-- **形式化验证**：程序正确性证明
-
-#### 抽象解释 (Abstract Interpretation)
-
-- **抽象域**：区间、多面体、八边形
-- **扩宽-缩窄**：收敛加速技术
-- **不动点计算**：迭代求解
-- **静态分析**：类型检查、数据流分析
-
-### Petri网理论 (Petri Net Theory)
-
-**研究并发系统的建模和分析**
-
-#### 基础Petri网 (Basic Petri Nets)
-
-- **Petri网结构**：库所、变迁、弧
-- **激发规则**：变迁的激发条件
-- **可达性**：状态可达性分析
-- **活性**：死锁检测
-
-#### 高级Petri网 (Advanced Petri Nets)
-
-- **有色Petri网**：带颜色的标记
-- **时间Petri网**：时间约束
-- **随机Petri网**：随机时间
-- **高级Petri网**：层次化、模块化
-
-#### Petri网分析 (Petri Net Analysis)
-
-- **结构分析**：不变量、陷阱
-- **行为分析**：可达图、覆盖图
-- **性能分析**：吞吐量、响应时间
-- **验证**：性质验证
-
-### 时态逻辑 (Temporal Logic)
-
-**研究时间相关的逻辑系统**
-
-#### 线性时态逻辑 (Linear Temporal Logic)
-
-- **LTL语法语义**：时态算子、路径公式
-- **LTL模型检测**：自动机方法
-- **LTL可满足性**：SAT求解
-- **LTL综合**：控制器综合
-
-#### 计算树逻辑 (Computation Tree Logic)
-
-- **CTL语法语义**：分支时态算子
-- **CTL模型检测**：标记算法
-- **CTL可满足性**：模型检查
-- **CTL综合**：反应系统综合
-
-#### 实时时态逻辑 (Real-Time Temporal Logic)
-
-- **时间自动机**：时钟变量、时间约束
-- **度量时态逻辑**：时间区间
-- **实时验证**：时间模型检测
-- **时间系统**：实时系统建模
-
-## 🛠️ 形式化方法
-
-### 编程语言形式化
+**Haskell实现**：
 
 ```haskell
--- 编程语言的基本类型
-class ProgrammingLanguage a where
-    -- 获取语言的语法
-    getSyntax :: a -> Syntax
-    
-    -- 获取语言的语义
-    getSemantics :: a -> Semantics
-    
-    -- 获取语言的类型系统
-    getTypeSystem :: a -> TypeSystem
-    
-    -- 类型检查
-    typeCheck :: a -> Program -> Maybe Type
+-- 语法树
+data SyntaxTree = 
+    Leaf String |
+    Node String [SyntaxTree]
 
--- 函数式编程语言
-instance ProgrammingLanguage Haskell where
-    getSyntax = FunctionalSyntax
-    getSemantics = DenotationalSemantics
-    getTypeSystem = HindleyMilner
-    typeCheck lang prog = inferType prog
+-- 语义解释器
+class Semantics a where
+    interpret :: SyntaxTree -> a
 
--- 面向对象编程语言
-instance ProgrammingLanguage Java where
-    getSyntax = ObjectOrientedSyntax
-    getSemantics = OperationalSemantics
-    getTypeSystem = NominalTypeSystem
-    typeCheck lang prog = checkTypes prog
+-- 类型检查器
+class TypeChecker a where
+    typeCheck :: Expr -> Maybe Type
 ```
 
-### 系统理论形式化
+### 2. 系统理论 (02-System-Theory)
+
+研究复杂系统的结构、行为和优化，为系统设计和分析提供方法。
+
+**主要内容**：
+
+- **基本系统概念**: 系统定义、系统分类、系统特性
+- **系统动力学**: 状态方程、动态行为、稳定性分析
+- **系统架构**: 架构模式、组件设计、接口规范
+- **系统优化**: 性能优化、资源优化、约束优化
+
+**Haskell实现**：
 
 ```haskell
--- 系统的基本类型
-class System a where
-    -- 获取系统的状态
-    getState :: a -> State
-    
-    -- 获取系统的行为
-    getBehavior :: a -> Behavior
-    
-    -- 获取系统的结构
-    getStructure :: a -> Structure
-    
-    -- 系统演化
-    evolve :: a -> Time -> a
+-- 系统状态
+data SystemState a = SystemState {
+    components :: [Component a],
+    connections :: [Connection],
+    dynamics :: StateTransition a
+}
 
--- 复杂系统
-instance System ComplexSystem where
-    getState sys = ComplexState sys
-    getBehavior sys = EmergentBehavior sys
-    getStructure sys = NetworkStructure sys
-    evolve sys t = simulateEvolution sys t
-
--- 控制系统
-instance System ControlSystem where
-    getState sys = ControlState sys
-    getBehavior sys = FeedbackBehavior sys
-    getStructure sys = FeedbackStructure sys
-    evolve sys t = applyControl sys t
+-- 系统动力学
+class SystemDynamics a where
+    evolve :: SystemState a -> Time -> SystemState a
+    isStable :: SystemState a -> Bool
 ```
 
-### 分布式系统形式化
+### 3. 控制论理论 (12-Control-Theory)
+
+研究系统控制和调节的数学理论，为自动控制系统提供设计方法。
+
+**主要内容**：
+
+- **经典控制**: PID控制、频率域分析、根轨迹分析
+- **现代控制**: 最优控制、鲁棒控制、自适应控制
+- **数字控制**: 离散时间系统、数字控制器、采样理论
+
+**Haskell实现**：
 
 ```haskell
--- 分布式系统的基本类型
-class DistributedSystem a where
-    -- 获取系统的节点
-    getNodes :: a -> [Node]
-    
-    -- 获取系统的通信
-    getCommunication :: a -> Communication
-    
-    -- 获取系统的一致性
-    getConsistency :: a -> ConsistencyModel
-    
-    -- 执行操作
-    execute :: a -> Operation -> a
+-- PID控制器
+data PIDController = PIDController {
+    kp :: Double,
+    ki :: Double,
+    kd :: Double,
+    integral :: Double,
+    previousError :: Double
+}
 
--- 强一致性系统
-instance DistributedSystem StrongConsistentSystem where
-    getNodes sys = StrongConsistentNodes sys
-    getCommunication sys = SynchronousCommunication sys
-    getConsistency sys = LinearizableConsistency
-    execute sys op = executeLinearizable sys op
-
--- 最终一致性系统
-instance DistributedSystem EventuallyConsistentSystem where
-    getNodes sys = EventuallyConsistentNodes sys
-    getCommunication sys = AsynchronousCommunication sys
-    getConsistency sys = EventualConsistency
-    execute sys op = executeEventuallyConsistent sys op
+-- 控制算法
+pidControl :: PIDController -> Double -> PIDController
+pidControl controller error = 
+    let newIntegral = integral controller + error
+        derivative = error - previousError controller
+        output = kp controller * error + 
+                 ki controller * newIntegral + 
+                 kd controller * derivative
+    in controller { 
+        integral = newIntegral,
+        previousError = error
+    }
 ```
 
-## 📚 参考资源
+### 4. 形式化方法 (04-Formal-Methods)
 
-### 经典教材
+研究程序验证和系统分析的形式化技术，确保软件系统的正确性。
 
-- **编程语言理论**：Pierce《Types and Programming Languages》
-- **系统理论**：Wiener《Cybernetics》
-- **分布式系统**：Tanenbaum《Distributed Systems》
-- **形式化方法**：Clarke《Model Checking》
+**主要内容**：
 
-### 现代发展
+- **模型检验**: 时态逻辑、状态空间分析、性质验证
+- **定理证明**: 交互式定理证明、自动定理证明
+- **抽象解释**: 抽象域、程序分析、静态分析
 
-- **类型理论**：同伦类型论、线性类型论
-- **系统理论**：复杂网络、自组织系统
-- **分布式系统**：区块链、微服务架构
-- **形式化方法**：自动验证、机器学习验证
+**Haskell实现**：
 
-### 技术标准
+```haskell
+-- 时态逻辑
+data TemporalFormula = 
+    Atomic String |
+    Not TemporalFormula |
+    And TemporalFormula TemporalFormula |
+    Or TemporalFormula TemporalFormula |
+    Always TemporalFormula |
+    Eventually TemporalFormula |
+    Next TemporalFormula |
+    Until TemporalFormula TemporalFormula
 
-- **编程语言**：Haskell、Rust、TypeScript
-- **系统建模**：UML、SysML、AADL
-- **分布式系统**：Kubernetes、Docker、gRPC
-- **形式化工具**：Coq、Isabelle、TLA+
+-- 模型检验
+class ModelChecker where
+    checkFormula :: TemporalFormula -> SystemState -> Bool
+    findCounterexample :: TemporalFormula -> SystemState -> Maybe Path
+```
 
----
+### 5. Petri网理论 (05-Petri-Net-Theory)
 
-*理论层为具体科学层提供坚实的理论基础，确保应用的科学性和可靠性。*
+研究并发系统的建模和分析，为并发程序提供形式化描述。
+
+**主要内容**：
+
+- **基本Petri网**: 基本概念、标识和变迁、可达性分析
+- **高级Petri网**: 着色Petri网、时间Petri网、随机Petri网
+- **Petri网分析**: 不变性分析、死锁分析、活性分析
+
+**Haskell实现**：
+
+```haskell
+-- Petri网
+data PetriNet = PetriNet {
+    places :: [Place],
+    transitions :: [Transition],
+    arcs :: [Arc],
+    initialMarking :: Marking
+}
+
+-- 变迁规则
+fireTransition :: PetriNet -> Transition -> Maybe PetriNet
+fireTransition net transition = 
+    if isEnabled net transition
+        then Just (updateMarking net transition)
+        else Nothing
+```
+
+### 6. 自动机理论 (06-Automata-Theory)
+
+研究计算模型和形式语言，为编译器设计和语言处理提供基础。
+
+**主要内容**：
+
+- **有限自动机**: 确定性自动机、非确定性自动机
+- **上下文无关语言**: 上下文无关文法、下推自动机、语法分析
+- **图灵机理论**: 基本图灵机、通用图灵机、计算复杂性
+
+**Haskell实现**：
+
+```haskell
+-- 有限自动机
+data FiniteAutomaton = FiniteAutomaton {
+    states :: [State],
+    alphabet :: [Symbol],
+    transitions :: [Transition],
+    startState :: State,
+    acceptStates :: [State]
+}
+
+-- 自动机执行
+runAutomaton :: FiniteAutomaton -> String -> Bool
+runAutomaton automaton input = 
+    let finalState = foldl step (startState automaton) input
+    in finalState `elem` acceptStates automaton
+```
+
+### 7. 线性类型理论 (08-Linear-Type-Theory)
+
+研究资源管理和线性逻辑，为内存安全和并发编程提供类型安全。
+
+**主要内容**：
+
+- **线性逻辑基础**: 线性蕴含、乘性连接词、指数连接词
+- **线性类型系统**: 线性函数、线性积、线性和
+- **高级线性理论**: 分级单子、线性效应、线性容器
+
+**Haskell实现**：
+
+```haskell
+-- 线性函数类型
+type LinearFunction a b = a %1 -> b
+
+-- 线性积类型
+data LinearPair a b = LinearPair a b
+
+-- 线性类型类
+class LinearFunctor f where
+    lmap :: (a %1 -> b) -> f a %1 -> f b
+```
+
+### 8. 仿射类型理论 (09-Affine-Type-Theory)
+
+研究允许丢弃值的类型系统，为所有权系统提供理论基础。
+
+**主要内容**：
+
+- **仿射逻辑基础**: 仿射蕴含、弱化规则、仿射连接词
+- **仿射类型系统**: 仿射函数、仿射积、仿射和
+- **所有权系统**: 所有权类型、借用检查、生命周期
+
+**Haskell实现**：
+
+```haskell
+-- 仿射函数类型
+type AffineFunction a b = a %ω -> b
+
+-- 仿射类型类
+class AffineType a where
+    discard :: a %ω -> ()
+```
+
+### 9. 量子类型理论 (10-Quantum-Type-Theory)
+
+研究量子计算中的类型系统，为量子编程语言提供类型安全。
+
+**主要内容**：
+
+- **量子力学基础**: 叠加态、纠缠、不可克隆性
+- **量子类型系统**: 量子比特类型、量子函数、量子积
+- **量子算法**: 量子傅里叶变换、Grover算法、Shor算法
+
+**Haskell实现**：
+
+```haskell
+-- 量子比特类型
+data Qubit = Qubit (Complex Double)
+
+-- 量子函数类型
+type QuantumFunction a b = a %1 -> b
+
+-- 量子效应
+data QuantumEffect a where
+    Measure :: Qubit -> QuantumEffect Bool
+    ApplyGate :: QuantumGate -> Qubit -> QuantumEffect Qubit
+```
+
+### 10. 时态类型理论 (11-Temporal-Type-Theory)
+
+研究时间相关的类型系统，为实时系统和时序逻辑提供类型安全。
+
+**主要内容**：
+
+- **时态逻辑基础**: 时态算子、时间模型、时态蕴含
+- **时态类型系统**: 时态类型、时态函数、时态积
+- **实时系统**: 实时任务、实时约束、实时调度
+
+**Haskell实现**：
+
+```haskell
+-- 时态类型
+data TemporalType a = TemporalType a Time
+
+-- 时态函数类型
+type TemporalFunction a b = a %1 -> Temporal b
+
+-- 时态算子
+class Always a where
+    always :: Temporal a -> Temporal (Always a)
+```
+
+### 11. 分布式系统理论 (13-Distributed-Systems-Theory)
+
+研究分布式算法和系统，为大规模分布式系统提供理论基础。
+
+**主要内容**：
+
+- **一致性理论**: 强一致性、最终一致性、因果一致性
+- **共识算法**: Paxos算法、Raft算法、拜占庭共识
+- **容错性**: 复制、检查点、恢复、自稳定
+
+**Haskell实现**：
+
+```haskell
+-- 分布式系统
+data DistributedSystem a = DistributedSystem {
+    nodes :: [Node a],
+    network :: Network,
+    algorithm :: DistributedAlgorithm a
+}
+
+-- 一致性检查
+class Consistency a where
+    strongConsistency :: [Node a] -> Bool
+    eventualConsistency :: [Node a] -> Bool
+```
+
+## 理论间关系
+
+### 1. 层次关系
+
+```
+哲学层 → 形式科学层 → 理论层 → 应用科学层 → 行业领域层
+```
+
+### 2. 横向关系
+
+- **类型理论** ↔ **形式化方法**: 类型系统用于程序验证
+- **系统理论** ↔ **控制论**: 系统控制需要系统理论支持
+- **Petri网** ↔ **分布式系统**: 并发模型用于分布式系统分析
+- **线性类型** ↔ **量子类型**: 资源管理在量子计算中的应用
+
+### 3. 纵向关系
+
+- **基础理论** → **高级理论** → **应用理论**
+- **抽象概念** → **具体实现** → **实际应用**
+
+## 形式化方法
+
+### 1. 数学表示
+
+每个理论都采用严格的数学符号和公式进行定义，确保概念的精确性和可推导性。
+
+### 2. Haskell实现
+
+所有理论概念都有对应的Haskell代码实现，体现从理论到实践的转化。
+
+### 3. 证明系统
+
+建立完整的证明体系，确保理论的一致性和正确性。
+
+## 应用价值
+
+### 1. 软件工程
+
+- 提供程序验证的理论基础
+- 支持类型安全的编程语言设计
+- 为并发程序提供形式化模型
+
+### 2. 系统设计
+
+- 指导复杂系统的架构设计
+- 提供系统分析和优化方法
+- 支持分布式系统的设计
+
+### 3. 人工智能
+
+- 为机器学习算法提供理论基础
+- 支持量子计算的应用
+- 提供智能系统的控制方法
+
+## 发展方向
+
+### 1. 理论融合
+
+- 不同类型理论的统一框架
+- 跨领域理论的整合
+- 新兴理论的引入
+
+### 2. 实践应用
+
+- 理论在工程实践中的应用
+- 新技术的理论支持
+- 实际问题的理论解决方案
+
+### 3. 前沿探索
+
+- 量子计算的理论发展
+- 人工智能的理论基础
+- 新兴领域的理论创新
