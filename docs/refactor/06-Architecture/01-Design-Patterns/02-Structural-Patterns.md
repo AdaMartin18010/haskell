@@ -9,13 +9,16 @@
 ### 对象组合的形式化模型
 
 #### 定义 1.1 (对象组合)
+
 设 $U$ 为类型宇宙，对象组合定义为：
 $$\text{compose} : A \times B \rightarrow C$$
 
 其中 $A, B, C \in U$ 是类型。
 
 #### 定义 1.2 (结构型模式)
+
 结构型模式是一个四元组 $(S, C, \text{compose}, \text{decompose})$，其中：
+
 - $S$ 是结构类型
 - $C$ 是组件类型
 - $\text{compose}$ 是组合函数
@@ -26,10 +29,12 @@ $$\text{compose} : A \times B \rightarrow C$$
 ### 形式化定义
 
 #### 定义 2.1 (适配器模式)
+
 适配器模式定义为：
 $$\text{Adapter}_{A,B} = (A, B, \text{adapt}, \text{target})$$
 
 其中：
+
 - $A$ 是源类型
 - $B$ 是目标类型
 - $\text{adapt} : A \rightarrow B$ 是适配函数
@@ -72,6 +77,7 @@ exampleAdapter = do
 ### 形式化证明
 
 #### 定理 2.1 (适配器的兼容性)
+
 对于任意适配器 $\text{Adapter}_{A,B}$，适配后的对象满足目标接口：
 $$\forall a \in A, \text{target}(\text{adapt}(a)) \in \text{Interface}$$
 
@@ -83,10 +89,12 @@ $$\forall a \in A, \text{target}(\text{adapt}(a)) \in \text{Interface}$$
 ### 形式化定义
 
 #### 定义 3.1 (装饰器模式)
+
 装饰器模式定义为：
 $$\text{Decorator}_A = (A, \text{decorate}, \text{base})$$
 
 其中：
+
 - $A$ 是基础类型
 - $\text{decorate} : A \rightarrow A$ 是装饰函数
 - $\text{base} : A \rightarrow A$ 是基础函数
@@ -155,6 +163,7 @@ exampleDecorator = do
 ### 形式化证明
 
 #### 定理 3.1 (装饰器的可组合性)
+
 对于任意装饰器 $\text{Decorator}_A$，装饰操作是可组合的：
 $$\text{decorate}_1 \circ \text{decorate}_2 = \text{decorate}_{1,2}$$
 
@@ -166,10 +175,12 @@ $$\text{decorate}_1 \circ \text{decorate}_2 = \text{decorate}_{1,2}$$
 ### 形式化定义
 
 #### 定义 4.1 (桥接模式)
+
 桥接模式定义为：
 $$\text{Bridge}_{A,B} = (A, B, \text{implement}, \text{abstract})$$
 
 其中：
+
 - $A$ 是抽象类型
 - $B$ 是实现类型
 - $\text{implement} : A \rightarrow B$ 是实现函数
@@ -224,6 +235,7 @@ exampleBridge = do
 ### 形式化证明
 
 #### 定理 4.1 (桥接的独立性)
+
 对于任意桥接 $\text{Bridge}_{A,B}$，抽象和实现是独立的：
 $$\text{abstract} \circ \text{implement} = \text{id}_A$$
 
@@ -235,10 +247,12 @@ $$\text{abstract} \circ \text{implement} = \text{id}_A$$
 ### 形式化定义
 
 #### 定义 5.1 (外观模式)
+
 外观模式定义为：
 $$\text{Facade} = (S, \text{simplify}, \text{interface})$$
 
 其中：
+
 - $S$ 是子系统类型
 - $\text{simplify} : S \rightarrow \text{SimpleInterface}$ 是简化函数
 - $\text{interface} : \text{SimpleInterface} \rightarrow S$ 是接口函数
@@ -300,6 +314,7 @@ exampleFacade = do
 ### 形式化证明
 
 #### 定理 5.1 (外观的简化性)
+
 对于任意外观 $\text{Facade}$，简化后的接口比原系统简单：
 $$|\text{SimpleInterface}| < |S|$$
 
@@ -311,10 +326,12 @@ $$|\text{SimpleInterface}| < |S|$$
 ### 形式化定义
 
 #### 定义 6.1 (享元模式)
+
 享元模式定义为：
 $$\text{Flyweight} = (I, S, \text{share}, \text{unique})$$
 
 其中：
+
 - $I$ 是内部状态类型
 - $S$ 是外部状态类型
 - $\text{share} : I \rightarrow \text{Shared}$ 是共享函数
@@ -370,6 +387,7 @@ exampleFlyweight = do
 ### 形式化证明
 
 #### 定理 6.1 (享元的共享性)
+
 对于任意享元 $\text{Flyweight}$，相同内部状态的对象被共享：
 $$\forall i \in I, \text{share}(i) = \text{shared}$$
 
@@ -381,10 +399,12 @@ $$\forall i \in I, \text{share}(i) = \text{shared}$$
 ### 形式化定义
 
 #### 定义 7.1 (代理模式)
+
 代理模式定义为：
 $$\text{Proxy}_A = (A, \text{control}, \text{access})$$
 
 其中：
+
 - $A$ 是目标类型
 - $\text{control} : A \rightarrow \text{Controlled}$ 是控制函数
 - $\text{access} : \text{Controlled} \rightarrow A$ 是访问函数
@@ -453,6 +473,7 @@ exampleProxy = do
 ### 形式化证明
 
 #### 定理 7.1 (代理的透明性)
+
 对于任意代理 $\text{Proxy}_A$，代理对客户端透明：
 $$\text{access} \circ \text{control} = \text{id}_A$$
 
@@ -464,6 +485,7 @@ $$\text{access} \circ \text{control} = \text{id}_A$$
 ### 模式间的形式化关系
 
 #### 定义 8.1 (模式组合)
+
 两个结构型模式 $P_1$ 和 $P_2$ 的组合定义为：
 $$P_1 \circ P_2 = (S_1 \times S_2, C_1 \times C_2, \text{compose}_{1,2}, \text{decompose}_{1,2})$$
 
@@ -549,4 +571,4 @@ decrementRef flyweight =
 
 ---
 
-*本文档提供了结构型设计模式的完整形式化理论和Haskell实现，为软件架构设计提供了坚实的理论基础。* 
+*本文档提供了结构型设计模式的完整形式化理论和Haskell实现，为软件架构设计提供了坚实的理论基础。*

@@ -306,7 +306,7 @@ calculateLaxity currentTime task =
   in (task, laxity)
 ```
 
-### 可调度性分析
+### 可调度性分析1
 
 ```haskell
 -- 可调度性分析器

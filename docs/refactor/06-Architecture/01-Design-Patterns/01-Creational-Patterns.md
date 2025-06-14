@@ -9,13 +9,16 @@
 ### 对象创建的形式化模型
 
 #### 定义 1.1 (对象创建函数)
+
 设 $U$ 为类型宇宙，$A \in U$ 为类型，对象创建函数定义为：
 $$\text{create}_A : \text{Config}_A \rightarrow A$$
 
 其中 $\text{Config}_A$ 是类型 $A$ 的配置空间。
 
 #### 定义 1.2 (创建型模式)
+
 创建型模式是一个三元组 $(C, F, \phi)$，其中：
+
 - $C$ 是配置类型
 - $F$ 是工厂函数类型
 - $\phi$ 是创建策略
@@ -25,10 +28,12 @@ $$\text{create}_A : \text{Config}_A \rightarrow A$$
 ### 形式化定义
 
 #### 定义 2.1 (工厂模式)
+
 工厂模式定义为：
 $$\text{Factory}_A = (C_A, \text{create}_A, \text{strategy}_A)$$
 
 其中：
+
 - $C_A$ 是产品配置类型
 - $\text{create}_A : C_A \rightarrow A$ 是创建函数
 - $\text{strategy}_A : C_A \rightarrow \text{Strategy}$ 是创建策略
@@ -81,6 +86,7 @@ example = do
 ### 形式化证明
 
 #### 定理 2.1 (工厂模式的可组合性)
+
 对于任意类型 $A, B$，如果存在工厂 $\text{Factory}_A$ 和 $\text{Factory}_B$，则存在复合工厂 $\text{Factory}_{A \times B}$。
 
 **证明**：
@@ -95,10 +101,12 @@ $$\text{create}_{A \times B}(c_A, c_B) = (\text{create}_A(c_A), \text{create}_B(
 ### 形式化定义
 
 #### 定义 3.1 (抽象工厂)
+
 抽象工厂是一个四元组：
 $$\text{AbstractFactory} = (F, P, \text{create}, \text{family})$$
 
 其中：
+
 - $F$ 是工厂族类型
 - $P$ 是产品族类型
 - $\text{create} : F \rightarrow P$ 是创建函数
@@ -155,6 +163,7 @@ createUI family = getUIFactory family $ \factory ->
 ### 形式化证明
 
 #### 定理 3.1 (抽象工厂的一致性)
+
 对于任意抽象工厂 $\text{AbstractFactory}$，其创建的产品族具有一致性：
 $$\forall f \in F, \text{family}(\text{create}(f)) = \text{family}(f)$$
 
@@ -167,10 +176,12 @@ $$\text{family}(\text{create}(f)) = \text{family}(f)$$
 ### 形式化定义
 
 #### 定义 4.1 (建造者模式)
+
 建造者模式定义为：
 $$\text{Builder}_A = (S, \text{build}, \text{reset})$$
 
 其中：
+
 - $S$ 是构建状态类型
 - $\text{build} : S \rightarrow A$ 是构建函数
 - $\text{reset} : S \rightarrow S$ 是重置函数
@@ -237,6 +248,7 @@ buildCar = construct CarDirector (reset undefined)
 ### 形式化证明
 
 #### 定理 4.1 (建造者的幂等性)
+
 对于任意建造者 $\text{Builder}_A$，重置操作是幂等的：
 $$\text{reset} \circ \text{reset} = \text{reset}$$
 
@@ -249,10 +261,12 @@ $$\text{reset} \circ \text{reset} = \text{reset}$$
 ### 形式化定义
 
 #### 定义 5.1 (原型模式)
+
 原型模式定义为：
 $$\text{Prototype}_A = (A, \text{clone}, \text{prototype})$$
 
 其中：
+
 - $A$ 是原型类型
 - $\text{clone} : A \rightarrow A$ 是克隆函数
 - $\text{prototype} : A \rightarrow A$ 是原型函数
@@ -308,6 +322,7 @@ examplePrototype = do
 ### 形式化证明
 
 #### 定理 5.1 (克隆的恒等性)
+
 对于任意原型 $p \in A$，克隆操作满足：
 $$\text{clone}(p) \equiv p$$
 
@@ -320,10 +335,12 @@ $$\text{clone}(p) \equiv p$$
 ### 形式化定义
 
 #### 定义 6.1 (单例模式)
+
 单例模式定义为：
 $$\text{Singleton}_A = (A, \text{instance}, \text{unique})$$
 
 其中：
+
 - $A$ 是单例类型
 - $\text{instance} : \text{Unit} \rightarrow A$ 是实例获取函数
 - $\text{unique} : A \rightarrow \text{Bool}$ 是唯一性验证函数
@@ -373,6 +390,7 @@ exampleSingleton = do
 ### 形式化证明
 
 #### 定理 6.1 (单例的唯一性)
+
 对于任意单例 $\text{Singleton}_A$，其实例是唯一的：
 $$\forall x, y \in A, x = y$$
 
@@ -385,6 +403,7 @@ $$\forall x, y \in A, x = y$$
 ### 模式间的形式化关系
 
 #### 定义 7.1 (模式组合)
+
 两个模式 $P_1 = (C_1, F_1, \phi_1)$ 和 $P_2 = (C_2, F_2, \phi_2)$ 的组合定义为：
 $$P_1 \circ P_2 = (C_1 \times C_2, F_1 \circ F_2, \phi_1 \circ \phi_2)$$
 
@@ -482,4 +501,4 @@ release obj (ObjectPool available inUse) =
 
 ---
 
-*本文档提供了创建型设计模式的完整形式化理论和Haskell实现，为软件架构设计提供了坚实的理论基础。* 
+*本文档提供了创建型设计模式的完整形式化理论和Haskell实现，为软件架构设计提供了坚实的理论基础。*
