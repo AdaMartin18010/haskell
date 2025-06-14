@@ -429,7 +429,7 @@ data BehaviorResult
   deriving (Show)
 ```
 
-### 路径规划系统
+### 路径规划系统1
 
 ```haskell
 -- 路径规划系统
@@ -520,7 +520,7 @@ smoothWaypoints (start:end:rest) graph =
     else start : smoothWaypoints (end:rest) graph
 ```
 
-### 决策制定系统
+### 决策制定系统1
 
 ```haskell
 -- 决策制定系统
