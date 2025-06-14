@@ -1,8 +1,8 @@
-# 类型理论 (Type Theory)
+# 类型论 (Type Theory)
 
 ## 📋 概述
 
-类型理论是现代数学和计算机科学的基础理论，它提供了形式化表达数学对象和程序语义的框架。类型理论将数学构造和计算过程统一在一个形式化系统中，是函数式编程语言的理论基础。
+类型论是现代数学和计算机科学的基础理论，它统一了逻辑、集合论和计算理论。类型论为函数式编程、定理证明和形式化验证提供理论基础。
 
 ## 🎯 核心概念
 
@@ -29,33 +29,47 @@
 
 ## 📚 详细内容
 
-### 01-简单类型理论
+### 01-基本概念 (Basic-Concepts)
 
-- [简单类型理论基础](./01-Simple-Type-Theory/简单类型理论基础.md)
-- 类型和项的定义
-- 类型规则和推导
-- 类型安全性和进展性
+- [类型论基础](./01-Basic-Concepts/01-Type-Theory-Basics.md)
+- [类型与项](./01-Basic-Concepts/02-Types-and-Terms.md)
+- [类型检查](./01-Basic-Concepts/03-Type-Checking.md)
+- [类型推导](./01-Basic-Concepts/04-Type-Inference.md)
 
-### 02-依赖类型理论
+### 02-简单类型论 (Simple-Type-Theory)
 
-- [依赖类型理论基础](./02-Dependent-Type-Theory/依赖类型理论基础.md)
-- Π类型和Σ类型
-- 依赖函数和依赖积
-- 类型族和索引类型
+- [λ演算](./02-Simple-Type-Theory/01-Lambda-Calculus.md)
+- [简单类型λ演算](./02-Simple-Type-Theory/02-Simply-Typed-Lambda-Calculus.md)
+- [类型构造子](./02-Simple-Type-Theory/03-Type-Constructors.md)
+- [类型系统性质](./02-Simple-Type-Theory/04-Type-System-Properties.md)
 
-### 03-同伦类型理论
+### 03-多态类型论 (Polymorphic-Type-Theory)
 
-- [同伦类型理论基础](./03-Homotopy-Type-Theory/同伦类型理论基础.md)
+- [System F](./03-Polymorphic-Type-Theory/01-System-F.md)
+- [Hindley-Milner系统](./03-Polymorphic-Type-Theory/02-Hindley-Milner-System.md)
+- [高阶多态](./03-Polymorphic-Type-Theory/03-Higher-Order-Polymorphism.md)
+- [类型抽象](./03-Polymorphic-Type-Theory/04-Type-Abstraction.md)
+
+### 04-依赖类型论 (Dependent-Type-Theory)
+
+- [Martin-Löf类型论](./04-Dependent-Type-Theory/01-Martin-Lof-Type-Theory.md)
+- Π类型与Σ类型
+- 归纳类型
+- 模式匹配
+
+### 05-同伦类型论 (Homotopy-Type-Theory)
+
+- [基本概念](./05-Homotopy-Type-Theory/01-Basic-Concepts.md)
 - 类型作为空间
-- 路径和同伦
+- 等价与同构
 - 高阶归纳类型
 
-### 04-构造类型理论
+### 06-构造类型论 (Constructive-Type-Theory)
 
-- [构造类型理论基础](./04-Constructive-Type-Theory/构造类型理论基础.md)
-- 直觉主义逻辑
+- [直觉逻辑](./06-Constructive-Type-Theory/01-Intuitionistic-Logic.md)
 - 构造性证明
 - 程序提取
+- 证明无关性
 
 ## 🔗 相关链接
 
@@ -67,10 +81,10 @@
 
 ## 📖 学习路径
 
-1. **基础阶段**：简单类型理论
-2. **进阶阶段**：依赖类型理论
-3. **高级阶段**：同伦类型理论
-4. **应用阶段**：构造类型理论
+1. **基本概念**：理解类型、项和类型关系
+2. **简单类型论**：掌握λ演算和类型检查
+3. **多态类型论**：学习参数多态和类型抽象
+4. **依赖类型论**：理解依赖类型和证明系统
 
 ## 🎯 应用领域
 
@@ -81,4 +95,4 @@
 
 ---
 
-*类型理论是现代数学和计算机科学的重要基础，为形式化方法和函数式编程提供了坚实的理论基础。*
+*类型论是现代数学和计算机科学的重要基础，为形式化方法和函数式编程提供了坚实的理论基础。*
