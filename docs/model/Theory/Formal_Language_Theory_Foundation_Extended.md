@@ -68,7 +68,7 @@
 2. 单向DFA可以通过状态编码位置信息
 3. 状态空间大小最多增加 $O(n)$ 倍
 
-**算法 2.1 (双向DFA模拟)**
+-**算法 2.1 (双向DFA模拟)**
 
 ```haskell
 data TwoWayDFA = TwoWayDFA {
@@ -120,7 +120,7 @@ iterateStep dfa config =
 **定理 2.2 (交替DFA表达能力)**
 交替DFA可以识别所有正则语言，且某些情况下状态数更少。
 
-**算法 2.2 (交替DFA模拟)**
+-**算法 2.2 (交替DFA模拟)**
 
 ```haskell
 data AlternatingDFA = AlternatingDFA {
@@ -162,7 +162,7 @@ $$P_M(w) = \sum_{q \in F} P_M(w, q)$$
 
 其中 $P_M(w, q)$ 是读入 $w$ 后到达状态 $q$ 的概率。
 
-**算法 2.3 (概率DFA模拟)**
+-**算法 2.3 (概率DFA模拟)**
 
 ```haskell
 data ProbabilisticDFA = ProbabilisticDFA {
@@ -200,12 +200,12 @@ stepProbabilistic dfa currentProbs char =
 - $P$ 是产生式集合
 - $A$ 是属性计算规则集合
 
-**定义 3.2 (综合属性和继承属性)**
+-**定义 3.2 (综合属性和继承属性)**
 
 - **综合属性**：从子节点向上传播
 - **继承属性**：从父节点向下传播
 
-**算法 3.1 (属性文法求值)**
+-**算法 3.1 (属性文法求值)**
 
 ```haskell
 data AttributeGrammar = AttributeGrammar {
@@ -251,12 +251,12 @@ evaluateSynthesized grammar (Node production children) env =
 - $I$ 是初始树集合
 - $A$ 是辅助树集合
 
-**定义 3.4 (替换和邻接操作)**
+-**定义 3.4 (替换和邻接操作)**
 
 - **替换**：在非终结符节点处插入树
 - **邻接**：在非终结符节点处邻接辅助树
 
-**算法 3.2 (树邻接文法解析)**
+-**算法 3.2 (树邻接文法解析)**
 
 ```haskell
 data TreeAdjoiningGrammar = TreeAdjoiningGrammar {
@@ -301,7 +301,7 @@ generateAllDerivations grammar trees =
 **定义 3.6 (依存关系)**
 依存关系是二元组 $(w_1, w_2, t)$，表示词 $w_1$ 通过关系 $t$ 依存于词 $w_2$。
 
-**算法 3.3 (依赖文法解析)**
+-**算法 3.3 (依赖文法解析)**
 
 ```haskell
 data DependencyGrammar = DependencyGrammar {
@@ -338,7 +338,7 @@ generateDependencies grammar words currentDeps =
 
 ### 4.1 最小化算法
 
-**算法 4.1 (DFA最小化)**
+-**算法 4.1 (DFA最小化)**
 
 ```haskell
 minimizeDFA :: DFA -> DFA
@@ -380,7 +380,7 @@ splitBlock dfa block partition =
 
 ### 4.2 语言等价性检查
 
-**算法 4.2 (语言等价性)**
+-**算法 4.2 (语言等价性)**
 
 ```haskell
 areLanguagesEquivalent :: DFA -> DFA -> Bool
@@ -409,7 +409,7 @@ constructProductDFA dfa1 dfa2 =
 
 ### 4.3 语言包含性检查
 
-**算法 4.3 (语言包含性)**
+-**算法 4.3 (语言包含性)**
 
 ```haskell
 isLanguageContained :: DFA -> DFA -> Bool
@@ -441,7 +441,7 @@ isEmptyLanguage dfa =
 **定理 5.1 (LBA与CSL等价性)**
 线性有界自动机识别的语言类与上下文敏感语言等价。
 
-**算法 5.1 (LBA模拟)**
+-**算法 5.1 (LBA模拟)**
 
 ```haskell
 data LinearBoundedAutomaton = LinearBoundedAutomaton {
@@ -490,7 +490,7 @@ iterateLBAStep lba config =
 - $B \in \Gamma$ 是空白符号
 - $\delta : Q \times \Gamma \rightarrow Q \times \Gamma \times \{\text{left}, \text{right}\}$
 
-**算法 5.2 (图灵机模拟)**
+-**算法 5.2 (图灵机模拟)**
 
 ```haskell
 data TuringMachine = TuringMachine {
@@ -531,7 +531,7 @@ iterateTMStep tm config =
 
 ### 6.1 编译器设计
 
-**算法 6.1 (词法分析器生成)**
+-**算法 6.1 (词法分析器生成)**
 
 ```haskell
 generateLexer :: [RegularExpression] -> Lexer
@@ -565,7 +565,7 @@ tokenize lexer input =
 
 ### 6.2 自然语言处理
 
-**算法 6.2 (句法分析器)**
+-**算法 6.2 (句法分析器)**
 
 ```haskell
 data Parser = Parser {
@@ -604,7 +604,7 @@ shiftReduce parser stack input =
 - $\delta : Q \times \Sigma \times Q \rightarrow \mathbb{C}$ 是转移振幅函数
 - 满足 $\sum_{q' \in Q} |\delta(q, a, q')|^2 = 1$ 对于所有 $q \in Q, a \in \Sigma$
 
-**算法 7.1 (量子自动机模拟)**
+-**算法 7.1 (量子自动机模拟)**
 
 ```haskell
 data QuantumDFA = QuantumDFA {
@@ -638,7 +638,7 @@ stepQuantum qdfa currentState char =
 - $\pi : P \rightarrow [0,1]$ 是产生式概率函数
 - 满足 $\sum_{A \rightarrow \alpha} \pi(A \rightarrow \alpha) = 1$ 对于所有 $A \in V$
 
-**算法 7.2 (PCFG解析)**
+-**算法 7.2 (PCFG解析)**
 
 ```haskell
 data ProbabilisticCFG = ProbabilisticCFG {
