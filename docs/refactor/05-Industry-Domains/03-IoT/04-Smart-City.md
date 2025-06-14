@@ -743,4 +743,4 @@ optimizeDispatch grid energyStatus demandPredictions renewableStatus gridBalance
 
 ---
 
-*本文档提供了智慧城市的完整形式化理论框架和Haskell实现，为智慧城市建设提供了理论基础和实用工具。* 
+*本文档提供了智慧城市的完整形式化理论框架和Haskell实现，为智慧城市建设提供了理论基础和实用工具。*

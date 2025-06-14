@@ -600,6 +600,7 @@ data Option = Option
 **证明**:
 
 设 $f(n) = g(n) + h(n)$ 是节点 $n$ 的评估函数，其中：
+
 - $g(n)$ 是从起始节点到节点 $n$ 的实际成本
 - $h(n)$ 是从节点 $n$ 到目标的估计成本
 
@@ -824,4 +825,4 @@ engageInCombat enemy world alertStatus = do
 
 ---
 
-*本文档提供了游戏AI的完整形式化理论框架和Haskell实现，为游戏AI开发提供了理论基础和实用工具。* 
+*本文档提供了游戏AI的完整形式化理论框架和Haskell实现，为游戏AI开发提供了理论基础和实用工具。*

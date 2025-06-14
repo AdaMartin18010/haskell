@@ -565,22 +565,22 @@ data PersonalizedMedicine = PersonalizedMedicine
 
 -- 药物推荐算法
 recommendDrugs :: PersonalizedMedicine -> Condition -> [DrugRecommendation]
-recommendDrugs medicine condition = 
+recommendDrugs medicine condition =
   let -- 1. 基于基因组的药物筛选
       genomicRecommendations = filterByGenomics medicine condition
-      
+
       -- 2. 基于表型的药物筛选
       phenotypicRecommendations = filterByPhenotype medicine condition
-      
+
       -- 3. 基于环境的药物筛选
       environmentalRecommendations = filterByEnvironment medicine condition
-      
+
       -- 4. 综合评分
-      allRecommendations = combineRecommendations 
-        genomicRecommendations 
-        phenotypicRecommendations 
+      allRecommendations = combineRecommendations
+        genomicRecommendations
+        phenotypicRecommendations
         environmentalRecommendations
-      
+
       -- 5. 排序和筛选
       rankedRecommendations = rankRecommendations allRecommendations
       topRecommendations = take 10 rankedRecommendations
@@ -588,7 +588,7 @@ recommendDrugs medicine condition =
 
 -- 基因组筛选
 filterByGenomics :: PersonalizedMedicine -> Condition -> [DrugRecommendation]
-filterByGenomics medicine condition = 
+filterByGenomics medicine condition =
   let patientVariants = getPatientVariants (genomicData medicine)
       conditionGenes = getConditionGenes condition
       relevantVariants = filter (isRelevant conditionGenes) patientVariants
@@ -613,44 +613,44 @@ data DrugRecommendation = DrugRecommendation
 ```haskell
 -- 药物剂量优化
 optimizeDosage :: PatientId -> Drug -> Dosage
-optimizeDosage patientId drug = 
+optimizeDosage patientId drug =
   let -- 1. 获取患者特征
       patientGenome = getPatientGenome patientId
       patientPhenotype = getPatientPhenotype patientId
       patientEnvironment = getPatientEnvironment patientId
-      
+
       -- 2. 预测药物代谢
       metabolismRate = predictMetabolismRate patientGenome drug
       clearanceRate = predictClearanceRate patientGenome drug
-      
+
       -- 3. 考虑药物相互作用
       currentMedications = getCurrentMedications patientId
       interactions = detectDrugInteractions (drug:currentMedications)
       adjustedRate = adjustForInteractions metabolismRate interactions
-      
+
       -- 4. 计算最佳剂量
       standardDose = getStandardDose drug
       adjustedDose = adjustDose standardDose adjustedRate patientPhenotype
-      
+
       -- 5. 验证安全性
       safeDose = ensureSafety adjustedDose patientPhenotype
   in safeDose
 
 -- 剂量调整
 adjustDose :: Dosage -> Double -> PhenotypicData -> Dosage
-adjustDose standardDose adjustmentFactor phenotype = 
+adjustDose standardDose adjustmentFactor phenotype =
   let baseDose = doseAmount standardDose
       adjustedAmount = baseDose * adjustmentFactor
-      
+
       -- 考虑年龄调整
       ageAdjusted = adjustForAge adjustedAmount (age phenotype)
-      
+
       -- 考虑体重调整
       weightAdjusted = adjustForWeight ageAdjusted (weight phenotype)
-      
+
       -- 考虑肾功能调整
       renalAdjusted = adjustForRenalFunction weightAdjusted (renalFunction phenotype)
-      
+
       -- 考虑肝功能调整
       hepaticAdjusted = adjustForHepaticFunction renalAdjusted (hepaticFunction phenotype)
   in Dosage hepaticAdjusted (doseUnit standardDose) (doseFrequency standardDose)
@@ -661,22 +661,22 @@ adjustDose standardDose adjustmentFactor phenotype =
 ```haskell
 -- 疾病风险预测
 predictDiseaseRisk :: PatientId -> Disease -> RiskAssessment
-predictDiseaseRisk patientId disease = 
+predictDiseaseRisk patientId disease =
   let -- 1. 遗传风险评估
       geneticRisk = assessGeneticRisk patientId disease
-      
+
       -- 2. 环境风险评估
       environmentalRisk = assessEnvironmentalRisk patientId disease
-      
+
       -- 3. 生活方式风险评估
       lifestyleRisk = assessLifestyleRisk patientId disease
-      
+
       -- 4. 综合风险评估
       combinedRisk = combineRisks geneticRisk environmentalRisk lifestyleRisk
-      
+
       -- 5. 风险分层
       riskLevel = stratifyRisk combinedRisk
-      
+
       -- 6. 预防建议
       recommendations = generatePreventionRecommendations riskLevel disease
   in RiskAssessment disease combinedRisk riskLevel recommendations
@@ -696,7 +696,7 @@ data RiskLevel
 
 -- 遗传风险评估
 assessGeneticRisk :: PatientId -> Disease -> Double
-assessGeneticRisk patientId disease = 
+assessGeneticRisk patientId disease =
   let patientVariants = getPatientVariants patientId
       diseaseVariants = getDiseaseVariants disease
       relevantVariants = filter (isDiseaseRelated disease) patientVariants
@@ -715,4 +715,4 @@ assessGeneticRisk patientId disease =
 
 ---
 
-*本文档提供了精准医学的完整形式化理论框架和Haskell实现，为个性化医疗提供了理论基础和实用工具。* 
+*本文档提供了精准医学的完整形式化理论框架和Haskell实现，为个性化医疗提供了理论基础和实用工具。*
