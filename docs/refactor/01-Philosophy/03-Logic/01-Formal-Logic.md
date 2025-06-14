@@ -1,806 +1,701 @@
-# 形式逻辑 (Formal Logic)
+# 形式逻辑
 
 ## 概述
 
-形式逻辑研究推理的有效性和形式结构，是哲学和数学的基础。本节将从形式化角度分析不同的逻辑系统，并用Haskell实现相关的概念和证明。
+形式逻辑是哲学和数学的基础学科，研究推理的有效性和形式结构。本节将从形式化角度探讨形式逻辑的基本概念，并提供Haskell实现。
 
-## 主要逻辑系统
+## 1. 命题逻辑
 
-### 1. 命题逻辑 (Propositional Logic)
-
-命题逻辑研究命题之间的逻辑关系。
-
-#### 形式化定义
+### 1.1 基本概念
 
 ```haskell
--- 命题逻辑的形式化表达
-class PropositionalLogic a where
-  -- 命题
-  proposition :: a -> String
-  -- 真值
-  truthValue :: a -> Bool
-  -- 逻辑连接词
-  logicalConnective :: a -> Connective
+-- 命题逻辑公式
+data PropositionalFormula = 
+    Atom String                    -- 原子命题
+  | Not PropositionalFormula      -- 否定
+  | And PropositionalFormula PropositionalFormula  -- 合取
+  | Or PropositionalFormula PropositionalFormula   -- 析取
+  | Implies PropositionalFormula PropositionalFormula  -- 蕴含
+  | Iff PropositionalFormula PropositionalFormula  -- 等价
+  deriving (Eq, Show)
 
--- 逻辑连接词
-data Connective = 
-  And
-  | Or
-  | Not
-  | Implies
-  | Iff
-  deriving (Show, Eq)
+-- 真值赋值
+type Valuation = String -> Bool
 
--- 命题
-data Proposition = 
-  Atomic String Bool
-  | Compound Connective [Proposition]
-  deriving (Show, Eq)
-
--- 命题逻辑实例
-instance PropositionalLogic Proposition where
-  proposition (Atomic name _) = name
-  proposition (Compound conn props) = 
-    show conn ++ "(" ++ unwords (map proposition props) ++ ")"
-  
-  truthValue (Atomic _ value) = value
-  truthValue (Compound conn props) = 
-    case conn of
-      And -> all truthValue props
-      Or -> any truthValue props
-      Not -> not (truthValue (head props))
-      Implies -> not (truthValue (head props)) || truthValue (props !! 1)
-      Iff -> truthValue (head props) == truthValue (props !! 1)
-
--- 逻辑连接词实例
-instance Show Connective where
-  show And = "∧"
-  show Or = "∨"
-  show Not = "¬"
-  show Implies = "→"
-  show Iff = "↔"
-
--- 命题逻辑运算
-class PropositionalOperations a where
-  -- 合取
-  conjunction :: a -> a -> a
-  -- 析取
-  disjunction :: a -> a -> a
-  -- 否定
-  negation :: a -> a
-  -- 蕴含
-  implication :: a -> a -> a
-  -- 等价
-  equivalence :: a -> a -> a
-
--- 命题逻辑运算实例
-instance PropositionalOperations Proposition where
-  conjunction p1 p2 = Compound And [p1, p2]
-  disjunction p1 p2 = Compound Or [p1, p2]
-  negation p = Compound Not [p]
-  implication p1 p2 = Compound Implies [p1, p2]
-  equivalence p1 p2 = Compound Iff [p1, p2]
-
--- 示例：命题逻辑
-exampleProposition :: Proposition
-exampleProposition = 
-  implication 
-    (conjunction (Atomic "P" True) (Atomic "Q" True))
-    (disjunction (Atomic "R" False) (Atomic "S" True))
+-- 语义解释
+interpret :: PropositionalFormula -> Valuation -> Bool
+interpret (Atom p) v = v p
+interpret (Not phi) v = not (interpret phi v)
+interpret (And phi psi) v = interpret phi v && interpret psi v
+interpret (Or phi psi) v = interpret phi v || interpret psi v
+interpret (Implies phi psi) v = not (interpret phi v) || interpret psi v
+interpret (Iff phi psi) v = interpret phi v == interpret psi v
 ```
 
-#### 真值表
+### 1.2 重言式和矛盾式
 
 ```haskell
--- 真值表生成
-generateTruthTable :: [String] -> [Proposition] -> [[Bool]]
-generateTruthTable variables propositions = 
-  let combinations = generateCombinations (length variables)
-  in map (\combo -> map (\prop -> evaluateWithValues prop (zip variables combo))) propositions
+-- 重言式检查
+isTautology :: PropositionalFormula -> Bool
+isTautology phi = 
+  let atoms = collectAtoms phi
+      valuations = generateValuations atoms
+  in all (\v -> interpret phi v) valuations
+
+-- 矛盾式检查
+isContradiction :: PropositionalFormula -> Bool
+isContradiction phi = 
+  let atoms = collectAtoms phi
+      valuations = generateValuations atoms
+  in all (\v -> not (interpret phi v)) valuations
+
+-- 可满足性检查
+isSatisfiable :: PropositionalFormula -> Bool
+isSatisfiable phi = 
+  let atoms = collectAtoms phi
+      valuations = generateValuations atoms
+  in any (\v -> interpret phi v) valuations
+
+-- 收集原子命题
+collectAtoms :: PropositionalFormula -> [String]
+collectAtoms (Atom p) = [p]
+collectAtoms (Not phi) = collectAtoms phi
+collectAtoms (And phi psi) = nub (collectAtoms phi ++ collectAtoms psi)
+collectAtoms (Or phi psi) = nub (collectAtoms phi ++ collectAtoms psi)
+collectAtoms (Implies phi psi) = nub (collectAtoms phi ++ collectAtoms psi)
+collectAtoms (Iff phi psi) = nub (collectAtoms phi ++ collectAtoms psi)
+
+-- 生成所有可能的真值赋值
+generateValuations :: [String] -> [Valuation]
+generateValuations atoms = 
+  let n = length atoms
+      combinations = replicateM n [True, False]
+  in [makeValuation atoms combo | combo <- combinations]
   where
-    generateCombinations n = 
-      if n == 0 then [[]]
-      else [True:combo | combo <- generateCombinations (n-1)] ++
-           [False:combo | combo <- generateCombinations (n-1)]
-    
-    evaluateWithValues :: Proposition -> [(String, Bool)] -> Bool
-    evaluateWithValues (Atomic name _) values = 
-      case lookup name values of
-        Just value -> value
+    makeValuation :: [String] -> [Bool] -> Valuation
+    makeValuation atoms values atom = 
+      case elemIndex atom atoms of
+        Just i -> values !! i
         Nothing -> False
-    evaluateWithValues (Compound conn props) values = 
-      case conn of
-        And -> all (\p -> evaluateWithValues p values) props
-        Or -> any (\p -> evaluateWithValues p values) props
-        Not -> not (evaluateWithValues (head props) values)
-        Implies -> not (evaluateWithValues (head props) values) || 
-                   evaluateWithValues (props !! 1) values
-        Iff -> evaluateWithValues (head props) values == 
-               evaluateWithValues (props !! 1) values
-
--- 示例：真值表
-exampleTruthTable :: [[Bool]]
-exampleTruthTable = 
-  generateTruthTable ["P", "Q"] [
-    Atomic "P" True,
-    Atomic "Q" True,
-    Compound And [Atomic "P" True, Atomic "Q" True]
-  ]
 ```
 
-### 2. 谓词逻辑 (Predicate Logic)
-
-谓词逻辑研究量化和谓词的逻辑。
-
-#### 形式化定义
+### 1.3 逻辑等价
 
 ```haskell
--- 谓词逻辑的形式化表达
-class PredicateLogic a where
-  -- 谓词
-  predicate :: a -> String
-  -- 变量
-  variables :: a -> [String]
-  -- 量词
-  quantifiers :: a -> [Quantifier]
+-- 逻辑等价
+isLogicallyEquivalent :: PropositionalFormula -> PropositionalFormula -> Bool
+isLogicallyEquivalent phi psi = 
+  let atoms = nub (collectAtoms phi ++ collectAtoms psi)
+      valuations = generateValuations atoms
+  in all (\v -> interpret phi v == interpret psi v) valuations
 
--- 量词类型
-data Quantifier = 
-  ForAll String  -- 全称量词
-  | Exists String  -- 存在量词
-  deriving (Show, Eq)
+-- 德摩根律
+deMorganLaws :: PropositionalFormula -> PropositionalFormula
+deMorganLaws (Not (And phi psi)) = Or (Not phi) (Not psi)
+deMorganLaws (Not (Or phi psi)) = And (Not phi) (Not psi)
+deMorganLaws phi = phi
 
--- 谓词公式
-data PredicateFormula = 
-  Predicate String [String]  -- 谓词符号和参数
-  | Quantified Quantifier PredicateFormula
-  | Logical Compound Connective [PredicateFormula]
-  deriving (Show, Eq)
-
--- 谓词逻辑实例
-instance PredicateLogic PredicateFormula where
-  predicate (Predicate name _) = name
-  predicate (Quantified _ formula) = predicate formula
-  predicate (Logical _ formulas) = 
-    "compound(" ++ unwords (map predicate formulas) ++ ")"
-  
-  variables (Predicate _ args) = args
-  variables (Quantified (ForAll var) formula) = 
-    var : variables formula
-  variables (Quantified (Exists var) formula) = 
-    var : variables formula
-  variables (Logical _ formulas) = 
-    concatMap variables formulas
-  
-  quantifiers (Predicate _ _) = []
-  quantifiers (Quantified q formula) = 
-    q : quantifiers formula
-  quantifiers (Logical _ formulas) = 
-    concatMap quantifiers formulas
-
--- 谓词逻辑运算
-class PredicateOperations a where
-  -- 全称量化
-  universalQuantification :: String -> a -> a
-  -- 存在量化
-  existentialQuantification :: String -> a -> a
-  -- 谓词应用
-  predicateApplication :: String -> [String] -> a
-
--- 谓词逻辑运算实例
-instance PredicateOperations PredicateFormula where
-  universalQuantification var formula = 
-    Quantified (ForAll var) formula
-  existentialQuantification var formula = 
-    Quantified (Exists var) formula
-  predicateApplication name args = 
-    Predicate name args
-
--- 示例：谓词逻辑
-examplePredicate :: PredicateFormula
-examplePredicate = 
-  universalQuantification "x" 
-    (implication 
-      (predicateApplication "Human" ["x"])
-      (predicateApplication "Mortal" ["x"]))
-  where
-    implication p1 p2 = Logical Compound Implies [p1, p2]
+-- 分配律
+distributiveLaws :: PropositionalFormula -> PropositionalFormula
+distributiveLaws (And phi (Or psi chi)) = 
+  Or (And phi psi) (And phi chi)
+distributiveLaws (Or phi (And psi chi)) = 
+  And (Or phi psi) (Or phi chi)
+distributiveLaws phi = phi
 ```
 
-#### 量词推理
+## 2. 一阶逻辑
+
+### 2.1 基本结构
 
 ```haskell
--- 量词推理规则
-class QuantifierInference a where
-  -- 全称实例化
-  universalInstantiation :: a -> String -> String -> a
-  -- 存在概括
-  existentialGeneralization :: a -> String -> String -> a
-  -- 全称概括
-  universalGeneralization :: a -> String -> a
-  -- 存在实例化
-  existentialInstantiation :: a -> String -> a
+-- 一阶逻辑项
+data Term = 
+    Variable String
+  | Constant String
+  | Function String [Term]
+  deriving (Eq, Show)
 
--- 量词推理实例
-instance QuantifierInference PredicateFormula where
-  universalInstantiation formula var constant = 
-    substituteVariable formula var constant
-  
-  existentialGeneralization formula var constant = 
-    substituteVariable formula constant var
-  
-  universalGeneralization formula var = 
-    Quantified (ForAll var) formula
-  
-  existentialInstantiation formula var = 
-    Quantified (Exists var) formula
+-- 一阶逻辑公式
+data FirstOrderFormula = 
+    Predicate String [Term]
+  | Equal Term Term
+  | Not FirstOrderFormula
+  | And FirstOrderFormula FirstOrderFormula
+  | Or FirstOrderFormula FirstOrderFormula
+  | Implies FirstOrderFormula FirstOrderFormula
+  | ForAll String FirstOrderFormula
+  | Exists String FirstOrderFormula
+  deriving (Eq, Show)
+
+-- 解释结构
+data Interpretation = Interpretation
+  { domain :: [String]
+  , constants :: String -> String
+  , functions :: String -> [String] -> String
+  , predicates :: String -> [String] -> Bool
+  }
+
+-- 变量赋值
+type Assignment = String -> String
+
+-- 项的解释
+interpretTerm :: Term -> Interpretation -> Assignment -> String
+interpretTerm (Variable x) _ assignment = assignment x
+interpretTerm (Constant c) interpretation _ = constants interpretation c
+interpretTerm (Function f args) interpretation assignment = 
+  functions interpretation f (map (\t -> interpretTerm t interpretation assignment) args)
+
+-- 公式的解释
+interpretFormula :: FirstOrderFormula -> Interpretation -> Assignment -> Bool
+interpretFormula (Predicate p args) interpretation assignment = 
+  predicates interpretation p (map (\t -> interpretTerm t interpretation assignment) args)
+interpretFormula (Equal t1 t2) interpretation assignment = 
+  interpretTerm t1 interpretation assignment == interpretTerm t2 interpretation assignment
+interpretFormula (Not phi) interpretation assignment = 
+  not (interpretFormula phi interpretation assignment)
+interpretFormula (And phi psi) interpretation assignment = 
+  interpretFormula phi interpretation assignment && interpretFormula psi interpretation assignment
+interpretFormula (Or phi psi) interpretation assignment = 
+  interpretFormula phi interpretation assignment || interpretFormula psi interpretation assignment
+interpretFormula (Implies phi psi) interpretation assignment = 
+  not (interpretFormula phi interpretation assignment) || interpretFormula psi interpretation assignment
+interpretFormula (ForAll x phi) interpretation assignment = 
+  all (\d -> interpretFormula phi interpretation (updateAssignment assignment x d)) (domain interpretation)
+interpretFormula (Exists x phi) interpretation assignment = 
+  any (\d -> interpretFormula phi interpretation (updateAssignment assignment x d)) (domain interpretation)
+
+-- 更新变量赋值
+updateAssignment :: Assignment -> String -> String -> Assignment
+updateAssignment assignment x d y = 
+  if x == y then d else assignment y
+```
+
+### 2.2 量词和绑定
+
+```haskell
+-- 自由变量
+freeVariables :: FirstOrderFormula -> [String]
+freeVariables (Predicate _ args) = concatMap freeVariablesTerm args
+freeVariables (Equal t1 t2) = freeVariablesTerm t1 ++ freeVariablesTerm t2
+freeVariables (Not phi) = freeVariables phi
+freeVariables (And phi psi) = nub (freeVariables phi ++ freeVariables psi)
+freeVariables (Or phi psi) = nub (freeVariables phi ++ freeVariables psi)
+freeVariables (Implies phi psi) = nub (freeVariables phi ++ freeVariables psi)
+freeVariables (ForAll x phi) = filter (/= x) (freeVariables phi)
+freeVariables (Exists x phi) = filter (/= x) (freeVariables phi)
+
+freeVariablesTerm :: Term -> [String]
+freeVariablesTerm (Variable x) = [x]
+freeVariablesTerm (Constant _) = []
+freeVariablesTerm (Function _ args) = concatMap freeVariablesTerm args
 
 -- 变量替换
-substituteVariable :: PredicateFormula -> String -> String -> PredicateFormula
-substituteVariable (Predicate name args) old new = 
-  Predicate name (map (\arg -> if arg == old then new else arg) args)
-substituteVariable (Quantified q formula) old new = 
-  Quantified q (substituteVariable formula old new)
-substituteVariable (Logical conn formulas) old new = 
-  Logical conn (map (\f -> substituteVariable f old new) formulas)
+substitute :: FirstOrderFormula -> String -> Term -> FirstOrderFormula
+substitute (Predicate p args) x t = 
+  Predicate p (map (\arg -> substituteTerm arg x t) args)
+substitute (Equal t1 t2) x t = 
+  Equal (substituteTerm t1 x t) (substituteTerm t2 x t)
+substitute (Not phi) x t = 
+  Not (substitute phi x t)
+substitute (And phi psi) x t = 
+  And (substitute phi x t) (substitute psi x t)
+substitute (Or phi psi) x t = 
+  Or (substitute phi x t) (substitute psi x t)
+substitute (Implies phi psi) x t = 
+  Implies (substitute phi x t) (substitute psi x t)
+substitute (ForAll y phi) x t = 
+  if x == y 
+  then ForAll y phi
+  else ForAll y (substitute phi x t)
+substitute (Exists y phi) x t = 
+  if x == y 
+  then Exists y phi
+  else Exists y (substitute phi x t)
 
--- 示例：量词推理
-exampleInference :: PredicateFormula
-exampleInference = 
-  universalInstantiation 
-    (universalQuantification "x" 
-      (predicateApplication "Human" ["x"]))
-    "x" "Socrates"
+substituteTerm :: Term -> String -> Term -> Term
+substituteTerm (Variable y) x t = 
+  if x == y then t else Variable y
+substituteTerm (Constant c) _ _ = Constant c
+substituteTerm (Function f args) x t = 
+  Function f (map (\arg -> substituteTerm arg x t) args)
 ```
 
-### 3. 模态逻辑 (Modal Logic)
+## 3. 模态逻辑
 
-模态逻辑研究必然性和可能性的逻辑。
-
-#### 形式化定义
+### 3.1 基本模态逻辑
 
 ```haskell
--- 模态逻辑的形式化表达
-class ModalLogic a where
-  -- 必然性
-  necessity :: a -> a
-  -- 可能性
-  possibility :: a -> a
-  -- 模态公式
-  modalFormula :: a -> String
-
--- 模态算子
-data ModalOperator = 
-  Necessity
-  | Possibility
-  deriving (Show, Eq)
-
--- 模态公式
+-- 模态逻辑公式
 data ModalFormula = 
-  Modal Atomic ModalOperator ModalFormula
-  | Propositional Proposition
-  deriving (Show, Eq)
+    Atom String
+  | Not ModalFormula
+  | And ModalFormula ModalFormula
+  | Or ModalFormula ModalFormula
+  | Implies ModalFormula ModalFormula
+  | Necessarily ModalFormula
+  | Possibly ModalFormula
+  deriving (Eq, Show)
 
--- 模态逻辑实例
-instance ModalLogic ModalFormula where
-  necessity formula = Modal Atomic Necessity formula
-  possibility formula = Modal Atomic Possibility formula
-  modalFormula (Modal _ op formula) = 
-    show op ++ "(" ++ modalFormula formula ++ ")"
-  modalFormula (Propositional prop) = proposition prop
+-- 克里普克模型
+data KripkeModel = KripkeModel
+  { worlds :: [Int]
+  , accessibility :: Int -> [Int]
+  , valuation :: Int -> String -> Bool
+  }
 
--- 模态算子实例
-instance Show ModalOperator where
-  show Necessity = "□"
-  show Possibility = "◇"
-
--- 模态逻辑运算
-class ModalOperations a where
-  -- 必然性运算
-  necessary :: a -> a
-  -- 可能性运算
-  possible :: a -> a
-  -- 模态等价
-  modalEquivalence :: a -> a -> a
-
--- 模态逻辑运算实例
-instance ModalOperations ModalFormula where
-  necessary = necessity
-  possible = possibility
-  modalEquivalence f1 f2 = 
-    Logical Compound Iff [f1, f2]
-
--- 示例：模态逻辑
-exampleModal :: ModalFormula
-exampleModal = 
-  implication 
-    (necessary (Propositional (Atomic "P" True)))
-    (possible (Propositional (Atomic "P" True)))
-  where
-    implication f1 f2 = Logical Compound Implies [f1, f2]
+-- 模态逻辑语义
+interpretModal :: ModalFormula -> KripkeModel -> Int -> Bool
+interpretModal (Atom p) model world = 
+  valuation model world p
+interpretModal (Not phi) model world = 
+  not (interpretModal phi model world)
+interpretModal (And phi psi) model world = 
+  interpretModal phi model world && interpretModal psi model world
+interpretModal (Or phi psi) model world = 
+  interpretModal phi model world || interpretModal psi model world
+interpretModal (Implies phi psi) model world = 
+  not (interpretModal phi model world) || interpretModal psi model world
+interpretModal (Necessarily phi) model world = 
+  all (\w -> interpretModal phi model w) (accessibility model world)
+interpretModal (Possibly phi) model world = 
+  any (\w -> interpretModal phi model w) (accessibility model world)
 ```
 
-#### 可能世界语义
+### 3.2 模态逻辑系统
 
 ```haskell
--- 可能世界语义
-data PossibleWorld = PossibleWorld {
-  worldId :: String,
-  propositions :: [(String, Bool)],
-  accessibility :: [String]  -- 可通达的世界
-} deriving (Show, Eq)
+-- 模态逻辑系统
+data ModalSystem = K | T | S4 | S5
 
--- 模态模型
-data ModalModel = ModalModel {
-  worlds :: [PossibleWorld],
-  actualWorld :: String
-} deriving (Show, Eq)
+-- 系统公理
+systemAxioms :: ModalSystem -> [ModalFormula]
+systemAxioms K = [kAxiom]
+systemAxioms T = kAxioms ++ [tAxiom]
+systemAxioms S4 = kAxioms ++ [tAxiom, s4Axiom]
+systemAxioms S5 = kAxioms ++ [tAxiom, s4Axiom, s5Axiom]
 
--- 模态语义
-class ModalSemantics a where
-  -- 在可能世界中为真
-  trueInWorld :: a -> PossibleWorld -> Bool
-  -- 在所有可通达世界中为真
-  trueInAllAccessible :: a -> PossibleWorld -> [PossibleWorld] -> Bool
-  -- 在某个可通达世界中为真
-  trueInSomeAccessible :: a -> PossibleWorld -> [PossibleWorld] -> Bool
+-- K公理：□(φ→ψ) → (□φ→□ψ)
+kAxiom :: ModalFormula
+kAxiom = Implies 
+  (Necessarily (Implies (Atom "p") (Atom "q")))
+  (Implies (Necessarily (Atom "p")) (Necessarily (Atom "q")))
 
--- 模态语义实例
-instance ModalSemantics ModalFormula where
-  trueInWorld (Modal _ Necessity formula) world = 
-    -- 在所有可通达世界中为真
-    True  -- 简化实现
-  trueInWorld (Modal _ Possibility formula) world = 
-    -- 在某个可通达世界中为真
-    True  -- 简化实现
-  trueInWorld (Propositional prop) world = 
-    case lookup (proposition prop) (propositions world) of
-      Just value -> value
-      Nothing -> False
-  
-  trueInAllAccessible formula world accessibleWorlds = 
-    all (\w -> trueInWorld formula w) accessibleWorlds
-  
-  trueInSomeAccessible formula world accessibleWorlds = 
-    any (\w -> trueInWorld formula w) accessibleWorlds
+-- T公理：□φ → φ
+tAxiom :: ModalFormula
+tAxiom = Implies (Necessarily (Atom "p")) (Atom "p")
 
--- 示例：可能世界
-exampleWorld :: PossibleWorld
-exampleWorld = PossibleWorld {
-  worldId = "w1",
-  propositions = [
-    ("P", True),
-    ("Q", False),
-    ("R", True)
-  ],
-  accessibility = ["w2", "w3"]
-}
+-- S4公理：□φ → □□φ
+s4Axiom :: ModalFormula
+s4Axiom = Implies (Necessarily (Atom "p")) (Necessarily (Necessarily (Atom "p")))
 
--- 示例：模态模型
-exampleModel :: ModalModel
-exampleModel = ModalModel {
-  worlds = [exampleWorld],
-  actualWorld = "w1"
-}
+-- S5公理：◇φ → □◇φ
+s5Axiom :: ModalFormula
+s5Axiom = Implies (Possibly (Atom "p")) (Necessarily (Possibly (Atom "p")))
 ```
 
-### 4. 时序逻辑 (Temporal Logic)
+## 4. 直觉主义逻辑
 
-时序逻辑研究时间和变化的逻辑。
-
-#### 形式化定义
+### 4.1 直觉主义语义
 
 ```haskell
--- 时序逻辑的形式化表达
-class TemporalLogic a where
-  -- 将来
-  future :: a -> a
-  -- 过去
-  past :: a -> a
-  -- 总是
-  always :: a -> a
-  -- 最终
-  eventually :: a -> a
+-- 直觉主义克里普克模型
+data IntuitionisticModel = IntuitionisticModel
+  { worlds :: [Int]
+  , partialOrder :: Int -> Int -> Bool  -- 偏序关系
+  , valuation :: Int -> String -> Bool
+  }
 
--- 时序算子
-data TemporalOperator = 
-  Future
-  | Past
-  | Always
-  | Eventually
-  | Until
-  | Since
-  deriving (Show, Eq)
+-- 单调性条件
+monotonicity :: IntuitionisticModel -> Int -> Int -> String -> Bool
+monotonicity model w1 w2 p = 
+  if partialOrder model w1 w2
+  then valuation model w1 p -> valuation model w2 p
+  else True
 
--- 时序公式
-data TemporalFormula = 
-  Temporal Atomic TemporalOperator TemporalFormula
-  | TemporalBinary TemporalOperator TemporalFormula TemporalFormula
-  | TemporalPropositional Proposition
-  deriving (Show, Eq)
-
--- 时序逻辑实例
-instance TemporalLogic TemporalFormula where
-  future formula = Temporal Atomic Future formula
-  past formula = Temporal Atomic Past formula
-  always formula = Temporal Atomic Always formula
-  eventually formula = Temporal Atomic Eventually formula
-
--- 时序算子实例
-instance Show TemporalOperator where
-  show Future = "F"
-  show Past = "P"
-  show Always = "G"
-  show Eventually = "F"
-  show Until = "U"
-  show Since = "S"
-
--- 时序逻辑运算
-class TemporalOperations a where
-  -- 将来运算
-  next :: a -> a
-  -- 过去运算
-  previous :: a -> a
-  -- 直到运算
-  until :: a -> a -> a
-  -- 自从运算
-  since :: a -> a -> a
-
--- 时序逻辑运算实例
-instance TemporalOperations TemporalFormula where
-  next = future
-  previous = past
-  until f1 f2 = TemporalBinary Until f1 f2
-  since f1 f2 = TemporalBinary Since f1 f2
-
--- 示例：时序逻辑
-exampleTemporal :: TemporalFormula
-exampleTemporal = 
-  until 
-    (TemporalPropositional (Atomic "P" True))
-    (TemporalPropositional (Atomic "Q" True))
+-- 直觉主义语义
+interpretIntuitionistic :: ModalFormula -> IntuitionisticModel -> Int -> Bool
+interpretIntuitionistic (Atom p) model world = 
+  valuation model world p
+interpretIntuitionistic (Not phi) model world = 
+  all (\w -> not (interpretIntuitionistic phi model w)) 
+      [w | w <- worlds model, partialOrder model world w]
+interpretIntuitionistic (And phi psi) model world = 
+  interpretIntuitionistic phi model world && interpretIntuitionistic psi model world
+interpretIntuitionistic (Or phi psi) model world = 
+  interpretIntuitionistic phi model world || interpretIntuitionistic psi model world
+interpretIntuitionistic (Implies phi psi) model world = 
+  all (\w -> not (interpretIntuitionistic phi model w) || interpretIntuitionistic psi model w)
+      [w | w <- worlds model, partialOrder model world w]
 ```
 
-#### 线性时间语义
+### 4.2 构造性证明
 
 ```haskell
--- 时间点
-data TimePoint = TimePoint {
-  time :: Int,
-  propositions :: [(String, Bool)]
-} deriving (Show, Eq)
-
--- 时间序列
-data TimeSequence = TimeSequence {
-  points :: [TimePoint],
-  current :: Int
-} deriving (Show, Eq)
-
--- 时序语义
-class TemporalSemantics a where
-  -- 在时间点中为真
-  trueAtTime :: a -> TimePoint -> Bool
-  -- 在时间序列中为真
-  trueInSequence :: a -> TimeSequence -> Bool
-
--- 时序语义实例
-instance TemporalSemantics TemporalFormula where
-  trueAtTime (Temporal _ Future formula) timePoint = 
-    -- 在将来某个时间点为真
-    True  -- 简化实现
-  trueAtTime (Temporal _ Past formula) timePoint = 
-    -- 在过去某个时间点为真
-    True  -- 简化实现
-  trueAtTime (Temporal _ Always formula) timePoint = 
-    -- 在所有时间点为真
-    True  -- 简化实现
-  trueAtTime (Temporal _ Eventually formula) timePoint = 
-    -- 在某个时间点为真
-    True  -- 简化实现
-  trueAtTime (TemporalBinary _ f1 f2) timePoint = 
-    trueAtTime f1 timePoint && trueAtTime f2 timePoint
-  trueAtTime (TemporalPropositional prop) timePoint = 
-    case lookup (proposition prop) (propositions timePoint) of
-      Just value -> value
-      Nothing -> False
-  
-  trueInSequence formula sequence = 
-    trueAtTime formula (points sequence !! current sequence)
-
--- 示例：时间点
-exampleTimePoint :: TimePoint
-exampleTimePoint = TimePoint {
-  time = 0,
-  propositions = [
-    ("P", True),
-    ("Q", False)
-  ]
-}
-
--- 示例：时间序列
-exampleTimeSequence :: TimeSequence
-exampleTimeSequence = TimeSequence {
-  points = [exampleTimePoint],
-  current = 0
-}
-```
-
-### 5. 非单调逻辑 (Non-monotonic Logic)
-
-非单调逻辑研究可修正的推理。
-
-#### 形式化定义
-
-```haskell
--- 非单调逻辑的形式化表达
-class NonMonotonicLogic a where
-  -- 默认推理
-  defaultInference :: a -> a -> Bool
-  -- 异常处理
-  exceptionHandling :: a -> [a] -> Bool
-  -- 可修正性
-  revisability :: a -> a -> Bool
-
--- 默认规则
-data DefaultRule = DefaultRule {
-  premise :: String,
-  conclusion :: String,
-  exceptions :: [String]
-} deriving (Show, Eq)
-
--- 非单调推理
-data NonMonotonicInference = NonMonotonicInference {
-  rules :: [DefaultRule],
-  facts :: [String],
-  conclusions :: [String]
-} deriving (Show, Eq)
-
--- 非单调逻辑实例
-instance NonMonotonicLogic NonMonotonicInference where
-  defaultInference inference rule = 
-    premise rule `elem` facts inference &&
-    not (any (\exc -> exc `elem` facts inference) (exceptions rule))
-  
-  exceptionHandling inference exceptions = 
-    not (any (\exc -> exc `elem` facts inference) exceptions)
-  
-  revisability inference newFact = 
-    newFact `notElem` facts inference
-
--- 默认推理系统
-class DefaultReasoning a where
-  -- 应用默认规则
-  applyDefaultRule :: a -> DefaultRule -> a
-  -- 检查异常
-  checkException :: a -> DefaultRule -> Bool
-  -- 修正推理
-  reviseInference :: a -> String -> a
-
--- 默认推理实例
-instance DefaultReasoning NonMonotonicInference where
-  applyDefaultRule inference rule = 
-    if defaultInference inference rule && 
-       not (checkException inference rule)
-    then inference { conclusions = conclusion rule : conclusions inference }
-    else inference
-  
-  checkException inference rule = 
-    any (\exc -> exc `elem` facts inference) (exceptions rule)
-  
-  reviseInference inference newFact = 
-    inference { 
-      facts = newFact : facts inference,
-      conclusions = filter (\c -> c /= conclusion (head rules inference)) (conclusions inference)
-    }
-
--- 示例：默认推理
-exampleDefault :: DefaultRule
-exampleDefault = DefaultRule {
-  premise = "鸟(x)",
-  conclusion = "飞(x)",
-  exceptions = ["企鹅(x)", "鸵鸟(x)"]
-}
-
--- 示例：非单调推理
-exampleNonMonotonic :: NonMonotonicInference
-exampleNonMonotonic = NonMonotonicInference {
-  rules = [exampleDefault],
-  facts = ["鸟(企鹅)"],
-  conclusions = []
-}
-```
-
-## 形式化证明
-
-### 逻辑推理的形式化证明
-
-```haskell
--- 推理规则
-data InferenceRule = 
-  ModusPonens
-  | ModusTollens
-  | HypotheticalSyllogism
-  | DisjunctiveSyllogism
-  | Conjunction
-  | Simplification
-  | Addition
-  deriving (Show, Eq)
-
--- 证明步骤
-data ProofStep = ProofStep {
-  stepNumber :: Int,
-  formula :: String,
-  rule :: InferenceRule,
-  premises :: [Int]
-} deriving (Show, Eq)
-
--- 证明
-data Proof = Proof {
-  steps :: [ProofStep],
-  conclusion :: String
-} deriving (Show, Eq)
+-- 构造性证明系统
+data ConstructiveProof = 
+    Axiom String
+  | Assumption String
+  | ImplicationIntro String ConstructiveProof
+  | ImplicationElim ConstructiveProof ConstructiveProof
+  | ConjunctionIntro ConstructiveProof ConstructiveProof
+  | ConjunctionElim1 ConstructiveProof
+  | ConjunctionElim2 ConstructiveProof
+  | DisjunctionIntro1 ConstructiveProof
+  | DisjunctionIntro2 ConstructiveProof
+  | DisjunctionElim ConstructiveProof ConstructiveProof ConstructiveProof
+  | AbsurdityElim ConstructiveProof
+  deriving (Show)
 
 -- 证明验证
-validateProof :: Proof -> Bool
-validateProof proof = 
-  all validateStep (steps proof) &&
-  conclusion proof == formula (last (steps proof))
-
--- 步骤验证
-validateStep :: ProofStep -> Bool
-validateStep step = 
-  case rule step of
-    ModusPonens -> length (premises step) == 2
-    ModusTollens -> length (premises step) == 2
-    HypotheticalSyllogism -> length (premises step) == 2
-    DisjunctiveSyllogism -> length (premises step) == 2
-    Conjunction -> length (premises step) == 2
-    Simplification -> length (premises step) == 1
-    Addition -> length (premises step) == 1
-
--- 示例：证明
-exampleProof :: Proof
-exampleProof = Proof {
-  steps = [
-    ProofStep 1 "P→Q" ModusPonens [],
-    ProofStep 2 "P" ModusPonens [],
-    ProofStep 3 "Q" ModusPonens [1, 2]
-  ],
-  conclusion = "Q"
-}
+validateProof :: ConstructiveProof -> Bool
+validateProof (Axiom _) = True
+validateProof (Assumption _) = True
+validateProof (ImplicationIntro _ proof) = validateProof proof
+validateProof (ImplicationElim proof1 proof2) = 
+  validateProof proof1 && validateProof proof2
+validateProof (ConjunctionIntro proof1 proof2) = 
+  validateProof proof1 && validateProof proof2
+validateProof (ConjunctionElim1 proof) = validateProof proof
+validateProof (ConjunctionElim2 proof) = validateProof proof
+validateProof (DisjunctionIntro1 proof) = validateProof proof
+validateProof (DisjunctionIntro2 proof) = validateProof proof
+validateProof (DisjunctionElim proof1 proof2 proof3) = 
+  validateProof proof1 && validateProof proof2 && validateProof proof3
+validateProof (AbsurdityElim proof) = validateProof proof
 ```
 
-### 逻辑系统的一致性
+## 5. 线性逻辑
+
+### 5.1 线性逻辑连接词
 
 ```haskell
--- 逻辑系统
-data LogicalSystem = LogicalSystem {
-  axioms :: [String],
-  rules :: [InferenceRule],
-  theorems :: [String]
-} deriving (Show, Eq)
+-- 线性逻辑公式
+data LinearFormula = 
+    Atom String
+  | Not LinearFormula
+  | Tensor LinearFormula LinearFormula  -- ⊗
+  | Par LinearFormula LinearFormula     -- ⅋
+  | With LinearFormula LinearFormula    -- &
+  | Plus LinearFormula LinearFormula    -- ⊕
+  | OfCourse LinearFormula              -- !
+  | WhyNot LinearFormula                -- ?
+  deriving (Eq, Show)
 
--- 一致性检查
-checkConsistency :: LogicalSystem -> Bool
-checkConsistency system = 
-  not (any (\theorem -> theorem == "⊥") (theorems system))
-
--- 完备性检查
-checkCompleteness :: LogicalSystem -> [String] -> Bool
-checkCompleteness system formulas = 
-  all (\formula -> formula `elem` theorems system) formulas
-
--- 示例：逻辑系统
-exampleSystem :: LogicalSystem
-exampleSystem = LogicalSystem {
-  axioms = [
-    "P→(Q→P)",
-    "(P→(Q→R))→((P→Q)→(P→R))",
-    "(¬P→¬Q)→(Q→P)"
-  ],
-  rules = [ModusPonens],
-  theorems = [
-    "P→(Q→P)",
-    "(P→(Q→R))→((P→Q)→(P→R))",
-    "(¬P→¬Q)→(Q→P)"
-  ]
-}
+-- 线性逻辑证明结构
+data LinearProof = 
+    Identity String
+  | Cut LinearProof LinearProof
+  | TensorIntro LinearProof LinearProof
+  | TensorElim LinearProof
+  | ParIntro LinearProof
+  | ParElim LinearProof LinearProof
+  | WithIntro LinearProof LinearProof
+  | WithElim1 LinearProof
+  | WithElim2 LinearProof
+  | PlusIntro1 LinearProof
+  | PlusIntro2 LinearProof
+  | PlusElim LinearProof LinearProof LinearProof
+  | OfCourseIntro LinearProof
+  | OfCourseElim LinearProof
+  | WhyNotIntro LinearProof
+  | WhyNotElim LinearProof
+  deriving (Show)
 ```
 
-## 应用与意义
-
-### 在计算机科学中的应用
+### 5.2 资源管理
 
 ```haskell
--- 程序验证的逻辑基础
-class ProgramVerification a where
-  -- 前置条件
-  precondition :: a -> String
-  -- 后置条件
-  postcondition :: a -> String
-  -- 程序正确性
-  correctness :: a -> Bool
+-- 资源上下文
+type ResourceContext = [LinearFormula]
 
--- 程序规范
-data ProgramSpecification = ProgramSpecification {
-  program :: String,
-  precondition :: String,
-  postcondition :: String,
-  invariants :: [String]
-} deriving (Show, Eq)
-
-instance ProgramVerification ProgramSpecification where
-  precondition = precondition
-  postcondition = postcondition
-  correctness spec = 
-    length (precondition spec) > 0 &&
-    length (postcondition spec) > 0
-
--- 示例：程序规范
-exampleSpec :: ProgramSpecification
-exampleSpec = ProgramSpecification {
-  program = "x := x + 1",
-  precondition = "x >= 0",
-  postcondition = "x > 0",
-  invariants = ["x >= 0"]
-}
+-- 线性逻辑证明验证
+validateLinearProof :: LinearProof -> ResourceContext -> ResourceContext -> Bool
+validateLinearProof (Identity a) context1 context2 = 
+  context1 == [Atom a] && context2 == [Atom a]
+validateLinearProof (Cut proof1 proof2) context1 context2 = 
+  let (context1', context3) = splitContext context1
+      (context3', context2') = splitContext context2
+  in validateLinearProof proof1 context1' context3 &&
+     validateLinearProof proof2 context3' context2'
+validateLinearProof (TensorIntro proof1 proof2) context1 context2 = 
+  let (context1', context1'') = splitContext context1
+      (context2', context2'') = splitContext context2
+  in validateLinearProof proof1 context1' context2' &&
+     validateLinearProof proof2 context1'' context2''
+-- 其他规则类似...
 ```
 
-### 在人工智能中的应用
+## 6. 证明论
+
+### 6.1 自然演绎
 
 ```haskell
--- 知识表示的逻辑基础
-class KnowledgeRepresentation a where
-  -- 知识表示
-  representation :: a -> String
-  -- 推理规则
-  inferenceRules :: a -> [InferenceRule]
-  -- 知识一致性
-  consistency :: a -> Bool
+-- 自然演绎规则
+data NaturalDeduction = 
+    Premise String
+  | Assumption String
+  | ImplicationIntro String NaturalDeduction
+  | ImplicationElim NaturalDeduction NaturalDeduction
+  | ConjunctionIntro NaturalDeduction NaturalDeduction
+  | ConjunctionElim1 NaturalDeduction
+  | ConjunctionElim2 NaturalDeduction
+  | DisjunctionIntro1 NaturalDeduction
+  | DisjunctionIntro2 NaturalDeduction
+  | DisjunctionElim NaturalDeduction NaturalDeduction NaturalDeduction
+  | NegationIntro String NaturalDeduction
+  | NegationElim NaturalDeduction NaturalDeduction
+  | ExFalsoQuodlibet NaturalDeduction
+  deriving (Show)
 
--- 知识库
-data KnowledgeBase = KnowledgeBase {
-  facts :: [String],
-  rules :: [DefaultRule],
-  queries :: [String]
-} deriving (Show, Eq)
+-- 证明树
+data ProofTree = ProofTree
+  { conclusion :: String
+  , rule :: NaturalDeduction
+  , premises :: [ProofTree]
+  }
 
-instance KnowledgeRepresentation KnowledgeBase where
-  representation kb = 
-    "Facts: " ++ show (facts kb) ++ 
-    "\nRules: " ++ show (rules kb)
-  inferenceRules kb = [ModusPonens, ModusTollens]
-  consistency kb = 
-    not (any (\fact -> fact == "⊥") (facts kb))
+-- 证明验证
+validateNaturalDeduction :: ProofTree -> Bool
+validateNaturalDeduction (ProofTree _ (Premise _) []) = True
+validateNaturalDeduction (ProofTree _ (Assumption _) []) = True
+validateNaturalDeduction (ProofTree conclusion (ImplicationIntro assumption rule) [premise]) = 
+  validateNaturalDeduction premise &&
+  conclusion == assumption ++ " → " ++ (conclusion premise)
+validateNaturalDeduction (ProofTree conclusion (ImplicationElim rule1 rule2) [premise1, premise2]) = 
+  validateNaturalDeduction premise1 &&
+  validateNaturalDeduction premise2 &&
+  -- 检查蕴含消除规则的正确性
+  isValidImplicationElim (conclusion premise1) (conclusion premise2) conclusion
+-- 其他规则类似...
+```
 
--- 示例：知识库
-exampleKB :: KnowledgeBase
-exampleKB = KnowledgeBase {
-  facts = [
-    "鸟(企鹅)",
-    "企鹅(企鹅)"
-  ],
-  rules = [exampleDefault],
-  queries = [
-    "飞(企鹅)?"
-  ]
-}
+### 6.2 序贯演算
+
+```haskell
+-- 序贯
+data Sequent = Sequent
+  { antecedent :: [String]
+  , succedent :: [String]
+  }
+
+-- 序贯演算规则
+data SequentRule = 
+    LeftWeakening Sequent
+  | RightWeakening Sequent
+  | LeftContraction Sequent
+  | RightContraction Sequent
+  | LeftExchange Sequent
+  | RightExchange Sequent
+  | LeftAnd Sequent
+  | RightAnd Sequent
+  | LeftOr Sequent
+  | RightOr Sequent
+  | LeftImplies Sequent
+  | RightImplies Sequent
+  | Cut Sequent Sequent
+  deriving (Show)
+
+-- 序贯演算证明
+data SequentProof = SequentProof
+  { sequent :: Sequent
+  , rule :: SequentRule
+  , premises :: [SequentProof]
+  }
+
+-- 序贯验证
+validateSequent :: SequentProof -> Bool
+validateSequent (SequentProof sequent (LeftWeakening _) [premise]) = 
+  validateSequent premise &&
+  isValidWeakening (sequent premise) sequent
+validateSequent (SequentProof sequent (Cut _ _) [premise1, premise2]) = 
+  validateSequent premise1 &&
+  validateSequent premise2 &&
+  isValidCut (sequent premise1) (sequent premise2) sequent
+-- 其他规则类似...
+```
+
+## 7. 自动定理证明
+
+### 7.1 归结方法
+
+```haskell
+-- 子句
+data Clause = Clause
+  { literals :: [Literal]
+  }
+
+data Literal = 
+    Positive String
+  | Negative String
+  deriving (Eq, Show)
+
+-- 归结规则
+resolve :: Clause -> Clause -> Maybe Clause
+resolve (Clause literals1) (Clause literals2) = 
+  let pairs = [(l1, l2) | l1 <- literals1, l2 <- literals2, isComplementary l1 l2]
+  in case pairs of
+       [] -> Nothing
+       ((l1, l2):_) -> 
+         let newLiterals = filter (\l -> l /= l1 && l /= l2) (literals1 ++ literals2)
+         in Just (Clause newLiterals)
+
+isComplementary :: Literal -> Literal -> Bool
+isComplementary (Positive p) (Negative q) = p == q
+isComplementary (Negative p) (Positive q) = p == q
+isComplementary _ _ = False
+
+-- 归结证明
+data ResolutionProof = ResolutionProof
+  { clauses :: [Clause]
+  , steps :: [ResolutionStep]
+  }
+
+data ResolutionStep = ResolutionStep
+  { clause1 :: Clause
+  , clause2 :: Clause
+  , resolvent :: Clause
+  }
+
+-- 归结证明验证
+validateResolution :: ResolutionProof -> Bool
+validateResolution proof = 
+  let allClauses = clauses proof
+      resolutionSteps = steps proof
+  in all (\step -> 
+           case resolve (clause1 step) (clause2 step) of
+             Just resolvent -> resolvent == resolvent step
+             Nothing -> False) resolutionSteps
+```
+
+### 7.2 表列方法
+
+```haskell
+-- 表列节点
+data TableauNode = TableauNode
+  { formula :: ModalFormula
+  , sign :: Bool  -- True for true, False for false
+  , children :: [TableauNode]
+  }
+
+-- 表列规则
+data TableauRule = 
+    AlphaRule TableauNode
+  | BetaRule TableauNode
+  | GammaRule TableauNode
+  | DeltaRule TableauNode
+  deriving (Show)
+
+-- 表列证明
+data TableauProof = TableauProof
+  { root :: TableauNode
+  , rules :: [TableauRule]
+  }
+
+-- 表列验证
+validateTableau :: TableauProof -> Bool
+validateTableau proof = 
+  let rootNode = root proof
+      rules = rules proof
+  in all (isValidTableauRule rootNode) rules
+
+isValidTableauRule :: TableauNode -> TableauRule -> Bool
+isValidTableauRule node (AlphaRule _) = 
+  -- 检查Alpha规则的正确性
+  True
+isValidTableauRule node (BetaRule _) = 
+  -- 检查Beta规则的正确性
+  True
+-- 其他规则类似...
+```
+
+## 8. Haskell实现示例
+
+### 8.1 逻辑推理系统
+
+```haskell
+-- 完整的逻辑推理系统
+class LogicalSystem a where
+  isValid :: a -> Bool
+  isSatisfiable :: a -> Bool
+  isTautology :: a -> Bool
+  isContradiction :: a -> Bool
+  logicalConsequence :: [a] -> a -> Bool
+
+-- 命题逻辑实例
+instance LogicalSystem PropositionalFormula where
+  isValid phi = isTautology phi
+  isSatisfiable phi = not (isContradiction phi)
+  isTautology phi = 
+    let atoms = collectAtoms phi
+        valuations = generateValuations atoms
+    in all (\v -> interpret phi v) valuations
+  isContradiction phi = 
+    let atoms = collectAtoms phi
+        valuations = generateValuations atoms
+    in all (\v -> not (interpret phi v)) valuations
+  logicalConsequence premises conclusion = 
+    let combinedPremise = foldr And (head premises) (tail premises)
+        implication = Implies combinedPremise conclusion
+    in isTautology implication
+```
+
+### 8.2 逻辑等价性检查
+
+```haskell
+-- 逻辑等价性检查系统
+class LogicalEquivalence a where
+  isEquivalent :: a -> a -> Bool
+  normalize :: a -> a
+  canonicalForm :: a -> a
+
+-- 命题逻辑等价性
+instance LogicalEquivalence PropositionalFormula where
+  isEquivalent phi psi = 
+    let atoms = nub (collectAtoms phi ++ collectAtoms psi)
+        valuations = generateValuations atoms
+    in all (\v -> interpret phi v == interpret psi v) valuations
+  
+  normalize phi = 
+    -- 应用逻辑等价规则进行标准化
+    let phi1 = applyDeMorgan phi
+        phi2 = applyDistributive phi1
+        phi3 = applyDoubleNegation phi2
+    in phi3
+  
+  canonicalForm phi = 
+    -- 转换为合取范式或析取范式
+    toConjunctiveNormalForm phi
+
+-- 标准化函数
+applyDeMorgan :: PropositionalFormula -> PropositionalFormula
+applyDeMorgan (Not (And phi psi)) = Or (Not phi) (Not psi)
+applyDeMorgan (Not (Or phi psi)) = And (Not phi) (Not psi)
+applyDeMorgan phi = phi
+
+applyDistributive :: PropositionalFormula -> PropositionalFormula
+applyDistributive (And phi (Or psi chi)) = 
+  Or (And phi psi) (And phi chi)
+applyDistributive (Or phi (And psi chi)) = 
+  And (Or phi psi) (Or phi chi)
+applyDistributive phi = phi
+
+applyDoubleNegation :: PropositionalFormula -> PropositionalFormula
+applyDoubleNegation (Not (Not phi)) = phi
+applyDoubleNegation phi = phi
 ```
 
 ## 总结
 
-形式逻辑为推理提供了严格的基础：
+本节从形式化角度探讨了形式逻辑的核心概念，包括：
 
-1. **命题逻辑**研究命题间的逻辑关系
-2. **谓词逻辑**研究量化和谓词的逻辑
-3. **模态逻辑**研究必然性和可能性
-4. **时序逻辑**研究时间和变化的逻辑
-5. **非单调逻辑**研究可修正的推理
+1. **命题逻辑**：基本概念、重言式、逻辑等价
+2. **一阶逻辑**：量词、绑定、语义解释
+3. **模态逻辑**：可能世界语义、模态系统
+4. **直觉主义逻辑**：构造性证明、克里普克语义
+5. **线性逻辑**：资源管理、线性连接词
+6. **证明论**：自然演绎、序贯演算
+7. **自动定理证明**：归结方法、表列方法
+8. **实际应用**：逻辑推理系统、等价性检查
 
-通过Haskell的形式化实现，我们可以：
-- 精确表达不同逻辑系统的核心概念
-- 验证各种推理规则的有效性
-- 分析不同逻辑在计算机科学中的应用
-- 为人工智能提供逻辑基础
-
-这种多表征的方式不仅有助于理解逻辑的本质，也为计算机科学和人工智能提供了坚实的理论基础。 
+通过Haskell实现，我们展示了如何将逻辑概念形式化，为计算机科学和人工智能提供理论基础。这种形式化方法不仅有助于理解逻辑概念，也为实际应用提供了可操作的框架。 
