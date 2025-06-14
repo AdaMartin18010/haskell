@@ -175,78 +175,7 @@ substitute x term prop =
             if x == y then prop else PExists y (substitute x term phi)
 ```
 
-#### 表方法算法
-
-```haskell
--- 表方法算法
-module TableauMethod where
-
-import Data.List (find)
-import Control.Monad.State
-
--- 表方法状态
-data TableauState = TableauState
-    { nodes :: [TableauNode]
-    , closedBranches :: [TableauNode]
-    , openBranches :: [TableauNode]
-    }
-
--- 表方法单子
-type TableauMethod = State TableauState
-
--- 构建分析表
-buildTableau :: Proposition -> Tableau
-buildTableau formula = 
-    let root = TableauNode formula False []
-        initialState = TableauState [root] [] [root]
-        finalState = execState (tableauStep) initialState
-    in Tableau root (null (openBranches finalState))
-
--- 表方法步骤
-tableauStep :: TableauMethod ()
-tableauStep = do
-    state <- get
-    case openBranches state of
-        [] -> return ()  -- 所有分支都关闭
-        (node:rest) -> do
-            if isApplicable node
-            then do
-                newNodes <- applyRule node
-                put $ state { 
-                    nodes = nodes state ++ newNodes,
-                    openBranches = rest ++ newNodes
-                }
-                tableauStep
-            else do
-                put $ state { 
-                    closedBranches = node : closedBranches state,
-                    openBranches = rest
-                }
-                tableauStep
-
--- 检查规则是否可应用
-isApplicable :: TableauNode -> Bool
-isApplicable node = 
-    case formula node of
-        PAnd _ _ -> True
-        POr _ _ -> True
-        PImplies _ _ -> True
-        PNot (PNot _) -> True
-        PNot (PAnd _ _) -> True
-        PNot (POr _ _) -> True
-        PForAll _ _ -> True
-        PExists _ _ -> True
-        _ -> False
-
--- 应用规则
-applyRule :: TableauNode -> TableauMethod [TableauNode]
-applyRule node = do
-    return $ applyTableauRule node
-```
-
-### 模型检查方法
-
-#### SAT求解
+### SAT求解
 
 ```haskell
 -- 布尔公式
@@ -262,22 +191,6 @@ data BoolFormula =
 
 -- 赋值
 type Assignment = [(String, Bool)]
-
--- SAT求解器
-module SATSolver where
-
-import Data.List (find)
-import Control.Monad.State
-
--- SAT求解状态
-data SATState = SATState
-    { formula :: BoolFormula
-    , assignment :: Assignment
-    , unassigned :: [String]
-    }
-
--- SAT求解单子
-type SATSolver = State SATState
 
 -- DPLL算法
 dpll :: BoolFormula -> Maybe Assignment
@@ -482,82 +395,6 @@ propositionToBoolFormula prop =
         _ -> BFalse  -- 简化处理
 ```
 
-### 证明优化
-
-```haskell
--- 证明优化
-module ProofOptimization where
-
-import Data.List (nub, sort)
-import Data.Map (Map)
-import qualified Data.Map as Map
-
--- 证明简化
-simplifyProof :: Proof -> Proof
-simplifyProof proof = 
-    case proof of
-        AndIntro p1 p2 -> 
-            let p1' = simplifyProof p1
-                p2' = simplifyProof p2
-            in if isTrivial p1' && isTrivial p2'
-               then p1'
-               else AndIntro p1' p2'
-        OrElim p1 p2 p3 -> 
-            let p1' = simplifyProof p1
-                p2' = simplifyProof p2
-                p3' = simplifyProof p3
-            in if isTrivial p1'
-               then p2'
-               else OrElim p1' p2' p3'
-        ImpliesElim p1 p2 -> 
-            let p1' = simplifyProof p1
-                p2' = simplifyProof p2
-            in if isTrivial p1'
-               then p2'
-               else ImpliesElim p1' p2'
-        _ -> proof
-
--- 检查证明是否平凡
-isTrivial :: Proof -> Bool
-isTrivial proof = 
-    case proof of
-        Axiom _ -> True
-        Assumption _ -> True
-        _ -> False
-
--- 证明压缩
-compressProof :: Proof -> Proof
-compressProof proof = 
-    let simplified = simplifyProof proof
-        deduplicated = deduplicateProof simplified
-    in deduplicated
-
--- 去重证明
-deduplicateProof :: Proof -> Proof
-deduplicateProof proof = 
-    let subproofs = collectSubproofs proof
-        uniqueSubproofs = nub subproofs
-    in rebuildProof uniqueSubproofs proof
-
--- 收集子证明
-collectSubproofs :: Proof -> [Proof]
-collectSubproofs proof = 
-    case proof of
-        AndIntro p1 p2 -> 
-            proof : collectSubproofs p1 ++ collectSubproofs p2
-        OrElim p1 p2 p3 -> 
-            proof : collectSubproofs p1 ++ collectSubproofs p2 ++ collectSubproofs p3
-        ImpliesElim p1 p2 -> 
-            proof : collectSubproofs p1 ++ collectSubproofs p2
-        _ -> [proof]
-
--- 重建证明
-rebuildProof :: [Proof] -> Proof -> Proof
-rebuildProof uniqueProofs original = 
-    -- 实现证明重建逻辑
-    original  -- 简化实现
-```
-
 ## 📊 应用示例
 
 ### 归结证明示例
@@ -582,26 +419,6 @@ runResolutionExample = do
     case exampleResolution of
         Just proof -> putStrLn $ "Proof found: " ++ show proof
         Nothing -> putStrLn "No proof found"
-```
-
-### 表方法示例
-
-```haskell
--- 示例：证明 (A ∧ B) → (B ∧ A)
-exampleFormula :: Proposition
-exampleFormula = PImplies (PAnd (PAtom "A") (PAtom "B")) 
-                          (PAnd (PAtom "B") (PAtom "A"))
-
--- 构建分析表
-exampleTableau :: Tableau
-exampleTableau = buildTableau (PNot exampleFormula)
-
--- 运行示例
-runTableauExample :: IO ()
-runTableauExample = do
-    if isClosed exampleTableau
-    then putStrLn "Formula is valid (tableau is closed)"
-    else putStrLn "Formula is not valid (tableau is open)"
 ```
 
 ### SAT求解示例
