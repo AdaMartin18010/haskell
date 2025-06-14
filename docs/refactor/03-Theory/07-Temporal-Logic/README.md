@@ -7,24 +7,28 @@
 ## 🏗️ 目录结构
 
 ### 01-线性时态逻辑
+
 - [LTL语法语义](01-Linear-Temporal-Logic/01-LTL-Syntax-Semantics.md)
 - [LTL模型检测](01-Linear-Temporal-Logic/02-LTL-Model-Checking.md)
 - [LTL可满足性](01-Linear-Temporal-Logic/03-LTL-Satisfiability.md)
 - [LTL综合](01-Linear-Temporal-Logic/04-LTL-Synthesis.md)
 
 ### 02-计算树逻辑
+
 - [CTL语法语义](02-Computation-Tree-Logic/01-CTL-Syntax-Semantics.md)
 - [CTL模型检测](02-Computation-Tree-Logic/02-CTL-Model-Checking.md)
 - [CTL可满足性](02-Computation-Tree-Logic/03-CTL-Satisfiability.md)
 - [CTL综合](02-Computation-Tree-Logic/04-CTL-Synthesis.md)
 
 ### 03-实时时态逻辑
+
 - [时间自动机](03-Real-Time-Temporal-Logic/01-Timed-Automata.md)
 - [度量时态逻辑](03-Real-Time-Temporal-Logic/02-Metric-Temporal-Logic.md)
 - [实时验证](03-Real-Time-Temporal-Logic/03-Real-Time-Verification.md)
 - [时间系统](03-Real-Time-Temporal-Logic/04-Timed-Systems.md)
 
 ### 04-时态逻辑应用
+
 - [硬件验证](04-Temporal-Logic-Applications/01-Hardware-Verification.md)
 - [软件验证](04-Temporal-Logic-Applications/02-Software-Verification.md)
 - [协议验证](04-Temporal-Logic-Applications/03-Protocol-Verification.md)
@@ -38,16 +42,19 @@
 ## 📚 理论基础
 
 ### 数学基础
+
 - **模态逻辑**：时态逻辑作为模态逻辑的扩展
 - **自动机理论**：Kripke结构和Büchi自动机
 - **图论**：状态转换图和时间图
 
 ### 形式化方法
+
 - **模型检测**：自动验证时态逻辑公式
 - **可满足性检查**：检查公式的可满足性
 - **综合算法**：从时态逻辑规约生成系统
 
 ### 应用领域
+
 - **硬件验证**：验证数字电路的正确性
 - **软件验证**：验证程序的时间性质
 - **协议验证**：验证通信协议的正确性
@@ -73,4 +80,4 @@
 
 ---
 
-*本目录提供时态逻辑理论的完整学习路径，从基础概念到实际应用。* 
+*本目录提供时态逻辑理论的完整学习路径，从基础概念到实际应用。*
