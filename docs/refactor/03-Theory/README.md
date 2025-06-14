@@ -2,7 +2,7 @@
 
 ## 📚 理论层概述
 
-理论层是连接形式科学与具体应用的桥梁，将抽象的数学概念转化为可应用的理论框架。我们涵盖编程语言理论、系统理论、分布式系统理论和形式化方法，为具体科学层提供理论基础。
+理论层是连接形式科学与具体应用的桥梁，将抽象的数学概念转化为可应用的理论框架。我们涵盖编程语言理论、系统理论、分布式系统理论、形式化方法、Petri网理论和自动机理论，为具体科学层提供理论基础。
 
 ## 🏗️ 目录结构
 
@@ -108,32 +108,50 @@
 │       ├── Refinement-Theory.md        # 精化理论
 │       ├── Contract-Theory.md          # 契约理论
 │       └── Formal-Specification-Synthesis.md # 形式化规约综合
-├── 05-Petri-Nets/                      # Petri网理论
+├── 05-Petri-Net-Theory/                # Petri网理论
 │   ├── README.md                       # Petri网理论总览
-│   ├── Basic-Petri-Nets/               # 基础Petri网
-│   │   ├── Petri-Net-Structure.md      # Petri网结构
-│   │   ├── Firing-Rules.md             # 激发规则
-│   │   ├── Reachability.md             # 可达性
-│   │   ├── Liveness.md                 # 活性
-│   │   └── Basic-Petri-Nets-Synthesis.md # 基础Petri网综合
-│   ├── Advanced-Petri-Nets/            # 高级Petri网
-│   │   ├── Colored-Petri-Nets.md       # 有色Petri网
-│   │   ├── Timed-Petri-Nets.md         # 时间Petri网
-│   │   ├── Stochastic-Petri-Nets.md    # 随机Petri网
-│   │   ├── High-Level-Petri-Nets.md    # 高级Petri网
-│   │   └── Advanced-Petri-Nets-Synthesis.md # 高级Petri网综合
-│   ├── Petri-Net-Analysis/             # Petri网分析
-│   │   ├── Structural-Analysis.md      # 结构分析
-│   │   ├── Behavioral-Analysis.md      # 行为分析
-│   │   ├── Performance-Analysis.md     # 性能分析
-│   │   ├── Verification.md             # 验证
-│   │   └── Petri-Net-Analysis-Synthesis.md # Petri网分析综合
-│   └── Petri-Net-Applications/         # Petri网应用
-│       ├── Workflow-Modeling.md        # 工作流建模
-│       ├── Concurrent-Systems.md       # 并发系统
-│       ├── Manufacturing-Systems.md    # 制造系统
-│       └── Petri-Net-Applications-Synthesis.md # Petri网应用综合
-└── 06-Temporal-Logic/                  # 时态逻辑
+│   ├── 01-基础Petri网/                 # 基础Petri网
+│   │   ├── 01-Basic-Concepts.md        # 基础概念与定义
+│   │   ├── 02-Markings-and-Transitions.md # 标记与变迁规则
+│   │   ├── 03-Reachability-Analysis.md # 可达性分析
+│   │   └── 04-Basic-Properties.md      # 基本性质
+│   ├── 02-高级Petri网/                 # 高级Petri网
+│   │   ├── 01-Timed-Petri-Nets.md      # 时间Petri网
+│   │   ├── 02-Colored-Petri-Nets.md    # 着色Petri网
+│   │   ├── 03-Hierarchical-Petri-Nets.md # 层次Petri网
+│   │   └── 04-Stochastic-Petri-Nets.md # 随机Petri网
+│   ├── 03-Petri网分析/                 # Petri网分析
+│   │   ├── 01-Structural-Analysis.md   # 结构分析
+│   │   ├── 02-Behavioral-Analysis.md   # 行为分析
+│   │   ├── 03-Performance-Analysis.md  # 性能分析
+│   │   └── 04-Verification-Techniques.md # 验证技术
+│   └── 04-Petri网应用/                 # Petri网应用
+│       ├── 01-Software-Engineering.md  # 软件工程
+│       ├── 02-Workflow-Modeling.md     # 工作流建模
+│   │   ├── 03-Concurrent-Systems.md    # 并发系统
+│   │   └── 04-Real-Time-Systems.md     # 实时系统
+│   └── 06-Automata-Theory/             # 自动机理论
+│       ├── 01-有限自动机/              # 有限自动机
+│       │   ├── 01-Basic-Concepts.md    # 基本概念
+│       │   ├── 02-Deterministic-Finite-Automata.md # 确定性有限自动机
+│       │   ├── 03-Nondeterministic-Finite-Automata.md # 非确定性有限自动机
+│       │   └── 04-Regular-Expressions.md   # 正则表达式
+│       ├── 02-上下文无关语言/          # 上下文无关语言
+│       │   ├── 01-Context-Free-Grammars.md # 上下文无关文法
+│       │   ├── 02-Pushdown-Automata.md     # 下推自动机
+│       │   ├── 03-Parsing.md               # 语法分析
+│       │   └── 04-Syntax-Trees.md          # 语法树
+│       ├── 03-图灵机理论/              # 图灵机理论
+│       │   ├── 01-Basic-Turing-Machines.md # 基本图灵机
+│       │   ├── 02-Universal-Turing-Machines.md # 通用图灵机
+│       │   ├── 03-Computability-Theory.md  # 可计算性理论
+│       │   └── 04-Halting-Problem.md       # 停机问题
+│       └── 04-形式语言理论/            # 形式语言理论
+│           ├── 01-Language-Hierarchy.md    # 语言层次
+│           ├── 02-Grammar-Theory.md        # 语法理论
+│           ├── 03-Language-Operations.md   # 语言运算
+│           └── 04-Language-Properties.md   # 语言性质
+└── 07-Temporal-Logic/                  # 时态逻辑
     ├── README.md                       # 时态逻辑总览
     ├── Linear-Temporal-Logic/          # 线性时态逻辑
     │   ├── LTL-Syntax-Semantics.md     # LTL语法语义
@@ -168,8 +186,9 @@
 - [系统理论](02-System-Theory/) - 复杂系统、控制论、信息论、系统工程
 - [分布式系统理论](03-Distributed-Systems-Theory/) - 一致性、共识、容错、分布式算法
 - [形式化方法](04-Formal-Methods/) - 模型检测、定理证明、抽象解释、形式化规约
-- [Petri网理论](05-Petri-Nets/) - 基础Petri网、高级Petri网、分析、应用
-- [时态逻辑](06-Temporal-Logic/) - 线性时态逻辑、计算树逻辑、实时时态逻辑、应用
+- [Petri网理论](05-Petri-Net-Theory/) - 基础Petri网、高级Petri网、分析、应用
+- [自动机理论](06-Automata-Theory/) - 有限自动机、上下文无关语言、图灵机、形式语言
+- [时态逻辑](07-Temporal-Logic/) - 线性时态逻辑、计算树逻辑、实时时态逻辑、应用
 
 ### 主题导航
 
@@ -178,6 +197,8 @@
 - [类型系统](01-Programming-Language-Theory/Type-Systems/) - 简单类型、多态类型、依赖类型
 - [复杂系统](02-System-Theory/Complex-Systems/) - 涌现、自组织、非线性动力学
 - [一致性模型](03-Distributed-Systems-Theory/Consistency-Models/) - 强一致性、最终一致性
+- [Petri网基础](05-Petri-Net-Theory/01-基础Petri网/) - 基础概念、标记变迁、可达性分析
+- [有限自动机](06-Automata-Theory/01-有限自动机/) - 基本概念、DFA、NFA、正则表达式
 
 ## 📖 核心概念
 
