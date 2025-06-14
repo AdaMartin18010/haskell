@@ -10,6 +10,7 @@
 
 **定义 1.1.1** (布朗运动)
 布朗运动 $W_t$ 是一个连续时间随机过程，满足：
+
 - $W_0 = 0$
 - 增量独立：$W_{t+s} - W_t$ 与 $W_t$ 独立
 - 正态分布：$W_{t+s} - W_t \sim N(0, s)$
@@ -834,6 +835,7 @@ statisticalArbitrageStrategy = HighFrequencyStrategy
 ---
 
 **参考文献**：
+
 1. Hull, J. C. (2018). Options, Futures, and Other Derivatives. Pearson.
 2. Markowitz, H. (1952). Portfolio Selection. Journal of Finance, 7(1), 77-91.
-3. Murphy, J. J. (1999). Technical Analysis of the Financial Markets. New York Institute of Finance. 
+3. Murphy, J. J. (1999). Technical Analysis of the Financial Markets. New York Institute of Finance.

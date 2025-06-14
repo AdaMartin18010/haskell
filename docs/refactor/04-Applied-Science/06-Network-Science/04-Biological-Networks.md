@@ -10,6 +10,7 @@
 
 **定义 1.1.1** (蛋白质相互作用网络)
 蛋白质相互作用网络 $G = (V, E, W)$ 是一个带权无向图，其中：
+
 - $V$ 是蛋白质集合
 - $E$ 是相互作用关系集合
 - $W: E \rightarrow \mathbb{R}^+$ 是相互作用强度
@@ -164,6 +165,7 @@ eigenvectorCentrality proteinId network =
 
 **定义 2.1.1** (基因调控网络)
 基因调控网络 $G = (V, E, W, T)$ 是一个带权有向图，其中：
+
 - $V$ 是基因集合
 - $E$ 是调控关系集合
 - $W: E \rightarrow \mathbb{R}$ 是调控强度
@@ -316,6 +318,7 @@ jaccardSimilarity set1 set2 =
 
 **定义 3.1.1** (代谢网络)
 代谢网络 $G = (V, E, W)$ 是一个带权有向二分图，其中：
+
 - $V = V_M \cup V_R$ 是代谢物和反应集合
 - $E$ 是代谢物与反应的关系
 - $W: E \rightarrow \mathbb{R}$ 是化学计量系数
@@ -687,6 +690,7 @@ networkProximityScore protein knownTargets network =
 ---
 
 **参考文献**：
+
 1. Barabási, A. L., & Oltvai, Z. N. (2004). Network biology: understanding the cell's functional organization. Nature Reviews Genetics, 5(2), 101-113.
 2. Alon, U. (2007). Network motifs: theory and experimental approaches. Nature Reviews Genetics, 8(6), 450-461.
-3. Palsson, B. Ø. (2015). Systems Biology: Constraint-based Reconstruction and Analysis. Cambridge University Press. 
+3. Palsson, B. Ø. (2015). Systems Biology: Constraint-based Reconstruction and Analysis. Cambridge University Press.

@@ -524,6 +524,7 @@ calculateConfidence prediction = maximum prediction
 ---
 
 **参考文献**：
+
 1. Gonzalez, R. C., & Woods, R. E. (2018). Digital Image Processing. Pearson.
 2. Sonka, M., Hlavac, V., & Boyle, R. (2014). Image Processing, Analysis, and Machine Vision. Cengage Learning.
-3. Otsu, N. (1979). A threshold selection method from gray-level histograms. IEEE Transactions on Systems, Man, and Cybernetics, 9(1), 62-66. 
+3. Otsu, N. (1979). A threshold selection method from gray-level histograms. IEEE Transactions on Systems, Man, and Cybernetics, 9(1), 62-66.

@@ -14,6 +14,7 @@
 $$B_i = (H_{i-1}, T_i, t_i, nonce_i)$$
 
 其中：
+
 - $H_{i-1}$ 是前一个区块的哈希
 - $T_i$ 是交易集合
 - $t_i$ 是时间戳
@@ -96,6 +97,7 @@ blockHash block = sha256 $ encodeBlock block
 
 **定义 1.2.1** (哈希函数)
 哈希函数 $H: \{0,1\}^* \rightarrow \{0,1\}^{256}$ 满足：
+
 - 确定性：$H(x) = H(x)$
 - 抗碰撞性：难以找到 $x \neq y$ 使得 $H(x) = H(y)$
 - 单向性：难以从 $H(x)$ 反推 $x$
@@ -829,6 +831,7 @@ getAssetPrice asset protocol = 1.0  -- 简化实现，实际应从价格预言�
 ---
 
 **参考文献**：
+
 1. Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
 2. Buterin, V. (2014). Ethereum: A next-generation smart contract and decentralized application platform.
-3. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger. 
+3. Wood, G. (2014). Ethereum: A secure decentralised generalised transaction ledger.
