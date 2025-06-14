@@ -394,4 +394,4 @@ timeSpaceTradeoff tm input =
 
 ---
 
-*本文档提供了基本图灵机理论的完整形式化定义和Haskell实现。* 
+*本文档提供了基本图灵机理论的完整形式化定义和Haskell实现。*

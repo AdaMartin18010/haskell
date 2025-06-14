@@ -25,24 +25,28 @@ Petri网理论是并发系统建模和分析的重要形式化工具，提供了
 ## 📚 详细内容
 
 ### 01-基础Petri网
+
 - [基础概念与定义](01-Basic-Concepts.md)
 - [标记与变迁规则](02-Markings-and-Transitions.md)
 - [可达性分析](03-Reachability-Analysis.md)
 - [基本性质](04-Basic-Properties.md)
 
 ### 02-高级Petri网
+
 - [时间Petri网](01-Timed-Petri-Nets.md)
 - [着色Petri网](02-Colored-Petri-Nets.md)
 - [层次Petri网](03-Hierarchical-Petri-Nets.md)
 - [随机Petri网](04-Stochastic-Petri-Nets.md)
 
 ### 03-Petri网分析
+
 - [结构分析](01-Structural-Analysis.md)
 - [行为分析](02-Behavioral-Analysis.md)
 - [性能分析](03-Performance-Analysis.md)
 - [验证技术](04-Verification-Techniques.md)
 
 ### 04-Petri网应用
+
 - [软件工程](01-Software-Engineering.md)
 - [工作流建模](02-Workflow-Modeling.md)
 - [并发系统](03-Concurrent-Systems.md)
@@ -66,4 +70,4 @@ Petri网理论是并发系统建模和分析的重要形式化工具，提供了
 
 ---
 
-*本索引文件提供了Petri网理论的完整导航和框架。* 
+*本索引文件提供了Petri网理论的完整导航和框架。*

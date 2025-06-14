@@ -400,4 +400,4 @@ fairnessProperty = ltlGlobally (LTLAnd (ltlFinally (LTLProp "red"))
 
 ---
 
-*本文档提供了模型检测中时态逻辑的完整介绍，包括形式化定义、Haskell实现和应用示例。* 
+*本文档提供了模型检测中时态逻辑的完整介绍，包括形式化定义、Haskell实现和应用示例。*

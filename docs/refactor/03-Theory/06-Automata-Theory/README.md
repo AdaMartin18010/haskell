@@ -24,24 +24,28 @@
 ## 📚 详细内容
 
 ### 01-有限自动机
+
 - [基本概念](01-Basic-Concepts.md)
 - [确定性有限自动机](02-Deterministic-Finite-Automata.md)
 - [非确定性有限自动机](03-Nondeterministic-Finite-Automata.md)
 - [正则表达式](04-Regular-Expressions.md)
 
 ### 02-上下文无关语言
+
 - [上下文无关文法](01-Context-Free-Grammars.md)
 - [下推自动机](02-Pushdown-Automata.md)
 - [语法分析](03-Parsing.md)
 - [语法树](04-Syntax-Trees.md)
 
 ### 03-图灵机理论
+
 - [基本图灵机](01-Basic-Turing-Machines.md)
 - [通用图灵机](02-Universal-Turing-Machines.md)
 - [可计算性理论](03-Computability-Theory.md)
 - [停机问题](04-Halting-Problem.md)
 
 ### 04-形式语言理论
+
 - [语言层次](01-Language-Hierarchy.md)
 - [语法理论](02-Grammar-Theory.md)
 - [语言运算](03-Language-Operations.md)
@@ -63,4 +67,4 @@
 
 ---
 
-*本索引文件提供了自动机理论的完整导航和框架。* 
+*本索引文件提供了自动机理论的完整导航和框架。*

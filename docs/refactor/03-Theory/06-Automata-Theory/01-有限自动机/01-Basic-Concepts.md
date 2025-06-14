@@ -415,4 +415,4 @@ acceptanceComplexity fa input = length input  -- 线性时间
 
 ---
 
-*本文档提供了有限自动机基本概念的完整形式化定义和Haskell实现。* 
+*本文档提供了有限自动机基本概念的完整形式化定义和Haskell实现。*
