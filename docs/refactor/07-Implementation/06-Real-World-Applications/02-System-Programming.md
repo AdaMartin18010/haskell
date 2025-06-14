@@ -11,6 +11,7 @@
 #### 操作系统接口
 
 **系统调用模型**：
+
 - **进程**：$P = \{p_1, p_2, \ldots, p_n\}$
 - **系统调用**：$SysCall = \{open, read, write, close, fork, exec\}$
 - **文件描述符**：$FD = \{fd_1, fd_2, \ldots, fd_k\}$
@@ -21,6 +22,7 @@ $$Process = State \times Memory \times Resources \times Context$$
 #### 内存管理
 
 **内存模型**：
+
 - **物理内存**：$PM = \{pm_1, pm_2, \ldots, pm_m\}$
 - **虚拟内存**：$VM = \{vm_1, vm_2, \ldots, vm_n\}$
 - **页表**：$PT: VM \to PM$
@@ -97,6 +99,7 @@ class SystemProgramming sys where
 文件系统操作提供对文件和目录的底层访问。
 
 **文件操作模型**：
+
 - **文件**：$File = Path \times Content \times Metadata$
 - **目录**：$Directory = Path \times \{File\} \times \{Directory\}$
 - **操作**：$FileOp = \{create, read, write, delete, move\}$
@@ -202,6 +205,7 @@ createHardLink target link = do
 进程管理提供对进程的创建、控制和监控功能。
 
 **进程模型**：
+
 - **进程状态**：$State = \{Running, Sleeping, Stopped, Zombie\}$
 - **进程转换**：$Transition = State \times Event \to State$
 - **进程树**：$ProcessTree = Process \times \{ProcessTree\}$
@@ -291,6 +295,7 @@ setProcessGroup pid pgid = do
 内存管理提供对系统内存的直接操作。
 
 **内存模型**：
+
 - **内存分配**：$Alloc: Size \to Ptr$
 - **内存释放**：$Free: Ptr \to Bool$
 - **内存映射**：$Map: File \times Offset \times Size \to Ptr$
@@ -387,6 +392,7 @@ protectMemory ptr size protection = do
 网络编程提供对网络套接字的底层操作。
 
 **网络模型**：
+
 - **套接字**：$Socket = Domain \times Type \times Protocol$
 - **地址**：$Address = IP \times Port$
 - **连接**：$Connection = Socket \times Address$
@@ -488,6 +494,7 @@ getSocketOption sock option = do
 并发编程提供对多线程和同步机制的支持。
 
 **并发模型**：
+
 - **线程**：$Thread = State \times Stack \times Context$
 - **同步**：$Sync = \{Mutex, Semaphore, Condition, Barrier\}$
 - **通信**：$Comm = \{Channel, Pipe, SharedMemory\}$
@@ -663,6 +670,7 @@ smartSystemProgrammingTechnique _ _ = "需要更多信息"
 **定理**：文件系统操作满足原子性和一致性。
 
 **证明**：
+
 1. **原子性**：文件操作要么完全成功，要么完全失败
 2. **一致性**：文件系统状态在操作前后保持一致
 
@@ -671,6 +679,7 @@ smartSystemProgrammingTechnique _ _ = "需要更多信息"
 **定理**：进程管理确保进程隔离和资源管理。
 
 **证明**：
+
 1. **隔离性**：不同进程的内存空间相互隔离
 2. **资源管理**：进程资源在创建和销毁时正确管理
 
@@ -681,6 +690,7 @@ smartSystemProgrammingTechnique _ _ = "需要更多信息"
 **定理**：内存分配的时间复杂度为 $O(1)$。
 
 **证明**：
+
 - 使用空闲列表管理：$O(1)$
 - 内存池分配：$O(1)$
 - 页分配：$O(1)$
@@ -797,4 +807,4 @@ compositeSystemProgramming fs pm mm = do
 
 ---
 
-*本文档提供了系统编程的完整形式化理论和Haskell实现，包括性能分析和实际应用指导。* 
+*本文档提供了系统编程的完整形式化理论和Haskell实现，包括性能分析和实际应用指导。*
