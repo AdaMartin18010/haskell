@@ -13,6 +13,7 @@
 $$\text{RationalKnowledge} = (P, R, I, C)$$
 
 其中：
+
 - $P$ 是前提集合
 - $R$ 是推理规则集合
 - $I$ 是推理过程
@@ -326,4 +327,4 @@ data InferenceEngine = InferenceEngine
 
 - [知识论基础](../01-Knowledge-Theory/01-Basic-Concepts.md)
 - [形式逻辑](../../02-Formal-Science/02-Formal-Logic/01-Classical-Logic/01-Basic-Concepts.md)
-- [定理证明](../../03-Theory/04-Formal-Methods/02-Theorem-Proving/01-Interactive-Theorem-Proving.md) 
+- [定理证明](../../03-Theory/04-Formal-Methods/02-Theorem-Proving/01-Interactive-Theorem-Proving.md)

@@ -440,7 +440,8 @@ data DataGovernance = DataGovernance
 ---
 
 **参考文献**：
+
 - Heidegger, M. (1977). The Question Concerning Technology
 - Ihde, D. (1990). Technology and the Lifeworld
 - Feenberg, A. (1999). Questioning Technology
-- Winner, L. (1986). The Whale and the Reactor 
+- Winner, L. (1986). The Whale and the Reactor

@@ -13,6 +13,7 @@
 $$\text{EmpiricalKnowledge} = (O, E, V)$$
 
 其中：
+
 - $O$ 是观察对象集合
 - $E$ 是经验证据集合  
 - $V$ 是验证函数
@@ -252,4 +253,4 @@ $$C = 1 - \frac{\sum_{i=1}^n (V(ek_i) - \bar{V})^2}{n \bar{V}}$$
 
 - [知识论基础](../01-Knowledge-Theory/01-Basic-Concepts.md)
 - [形式化验证](../../03-Theory/04-Formal-Methods/02-Theorem-Proving/01-Interactive-Theorem-Proving.md)
-- [统计分析方法](../../04-Applied-Science/04-Data-Science/01-Statistical-Analysis.md) 
+- [统计分析方法](../../04-Applied-Science/04-Data-Science/01-Statistical-Analysis.md)

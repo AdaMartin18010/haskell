@@ -453,7 +453,8 @@ AI哲学的形式化表达不仅有助于理论研究的严谨性，也为实际
 ---
 
 **参考文献**：
+
 - Searle, J. (1980). Minds, Brains, and Programs
 - Dennett, D. (1991). Consciousness Explained
 - Chalmers, D. (1996). The Conscious Mind
-- Russell, S. (2019). Human Compatible 
+- Russell, S. (2019). Human Compatible

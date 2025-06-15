@@ -13,6 +13,7 @@
 $$(X, \tau)$$
 
 其中：
+
 - $X$ 是集合（称为底集）
 - $\tau \subseteq \mathcal{P}(X)$ 是拓扑（开集族）
 
@@ -471,4 +472,4 @@ generateQuotientTopology space classes =
 
 - [拓扑结构基础](../01-Basic-Concepts.md)
 - [代数拓扑](../02-Algebraic-Topology/01-Basic-Concepts.md)
-- [微分几何](../03-Differential-Geometry/01-Basic-Concepts.md) 
+- [微分几何](../03-Differential-Geometry/01-Basic-Concepts.md)

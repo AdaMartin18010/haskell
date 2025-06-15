@@ -154,6 +154,7 @@ checkProof (Apply rule premises) =
 对于任意命题 $P$，有 $P \leftrightarrow \neg\neg P$
 
 **证明**：
+
 ```haskell
 -- 双重否定律的Haskell实现
 doubleNegation :: Proposition -> Bool
@@ -172,10 +173,12 @@ doubleNegationProof = Apply IffIntro [
 #### 定理2：德摩根律
 
 对于任意命题 $P$ 和 $Q$，有：
+
 - $\neg(P \land Q) \leftrightarrow (\neg P \lor \neg Q)$
 - $\neg(P \lor Q) \leftrightarrow (\neg P \land \neg Q)$
 
 **证明**：
+
 ```haskell
 -- 德摩根律的Haskell实现
 deMorgan1 :: Proposition -> Proposition -> Bool
@@ -262,4 +265,4 @@ safeInference (ValidFormula p1) (ValidFormula p2) =
 - [形式逻辑主索引](../README.md)
 - [模态逻辑](../02-Modal-Logic/01-Basic-Concepts.md)
 - [哲学逻辑](../02-Philosophical-Logic/01-Basic-Concepts.md)
-- [计算逻辑](../03-Computational-Logic/01-Basic-Concepts.md) 
+- [计算逻辑](../03-Computational-Logic/01-Basic-Concepts.md)

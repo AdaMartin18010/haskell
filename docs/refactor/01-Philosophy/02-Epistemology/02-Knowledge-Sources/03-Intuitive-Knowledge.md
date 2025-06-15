@@ -13,6 +13,7 @@
 $$\text{IntuitiveKnowledge} = (S, C, P, I, V)$$
 
 其中：
+
 - $S$ 是主体状态
 - $C$ 是认知内容
 - $P$ 是处理过程
@@ -395,4 +396,4 @@ creativeSolve cps =
 
 - [知识论基础](../01-Knowledge-Theory/01-Basic-Concepts.md)
 - [认知科学理论](../03-Cognitive-Science/01-Basic-Concepts.md)
-- [模式识别](../../03-Theory/06-Automata-Theory/01-有限自动机/01-Basic-Concepts.md) 
+- [模式识别](../../03-Theory/06-Automata-Theory/01-有限自动机/01-Basic-Concepts.md)

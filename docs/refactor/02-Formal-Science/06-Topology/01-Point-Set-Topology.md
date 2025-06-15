@@ -202,6 +202,7 @@ hasDisjointOpenSets space x y =
 拓扑空间中开集的任意并仍然是开集。
 
 **证明**：
+
 ```haskell
 -- 任意并定理的Haskell实现
 arbitraryUnionTheorem :: TopologicalSpace a -> Bool
@@ -223,6 +224,7 @@ arbitraryUnionProof = Apply ArbitraryUnion [
 连续映射的复合仍然是连续映射。
 
 **证明**：
+
 ```haskell
 -- 复合连续性定理的Haskell实现
 compositionContinuityTheorem :: TopologicalSpace a -> TopologicalSpace b -> TopologicalSpace c -> (a -> b) -> (b -> c) -> Bool
@@ -244,6 +246,7 @@ compositionContinuityProof = Apply CompositionContinuity [
 在豪斯多夫空间中，单点集是闭集。
 
 **证明**：
+
 ```haskell
 -- 单点集闭性定理的Haskell实现
 singletonClosedTheorem :: TopologicalSpace a -> a -> Bool
@@ -538,4 +541,4 @@ identifyTopologyProperties space =
 - [拓扑结构主索引](../README.md)
 - [代数拓扑](../02-Algebraic-Topology.md)
 - [微分几何](../03-Differential-Geometry.md)
-- [拓扑数据分析](../04-Topological-Data-Analysis.md) 
+- [拓扑数据分析](../04-Topological-Data-Analysis.md)

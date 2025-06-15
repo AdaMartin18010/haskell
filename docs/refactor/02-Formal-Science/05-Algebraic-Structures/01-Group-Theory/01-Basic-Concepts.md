@@ -13,6 +13,7 @@
 $$G = (S, \circ, e, \cdot^{-1})$$
 
 其中：
+
 - $S$ 是集合
 - $\circ: S \times S \rightarrow S$ 是二元运算
 - $e \in S$ 是单位元
@@ -403,4 +404,4 @@ trivialSubgroup group =
 
 - [代数结构基础](../01-Basic-Concepts.md)
 - [环论](../02-Ring-Theory/01-Basic-Concepts.md)
-- [域论](../03-Field-Theory/01-Basic-Concepts.md) 
+- [域论](../03-Field-Theory/01-Basic-Concepts.md)

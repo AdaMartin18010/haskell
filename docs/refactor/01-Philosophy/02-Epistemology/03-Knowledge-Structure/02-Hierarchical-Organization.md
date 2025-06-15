@@ -13,6 +13,7 @@
 $$\text{HierarchicalOrganization} = (L, P, I, R, T)$$
 
 其中：
+
 - $L$ 是层次集合
 - $P$ 是偏序关系
 - $I$ 是继承关系
@@ -26,6 +27,7 @@ $$\text{HierarchicalOrganization} = (L, P, I, R, T)$$
 $$\text{Level} = (N, E, A)$$
 
 其中：
+
 - $N$ 是层次名称
 - $E$ 是实体集合
 - $A$ 是抽象度
@@ -458,4 +460,4 @@ validateDesign sd =
 
 - [知识结构理论](../01-Basic-Concepts.md)
 - [概念框架](../01-Conceptual-Framework.md)
-- [抽象层次](../../02-Formal-Science/01-Mathematics/02-Abstract-Algebra.md) 
+- [抽象层次](../../02-Formal-Science/01-Mathematics/02-Abstract-Algebra.md)

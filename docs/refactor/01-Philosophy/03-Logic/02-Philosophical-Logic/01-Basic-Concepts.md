@@ -225,6 +225,7 @@ instance Validatable LogicalForm where
 $\text{sense}(e_1 \circ e_2) = f(\text{sense}(e_1), \text{sense}(e_2))$
 
 **证明**：
+
 ```haskell
 -- 意义组合性定理的Haskell实现
 compositionalityTheorem :: FregeanMeaning -> FregeanMeaning -> Bool
@@ -246,6 +247,7 @@ compositionalityProof = Apply MeaningComposition [
 对于任意模态公式 $\phi$ 和可能世界 $w$，如果 $w \models \Box\phi$，则对所有可达世界 $w'$，有 $w' \models \phi$
 
 **证明**：
+
 ```haskell
 -- 单调性定理的Haskell实现
 monotonicityTheorem :: KripkeModel -> World -> ModalFormula -> Bool
@@ -397,4 +399,4 @@ isContradictory a1 a2 =
 - [逻辑学主索引](../README.md)
 - [经典逻辑](../01-Formal-Logic/01-Classical-Logic.md)
 - [模态逻辑](../02-Modal-Logic/01-Basic-Concepts.md)
-- [非经典逻辑](../03-Non-Classical-Logic/01-Basic-Concepts.md) 
+- [非经典逻辑](../03-Non-Classical-Logic/01-Basic-Concepts.md)

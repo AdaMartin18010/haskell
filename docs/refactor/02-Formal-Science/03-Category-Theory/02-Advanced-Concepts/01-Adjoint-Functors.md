@@ -451,7 +451,8 @@ class AdjointProperties f g where
 ---
 
 **参考文献**：
+
 - Mac Lane, S. (1998). Categories for the Working Mathematician
 - Awodey, S. (2010). Category Theory
 - Barr, M., & Wells, C. (1990). Category Theory for Computing Science
-- Riehl, E. (2017). Category Theory in Context 
+- Riehl, E. (2017). Category Theory in Context

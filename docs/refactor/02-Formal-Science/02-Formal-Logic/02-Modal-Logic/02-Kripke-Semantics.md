@@ -13,6 +13,7 @@ Kripke框架是一个二元组：
 $$\mathcal{F} = (W, R)$$
 
 其中：
+
 - $W$ 是可能世界集合
 - $R \subseteq W \times W$ 是可达关系
 
@@ -23,6 +24,7 @@ Kripke模型是一个三元组：
 $$\mathcal{M} = (W, R, V)$$
 
 其中：
+
 - $(W, R)$ 是Kripke框架
 - $V: \Phi \rightarrow \mathcal{P}(W)$ 是赋值函数
 
@@ -382,4 +384,4 @@ Kripke语义通过形式化方法建立了模态逻辑的语义学基础，为�
 
 - [模态逻辑基础](../01-Basic-Concepts.md)
 - [线性时序逻辑](../../03-Theory/07-Temporal-Logic/01-Linear-Temporal-Logic.md)
-- [模型检测](../../03-Theory/04-Formal-Methods/01-Model-Checking/01-Temporal-Logic.md) 
+- [模型检测](../../03-Theory/04-Formal-Methods/01-Model-Checking/01-Temporal-Logic.md)

@@ -13,6 +13,7 @@
 $$\text{IntuitionisticLogic} = (F, R, I, P)$$
 
 其中：
+
 - $F$ 是公式集合
 - $R$ 是推理规则集合
 - $I$ 是直觉解释
@@ -366,4 +367,4 @@ verifyProgram pv =
 
 - [非经典逻辑基础](../01-Basic-Concepts.md)
 - [Kripke语义](../02-Modal-Logic/02-Kripke-Semantics.md)
-- [构造性证明](../../03-Theory/04-Formal-Methods/02-Theorem-Proving/01-Interactive-Theorem-Proving.md) 
+- [构造性证明](../../03-Theory/04-Formal-Methods/02-Theorem-Proving/01-Interactive-Theorem-Proving.md)

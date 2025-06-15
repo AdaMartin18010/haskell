@@ -13,6 +13,7 @@
 $$\text{ConceptualFramework} = (C, R, H, M)$$
 
 其中：
+
 - $C$ 是概念集合
 - $R$ 是关系集合
 - $H$ 是层次结构
@@ -25,6 +26,7 @@ $$\text{ConceptualFramework} = (C, R, H, M)$$
 $$\text{Concept} = (N, A, E)$$
 
 其中：
+
 - $N$ 是概念名称
 - $A$ 是属性集合
 - $E$ 是外延集合
@@ -425,4 +427,4 @@ semanticSearch ss query =
 
 - [知识结构理论](../01-Basic-Concepts.md)
 - [本体论](../../01-Metaphysics/01-Mathematical-Ontology.md)
-- [语义网络](../../03-Theory/01-Programming-Language-Theory/02-Semantics-Theory.md) 
+- [语义网络](../../03-Theory/01-Programming-Language-Theory/02-Semantics-Theory.md)

@@ -263,6 +263,7 @@ data MoralAnalysis = MoralAnalysis {
 $\forall a \in A: U(a^*) \geq U(a)$
 
 **证明**：
+
 ```haskell
 -- 最大化原则的Haskell实现
 maximizationTheorem :: Utilitarianism -> [Action] -> Bool
@@ -284,6 +285,7 @@ maximizationProof = Apply UtilitarianMaximization [
 对于绝对道德规则 $R$ 和任意行动 $a$，如果 $a$ 违反 $R$，则 $a$ 在道德上是错误的。
 
 **证明**：
+
 ```haskell
 -- 绝对性定理的Haskell实现
 absolutenessTheorem :: DeontologicalEthics -> Action -> Bool
@@ -476,4 +478,4 @@ canEvaluate mds action =
 - [伦理学主索引](../README.md)
 - [元伦理学](../02-Meta-Ethics/01-Basic-Concepts.md)
 - [应用伦理学](../03-Applied-Ethics/01-Basic-Concepts.md)
-- [形式伦理学](../04-Formal-Ethics/01-Basic-Concepts.md) 
+- [形式伦理学](../04-Formal-Ethics/01-Basic-Concepts.md)

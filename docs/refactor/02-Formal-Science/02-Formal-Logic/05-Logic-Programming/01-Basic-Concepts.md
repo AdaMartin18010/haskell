@@ -566,7 +566,8 @@ class ConstraintSolver a where
 ---
 
 **参考文献**：
+
 - Lloyd, J. W. (1987). Foundations of Logic Programming
 - Sterling, L., & Shapiro, E. (1994). The Art of Prolog
 - Apt, K. R. (1997). From Logic Programming to Prolog
-- Kowalski, R. (1979). Logic for Problem Solving 
+- Kowalski, R. (1979). Logic for Problem Solving
