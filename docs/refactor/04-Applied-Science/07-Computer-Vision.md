@@ -660,6 +660,7 @@ data Classification = Classification {
 **定理 1**: Canny边缘检测算法在理想条件下能够检测到所有显著边缘。
 
 **证明**:
+
 ```haskell
 -- Canny边缘检测的正确性
 cannyCorrectness :: GrayscaleImage -> CannyParams -> Bool
@@ -699,6 +700,7 @@ preservesEdgePositions original smoothed =
 **定理 2**: Harris角点检测对图像旋转和尺度变化具有稳定性。
 
 **证明**:
+
 ```haskell
 -- Harris角点检测的稳定性
 harrisStability :: GrayscaleImage -> HarrisParams -> Bool
@@ -735,4 +737,4 @@ checkRotationStability original rotated =
 
 计算机视觉为理解和处理视觉信息提供了系统化的方法。通过图像处理、特征提取、目标检测等技术，我们可以构建能够"看见"和"理解"图像的智能系统。
 
-在Haskell中，我们可以通过类型系统、代数数据类型和函数式编程等特性，构建严格的计算机视觉系统，确保图像处理算法的正确性和稳定性。这种形式化的方法为计算机视觉的应用提供了坚实的技术基础。 
+在Haskell中，我们可以通过类型系统、代数数据类型和函数式编程等特性，构建严格的计算机视觉系统，确保图像处理算法的正确性和稳定性。这种形式化的方法为计算机视觉的应用提供了坚实的技术基础。

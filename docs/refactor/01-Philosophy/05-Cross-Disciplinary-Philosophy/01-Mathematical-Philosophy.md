@@ -39,6 +39,7 @@ instance PlatonicRealm MathematicalObject where
 如果数学对象在理念世界中存在，则它们具有客观性和必然性。
 
 **证明：** 通过柏拉图主义公理：
+
 1. 理念世界是客观存在的
 2. 数学对象在理念世界中有确定位置
 3. 因此数学对象具有客观性
@@ -93,6 +94,7 @@ isValidProof system proof =
 如果形式系统是一致的，则其所有定理都是语法上正确的。
 
 **证明：** 通过形式化推理：
+
 1. 每个推理步骤都遵循形式规则
 2. 公理是语法上正确的
 3. 因此所有定理都是语法上正确的
@@ -138,6 +140,7 @@ constructiveExists predicate =
 在直觉主义数学中，存在性证明必须提供构造性证据。
 
 **证明：** 通过直觉主义原则：
+
 1. 存在性意味着可构造性
 2. 构造性证明提供具体对象
 3. 因此存在性证明必须构造性
@@ -179,6 +182,7 @@ instance TruthJudgment MathematicalTruth where
 数学真理是必然的，在所有可能世界中都成立。
 
 **证明：** 通过数学真理的本质：
+
 1. 数学真理基于逻辑必然性
 2. 逻辑必然性在所有可能世界中成立
 3. 因此数学真理是必然的
@@ -252,6 +256,7 @@ instance ApplicationValidity MathematicalApplication where
 数学在描述物理世界时表现出普遍的有效性。
 
 **证明：** 通过数学应用的历史：
+
 1. 数学在多个领域都有效
 2. 数学预测与实验一致
 3. 因此数学具有普遍有效性
@@ -458,4 +463,4 @@ instance AIMathematicalReasoning AIMathematicalSystem where
 2. Gödel, K. (1947). What is Cantor's continuum problem? The American Mathematical Monthly, 54(9), 515-525.
 3. Quine, W. V. O. (1951). Two dogmas of empiricism. The Philosophical Review, 60(1), 20-43.
 4. Brouwer, L. E. J. (1912). Intuitionism and formalism. Bulletin of the American Mathematical Society, 20(2), 81-96.
-5. Wigner, E. P. (1960). The unreasonable effectiveness of mathematics in the natural sciences. Communications in Pure and Applied Mathematics, 13(1), 1-14. 
+5. Wigner, E. P. (1960). The unreasonable effectiveness of mathematics in the natural sciences. Communications in Pure and Applied Mathematics, 13(1), 1-14.

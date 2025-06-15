@@ -544,6 +544,7 @@ data BoundType =
 **定理 1**: 对于任何时间可构造函数$f(n)$，存在一个语言$L$，使得$L \in \text{TIME}(f(n)^2)$但$L \notin \text{TIME}(f(n))$。
 
 **证明**:
+
 ```haskell
 -- 时间层次定理
 timeHierarchyTheorem :: ComplexityFunction -> Bool
@@ -573,6 +574,7 @@ constructDiagonalLanguage f =
 **定理 2**: 对于任何空间可构造函数$f(n)$，存在一个语言$L$，使得$L \in \text{SPACE}(f(n)^2)$但$L \notin \text{SPACE}(f(n))$。
 
 **证明**:
+
 ```haskell
 -- 空间层次定理
 spaceHierarchyTheorem :: ComplexityFunction -> Bool
@@ -595,4 +597,4 @@ isSpaceConstructible f =
 
 计算复杂性理论为理解算法的效率和问题的固有难度提供了深刻的洞察。通过复杂度类、问题归约和下界理论，我们可以精确地分析各种计算问题的复杂性。
 
-在Haskell中，我们可以通过类型系统、代数数据类型和函数式编程等特性，构建严格的计算复杂性分析系统，确保复杂度分析的准确性和证明的正确性。这种形式化的方法为算法设计和问题求解提供了坚实的理论基础。 
+在Haskell中，我们可以通过类型系统、代数数据类型和函数式编程等特性，构建严格的计算复杂性分析系统，确保复杂度分析的准确性和证明的正确性。这种形式化的方法为算法设计和问题求解提供了坚实的理论基础。

@@ -74,6 +74,7 @@ inductiveStrength obs hyp =
 归纳推理无法提供绝对的确定性，只能提供概率性的支持。
 
 **证明：** 通过休谟的归纳问题：
+
 1. 归纳推理基于"未来类似过去"的假设
 2. 这个假设本身无法通过归纳证明
 3. 因此归纳推理缺乏逻辑基础
@@ -135,6 +136,7 @@ validateSyllogism syll =
 如果演绎推理的前提为真且推理形式有效，则结论必然为真。
 
 **证明：** 通过演绎逻辑的性质：
+
 1. 演绎推理是保真的
 2. 如果前提为真，结论必然为真
 3. 这是演绎推理的定义特征
@@ -249,6 +251,7 @@ realismArgument theories =
 如果科学理论不是近似为真，那么它们的经验成功将是一个奇迹。
 
 **证明：** 通过反证法：
+
 1. 假设科学理论不是近似为真
 2. 但科学理论在经验上非常成功
 3. 这种成功只能用奇迹来解释
@@ -395,6 +398,7 @@ detectParadigmShift paradigms anomalies =
 不同范式之间可能存在不可通约性，使得它们无法完全比较。
 
 **证明：** 通过范式理论：
+
 1. 不同范式有不同的概念框架
 2. 概念框架决定观察和解释
 3. 因此不同范式可能无法完全比较
@@ -506,6 +510,7 @@ explanationPower expl =
 一个充分的科学解释必须包含覆盖律和相关的初始条件。
 
 **证明：** 通过覆盖律模型：
+
 1. 解释需要一般规律作为前提
 2. 解释需要初始条件作为前提
 3. 两者结合才能充分解释现象
@@ -682,4 +687,4 @@ instance ScientificMethod ExperimentalMethod where
 2. Kuhn, T. S. (1962). The structure of scientific revolutions. University of Chicago Press.
 3. Hempel, C. G. (1965). Aspects of scientific explanation. Free Press.
 4. van Fraassen, B. C. (1980). The scientific image. Oxford University Press.
-5. Laudan, L. (1981). A confutation of convergent realism. Philosophy of Science, 48(1), 19-49. 
+5. Laudan, L. (1981). A confutation of convergent realism. Philosophy of Science, 48(1), 19-49.
