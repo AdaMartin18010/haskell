@@ -242,6 +242,7 @@ class (Group g, Group h) => GroupIsomorphism g h where
 群中的单位元是唯一的。
 
 **证明**：
+
 ```haskell
 -- 单位元唯一性定理的Haskell实现
 identityUniquenessTheorem :: (Group g) => [g] -> Bool
@@ -262,6 +263,7 @@ identityUniquenessProof = Apply IdentityUniqueness [
 群中每个元素的逆元是唯一的。
 
 **证明**：
+
 ```haskell
 -- 逆元唯一性定理的Haskell实现
 inverseUniquenessTheorem :: (Group g) => g -> Bool
@@ -282,6 +284,7 @@ inverseUniquenessProof = Apply InverseUniqueness [
 有限群的子群的阶数整除群的阶数。
 
 **证明**：
+
 ```haskell
 -- 拉格朗日定理的Haskell实现
 lagrangeTheorem :: (Group g) => [g] -> [g] -> Bool

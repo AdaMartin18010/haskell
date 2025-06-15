@@ -66,7 +66,7 @@ data Formula =
   deriving (Show, Eq)
 ```
 
-#### 语义定义
+#### 语义定义2
 
 ```haskell
 -- 一阶逻辑语义
