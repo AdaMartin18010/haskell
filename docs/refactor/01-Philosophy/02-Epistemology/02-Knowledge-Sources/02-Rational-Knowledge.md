@@ -13,6 +13,7 @@
 $$\text{RationalKnowledge} = (P, R, I, D, V)$$
 
 其中：
+
 - $P$ 是前提集合
 - $R$ 是推理规则集合
 - $I$ 是推理函数
@@ -270,6 +271,7 @@ checkCompleteness rk propositions =
 **定理**：如果前提为真且推理规则有效，则演绎推理的结论为真。
 
 **证明**：
+
 1. 设 $P_1, P_2, ..., P_n$ 为真前提
 2. 设 $R$ 为有效推理规则
 3. 根据推理规则的定义，$R(P_1, P_2, ..., P_n) = C$
@@ -280,6 +282,7 @@ checkCompleteness rk propositions =
 **定理**：归纳推理的结论具有或然性，其置信度与证据数量成正比。
 
 **证明**：
+
 1. 设 $E_1, E_2, ..., E_n$ 为观察证据
 2. 设 $H$ 为归纳假设
 3. 归纳推理的置信度 $C = f(n, \text{consistency}(E_1, E_2, ..., E_n))$

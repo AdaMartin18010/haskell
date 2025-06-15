@@ -13,6 +13,7 @@
 $$\text{IntuitiveKnowledge} = (S, I, P, V)$$
 
 其中：
+
 - $S$ 是主体集合
 - $I$ 是直觉函数
 - $P$ 是洞察函数
@@ -243,6 +244,7 @@ predictIntuition system subject context =
 **定理**：直觉知识的可靠性与主体的经验水平和专业领域匹配度成正比。
 
 **证明**：
+
 1. 设 $S$ 为主体，$E$ 为经验水平，$D$ 为领域匹配度
 2. 直觉可靠性 $R = f(E, D)$
 3. 当 $E \rightarrow \infty$ 且 $D \rightarrow 1$ 时，$R \rightarrow 1$
@@ -252,6 +254,7 @@ predictIntuition system subject context =
 **定理**：创造性直觉的产出与主体的直觉水平和非线性思维模式相关。
 
 **证明**：
+
 1. 设 $I$ 为直觉水平，$N$ 为非线性思维程度
 2. 创造性产出 $C = g(I, N)$
 3. 当 $I > 0.8$ 且 $N > 0.7$ 时，$C$ 显著增加

@@ -13,6 +13,7 @@
 $$\text{EmpiricalKnowledge} = (O, E, I, V)$$
 
 其中：
+
 - $O$ 是观察者集合
 - $E$ 是经验集合
 - $I$ 是解释函数
@@ -143,6 +144,7 @@ assessReliability ek observer =
 **定理**：如果经验知识 $K$ 是直接经验知识，那么 $K$ 是可验证的。
 
 **证明**：
+
 1. 设 $K = (O, E, I, V)$ 是直接经验知识
 2. 对于任意 $o \in O$ 和 $e \in E$，如果 $\text{perceives}(o, e)$ 成立
 3. 则 $V(o, e) = \text{True}$
@@ -153,6 +155,7 @@ assessReliability ek observer =
 **定理**：经验知识在满足特定条件下具有传递性。
 
 **证明**：
+
 1. 设 $K_1 = (O_1, E_1, I_1, V_1)$ 和 $K_2 = (O_2, E_2, I_2, V_2)$
 2. 如果存在映射 $f: E_1 \rightarrow E_2$ 使得 $I_2 \circ f = I_1$
 3. 则 $K_1$ 可以传递到 $K_2$
