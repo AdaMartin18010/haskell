@@ -391,4 +391,4 @@ verifyMaybeFunctor =
 - [单位元与结合律](03-Identity-and-Associativity.md)
 - [范畴的例子](04-Category-Examples.md)
 - [形式科学层主索引](../../README.md)
-- [理论层](../../../03-Theory/README.md) 
+- [理论层](../../../03-Theory/README.md)

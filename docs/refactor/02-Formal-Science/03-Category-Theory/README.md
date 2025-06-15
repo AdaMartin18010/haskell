@@ -7,36 +7,42 @@
 ## 目录结构
 
 ### 01-基本概念 (Basic-Concepts)
+
 - [范畴定义](01-Basic-Concepts/01-Category-Definition.md)
 - [态射与复合](01-Basic-Concepts/02-Morphisms-and-Composition.md)
 - [单位元与结合律](01-Basic-Concepts/03-Identity-and-Associativity.md)
 - [范畴的例子](01-Basic-Concepts/04-Category-Examples.md)
 
 ### 02-函子 (Functors)
+
 - [函子定义](02-Functors/01-Functor-Definition.md)
 - [协变与反变函子](02-Functors/02-Covariant-and-Contravariant-Functors.md)
 - [函子复合](02-Functors/03-Functor-Composition.md)
 - [函子例子](02-Functors/04-Functor-Examples.md)
 
 ### 03-自然变换 (Natural-Transformations)
+
 - [自然变换定义](03-Natural-Transformations/01-Natural-Transformation-Definition.md)
 - [自然变换复合](03-Natural-Transformations/02-Natural-Transformation-Composition.md)
 - [自然同构](03-Natural-Transformations/03-Natural-Isomorphism.md)
 - [自然变换例子](03-Natural-Transformations/04-Natural-Transformation-Examples.md)
 
 ### 04-极限与共极限 (Limits-and-Colimits)
+
 - [极限定义](04-Limits-and-Colimits/01-Limit-Definition.md)
 - [积与余积](04-Limits-and-Colimits/02-Products-and-Coproducts.md)
 - [等化子与余等化子](04-Limits-and-Colimits/03-Equalizers-and-Coequalizers.md)
 - [拉回与推出](04-Limits-and-Colimits/04-Pullbacks-and-Pushouts.md)
 
 ### 05-伴随函子 (Adjunctions)
+
 - [伴随定义](05-Adjunctions/01-Adjunction-Definition.md)
 - [单位与余单位](05-Adjunctions/02-Unit-and-Counit.md)
 - [伴随例子](05-Adjunctions/03-Adjunction-Examples.md)
 - [伴随与单子](05-Adjunctions/04-Adjunctions-and-Monads.md)
 
 ### 06-单子与余单子 (Monads-and-Comonads)
+
 - [单子定义](06-Monads-and-Comonads/01-Monad-Definition.md)
 - [单子例子](06-Monads-and-Comonads/02-Monad-Examples.md)
 - [余单子定义](06-Monads-and-Comonads/03-Comonad-Definition.md)
@@ -361,4 +367,4 @@ data Module ring = Module {
 - [数学基础](../01-Mathematics/README.md)
 - [形式逻辑](../02-Formal-Logic/README.md)
 - [类型论](../04-Type-Theory/README.md)
-- [理论层](../../03-Theory/README.md) 
+- [理论层](../../03-Theory/README.md)

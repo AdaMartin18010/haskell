@@ -7,24 +7,28 @@
 ## 目录结构
 
 ### 01-经典逻辑 (Classical-Logic)
+
 - [基本概念](01-Classical-Logic/01-Basic-Concepts.md)
 - [命题逻辑](01-Classical-Logic/02-Propositional-Logic.md)
 - [一阶逻辑](01-Classical-Logic/03-First-Order-Logic.md)
 - [高阶逻辑](01-Classical-Logic/04-Higher-Order-Logic.md)
 
 ### 02-模态逻辑 (Modal-Logic)
+
 - [基本概念](02-Modal-Logic/01-Basic-Concepts.md)
 - [可能世界语义](02-Modal-Logic/02-Possible-Worlds-Semantics.md)
 - [时态逻辑](02-Modal-Logic/03-Temporal-Logic.md)
 - [认知逻辑](02-Modal-Logic/04-Epistemic-Logic.md)
 
 ### 03-非经典逻辑 (Non-Classical-Logic)
+
 - [直觉逻辑](03-Non-Classical-Logic/01-Intuitionistic-Logic.md)
 - [模糊逻辑](03-Non-Classical-Logic/02-Fuzzy-Logic.md)
 - [多值逻辑](03-Non-Classical-Logic/03-Many-Valued-Logic.md)
 - [线性逻辑](03-Non-Classical-Logic/04-Linear-Logic.md)
 
 ### 04-逻辑编程 (Logic-Programming)
+
 - [基本概念](04-Logic-Programming/01-Basic-Concepts.md)
 - [Prolog基础](04-Logic-Programming/02-Prolog-Basics.md)
 - [约束逻辑编程](04-Logic-Programming/03-Constraint-Logic-Programming.md)
@@ -302,4 +306,4 @@ temporalModelCheck system formula =
 - [数学基础](../01-Mathematics/README.md)
 - [范畴论](../03-Category-Theory/README.md)
 - [类型论](../04-Type-Theory/README.md)
-- [理论层](../../03-Theory/README.md) 
+- [理论层](../../03-Theory/README.md)
