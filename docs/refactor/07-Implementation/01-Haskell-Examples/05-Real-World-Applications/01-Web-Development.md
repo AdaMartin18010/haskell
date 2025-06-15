@@ -665,7 +665,8 @@ Haskell的强类型系统和函数式特性为构建安全、可靠的Web应用�
 ---
 
 **相关链接**：
+
 - [函数式编程基础](../01-Basic-Examples/01-Functional-Programming-Basics.md)
 - [类型类与单子](../02-Advanced-Features/01-Type-Classes-and-Monads.md)
 - [排序算法](../03-Algorithm-Implementation/01-Sorting-Algorithms.md)
-- [定理证明](../04-Formal-Proofs/01-Theorem-Proving-Examples.md) 
+- [定理证明](../04-Formal-Proofs/01-Theorem-Proving-Examples.md)

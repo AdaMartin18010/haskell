@@ -417,6 +417,7 @@ isRedundant _ _ = False
 ---
 
 **相关链接**：
+
 - [量子计算理论](../03-Theory/16-Quantum-Computing-Theory.md)
 - [量子类型理论](../03-Theory/10-Quantum-Type-Theory.md)
-- [形式化证明](../04-Formal-Proofs.md) 
+- [形式化证明](../04-Formal-Proofs.md)

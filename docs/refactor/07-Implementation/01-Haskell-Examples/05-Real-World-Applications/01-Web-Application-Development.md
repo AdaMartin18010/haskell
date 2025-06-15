@@ -13,6 +13,7 @@ HTTP协议可以形式化定义为：
 $$\text{HTTP} = \langle \text{Method}, \text{URI}, \text{Version}, \text{Headers}, \text{Body} \rangle$$
 
 其中：
+
 - $\text{Method} \in \{\text{GET}, \text{POST}, \text{PUT}, \text{DELETE}, \ldots\}$
 - $\text{URI} = \text{Scheme} :// \text{Host} / \text{Path} ? \text{Query}$
 - $\text{Headers} = \{(\text{Name}, \text{Value})\}^*$
@@ -24,6 +25,7 @@ RESTful API可以建模为状态机：
 $$M = \langle S, \Sigma, \delta, s_0, F \rangle$$
 
 其中：
+
 - $S$ 是资源状态集合
 - $\Sigma$ 是HTTP方法集合
 - $\delta: S \times \Sigma \rightarrow S$ 是状态转移函数
@@ -569,4 +571,4 @@ Web应用开发展示了Haskell在实际项目中的强大能力：
 4. **可维护性**：清晰的代码结构和强类型系统
 5. **可扩展性**：模块化设计和组合性
 
-通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的Web应用框架。 
+通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的Web应用框架。

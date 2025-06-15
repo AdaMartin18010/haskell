@@ -10,6 +10,7 @@
 
 **定义 1.1 (纯函数)**
 纯函数是满足以下条件的函数：
+
 - 相同输入总是产生相同输出
 - 没有副作用
 - 不依赖外部状态
@@ -435,4 +436,4 @@ compositionTest = do
 1. Bird, R. (1998). Introduction to functional programming using Haskell. Prentice Hall.
 2. Hutton, G. (2016). Programming in Haskell. Cambridge University Press.
 3. Thompson, S. (2011). Haskell: the craft of functional programming. Pearson Education.
-4. Peyton Jones, S. (2003). The Haskell 98 language and libraries: the revised report. Journal of functional programming, 13(1), 0-255. 
+4. Peyton Jones, S. (2003). The Haskell 98 language and libraries: the revised report. Journal of functional programming, 13(1), 0-255.

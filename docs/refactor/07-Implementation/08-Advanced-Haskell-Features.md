@@ -1135,7 +1135,8 @@ exampleCompile =
 ---
 
 **参考文献**：
+
 - Peyton Jones, S., et al. (2006). GADTs
 - Chakravarty, M. M. T., et al. (2005). Associated Type Synonyms
 - Hallgren, T. (2001). Fun with Functional Dependencies
-- Vytiniotis, D., et al. (2011). OutsideIn(X) 
+- Vytiniotis, D., et al. (2011). OutsideIn(X)

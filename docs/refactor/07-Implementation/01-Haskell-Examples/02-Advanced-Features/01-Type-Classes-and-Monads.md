@@ -73,6 +73,7 @@ instance Monoid Int where
 $$F: \mathcal{C} \to \mathcal{D}$$
 
 满足：
+
 - $F(\text{id}_A) = \text{id}_{F(A)}$
 - $F(g \circ f) = F(g) \circ F(f)$
 
@@ -161,6 +162,7 @@ exampleDo = do
 $$\text{Monad}(M) = \text{Applicative}(M) + \text{>>=}$$
 
 满足单子定律：
+
 1. **左单位元**：`return a >>= f = f a`
 2. **右单位元**：`m >>= return = m`
 3. **结合律**：`(m >>= f) >>= g = m >>= (\x -> f x >>= g)`
@@ -445,7 +447,8 @@ processValid = rights . lazyValidation
 ---
 
 **相关链接**：
+
 - [函数式编程基础](../01-Basic-Examples/01-Functional-Programming-Basics.md)
 - [算法实现](../03-Algorithm-Implementation/README.md)
 - [形式化证明](../04-Formal-Proofs/README.md)
-- [实际应用](../05-Real-World-Applications/README.md) 
+- [实际应用](../05-Real-World-Applications/README.md)

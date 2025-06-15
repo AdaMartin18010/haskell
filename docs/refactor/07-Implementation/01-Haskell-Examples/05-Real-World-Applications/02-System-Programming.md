@@ -13,6 +13,7 @@
 $$\text{SysCall} = \langle \text{Number}, \text{Arguments}, \text{ReturnType}, \text{SideEffects} \rangle$$
 
 其中：
+
 - $\text{Number} \in \mathbb{N}$ 是系统调用号
 - $\text{Arguments} = \text{Arg}_1 \times \text{Arg}_2 \times \cdots \times \text{Arg}_n$
 - $\text{ReturnType} \in \{\text{Success}, \text{Error}\} \times \text{Data}$
@@ -25,6 +26,7 @@ $$\text{SysCall} = \langle \text{Number}, \text{Arguments}, \text{ReturnType}, \
 $$P = \langle S, \Sigma, \delta, s_0, F \rangle$$
 
 其中：
+
 - $S$ 是进程状态集合 $\{\text{Running}, \text{Blocked}, \text{Ready}, \text{Terminated}\}$
 - $\Sigma$ 是事件集合
 - $\delta: S \times \Sigma \rightarrow S$ 是状态转移函数
@@ -784,4 +786,4 @@ memoryStressTest iterations = do
 4. **性能优化**：利用Haskell的优化特性实现高性能
 5. **形式化验证**：通过类型系统提供形式化保证
 
-通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的系统编程框架。 
+通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的系统编程框架。
