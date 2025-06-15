@@ -222,6 +222,7 @@ class BiasVarianceDecomposition b where
 $$\mathbb{E}[(h(x) - y)^2] = \text{Bias}^2(h) + \text{Var}(h) + \sigma^2$$
 
 其中：
+
 - $\text{Bias}^2(h) = \mathbb{E}[h(x) - \mathbb{E}[y|x]]^2$
 - $\text{Var}(h) = \mathbb{E}[(h(x) - \mathbb{E}[h(x)])^2]$
 - $\sigma^2 = \mathbb{E}[(y - \mathbb{E}[y|x])^2]$
