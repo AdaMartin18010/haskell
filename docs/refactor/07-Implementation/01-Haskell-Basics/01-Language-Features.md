@@ -1,556 +1,567 @@
-# Haskell语言特性
+# Haskell语言特性 - 核心概念与实现
 
-## 📋 概述
+## 📚 概述
 
-Haskell是一种纯函数式编程语言，具有强类型系统、惰性求值、高阶函数等特性。它提供了强大的抽象能力和类型安全保证，是现代函数式编程的典范。
+Haskell语言特性是函数式编程的核心基础，包括类型系统、模式匹配、高阶函数、类型类和单子等概念。这些特性使得Haskell能够提供强大的抽象能力和类型安全保证。
 
-## 🎯 核心概念
+## 🏗️ 目录结构
 
-### 类型系统
+- [类型系统](#类型系统)
+- [模式匹配](#模式匹配)
+- [高阶函数](#高阶函数)
+- [类型类](#类型类)
+- [单子](#单子)
+- [惰性求值](#惰性求值)
+- [纯度与副作用](#纯度与副作用)
 
-Haskell的类型系统是其核心特性之一：
+## 🔧 类型系统
+
+### 基本类型
+
+Haskell的类型系统是静态的、强类型的，提供了强大的类型安全保证。
 
 ```haskell
--- 基本类型
-data BasicType = 
-    Int
-  | Integer
-  | Float
-  | Double
-  | Char
-  | Bool
-  | String
-  deriving (Eq, Show)
-
--- 类型类
-class TypeClass a where
-  method1 :: a -> a
-  method2 :: a -> Bool
-  default method1 :: a -> a
-  method1 = id
-
--- 代数数据类型
-data AlgebraicDataType = 
-    Constructor1 Int String
-  | Constructor2 Bool
-  | Constructor3
-  deriving (Eq, Show, Read)
-
--- 记录类型
-data RecordType = RecordType
-  { field1 :: Int
-  , field2 :: String
-  , field3 :: Bool
-  } deriving (Eq, Show)
+-- 基本类型定义
+data Bool = True | False
+data Int = -- 整数类型
+data Integer = -- 任意精度整数
+data Float = -- 单精度浮点数
+data Double = -- 双精度浮点数
+data Char = -- 字符类型
+data String = [Char] -- 字符串是字符列表
 
 -- 类型别名
-type TypeAlias = String
+type Name = String
+type Age = Int
+type Person = (Name, Age)
 
--- 新类型
-newtype NewType = NewType { unNewType :: Int }
-  deriving (Eq, Show, Num)
+-- 自定义数据类型
+data Color = Red | Green | Blue | Yellow
+data Shape = Circle Double | Rectangle Double Double | Triangle Double Double Double
 ```
 
-### 函数特性
+### 函数类型
 
 ```haskell
--- 函数类型
-type FunctionType = Int -> String
-
--- 高阶函数
-type HigherOrderFunction = (Int -> Bool) -> [Int] -> [Int]
-
--- 柯里化
-type CurriedFunction = Int -> Int -> Int
-
--- 部分应用
-type PartialApplication = (Int -> Int -> Int) -> Int -> (Int -> Int)
-
--- 函数组合
-type FunctionComposition = (b -> c) -> (a -> b) -> (a -> c)
-```
-
-### 惰性求值
-
-```haskell
--- 惰性数据结构
-data LazyList a = 
-    Nil
-  | Cons a (LazyList a)
-  deriving (Eq, Show)
-
--- 无限列表
-infiniteList :: Num a => [a]
-infiniteList = iterate (+1) 0
-
--- 惰性求值示例
-lazyEvaluation :: [Int]
-lazyEvaluation = take 5 [1..]  -- 只计算前5个元素
-```
-
-## 🔧 实现
-
-### 基本语法
-
-```haskell
--- 模块声明
-module HaskellBasics where
-
--- 导入语句
-import Data.List (sort, nub)
-import Data.Maybe (Maybe(..), fromMaybe)
-import Control.Monad (Monad(..))
-import System.IO (IO)
-
--- 函数定义
--- 基本函数
-add :: Num a => a -> a -> a
+-- 函数类型签名
+add :: Int -> Int -> Int
 add x y = x + y
 
--- 模式匹配
-factorial :: Integer -> Integer
-factorial 0 = 1
-factorial n = n * factorial (n - 1)
+-- 高阶函数类型
+map :: (a -> b) -> [a] -> [b]
+filter :: (a -> Bool) -> [a] -> [a]
+foldr :: (a -> b -> b) -> b -> [a] -> b
 
--- 守卫表达式
+-- 部分应用
+addFive :: Int -> Int
+addFive = add 5
+
+-- 柯里化
+curriedAdd :: Int -> (Int -> Int)
+curriedAdd = \x -> \y -> x + y
+```
+
+### 类型推断
+
+Haskell的类型推断系统能够自动推导出表达式的类型。
+
+```haskell
+-- 类型推断示例
+x = 42                    -- 推断为 Num a => a
+y = "hello"              -- 推断为 String
+z = [1, 2, 3]           -- 推断为 Num a => [a]
+f = \x -> x + 1         -- 推断为 Num a => a -> a
+
+-- 显式类型注解
+explicitX :: Integer
+explicitX = 42
+
+explicitF :: Int -> Int
+explicitF x = x + 1
+```
+
+## 🎯 模式匹配
+
+### 基本模式匹配
+
+模式匹配是Haskell中处理数据结构的核心机制。
+
+```haskell
+-- 列表模式匹配
+head' :: [a] -> a
+head' (x:_) = x
+head' [] = error "Empty list"
+
+tail' :: [a] -> [a]
+tail' (_:xs) = xs
+tail' [] = []
+
+-- 元组模式匹配
+first :: (a, b) -> a
+first (x, _) = x
+
+second :: (a, b) -> b
+second (_, y) = y
+
+-- 自定义数据类型模式匹配
+data Tree a = Leaf a | Node (Tree a) (Tree a)
+
+treeSize :: Tree a -> Int
+treeSize (Leaf _) = 1
+treeSize (Node left right) = treeSize left + treeSize right + 1
+
+treeHeight :: Tree a -> Int
+treeHeight (Leaf _) = 0
+treeHeight (Node left right) = 1 + max (treeHeight left) (treeHeight right)
+```
+
+### 守卫表达式
+
+守卫表达式提供了一种基于条件的模式匹配方式。
+
+```haskell
+-- 使用守卫的阶乘函数
+factorial :: Integer -> Integer
+factorial n
+  | n < 0 = error "Negative number"
+  | n == 0 = 1
+  | otherwise = n * factorial (n - 1)
+
+-- 使用守卫的绝对值函数
 absolute :: Num a => a -> a
 absolute x
-  | x < 0     = -x
+  | x < 0 = -x
   | otherwise = x
 
--- where子句
-calculateArea :: Double -> Double -> Double
-calculateArea width height = area
-  where
-    area = width * height
-    perimeter = 2 * (width + height)
-
--- let表达式
-letExample :: Int -> Int
-letExample x = let y = x * 2
-                   z = y + 1
-               in z * z
-
--- case表达式
-caseExample :: Int -> String
-caseExample x = case x of
-  0 -> "Zero"
-  1 -> "One"
-  2 -> "Two"
-  _ -> "Other"
+-- 使用守卫的符号函数
+signum' :: (Num a, Ord a) => a -> a
+signum' x
+  | x < 0 = -1
+  | x == 0 = 0
+  | otherwise = 1
 ```
 
-### 类型系统实现
+### 模式匹配的高级特性
 
 ```haskell
--- 类型类定义
-class Show a => Printable a where
-  printValue :: a -> String
-  default printValue :: Show a => a -> String
-  printValue = show
+-- 嵌套模式匹配
+data Expr = Lit Int | Add Expr Expr | Mul Expr Expr
 
--- 类型类实例
-instance Printable Int where
-  printValue = show
+eval :: Expr -> Int
+eval (Lit n) = n
+eval (Add e1 e2) = eval e1 + eval e2
+eval (Mul e1 e2) = eval e1 * eval e2
 
-instance Printable String where
-  printValue = id
+-- 模式匹配中的变量绑定
+swap :: (a, b) -> (b, a)
+swap (x, y) = (y, x)
 
--- 多参数类型类
-class Convertible a b where
-  convert :: a -> b
-
-instance Convertible Int String where
-  convert = show
-
-instance Convertible String Int where
-  convert = read
-
--- 函数依赖
-class FunctionalDependency a b | a -> b where
-  function :: a -> b
-
--- 关联类型
-class Container c where
-  type Element c
-  empty :: c
-  insert :: Element c -> c -> c
-  contains :: Element c -> c -> Bool
-
-instance Container [a] where
-  type Element [a] = a
-  empty = []
-  insert x xs = x : xs
-  contains x xs = x `elem` xs
+-- 模式匹配中的通配符
+firstThree :: [a] -> (a, a, a)
+firstThree (x:y:z:_) = (x, y, z)
+firstThree _ = error "List too short"
 ```
 
-### 高阶函数
+## 🚀 高阶函数
+
+### 基本高阶函数
+
+高阶函数是接受函数作为参数或返回函数的函数。
 
 ```haskell
--- map函数
+-- map函数：将函数应用到列表的每个元素
 map' :: (a -> b) -> [a] -> [b]
 map' _ [] = []
 map' f (x:xs) = f x : map' f xs
 
--- filter函数
+-- filter函数：根据谓词过滤列表
 filter' :: (a -> Bool) -> [a] -> [a]
 filter' _ [] = []
 filter' p (x:xs)
-  | p x       = x : filter' p xs
+  | p x = x : filter' p xs
   | otherwise = filter' p xs
 
--- foldr函数
+-- foldr函数：右折叠
 foldr' :: (a -> b -> b) -> b -> [a] -> b
 foldr' _ z [] = z
 foldr' f z (x:xs) = f x (foldr' f z xs)
 
--- foldl函数
+-- foldl函数：左折叠
 foldl' :: (b -> a -> b) -> b -> [a] -> b
 foldl' _ z [] = z
 foldl' f z (x:xs) = foldl' f (f z x) xs
-
--- 函数组合
-compose :: (b -> c) -> (a -> b) -> a -> c
-compose f g x = f (g x)
-
--- 部分应用
-partialApplication :: (Int -> Int -> Int) -> Int -> Int -> Int
-partialApplication f x y = f x y
-
--- 柯里化
-curry' :: ((a, b) -> c) -> a -> b -> c
-curry' f x y = f (x, y)
-
--- 反柯里化
-uncurry' :: (a -> b -> c) -> (a, b) -> c
-uncurry' f (x, y) = f x y
 ```
 
-### 单子（Monad）
+### 函数组合
 
 ```haskell
+-- 函数组合操作符
+(.) :: (b -> c) -> (a -> b) -> a -> c
+(.) f g x = f (g x)
+
+-- 函数组合示例
+composeExample :: [Int] -> Int
+composeExample = sum . map (*2) . filter (>0)
+
+-- 管道操作符（需要导入）
+import Data.Function ((&))
+
+pipelineExample :: [Int] -> Int
+pipelineExample xs = xs
+  & filter (>0)
+  & map (*2)
+  & sum
+```
+
+### 部分应用和柯里化
+
+```haskell
+-- 部分应用示例
+add :: Int -> Int -> Int
+add x y = x + y
+
+addFive :: Int -> Int
+addFive = add 5
+
+-- 使用部分应用的高阶函数
+mapAddFive :: [Int] -> [Int]
+mapAddFive = map addFive
+
+-- 柯里化函数
+curriedFunction :: Int -> Int -> Int -> Int
+curriedFunction x y z = x + y * z
+
+-- 部分应用柯里化函数
+addOne :: Int -> Int -> Int
+addOne = curriedFunction 1
+
+multiplyByTwo :: Int -> Int
+multiplyByTwo = curriedFunction 1 2
+```
+
+## 🎭 类型类
+
+### 基本类型类
+
+类型类是Haskell中实现多态的核心机制。
+
+```haskell
+-- Eq类型类：相等性
+class Eq a where
+  (==) :: a -> a -> Bool
+  (/=) :: a -> a -> Bool
+  x /= y = not (x == y)
+
+-- Ord类型类：有序性
+class (Eq a) => Ord a where
+  compare :: a -> a -> Ordering
+  (<) :: a -> a -> Bool
+  (<=) :: a -> a -> Bool
+  (>) :: a -> a -> Bool
+  (>=) :: a -> a -> Bool
+  max :: a -> a -> a
+  min :: a -> a -> a
+
+-- Show类型类：可显示
+class Show a where
+  show :: a -> String
+
+-- Read类型类：可读取
+class Read a where
+  readsPrec :: Int -> ReadS a
+  read :: String -> a
+```
+
+### 自定义类型类
+
+```haskell
+-- 自定义类型类
+class Describable a where
+  describe :: a -> String
+  describe _ = "No description available"
+
+-- 为自定义数据类型实现类型类
+data Person = Person String Int
+
+instance Eq Person where
+  (Person name1 age1) == (Person name2 age2) = 
+    name1 == name2 && age1 == age2
+
+instance Show Person where
+  show (Person name age) = "Person " ++ show name ++ " " ++ show age
+
+instance Describable Person where
+  describe (Person name age) = 
+    name ++ " is " ++ show age ++ " years old"
+```
+
+### 类型类约束
+
+```haskell
+-- 带类型类约束的函数
+sortAndShow :: (Ord a, Show a) => [a] -> String
+sortAndShow xs = show (sort xs)
+
+-- 多参数类型类约束
+compareAndShow :: (Ord a, Show a, Show b) => a -> b -> String
+compareAndShow x y = show x ++ " compared to " ++ show y
+
+-- 类型类约束的嵌套
+nestedConstraint :: (Ord a, Show a, Num b) => [a] -> b -> String
+nestedConstraint xs n = show (sort xs) ++ " with number " ++ show n
+```
+
+## 🎪 单子
+
+### 基本单子概念
+
+单子是Haskell中处理计算效果的核心抽象。
+
+```haskell
+-- 单子类型类
+class Monad m where
+  return :: a -> m a
+  (>>=) :: m a -> (a -> m b) -> m b
+  (>>) :: m a -> m b -> m b
+  m >> k = m >>= \_ -> k
+  fail :: String -> m a
+  fail msg = error msg
+
 -- Maybe单子
 data Maybe a = Nothing | Just a
-  deriving (Eq, Show)
-
-instance Functor Maybe where
-  fmap _ Nothing = Nothing
-  fmap f (Just x) = Just (f x)
-
-instance Applicative Maybe where
-  pure = Just
-  Nothing <*> _ = Nothing
-  Just f <*> mx = fmap f mx
 
 instance Monad Maybe where
   return = Just
   Nothing >>= _ = Nothing
   Just x >>= f = f x
+  fail _ = Nothing
 
--- Either单子
-data Either a b = Left a | Right b
-  deriving (Eq, Show)
-
-instance Functor (Either a) where
-  fmap _ (Left x) = Left x
-  fmap f (Right y) = Right (f y)
-
-instance Applicative (Either a) where
-  pure = Right
-  Left e <*> _ = Left e
-  Right f <*> mx = fmap f mx
-
-instance Monad (Either a) where
-  return = Right
-  Left e >>= _ = Left e
-  Right x >>= f = f x
-
--- List单子
+-- 列表单子
 instance Monad [] where
   return x = [x]
   xs >>= f = concat (map f xs)
+```
 
+### 单子操作
+
+```haskell
+-- 单子操作示例
+maybeExample :: Maybe Int
+maybeExample = do
+  x <- Just 5
+  y <- Just 3
+  return (x + y)
+
+-- 列表单子示例
+listExample :: [Int]
+listExample = do
+  x <- [1, 2, 3]
+  y <- [4, 5, 6]
+  return (x + y)
+
+-- 单子组合
+monadComposition :: Maybe Int
+monadComposition = 
+  Just 5 >>= \x ->
+  Just 3 >>= \y ->
+  return (x * y)
+```
+
+### 常用单子
+
+```haskell
 -- IO单子
 ioExample :: IO String
 ioExample = do
   putStrLn "Enter your name:"
   name <- getLine
-  putStrLn $ "Hello, " ++ name ++ "!"
+  putStrLn ("Hello, " ++ name)
   return name
+
+-- State单子
+import Control.Monad.State
+
+type Counter = State Int
+
+increment :: Counter ()
+increment = modify (+1)
+
+getCount :: Counter Int
+getCount = get
+
+counterExample :: Counter Int
+counterExample = do
+  increment
+  increment
+  getCount
 ```
 
-### 类型族（Type Families）
+## ⚡ 惰性求值
+
+### 惰性求值概念
+
+Haskell使用惰性求值，表达式只在需要时才被计算。
 
 ```haskell
--- 类型族定义
-type family ElementType c :: *
+-- 惰性求值示例
+infiniteList :: [Integer]
+infiniteList = [1..]
 
-type instance ElementType [a] = a
-type instance ElementType (Maybe a) = a
-type instance ElementType (Either a b) = b
+-- 只取前5个元素
+takeFive :: [Integer]
+takeFive = take 5 infiniteList
 
--- 数据族
-data family Array a
+-- 惰性求值的优势
+lazyFilter :: [Integer]
+lazyFilter = take 10 [x | x <- [1..], x `mod` 2 == 0]
 
-data instance Array Int = IntArray [Int]
-data instance Array Bool = BoolArray [Bool]
+-- 避免不必要的计算
+expensiveComputation :: Integer -> Integer
+expensiveComputation n = 
+  if n > 1000 
+    then n * n 
+    else n
 
--- 关联数据族
-class Collection c where
-  data Element c
-  empty :: c
-  insert :: Element c -> c -> c
-
-instance Collection [a] where
-  data Element [a] = ListElement a
-  empty = []
-  insert (ListElement x) xs = x : xs
+-- 惰性求值使得条件分支中的计算被延迟
+lazyCondition :: Integer -> Integer
+lazyCondition n = 
+  if n < 100 
+    then n 
+    else expensiveComputation n
 ```
 
-### GADT（广义代数数据类型）
+### 严格性控制
 
 ```haskell
--- GADT定义
-data Expression a where
-  LitInt :: Int -> Expression Int
-  LitBool :: Bool -> Expression Bool
-  Add :: Expression Int -> Expression Int -> Expression Int
-  And :: Expression Bool -> Expression Bool -> Expression Bool
-  If :: Expression Bool -> Expression a -> Expression a -> Expression a
-
--- GADT求值
-eval :: Expression a -> a
-eval (LitInt n) = n
-eval (LitBool b) = b
-eval (Add e1 e2) = eval e1 + eval e2
-eval (And e1 e2) = eval e1 && eval e2
-eval (If cond e1 e2) = if eval cond then eval e1 else eval e2
-```
-
-## 📊 形式化证明
-
-### 类型安全定理
-
-**定理 1 (类型安全)**: 如果Haskell程序类型检查通过，则不会发生类型错误。
-
-```haskell
--- 类型安全定义
-data TypeSafety = TypeSafety
-  { typeCheck :: Bool
-  | runtimeErrors :: [RuntimeError]
-  | isTypeSafe :: Bool
-  }
-
--- 类型安全检查
-isTypeSafe :: TypeSafety -> Bool
-isTypeSafe safety = 
-  typeCheck safety && null (runtimeErrors safety)
-
--- 证明：类型检查保证类型安全
-theorem_typeSafety :: 
-  HaskellProgram -> 
-  Property
-theorem_typeSafety program = 
-  property $ do
-    -- 执行类型检查
-    typeCheckResult <- performTypeCheck program
-    -- 执行程序
-    runtimeResult <- executeProgram program
-    -- 检查类型安全
-    let safety = TypeSafety typeCheckResult (runtimeErrors runtimeResult) True
-    -- 证明类型安全
-    assert $ isTypeSafe safety
-```
-
-### 函数纯度定理
-
-**定理 2 (函数纯度)**: 纯函数在相同输入下总是产生相同输出，且没有副作用。
-
-```haskell
--- 函数纯度
-data FunctionPurity = FunctionPurity
-  { function :: Function
-  | inputs :: [Input]
-  | outputs :: [Output]
-  | isPure :: Bool
-  }
-
--- 纯度检查
-isPure :: FunctionPurity -> Bool
-isPure purity = 
-  allSameOutput (outputs purity) && noSideEffects (function purity)
-
--- 证明：纯函数满足纯度要求
-theorem_functionPurity :: 
-  Function -> 
-  [Input] -> 
-  Property
-theorem_functionPurity function inputs = 
-  property $ do
-    -- 多次执行函数
-    outputs <- mapM (executeFunction function) inputs
-    -- 检查纯度
-    let purity = FunctionPurity function inputs outputs True
-    -- 证明纯度
-    assert $ isPure purity
-```
-
-### 惰性求值定理
-
-**定理 3 (惰性求值)**: 惰性求值确保只计算需要的值，避免不必要的计算。
-
-```haskell
--- 惰性求值
-data LazyEvaluation = LazyEvaluation
-  { expression :: Expression
-  | computedValues :: [Value]
-  | totalComputation :: Int
-  | isLazy :: Bool
-  }
-
--- 惰性检查
-isLazy :: LazyEvaluation -> Bool
-isLazy evaluation = 
-  totalComputation evaluation <= requiredComputation (expression evaluation)
-
--- 证明：惰性求值避免不必要计算
-theorem_lazyEvaluation :: 
-  Expression -> 
-  Property
-theorem_lazyEvaluation expression = 
-  property $ do
-    -- 执行惰性求值
-    evaluation <- executeLazyEvaluation expression
-    -- 检查惰性
-    assert $ isLazy evaluation
-```
-
-## 🔄 性能优化
-
-### 严格性分析
-
-```haskell
--- 严格性分析
-data StrictnessAnalysis = StrictnessAnalysis
-  { function :: Function
-  | strictArguments :: [Int]
-  | lazyArguments :: [Int]
-  | optimization :: Optimization
-  }
-
--- 严格性优化
-optimizeStrictness :: Function -> StrictnessAnalysis
-optimizeStrictness function = 
-  StrictnessAnalysis
-    { function = function
-    , strictArguments = findStrictArguments function
-    , lazyArguments = findLazyArguments function
-    , optimization = generateOptimization function
-    }
-
 -- 严格求值
-strictEvaluation :: a -> a
-strictEvaluation x = x `seq` x
+strictSum :: [Integer] -> Integer
+strictSum = foldl' (+) 0
 
--- 深度严格求值
-deepStrictEvaluation :: NFData a => a -> a
-deepStrictEvaluation x = x `deepseq` x
+-- 惰性求值
+lazySum :: [Integer] -> Integer
+lazySum = foldr (+) 0
+
+-- 使用seq强制求值
+forceEvaluation :: Integer -> Integer
+forceEvaluation x = x `seq` x + 1
+
+-- 使用BangPatterns扩展
+{-# LANGUAGE BangPatterns #-}
+
+strictFunction :: Integer -> Integer
+strictFunction !x = x + 1
 ```
 
-### 内存优化
+## 🧹 纯度与副作用
+
+### 纯函数
 
 ```haskell
--- 内存分析
-data MemoryAnalysis = MemoryAnalysis
-  { allocation :: Int
-  | deallocation :: Int
-  | memoryUsage :: Int
-  | optimization :: MemoryOptimization
-  }
+-- 纯函数示例
+pureAdd :: Int -> Int -> Int
+pureAdd x y = x + y
 
--- 内存优化策略
-data MemoryOptimization = 
-    UnboxedTypes
-  | StreamFusion
-  | Deforestation
-  | GarbageCollection
-  deriving (Eq, Show)
+pureFactorial :: Integer -> Integer
+pureFactorial 0 = 1
+pureFactorial n = n * pureFactorial (n - 1)
 
--- 未装箱类型
-data UnboxedArray = UnboxedArray {-# UNPACK #-} !Int
-
--- 流融合
-streamFusion :: [Int] -> [Int]
-streamFusion = map (+1) . filter even
-
--- 森林砍伐
-deforestation :: [Int] -> Int
-deforestation = sum . map (*2) . filter (>0)
+-- 引用透明性
+referenceTransparent :: Int
+referenceTransparent = 
+  let x = pureAdd 2 3
+      y = pureAdd 2 3
+  in x + y  -- 可以替换为 pureAdd 2 3 + pureAdd 2 3
 ```
 
-### 并行化
+### 副作用处理
 
 ```haskell
--- 并行计算
-import Control.Parallel
-import Control.Parallel.Strategies
+-- IO单子处理副作用
+sideEffectExample :: IO ()
+sideEffectExample = do
+  putStrLn "This is a side effect"
+  name <- getLine
+  putStrLn ("Hello, " ++ name)
 
--- 并行求值
-parallelEvaluation :: [Int] -> [Int]
-parallelEvaluation xs = 
-  xs `using` parList rdeepseq
+-- 使用Reader单子处理环境
+import Control.Monad.Reader
 
--- 并行映射
-parallelMap :: (a -> b) -> [a] -> [b]
-parallelMap f xs = 
-  map f xs `using` parList rdeepseq
+type Config = String
 
--- 并行归约
-parallelReduce :: (a -> a -> a) -> a -> [a] -> a
-parallelReduce f z xs = 
-  foldr f z xs `using` rdeepseq
+readerExample :: Reader Config String
+readerExample = do
+  config <- ask
+  return ("Using config: " ++ config)
+
+-- 使用Writer单子处理日志
+import Control.Monad.Writer
+
+writerExample :: Writer [String] Int
+writerExample = do
+  tell ["Starting computation"]
+  let result = 42
+  tell ["Computation completed"]
+  return result
 ```
 
-## 🎯 最佳实践
+## 📊 性能考虑
 
-### 1. 代码组织
+### 空间复杂度
 
-- **模块化**: 将代码组织成清晰的模块
-- **类型安全**: 充分利用类型系统
-- **文档化**: 为函数和类型添加文档
-- **测试**: 编写单元测试和属性测试
+```haskell
+-- 空间泄漏示例
+spaceLeak :: [Integer] -> Integer
+spaceLeak xs = foldl (+) 0 xs  -- 可能导致空间泄漏
 
-### 2. 性能优化
+-- 避免空间泄漏
+noSpaceLeak :: [Integer] -> Integer
+noSpaceLeak xs = foldl' (+) 0 xs  -- 使用严格版本
 
-- **严格性**: 在适当的地方使用严格求值
-- **内存管理**: 避免内存泄漏和过度分配
-- **算法选择**: 选择合适的数据结构和算法
-- **编译优化**: 使用编译优化选项
+-- 使用seq避免空间泄漏
+seqExample :: [Integer] -> Integer
+seqExample = go 0
+  where
+    go acc [] = acc
+    go acc (x:xs) = acc `seq` go (acc + x) xs
+```
 
-### 3. 函数式编程
+### 时间复杂度
 
-- **不可变性**: 优先使用不可变数据结构
-- **函数组合**: 使用函数组合构建复杂功能
-- **高阶函数**: 利用高阶函数提高抽象层次
-- **模式匹配**: 使用模式匹配简化代码
+```haskell
+-- 高效的列表操作
+efficientConcat :: [[a]] -> [a]
+efficientConcat = foldr (++) []
 
-### 4. 错误处理
+-- 使用差异列表优化连接
+type DList a = [a] -> [a]
 
-- **Maybe类型**: 使用Maybe处理可能失败的操作
-- **Either类型**: 使用Either处理带错误信息的失败
-- **异常处理**: 在适当的地方使用异常
-- **类型安全**: 通过类型系统避免运行时错误
+empty :: DList a
+empty = id
 
-## 📚 总结
+singleton :: a -> DList a
+singleton x = (x:)
 
-Haskell语言特性为函数式编程提供了强大的工具，包括：
+append :: DList a -> DList a -> DList a
+append xs ys = xs . ys
 
-关键要点：
+toList :: DList a -> [a]
+toList xs = xs []
+```
 
-1. **类型系统**: 强类型系统提供编译时安全保障
-2. **函数式编程**: 纯函数和不可变性简化程序推理
-3. **高阶函数**: 函数作为一等公民提高抽象能力
-4. **惰性求值**: 按需计算提高程序效率
-5. **单子**: 处理副作用和复杂计算
+## 🔗 相关链接
 
-通过Haskell的类型系统和函数式编程特性，我们可以构建出类型安全、易于推理的程序。
+- [高级特性](02-Advanced-Features.md) - GADTs、类型族、函数依赖
+- [标准库](03-Libraries.md) - Prelude、数据结构库、文本处理
+- [开发工具](04-Development-Tools.md) - GHC、Cabal、Stack
+
+## 📚 参考文献
+
+1. Peyton Jones, S. (2003). *The Haskell 98 Language and Libraries: The Revised Report*
+2. Hutton, G. (2016). *Programming in Haskell*
+3. Lipovača, M. (2011). *Learn You a Haskell for Great Good!*
+
+---
+
+**最后更新**: 2024年12月  
+**版本**: 1.0  
+**状态**: 完成
