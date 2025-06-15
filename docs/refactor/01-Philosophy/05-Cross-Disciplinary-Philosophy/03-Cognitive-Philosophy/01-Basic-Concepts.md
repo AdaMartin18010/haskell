@@ -308,6 +308,7 @@ explanationAdequacy explanation =
 **定理 1**: 认知过程在计算主义框架下是可计算的。
 
 **证明**：
+
 ```haskell
 -- 认知计算性证明
 cognitiveComputabilityProof :: CognitiveSystem -> Bool
@@ -327,6 +328,7 @@ verifyCognitiveComputability system =
 **定理 2**: 意识的难问题在物理主义框架下存在解释鸿沟。
 
 **证明**：
+
 ```haskell
 -- 意识难问题证明
 hardProblemProof :: HardProblem -> Bool

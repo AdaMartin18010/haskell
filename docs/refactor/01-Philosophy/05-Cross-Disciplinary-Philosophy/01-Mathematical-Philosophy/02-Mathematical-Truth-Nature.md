@@ -403,4 +403,4 @@ data Interpretation a = AbstractInterpretation a | ConcreteInterpretation a | Sy
 
 ### 实际意义
 
-这些不同的理论在计算机科学和形式化方法中都有重要的应用价值，帮助我们更好地理解和使用数学真理。 
+这些不同的理论在计算机科学和形式化方法中都有重要的应用价值，帮助我们更好地理解和使用数学真理。

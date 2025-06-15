@@ -303,6 +303,7 @@ instance Computability MathematicalAlgorithm where
 **定理 1**: 在柏拉图主义框架下，数学对象具有独立存在性。
 
 **证明**：
+
 ```haskell
 -- 构造性证明
 platonistExistenceProof :: MathematicalObject -> Bool
@@ -326,6 +327,7 @@ verifyPlatonistExistence obj =
 **定理 2**: 直觉主义数学要求构造性存在证明。
 
 **证明**：
+
 ```haskell
 -- 构造性存在证明
 constructiveExistenceProof :: ConstructiveProof -> Bool
@@ -389,4 +391,4 @@ historicalAnalysis history =
 3. **指导实践**：为数学教育和研究提供哲学指导
 4. **促进对话**：在不同哲学观点间建立对话桥梁
 
-数学哲学的研究不仅有助于理解数学的本质，也为计算机科学中的形式化方法提供了哲学基础。 
+数学哲学的研究不仅有助于理解数学的本质，也为计算机科学中的形式化方法提供了哲学基础。

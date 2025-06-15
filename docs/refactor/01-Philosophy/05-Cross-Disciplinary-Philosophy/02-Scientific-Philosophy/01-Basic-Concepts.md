@@ -322,6 +322,7 @@ ethicalAssessment ethics =
 **定理 1**: 在实证主义框架下，可观察的科学知识具有可靠性。
 
 **证明**：
+
 ```haskell
 -- 实证主义可靠性证明
 positivistReliabilityProof :: ScientificKnowledge -> Bool
@@ -344,6 +345,7 @@ verifyPositivistReliability knowledge =
 **定理 2**: 批判理性主义框架下的科学理论通过证伪而进步。
 
 **证明**：
+
 ```haskell
 -- 科学进步证明
 scientificProgressProof :: ScientificTheory -> Bool
@@ -430,4 +432,4 @@ policyEvaluation policy =
 3. **指导科学研究**：为科学研究提供哲学指导
 4. **促进科学对话**：在不同科学哲学观点间建立对话桥梁
 
-科学哲学的研究不仅有助于理解科学的本质，也为科学教育和研究提供了重要的理论基础。 
+科学哲学的研究不仅有助于理解科学的本质，也为科学教育和研究提供了重要的理论基础。

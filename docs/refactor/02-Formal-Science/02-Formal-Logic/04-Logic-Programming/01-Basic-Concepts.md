@@ -338,6 +338,7 @@ propagateConstraint system _ = system
 **定理 1**: 归结原理对于不可满足的子句集是完备的。
 
 **证明**：
+
 ```haskell
 -- 归结完备性证明
 resolutionCompletenessProof :: [Clause] -> Bool
@@ -359,6 +360,7 @@ verifyResolutionCompleteness clauses =
 **定理 2**: SLD归结对于Horn子句程序是完备的。
 
 **证明**：
+
 ```haskell
 -- SLD完备性证明
 sldCompletenessProof :: LogicProgram -> Query -> Bool
@@ -485,4 +487,4 @@ backwardChaining system query =
 3. **实现推理系统**：为知识表示和问题求解提供实现框架
 4. **促进逻辑研究**：在不同逻辑编程范式间建立联系
 
-逻辑编程的研究不仅有助于理解计算的逻辑本质，也为人工智能和知识工程提供了重要的理论基础。 
+逻辑编程的研究不仅有助于理解计算的逻辑本质，也为人工智能和知识工程提供了重要的理论基础。
