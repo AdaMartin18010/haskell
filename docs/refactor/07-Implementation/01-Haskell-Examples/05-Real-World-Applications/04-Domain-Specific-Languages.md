@@ -13,6 +13,7 @@ DSL可以形式化定义为：
 $$\text{DSL} = \langle \text{Syntax}, \text{Semantics}, \text{TypeSystem}, \text{Compiler} \rangle$$
 
 其中：
+
 - $\text{Syntax} = \langle \text{Terminals}, \text{NonTerminals}, \text{Productions} \rangle$
 - $\text{Semantics} = \langle \text{Denotational}, \text{Operational}, \text{Axiomatic} \rangle$
 - $\text{TypeSystem} = \langle \text{Types}, \text{Rules}, \text{Inference} \rangle$
@@ -25,6 +26,7 @@ $$\text{DSL} = \langle \text{Syntax}, \text{Semantics}, \text{TypeSystem}, \text
 $$\text{AST} = \text{Node}(\text{Constructor}, [\text{AST}_1, \text{AST}_2, \ldots, \text{AST}_n])$$
 
 其中：
+
 - $\text{Constructor}$ 是节点类型
 - $\text{AST}_i$ 是子节点
 
@@ -802,4 +804,4 @@ data Frame = Frame
 4. **性能优化**：编译时和运行时优化
 5. **形式化验证**：类型安全和语义一致性验证
 
-通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的DSL框架。 
+通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的DSL框架。

@@ -13,6 +13,7 @@
 $$\text{ConcurrentSystem} = \langle \text{Processes}, \text{Channels}, \text{Scheduler}, \text{Semantics} \rangle$$
 
 其中：
+
 - $\text{Processes} = \{P_1, P_2, \ldots, P_n\}$ 是进程集合
 - $\text{Channels} = \{C_1, C_2, \ldots, C_m\}$ 是通信通道集合
 - $\text{Scheduler} : \text{Processes} \rightarrow \text{Processes}$ 是调度函数
@@ -25,6 +26,7 @@ $$\text{ConcurrentSystem} = \langle \text{Processes}, \text{Channels}, \text{Sch
 $$P ::= 0 \mid \alpha.P \mid P_1 \mid P_2 \mid P_1 + P_2 \mid (\nu x)P \mid !P$$
 
 其中：
+
 - $0$ 是空进程
 - $\alpha.P$ 是前缀进程
 - $P_1 \mid P_2$ 是并行组合
@@ -960,4 +962,4 @@ allocateFromPool pool size = do
 4. **性能优化**：无锁数据结构和内存池优化
 5. **形式化验证**：并发正确性和活锁检测
 
-通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的并发编程框架。 
+通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的并发编程框架。

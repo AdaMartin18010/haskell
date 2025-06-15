@@ -181,10 +181,12 @@ instance (LinearTransformation t v w) =>
 ### 定理1：核与像的性质
 
 **定理**：设 $T: V \to W$ 是线性变换，则：
+
 1. $\ker(T)$ 是 $V$ 的子空间
 2. $\text{im}(T)$ 是 $W$ 的子空间
 
 **证明**：
+
 1. **核是子空间**：
    - $T(\mathbf{0}) = \mathbf{0}$，所以 $\mathbf{0} \in \ker(T)$
    - 设 $\mathbf{u}, \mathbf{v} \in \ker(T)$，则 $T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v}) = \mathbf{0} + \mathbf{0} = \mathbf{0}$，所以 $\mathbf{u} + \mathbf{v} \in \ker(T)$
@@ -203,6 +205,7 @@ instance (LinearTransformation t v w) =>
 $$\text{rank}(T) + \text{nullity}(T) = n$$
 
 **证明**：
+
 1. 设 $\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\}$ 是 $\ker(T)$ 的基
 2. 将其扩展为 $V$ 的基 $\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k, \mathbf{v}_{k+1}, \ldots, \mathbf{v}_n\}$
 3. 证明 $\{T(\mathbf{v}_{k+1}), T(\mathbf{v}_{k+2}), \ldots, T(\mathbf{v}_n)\}$ 是 $\text{im}(T)$ 的基
@@ -213,6 +216,7 @@ $$\text{rank}(T) + \text{nullity}(T) = n$$
 **定理**：设 $T: V \to W$ 是线性变换，$B_V$ 和 $B_W$ 分别是 $V$ 和 $W$ 的基，则 $T$ 有唯一的矩阵表示。
 
 **证明**：
+
 1. 设 $B_V = \{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n\}$，$B_W = \{\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_m\}$
 2. 对每个 $j = 1, 2, \ldots, n$，$T(\mathbf{v}_j)$ 可以唯一表示为 $B_W$ 的线性组合
 3. 这些系数构成矩阵 $A = [a_{ij}]$，其中 $T(\mathbf{v}_j) = \sum_{i=1}^{m} a_{ij}\mathbf{w}_i$
@@ -309,6 +313,7 @@ coordinatesToVector xs = Vector xs
 ---
 
 **相关文档**：
+
 - [向量空间理论](./01-Vector-Spaces.md)
 - [特征值与特征向量](../04-Eigenvalues-Eigenvectors/01-Eigenvalues-Eigenvectors.md)
-- [矩阵理论](../05-Matrix-Theory/01-Matrix-Theory.md) 
+- [矩阵理论](../05-Matrix-Theory/01-Matrix-Theory.md)

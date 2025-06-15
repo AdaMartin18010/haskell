@@ -334,11 +334,13 @@ chunksOf n xs = take n xs : chunksOf n (drop n xs)
 ### 定理1：特征多项式的性质
 
 **定理**：设 $A$ 是 $n \times n$ 矩阵，则：
+
 1. $p_A(\lambda)$ 是 $n$ 次多项式
 2. $p_A(\lambda)$ 的首项系数是 $(-1)^n$
 3. $p_A(0) = \det(A)$
 
 **证明**：
+
 1. **次数**：$\det(A - \lambda I)$ 是 $n$ 个变量的行列式，每个变量最多出现一次，所以是 $n$ 次多项式
 2. **首项系数**：展开 $\det(A - \lambda I)$ 时，包含 $\lambda^n$ 的项来自对角线的乘积 $(-1)^n \lambda^n$
 3. **常数项**：$p_A(0) = \det(A - 0 \cdot I) = \det(A)$
@@ -348,6 +350,7 @@ chunksOf n xs = take n xs : chunksOf n (drop n xs)
 **定理**：设 $\lambda$ 是矩阵 $A$ 的特征值，则几何重数 ≤ 代数重数。
 
 **证明**：
+
 1. 设几何重数为 $k$，代数重数为 $m$
 2. 存在 $k$ 个线性无关的特征向量 $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k$
 3. 将其扩展为 $\mathbb{R}^n$ 的基 $\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k, \mathbf{w}_{k+1}, \ldots, \mathbf{w}_n\}$
@@ -364,6 +367,7 @@ chunksOf n xs = take n xs : chunksOf n (drop n xs)
 **定理**：$n \times n$ 矩阵 $A$ 可对角化当且仅当 $A$ 有 $n$ 个线性无关的特征向量。
 
 **证明**：
+
 - **必要性**：如果 $A$ 可对角化，则存在可逆矩阵 $P$ 使得 $P^{-1}AP = D$，其中 $D$ 是对角矩阵
 - 设 $D = \text{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n)$，则 $AP = PD$
 - 设 $P = [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n]$，则 $A\mathbf{v}_i = \lambda_i\mathbf{v}_i$
@@ -480,6 +484,7 @@ vectorApproximatelyEqual (Vector a) (Vector b) tolerance =
 ---
 
 **相关文档**：
+
 - [向量空间理论](./01-Vector-Spaces.md)
 - [线性变换理论](./02-Linear-Transformations.md)
-- [矩阵理论](../05-Matrix-Theory/01-Matrix-Theory.md) 
+- [矩阵理论](../05-Matrix-Theory/01-Matrix-Theory.md)

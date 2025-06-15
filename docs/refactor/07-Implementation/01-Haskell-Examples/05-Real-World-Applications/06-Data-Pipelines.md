@@ -13,6 +13,7 @@
 $$\text{DataPipeline} = \langle \text{Sources}, \text{Transformers}, \text{Sinks}, \text{Flow} \rangle$$
 
 其中：
+
 - $\text{Sources} = \{S_1, S_2, \ldots, S_n\}$ 是数据源集合
 - $\text{Transformers} = \{T_1, T_2, \ldots, T_m\}$ 是转换器集合
 - $\text{Sinks} = \{D_1, D_2, \ldots, D_k\}$ 是数据汇集合
@@ -25,6 +26,7 @@ $$\text{DataPipeline} = \langle \text{Sources}, \text{Transformers}, \text{Sinks
 $$\text{Stream} = \text{Event} \times \text{Time} \times \text{Stream}$$
 
 其中：
+
 - $\text{Event}$ 是事件类型
 - $\text{Time}$ 是时间戳
 - $\text{Stream}$ 是后续流
@@ -1024,4 +1026,4 @@ cachePut cache key value =
 4. **内存优化**：通过流式处理和内存池减少内存使用
 5. **形式化验证**：数据流正确性和性能分析
 
-通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的数据管道框架。 
+通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的数据管道框架。

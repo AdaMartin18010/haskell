@@ -375,6 +375,7 @@ theorem_geodesic_minimal manifold p q =
 ---
 
 **参考文献**:
+
 - Rudin, W. (1991). Functional Analysis
 - Do Carmo, M. P. (1992). Riemannian Geometry
-- Hartshorne, R. (1977). Algebraic Geometry 
+- Hartshorne, R. (1977). Algebraic Geometry

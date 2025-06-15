@@ -787,7 +787,8 @@ loadTemplates = do
 ---
 
 **参考文献**：
+
 - Spock Framework Documentation
 - Yesod Web Framework Book
 - Scotty Web Framework Guide
-- JWT RFC 7519 
+- JWT RFC 7519

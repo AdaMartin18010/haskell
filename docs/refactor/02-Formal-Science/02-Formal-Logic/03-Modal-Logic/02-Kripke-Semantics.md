@@ -9,12 +9,14 @@ Kripke语义是模态逻辑的标准语义学，由Saul Kripke在20世纪60年�
 ### Kripke框架
 
 **Kripke框架**是一个二元组 $\mathcal{F} = (W, R)$，其中：
+
 - $W$ 是非空集合，称为可能世界集（worlds）
 - $R \subseteq W \times W$ 是二元关系，称为可达关系（accessibility relation）
 
 ### Kripke模型
 
 **Kripke模型**是一个三元组 $\mathcal{M} = (W, R, V)$，其中：
+
 - $(W, R)$ 是Kripke框架
 - $V: \Phi \to \mathcal{P}(W)$ 是赋值函数，将每个命题变量映射到可能世界的子集
 
@@ -314,6 +316,7 @@ getConclusion (Rule _ _ conclusion) = conclusion
 **定理**：公式 $\Box(\varphi \to \psi) \to (\Box\varphi \to \Box\psi)$ 在所有Kripke框架中有效。
 
 **证明**：
+
 1. 设 $\mathcal{M} = (W, R, V)$ 是任意Kripke模型，$w \in W$ 是任意可能世界
 2. 假设 $\mathcal{M}, w \models \Box(\varphi \to \psi)$ 且 $\mathcal{M}, w \models \Box\varphi$
 3. 需要证明 $\mathcal{M}, w \models \Box\psi$
@@ -329,6 +332,7 @@ getConclusion (Rule _ _ conclusion) = conclusion
 **定理**：公式 $\Box\varphi \to \varphi$ 在Kripke框架中有效当且仅当该框架是自反的。
 
 **证明**：
+
 - **必要性**：假设 $\Box\varphi \to \varphi$ 在框架 $\mathcal{F} = (W, R)$ 中有效
   - 设 $w \in W$ 是任意世界
   - 构造赋值 $V$ 使得 $V(p) = W \setminus \{w\}$
@@ -348,6 +352,7 @@ getConclusion (Rule _ _ conclusion) = conclusion
 **定理**：S5逻辑（等价关系框架）中，$\Diamond\varphi \leftrightarrow \neg\Box\neg\varphi$ 是有效的。
 
 **证明**：
+
 1. 设 $\mathcal{M} = (W, R, V)$ 是S5模型，$w \in W$ 是任意世界
 2. 证明 $\mathcal{M}, w \models \Diamond\varphi \to \neg\Box\neg\varphi$：
    - 假设 $\mathcal{M}, w \models \Diamond\varphi$
@@ -535,6 +540,7 @@ Kripke语义理论为模态逻辑提供了完整且直观的语义基础：
 ---
 
 **相关文档**：
+
 - [模态逻辑基础](./01-Basic-Concepts.md)
 - [线性时态逻辑](../07-Temporal-Logic/01-Linear-Temporal-Logic.md)
-- [形式化验证理论](../04-Formal-Methods/01-Model-Checking.md) 
+- [形式化验证理论](../04-Formal-Methods/01-Model-Checking.md)

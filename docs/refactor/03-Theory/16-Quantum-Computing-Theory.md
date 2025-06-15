@@ -24,6 +24,7 @@ $$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$$
 量子门是希尔伯特空间上的酉算子，保持量子态的正交性。
 
 **常用量子门：**
+
 - Hadamard门：$H = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$
 - Pauli-X门：$X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$
 - Pauli-Y门：$Y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}$
@@ -427,4 +428,4 @@ complexityAnalysis Optimization = QMA
 1. Nielsen, M. A., & Chuang, I. L. (2010). Quantum computation and quantum information. Cambridge university press.
 2. Deutsch, D. (1985). Quantum theory, the Church–Turing principle and the universal quantum computer. Proceedings of the Royal Society of London. A. Mathematical and Physical Sciences, 400(1818), 97-117.
 3. Grover, L. K. (1996). A fast quantum mechanical algorithm for database search. In Proceedings of the twenty-eighth annual ACM symposium on Theory of computing (pp. 212-219).
-4. Shor, P. W. (1994). Algorithms for quantum computation: discrete logarithms and factoring. In Proceedings 35th annual symposium on foundations of computer science (pp. 124-134). 
+4. Shor, P. W. (1994). Algorithms for quantum computation: discrete logarithms and factoring. In Proceedings 35th annual symposium on foundations of computer science (pp. 124-134).

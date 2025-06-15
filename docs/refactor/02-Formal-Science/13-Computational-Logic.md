@@ -546,6 +546,7 @@ verifySeparationProperties =
 **定义 3.1.1 (动态逻辑)** 动态逻辑研究程序执行对状态的影响。
 
 **模态算子**：
+
 - $[α]φ$: 执行程序 $α$ 后，$φ$ 为真
 - $\langle α \rangle φ$: 存在程序 $α$ 的执行，使得 $φ$ 为真
 
@@ -771,7 +772,8 @@ verifySwapProgram =
 ---
 
 **参考文献**：
+
 - Arora, S., & Barak, B. (2009). Computational Complexity
 - Hoare, C. A. R. (1969). An Axiomatic Basis for Computer Programming
 - Reynolds, J. C. (2002). Separation Logic
-- Harel, D., Kozen, D., & Tiuryn, J. (2000). Dynamic Logic 
+- Harel, D., Kozen, D., & Tiuryn, J. (2000). Dynamic Logic

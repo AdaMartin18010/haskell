@@ -17,6 +17,7 @@
 **定义 1.1.2 (命题变元)** 命题变元是表示命题的符号，通常用 $p, q, r$ 等表示。
 
 **定义 1.1.3 (逻辑连接词)** 基本逻辑连接词包括：
+
 - 否定 (¬): $\neg p$
 - 合取 (∧): $p \land q$
 - 析取 (∨): $p \lor q$
@@ -103,6 +104,7 @@ verifyDeMorgan = isTautology deMorganExample
 **定理 1.2.1 (假言推理)** 如果 $p \rightarrow q$ 和 $p$ 都为真，则 $q$ 为真。
 
 **证明**：
+
 1. $p \rightarrow q$ (前提)
 2. $p$ (前提)
 3. 根据蕴含的定义，$p \rightarrow q$ 等价于 $\neg p \lor q$
@@ -222,7 +224,8 @@ validateProof proof conclusion =
 
 **定义 2.1.1 (谓词)** 谓词是描述对象性质的函数，记作 $P(x_1, x_2, \ldots, x_n)$。
 
-**定义 2.1.2 (量词)** 
+**定义 2.1.2 (量词)**
+
 - 全称量词 (∀): $\forall x P(x)$ 表示"对所有 $x$，$P(x)$ 成立"
 - 存在量词 (∃): $\exists x P(x)$ 表示"存在 $x$，使得 $P(x)$ 成立"
 
@@ -454,11 +457,13 @@ validatePredicateProof proof conclusion =
 
 #### 形式化定义
 
-**定义 3.1.1 (模态算子)** 
+**定义 3.1.1 (模态算子)**
+
 - 必然算子 (□): $\Box p$ 表示"必然 $p$"
 - 可能算子 (◇): $\Diamond p$ 表示"可能 $p$"
 
 **定义 3.1.2 (Kripke模型)** Kripke模型是一个三元组 $\mathcal{M} = (W, R, V)$，其中：
+
 - $W$ 是可能世界的集合
 - $R \subseteq W \times W$ 是可达关系
 - $V: W \times \text{Prop} \to \{\text{true}, \text{false}\}$ 是赋值函数
@@ -598,6 +603,7 @@ verifyS5 =
 **定义 4.1.1 (线性时态逻辑)** 线性时态逻辑用于描述程序执行路径上的时态性质。
 
 **时态算子**：
+
 - $\mathbf{X} \phi$: 下一个时刻 $\phi$ 为真
 - $\mathbf{F} \phi$: 将来某个时刻 $\phi$ 为真
 - $\mathbf{G} \phi$: 将来所有时刻 $\phi$ 为真
@@ -732,6 +738,7 @@ generateAllPaths initialState =
 ---
 
 **参考文献**：
+
 - Enderton, H. B. (2001). A Mathematical Introduction to Logic
 - van Dalen, D. (2013). Logic and Structure
-- Blackburn, P., de Rijke, M., & Venema, Y. (2001). Modal Logic 
+- Blackburn, P., de Rijke, M., & Venema, Y. (2001). Modal Logic

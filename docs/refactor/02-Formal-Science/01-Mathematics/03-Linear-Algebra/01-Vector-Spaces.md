@@ -9,18 +9,21 @@
 ### 向量空间公理
 
 设 $V$ 是一个非空集合，$\mathbb{F}$ 是一个域（通常是实数域 $\mathbb{R}$ 或复数域 $\mathbb{C}$），定义两个运算：
+
 - **向量加法**：$+ : V \times V \to V$
 - **标量乘法**：$\cdot : \mathbb{F} \times V \to V$
 
 如果满足以下公理，则称 $V$ 为域 $\mathbb{F}$ 上的向量空间：
 
 #### 加法公理
+
 1. **结合律**：$\forall \mathbf{u}, \mathbf{v}, \mathbf{w} \in V, (\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$
 2. **交换律**：$\forall \mathbf{u}, \mathbf{v} \in V, \mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$
 3. **零元素**：$\exists \mathbf{0} \in V, \forall \mathbf{v} \in V, \mathbf{v} + \mathbf{0} = \mathbf{v}$
 4. **逆元素**：$\forall \mathbf{v} \in V, \exists (-\mathbf{v}) \in V, \mathbf{v} + (-\mathbf{v}) = \mathbf{0}$
 
 #### 标量乘法公理
+
 5. **分配律1**：$\forall a \in \mathbb{F}, \forall \mathbf{u}, \mathbf{v} \in V, a \cdot (\mathbf{u} + \mathbf{v}) = a \cdot \mathbf{u} + a \cdot \mathbf{v}$
 6. **分配律2**：$\forall a, b \in \mathbb{F}, \forall \mathbf{v} \in V, (a + b) \cdot \mathbf{v} = a \cdot \mathbf{v} + b \cdot \mathbf{v}$
 7. **结合律**：$\forall a, b \in \mathbb{F}, \forall \mathbf{v} \in V, (ab) \cdot \mathbf{v} = a \cdot (b \cdot \mathbf{v})$
@@ -31,6 +34,7 @@
 设 $V$ 是域 $\mathbb{F}$ 上的向量空间，$W \subseteq V$ 是 $V$ 的非空子集。如果 $W$ 在加法和标量乘法下封闭，则称 $W$ 为 $V$ 的子空间。
 
 **子空间判定定理**：$W$ 是 $V$ 的子空间当且仅当：
+
 1. $\mathbf{0} \in W$
 2. $\forall \mathbf{u}, \mathbf{v} \in W, \mathbf{u} + \mathbf{v} \in W$
 3. $\forall a \in \mathbb{F}, \forall \mathbf{v} \in W, a \cdot \mathbf{v} \in W$
@@ -52,6 +56,7 @@ $$a_1\mathbf{v}_1 + a_2\mathbf{v}_2 + \cdots + a_n\mathbf{v}_n = \mathbf{0}$$
 只有平凡解 $a_1 = a_2 = \cdots = a_n = 0$。
 
 **基**：向量空间 $V$ 的基是线性无关的生成集。即集合 $B = \{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n\}$ 是 $V$ 的基，当且仅当：
+
 1. $B$ 线性无关
 2. $\text{span}(B) = V$
 
@@ -210,11 +215,13 @@ subspaceDimension (Subspace vectors) =
 ### 定理1：子空间判定定理
 
 **定理**：设 $W$ 是向量空间 $V$ 的非空子集，则 $W$ 是 $V$ 的子空间当且仅当：
+
 1. $\mathbf{0} \in W$
 2. $\forall \mathbf{u}, \mathbf{v} \in W, \mathbf{u} + \mathbf{v} \in W$
 3. $\forall a \in \mathbb{F}, \forall \mathbf{v} \in W, a \cdot \mathbf{v} \in W$
 
 **证明**：
+
 - **必要性**：如果 $W$ 是子空间，则满足向量空间的所有公理，特别地满足条件1-3。
 - **充分性**：假设 $W$ 满足条件1-3，需要证明 $W$ 满足所有向量空间公理。
   - 结合律和交换律在 $V$ 中成立，在 $W$ 中也成立
@@ -227,6 +234,7 @@ subspaceDimension (Subspace vectors) =
 **定理**：每个有限维向量空间都有基。
 
 **证明**：
+
 1. 设 $V$ 是有限维向量空间，$\dim(V) = n$
 2. 从 $V$ 中任取一个非零向量 $\mathbf{v}_1$
 3. 如果 $\{\mathbf{v}_1\}$ 生成 $V$，则它是基
@@ -238,6 +246,7 @@ subspaceDimension (Subspace vectors) =
 **定理**：向量空间的所有基都有相同的维数。
 
 **证明**：
+
 1. 设 $B_1$ 和 $B_2$ 是 $V$ 的两个基
 2. 假设 $|B_1| < |B_2|$
 3. 由于 $B_1$ 生成 $V$，$B_2$ 中的每个向量都可以表示为 $B_1$ 的线性组合
@@ -318,6 +327,7 @@ polynomialSubspace n = Subspace [
 ---
 
 **相关文档**：
+
 - [线性变换理论](../04-Linear-Transformations/01-Linear-Transformations.md)
 - [特征值与特征向量](../05-Eigenvalues-Eigenvectors/01-Eigenvalues-Eigenvectors.md)
-- [内积空间理论](../06-Inner-Product-Spaces/01-Inner-Product-Spaces.md) 
+- [内积空间理论](../06-Inner-Product-Spaces/01-Inner-Product-Spaces.md)

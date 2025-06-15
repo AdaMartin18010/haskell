@@ -13,6 +13,7 @@
 $$\text{Algorithm} = \langle \text{Input}, \text{Output}, \text{Precision}, \text{Complexity} \rangle$$
 
 其中：
+
 - $\text{Input} \in \mathbb{R}^n$ 是输入向量
 - $\text{Output} \in \mathbb{R}^m$ 是输出向量
 - $\text{Precision} \in \mathbb{R}^+$ 是精度要求
@@ -25,6 +26,7 @@ $$\text{Algorithm} = \langle \text{Input}, \text{Output}, \text{Precision}, \tex
 $$\text{Error} = \text{AbsoluteError} + \text{RelativeError}$$
 
 其中：
+
 - $\text{AbsoluteError} = |x - \hat{x}|$
 - $\text{RelativeError} = \frac{|x - \hat{x}|}{|x|}$
 
@@ -829,4 +831,4 @@ allocateFromPool pool size = do
 4. **性能优化**：并行计算和内存优化
 5. **形式化验证**：数值稳定性和收敛性分析
 
-通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的科学计算框架。 
+通过严格的数学定义、完整的Haskell实现和形式化验证，我们构建了一个类型安全、高性能的科学计算框架。

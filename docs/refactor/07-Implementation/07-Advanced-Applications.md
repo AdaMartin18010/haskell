@@ -592,6 +592,7 @@ preservationProperty expr =
 ---
 
 **参考文献**:
+
 - Pierce, B. C. (2002). Types and Programming Languages
 - Appel, A. W. (1998). Modern Compiler Implementation
-- Peyton Jones, S. (2003). The Implementation of Functional Programming Languages 
+- Peyton Jones, S. (2003). The Implementation of Functional Programming Languages
