@@ -282,7 +282,7 @@ ctlSatisfaction model world formula = case formula of
 
 认知逻辑研究知识和信念的模态概念。
 
-#### 形式化定义
+#### 4.1 形式化定义
 
 ```haskell
 -- 认知公式
@@ -395,4 +395,4 @@ knowledgeTransfer = Implies
 - [时态逻辑](03-Temporal-Logic.md)
 - [认知逻辑](04-Epistemic-Logic.md)
 - [形式科学层主索引](../../README.md)
-- [理论层](../../../03-Theory/README.md) 
+- [理论层](../../../03-Theory/README.md)

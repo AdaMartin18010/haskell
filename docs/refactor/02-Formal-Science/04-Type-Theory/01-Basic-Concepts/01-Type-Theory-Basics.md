@@ -93,7 +93,7 @@ infixr 6 `eitherType`
 
 项是类型的实例，表示具体的值或计算。
 
-#### 形式化定义
+#### 2.1 形式化定义
 
 ```haskell
 -- 项
@@ -215,7 +215,7 @@ caseMaybe t nothingCase x justCase = CaseMaybe t nothingCase x justCase
 
 类型关系定义了项与类型之间的对应关系。
 
-#### 形式化定义
+#### 3.1 形式化定义
 
 ```haskell
 -- 上下文
