@@ -67,32 +67,38 @@ graph TD
 ### 主题导航
 
 #### 数学与逻辑
+
 - [集合论](02-Formal-Science/01-Mathematics/01-Set-Theory-Basics.md) - 基础集合论
 - [范畴论](02-Formal-Science/03-Category-Theory/01-Basic-Concepts/01-Category-Definition.md) - 范畴定义
 - [类型论](02-Formal-Science/04-Type-Theory/01-Basic-Concepts/01-Type-Theory-Basics.md) - 类型论基础
 - [模态逻辑](02-Formal-Science/02-Formal-Logic/02-Modal-Logic/01-Basic-Concepts.md) - 模态逻辑基础
 
 #### 编程语言理论
+
 - [语法理论](03-Theory/01-Programming-Language-Theory/01-Syntax-Theory/01-Syntax-Theory.md) - 语法理论基础
 - [语义理论](03-Theory/01-Programming-Language-Theory/02-Semantics-Theory/01-Semantics-Theory.md) - 语义理论基础
 - [类型系统](03-Theory/01-Programming-Language-Theory/03-Type-System-Theory/01-Basic-Type-Systems/01-Basic-Concepts.md) - 类型系统基础
 
 #### 形式化方法
+
 - [模型检测](03-Theory/04-Formal-Methods/01-Model-Checking/01-Temporal-Logic.md) - 模型检测与时态逻辑
 - [定理证明](03-Theory/04-Formal-Methods/02-Theorem-Proving/01-Interactive-Theorem-Proving.md) - 交互式定理证明
 - [抽象解释](03-Theory/04-Formal-Methods/03-Abstract-Interpretation/01-Abstract-Domains.md) - 抽象解释
 
 #### 并发与分布式
+
 - [Petri网理论](03-Theory/05-Petri-Net-Theory/01-基础Petri网/01-Basic-Concepts.md) - Petri网基础
 - [分布式系统](03-Theory/13-Distributed-Systems-Theory/01-Distributed-Systems-Theory.md) - 分布式系统理论
 - [线性类型理论](03-Theory/08-Linear-Type-Theory/01-Linear-Type-Theory.md) - 线性类型理论
 
 #### 应用领域
+
 - [机器学习](04-Applied-Science/03-Artificial-Intelligence/01-Machine-Learning.md) - 机器学习基础
 - [区块链](05-Industry-Domains/01-FinTech/01-Blockchain.md) - 区块链技术
 - [设计模式](06-Architecture/01-Design-Patterns/01-Creational-Patterns.md) - 创建型设计模式
 
 #### Haskell实现
+
 - [函数式编程基础](07-Implementation/01-Haskell-Basics/01-Language-Features.md) - Haskell语言特性
 - [排序算法](07-Implementation/03-Algorithms/01-Sorting-Algorithms.md) - 排序算法实现
 - [定理证明](07-Implementation/04-Formal-Proofs/01-Theorem-Proving.md) - 定理证明实现

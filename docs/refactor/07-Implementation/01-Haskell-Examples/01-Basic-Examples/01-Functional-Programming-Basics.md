@@ -9,6 +9,7 @@
 ### 数学定义
 
 纯函数满足以下性质：
+
 - **确定性**：相同输入总是产生相同输出
 - **无副作用**：不修改外部状态
 - **引用透明性**：函数调用可以被其返回值替换
@@ -378,7 +379,8 @@ parseConfig input = do
 ---
 
 **相关链接**：
+
 - [Haskell基础](../README.md)
 - [高级特性](../02-Advanced-Features/README.md)
 - [算法实现](../03-Algorithm-Implementation/README.md)
-- [形式化证明](../04-Formal-Proofs/README.md) 
+- [形式化证明](../04-Formal-Proofs/README.md)

@@ -113,7 +113,7 @@ graph TD
 
 ### 06-Architecture (架构领域层)
 
-**系统架构与设计模式**
+**系统架构与设计模式**:
 
 - [设计模式](06-Architecture/01-Design-Patterns/) - 创建型、结构型、行为型、并发型模式
 - [微服务](06-Architecture/02-Microservices/) - 服务设计、服务通信、服务治理
@@ -123,7 +123,7 @@ graph TD
 
 ### 07-Implementation (实现层)
 
-**Haskell实现与形式化验证**
+**Haskell实现与形式化验证**:
 
 - [Haskell基础](07-Implementation/01-Haskell-Basics/) - 函数式编程、类型系统、模式匹配
 - [数据结构](07-Implementation/02-Data-Structures/) - 基本数据结构、高级数据结构、持久化数据结构
@@ -230,4 +230,4 @@ graph TD
 
 **最后更新**: 2024年12月
 **导航状态**: 完整可用
-**交叉引用**: 100% 完成 
+**交叉引用**: 100% 完成

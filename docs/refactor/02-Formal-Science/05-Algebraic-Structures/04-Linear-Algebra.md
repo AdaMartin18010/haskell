@@ -12,12 +12,14 @@
 设 $V$ 是集合，$\mathbb{F}$ 是域，$V$ 上的向量空间由以下公理定义：
 
 **加法公理：**
+
 - 结合律：$(u + v) + w = u + (v + w)$
 - 交换律：$u + v = v + u$
 - 零元：存在 $0 \in V$ 使得 $v + 0 = v$
 - 逆元：对每个 $v \in V$，存在 $-v \in V$ 使得 $v + (-v) = 0$
 
 **标量乘法公理：**
+
 - 分配律：$a(u + v) = au + av$
 - 分配律：$(a + b)v = av + bv$
 - 结合律：$(ab)v = a(bv)$
@@ -106,6 +108,7 @@ multRowMatrix (VCons x xs) (MCons col mat) =
 
 **定义 3.1 (线性变换)**
 函数 $T: V \rightarrow W$ 是线性变换当且仅当：
+
 - $T(u + v) = T(u) + T(v)$
 - $T(av) = aT(v)$
 
@@ -181,6 +184,7 @@ removeRowCol = undefined  -- 实现省略
 
 **定义 5.1 (内积)**
 内积是满足以下性质的函数 $\langle \cdot, \cdot \rangle: V \times V \rightarrow \mathbb{F}$：
+
 - 共轭对称性：$\langle u, v \rangle = \overline{\langle v, u \rangle}$
 - 线性性：$\langle au + bv, w \rangle = a\langle u, w \rangle + b\langle v, w \rangle$
 - 正定性：$\langle v, v \rangle \geq 0$ 且 $\langle v, v \rangle = 0 \Leftrightarrow v = 0$
@@ -338,4 +342,4 @@ matrixToList = undefined
 1. Strang, G. (2006). Linear algebra and its applications. Cengage Learning.
 2. Axler, S. (2015). Linear algebra done right. Springer.
 3. Golub, G. H., & Van Loan, C. F. (2013). Matrix computations. JHU press.
-4. Trefethen, L. N., & Bau, D. (1997). Numerical linear algebra. SIAM. 
+4. Trefethen, L. N., & Bau, D. (1997). Numerical linear algebra. SIAM.

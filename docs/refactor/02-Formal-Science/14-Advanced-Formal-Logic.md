@@ -572,7 +572,8 @@ findPath model state formula =
 ---
 
 **相关链接**：
+
 - [形式逻辑基础](../02-Formal-Logic.md)
 - [模态逻辑](../02-Modal-Logic.md)
 - [时态逻辑](../03-Theory/07-Temporal-Logic.md)
-- [程序验证](../04-Formal-Proofs.md) 
+- [程序验证](../04-Formal-Proofs.md)

@@ -10,6 +10,7 @@ Deutsch算法是第一个展示量子计算优势的算法，它可以在一次�
 
 **定义 1.1.1 (Deutsch问题)**
 给定一个函数 $f : \{0,1\} \rightarrow \{0,1\}$，确定 $f$ 是：
+
 - **常数函数**：$f(0) = f(1)$
 - **平衡函数**：$f(0) \neq f(1)$
 
@@ -34,6 +35,7 @@ $$f(0) \neq f(1)$$
 
 **证明：**
 考虑所有可能的布尔函数：
+
 - $f(0) = 0, f(1) = 0$：常数函数
 - $f(0) = 0, f(1) = 1$：平衡函数
 - $f(0) = 1, f(1) = 0$：平衡函数
@@ -51,6 +53,7 @@ $$U_f|x\rangle|y\rangle = |x\rangle|y \oplus f(x)\rangle$$
 
 **定义 2.1.2 (Oracle性质)**
 量子Oracle满足：
+
 1. **线性性**：$U_f(\alpha|\psi\rangle + \beta|\phi\rangle) = \alpha U_f|\psi\rangle + \beta U_f|\phi\rangle$
 2. **酉性**：$U_f^\dagger U_f = U_f U_f^\dagger = I$
 3. **可逆性**：$U_f^{-1} = U_f^\dagger$
@@ -92,10 +95,12 @@ $$|\psi_2\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes \frac{1}{\s
 $$|\psi_2\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle) \otimes \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$$
 
 应用Hadamard门后：
+
 - 常数函数：$|\psi_3\rangle = |0\rangle \otimes \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$
 - 平衡函数：$|\psi_3\rangle = |1\rangle \otimes \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$
 
 因此，测量第一个量子比特：
+
 - 得到 $|0\rangle$：常数函数
 - 得到 $|1\rangle$：平衡函数
 
@@ -322,6 +327,7 @@ Deutsch算法的空间复杂度为 $O(1)$。
 
 **证明：**
 根据算法的数学分析，在理想情况下：
+
 - 常数函数总是输出 $|0\rangle$
 - 平衡函数总是输出 $|1\rangle$
 
@@ -342,6 +348,7 @@ Deutsch算法的空间复杂度为 $O(1)$。
 Deutsch算法展示了量子优势。
 
 **证明：**
+
 - 经典算法需要2次函数查询
 - 量子算法只需要1次函数查询
 - 因此量子算法比经典算法快2倍
@@ -463,6 +470,7 @@ Deutsch算法是量子计算的重要里程碑，它展示了：
 4. **量子测量**：从量子态获取经典信息
 
 算法的核心思想是：
+
 - 利用量子叠加态同时评估函数的所有输入
 - 通过量子干涉提取函数的全局性质
 - 通过量子测量获得结果
@@ -473,4 +481,4 @@ Deutsch算法为后续的量子算法（如Grover算法、Shor算法）奠定了
 
 **最后更新**: 2024年12月  
 **维护者**: 形式化知识体系项目组  
-**版本**: 1.0 
+**版本**: 1.0

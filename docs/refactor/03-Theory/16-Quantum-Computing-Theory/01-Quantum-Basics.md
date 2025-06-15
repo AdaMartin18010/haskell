@@ -374,6 +374,7 @@ matrixEigenvalues matrix =
 **定理**：不存在能够完美复制任意未知量子态的量子操作。
 
 **证明**：
+
 1. 假设存在克隆操作 $U$ 使得 $U|\psi\rangle|0\rangle = |\psi\rangle|\psi\rangle$
 2. 对于两个不同的量子态 $|\psi\rangle$ 和 $|\phi\rangle$：
    - $U|\psi\rangle|0\rangle = |\psi\rangle|\psi\rangle$
@@ -389,6 +390,7 @@ matrixEigenvalues matrix =
 **定理**：Deutsch算法能够用一次查询确定函数 $f: \{0,1\} \to \{0,1\}$ 是常数还是平衡的。
 
 **证明**：
+
 1. 初始态：$|0\rangle|1\rangle$
 2. 应用Hadamard门：$\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \cdot \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$
 3. 应用Oracle：$\frac{1}{2}((-1)^{f(0)}|0\rangle + (-1)^{f(1)}|1\rangle) \cdot (|0\rangle - |1\rangle)$
@@ -402,6 +404,7 @@ matrixEigenvalues matrix =
 **定理**：Grover算法在未排序数据库中搜索标记元素需要 $O(\sqrt{N})$ 次查询，而经典算法需要 $O(N)$ 次。
 
 **证明**：
+
 1. 经典搜索：需要检查每个元素，最坏情况 $N$ 次查询
 2. 量子搜索：每次Grover迭代将标记态的概率振幅增加 $O(1/\sqrt{N})$
 3. 经过 $O(\sqrt{N})$ 次迭代，标记态的概率接近1
@@ -531,6 +534,7 @@ decode (QuantumErrorCode logical _) = logical
 ---
 
 **相关文档**：
+
 - [量子算法理论](./02-Quantum-Algorithms.md)
 - [量子密码学理论](./03-Quantum-Cryptography.md)
-- [量子机器学习理论](./04-Quantum-Machine-Learning.md) 
+- [量子机器学习理论](./04-Quantum-Machine-Learning.md)

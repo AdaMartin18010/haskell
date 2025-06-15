@@ -44,6 +44,7 @@ $$U_f|x\rangle = (-1)^{f(x)}|x\rangle$$
 
 **定义 2.1.2 (Oracle性质)**
 标记Oracle满足：
+
 1. **酉性**：$U_f^\dagger U_f = U_f U_f^\dagger = I$
 2. **标记性**：$U_f|x\rangle = -|x\rangle$ 当且仅当 $f(x) = 1$
 3. **线性性**：$U_f(\alpha|\psi\rangle + \beta|\phi\rangle) = \alpha U_f|\psi\rangle + \beta U_f|\phi\rangle$
@@ -58,6 +59,7 @@ $$D = 2|s\rangle\langle s| - I$$
 
 **定义 2.2.2 (扩散算子性质)**
 扩散算子满足：
+
 1. **酉性**：$D^\dagger D = DD^\dagger = I$
 2. **反射性**：$D$ 是关于 $|s\rangle$ 的反射
 3. **几何意义**：$D$ 将态向量关于 $|s\rangle$ 反射
@@ -70,6 +72,7 @@ $$G = D \cdot U_f$$
 
 **定义 2.3.2 (迭代几何意义)**
 Grover迭代是两个反射的组合：
+
 1. $U_f$：关于解空间的反射
 2. $D$：关于均匀叠加态的反射
 
@@ -118,6 +121,7 @@ $$\sin\theta = \sqrt{\frac{t}{N}}$$
 $$|\psi_k\rangle = \sin((2k+1)\theta)|s_1\rangle + \cos((2k+1)\theta)|s_0\rangle$$
 
 其中：
+
 - $|s_1\rangle$ 是解空间的归一化投影
 - $|s_0\rangle$ 是非解空间的归一化投影
 
@@ -135,6 +139,7 @@ $$P_{success} = \sin^2((2k_{opt}+1)\theta)$$
 Grover算法的查询复杂度为 $O(\sqrt{N/t})$。
 
 **证明：**
+
 - 每次迭代需要一次Oracle查询
 - 最优迭代次数为 $O(\sqrt{N/t})$
 - 因此总查询复杂度为 $O(\sqrt{N/t})$
@@ -143,6 +148,7 @@ Grover算法的查询复杂度为 $O(\sqrt{N/t})$。
 Grover算法的时间复杂度为 $O(\sqrt{N/t} \cdot \log N)$。
 
 **证明：**
+
 - 每次迭代需要 $O(\log N)$ 个量子门
 - 总迭代次数为 $O(\sqrt{N/t})$
 - 因此总时间复杂度为 $O(\sqrt{N/t} \cdot \log N)$
@@ -397,6 +403,7 @@ demonstrateQuantumSearch = do
 Grover算法在单解情况下达到最优复杂度 $O(\sqrt{N})$。
 
 **证明：**
+
 - 查询复杂度下界为 $\Omega(\sqrt{N})$
 - Grover算法达到 $O(\sqrt{N})$
 - 因此Grover算法是最优的
@@ -430,6 +437,7 @@ $$P_{success} = \sin^2((2k_{opt}+1)\theta) \geq 1 - O(1/\sqrt{N})$$
 Grover算法展示了量子优势。
 
 **证明：**
+
 - 经典搜索算法需要 $O(N)$ 次查询
 - Grover算法需要 $O(\sqrt{N})$ 次查询
 - 因此Grover算法提供了二次加速
@@ -545,6 +553,7 @@ Grover搜索算法是量子计算的重要成就，它展示了：
 4. **实用性**：有广泛的应用前景
 
 算法的核心思想是：
+
 - 利用量子叠加态同时搜索所有可能解
 - 通过量子干涉放大解的概率
 - 通过量子测量获得结果
@@ -555,4 +564,4 @@ Grover算法为量子计算的实际应用奠定了基础，展示了量子计�
 
 **最后更新**: 2024年12月  
 **维护者**: 形式化知识体系项目组  
-**版本**: 1.0 
+**版本**: 1.0
