@@ -541,4 +541,4 @@ Prolog是逻辑编程的经典实现，通过统一算法和SLD归结提供了�
 - [逻辑编程基础](01-Basic-Concepts.md)
 - [经典逻辑基础](../01-Classical-Logic/01-Basic-Concepts.md)
 - [模态逻辑基础](../02-Modal-Logic/01-Basic-Concepts.md)
-- [非经典逻辑基础](../03-Non-Classical-Logic.md) 
+- [非经典逻辑基础](../03-Non-Classical-Logic.md)

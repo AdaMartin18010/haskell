@@ -44,7 +44,7 @@ interpret (Iff p q) v = interpret p v == interpret q v
 
 ### 一阶谓词逻辑
 
-#### 语法定义
+#### 语法定义1
 
 ```haskell
 -- 一阶逻辑语法

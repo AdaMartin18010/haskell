@@ -314,7 +314,7 @@ calculateGamma v c = 1 / sqrt (1 - (v/c)^2)
 
 -- 洛伦兹变换
 lorentzTransform :: LorentzTransformation -> SpaceTimePoint -> SpaceTimePoint
-lorentzTransform lt p = 
+lorentzTransform lt p =
   let v = velocity lt
       g = gamma lt
       c = 299792458  -- 光速
@@ -322,7 +322,7 @@ lorentzTransform lt p =
       x_coord = x (space p)
       y_coord = y (space p)
       z_coord = z (space p)
-      
+
       t' = g * (t - v * x_coord / c^2)
       x' = g * (x_coord - v * t)
       y' = y_coord
@@ -359,7 +359,7 @@ type MemoryItem = (TimePoint, String)
 
 -- 时间感知计算
 perceiveTime :: TimePerception -> TimePoint -> Double
-perceiveTime perception t = 
+perceiveTime perception t =
   let sensory = sensoryInput perception t
       memory = memoryState perception t
       cognitive = cognitiveState perception t
@@ -393,7 +393,7 @@ type MotorData = Map String Double
 
 -- 空间感知计算
 perceiveSpace :: SpacePerception -> SpacePoint -> SpacePoint
-perceiveSpace perception p = 
+perceiveSpace perception p =
   let visual = visualInput perception p
       haptic = hapticInput perception p
       motor = motorInput perception p
@@ -424,7 +424,7 @@ type InferenceEngine = [ReasoningRule] -> SpaceTimePoint -> [SpaceTimePoint]
 
 -- 时空推理
 spacetimeInference :: SpaceTimeReasoning -> SpaceTimePoint -> [SpaceTimePoint]
-spacetimeInference reasoning point = 
+spacetimeInference reasoning point =
   inferenceEngine reasoning (reasoningRules reasoning) point
 ```
 
@@ -432,4 +432,4 @@ spacetimeInference reasoning point =
 
 时间空间哲学通过形式化的方法研究时间、空间以及它们之间关系的本质问题。它结合了哲学思辨与数学工具，为理解现实世界的基本结构提供了重要的理论框架。
 
-通过Haskell的实现，我们可以将抽象的时空概念转化为可计算的形式，为计算机科学、人工智能和形式化方法提供重要的理论基础。时间空间哲学的研究不仅深化了我们对现实世界的理解，也为时空数据的处理和分析提供了重要的理论工具。 
+通过Haskell的实现，我们可以将抽象的时空概念转化为可计算的形式，为计算机科学、人工智能和形式化方法提供重要的理论基础。时间空间哲学的研究不仅深化了我们对现实世界的理解，也为时空数据的处理和分析提供了重要的理论工具。

@@ -402,6 +402,7 @@ stateMonadAdjunction s = StateMonadAdjunction {
 **定理 1**: 左伴随保持余极限，右伴随保持极限。
 
 **证明**：
+
 ```haskell
 -- 伴随函子保持性质证明
 adjointPreservationProof :: AdjointFunctor -> Bool
@@ -424,6 +425,7 @@ rightAdjointPreservesLimits functor =
 **定理 2**: 伴随函子在自然同构意义下是唯一的。
 
 **证明**：
+
 ```haskell
 -- 伴随函子唯一性证明
 adjointUniquenessProof :: AdjointFunctor -> AdjointFunctor -> Bool
