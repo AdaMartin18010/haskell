@@ -384,6 +384,7 @@ associativity m k h = ((m >>= k) >>= h) == (m >>= (\x -> k x >>= h))
 ---
 
 **相关链接**:
+
 - [函数式编程基础](../01-Basic-Examples/01-Functional-Programming-Basics.md)
 - [算法实现](../03-Algorithm-Implementation/README.md)
 - [形式化证明](../04-Formal-Proofs/README.md)
