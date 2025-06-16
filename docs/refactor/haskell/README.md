@@ -7,6 +7,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 ## 目录结构
 
 ### 01-Basics (基础语法)
+
 - [01-Language-Features.md](01-Basics/01-Language-Features.md) - 语言特性
 - [02-Functions.md](01-Basics/02-Functions.md) - 函数定义
 - [03-Pattern-Matching.md](01-Basics/03-Pattern-Matching.md) - 模式匹配
@@ -14,6 +15,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 - [05-Type-Classes.md](01-Basics/05-Type-Classes.md) - 类型类
 
 ### 02-Advanced-Features (高级特性)
+
 - [01-Monads.md](02-Advanced-Features/01-Monads.md) - 单子
 - [02-Functors.md](02-Advanced-Features/02-Functors.md) - 函子
 - [03-Applicatives.md](02-Advanced-Features/03-Applicatives.md) - 应用函子
@@ -21,6 +23,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 - [05-GADTs.md](02-Advanced-Features/05-GADTs.md) - 广义代数数据类型
 
 ### 03-Type-System (类型系统)
+
 - [01-Basic-Types.md](03-Type-System/01-Basic-Types.md) - 基本类型
 - [02-Polymorphic-Types.md](03-Type-System/02-Polymorphic-Types.md) - 多态类型
 - [03-Dependent-Types.md](03-Type-System/03-Dependent-Types.md) - 依赖类型
@@ -28,6 +31,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 - [05-Type-Families.md](03-Type-System/05-Type-Families.md) - 类型族
 
 ### 04-Control-Flow (控制流)
+
 - [01-Conditionals.md](04-Control-Flow/01-Conditionals.md) - 条件语句
 - [02-Loops.md](04-Control-Flow/02-Loops.md) - 循环结构
 - [03-Recursion.md](04-Control-Flow/03-Recursion.md) - 递归
@@ -35,6 +39,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 - [05-Continuations.md](04-Control-Flow/05-Continuations.md) - 续体
 
 ### 05-Execution-Flow (执行流)
+
 - [01-Evaluation-Strategies.md](05-Execution-Flow/01-Evaluation-Strategies.md) - 求值策略
 - [02-Lazy-Evaluation.md](05-Execution-Flow/02-Lazy-Evaluation.md) - 惰性求值
 - [03-Strict-Evaluation.md](05-Execution-Flow/03-Strict-Evaluation.md) - 严格求值
@@ -42,6 +47,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 - [05-Concurrency.md](05-Execution-Flow/05-Concurrency.md) - 并发
 
 ### 06-Data-Flow (数据流)
+
 - [01-Data-Structures.md](06-Data-Flow/01-Data-Structures.md) - 数据结构
 - [02-Streams.md](06-Data-Flow/02-Streams.md) - 流
 - [03-Pipelines.md](06-Data-Flow/03-Pipelines.md) - 管道
@@ -49,6 +55,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 - [05-Reactive-Programming.md](06-Data-Flow/05-Reactive-Programming.md) - 响应式编程
 
 ### 07-Design-Patterns (设计模式)
+
 - [01-Functional-Patterns.md](07-Design-Patterns/01-Functional-Patterns.md) - 函数式模式
 - [02-Object-Oriented-Patterns.md](07-Design-Patterns/02-Object-Oriented-Patterns.md) - 面向对象模式
 - [03-Architectural-Patterns.md](07-Design-Patterns/03-Architectural-Patterns.md) - 架构模式
@@ -56,6 +63,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 - [05-Performance-Patterns.md](07-Design-Patterns/05-Performance-Patterns.md) - 性能模式
 
 ### 08-Open-Source-Comparison (开源软件对比)
+
 - [01-vs-Rust.md](08-Open-Source-Comparison/01-vs-Rust.md) - 与Rust对比
 - [02-vs-OCaml.md](08-Open-Source-Comparison/02-vs-OCaml.md) - 与OCaml对比
 - [03-vs-Scala.md](08-Open-Source-Comparison/03-vs-Scala.md) - 与Scala对比
@@ -63,6 +71,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 - [05-vs-FSharp.md](08-Open-Source-Comparison/05-vs-FSharp.md) - 与F#对比
 
 ### 09-Components (组件)
+
 - [01-Standard-Library.md](09-Components/01-Standard-Library.md) - 标准库
 - [02-Package-Management.md](09-Components/02-Package-Management.md) - 包管理
 - [03-Testing-Frameworks.md](09-Components/03-Testing-Frameworks.md) - 测试框架
@@ -70,6 +79,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 - [05-Development-Tools.md](09-Components/05-Development-Tools.md) - 开发工具
 
 ### 10-Architecture-Design (架构设计)
+
 - [01-Modular-Design.md](10-Architecture-Design/01-Modular-Design.md) - 模块化设计
 - [02-Layered-Architecture.md](10-Architecture-Design/02-Layered-Architecture.md) - 分层架构
 - [03-Microservices.md](10-Architecture-Design/03-Microservices.md) - 微服务
@@ -77,6 +87,7 @@ Haskell是一个纯函数式编程语言，具有强大的类型系统和惰性�
 - [05-Domain-Driven-Design.md](10-Architecture-Design/05-Domain-Driven-Design.md) - 领域驱动设计
 
 ### 11-Data-Processing (数据处理)
+
 - [01-Data-Analysis.md](11-Data-Processing/01-Data-Analysis.md) - 数据分析
 - [02-Machine-Learning.md](11-Data-Processing/02-Machine-Learning.md) - 机器学习
 - [03-Database-Integration.md](11-Data-Processing/03-Database-Integration.md) - 数据库集成
@@ -162,21 +173,25 @@ complexPattern (x, y) = "Tuple with two elements"
 ## 设计原则
 
 ### 1. 函数式优先
+
 - 优先使用纯函数
 - 避免可变状态
 - 利用高阶函数
 
 ### 2. 类型安全
+
 - 充分利用类型系统
 - 使用类型类进行抽象
 - 避免运行时错误
 
-### 3. 惰性求值
+### 3. 惰性求值1
+
 - 利用惰性求值优化性能
 - 处理无限数据结构
 - 避免不必要的计算
 
 ### 4. 模块化设计
+
 - 清晰的模块边界
 - 最小化依赖关系
 - 可测试的组件
@@ -282,18 +297,21 @@ scientificComputing = do
 ## 学习路径
 
 ### 1. 基础阶段
+
 1. 基本语法和数据类型
 2. 函数定义和模式匹配
 3. 列表和列表推导式
 4. 类型类和基本类型
 
 ### 2. 进阶阶段
+
 1. 单子和应用函子
 2. 高级类型特性
 3. 并发和并行编程
 4. 性能优化
 
 ### 3. 专业阶段
+
 1. 编译器开发
 2. 形式化验证
 3. 领域特定语言

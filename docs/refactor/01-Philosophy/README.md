@@ -8,15 +8,15 @@
 
 ### 01-Metaphysics (形而上学)
 
-- [01-Mathematical-Ontology.md](01-Metaphysics/01-Mathematical-Ontology.md) - 数学本体论
-- [02-Existence-Theory.md](01-Metaphysics/02-Existence-Theory.md) - 存在论
-- [03-Modal-Metaphysics.md](01-Metaphysics/03-Modal-Metaphysics.md) - 模态形而上学
-- [04-Time-Space-Philosophy.md](01-Metaphysics/04-Time-Space-Philosophy.md) - 时间空间哲学
-- [05-Causality-Theory.md](01-Metaphysics/05-Causality-Theory.md) - 因果性理论
+- [01-Mathematical-Ontology.md](01-Mathematical-Ontology/01-Mathematical-Ontology.md) - 数学本体论
+- [02-Existence-Theory.md](01-Mathematical-Ontology/02-Existence-Theory.md) - 存在论
+- [03-Modal-Metaphysics.md](01-Mathematical-Ontology/03-Modal-Metaphysics.md) - 模态形而上学
+- [04-Time-Space-Philosophy.md](01-Mathematical-Ontology/04-Time-Space-Philosophy.md) - 时间空间哲学
+- [05-Causality-Theory.md](01-Mathematical-Ontology/05-Causality-Theory.md) - 因果性理论
 
 ### 02-Epistemology (认识论)
 
-- [01-Knowledge-Theory.md](02-Epistemology/01-Knowledge-Theory.md) - 知识论
+- [01-Knowledge-Theory.md](02-Epistemology/01-Knowledge-Theory/01-Basic-Concepts.md) - 知识论基础
 - [02-Knowledge-Sources.md](02-Epistemology/02-Knowledge-Sources.md) - 知识来源
 - [03-Knowledge-Structure.md](02-Epistemology/03-Knowledge-Structure.md) - 知识结构
 - [04-Cognitive-Science.md](02-Epistemology/04-Cognitive-Science.md) - 认知科学
@@ -50,28 +50,75 @@
 
 ### 1. 形式化表达
 
-- 所有哲学概念都有对应的形式化定义
-- 使用数学符号和逻辑表达式
-- 建立哲学思辨与形式化方法的桥梁
+- 所有哲学概念都尝试用形式化语言表达
+- 建立哲学概念与数学结构的对应关系
+- 使用Haskell类型系统作为形式化工具
 
-### 2. 层次化结构
+### 2. 层次化组织
 
-- 从基础形而上学到具体应用伦理学
-- 每个分支都有明确的哲学传统和现代发展
-- 建立跨分支的理论联系
+- 从基础概念到高级理论的渐进结构
+- 每个概念都有明确的定义和边界
+- 建立概念间的依赖关系
 
 ### 3. 多表征方式
 
-- 哲学文本的严格分析
-- 数学公式的形式化表达
-- Haskell代码的概念实现
-- 图表的直观表示
+- 自然语言解释
+- 数学符号表达
+- Haskell代码实现
+- 图表可视化
 
-### 4. 现代性导向
+### 4. 一致性保证
 
-- 结合现代哲学发展
-- 关注AI和计算科学的影响
-- 建立哲学与技术发展的对话
+- 概念定义的一致性
+- 逻辑推理的一致性
+- 形式化表达的一致性
+
+## 与后续层次的关系
+
+### 理念层 → 形式科学层
+
+- 为数学和逻辑提供哲学基础
+- 建立形式化表达的合理性论证
+- 提供认识论和方法论指导
+
+### 理念层 → 理论层
+
+- 为计算机科学理论提供哲学支撑
+- 建立理论与现实的关系
+- 提供价值判断和伦理指导
+
+## 学习路径
+
+### 初学者路径
+
+1. 从形而上学开始，理解存在和本质
+2. 学习认识论，理解知识的性质
+3. 掌握逻辑学基础，理解推理规则
+4. 了解伦理学，理解价值判断
+5. 探索交叉领域，理解学科融合
+
+### 进阶路径
+
+1. 深入研究特定哲学问题
+2. 掌握形式化表达方法
+3. 学习Haskell实现技术
+4. 参与哲学讨论和辩论
+
+## 质量保证
+
+### 内容质量
+
+- 哲学概念的准确性
+- 论证逻辑的严密性
+- 形式化表达的正确性
+- 多表征方式的一致性
+
+### 技术质量
+
+- Haskell代码的可执行性
+- 类型系统的正确性
+- 数学公式的准确性
+- 图表的清晰性
 
 ## 与形式科学层的关系
 
@@ -91,4 +138,5 @@
 ---
 
 **最后更新**: 2024年12月  
-**版本**: 1.0.0
+**版本**: 1.0.0  
+**状态**: 构建中

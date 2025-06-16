@@ -9,12 +9,14 @@
 ### 1. 文法定义
 
 **定义**：文法是一个四元组 $G = (V, \Sigma, P, S)$，其中：
+
 - $V$ 是非终结符集合
 - $\Sigma$ 是终结符集合
 - $P$ 是产生式规则集合
 - $S$ 是开始符号
 
 **Haskell实现**：
+
 ```haskell
 -- 文法定义
 data Grammar a = 
@@ -66,6 +68,7 @@ class GrammarOperations a where
 $$\forall (A \rightarrow \alpha) \in P \cdot A \in V \land \alpha \in (V \cup \Sigma)^*$$
 
 **Haskell实现**：
+
 ```haskell
 -- 上下文无关文法
 class ContextFreeGrammar a where
@@ -114,6 +117,7 @@ extractLeftFactors (Grammar vn vt ps s) =
 **算法**：递归下降分析是一种自顶向下的语法分析方法。
 
 **Haskell实现**：
+
 ```haskell
 -- 递归下降分析器
 class RecursiveDescentParser a where
@@ -167,6 +171,7 @@ parseRecursive grammar state@(RecursiveDescentParserState input pos stack tree) 
 **算法**：LR分析是一种自底向上的语法分析方法。
 
 **Haskell实现**：
+
 ```haskell
 -- LR分析器
 class LRParser a where
@@ -243,6 +248,7 @@ parseLRStep table state@(LRParserState stack input pos tree) =
 **算法**：LL分析是一种自顶向下的预测分析方法。
 
 **Haskell实现**：
+
 ```haskell
 -- LL分析器
 class LLParser a where
@@ -298,6 +304,7 @@ parseLLStep table state@(LLParserState stack input pos tree) =
 **定义**：抽象语法树是源代码的树形表示，忽略语法细节，只保留结构信息。
 
 **Haskell实现**：
+
 ```haskell
 -- 抽象语法树
 data AST a = 
@@ -364,6 +371,7 @@ findAST p tree =
 ### 2. 语法树转换
 
 **Haskell实现**：
+
 ```haskell
 -- 语法树转换
 class ASTTransformation a where
@@ -408,6 +416,7 @@ deadCodeElimination tree = tree
 ### 1. 错误恢复
 
 **Haskell实现**：
+
 ```haskell
 -- 语法错误
 data SyntaxError = 
@@ -446,6 +455,7 @@ phraseLevelRecovery errors state =
 ### 2. 错误报告
 
 **Haskell实现**：
+
 ```haskell
 -- 错误报告
 class ErrorReporting a where
@@ -475,6 +485,7 @@ generateErrorMessage (ParseStackOverflow pos) =
 ### 1. 语法分析器生成器
 
 **Haskell实现**：
+
 ```haskell
 -- 语法分析器生成器
 class ParserGenerator a where
@@ -511,6 +522,7 @@ generateBody nt =
 ### 2. 语法可视化
 
 **Haskell实现**：
+
 ```haskell
 -- 语法可视化
 class GrammarVisualization a where
@@ -563,4 +575,4 @@ generateEdge (Production left right) =
 ---
 
 **最后更新**: 2024年12月  
-**版本**: 1.0.0 
+**版本**: 1.0.0
