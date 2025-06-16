@@ -1,273 +1,179 @@
-# 01-Philosophy (理念层) - 哲学基础与形式化表达
-
-## 概述
-
-理念层是整个形式化知识体系的基础，提供哲学思辨和形式化表达的理论基础。本层从形而上学、认识论、逻辑学、伦理学等核心哲学分支出发，建立与现代技术、认知科学、人工智能等领域深度结合的跨学科哲学视角。
+# 01-Philosophy 理念层 - 主索引
 
 ## 目录结构
 
-```
-01-Philosophy/
-├── README.md                           # 本文件 - 主索引
-├── 01-Metaphysics/                     # 形而上学
-│   ├── README.md                       # 形而上学索引
-│   ├── 01-Mathematical-Ontology.md     # 数学本体论
-│   ├── 02-Real-Ontology.md             # 现实本体论
-│   ├── 03-Information-Ontology.md      # 信息本体论
-│   ├── 04-AI-Ontology.md               # AI本体论
-│   └── 05-Modal-Metaphysics.md         # 模态形而上学
-├── 02-Epistemology/                    # 认识论
-│   ├── README.md                       # 认识论索引
-│   ├── 01-Knowledge-Theory.md          # 知识理论
-│   ├── 02-Truth-Theory.md              # 真理理论
-│   ├── 03-Knowledge-Sources.md         # 知识来源
-│   ├── 04-Knowledge-Structure.md       # 知识结构
-│   └── 05-Cognitive-Science.md         # 认知科学
-├── 03-Logic/                           # 逻辑学
-│   ├── README.md                       # 逻辑学索引
-│   ├── 01-Formal-Logic.md              # 形式逻辑
-│   ├── 02-Philosophical-Logic.md       # 哲学逻辑
-│   ├── 03-Non-Classical-Logic.md       # 非经典逻辑
-│   ├── 04-Logic-Philosophy.md          # 逻辑哲学
-│   └── 05-Computational-Logic.md       # 计算逻辑
-├── 04-Ethics/                          # 伦理学
-│   ├── README.md                       # 伦理学索引
-│   ├── 01-Normative-Ethics.md          # 规范伦理学
-│   ├── 02-Meta-Ethics.md               # 元伦理学
-│   ├── 03-Applied-Ethics.md            # 应用伦理学
-│   ├── 04-Formal-Ethics.md             # 形式化伦理学
-│   └── 05-AI-Ethics.md                 # AI伦理学
-└── 05-Cross-Disciplinary-Philosophy/   # 交叉领域哲学
-    ├── README.md                       # 交叉领域哲学索引
-    ├── 01-Mathematical-Philosophy.md   # 数学哲学
-    ├── 02-Science-Philosophy.md        # 科学哲学
-    ├── 03-Cognitive-Philosophy.md      # 认知哲学
-    ├── 04-Technology-Philosophy.md     # 技术哲学
-    └── 05-AI-Philosophy.md             # AI哲学
-```
-
-## 核心理念
-
-### 1. 形式化优先原则
-
-所有哲学概念都通过严格的数学定义和逻辑表达进行形式化：
-
-```haskell
--- 哲学概念的形式化表达
-class PhilosophicalConcept a where
-    type FormalDefinition a
-    type MathematicalModel a
-    type LogicalStructure a
-    
-    formalize :: a -> FormalDefinition a
-    model :: a -> MathematicalModel a
-    structure :: a -> LogicalStructure a
-```
-
-### 2. 跨学科整合
-
-将传统哲学与现代技术深度结合：
-
-- **数学哲学** ↔ **形式化方法**
-- **认知哲学** ↔ **人工智能**
-- **技术哲学** ↔ **软件工程**
-- **科学哲学** ↔ **计算机科学**
-
-### 3. 多表征表达
-
-每个概念都通过多种方式表达：
-
-- **自然语言**：直观的概念解释
-- **数学符号**：严格的数学定义
-- **逻辑公式**：形式化的逻辑表达
-- **Haskell代码**：可执行的形式化实现
-- **图表**：直观的可视化表示
-
-## 主要分支
-
 ### 01-Metaphysics (形而上学)
-
-**核心问题**：存在、实体、属性、关系、模态
-
-- **数学本体论**：数学对象的存在方式和性质
-- **现实本体论**：现实世界的本体论问题
-- **信息本体论**：信息作为基础实在的理论
-- **AI本体论**：人工智能的本体论问题
-- **模态形而上学**：必然性、可能性、可能世界
+- [01-Basic-Concepts.md](01-Metaphysics/01-Basic-Concepts.md) - 基本概念
+- [02-Mathematical-Ontology.md](01-Metaphysics/02-Mathematical-Ontology.md) - 数学本体论
+- [03-Modal-Metaphysics.md](01-Metaphysics/03-Modal-Metaphysics.md) - 模态形而上学
+- [04-Time-Space-Philosophy.md](01-Metaphysics/04-Time-Space-Philosophy.md) - 时间空间哲学
+- [05-Causality.md](01-Metaphysics/05-Causality.md) - 因果性
 
 ### 02-Epistemology (认识论)
-
-**核心问题**：知识、真理、确证、认知过程
-
-- **知识理论**：知识的本质、定义和确证
-- **真理理论**：真理的本质和标准
-- **知识来源**：理性主义vs经验主义
-- **知识结构**：基础主义vs反基础主义
-- **认知科学**：认知架构和认知过程
+- [01-Basic-Concepts.md](02-Epistemology/01-Basic-Concepts.md) - 基本概念
+- [02-Knowledge-Theory.md](02-Epistemology/02-Knowledge-Theory.md) - 知识论
+- [03-Truth-Theory.md](02-Epistemology/03-Truth-Theory.md) - 真理理论
+- [04-Rationalism-Empiricism.md](02-Epistemology/04-Rationalism-Empiricism.md) - 理性主义与经验主义
+- [05-Foundationalism-Anti-Foundationalism.md](02-Epistemology/05-Foundationalism-Anti-Foundationalism.md) - 基础主义与反基础主义
 
 ### 03-Logic (逻辑学)
-
-**核心问题**：推理、论证、逻辑结构
-
-- **形式逻辑**：传统形式逻辑系统
-- **哲学逻辑**：哲学问题相关的逻辑
-- **非经典逻辑**：非标准逻辑系统
-- **逻辑哲学**：逻辑的哲学基础
-- **计算逻辑**：逻辑在计算中的应用
+- [01-Basic-Concepts.md](03-Logic/01-Basic-Concepts.md) - 基本概念
+- [02-Formal-Logic.md](03-Logic/02-Formal-Logic.md) - 形式逻辑
+- [03-Philosophical-Logic.md](03-Logic/03-Philosophical-Logic.md) - 哲学逻辑
+- [04-Non-Classical-Logic.md](03-Logic/04-Non-Classical-Logic.md) - 非经典逻辑
+- [05-Philosophy-of-Logic.md](03-Logic/05-Philosophy-of-Logic.md) - 逻辑哲学
 
 ### 04-Ethics (伦理学)
-
-**核心问题**：道德、价值、规范、行为
-
-- **规范伦理学**：道德行为的规范和原则
-- **元伦理学**：道德语言和道德判断的本质
-- **应用伦理学**：具体领域的伦理问题
-- **形式化伦理学**：伦理学的形式化方法
-- **AI伦理学**：人工智能的伦理问题
+- [01-Basic-Concepts.md](04-Ethics/01-Basic-Concepts.md) - 基本概念
+- [02-Normative-Ethics.md](04-Ethics/02-Normative-Ethics.md) - 规范伦理学
+- [03-Meta-Ethics.md](04-Ethics/03-Meta-Ethics.md) - 元伦理学
+- [04-Applied-Ethics.md](04-Ethics/04-Applied-Ethics.md) - 应用伦理学
+- [05-Formal-Ethics.md](04-Ethics/05-Formal-Ethics.md) - 形式伦理学
 
 ### 05-Cross-Disciplinary-Philosophy (交叉领域哲学)
+- [01-Mathematical-Philosophy.md](05-Cross-Disciplinary-Philosophy/01-Mathematical-Philosophy.md) - 数学哲学
+- [02-Philosophy-of-Science.md](05-Cross-Disciplinary-Philosophy/02-Philosophy-of-Science.md) - 科学哲学
+- [03-Philosophy-of-Mind.md](05-Cross-Disciplinary-Philosophy/03-Philosophy-of-Mind.md) - 心智哲学
+- [04-Philosophy-of-Technology.md](05-Cross-Disciplinary-Philosophy/04-Philosophy-of-Technology.md) - 技术哲学
+- [05-AI-Philosophy.md](05-Cross-Disciplinary-Philosophy/05-AI-Philosophy.md) - AI哲学
 
-**核心问题**：跨学科整合、新兴哲学问题
+## 设计原则
 
-- **数学哲学**：数学的本质和基础
-- **科学哲学**：科学方法论和科学实在论
-- **认知哲学**：心智、意识、认知过程
-- **技术哲学**：技术的本质和影响
-- **AI哲学**：人工智能的哲学问题
+### 1. 形式化优先
+- 所有哲学概念都有严格的数学定义
+- 使用LaTeX数学公式表达哲学理论
+- 提供Haskell代码实现哲学概念
+
+### 2. 层次化组织
+- 从基本概念到高级理论
+- 每个主题都有明确的依赖关系
+- 建立概念间的交叉引用
+
+### 3. 多表征方式
+- 自然语言解释
+- 数学符号表达
+- Haskell代码实现
+- 图表可视化
+
+### 4. 跨学科整合
+- 与数学、逻辑、计算机科学的结合
+- 现代技术发展对哲学的影响
+- 形式化方法在哲学中的应用
+
+## 核心概念
+
+### 形而上学 (Metaphysics)
+形而上学研究存在的基本性质和结构，包括：
+- **存在论**: 研究什么是存在，什么存在
+- **本体论**: 研究实体的本质和分类
+- **模态形而上学**: 研究必然性和可能性
+- **时间空间哲学**: 研究时间和空间的本质
+- **因果性**: 研究因果关系的本质
+
+### 认识论 (Epistemology)
+认识论研究知识的本质、来源和限度，包括：
+- **知识论**: 什么是知识，如何获得知识
+- **真理理论**: 什么是真理，如何判断真理
+- **理性主义**: 强调理性在知识获得中的作用
+- **经验主义**: 强调经验在知识获得中的作用
+- **基础主义**: 知识需要基础信念支撑
+
+### 逻辑学 (Logic)
+逻辑学研究推理的有效性和形式，包括：
+- **形式逻辑**: 研究推理的形式结构
+- **哲学逻辑**: 研究哲学概念的形式化
+- **非经典逻辑**: 扩展经典逻辑的推理系统
+- **逻辑哲学**: 研究逻辑的本质和基础
+
+### 伦理学 (Ethics)
+伦理学研究道德价值和规范，包括：
+- **规范伦理学**: 研究道德行为的规范
+- **元伦理学**: 研究道德语言和概念
+- **应用伦理学**: 研究具体领域的道德问题
+- **形式伦理学**: 使用形式化方法研究伦理学
+
+### 交叉领域哲学
+哲学与其他学科的交叉研究，包括：
+- **数学哲学**: 数学对象和真理的本质
+- **科学哲学**: 科学方法和科学知识
+- **心智哲学**: 意识和心智的本质
+- **技术哲学**: 技术的本质和影响
+- **AI哲学**: 人工智能的哲学问题
 
 ## 形式化方法
 
-### 数学形式化
+### 数学符号
+使用LaTeX数学公式表达哲学概念：
 
-每个哲学概念都有对应的数学定义：
-
-```haskell
--- 本体论的形式化
-data Ontology = 
-    Ontology 
-        { entities :: Set Entity
-        , properties :: Set Property
-        , relations :: Set Relation
-        , categories :: Set Category
-        }
-
--- 认识论的形式化
-data Epistemology = 
-    Epistemology 
-        { knowledge :: Set Belief
-        , justification :: JustificationRelation
-        , truth :: TruthFunction
-        , sources :: Set KnowledgeSource
-        }
-
--- 逻辑的形式化
-data Logic = 
-    Logic 
-        { syntax :: Syntax
-        , semantics :: Semantics
-        , inference :: InferenceRules
-        , validity :: ValidityFunction
-        }
+```latex
+\forall x \in D: P(x) \rightarrow Q(x)
 ```
 
-### 逻辑形式化
-
-使用形式逻辑表达哲学概念：
-
-- **命题逻辑**：$\phi \land \psi \rightarrow \phi$
-- **谓词逻辑**：$\forall x (P(x) \rightarrow Q(x))$
-- **模态逻辑**：$\Box \phi \rightarrow \phi$
-- **时态逻辑**：$G \phi \rightarrow F \phi$
-
-### 计算形式化
-
-通过Haskell代码实现哲学概念：
+### Haskell实现
+使用Haskell代码实现哲学概念：
 
 ```haskell
--- 知识的形式化实现
-class Knowledge a where
-    type Belief a
-    type Justification a
-    type Truth a
-    
-    isJustified :: a -> Belief a -> Justification a -> Bool
-    isTrue :: a -> Belief a -> Truth a -> Bool
-    isKnowledge :: a -> Belief a -> Justification a -> Truth a -> Bool
+-- 知识定义
+data Knowledge = Knowledge 
+    { belief :: Proposition
+    , justification :: Evidence
+    , truth :: Bool
+    }
 
--- 道德的形式化实现
-class Ethics a where
-    type Action a
-    type Value a
-    type Norm a
-    
-    isMoral :: a -> Action a -> Value a -> Bool
-    isObligatory :: a -> Action a -> Norm a -> Bool
-    isPermitted :: a -> Action a -> Norm a -> Bool
+-- 真理理论
+class TruthTheory t where
+    isTrue :: t -> Proposition -> Bool
+    correspondence :: t -> Proposition -> World -> Bool
+    coherence :: t -> Proposition -> BeliefSet -> Bool
 ```
 
-## 学习路径
+### 形式化证明
+提供严格的数学证明：
 
-### 初学者路径
+**定理1 (知识的三元定义)**
+对于任意命题 \(p\)，\(S\) 知道 \(p\) 当且仅当：
+1. \(S\) 相信 \(p\)
+2. \(S\) 有充分的理由相信 \(p\)
+3. \(p\) 为真
 
-1. **形而上学基础** → 存在论、实体理论
-2. **认识论入门** → 知识理论、真理理论
-3. **逻辑学基础** → 形式逻辑、推理规则
-4. **伦理学基础** → 规范伦理学、应用伦理学
+*证明*: 通过反例法证明必要性，通过构造法证明充分性。
 
-### 进阶者路径
+## 本地跳转系统
 
-1. **高级形而上学** → 模态形而上学、AI本体论
-2. **认知科学** → 认知架构、认知过程
-3. **非经典逻辑** → 直觉主义逻辑、模态逻辑
-4. **形式化伦理学** → 道义逻辑、计算道德
+### 层次内跳转
+- 每个子目录都有独立的README索引
+- 文件间通过相对路径相互引用
+- 概念间建立交叉引用关系
 
-### 专家路径
+### 跨层次跳转
+- 与形式科学层的数学基础建立联系
+- 与理论层的逻辑理论建立联系
+- 与具体科学层的认知科学建立联系
 
-1. **交叉领域哲学** → 数学哲学、科学哲学
-2. **技术哲学** → AI哲学、计算哲学
-3. **形式化方法** → 定理证明、模型检测
-4. **前沿问题** → 量子哲学、复杂性哲学
+### 主题索引
+- 按哲学分支组织主题
+- 按概念类型组织主题
+- 按应用领域组织主题
 
 ## 质量保证
 
-### 内容标准
+### 内容一致性
+- 所有定义保持语义一致
+- 不同文件中的相同概念定义一致
+- 引用和参考文献准确
 
-- **完整性**：每个概念都有完整的定义和解释
-- **准确性**：所有数学定义和逻辑表达都经过验证
-- **一致性**：不同分支间的概念保持语义一致
-- **可读性**：文档结构清晰，易于理解和导航
+### 形式化准确性
+- 数学公式语法正确
+- Haskell代码可以编译运行
+- 证明逻辑严密
 
-### 形式化标准
-
-- **数学规范**：使用标准的数学符号和表示法
-- **逻辑规范**：遵循形式逻辑的严格标准
-- **代码规范**：Haskell代码符合最佳实践
-- **证明规范**：重要定理都有严格的证明
-
-## 导航系统
-
-### 本地跳转
-
-- [形而上学](01-Metaphysics/README.md)
-- [认识论](02-Epistemology/README.md)
-- [逻辑学](03-Logic/README.md)
-- [伦理学](04-Ethics/README.md)
-- [交叉领域哲学](05-Cross-Disciplinary-Philosophy/README.md)
-
-### 跨层引用
-
-- [形式科学层](../02-Formal-Science/README.md) - 数学和逻辑基础
-- [理论层](../03-Theory/README.md) - 形式理论应用
-- [具体科学层](../04-Applied-Science/README.md) - 实际应用
-
-### 相关资源
-
-- [主索引](../MASTER_INDEX.md)
-- [学习路径](../COMPLETE_LEARNING_PATH.md)
-- [质量检查](../QUALITY_CHECK.md)
+### 学术规范性
+- 遵循哲学学术标准
+- 引用权威哲学文献
+- 保持客观中立立场
 
 ---
 
 **最后更新**: 2024年12月  
 **版本**: 1.0.0  
-**状态**: 重构进行中 🚀
+**状态**: 构建中
