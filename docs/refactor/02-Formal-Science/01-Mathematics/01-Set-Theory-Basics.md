@@ -2,216 +2,223 @@
 
 ## 概述
 
-集合论是现代数学的基础语言，为所有数学分支提供统一的表达框架。本文档介绍集合论的基本概念、公理系统和重要定理，并通过Haskell代码实现相关的集合操作和性质。
+集合论是现代数学的基础，为所有数学分支提供统一的语言和工具。本文档采用ZFC公理系统，使用Haskell实现集合论的核心概念和操作，为整个形式化知识体系提供基础。
+
+## 公理系统
+
+### ZFC公理系统
+
+#### 1. 外延公理 (Axiom of Extensionality)
+
+两个集合相等当且仅当它们包含相同的元素。
+
+```haskell
+-- 外延公理
+class Extensionality a where
+    type Element a
+    
+    equal :: Set a -> Set a -> Bool
+    equal s1 s2 = all (`member` s2) (elements s1) && 
+                  all (`member` s1) (elements s2)
+```
+
+**数学表达**：
+$$\forall x \forall y [\forall z(z \in x \leftrightarrow z \in y) \rightarrow x = y]$$
+
+#### 2. 空集公理 (Axiom of Empty Set)
+
+存在一个不包含任何元素的集合。
+
+```haskell
+-- 空集
+data EmptySet = EmptySet
+
+-- 空集公理
+emptySet :: Set a
+emptySet = Set []
+
+-- 空集性质
+isEmpty :: Set a -> Bool
+isEmpty (Set []) = True
+isEmpty _ = False
+```
+
+**数学表达**：
+$$\exists x \forall y (y \notin x)$$
+
+#### 3. 配对公理 (Axiom of Pairing)
+
+对于任意两个集合，存在一个包含它们的集合。
+
+```haskell
+-- 配对公理
+pair :: a -> a -> Set a
+pair x y = Set [x, y]
+
+-- 有序对
+data OrderedPair a b = OrderedPair a b
+
+-- 有序对实现
+orderedPair :: a -> b -> OrderedPair a b
+orderedPair x y = OrderedPair x y
+```
+
+**数学表达**：
+$$\forall x \forall y \exists z \forall w(w \in z \leftrightarrow w = x \lor w = y)$$
+
+#### 4. 并集公理 (Axiom of Union)
+
+对于任意集合族，存在一个包含所有成员元素的集合。
+
+```haskell
+-- 并集公理
+union :: [Set a] -> Set a
+union sets = Set $ concatMap elements sets
+
+-- 二元并集
+union2 :: Set a -> Set a -> Set a
+union2 s1 s2 = Set $ elements s1 ++ elements s2
+```
+
+**数学表达**：
+$$\forall F \exists A \forall x(x \in A \leftrightarrow \exists B(B \in F \land x \in B))$$
+
+#### 5. 幂集公理 (Axiom of Power Set)
+
+对于任意集合，存在一个包含其所有子集的集合。
+
+```haskell
+-- 幂集公理
+powerSet :: Set a -> Set (Set a)
+powerSet s = Set $ allSubsets (elements s)
+
+-- 子集生成
+allSubsets :: [a] -> [Set a]
+allSubsets [] = [Set []]
+allSubsets (x:xs) = 
+    let subsets = allSubsets xs
+    in subsets ++ map (insert x) subsets
+```
+
+**数学表达**：
+$$\forall x \exists y \forall z(z \in y \leftrightarrow z \subseteq x)$$
+
+#### 6. 分离公理 (Axiom Schema of Separation)
+
+对于任意集合和性质，存在一个包含满足该性质元素的子集。
+
+```haskell
+-- 分离公理
+separation :: Set a -> (a -> Bool) -> Set a
+separation s predicate = Set $ filter predicate (elements s)
+
+-- 集合构造器
+setBuilder :: (a -> Bool) -> Set a
+setBuilder predicate = Set $ filter predicate universe
+```
+
+**数学表达**：
+$$\forall x \exists y \forall z(z \in y \leftrightarrow z \in x \land \phi(z))$$
+
+#### 7. 无穷公理 (Axiom of Infinity)
+
+存在一个包含空集且对每个元素都包含其后继的集合。
+
+```haskell
+-- 后继函数
+successor :: Set a -> Set a
+successor s = union2 s (Set [s])
+
+-- 无穷公理
+infinity :: Set (Set a)
+infinity = Set $ iterate successor emptySet
+```
+
+**数学表达**：
+$$\exists x(\emptyset \in x \land \forall y(y \in x \rightarrow y \cup \{y\} \in x))$$
+
+#### 8. 替换公理 (Axiom Schema of Replacement)
+
+如果函数将集合的元素映射到集合，则存在一个包含所有像的集合。
+
+```haskell
+-- 替换公理
+replacement :: Set a -> (a -> b) -> Set b
+replacement s f = Set $ map f (elements s)
+
+-- 函数图像
+image :: Set a -> (a -> b) -> Set b
+image s f = replacement s f
+```
+
+**数学表达**：
+$$\forall x \forall y \forall z(\phi(x,y) \land \phi(x,z) \rightarrow y = z) \rightarrow \forall A \exists B \forall y(y \in B \leftrightarrow \exists x(x \in A \land \phi(x,y)))$$
+
+#### 9. 正则公理 (Axiom of Regularity)
+
+每个非空集合都包含一个与它不相交的元素。
+
+```haskell
+-- 正则公理
+regularity :: Set a -> Bool
+regularity s = isEmpty s || 
+               any (\x -> isEmpty (intersection2 (Set [x]) s)) (elements s)
+```
+
+**数学表达**：
+$$\forall x(x \neq \emptyset \rightarrow \exists y(y \in x \land y \cap x = \emptyset))$$
+
+#### 10. 选择公理 (Axiom of Choice)
+
+对于任意非空集合族，存在一个选择函数。
+
+```haskell
+-- 选择公理
+choice :: [Set a] -> [a]
+choice sets = map (selectElement) sets
+  where
+    selectElement (Set []) = error "Empty set"
+    selectElement (Set (x:_)) = x
+
+-- 选择函数
+choiceFunction :: [Set a] -> (Set a -> a)
+choiceFunction sets = \s -> 
+    case find (\x -> x == s) sets of
+        Just (Set (x:_)) -> x
+        _ -> error "Set not found"
+```
+
+**数学表达**：
+$$\forall F(\emptyset \notin F \rightarrow \exists f \forall A \in F(f(A) \in A))$$
 
 ## 基本概念
 
-### 1. 集合的定义
-
-**定义 1.1 (集合)**
-集合是不同对象的无序聚集。如果 $x$ 是集合 $A$ 的元素，记作 $x \in A$。
-
-**形式化表达**:
+### 集合表示
 
 ```haskell
--- 集合的基本定义
-class Set a where
-    type Element a
-    type Universe a
-    
-    -- 元素关系
-    member :: Element a -> a -> Bool
-    -- 空集
-    empty :: a
-    -- 单元素集
-    singleton :: Element a -> a
-    -- 并集
-    union :: a -> a -> a
-    -- 交集
-    intersection :: a -> a -> a
-    -- 差集
-    difference :: a -> a -> a
-    -- 幂集
-    powerSet :: a -> Set a
-
--- 集合的基本操作
-data SetOperation = 
-    Union | Intersection | Difference | Complement
-  | CartesianProduct | PowerSet
+-- 集合数据类型
+data Set a = Set [a]
   deriving (Show, Eq)
 
--- 集合关系
-data SetRelation = 
-    Subset | ProperSubset | Equal | Disjoint
-  | Overlapping | Partition
-  deriving (Show, Eq)
-```
-
-### 2. 集合的表示
-
-**外延表示法**: 通过列举元素表示集合
-$$A = \{1, 2, 3, 4, 5\}$$
-
-**内涵表示法**: 通过性质描述集合
-$$A = \{x \mid x \text{ 是自然数且 } x \leq 5\}$$
-
-**Haskell实现**:
-
-```haskell
--- 集合的表示方法
-data SetRepresentation a = 
-    Extensional [a]  -- 外延表示
-  | Intensional (a -> Bool)  -- 内涵表示
-  deriving (Show)
-
--- 外延表示
-extensionalSet :: [a] -> SetRepresentation a
-extensionalSet elements = Extensional elements
-
--- 内涵表示
-intensionalSet :: (a -> Bool) -> SetRepresentation a
-intensionalSet predicate = Intensional predicate
-
--- 集合转换
-toExtensional :: (Eq a) => SetRepresentation a -> [a]
-toExtensional (Extensional xs) = xs
-toExtensional (Intensional p) = filter p universe
-
-toIntensional :: SetRepresentation a -> (a -> Bool)
-toIntensional (Extensional xs) = \x -> x `elem` xs
-toIntensional (Intensional p) = p
-```
-
-## 集合运算
-
-### 1. 基本运算
-
-**并集**: $A \cup B = \{x \mid x \in A \text{ 或 } x \in B\}$
-
-**交集**: $A \cap B = \{x \mid x \in A \text{ 且 } x \in B\}$
-
-**差集**: $A \setminus B = \{x \mid x \in A \text{ 且 } x \notin B\}$
-
-**补集**: $A^c = \{x \mid x \notin A\}$
-
-**Haskell实现**:
-
-```haskell
--- 基本集合运算
+-- 集合操作
 class SetOperations a where
-    -- 并集
-    union :: a -> a -> a
-    -- 交集
-    intersection :: a -> a -> a
-    -- 差集
-    difference :: a -> a -> a
-    -- 对称差
-    symmetricDifference :: a -> a -> a
-    -- 补集
-    complement :: a -> a
-
--- 具体实现
-instance SetOperations (Set a) where
-    union s1 s2 = Set $ \x -> member x s1 || member x s2
-    intersection s1 s2 = Set $ \x -> member x s1 && member x s2
-    difference s1 s2 = Set $ \x -> member x s1 && not (member x s2)
-    symmetricDifference s1 s2 = union (difference s1 s2) (difference s2 s1)
-    complement s = Set $ \x -> not (member x s)
-```
-
-### 2. 笛卡尔积
-
-**定义 1.2 (笛卡尔积)**
-集合 $A$ 和 $B$ 的笛卡尔积定义为：
-$$A \times B = \{(a, b) \mid a \in A \text{ 且 } b \in B\}$$
-
-**Haskell实现**:
-
-```haskell
--- 笛卡尔积
-cartesianProduct :: Set a -> Set b -> Set (a, b)
-cartesianProduct setA setB = Set $ \(a, b) -> 
-    member a setA && member b setB
-
--- 多重笛卡尔积
-cartesianProductN :: [Set a] -> Set [a]
-cartesianProductN [] = singleton []
-cartesianProductN (s:ss) = 
-    cartesianProduct s (cartesianProductN ss)
-```
-
-### 3. 幂集
-
-**定义 1.3 (幂集)**
-集合 $A$ 的幂集定义为：
-$$\mathcal{P}(A) = \{B \mid B \subseteq A\}$$
-
-**Haskell实现**:
-
-```haskell
--- 幂集
-powerSet :: (Eq a) => Set a -> Set (Set a)
-powerSet set = Set $ \subset -> 
-    all (\x -> member x subset -> member x set) (toList subset)
-
--- 生成所有子集
-generateSubsets :: [a] -> [[a]]
-generateSubsets [] = [[]]
-generateSubsets (x:xs) = 
-    let subsets = generateSubsets xs
-    in subsets ++ map (x:) subsets
-```
-
-## 集合关系
-
-### 1. 包含关系
-
-**子集**: $A \subseteq B \iff \forall x (x \in A \rightarrow x \in B)$
-
-**真子集**: $A \subset B \iff A \subseteq B \land A \neq B$
-
-**Haskell实现**:
-
-```haskell
--- 集合关系
-class SetRelations a where
+    type Element a
+    
+    -- 成员关系
+    member :: Element a -> Set a -> Bool
+    member x (Set xs) = x `elem` xs
+    
     -- 子集关系
-    subset :: a -> a -> Bool
+    subset :: Set a -> Set a -> Bool
+    subset s1 s2 = all (`member` s2) (elements s1)
+    
     -- 真子集关系
-    properSubset :: a -> a -> Bool
-    -- 相等关系
-    equal :: a -> a -> Bool
-    -- 不相交
-    disjoint :: a -> a -> Bool
-
--- 具体实现
-instance (Eq a) => SetRelations (Set a) where
-    subset s1 s2 = all (\x -> member x s1 -> member x s2) universe
+    properSubset :: Set a -> Set a -> Bool
     properSubset s1 s2 = subset s1 s2 && not (equal s1 s2)
-    equal s1 s2 = subset s1 s2 && subset s2 s1
-    disjoint s1 s2 = not (any (\x -> member x s1 && member x s2) universe)
-```
-
-### 2. 集合的基数
-
-**定义 1.4 (基数)**
-集合 $A$ 的基数 $|A|$ 是 $A$ 中元素的个数。
-
-**有限集**: 基数有限的集合
-**无限集**: 基数无限的集合
-**可数集**: 与自然数集等势的集合
-
-**Haskell实现**:
-
-```haskell
--- 集合基数
-class SetCardinality a where
+    
     -- 基数
-    cardinality :: a -> Cardinality
-    -- 有限性
-    isFinite :: a -> Bool
-    -- 可数性
-    isCountable :: a -> Bool
+    cardinality :: Set a -> Cardinality
+    cardinality (Set xs) = Finite (length xs)
 
 -- 基数类型
 data Cardinality = 
@@ -219,354 +226,283 @@ data Cardinality =
   | Countable
   | Uncountable
   deriving (Show, Eq)
-
--- 具体实现
-instance SetCardinality (Set a) where
-    cardinality set = 
-        if isFinite set 
-        then Finite (length $ toList set)
-        else if isCountable set 
-        then Countable 
-        else Uncountable
-    
-    isFinite set = length (toList set) < maxBound
-    isCountable set = -- 实现可数性检查
 ```
 
-## 集合论公理
-
-### 1. ZFC公理系统
-
-**外延公理**: 两个集合相等当且仅当它们包含相同的元素
-$$\forall x \forall y [\forall z(z \in x \leftrightarrow z \in y) \rightarrow x = y]$$
-
-**空集公理**: 存在一个不包含任何元素的集合
-$$\exists x \forall y (y \notin x)$$
-
-**配对公理**: 对于任意两个集合，存在包含它们的集合
-$$\forall x \forall y \exists z \forall w(w \in z \leftrightarrow w = x \lor w = y)$$
-
-**并集公理**: 对于任意集合族，存在包含所有成员元素的集合
-$$\forall F \exists A \forall x(x \in A \leftrightarrow \exists B(B \in F \land x \in B))$$
-
-**幂集公理**: 对于任意集合，存在包含其所有子集的集合
-$$\forall x \exists y \forall z(z \in y \leftrightarrow z \subseteq x)$$
-
-**Haskell实现**:
+### 集合运算
 
 ```haskell
--- ZFC公理系统
-class ZFCAxioms a where
-    -- 外延公理
-    extensionality :: a -> a -> Bool
-    -- 空集公理
-    emptySet :: a
-    -- 配对公理
-    pairing :: Element a -> Element a -> a
-    -- 并集公理
-    union :: [a] -> a
-    -- 幂集公理
-    powerSet :: a -> Set a
-
--- 公理验证
-validateAxioms :: (ZFCAxioms a) => a -> Bool
-validateAxioms set = 
-    extensionalityAxiom set &&
-    emptySetAxiom set &&
-    pairingAxiom set &&
-    unionAxiom set &&
-    powerSetAxiom set
-```
-
-### 2. 选择公理
-
-**选择公理**: 对于任意非空集合族，存在选择函数
-$$\forall F[\emptyset \notin F \rightarrow \exists f \forall A \in F(f(A) \in A)]$$
-
-**Haskell实现**:
-
-```haskell
--- 选择公理
-class AxiomOfChoice a where
-    -- 选择函数
-    choiceFunction :: [a] -> (a -> Element a)
-    -- 验证选择公理
-    validateChoice :: [a] -> Bool
-
--- 选择函数实现
-choiceFunction :: (NonEmpty a) => [a] -> (a -> Element a)
-choiceFunction sets = \set -> head (toList set)
-```
-
-## 重要定理
-
-### 1. 德摩根定律
-
-**定理 1.1 (德摩根定律)**
-对于任意集合 $A$ 和 $B$：
-$$(A \cup B)^c = A^c \cap B^c$$
-$$(A \cap B)^c = A^c \cup B^c$$
-
-**证明**:
-$$\begin{align}
-x \in (A \cup B)^c &\iff x \notin (A \cup B) \\
-&\iff x \notin A \text{ 且 } x \notin B \\
-&\iff x \in A^c \text{ 且 } x \in B^c \\
-&\iff x \in A^c \cap B^c
-\end{align}$$
-
-**Haskell实现**:
-
-```haskell
--- 德摩根定律验证
-deMorganLaws :: (Set a, Eq a) => Set a -> Set a -> Bool
-deMorganLaws setA setB =
-    let law1 = complement (union setA setB) == intersection (complement setA) (complement setB)
-        law2 = complement (intersection setA setB) == union (complement setA) (complement setB)
-    in law1 && law2
-
--- 定理证明
-proveDeMorgan :: (Set a, Eq a) => Set a -> Set a -> Proof
-proveDeMorgan setA setB =
-    Proof $ \x ->
-        member x (complement (union setA setB)) ==
-        member x (intersection (complement setA) (complement setB))
-```
-
-### 2. 容斥原理
-
-**定理 1.2 (容斥原理)**
-对于有限集 $A$ 和 $B$：
-$$|A \cup B| = |A| + |B| - |A \cap B|$$
-
-**推广到n个集合**:
-$$|A_1 \cup A_2 \cup \cdots \cup A_n| = \sum_{i=1}^n |A_i| - \sum_{1 \leq i < j \leq n} |A_i \cap A_j| + \cdots + (-1)^{n-1} |A_1 \cap A_2 \cap \cdots \cap A_n|$$
-
-**Haskell实现**:
-
-```haskell
--- 容斥原理
-inclusionExclusion :: [Set a] -> Int
-inclusionExclusion sets =
-    sum [(-1)^(k+1) * sum (map cardinality (combinations k sets)) | k <- [1..length sets]]
-
--- 组合生成
-combinations :: Int -> [a] -> [[a]]
-combinations 0 _ = [[]]
-combinations n xs@(y:ys)
-    | n > length xs = []
-    | otherwise = map (y:) (combinations (n-1) ys) ++ combinations n ys
-```
-
-## 特殊集合
-
-### 1. 数集
-
-**自然数集**: $\mathbb{N} = \{0, 1, 2, 3, \ldots\}$
-
-**整数集**: $\mathbb{Z} = \{\ldots, -2, -1, 0, 1, 2, \ldots\}$
-
-**有理数集**: $\mathbb{Q} = \{\frac{p}{q} \mid p, q \in \mathbb{Z}, q \neq 0\}$
-
-**实数集**: $\mathbb{R}$
-
-**复数集**: $\mathbb{C} = \{a + bi \mid a, b \in \mathbb{R}\}$
-
-**Haskell实现**:
-
-```haskell
--- 数集定义
-data NumberSet =
-    NaturalNumbers
-  | IntegerNumbers
-  | RationalNumbers
-  | RealNumbers
-  | ComplexNumbers
-  deriving (Show, Eq)
-
--- 数集操作
-class NumberSetOperations a where
-    -- 包含关系
-    contains :: NumberSet -> a -> Bool
-    -- 基数
-    cardinality :: NumberSet -> Cardinality
-    -- 代数运算
-    algebraicOperations :: NumberSet -> [Operation]
-
--- 具体实现
-instance NumberSetOperations NumberSet where
-    contains NaturalNumbers n = n >= 0
-    contains IntegerNumbers _ = True
-    contains RationalNumbers _ = True
-    contains RealNumbers _ = True
-    contains ComplexNumbers _ = True
-
-    cardinality NaturalNumbers = Countable
-    cardinality IntegerNumbers = Countable
-    cardinality RationalNumbers = Countable
-    cardinality RealNumbers = Uncountable
-    cardinality ComplexNumbers = Uncountable
-```
-
-### 2. 区间
-
-**开区间**: $(a, b) = \{x \mid a < x < b\}$
-
-**闭区间**: $[a, b] = \{x \mid a \leq x \leq b\}$
-
-**半开区间**: $[a, b) = \{x \mid a \leq x < b\}$
-
-**Haskell实现**:
-
-```haskell
--- 区间定义
-data Interval a =
-    Open a a
-  | Closed a a
-  | LeftOpen a a
-  | RightOpen a a
-  | Unbounded
-  deriving (Show, Eq)
-
--- 区间操作
-class IntervalOperations a where
-    -- 包含关系
-    contains :: Interval a -> a -> Bool
+-- 基本集合运算
+class BasicSetOperations a where
     -- 交集
-    intersection :: Interval a -> Interval a -> Maybe (Interval a)
-    -- 并集
-    union :: Interval a -> Interval a -> [Interval a]
+    intersection :: Set a -> Set a -> Set a
+    intersection s1 s2 = Set $ filter (`member` s2) (elements s1)
+    
+    -- 差集
+    difference :: Set a -> Set a -> Set a
+    difference s1 s2 = Set $ filter (not . (`member` s2)) (elements s1)
+    
+    -- 对称差
+    symmetricDifference :: Set a -> Set a -> Set a
+    symmetricDifference s1 s2 = 
+        union2 (difference s1 s2) (difference s2 s1)
+    
+    -- 笛卡尔积
+    cartesianProduct :: Set a -> Set b -> Set (OrderedPair a b)
+    cartesianProduct s1 s2 = 
+        Set [(OrderedPair x y) | x <- elements s1, y <- elements s2]
 
--- 具体实现
-instance (Ord a) => IntervalOperations (Interval a) where
-    contains (Open a b) x = a < x && x < b
-    contains (Closed a b) x = a <= x && x <= b
-    contains (LeftOpen a b) x = a <= x && x < b
-    contains (RightOpen a b) x = a < x && x <= b
-    contains Unbounded _ = True
+-- 辅助函数
+elements :: Set a -> [a]
+elements (Set xs) = xs
+
+insert :: a -> Set a -> Set a
+insert x (Set xs) = Set (x:xs)
+
+remove :: a -> Set a -> Set a
+remove x (Set xs) = Set $ filter (/= x) xs
 ```
 
-## 集合的应用
-
-### 1. 关系理论
-
-**定义 1.5 (关系)**
-集合 $A$ 和 $B$ 之间的关系是 $A \times B$ 的子集。
-
-**Haskell实现**:
+### 关系理论
 
 ```haskell
--- 关系定义
-type Relation a b = Set (a, b)
+-- 二元关系
+data Relation a b = Relation (Set (OrderedPair a b))
 
 -- 关系操作
 class RelationOperations a b where
+    type Domain a b
+    type Codomain a b
+    type Range a b
+    
     -- 定义域
     domain :: Relation a b -> Set a
+    domain (Relation pairs) = 
+        Set $ map (\(OrderedPair x _) -> x) (elements pairs)
+    
     -- 值域
     range :: Relation a b -> Set b
+    range (Relation pairs) = 
+        Set $ map (\(OrderedPair _ y) -> y) (elements pairs)
+    
+    -- 关系合成
+    compose :: Relation a b -> Relation b c -> Relation a c
+    compose (Relation r1) (Relation r2) = 
+        Relation $ Set [(OrderedPair x z) | 
+                       (OrderedPair x y) <- elements r1,
+                       (OrderedPair y' z) <- elements r2,
+                       y == y']
+    
     -- 逆关系
     inverse :: Relation a b -> Relation b a
-    -- 复合关系
-    compose :: Relation a b -> Relation b c -> Relation a c
+    inverse (Relation pairs) = 
+        Relation $ Set [(OrderedPair y x) | (OrderedPair x y) <- elements pairs]
 
--- 具体实现
-instance (Eq a, Eq b) => RelationOperations a b where
-    domain rel = Set $ \x -> any (\(a, _) -> a == x) (toList rel)
-    range rel = Set $ \y -> any (\(_, b) -> b == y) (toList rel)
-    inverse rel = Set $ map (\(a, b) -> (b, a)) (toList rel)
-    compose rel1 rel2 = Set $
-        [(a, c) | (a, b) <- toList rel1, (b', c) <- toList rel2, b == b']
+-- 关系性质
+class RelationProperties a where
+    -- 自反性
+    reflexive :: Relation a a -> Bool
+    reflexive (Relation pairs) = 
+        all (\x -> member (OrderedPair x x) (Relation pairs)) universe
+    
+    -- 对称性
+    symmetric :: Relation a a -> Bool
+    symmetric (Relation pairs) = 
+        all (\(OrderedPair x y) -> 
+            member (OrderedPair y x) (Relation pairs)) (elements pairs)
+    
+    -- 传递性
+    transitive :: Relation a a -> Bool
+    transitive (Relation pairs) = 
+        all (\(OrderedPair x y, OrderedPair y' z) -> 
+            y == y' && member (OrderedPair x z) (Relation pairs))
+            [(p1, p2) | p1 <- elements pairs, p2 <- elements pairs]
 ```
 
-### 2. 函数理论
-
-**定义 1.6 (函数)**
-函数是满足单值性的关系。
-
-**Haskell实现**:
+### 函数理论
 
 ```haskell
--- 函数定义
-type Function a b = Relation a b
+-- 函数作为特殊关系
+data Function a b = Function (Relation a b)
 
 -- 函数性质
 class FunctionProperties a b where
+    -- 单值性
+    singleValued :: Function a b -> Bool
+    singleValued (Function relation) = 
+        all (\(OrderedPair x1 y1, OrderedPair x2 y2) -> 
+            x1 == x2 && y1 == y2) 
+            [(p1, p2) | p1 <- elements relation, p2 <- elements relation]
+    
+    -- 全函数
+    total :: Function a b -> Bool
+    total (Function relation) = 
+        all (\x -> any (\(OrderedPair x' _) -> x == x') (elements relation)) universe
+    
     -- 单射
     injective :: Function a b -> Bool
+    injective (Function relation) = 
+        all (\(OrderedPair x1 y1, OrderedPair x2 y2) -> 
+            y1 == y2 && x1 == x2) 
+            [(p1, p2) | p1 <- elements relation, p2 <- elements relation]
+    
     -- 满射
-    surjective :: Function a b -> Set b -> Bool
+    surjective :: Function a b -> Bool
+    surjective (Function relation) = 
+        all (\y -> any (\(OrderedPair _ y') -> y == y') (elements relation)) universe
+    
     -- 双射
-    bijective :: Function a b -> Set b -> Bool
+    bijective :: Function a b -> Bool
+    bijective f = injective f && surjective f
 
--- 具体实现
-instance (Eq a, Eq b) => FunctionProperties a b where
-    injective f =
-        let pairs = toList f
-        in all (\(a1, b1) ->
-            all (\(a2, b2) -> a1 == a2 || b1 /= b2) pairs) pairs
-
-    surjective f codomain =
-        all (\y -> any (\(_, b) -> b == y) (toList f)) (toList codomain)
-
-    bijective f codomain = injective f && surjective f codomain
+-- 函数应用
+apply :: Function a b -> a -> Maybe b
+apply (Function relation) x = 
+    case find (\(OrderedPair x' y) -> x == x') (elements relation) of
+        Just (OrderedPair _ y) -> Just y
+        Nothing -> Nothing
 ```
 
-## 集合论的计算机科学应用
-
-### 1. 数据库理论
+## 序数理论
 
 ```haskell
--- 关系数据库
-type Table a = Set a
-type Database = Map String (Table Row)
+-- 序数
+data Ordinal = 
+    Zero
+  | Successor Ordinal
+  | Limit (Set Ordinal)
+  deriving (Show, Eq)
 
--- 关系代数
-class RelationalAlgebra a where
-    -- 选择
-    select :: (a -> Bool) -> Table a -> Table a
-    -- 投影
-    project :: [String] -> Table Row -> Table Row
-    -- 连接
-    join :: Table Row -> Table Row -> Table Row
-    -- 并集
-    union :: Table a -> Table a -> Table a
+-- 序数运算
+class OrdinalOperations where
+    -- 后继
+    succ :: Ordinal -> Ordinal
+    succ = Successor
+    
+    -- 序数加法
+    add :: Ordinal -> Ordinal -> Ordinal
+    add Zero y = y
+    add (Successor x) y = Successor (add x y)
+    add (Limit xs) y = Limit (Set [add x y | x <- elements xs])
+    
+    -- 序数乘法
+    multiply :: Ordinal -> Ordinal -> Ordinal
+    multiply Zero _ = Zero
+    multiply (Successor x) y = add y (multiply x y)
+    multiply (Limit xs) y = Limit (Set [multiply x y | x <- elements xs])
+    
+    -- 序数幂
+    power :: Ordinal -> Ordinal -> Ordinal
+    power _ Zero = Successor Zero
+    power x (Successor y) = multiply x (power x y)
+    power x (Limit ys) = Limit (Set [power x y | y <- elements ys])
+
+-- 序数比较
+instance Ord Ordinal where
+    compare Zero Zero = EQ
+    compare Zero _ = LT
+    compare _ Zero = GT
+    compare (Successor x) (Successor y) = compare x y
+    compare (Successor x) (Limit ys) = LT
+    compare (Limit xs) (Successor y) = GT
+    compare (Limit xs) (Limit ys) = 
+        if subset xs ys && subset ys xs then EQ
+        else if subset xs ys then LT
+        else GT
 ```
 
-### 2. 形式语言理论
+## 基数理论
 
 ```haskell
--- 字母表
-type Alphabet = Set Char
+-- 基数
+data Cardinal = 
+    FiniteCardinal Int
+  | AlephZero
+  | Aleph Ordinal
+  deriving (Show, Eq)
 
--- 字符串
-type String = [Char]
+-- 基数运算
+class CardinalOperations where
+    -- 基数加法
+    addCardinal :: Cardinal -> Cardinal -> Cardinal
+    addCardinal (FiniteCardinal m) (FiniteCardinal n) = FiniteCardinal (m + n)
+    addCardinal AlephZero _ = AlephZero
+    addCardinal _ AlephZero = AlephZero
+    addCardinal (Aleph a) (Aleph b) = Aleph (max a b)
+    
+    -- 基数乘法
+    multiplyCardinal :: Cardinal -> Cardinal -> Cardinal
+    multiplyCardinal (FiniteCardinal m) (FiniteCardinal n) = FiniteCardinal (m * n)
+    multiplyCardinal AlephZero _ = AlephZero
+    multiplyCardinal _ AlephZero = AlephZero
+    multiplyCardinal (Aleph a) (Aleph b) = Aleph (max a b)
+    
+    -- 基数幂
+    powerCardinal :: Cardinal -> Cardinal -> Cardinal
+    powerCardinal _ (FiniteCardinal 0) = FiniteCardinal 1
+    powerCardinal (FiniteCardinal m) (FiniteCardinal n) = FiniteCardinal (m ^ n)
+    powerCardinal AlephZero (FiniteCardinal n) = AlephZero
+    powerCardinal (Aleph a) (FiniteCardinal n) = Aleph a
+    powerCardinal _ AlephZero = AlephZero
+    powerCardinal (FiniteCardinal m) (Aleph a) = Aleph (Successor a)
+    powerCardinal (Aleph a) (Aleph b) = Aleph (Successor (max a b))
 
--- 语言
-type Language = Set String
-
--- 语言操作
-class LanguageOperations where
-    -- 连接
-    concatenation :: Language -> Language -> Language
-    -- 克林闭包
-    kleeneStar :: Language -> Language
-    -- 并集
-    union :: Language -> Language -> Language
+-- 基数比较
+instance Ord Cardinal where
+    compare (FiniteCardinal m) (FiniteCardinal n) = compare m n
+    compare (FiniteCardinal _) _ = LT
+    compare _ (FiniteCardinal _) = GT
+    compare AlephZero AlephZero = EQ
+    compare AlephZero (Aleph _) = LT
+    compare (Aleph _) AlephZero = GT
+    compare (Aleph a) (Aleph b) = compare a b
 ```
 
-## 结论
+## 应用领域
 
-集合论为现代数学和计算机科学提供了统一的基础语言。通过严格的公理化方法和形式化表达，集合论确保了数学推理的严谨性和可靠性。
+### 1. 计算机科学
 
-在计算机科学中，集合论的应用包括：
+- 为数据结构提供理论基础
+- 支持算法设计和分析
+- 指导编程语言设计
 
-1. **数据结构**: 集合、映射、关系等基础数据结构
-2. **算法设计**: 集合操作、搜索算法、图算法
-3. **数据库理论**: 关系代数、查询优化
-4. **形式语言**: 自动机理论、语法分析
-5. **程序验证**: 集合论在形式化验证中的应用
+### 2. 数学基础
+
+- 为所有数学分支提供统一语言
+- 支持数学结构的形式化
+- 提供证明的基础工具
+
+### 3. 逻辑学
+
+- 为形式逻辑提供语义基础
+- 支持模型论研究
+- 提供证明论工具
+
+### 4. 哲学
+
+- 为数学哲学提供研究对象
+- 支持本体论研究
+- 提供认识论工具
+
+## 质量保证
+
+### 1. 公理化标准
+
+- 严格遵循ZFC公理系统
+- 所有定理都有形式化证明
+- 保证逻辑一致性
+
+### 2. 实现正确性
+
+- Haskell代码的类型安全
+- 算法的正确性验证
+- 性能的优化保证
+
+### 3. 数学准确性
+
+- 所有定义都符合数学标准
+- 符号使用的一致性
+- 证明的严格性
 
 ---
 
-**导航**: [返回数学基础](../README.md) | [下一主题：数论](02-Number-Theory.md) | [返回形式科学层](../../README.md)
+**导航**: [返回数学基础索引](../README.md) | [下一主题：数论](02-Number-Theory.md)

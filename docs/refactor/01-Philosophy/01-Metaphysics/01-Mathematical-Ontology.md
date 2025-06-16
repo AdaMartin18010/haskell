@@ -1,409 +1,428 @@
-# 数学本体论 (Mathematical Ontology)
+# 01-Mathematical-Ontology (数学本体论)
 
 ## 概述
 
-数学本体论研究数学对象的存在性、本质和结构，为形式化科学提供本体论基础。本文档将数学本体论的主要立场进行形式化表达，并通过Haskell代码实现相关的概念和推理。
+数学本体论研究数学对象的存在性、本质和结构，是连接哲学思辨与数学形式化的桥梁。本文档将数学本体论概念形式化，并用Haskell实现相关的抽象结构。
 
-## 核心问题
+## 核心概念
 
 ### 1. 数学对象的存在性
 
-数学对象（如数、集合、函数）是否真实存在？如果存在，它们存在于何处？
+#### 形式化定义
 
-### 2. 数学真理的本质
+数学对象的存在性可以通过以下方式定义：
 
-数学命题的真假如何确定？数学真理是发现的还是发明的？
+- **柏拉图主义**: 数学对象存在于抽象世界中
+- **形式主义**: 数学对象是形式符号系统
+- **直觉主义**: 数学对象通过构造性方法获得
+- **结构主义**: 数学对象是结构关系中的位置
 
-### 3. 数学知识的来源
-
-我们如何获得数学知识？数学知识是经验的还是先验的？
-
-## 主要立场
-
-### 1. 柏拉图主义 (Platonism)
-
-**核心观点**: 数学对象是抽象实体，独立于物质世界和人类思维而存在。
-
-**形式化表达**:
+#### Haskell实现
 
 ```haskell
--- 柏拉图主义的形式化
-data Platonism = Platonism 
-    { mathematicalObjects :: Set AbstractEntity
-    , eternalTruths :: Set MathematicalProposition
-    , independentExistence :: Bool
-    }
+-- 数学对象的基本类型
+data MathematicalObject = 
+    Set SetStructure
+  | Function FunctionStructure
+  | Category CategoryStructure
+  | Type TypeStructure
+  | Space SpaceStructure
 
--- 数学对象作为抽象实体
-data AbstractEntity = 
-    Number NumberType
-  | Set SetType
-  | Function FunctionType
-  | Structure AlgebraicStructure
-
--- 数学真理的永恒性
-eternal :: MathematicalProposition -> Bool
-eternal prop = 
-    prop `isMathematical` && prop `isNecessary` && prop `isTimeless`
-```
-
-**数学表达**:
-
-$$\text{柏拉图主义} \equiv \forall x \in \mathcal{M} \cdot \exists y \in \mathcal{A} \cdot (x = y \land \text{Independent}(y))$$
-
-其中 $\mathcal{M}$ 是数学对象集合，$\mathcal{A}$ 是抽象实体集合。
-
-### 2. 形式主义 (Formalism)
-
-**核心观点**: 数学是符号游戏，数学对象没有独立的存在性。
-
-**形式化表达**:
-
-```haskell
--- 形式主义的形式化
-data Formalism = Formalism 
-    { symbols :: Set Symbol
-    , rules :: Set Rule
-    , games :: Set SymbolGame
-    }
-
--- 符号游戏
-data SymbolGame = SymbolGame 
-    { symbols :: Set Symbol
-    , rules :: Set Rule
-    , moves :: Set Move
-    , validMoves :: Move -> Bool
-    }
-
--- 数学作为符号操作
-mathematicalOperation :: Symbol -> Rule -> Symbol
-mathematicalOperation symbol rule = 
-    applyRule rule symbol
-```
-
-**数学表达**:
-
-$$\text{形式主义} \equiv \forall x \in \mathcal{M} \cdot x \in \mathcal{S} \land \text{Symbolic}(x)$$
-
-其中 $\mathcal{S}$ 是符号集合。
-
-### 3. 直觉主义 (Intuitionism)
-
-**核心观点**: 数学对象是人类心智构造的产物，数学真理需要构造性证明。
-
-**形式化表达**:
-
-```haskell
--- 直觉主义的形式化
-data Intuitionism = Intuitionism 
-    { mentalConstructions :: Set MentalConstruction
-    , constructiveProofs :: Set ConstructiveProof
-    , intuition :: IntuitionFunction
-    }
-
--- 构造性证明
-data ConstructiveProof = ConstructiveProof 
-    { premises :: [Proposition]
-    , construction :: Construction
-    , conclusion :: Proposition
-    }
-
--- 构造性存在性
-constructiveExists :: (a -> Bool) -> Maybe a
-constructiveExists predicate = 
-    find predicate universe
-```
-
-**数学表达**:
-
-$$\text{直觉主义} \equiv \forall x \in \mathcal{M} \cdot \exists c \in \mathcal{C} \cdot \text{Constructed}(x, c)$$
-
-其中 $\mathcal{C}$ 是构造集合。
-
-### 4. 结构主义 (Structuralism)
-
-**核心观点**: 数学对象是结构中的位置，数学关注的是结构关系而非具体对象。
-
-**形式化表达**:
-
-```haskell
--- 结构主义的形式化
-data Structuralism = Structuralism 
-    { structures :: Set Structure
-    , positions :: Set Position
-    , relations :: Set Relation
-    }
+-- 存在性谓词
+class Exists a where
+    exists :: a -> Bool
+    essence :: a -> Essence
+    structure :: a -> Structure
 
 -- 数学结构
-data Structure = Structure 
-    { domain :: Set Position
-    , relations :: Set Relation
-    , axioms :: Set Axiom
-    }
+data Structure = 
+    AlgebraicStructure AlgebraicProperties
+  | TopologicalStructure TopologicalProperties
+  | OrderStructure OrderProperties
+  | MetricStructure MetricProperties
 
--- 结构中的位置
-data Position = Position 
-    { structure :: Structure
-    , role :: Role
-    , relations :: Set Relation
-    }
+-- 本质属性
+data Essence = 
+    Essence 
+        { properties :: [Property]
+        , relations :: [Relation]
+        , invariants :: [Invariant]
+        }
 ```
 
-**数学表达**:
+### 2. 集合论基础
 
-$$\text{结构主义} \equiv \forall x \in \mathcal{M} \cdot \exists S \in \mathcal{S} \cdot \text{Position}(x, S)$$
-
-其中 $\mathcal{S}$ 是结构集合。
-
-### 5. 虚构主义 (Fictionalism)
-
-**核心观点**: 数学陈述是虚构的，数学对象不存在，但数学在科学中有用。
-
-**形式化表达**:
+#### 公理化集合论
 
 ```haskell
--- 虚构主义的形式化
-data Fictionalism = Fictionalism 
-    { fictions :: Set Fiction
-    , usefulness :: UsefulnessFunction
-    , instrumentalValue :: Value
-    }
+-- ZFC公理系统
+data ZFCAxioms = 
+    ZFCAxioms 
+        { extensionality :: ExtensionalityAxiom
+        , pairing :: PairingAxiom
+        , union :: UnionAxiom
+        , powerSet :: PowerSetAxiom
+        , infinity :: InfinityAxiom
+        , replacement :: ReplacementAxiom
+        , foundation :: FoundationAxiom
+        , choice :: ChoiceAxiom
+        }
 
--- 数学虚构
-data Fiction = Fiction 
-    { content :: MathematicalContent
-    , truthValue :: FictionalTruth
-    , utility :: Utility
-    }
+-- 外延公理
+data ExtensionalityAxiom = 
+    ExtensionalityAxiom 
+        { premise :: Set -> Set -> Bool
+        , conclusion :: Set -> Set -> Bool
+        }
 
--- 工具性价值
-instrumentalValue :: Fiction -> Value
-instrumentalValue fiction = 
-    calculateUtility fiction
+-- 集合的基本操作
+class SetOperations a where
+    empty :: a
+    singleton :: Element -> a
+    union :: a -> a -> a
+    intersection :: a -> a -> a
+    complement :: a -> a
+    powerSet :: a -> Set a
 ```
 
-**数学表达**:
-
-$$\text{虚构主义} \equiv \forall x \in \mathcal{M} \cdot \text{Fictional}(x) \land \text{Useful}(x)$$
-
-## 形式化比较
-
-### 存在性判断
+#### 数学实现
 
 ```haskell
--- 不同立场对存在性的判断
-exists :: MathematicalObject -> OntologicalPosition -> Bool
-exists obj position = case position of
-    Platonism -> True  -- 柏拉图主义：数学对象存在
-    Formalism -> False -- 形式主义：数学对象不存在
-    Intuitionism -> isConstructed obj -- 直觉主义：需要构造
-    Structuralism -> isPosition obj -- 结构主义：作为位置存在
-    Fictionalism -> False -- 虚构主义：数学对象不存在
+-- 集合的Haskell实现
+newtype Set a = Set { unSet :: [a] }
+    deriving (Eq, Show)
+
+instance SetOperations Set where
+    empty = Set []
+    singleton x = Set [x]
+    union (Set xs) (Set ys) = Set (xs ++ ys)
+    intersection (Set xs) (Set ys) = Set (filter (`elem` ys) xs)
+    complement (Set xs) = Set (filter (`notElem` xs) universe)
+    powerSet (Set xs) = Set (map Set (subsequences xs))
+
+-- 集合关系
+isSubset :: Eq a => Set a -> Set a -> Bool
+isSubset (Set xs) (Set ys) = all (`elem` ys) xs
+
+isElement :: Eq a => a -> Set a -> Bool
+isElement x (Set xs) = x `elem` xs
 ```
 
-### 真理理论
+### 3. 类型论基础
+
+#### 简单类型论
 
 ```haskell
--- 不同立场对真理的理解
-truthTheory :: OntologicalPosition -> TruthTheory
-truthTheory position = case position of
-    Platonism -> CorrespondenceTheory -- 符合论
-    Formalism -> CoherenceTheory -- 融贯论
-    Intuitionism -> ConstructiveTheory -- 构造论
-    Structuralism -> StructuralTheory -- 结构论
-    Fictionalism -> FictionalTheory -- 虚构论
+-- 简单类型
+data SimpleType = 
+    BaseType String
+  | FunctionType SimpleType SimpleType
+  | ProductType SimpleType SimpleType
+  | SumType SimpleType SimpleType
+
+-- 类型环境
+type TypeEnvironment = [(String, SimpleType)]
+
+-- 类型检查
+typeCheck :: TypeEnvironment -> Term -> Maybe SimpleType
+typeCheck env (Var x) = lookup x env
+typeCheck env (App t1 t2) = do
+    tau1 <- typeCheck env t1
+    tau2 <- typeCheck env t2
+    case tau1 of
+        FunctionType arg res | arg == tau2 -> Just res
+        _ -> Nothing
+typeCheck env (Lambda x tau t) = do
+    res <- typeCheck ((x, tau) : env) t
+    return (FunctionType tau res)
 ```
 
-## 与编程语言理论的关系
-
-### 1. 类型系统
-
-数学本体论影响类型系统的设计：
+#### 依赖类型论
 
 ```haskell
--- 基于柏拉图主义的类型系统
-class PlatonistTypeSystem a where
-    type MathematicalObject a
-    type AbstractEntity a
-    
-    -- 类型作为抽象实体
-    typeAsEntity :: Type a -> AbstractEntity a
-    -- 类型的存在性
-    typeExists :: Type a -> Bool
+-- 依赖类型
+data DependentType = 
+    PiType String DependentType DependentType
+  | SigmaType String DependentType DependentType
+  | IdType DependentType Term Term
+  | UniverseType Level
 
--- 基于直觉主义的类型系统
-class IntuitionistTypeSystem a where
-    type Construction a
-    type Proof a
-    
-    -- 构造性类型
-    constructiveType :: Construction a -> Type a
-    -- 构造性证明
-    constructiveProof :: Type a -> Proof a
+-- 上下文
+type Context = [(String, DependentType)]
+
+-- 类型形成规则
+typeFormation :: Context -> DependentType -> Bool
+typeFormation ctx (PiType x a b) = 
+    typeFormation ctx a && typeFormation ((x, a) : ctx) b
+typeFormation ctx (SigmaType x a b) = 
+    typeFormation ctx a && typeFormation ((x, a) : ctx) b
+typeFormation ctx (IdType a t1 t2) = 
+    typeFormation ctx a && 
+    hasType ctx t1 a && 
+    hasType ctx t2 a
+typeFormation ctx (UniverseType l) = True
 ```
 
-### 2. 程序语义
+### 4. 范畴论基础
 
-本体论立场影响程序语义的理解：
+#### 基本范畴
 
 ```haskell
--- 柏拉图主义语义：程序对应数学对象
-platonistSemantics :: Program -> MathematicalObject
-platonistSemantics program = 
-    interpretAsMathematicalObject program
+-- 范畴定义
+data Category obj arr = 
+    Category 
+        { objects :: [obj]
+        , arrows :: [arr]
+        , domain :: arr -> obj
+        , codomain :: arr -> obj
+        , identity :: obj -> arr
+        , composition :: arr -> arr -> Maybe arr
+        }
 
--- 形式主义语义：程序是符号操作
-formalistSemantics :: Program -> SymbolOperation
-formalistSemantics program = 
-    interpretAsSymbolOperation program
+-- 函子
+data Functor c d = 
+    Functor 
+        { objectMap :: Object c -> Object d
+        , arrowMap :: Arrow c -> Arrow d
+        , preservesIdentity :: Bool
+        , preservesComposition :: Bool
+        }
 
--- 直觉主义语义：程序是构造
-intuitionistSemantics :: Program -> Construction
-intuitionistSemantics program = 
-    interpretAsConstruction program
+-- 自然变换
+data NaturalTransformation f g = 
+    NaturalTransformation 
+        { components :: Object c -> Arrow d
+        , naturality :: Arrow c -> Bool
+        }
 ```
 
-## 实际应用
-
-### 1. 定理证明系统
+#### Haskell实现
 
 ```haskell
--- 基于不同本体论的证明系统
-data ProofSystem = ProofSystem 
-    { ontology :: OntologicalPosition
-    , proofRules :: [ProofRule]
-    , semantics :: ProofSemantics
-    }
+-- Hask范畴
+instance Category () (->) where
+    objects = [()]
+    arrows = undefined  -- 所有函数
+    domain _ = ()
+    codomain _ = ()
+    identity _ = id
+    composition f g = Just (f . g)
 
--- 柏拉图主义证明：寻找永恒真理
-platonistProof :: Theorem -> Proof
-platonistProof theorem = 
-    discoverEternalTruth theorem
+-- 函子实例
+instance Functor Maybe where
+    fmap f Nothing = Nothing
+    fmap f (Just x) = Just (f x)
 
--- 直觉主义证明：构造性证明
-intuitionistProof :: Theorem -> ConstructiveProof
-intuitionistProof theorem = 
-    constructProof theorem
+-- 单子
+class Monad m where
+    return :: a -> m a
+    (>>=) :: m a -> (a -> m b) -> m b
+
+instance Monad Maybe where
+    return = Just
+    Nothing >>= _ = Nothing
+    Just x >>= f = f x
 ```
 
-### 2. 类型检查器
+## 数学基础
+
+### 1. 集合论公理
+
+#### ZFC公理系统
+
+1. **外延公理**: $\forall x \forall y [\forall z(z \in x \leftrightarrow z \in y) \rightarrow x = y]$
+
+2. **配对公理**: $\forall x \forall y \exists z \forall w(w \in z \leftrightarrow w = x \vee w = y)$
+
+3. **并集公理**: $\forall F \exists A \forall x(x \in A \leftrightarrow \exists B(B \in F \wedge x \in B))$
+
+4. **幂集公理**: $\forall x \exists y \forall z(z \in y \leftrightarrow z \subseteq x)$
+
+5. **无穷公理**: $\exists x(\emptyset \in x \wedge \forall y(y \in x \rightarrow y \cup \{y\} \in x))$
+
+#### Haskell实现
 
 ```haskell
--- 基于本体论的类型检查
-class OntologicalTypeChecker a where
-    type Ontology a
-    type Type a
-    type Term a
-    
-    -- 类型检查
-    typeCheck :: Term a -> Type a -> Ontology a -> Bool
-    -- 类型推断
-    typeInfer :: Term a -> Ontology a -> Maybe (Type a)
+-- 公理验证
+validateExtensionality :: Set a -> Set a -> Bool
+validateExtensionality s1 s2 = 
+    all (`isElement` s2) (unSet s1) && 
+    all (`isElement` s1) (unSet s2)
 
--- 柏拉图主义类型检查
-platonistTypeCheck :: Term -> Type -> Bool
-platonistTypeCheck term typ = 
-    term `correspondsTo` typ
-
--- 直觉主义类型检查
-intuitionistTypeCheck :: Term -> Type -> Bool
-intuitionistTypeCheck term typ = 
-    canConstruct term typ
+validatePairing :: a -> a -> Set a -> Bool
+validatePairing x y pair = 
+    isElement x pair && isElement y pair &&
+    all (\z -> z == x || z == y) (unSet pair)
 ```
 
-## 哲学论证
+### 2. 类型论规则
 
-### 1. 柏拉图主义论证
+#### 形成规则
 
-**优点**:
+1. **Π类型形成**: $\frac{\Gamma \vdash A : \mathcal{U}_i \quad \Gamma, x:A \vdash B : \mathcal{U}_i}{\Gamma \vdash \Pi x:A.B : \mathcal{U}_i}$
 
-- 解释数学的客观性和必然性
-- 为数学真理提供坚实基础
-- 支持数学的发现观
+2. **Σ类型形成**: $\frac{\Gamma \vdash A : \mathcal{U}_i \quad \Gamma, x:A \vdash B : \mathcal{U}_i}{\Gamma \vdash \Sigma x:A.B : \mathcal{U}_i}$
 
-**缺点**:
+3. **恒等类型形成**: $\frac{\Gamma \vdash A : \mathcal{U}_i \quad \Gamma \vdash a : A \quad \Gamma \vdash b : A}{\Gamma \vdash \text{Id}_A(a,b) : \mathcal{U}_i}$
 
-- 难以解释数学知识的获得
-- 存在认识论问题
-- 违反奥卡姆剃刀原则
-
-### 2. 形式主义论证
-
-**优点**:
-
-- 避免本体论承诺
-- 解释数学的符号性质
-- 符合现代数学实践
-
-**缺点**:
-
-- 难以解释数学的应用性
-- 无法解释数学的必然性
-- 忽视数学的直觉方面
-
-### 3. 直觉主义论证
-
-**优点**:
-
-- 解释数学知识的来源
-- 强调构造性方法
-- 与计算机科学契合
-
-**缺点**:
-
-- 限制数学的范围
-- 难以处理经典数学
-- 存在主观性问题
-
-## 现代发展
-
-### 1. 计算哲学
-
-数学本体论与计算哲学的结合：
+#### Haskell实现
 
 ```haskell
--- 计算哲学视角
-data ComputationalPhilosophy = ComputationalPhilosophy 
-    { computation :: Computation
-    , ontology :: Ontology
-    , epistemology :: Epistemology
-    }
+-- 类型形成检查
+checkPiFormation :: Context -> DependentType -> DependentType -> Bool
+checkPiFormation ctx a b = 
+    hasType ctx a universe && 
+    hasType ((freshVar ctx, a) : ctx) b universe
 
--- 计算作为本体论基础
-computationAsOntology :: Computation -> Ontology
-computationAsOntology computation = 
-    deriveOntologyFromComputation computation
+checkSigmaFormation :: Context -> DependentType -> DependentType -> Bool
+checkSigmaFormation ctx a b = 
+    hasType ctx a universe && 
+    hasType ((freshVar ctx, a) : ctx) b universe
+
+checkIdFormation :: Context -> DependentType -> Term -> Term -> Bool
+checkIdFormation ctx a t1 t2 = 
+    hasType ctx a universe && 
+    hasType ctx t1 a && 
+    hasType ctx t2 a
 ```
 
-### 2. 信息哲学
+### 3. 范畴论公理
 
-信息作为基础实在：
+#### 范畴公理
+
+1. **结合律**: $(f \circ g) \circ h = f \circ (g \circ h)$
+
+2. **单位律**: $1_B \circ f = f = f \circ 1_A$
+
+3. **函子公理**: $F(1_A) = 1_{F(A)}$ 和 $F(f \circ g) = F(f) \circ F(g)$
+
+#### Haskell实现
 
 ```haskell
--- 信息本体论
-data InformationOntology = InformationOntology 
-    { information :: Information
-    , patterns :: Set Pattern
-    , structures :: Set Structure
-    }
+-- 范畴公理验证
+validateAssociativity :: Category obj arr -> arr -> arr -> arr -> Bool
+validateAssociativity cat f g h = 
+    case (composition cat (composition cat f g) h, 
+          composition cat f (composition cat g h)) of
+        (Just comp1, Just comp2) -> comp1 == comp2
+        _ -> False
 
--- 数学作为信息模式
-mathematicsAsInformation :: MathematicalObject -> Information
-mathematicsAsInformation obj = 
-    encodeAsInformation obj
+validateIdentity :: Category obj arr -> arr -> Bool
+validateIdentity cat f = 
+    let dom = domain cat f
+        cod = codomain cat f
+        idDom = identity cat dom
+        idCod = identity cat cod
+    in composition cat idCod f == Just f &&
+       composition cat f idDom == Just f
 ```
 
-## 结论
+## 应用领域
 
-数学本体论为形式化科学提供了重要的哲学基础。不同的本体论立场影响我们对数学对象、数学真理和数学知识的理解，进而影响形式化方法的设计和应用。
+### 1. 程序语义
 
-在软件工程和计算机科学中，理解这些本体论立场有助于：
+#### 指称语义
 
-1. **设计更好的类型系统**: 基于对数学对象本质的理解
-2. **构建更可靠的程序**: 通过形式化验证确保正确性
-3. **开发更有效的算法**: 利用数学结构的性质
-4. **建立更严谨的理论**: 基于坚实的哲学基础
+```haskell
+-- 指称语义域
+data DenotationalDomain = 
+    Bottom
+  | Value Value
+  | Function (DenotationalDomain -> DenotationalDomain)
+
+-- 语义函数
+semantic :: Term -> DenotationalDomain
+semantic (Var x) = lookup x environment
+semantic (App t1 t2) = 
+    case semantic t1 of
+        Function f -> f (semantic t2)
+        _ -> Bottom
+semantic (Lambda x t) = 
+    Function (\v -> semantic t { environment = (x, v) : environment })
+```
+
+### 2. 类型系统
+
+#### 类型安全
+
+```haskell
+-- 类型安全定理
+typeSafety :: Term -> Bool
+typeSafety t = 
+    case typeCheck emptyContext t of
+        Just _ -> progress t && preservation t
+        Nothing -> False
+
+-- 进展性
+progress :: Term -> Bool
+progress (Var _) = False
+progress (App t1 t2) = 
+    case (isValue t1, isValue t2) of
+        (True, True) -> isReducible (App t1 t2)
+        _ -> progress t1 || progress t2
+progress (Lambda _ _) = True
+
+-- 保持性
+preservation :: Term -> Bool
+preservation t = 
+    case (typeCheck emptyContext t, step t) of
+        (Just tau, Just t') -> 
+            case typeCheck emptyContext t' of
+                Just tau' -> tau == tau'
+                Nothing -> False
+        _ -> True
+```
+
+### 3. 形式化验证
+
+#### 程序验证
+
+```haskell
+-- Hoare逻辑
+data HoareTriple = 
+    HoareTriple 
+        { precondition :: Predicate
+        , program :: Program
+        , postcondition :: Predicate
+        }
+
+-- 验证规则
+validateAssignment :: Predicate -> String -> Expression -> Predicate
+validateAssignment post x e = 
+    substitute post x e
+
+validateSequence :: HoareTriple -> HoareTriple -> HoareTriple
+validateSequence (HoareTriple p1 c1 q1) (HoareTriple p2 c2 q2) = 
+    HoareTriple p1 (Sequence c1 c2) q2
+    where p2 = q1
+
+validateConditional :: Predicate -> Expression -> HoareTriple -> HoareTriple -> HoareTriple
+validateConditional p b (HoareTriple p1 c1 q) (HoareTriple p2 c2 q) = 
+    HoareTriple (And p (And (Implies p1 b) (Implies p2 (Not b)))) 
+                (If b c1 c2) q
+```
+
+## 学习路径
+
+### 基础路径
+
+1. **集合论基础** → 公理化集合论 → 基数理论
+2. **类型论基础** → 简单类型论 → 依赖类型论
+3. **范畴论基础** → 基本范畴 → 高级范畴
+
+### 高级路径
+
+1. **同伦类型论** → 高阶归纳类型 → 单值公理
+2. **构造性数学** → 直觉主义逻辑 → 程序提取
+3. **形式化验证** → 定理证明 → 程序验证
+
+## 相关链接
+
+- [返回形而上学](../README.md)
+- [模态形而上学](02-Modal-Metaphysics.md)
+- [形式科学层](../../02-Formal-Science/README.md)
+- [类型论](../../02-Formal-Science/04-Type-Theory/README.md)
 
 ---
 
-**导航**: [返回形而上学](../README.md) | [下一主题：存在论](02-Existence-Theory.md) | [返回理念层](../../README.md)
+**导航**: [返回形而上学](../README.md) | [下一主题: 模态形而上学](02-Modal-Metaphysics.md)
