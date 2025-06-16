@@ -79,18 +79,23 @@ class Ord a where
 ### 2. 类型推导规则
 
 #### 变量规则 (Var)
+
 $$\frac{x : \tau \in \Gamma}{\Gamma \vdash x : \tau}$$
 
 #### 应用规则 (App)
+
 $$\frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1 e_2 : \tau_2}$$
 
 #### 抽象规则 (Abs)
+
 $$\frac{\Gamma, x : \tau_1 \vdash e : \tau_2}{\Gamma \vdash \lambda x.e : \tau_1 \rightarrow \tau_2}$$
 
 #### 泛化规则 (Gen)
+
 $$\frac{\Gamma \vdash e : \tau \quad \alpha \notin FV(\Gamma)}{\Gamma \vdash e : \forall \alpha.\tau}$$
 
 #### 实例化规则 (Inst)
+
 $$\frac{\Gamma \vdash e : \forall \alpha.\tau}{\Gamma \vdash e : \tau[\sigma/\alpha]}$$
 
 ### 3. 类型类约束
@@ -514,4 +519,4 @@ verifyTypeSafety = do
 
 **最后更新**: 2024年12月  
 **作者**: 形式化知识体系项目组  
-**版本**: 1.0 
+**版本**: 1.0
