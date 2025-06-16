@@ -7,30 +7,35 @@
 ## 目录结构
 
 ### 01-Existence-Theory (存在论)
+
 - [01-Existence-Theory.md](01-Existence-Theory.md) - 存在论基础
 - [02-Entity-Theory.md](02-Entity-Theory.md) - 实体理论
 - [03-Property-Theory.md](03-Property-Theory.md) - 属性理论
 - [04-Identity-Theory.md](04-Identity-Theory.md) - 同一性理论
 
 ### 02-Ontology (本体论)
+
 - [01-Ontology.md](02-Ontology/01-Ontology.md) - 本体论基础
 - [02-Category-Theory.md](02-Ontology/02-Category-Theory.md) - 范畴理论
 - [03-Substance-Theory.md](02-Ontology/03-Substance-Theory.md) - 实体理论
 - [04-Form-Theory.md](02-Ontology/04-Form-Theory.md) - 形式理论
 
 ### 03-Modal-Metaphysics (模态形而上学)
+
 - [01-Modal-Metaphysics.md](03-Modal-Metaphysics/01-Modal-Metaphysics.md) - 模态形而上学基础
 - [02-Possibility-Theory.md](03-Modal-Metaphysics/02-Possibility-Theory.md) - 可能性理论
 - [03-Necessity-Theory.md](03-Modal-Metaphysics/03-Necessity-Theory.md) - 必然性理论
 - [04-Contingency-Theory.md](03-Modal-Metaphysics/04-Contingency-Theory.md) - 偶然性理论
 
 ### 04-Time-Space-Philosophy (时间空间哲学)
+
 - [01-Time-Philosophy.md](04-Time-Space-Philosophy/01-Time-Philosophy.md) - 时间哲学
 - [02-Space-Philosophy.md](04-Time-Space-Philosophy/02-Space-Philosophy.md) - 空间哲学
 - [03-Spacetime-Theory.md](04-Time-Space-Philosophy/03-Spacetime-Theory.md) - 时空理论
 - [04-Temporal-Logic.md](04-Time-Space-Philosophy/04-Temporal-Logic.md) - 时态逻辑
 
 ### 05-Causality-Theory (因果性理论)
+
 - [01-Causality-Theory.md](05-Causality-Theory/01-Causality-Theory.md) - 因果性理论基础
 - [02-Causal-Relations.md](05-Causality-Theory/02-Causal-Relations.md) - 因果关系
 - [03-Causal-Chains.md](05-Causality-Theory/03-Causal-Chains.md) - 因果链
@@ -129,11 +134,13 @@ class ModalLogic a where
 ## 与其他层次的关系
 
 ### 向上关系
+
 - 为认识论提供本体论基础
 - 为逻辑学提供存在论前提
 - 为伦理学提供价值论基础
 
 ### 向下关系
+
 - 为形式科学层提供基本范畴
 - 为理论层提供概念框架
 - 指导具体科学的研究方向
@@ -141,11 +148,13 @@ class ModalLogic a where
 ## 学习路径
 
 ### 基础路径
+
 1. 存在论基础 → 实体理论 → 属性理论
 2. 本体论基础 → 范畴理论 → 分类系统
 3. 模态形而上学 → 可能性理论 → 必然性理论
 
 ### 进阶路径
+
 1. 时间空间哲学 → 时空理论 → 时态逻辑
 2. 因果性理论 → 因果关系 → 因果推理
 3. 形而上学应用 → 计算形而上学 → 形式化表达
@@ -153,12 +162,14 @@ class ModalLogic a where
 ## 质量保证
 
 ### 内容标准
+
 - 形而上学概念的准确性
 - 形式化表达的严格性
 - 逻辑推理的正确性
 - 与其他哲学分支的一致性
 
 ### 技术标准
+
 - Haskell代码的可编译性
 - 数学定义的规范性
 - 逻辑结构的完整性

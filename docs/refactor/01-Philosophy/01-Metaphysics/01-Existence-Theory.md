@@ -11,11 +11,13 @@
 **定义**: 存在是事物在现实世界中的实际在场状态。
 
 **形式化表达**:
+
 ```latex
 \exists x : \text{Entity}(x) \land \text{Present}(x)
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 存在的基本类型
 data Existence = 
@@ -51,11 +53,13 @@ data Modality =
 **定义**: 实体是具有独立存在性的基本单位。
 
 **形式化表达**:
+
 ```latex
 \text{Entity}(x) \equiv \exists y : \text{Property}(y) \land \text{Has}(x, y)
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 实体类
 class Entity a where
@@ -81,11 +85,13 @@ class Entity a where
 **定义**: 属性是实体所具有的特征或性质。
 
 **形式化表达**:
+
 ```latex
 \text{Property}(P) \land \text{Entity}(x) \rightarrow \text{Has}(x, P)
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 属性类型
 data Property = 
@@ -110,11 +116,13 @@ class PropertySystem a where
 **公理**: 至少存在一个实体。
 
 **形式化表达**:
+
 ```latex
 \exists x : \text{Entity}(x)
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 存在公理
 existenceAxiom :: Bool
@@ -135,11 +143,13 @@ existenceProof = Existence
 **公理**: 每个实体都与自身同一。
 
 **形式化表达**:
+
 ```latex
 \forall x : \text{Entity}(x) \rightarrow x = x
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 同一性公理
 identityAxiom :: (Entity a, Eq a) => a -> Bool
@@ -155,11 +165,13 @@ identityProof x = Proof $ "Entity " ++ show x ++ " is identical to itself"
 **公理**: 一个实体不能同时具有和不具有同一个属性。
 
 **形式化表达**:
+
 ```latex
 \forall x, P : \text{Entity}(x) \land \text{Property}(P) \rightarrow \neg(\text{Has}(x, P) \land \neg\text{Has}(x, P))
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 非矛盾公理
 nonContradictionAxiom :: (Entity a, PropertySystem a) => a -> PropertyType a -> Bool
@@ -179,11 +191,13 @@ checkNonContradiction entity props =
 **理论**: 存在可以分为不同的层次，从物理存在到抽象存在。
 
 **形式化表达**:
+
 ```latex
 \text{ExistenceLevel}(L) \land \text{Entity}(x) \rightarrow \text{AtLevel}(x, L)
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 存在层次
 data ExistenceLevel = 
@@ -208,11 +222,13 @@ class HierarchicalExistence a where
 **理论**: 存在具有不同的模态，包括必然存在、偶然存在和不可能存在。
 
 **形式化表达**:
+
 ```latex
 \text{ModalExistence}(x, M) \equiv \text{Entity}(x) \land \text{Modality}(M) \land \text{Has}(x, M)
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 模态存在
 class ModalExistence a where
@@ -232,11 +248,13 @@ class ModalExistence a where
 **理论**: 实体的存在往往通过与其他实体的关系来体现。
 
 **形式化表达**:
+
 ```latex
 \text{RelationalExistence}(x, y, R) \equiv \text{Entity}(x) \land \text{Entity}(y) \land \text{Relation}(R) \land R(x, y)
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 关系存在
 data Relation = 
@@ -358,4 +376,4 @@ verifyIdentity x y = x == y
 
 **导航**: [返回形而上学](../README.md) | [下一节: 本体论](../02-Ontology.md)  
 **最后更新**: 2024年12月  
-**版本**: 1.0.0 
+**版本**: 1.0.0

@@ -11,11 +11,13 @@
 **定义**: 集合是不同对象的无序聚集。
 
 **形式化表达**:
+
 ```latex
 A = \{x \mid P(x)\}
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 集合的基本表示
 data Set a = 
@@ -53,6 +55,7 @@ class SetOperations a where
 **差集**: $A \setminus B = \{x \mid x \in A \land x \notin B\}$
 
 **Haskell实现**:
+
 ```haskell
 -- 集合运算实现
 instance (Eq a) => SetOperations (Set a) where
@@ -126,6 +129,7 @@ instance (Eq a) => SetOperations (Set a) where
 **真包含关系**: $A \subset B \equiv A \subseteq B \land A \neq B$
 
 **Haskell实现**:
+
 ```haskell
 -- 集合关系
 instance (Eq a) => Eq (Set a) where
@@ -150,11 +154,13 @@ proveSetEquality s1 s2 =
 **公理**: 两个集合相等当且仅当它们包含相同的元素。
 
 **形式化表达**:
+
 ```latex
 \forall A \forall B [\forall x (x \in A \leftrightarrow x \in B) \rightarrow A = B]
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 外延公理
 extensionalityAxiom :: (Eq a) => Set a -> Set a -> Bool
@@ -169,11 +175,13 @@ extensionalityAxiom s1 s2 =
 **公理**: 存在一个不包含任何元素的集合。
 
 **形式化表达**:
+
 ```latex
 \exists A \forall x (x \notin A)
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 空集公理
 emptySetAxiom :: Bool
@@ -189,11 +197,13 @@ emptySetUniqueness s = isEmpty s == (s == empty)
 **公理**: 对于任意两个集合，存在一个包含它们的集合。
 
 **形式化表达**:
+
 ```latex
 \forall A \forall B \exists C \forall x (x \in C \leftrightarrow x = A \lor x = B)
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 配对公理
 pairingAxiom :: a -> a -> Set a
@@ -210,11 +220,13 @@ verifyPairingAxiom x y =
 **公理**: 对于任意集合族，存在一个包含所有成员集合元素的集合。
 
 **形式化表达**:
+
 ```latex
 \forall F \exists A \forall x (x \in A \leftrightarrow \exists B (B \in F \land x \in B))
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 并集公理
 unionAxiom :: [Set a] -> Set a
@@ -231,11 +243,13 @@ verifyUnionAxiom sets =
 
 ### 1. 德摩根定律 (De Morgan's Laws)
 
-**定理**: 
+**定理**:
+
 - $(A \cup B)^c = A^c \cap B^c$
 - $(A \cap B)^c = A^c \cup B^c$
 
 **Haskell实现**:
+
 ```haskell
 -- 补集操作
 complement :: (Eq a) => Set a -> Set a -> Set a
@@ -255,10 +269,12 @@ deMorganLaws universe a b =
 ### 2. 分配律 (Distributive Laws)
 
 **定理**:
+
 - $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
 - $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
 
 **Haskell实现**:
+
 ```haskell
 -- 分配律验证
 distributiveLaws :: (Eq a) => Set a -> Set a -> Set a -> Bool
@@ -275,11 +291,13 @@ distributiveLaws a b c =
 **定理**: 对于任意集合A，存在一个包含A的所有子集的集合。
 
 **形式化表达**:
+
 ```latex
 \forall A \exists P \forall B (B \in P \leftrightarrow B \subseteq A)
 ```
 
 **Haskell实现**:
+
 ```haskell
 -- 幂集
 powerSet :: (Eq a) => Set a -> Set (Set a)
@@ -405,4 +423,4 @@ data SetOperation = UnionOp | IntersectionOp | DifferenceOp
 
 **导航**: [返回数学基础](../README.md) | [下一节: 数论基础](../02-Number-Theory.md)  
 **最后更新**: 2024年12月  
-**版本**: 1.0.0 
+**版本**: 1.0.0
