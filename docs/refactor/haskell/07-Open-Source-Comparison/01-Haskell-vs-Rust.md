@@ -17,6 +17,7 @@ Haskell使用Hindley-Milner类型系统，支持类型推断和多态。
 $$\Gamma \vdash e : \tau \text{ with type inference}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 类型推断
 inferredType = 42  -- Haskell推断为 Int
@@ -50,6 +51,7 @@ Rust使用基于Hindley-Milner的类型系统，但增加了所有权和生命�
 $$\Gamma \vdash e : \tau \text{ with ownership and lifetime}$$
 
 **Rust实现**：
+
 ```rust
 // 类型推断
 let inferred_type = 42; // Rust推断为 i32
@@ -93,6 +95,7 @@ Haskell使用垃圾回收器管理内存，基于惰性求值。
 $$GC(M) = \text{Mark and Sweep}(M)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 惰性求值
 infiniteList :: [Integer]
@@ -124,6 +127,7 @@ Rust使用所有权系统在编译时保证内存安全，无需垃圾回收。
 $$\text{Ownership}(x) \implies \text{Unique}(x) \land \text{Safe}(x)$$
 
 **Rust实现**：
+
 ```rust
 // 所有权系统
 fn ownership_example() {
@@ -166,6 +170,7 @@ Haskell使用轻量级线程和STM（软件事务内存）进行并发编程。
 $$\text{STM}(T) = \text{Atomic}(T) \land \text{Consistent}(T)$$
 
 **Haskell实现**：
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -221,6 +226,7 @@ Rust使用所有权系统保证线程安全，通过Send和Sync特征控制并�
 $$\text{Send}(T) \land \text{Sync}(T) \implies \text{ThreadSafe}(T)$$
 
 **Rust实现**：
+
 ```rust
 use std::thread;
 use std::sync::{Arc, Mutex};
@@ -304,6 +310,7 @@ Haskell使用Maybe和Either类型进行错误处理，基于类型系统。
 $$\text{Maybe}(A) = \text{Nothing} + \text{Just}(A)$$
 
 **Haskell实现**：
+
 ```haskell
 -- Maybe类型
 safeDivide :: Double -> Double -> Maybe Double
@@ -342,6 +349,7 @@ Rust使用Result类型进行错误处理，强制处理所有错误情况。
 $$\text{Result}(T, E) = \text{Ok}(T) + \text{Err}(E)$$
 
 **Rust实现**：
+
 ```rust
 // Result类型
 fn safe_divide(x: f64, y: f64) -> Result<f64, &'static str> {
@@ -404,6 +412,7 @@ Haskell的性能基于惰性求值、垃圾回收和编译器优化。
 $$\text{Performance}(Haskell) = \text{LazyEval} + \text{GC} + \text{CompilerOpt}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 惰性求值优化
 lazyOptimization :: [Integer]
@@ -441,6 +450,7 @@ Rust的性能基于零成本抽象、所有权系统和LLVM优化。
 $$\text{Performance}(Rust) = \text{ZeroCost} + \text{Ownership} + \text{LLVM}$$
 
 **Rust实现**：
+
 ```rust
 // 零成本抽象
 fn zero_cost_abstraction() {
@@ -660,4 +670,4 @@ fn memory_usage() {
 
 **最后更新**: 2024年12月  
 **版本**: 1.0.0  
-**状态**: 完成 
+**状态**: 完成

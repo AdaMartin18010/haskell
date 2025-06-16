@@ -17,6 +17,7 @@ Haskell是纯函数式编程语言，强调不可变性、纯函数和类型安�
 $$\text{Haskell} = \text{Pure} + \text{Immutable} + \text{TypeSafe}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 纯函数
 add :: Num a => a -> a -> a
@@ -47,6 +48,7 @@ Scala是混合范式语言，结合了面向对象和函数式编程。
 $$\text{Scala} = \text{OOP} + \text{FP} + \text{JVM}$$
 
 **Scala实现**：
+
 ```scala
 // 面向对象
 class Person(val name: String, val age: Int) {
@@ -81,6 +83,7 @@ Haskell使用Hindley-Milner类型系统，支持类型推断和高级类型特�
 $$\Gamma \vdash e : \tau \text{ with HM inference}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 类型推断
 inferredType = 42  -- Int
@@ -124,6 +127,7 @@ Scala使用基于对象系统的类型系统，支持子类型和类型推断。
 $$\Gamma \vdash e : \tau \text{ with subtyping}$$
 
 **Scala实现**：
+
 ```scala
 // 类型推断
 val inferredType = 42 // Int
@@ -171,6 +175,7 @@ Haskell使用轻量级线程、STM和单子进行并发编程。
 $$\text{Concurrency}(Haskell) = \text{Threads} + \text{STM} + \text{Monads}$$
 
 **Haskell实现**：
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -226,6 +231,7 @@ Scala使用Actor模型、Future和并发集合进行并发编程。
 $$\text{Concurrency}(Scala) = \text{Actors} + \text{Futures} + \text{Collections}$$
 
 **Scala实现**：
+
 ```scala
 import scala.concurrent.{Future, Await}
 import scala.concurrent.duration._
@@ -294,6 +300,7 @@ Haskell使用垃圾回收器管理内存，基于惰性求值。
 $$GC(M) = \text{Mark and Sweep}(M)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 惰性求值
 infiniteList :: [Integer]
@@ -330,6 +337,7 @@ Scala使用JVM的垃圾回收器管理内存，支持多种GC算法。
 $$GC(M) = \text{JVM GC}(M)$$
 
 **Scala实现**：
+
 ```scala
 // 惰性求值
 lazy val expensiveComputation = {
@@ -374,6 +382,7 @@ Haskell使用Maybe和Either类型进行错误处理。
 $$\text{Maybe}(A) = \text{Nothing} + \text{Just}(A)$$
 
 **Haskell实现**：
+
 ```haskell
 -- Maybe类型
 safeDivide :: Double -> Double -> Maybe Double
@@ -412,6 +421,7 @@ Scala使用Option、Try和Either进行错误处理。
 $$\text{Option}(A) = \text{None} + \text{Some}(A)$$
 
 **Scala实现**：
+
 ```scala
 // Option类型
 def safeDivide(x: Double, y: Double): Option[Double] = {
@@ -467,6 +477,7 @@ Haskell的性能基于惰性求值、垃圾回收和编译器优化。
 $$\text{Performance}(Haskell) = \text{LazyEval} + \text{GC} + \text{CompilerOpt}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 惰性求值优化
 lazyOptimization :: [Integer]
@@ -504,6 +515,7 @@ Scala的性能基于JVM优化、JIT编译和垃圾回收。
 $$\text{Performance}(Scala) = \text{JVM} + \text{JIT} + \text{GC}$$
 
 **Scala实现**：
+
 ```scala
 // JVM优化
 @inline
@@ -647,4 +659,4 @@ object WebServer extends App {
 
 **最后更新**: 2024年12月  
 **版本**: 1.0.0  
-**状态**: 完成 
+**状态**: 完成

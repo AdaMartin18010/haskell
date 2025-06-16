@@ -17,6 +17,7 @@ Haskell使用Hindley-Milner类型系统，支持类型推断、类型类和高�
 $$\Gamma \vdash e : \tau \text{ with HM inference and type classes}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 类型推断
 inferredType = 42  -- Haskell推断为 Int
@@ -60,6 +61,7 @@ OCaml使用Hindley-Milner类型系统，支持类型推断、模块系统和多�
 $$\Gamma \vdash e : \tau \text{ with HM inference and modules}$$
 
 **OCaml实现**：
+
 ```ocaml
 (* 类型推断 *)
 let inferred_type = 42 (* OCaml推断为 int *)
@@ -111,6 +113,7 @@ Haskell使用垃圾回收器管理内存，基于惰性求值。
 $$GC(M) = \text{Mark and Sweep}(M)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 惰性求值
 infiniteList :: [Integer]
@@ -147,6 +150,7 @@ OCaml使用垃圾回收器管理内存，支持严格求值和惰性求值。
 $$GC(M) = \text{Mark and Sweep}(M)$$
 
 **OCaml实现**：
+
 ```ocaml
 (* 严格求值 *)
 let strict_list = [1; 2; 3; 4; 5]
@@ -190,6 +194,7 @@ Haskell使用轻量级线程、STM和单子进行并发编程。
 $$\text{Concurrency}(Haskell) = \text{Threads} + \text{STM} + \text{Monads}$$
 
 **Haskell实现**：
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -245,6 +250,7 @@ OCaml使用线程、异步编程和事件循环进行并发编程。
 $$\text{Concurrency}(OCaml) = \text{Threads} + \text{Async} + \text{Events}$$
 
 **OCaml实现**：
+
 ```ocaml
 (* 线程 *)
 let thread_example () =
@@ -292,6 +298,7 @@ Haskell使用Maybe和Either类型进行错误处理。
 $$\text{Maybe}(A) = \text{Nothing} + \text{Just}(A)$$
 
 **Haskell实现**：
+
 ```haskell
 -- Maybe类型
 safeDivide :: Double -> Double -> Maybe Double
@@ -330,6 +337,7 @@ OCaml使用option和result类型进行错误处理。
 $$\text{option}(A) = \text{None} + \text{Some}(A)$$
 
 **OCaml实现**：
+
 ```ocaml
 (* option类型 *)
 let safe_divide x y =
@@ -379,6 +387,7 @@ Haskell的性能基于惰性求值、垃圾回收和编译器优化。
 $$\text{Performance}(Haskell) = \text{LazyEval} + \text{GC} + \text{CompilerOpt}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 惰性求值优化
 lazyOptimization :: [Integer]
@@ -416,6 +425,7 @@ OCaml的性能基于严格求值、垃圾回收和编译器优化。
 $$\text{Performance}(OCaml) = \text{StrictEval} + \text{GC} + \text{CompilerOpt}$$
 
 **OCaml实现**：
+
 ```ocaml
 (* 严格求值优化 *)
 let strict_optimization xs =
@@ -614,4 +624,4 @@ let memory_usage () =
 
 **最后更新**: 2024年12月  
 **版本**: 1.0.0  
-**状态**: 完成 
+**状态**: 完成

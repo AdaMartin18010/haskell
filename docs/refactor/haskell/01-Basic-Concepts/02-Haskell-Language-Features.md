@@ -128,7 +128,7 @@ second (_, y) = y
 -- 嵌套模式匹配
 nestedPattern :: [(Int, String)] -> [String]
 nestedPattern [] = []
-nestedPattern ((n, s):xs) = 
+nestedPattern ((n, s):xs) =
     if n > 0 then s : nestedPattern xs else nestedPattern xs
 
 -- 守卫表达式（模式匹配的扩展）
@@ -161,7 +161,7 @@ $$C(\tau) \text{ means type } \tau \text{ is an instance of class } C$$
 class Eq a where
     (==) :: a -> a -> Bool
     (/=) :: a -> a -> Bool
-    
+
     -- 默认实现
     x /= y = not (x == y)
 
@@ -285,7 +285,7 @@ listFmap = fmap (*2) [1, 2, 3, 4, 5]  -- [2, 4, 6, 8, 10]
 
 -- 函子定律验证
 functorLaws :: Bool
-functorLaws = 
+functorLaws =
     let f = (+1)
         g = (*2)
         x = Just 5
@@ -344,7 +344,7 @@ applicativeDo = do
 惰性求值是一种求值策略，只在需要时才计算表达式的值。
 
 数学表示为：
-$$\text{eval}(e) = \begin{cases} 
+$$\text{eval}(e) = \begin{cases}
 \text{value} & \text{if } e \text{ is demanded} \\
 \text{thunk} & \text{otherwise}
 \end{cases}$$
@@ -362,7 +362,7 @@ finiteList = take 5 infiniteList
 
 -- 惰性求值的好处
 expensiveComputation :: Integer -> Integer
-expensiveComputation n = 
+expensiveComputation n =
     let result = sum [1..n]
     in trace ("Computing for " ++ show n) result
 
@@ -475,7 +475,7 @@ safeExpr = Add (LitInt 5) (LitInt 3)  -- 类型安全
 {-# LANGUAGE TemplateHaskell #-}
 
 -- 生成记录访问器
-data Person = Person 
+data Person = Person
     { name :: String
     , age :: Int
     } deriving Show
@@ -513,7 +513,7 @@ safeHead (Cons x _) = x
 import Control.Parallel
 
 parallelSum :: [Int] -> Int
-parallelSum xs = 
+parallelSum xs =
     let (left, right) = splitAt (length xs `div` 2) xs
         leftSum = sum left
         rightSum = sum right
@@ -547,7 +547,7 @@ data StrictList a = SNil | SCons !a !(StrictList a)
 ```haskell
 -- 内存效率的列表处理
 efficientProcessing :: [Int] -> [Int]
-efficientProcessing = 
+efficientProcessing =
     foldr (\x acc -> if x > 0 then x*2 : acc else acc) []
 
 -- 避免空间泄漏
@@ -568,4 +568,4 @@ avoidSpaceLeak = foldl' (+) 0
 
 **最后更新**: 2024年12月  
 **版本**: 1.0.0  
-**状态**: 完成 
+**状态**: 完成

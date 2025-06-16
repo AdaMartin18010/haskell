@@ -447,9 +447,10 @@ Haskell的基础语法为函数式编程提供了强大的工具。通过理解�
 
 ---
 
-**相关文档**: 
+**相关文档**:
+
 - [函数定义与使用](02-Functions.md)
 - [模式匹配](03-Pattern-Matching.md)
 - [数据类型](04-Data-Types.md)
 
-**导航**: [返回Haskell主索引](../README.md) | [下一主题: 函数定义与使用](02-Functions.md) 
+**导航**: [返回Haskell主索引](../README.md) | [下一主题: 函数定义与使用](02-Functions.md)
