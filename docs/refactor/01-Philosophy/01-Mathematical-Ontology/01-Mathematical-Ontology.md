@@ -416,8 +416,9 @@ class TypeConstructor a where
 ---
 
 **相关链接**:
+
 - [02-Formal-Science/01-Mathematics/01-Set-Theory-Basics.md](../02-Formal-Science/01-Mathematics/01-Set-Theory-Basics.md)
 - [03-Theory/01-Programming-Language-Theory/03-Type-System-Theory.md](../03-Theory/01-Programming-Language-Theory/03-Type-System-Theory.md)
 
 **最后更新**: 2024年12月  
-**版本**: 1.0.0 
+**版本**: 1.0.0
