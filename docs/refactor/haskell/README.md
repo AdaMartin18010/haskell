@@ -234,6 +234,7 @@ maybeExample = do
 ### 1. 内存管理
 
 **Haskell**:
+
 ```haskell
 -- 自动垃圾回收
 automaticGC :: [Int] -> [Int]
@@ -241,6 +242,7 @@ automaticGC xs = map (*2) xs  -- 无需手动管理内存
 ```
 
 **Rust**:
+
 ```rust
 // 所有权系统
 fn manual_memory_management(mut vec: Vec<i32>) -> Vec<i32> {
@@ -252,6 +254,7 @@ fn manual_memory_management(mut vec: Vec<i32>) -> Vec<i32> {
 ### 2. 类型系统
 
 **Haskell**:
+
 ```haskell
 -- 类型推断
 typeInference :: a -> a
@@ -259,6 +262,7 @@ typeInference x = x  -- 编译器自动推断
 ```
 
 **Rust**:
+
 ```rust
 // 显式类型注解
 fn explicit_types<T>(x: T) -> T {
@@ -269,6 +273,7 @@ fn explicit_types<T>(x: T) -> T {
 ### 3. 错误处理
 
 **Haskell**:
+
 ```haskell
 -- Maybe类型
 safeDivision :: Double -> Double -> Maybe Double
@@ -277,6 +282,7 @@ safeDivision x y = Just (x / y)
 ```
 
 **Rust**:
+
 ```rust
 // Result类型
 fn safe_division(x: f64, y: f64) -> Result<f64, String> {
@@ -370,4 +376,4 @@ Haskell在金融计算中的应用：
 **导航**: [返回主索引](../MASTER_INDEX.md) | [实现层](../07-Implementation/README.md)  
 **最后更新**: 2024年12月  
 **版本**: 1.0.0  
-**状态**: 基础框架建立完成 
+**状态**: 基础框架建立完成

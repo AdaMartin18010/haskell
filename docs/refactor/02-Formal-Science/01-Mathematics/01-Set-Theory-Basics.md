@@ -320,16 +320,16 @@ x \in (A \cup B)^c &\iff x \notin (A \cup B) \\
 ```haskell
 -- 德摩根定律验证
 deMorganLaws :: (Set a, Eq a) => Set a -> Set a -> Bool
-deMorganLaws setA setB = 
+deMorganLaws setA setB =
     let law1 = complement (union setA setB) == intersection (complement setA) (complement setB)
         law2 = complement (intersection setA setB) == union (complement setA) (complement setB)
     in law1 && law2
 
 -- 定理证明
 proveDeMorgan :: (Set a, Eq a) => Set a -> Set a -> Proof
-proveDeMorgan setA setB = 
-    Proof $ \x -> 
-        member x (complement (union setA setB)) == 
+proveDeMorgan setA setB =
+    Proof $ \x ->
+        member x (complement (union setA setB)) ==
         member x (intersection (complement setA) (complement setB))
 ```
 
@@ -347,7 +347,7 @@ $$|A_1 \cup A_2 \cup \cdots \cup A_n| = \sum_{i=1}^n |A_i| - \sum_{1 \leq i < j 
 ```haskell
 -- 容斥原理
 inclusionExclusion :: [Set a] -> Int
-inclusionExclusion sets = 
+inclusionExclusion sets =
     sum [(-1)^(k+1) * sum (map cardinality (combinations k sets)) | k <- [1..length sets]]
 
 -- 组合生成
@@ -376,7 +376,7 @@ combinations n xs@(y:ys)
 
 ```haskell
 -- 数集定义
-data NumberSet = 
+data NumberSet =
     NaturalNumbers
   | IntegerNumbers
   | RationalNumbers
@@ -400,7 +400,7 @@ instance NumberSetOperations NumberSet where
     contains RationalNumbers _ = True
     contains RealNumbers _ = True
     contains ComplexNumbers _ = True
-    
+
     cardinality NaturalNumbers = Countable
     cardinality IntegerNumbers = Countable
     cardinality RationalNumbers = Countable
@@ -420,7 +420,7 @@ instance NumberSetOperations NumberSet where
 
 ```haskell
 -- 区间定义
-data Interval a = 
+data Interval a =
     Open a a
   | Closed a a
   | LeftOpen a a
@@ -475,7 +475,7 @@ instance (Eq a, Eq b) => RelationOperations a b where
     domain rel = Set $ \x -> any (\(a, _) -> a == x) (toList rel)
     range rel = Set $ \y -> any (\(_, b) -> b == y) (toList rel)
     inverse rel = Set $ map (\(a, b) -> (b, a)) (toList rel)
-    compose rel1 rel2 = Set $ 
+    compose rel1 rel2 = Set $
         [(a, c) | (a, b) <- toList rel1, (b', c) <- toList rel2, b == b']
 ```
 
@@ -501,14 +501,14 @@ class FunctionProperties a b where
 
 -- 具体实现
 instance (Eq a, Eq b) => FunctionProperties a b where
-    injective f = 
+    injective f =
         let pairs = toList f
-        in all (\(a1, b1) -> 
+        in all (\(a1, b1) ->
             all (\(a2, b2) -> a1 == a2 || b1 /= b2) pairs) pairs
-    
-    surjective f codomain = 
+
+    surjective f codomain =
         all (\y -> any (\(_, b) -> b == y) (toList f)) (toList codomain)
-    
+
     bijective f codomain = injective f && surjective f codomain
 ```
 
@@ -569,4 +569,4 @@ class LanguageOperations where
 
 ---
 
-**导航**: [返回数学基础](../README.md) | [下一主题：数论](02-Number-Theory.md) | [返回形式科学层](../../README.md) 
+**导航**: [返回数学基础](../README.md) | [下一主题：数论](02-Number-Theory.md) | [返回形式科学层](../../README.md)

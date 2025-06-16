@@ -342,6 +342,7 @@ evaluateModal system (Atomic p) = valuation system (currentWorld system) p
 $\Box(p \land q) \leftrightarrow (\Box p \land \Box q)$
 
 **证明：**
+
 - **从左到右**: 如果 $\Box(p \land q)$，则在所有可及世界中 $p \land q$ 为真，因此 $\Box p \land \Box q$
 - **从右到左**: 如果 $\Box p \land \Box q$，则在所有可及世界中 $p$ 和 $q$ 都为真，因此 $\Box(p \land q)$
 

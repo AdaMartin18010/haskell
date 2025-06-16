@@ -136,6 +136,7 @@ Case表达式提供多路分支：
 ### 1. 循环 vs 递归
 
 **命令式语言**:
+
 ```python
 # Python循环
 def factorial(n):
@@ -146,6 +147,7 @@ def factorial(n):
 ```
 
 **Haskell递归**:
+
 ```haskell
 -- Haskell递归
 factorial :: Integer -> Integer
@@ -156,6 +158,7 @@ factorial n = n * factorial (n - 1)
 ### 2. 条件语句
 
 **命令式语言**:
+
 ```python
 # Python条件
 def classify(x):
@@ -168,6 +171,7 @@ def classify(x):
 ```
 
 **Haskell守卫**:
+
 ```haskell
 -- Haskell守卫
 classify :: Int -> String
@@ -180,6 +184,7 @@ classify x
 ### 3. 模式匹配
 
 **命令式语言**:
+
 ```python
 # Python需要手动检查
 def process_list(lst):
@@ -190,6 +195,7 @@ def process_list(lst):
 ```
 
 **Haskell模式匹配**:
+
 ```haskell
 -- Haskell模式匹配
 processList :: [Int] -> Int
@@ -382,4 +388,4 @@ counterExample = do
 **导航**: [返回Haskell主索引](../README.md) | [模式匹配](01-Pattern-Matching.md) | [守卫表达式](02-Guards.md)  
 **最后更新**: 2024年12月  
 **版本**: 1.0.0  
-**状态**: 基础框架建立完成 
+**状态**: 基础框架建立完成
