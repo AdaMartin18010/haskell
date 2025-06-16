@@ -248,7 +248,7 @@
 
 ### 算法 (Algorithms)
 
-**高效的算法设计和实现**
+**高效的算法设计和实现**:
 
 #### 排序算法 (Sorting Algorithms)
 
@@ -273,7 +273,7 @@
 
 ### 形式化验证 (Formal Verification)
 
-**程序正确性的数学证明**
+**程序正确性的数学证明**:
 
 #### 定理证明 (Theorem Proving)
 
@@ -298,7 +298,7 @@
 
 ### 性能优化 (Performance Optimization)
 
-**程序性能的优化和调优**
+**程序性能的优化和调优**:
 
 #### 内存优化 (Memory Optimization)
 
@@ -323,7 +323,7 @@
 
 ### 实际应用 (Real-World Applications)
 
-**Haskell在实际项目中的应用**
+**Haskell在实际项目中的应用**:
 
 #### Web开发 (Web Development)
 
