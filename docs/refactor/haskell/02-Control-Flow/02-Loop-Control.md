@@ -275,7 +275,7 @@ parallelSum xs = sum xs `using` parList rseq
 
 -- 分块并行处理
 chunkedParallel :: Int -> (a -> b) -> [a] -> [b]
-chunkedParallel chunkSize f xs = 
+chunkedParallel chunkSize f xs =
   concat $ map (map f) (chunksOf chunkSize xs) `using` parList rseq
   where
     chunksOf n [] = []
@@ -289,17 +289,17 @@ chunkedParallel chunkSize f xs =
 ```haskell
 -- 数值积分
 integrate :: (Double -> Double) -> Double -> Double -> Double -> Double
-integrate f a b n = 
+integrate f a b n =
   let h = (b - a) / n
       xs = [a + i * h | i <- [0..n]]
   in h * sum [f x | x <- xs]
 
 -- 牛顿法求根
 newtonMethod :: (Double -> Double) -> (Double -> Double) -> Double -> Double -> Double
-newtonMethod f f' x0 tolerance = 
+newtonMethod f f' x0 tolerance =
   let next x = x - f x / f' x
-      iterate' x = if abs (f x) < tolerance 
-                   then x 
+      iterate' x = if abs (f x) < tolerance
+                   then x
                    else iterate' (next x)
   in iterate' x0
 
@@ -313,7 +313,7 @@ sqrtNewton x = newtonMethod (\y -> y^2 - x) (\y -> 2*y) 1.0 1e-10
 ```haskell
 -- 数据流处理
 dataStream :: [Int] -> [Int]
-dataStream = 
+dataStream =
   filter (>0) .           -- 过滤正数
   map (*2) .              -- 翻倍
   takeWhile (<100) .      -- 限制范围
@@ -321,12 +321,12 @@ dataStream =
 
 -- 批处理
 batchProcess :: Int -> [a] -> [[a]]
-batchProcess size = 
+batchProcess size =
   unfoldr' (\xs -> if null xs then Nothing else Just (take size xs, drop size xs))
 
 -- 滑动窗口
 slidingWindow :: Int -> [a] -> [[a]]
-slidingWindow n xs = 
+slidingWindow n xs =
   [take n (drop i xs) | i <- [0..length xs - n]]
 ```
 
@@ -334,7 +334,7 @@ slidingWindow n xs =
 
 ```haskell
 -- 游戏状态
-data GameState = GameState 
+data GameState = GameState
   { playerPos :: (Int, Int)
   , score :: Int
   , gameOver :: Bool
@@ -343,10 +343,10 @@ data GameState = GameState
 -- 游戏循环
 gameLoop :: GameState -> [String] -> GameState
 gameLoop state [] = state
-gameLoop state (cmd:cmds) = 
+gameLoop state (cmd:cmds) =
   let newState = processCommand state cmd
-  in if gameOver newState 
-     then newState 
+  in if gameOver newState
+     then newState
      else gameLoop newState cmds
 
 -- 命令处理
@@ -393,7 +393,7 @@ lazySum = foldr (+) 0
 
 -- 混合策略
 hybridSum :: [Int] -> Int
-hybridSum xs = 
+hybridSum xs =
   let finite = take 1000 xs  -- 有限部分严格求值
       infinite = drop 1000 xs -- 无限部分惰性求值
   in strictSum finite + lazySum infinite
@@ -420,4 +420,4 @@ Haskell的循环控制机制包括：
 ---
 
 **最后更新**: 2024年12月  
-**版本**: 1.0.0 
+**版本**: 1.0.0

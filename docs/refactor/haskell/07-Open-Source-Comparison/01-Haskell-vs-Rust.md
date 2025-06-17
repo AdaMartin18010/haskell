@@ -496,14 +496,16 @@ fn ownership_semantics(s: String) -> String {
 
 ## 选择建议
 
-### 选择Haskell当：
+### 选择Haskell当
+
 - 需要函数式编程
 - 进行形式化验证
 - 开发编译器
 - 金融建模
 - 教学函数式编程
 
-### 选择Rust当：
+### 选择Rust当
+
 - 系统编程
 - 嵌入式开发
 - 高性能应用
@@ -521,4 +523,3 @@ fn ownership_semantics(s: String) -> String {
 
 **最后更新**: 2024年12月  
 **版本**: 1.0.0
-

@@ -204,7 +204,7 @@ $$\text{match}(v, p) = \begin{cases}
 ```haskell
 -- 条件函数管道
 conditionalPipeline :: Int -> String
-conditionalPipeline n = 
+conditionalPipeline n =
   (if n > 0 then ("positive: " ++) else ("negative: " ++)) .
   (if even n then ("even: " ++) else ("odd: " ++)) $
   show n
@@ -214,7 +214,7 @@ type Condition a = a -> Bool
 type Action a b = a -> b
 
 conditionalAction :: Condition a -> Action a b -> Action a b -> Action a b
-conditionalAction cond action1 action2 x = 
+conditionalAction cond action1 action2 x =
   if cond x then action1 x else action2 x
 ```
 
@@ -222,8 +222,8 @@ conditionalAction cond action1 action2 x =
 
 ```haskell
 -- 条件数据结构
-data Conditional a = 
-  When Bool a | 
+data Conditional a =
+  When Bool a |
   Otherwise a
 
 evaluate :: Conditional a -> a
@@ -338,7 +338,7 @@ efficientProcess (x:y:xs) = x + y + sum xs
 
 -- 避免重复计算
 optimizedAnalysis :: [Int] -> String
-optimizedAnalysis xs = 
+optimizedAnalysis xs =
   let len = length xs
       sum = sum xs
       avg = fromIntegral sum / fromIntegral len
@@ -369,4 +369,4 @@ Haskell的条件控制机制包括：
 ---
 
 **最后更新**: 2024年12月  
-**版本**: 1.0.0 
+**版本**: 1.0.0
