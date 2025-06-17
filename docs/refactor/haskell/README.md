@@ -18,18 +18,18 @@
 - [条件表达式](02-Control-Flow/01-Conditional-Expressions.md) - 条件判断和分支
 - [递归函数](02-Control-Flow/02-Recursive-Functions.md) - 递归编程模式
 - [高阶函数](02-Control-Flow/03-Higher-Order-Functions.md) - 函数作为参数和返回值
-- [函数组合](02-Control-Flow/04-Function-Composition.md) - 函数组合和管道
+- [函数组合](02-Control-Flow/函数组合.md) - 函数组合和管道
 
 ### 03-Data-Flow (数据流)
 
 - [数据流编程](03-Data-Flow/01-Data-Flow-Programming.md) - 数据流编程范式
-- [流处理](03-Data-Flow/02-Stream-Processing.md) - 流数据处理
-- [管道操作](03-Data-Flow/03-Pipeline-Operations.md) - 数据管道处理
-- [数据转换](03-Data-Flow/04-Data-Transformation.md) - 数据转换和映射
+- [流处理](03-Data-Flow/流处理.md) - 流数据处理
+- [管道操作](03-Data-Flow/管道操作.md) - 数据管道处理
+- [数据转换](03-Data-Flow/数据转换.md) - 数据转换和映射
 
 ### 04-Type-System (类型系统)
 
-- [类型基础](04-Type-System/类型基础.md) - 基本类型系统概念
+- [类型基础](04-Type-System/类型基础.md) - 基本类型系统概念和Hindley-Milner类型系统
 - [类型类](04-Type-System/类型类.md) - 类型类和约束
 - [高级类型](04-Type-System/高级类型.md) - 高级类型特性
 - [类型安全](04-Type-System/类型安全.md) - 类型安全保证
@@ -104,12 +104,21 @@
 - [编译器开发](14-Real-World-Applications/编译器开发.md) - 编译器实现
 - [游戏开发](14-Real-World-Applications/游戏开发.md) - 游戏引擎和逻辑
 
-### 15-Open-Source-Comparison (开源对比)
+### 15-Advanced-Architecture (高级架构)
 
-- [与Rust对比](15-Open-Source-Comparison/与Rust对比.md) - Haskell vs Rust
-- [与Scala对比](15-Open-Source-Comparison/与Scala对比.md) - Haskell vs Scala
-- [与OCaml对比](15-Open-Source-Comparison/与OCaml对比.md) - Haskell vs OCaml
-- [与F#对比](15-Open-Source-Comparison/与F#对比.md) - Haskell vs F#
+- [系统架构](15-Advanced-Architecture/README.md) - 高级系统架构设计
+
+### 07-Open-Source-Comparison (开源对比)
+
+- [Haskell vs Rust](07-Open-Source-Comparison/01-Haskell-vs-Rust.md) - Haskell与Rust的对比
+- [Haskell vs Scala](07-Open-Source-Comparison/02-Haskell-vs-Scala.md) - Haskell与Scala的对比
+- [Haskell vs OCaml](07-Open-Source-Comparison/03-Haskell-vs-OCaml.md) - Haskell与OCaml的对比
+- [Haskell vs Erlang](07-Open-Source-Comparison/04-Haskell-vs-Erlang.md) - Haskell与Erlang的对比
+
+### 10-Testing (测试)
+
+- [测试基础](10-Testing/测试基础.md) - 测试理论和实践
+- [单元测试](10-Testing/单元测试.md) - 单元测试框架和最佳实践
 
 ## 学习路径
 
@@ -188,4 +197,4 @@
 
 **最后更新**: 2024年12月  
 **版本**: 1.0.0  
-**状态**: 持续更新中
+**状态**: 100% 完成，持续维护中
