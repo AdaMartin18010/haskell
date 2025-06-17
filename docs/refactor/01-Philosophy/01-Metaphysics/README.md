@@ -6,7 +6,7 @@
 
 ## 目录结构
 
-```
+```text
 01-Metaphysics/
 ├── README.md                           # 本文件 - 主索引
 ├── 01-Mathematical-Ontology.md         # 数学本体论

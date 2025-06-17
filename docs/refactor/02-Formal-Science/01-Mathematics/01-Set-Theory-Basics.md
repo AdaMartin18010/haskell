@@ -611,6 +611,7 @@ typeConstructorSemantics =
 ---
 
 **相关链接**:
+
 - [02-Formal-Logic/01-Classical-Logic/01-Classical-Logic.md](../02-Formal-Logic/01-Classical-Logic/01-Classical-Logic.md)
 - [04-Type-Theory/01-Simple-Type-Theory.md](../04-Type-Theory/01-Simple-Type-Theory.md)
 

@@ -1,6 +1,7 @@
 # 01-Basic-Concepts 形而上学基本概念
 
 ## 目录
+
 - [1. 概念定义](#1-概念定义)
 - [2. 存在论基础](#2-存在论基础)
 - [3. 实体理论](#3-实体理论)
@@ -24,6 +25,7 @@
 \]
 
 其中：
+
 - **Ontology**: 存在论，研究什么是存在
 - **Entity Theory**: 实体理论，研究实体的本质
 - **Property Theory**: 属性理论，研究属性的本质
@@ -343,6 +345,7 @@ exampleMetaphysics =
 \]
 
 **证明**：
+
 1. 假设 \(\text{Exists}(x)\) 成立
 2. 根据存在论公理，\(x\) 是一个实体
 3. 根据实体定义，每个实体都具有"存在"这个属性
@@ -359,6 +362,7 @@ exampleMetaphysics =
 \]
 
 **证明**：
+
 1. 假设 \(x = y\) 和 \(y = z\) 成立
 2. 根据同一性公理，\(x = x\)
 3. 根据同一性替换原则，可以将 \(y\) 替换为 \(x\)
@@ -367,17 +371,20 @@ exampleMetaphysics =
 ## 8. 相关主题跳转
 
 ### 形而上学内部跳转
+
 - [数学本体论](02-Mathematical-Ontology.md) - 数学对象的存在性
 - [模态形而上学](03-Modal-Metaphysics.md) - 必然性和可能性
 - [时间空间哲学](04-Time-Space-Philosophy.md) - 时空的本质
 - [因果性](05-Causality.md) - 因果关系的本质
 
 ### 跨层次跳转
+
 - [形式科学层 - 集合论](../../02-Formal-Science/01-Mathematics/01-Set-Theory-Basics.md) - 数学基础
 - [理论层 - 形式化方法](../../03-Theory/04-Formal-Methods/README.md) - 形式化理论
 - [具体科学层 - 认知科学](../../04-Applied-Science/03-Artificial-Intelligence/README.md) - 认知理论
 
 ### 外部资源
+
 - [主索引](../../README.md) - 返回主索引
 - [学习路径](../../COMPLETE_LEARNING_PATH.md) - 完整学习路径
 - [质量检查](../../QUALITY_CHECK.md) - 质量保证
@@ -386,4 +393,4 @@ exampleMetaphysics =
 
 **最后更新**: 2024年12月  
 **版本**: 1.0.0  
-**状态**: 完成 
+**状态**: 完成
