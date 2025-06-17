@@ -14,10 +14,12 @@ $$f : A \rightarrow B$$
 
 其中 $f$ 满足递归方程：
 
-$$f(x) = \begin{cases} 
+$$
+f(x) = \begin{cases}
 \text{base}(x) & \text{if } \text{isBase}(x) \\
 \text{step}(x, f(\text{next}(x))) & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 ### 不动点理论
 
@@ -142,8 +144,8 @@ isOdd n = isEven (n - 1)
 
 ```haskell
 -- 递归函数的语义定义
-data RecursiveSemantics a b = 
-  RecursiveSemantics 
+data RecursiveSemantics a b =
+  RecursiveSemantics
     { baseCase :: a -> Bool
     , baseValue :: a -> b
     , stepFunction :: a -> b -> b
@@ -153,7 +155,7 @@ data RecursiveSemantics a b =
 -- 递归函数解释器
 interpretRecursive :: RecursiveSemantics a b -> a -> b
 interpretRecursive (RecursiveSemantics isBase base step next) x =
-  if isBase x 
+  if isBase x
     then base x
     else step x (interpretRecursive (RecursiveSemantics isBase base step next) (next x))
 
@@ -176,7 +178,7 @@ class RecursiveAlgebra a where
 
 ```haskell
 -- 递归模式定义
-data RecursionPattern a b = 
+data RecursionPattern a b =
   SimpleRecursion (a -> Bool) (a -> b) (a -> a -> b)
   | MutualRecursion [(a -> Bool)] [(a -> b)] [(a -> a -> b)]
   | TailRecursion (a -> Bool) (a -> b) (a -> a -> b)
@@ -184,7 +186,7 @@ data RecursionPattern a b =
 -- 递归模式解释器
 interpretPattern :: RecursionPattern a b -> a -> b
 interpretPattern (SimpleRecursion isBase base step) x =
-  if isBase x 
+  if isBase x
     then base x
     else step x (interpretPattern (SimpleRecursion isBase base step) x)
 ```
@@ -239,7 +241,7 @@ dynamicFibonacci n = go n (replicate (n + 1) (-1))
     go 1 memo = 1
     go i memo
       | memo !! i /= -1 = memo !! i
-      | otherwise = 
+      | otherwise =
           let val = go (i - 1) memo + go (i - 2) memo
           in val
 ```
@@ -270,7 +272,7 @@ primes = sieve [2..]
 -- 快速排序
 quicksort :: Ord a => [a] -> [a]
 quicksort [] = []
-quicksort (x:xs) = 
+quicksort (x:xs) =
   let smaller = quicksort [a | a <- xs, a <= x]
       larger = quicksort [a | a <- xs, a > x]
   in smaller ++ [x] ++ larger
@@ -279,7 +281,7 @@ quicksort (x:xs) =
 mergeSort :: Ord a => [a] -> [a]
 mergeSort [] = []
 mergeSort [x] = [x]
-mergeSort xs = 
+mergeSort xs =
   let (left, right) = splitAt (length xs `div` 2) xs
   in merge (mergeSort left) (mergeSort right)
 
@@ -353,7 +355,7 @@ data Permission = Read | Write | Execute
 
 checkPermissions :: [Permission] -> FileSystem -> Bool
 checkPermissions perms (File _) = Read `elem` perms
-checkPermissions perms (Directory _ children) = 
+checkPermissions perms (Directory _ children) =
   all (checkPermissions perms) children
 ```
 
@@ -372,6 +374,7 @@ Haskell的递归函数提供了：
 ---
 
 **相关链接**：
+
 - [函数式编程基础](../01-Basic-Concepts/函数式编程基础.md)
 - [条件表达式](./01-Conditional-Expressions.md)
-- [高阶函数](./03-Higher-Order-Functions.md) 
+- [高阶函数](./03-Higher-Order-Functions.md)

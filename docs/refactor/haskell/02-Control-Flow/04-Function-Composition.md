@@ -331,7 +331,8 @@ listProcessing xs =
 ---
 
 **相关主题**：
+
 - [高阶函数](03-Higher-Order-Functions.md)
 - [函数式编程基础](../01-Basic-Concepts/函数式编程基础.md)
 - [类型系统](../04-Type-System/类型基础.md)
-- [单子理论](../04-Type-System/高级类型.md) 
+- [单子理论](../04-Type-System/高级类型.md)

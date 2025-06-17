@@ -13,6 +13,7 @@
 $$\text{if} : \text{Bool} \times A \times A \rightarrow A$$
 
 其中：
+
 - $\text{Bool}$ 是布尔类型
 - $A$ 是任意类型
 - 满足：$\text{if}(b, x, y) = \begin{cases} x & \text{if } b = \text{True} \\ y & \text{if } b = \text{False} \end{cases}$
@@ -299,6 +300,7 @@ Haskell的条件表达式提供了：
 ---
 
 **相关链接**：
+
 - [函数式编程基础](../01-Basic-Concepts/函数式编程基础.md)
 - [模式匹配](../01-Basic-Concepts/模式匹配.md)
-- [高阶函数](../02-Control-Flow/高阶函数.md) 
+- [高阶函数](../02-Control-Flow/高阶函数.md)

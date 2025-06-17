@@ -181,30 +181,35 @@
 ### 已完成文档
 
 #### 01-Basic-Concepts (基础概念) - 部分完成 🔄
+
 - ✅ [函数式编程基础](haskell/01-Basic-Concepts/函数式编程基础.md)
 - ✅ [Haskell语言特性](haskell/01-Basic-Concepts/02-Haskell-Language-Features.md)
 - ✅ [表达式与求值](haskell/01-Basic-Concepts/03-Syntax-Basics.md)
 - 🔄 [模式匹配](haskell/01-Basic-Concepts/模式匹配.md)
 
 #### 02-Control-Flow (控制流) - 部分完成 🔄
+
 - ✅ [条件表达式](haskell/02-Control-Flow/01-Conditional-Expressions.md)
 - ✅ [递归函数](haskell/02-Control-Flow/02-Recursive-Functions.md)
 - ✅ [高阶函数](haskell/02-Control-Flow/03-Higher-Order-Functions.md)
 - 🔄 [函数组合](haskell/02-Control-Flow/04-Function-Composition.md)
 
 #### 03-Data-Flow (数据流) - 部分完成 🔄
+
 - ✅ [数据流编程](haskell/03-Data-Flow/01-Data-Flow-Programming.md)
 - 🔄 [流处理](haskell/03-Data-Flow/02-Stream-Processing.md)
 - 🔄 [管道操作](haskell/03-Data-Flow/03-Pipeline-Operations.md)
 - 🔄 [数据转换](haskell/03-Data-Flow/04-Data-Transformation.md)
 
 #### 04-Type-System (类型系统) - 部分完成 🔄
+
 - ✅ [类型基础](haskell/04-Type-System/类型基础.md)
 - 🔄 [类型类](haskell/04-Type-System/类型类.md)
 - 🔄 [高级类型](haskell/04-Type-System/高级类型.md)
 - 🔄 [类型安全](haskell/04-Type-System/类型安全.md)
 
 #### 07-Algorithms (算法) - 部分完成 🔄
+
 - ✅ [排序算法](haskell/07-Algorithms/排序算法.md)
 - 🔄 [图算法](haskell/07-Algorithms/图算法.md)
 - 🔄 [字符串算法](haskell/07-Algorithms/字符串算法.md)
@@ -213,54 +218,63 @@
 ### 待完成文档
 
 #### 05-Design-Patterns (设计模式) - 待完成 📋
+
 - 📋 [函数式设计模式](haskell/05-Design-Patterns/函数式设计模式.md)
 - 📋 [单子模式](haskell/05-Design-Patterns/单子模式.md)
 - 📋 [函子模式](haskell/05-Design-Patterns/函子模式.md)
 - 📋 [应用函子模式](haskell/05-Design-Patterns/应用函子模式.md)
 
 #### 06-Data-Structures (数据结构) - 待完成 📋
+
 - 📋 [基础数据结构](haskell/06-Data-Structures/基础数据结构.md)
 - 📋 [高级数据结构](haskell/06-Data-Structures/高级数据结构.md)
 - 📋 [持久化数据结构](haskell/06-Data-Structures/持久化数据结构.md)
 - 📋 [并发数据结构](haskell/06-Data-Structures/并发数据结构.md)
 
 #### 08-Concurrency (并发编程) - 待完成 📋
+
 - 📋 [并发基础](haskell/08-Concurrency/并发基础.md)
 - 📋 [线程管理](haskell/08-Concurrency/线程管理.md)
 - 📋 [同步机制](haskell/08-Concurrency/同步机制.md)
 - 📋 [异步编程](haskell/08-Concurrency/异步编程.md)
 
 #### 09-Performance (性能优化) - 待完成 📋
+
 - 📋 [内存优化](haskell/09-Performance/内存优化.md)
 - 📋 [算法优化](haskell/09-Performance/算法优化.md)
 - 📋 [并行计算](haskell/09-Performance/并行计算.md)
 - 📋 [编译器优化](haskell/09-Performance/编译器优化.md)
 
 #### 10-Advanced-Features (高级特性) - 待完成 📋
+
 - 📋 [类型族](haskell/10-Advanced-Features/类型族.md)
 - 📋 [GADT](haskell/10-Advanced-Features/GADT.md)
 - 📋 [模板Haskell](haskell/10-Advanced-Features/模板Haskell.md)
 - 📋 [扩展语言](haskell/10-Advanced-Features/扩展语言.md)
 
 #### 11-Web-Development (Web开发) - 待完成 📋
+
 - 📋 [Web框架](haskell/11-Web-Development/Web框架.md)
 - 📋 [HTTP处理](haskell/11-Web-Development/HTTP处理.md)
 - 📋 [模板系统](haskell/11-Web-Development/模板系统.md)
 - 📋 [数据库集成](haskell/11-Web-Development/数据库集成.md)
 
 #### 12-System-Programming (系统编程) - 待完成 📋
+
 - 📋 [系统调用](haskell/12-System-Programming/系统调用.md)
 - 📋 [文件系统](haskell/12-System-Programming/文件系统.md)
 - 📋 [网络编程](haskell/12-System-Programming/网络编程.md)
 - 📋 [进程管理](haskell/12-System-Programming/进程管理.md)
 
 #### 13-Formal-Verification (形式化验证) - 待完成 📋
+
 - 📋 [定理证明](haskell/13-Formal-Verification/定理证明.md)
 - 📋 [类型安全](haskell/13-Formal-Verification/类型安全.md)
 - 📋 [程序验证](haskell/13-Formal-Verification/程序验证.md)
 - 📋 [属性测试](haskell/13-Formal-Verification/属性测试.md)
 
 #### 14-Real-World-Applications (实际应用) - 待完成 📋
+
 - 📋 [科学计算](haskell/14-Real-World-Applications/科学计算.md)
 - 📋 [金融应用](haskell/14-Real-World-Applications/金融应用.md)
 - 📋 [编译器开发](haskell/14-Real-World-Applications/编译器开发.md)

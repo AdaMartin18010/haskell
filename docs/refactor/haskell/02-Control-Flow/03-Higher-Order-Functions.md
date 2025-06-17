@@ -17,6 +17,7 @@ $$F : (A \rightarrow B) \rightarrow C$$
 $$F : A \rightarrow (B \rightarrow C)$$
 
 其中：
+
 - $A \rightarrow B$ 表示从类型 $A$ 到类型 $B$ 的函数类型
 - 高阶函数可以接受函数作为参数或返回函数作为结果
 
@@ -432,7 +433,8 @@ Haskell的高阶函数提供了：
 ---
 
 **相关链接**：
+
 - [函数式编程基础](../01-Basic-Concepts/函数式编程基础.md)
 - [条件表达式](./01-Conditional-Expressions.md)
 - [递归函数](./02-Recursive-Functions.md)
-- [函数组合](./04-Function-Composition.md) 
+- [函数组合](./04-Function-Composition.md)

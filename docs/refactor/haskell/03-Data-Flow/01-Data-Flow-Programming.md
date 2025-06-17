@@ -24,10 +24,12 @@ $$\text{Stream} : \mathbb{N} \rightarrow A$$
 
 其中流满足：
 
-$$\text{stream}(n) = \begin{cases} 
+$$
+\text{stream}(n) = \begin{cases}
 \text{head}(s) & \text{if } n = 0 \\
 \text{stream}(n-1) & \text{otherwise}
-\end{cases}$$
+\end{cases}
+$$
 
 ### 管道形式化定义
 
@@ -134,7 +136,7 @@ transformPipeline f g (Pipeline p) = Pipeline (g . p . f)
 
 -- 管道分支
 branchPipeline :: (a -> Bool) -> Pipeline a b -> Pipeline a c -> Pipeline a (Either b c)
-branchPipeline pred (Pipeline f) (Pipeline g) = Pipeline (\x -> 
+branchPipeline pred (Pipeline f) (Pipeline g) = Pipeline (\x ->
   if pred x then Left (f x) else Right (g x))
 
 -- 管道合并
@@ -180,8 +182,8 @@ applyErrorFlow = runErrorFlow
 
 ```haskell
 -- 数据流语义定义
-data DataFlowSemantics a b = 
-  DataFlowSemantics 
+data DataFlowSemantics a b =
+  DataFlowSemantics
     { inputType :: a
     , outputType :: b
     , transformation :: a -> b
@@ -206,8 +208,8 @@ class DataFlowAlgebra a where
 
 ```haskell
 -- 流处理语义
-data StreamSemantics a = 
-  StreamSemantics 
+data StreamSemantics a =
+  StreamSemantics
     { streamHead :: Stream a -> a
     , streamTail :: Stream a -> Stream a
     , streamMap :: (a -> b) -> Stream a -> Stream b
@@ -291,7 +293,7 @@ memoizedDataFlow f = (map f [0..] !!)
 ```haskell
 -- 并行数据流处理
 parallelDataFlow :: (a -> b) -> [a] -> [b]
-parallelDataFlow f xs = 
+parallelDataFlow f xs =
   -- 在实际实现中，这里会使用并行计算
   map f xs
 
@@ -311,7 +313,7 @@ parallelPipeline = foldr (.) id
 ```haskell
 -- 数据处理管道
 dataProcessor :: [String] -> [Int]
-dataProcessor = 
+dataProcessor =
   map read .           -- 字符串转数字
   filter (not . null) . -- 过滤空字符串
   map trim .           -- 去除空白
@@ -319,7 +321,7 @@ dataProcessor =
 
 -- 文本处理管道
 textProcessor :: String -> String
-textProcessor = 
+textProcessor =
   map toLower .        -- 转小写
   filter isAlpha .     -- 只保留字母
   reverse .            -- 反转
@@ -327,7 +329,7 @@ textProcessor =
 
 -- 数值处理管道
 numberProcessor :: [Double] -> [Double]
-numberProcessor = 
+numberProcessor =
   filter (> 0) .       -- 过滤正数
   map sqrt .           -- 开平方
   map (* 2) .          -- 乘以2
@@ -339,33 +341,33 @@ numberProcessor =
 ```haskell
 -- 实时数据处理
 realTimeProcessor :: Stream Double -> Stream Double
-realTimeProcessor = 
+realTimeProcessor =
   mapStream (* 2) .    -- 乘以2
   filterStream (> 0) . -- 过滤正数
   mapStream sqrt       -- 开平方
 
 -- 事件流处理
-data Event = Event 
+data Event = Event
   { eventId :: Int
   , eventType :: String
   , eventData :: String
   }
 
 eventProcessor :: Stream Event -> Stream String
-eventProcessor = 
+eventProcessor =
   filterStream (\e -> eventType e == "important") . -- 过滤重要事件
   mapStream eventData .                             -- 提取数据
   mapStream (take 50)                               -- 限制长度
 
 -- 传感器数据处理
-data SensorData = SensorData 
+data SensorData = SensorData
   { sensorId :: Int
   , sensorValue :: Double
   , sensorTimestamp :: Integer
   }
 
 sensorProcessor :: Stream SensorData -> Stream Double
-sensorProcessor = 
+sensorProcessor =
   filterStream (\s -> sensorValue s > 0) . -- 过滤有效数据
   mapStream sensorValue .                  -- 提取数值
   mapStream (* 100)                        -- 放大100倍
@@ -375,7 +377,7 @@ sensorProcessor =
 
 ```haskell
 -- 用户数据处理
-data User = User 
+data User = User
   { userId :: Int
   , userName :: String
   , userAge :: Int
@@ -383,14 +385,14 @@ data User = User
   }
 
 userProcessor :: [User] -> [String]
-userProcessor = 
+userProcessor =
   filter userActive .           -- 过滤活跃用户
   filter (\u -> userAge u >= 18) . -- 过滤成年用户
   map userName .               -- 提取用户名
   map (take 20)               -- 限制长度
 
 -- 订单数据处理
-data Order = Order 
+data Order = Order
   { orderId :: Int
   , orderAmount :: Double
   , orderStatus :: String
@@ -398,21 +400,21 @@ data Order = Order
   }
 
 orderProcessor :: [Order] -> [Double]
-orderProcessor = 
+orderProcessor =
   filter (\o -> orderStatus o == "completed") . -- 过滤已完成订单
   map orderAmount .                             -- 提取金额
   filter (> 100) .                              -- 过滤大额订单
   map (* 1.1)                                   -- 增加10%
 
 -- 日志数据处理
-data LogEntry = LogEntry 
+data LogEntry = LogEntry
   { logLevel :: String
   , logMessage :: String
   , logTimestamp :: Integer
   }
 
 logProcessor :: [LogEntry] -> [String]
-logProcessor = 
+logProcessor =
   filter (\l -> logLevel l == "ERROR") . -- 过滤错误日志
   map logMessage .                       -- 提取消息
   map (take 100) .                       -- 限制长度
@@ -423,14 +425,14 @@ logProcessor =
 
 ```haskell
 -- 配置数据处理
-data Config = Config 
+data Config = Config
   { configKey :: String
   , configValue :: String
   , configType :: String
   }
 
 configProcessor :: [Config] -> [(String, String)]
-configProcessor = 
+configProcessor =
   filter (\c -> configType c == "string") . -- 过滤字符串配置
   map (\c -> (configKey c, configValue c)) . -- 转换为键值对
   filter (\(k, v) -> length v > 0) .         -- 过滤空值
@@ -438,7 +440,7 @@ configProcessor =
 
 -- 环境变量处理
 envProcessor :: [(String, String)] -> [(String, String)]
-envProcessor = 
+envProcessor =
   filter (\(k, v) -> not (null k)) .     -- 过滤空键
   filter (\(k, v) -> not (null v)) .     -- 过滤空值
   map (\(k, v) -> (map toUpper k, v)) .  -- 键转大写
@@ -460,7 +462,8 @@ Haskell的数据流编程提供了：
 ---
 
 **相关链接**：
+
 - [函数式编程基础](../01-Basic-Concepts/函数式编程基础.md)
 - [高阶函数](../02-Control-Flow/03-Higher-Order-Functions.md)
 - [流处理](./02-Stream-Processing.md)
-- [管道操作](./03-Pipeline-Operations.md) 
+- [管道操作](./03-Pipeline-Operations.md)
