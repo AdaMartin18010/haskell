@@ -13,6 +13,7 @@ Web框架可以形式化为：
 $$\text{WebFramework} = (R, H, M, C)$$
 
 其中：
+
 - $R$ 是路由系统
 - $H$ 是HTTP处理器
 - $M$ 是中间件系统
@@ -84,6 +85,7 @@ Yesod是一个类型安全的Web框架：
 $$\text{Yesod} = (\text{Foundation}, \text{Route}, \text{Handler}, \text{Widget})$$
 
 其中：
+
 - $\text{Foundation}$ 是应用基础
 - $\text{Route}$ 是类型安全路由
 - $\text{Handler}$ 是请求处理器
@@ -223,6 +225,7 @@ Scotty是一个轻量级Web框架：
 $$\text{Scotty} = (\text{Action}, \text{Route}, \text{Response})$$
 
 其中：
+
 - $\text{Action}$ 是动作处理器
 - $\text{Route}$ 是路由定义
 - $\text{Response}$ 是响应构建
@@ -369,6 +372,7 @@ Servant是一个类型级API框架：
 $$\text{Servant} = (\text{API}, \text{Server}, \text{Client})$$
 
 其中：
+
 - $\text{API}$ 是API类型定义
 - $\text{Server}$ 是服务器实现
 - $\text{Client}$ 是客户端生成
@@ -574,9 +578,10 @@ appWithAuth = serveWithContext appAPI context appServer
 3. **Servant**：类型级API开发框架
 
 每个框架都包含：
+
 - 严格的数学定义
 - 完整的Haskell实现
 - 形式化性质证明
 - 实际应用示例
 
-这些框架为Haskell Web开发提供了强大而类型安全的工具。 
+这些框架为Haskell Web开发提供了强大而类型安全的工具。
