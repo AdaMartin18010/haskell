@@ -30,6 +30,7 @@
 $$\text{Free} F = \mu X. \text{Id} + F X$$
 
 其中：
+
 - $F$ 是函子
 - $\mu$ 是最小不动点
 - $\text{Id}$ 是恒等函子
@@ -587,11 +588,13 @@ isSafeAlgebra algebra =
 $$A = (S, O, L)$$
 
 其中：
+
 - $S$ 是载体集合
 - $O$ 是操作集合
 - $L$ 是定律集合
 
 代数定律：
+
 - **结合律**: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
 - **单位律**: $e \cdot a = a \cdot e = a$
 - **逆律**: $a \cdot a^{-1} = a^{-1} \cdot a = e$
@@ -767,6 +770,7 @@ composeRecursively effect1 effect2 =
 $$E = (T, O, H)$$
 
 其中：
+
 - $T$ 是效果类型
 - $O$ 是操作集合
 - $H$ 是处理器集合
@@ -1236,4 +1240,4 @@ realWorldExample = do
 
 **作者**: 形式化知识体系重构项目  
 **最后更新**: 2024年12月  
-**版本**: 1.0 
+**版本**: 1.0

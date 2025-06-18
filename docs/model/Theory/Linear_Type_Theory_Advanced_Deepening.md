@@ -41,7 +41,7 @@ $$\frac{\Gamma, A \vdash B}{\Gamma, !A \vdash B} \text{ (!L)}$$
 2. 切割消除确保一致性
 3. 通过结构归纳证明
 
-**算法 1.1 (线性逻辑证明搜索)**
+**算法 1.1 (线性逻辑证明搜索)**:
 
 ```haskell
 data LinearLogic = LinearLogic {
