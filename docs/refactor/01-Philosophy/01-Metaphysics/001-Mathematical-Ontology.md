@@ -7,15 +7,18 @@
 ## 📚 快速导航
 
 ### 相关理论
+
 - [形式逻辑](./03-Logic/001-Formal-Logic.md)
 - [集合论](./02-Formal-Science/01-Mathematics/001-Set-Theory.md)
 - [类型论](./02-Formal-Science/04-Type-Theory/001-Simple-Type-Theory.md)
 
 ### 实现示例
+
 - [Haskell类型系统](./haskell/01-Basic-Concepts/002-Type-System.md)
 - [形式化验证](./haskell/13-Formal-Verification/001-Theorem-Proving.md)
 
 ### 应用领域
+
 - [编程语言理论](./03-Theory/01-Programming-Language-Theory/003-Type-Systems.md)
 - [形式化方法](./03-Theory/04-Formal-Methods/002-Theorem-Proving.md)
 
@@ -125,6 +128,7 @@ class Intuitionism m where
 
 **定义 2.1 (数学存在性)**
 数学对象 $x$ 存在，当且仅当：
+
 1. $x$ 满足一致性条件
 2. $x$ 可以通过构造性方法获得
 3. $x$ 在形式系统中可表示
@@ -179,7 +183,7 @@ $$\text{AbstractLevel}(x) = \begin{cases}
 
 ```haskell
 -- 抽象层次
-data AbstractLevel = 
+data AbstractLevel =
     Concrete
   | Abstract
   | Meta
@@ -419,4 +423,4 @@ class OntologicalVerification m where
 **文档版本**: 1.0  
 **最后更新**: 2024年12月  
 **作者**: 形式化知识体系重构项目  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

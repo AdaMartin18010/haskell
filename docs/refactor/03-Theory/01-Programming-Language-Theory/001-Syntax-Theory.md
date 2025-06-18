@@ -7,15 +7,18 @@
 ## 📚 快速导航
 
 ### 相关理论
+
 - [集合论](./02-Formal-Science/01-Mathematics/001-Set-Theory.md)
 - [形式语言理论](./02-Formal-Science/07-Formal-Language-Theory/001-Formal-Language-Basics.md)
 - [自动机理论](./02-Formal-Science/06-Automata-Theory/001-Finite-Automata.md)
 
 ### 实现示例
+
 - [Haskell解析器](./haskell/10-Domain-Specific-Languages/001-Parser-Combinators.md)
 - [语法分析](./haskell/07-Web-Development/003-Web-Sockets.md)
 
 ### 应用领域
+
 - [编译器设计](./07-Implementation/01-Compiler-Design/002-Syntax-Analysis.md)
 - [语言处理](./07-Implementation/02-Language-Processing/001-Parsing-Techniques.md)
 
@@ -25,6 +28,7 @@
 
 **定义 1.1 (形式语法)**
 形式语法是四元组 $G = (V, T, P, S)$，其中：
+
 - $V$ 是非终结符集合
 - $T$ 是终结符集合
 - $P$ 是产生式集合
@@ -131,7 +135,7 @@ $$\text{Type}(G) = \begin{cases}
 
 ```haskell
 -- 语法类型
-data GrammarType = 
+data GrammarType =
     Type0  -- 无限制语法
   | Type1  -- 上下文相关语法
   | Type2  -- 上下文无关语法
@@ -158,14 +162,14 @@ instance GrammarClassification IO where
     else return Type0
   
   isType3 :: Production -> Bool
-  isType3 (Production lhs rhs) = 
+  isType3 (Production lhs rhs) =
     case rhs of
       [Terminal _] -> True
       [Terminal _, NonTerminal _] -> True
       _ -> False
   
   isType2 :: Production -> Bool
-  isType2 (Production lhs rhs) = 
+  isType2 (Production lhs rhs) =
     case lhs of
       NonTerminal _ -> True
       _ -> False
@@ -188,7 +192,7 @@ $$\mathcal{L}_0 \supset \mathcal{L}_1 \supset \mathcal{L}_2 \supset \mathcal{L}_
 
 ```haskell
 -- 语言层次
-data LanguageClass = 
+data LanguageClass =
     RecursivelyEnumerable
   | ContextSensitive
   | ContextFree
@@ -308,7 +312,7 @@ class RecursiveDescentParser m where
   parseNonTerminal :: String -> [Token m] -> m (Maybe (ParseTree, [Token m]))
 
 -- 具体实现
-data ParseTree = 
+data ParseTree =
     Leaf Token
   | Node String [ParseTree]
 
@@ -377,7 +381,7 @@ data LRTable = LRTable {
   gotoTable :: Map (Int, String) Int
 }
 
-data Action = 
+data Action =
     Shift Int
   | Reduce Production
   | Accept
@@ -417,7 +421,7 @@ instance CYKParser IO where
     return $ startSymbol cfg `elem` table !! 0 !! (n-1)
   
   buildCYKTable :: CFG -> String -> Int -> [[Set String]]
-  buildCYKTable cfg input n = 
+  buildCYKTable cfg input n =
     let table = replicate n (replicate n Set.empty)
         -- 初始化对角线
         table1 = initializeDiagonal table input cfg
@@ -426,12 +430,12 @@ instance CYKParser IO where
     in table2
   
   initializeDiagonal :: [[Set String]] -> String -> CFG -> [[Set String]]
-  initializeDiagonal table input cfg = 
+  initializeDiagonal table input cfg =
     -- 初始化对角线元素的实现
     table
   
   fillTable :: [[Set String]] -> CFG -> Int -> [[Set String]]
-  fillTable table cfg n = 
+  fillTable table cfg n =
     -- 填充表格的实现
     table
 ```
@@ -530,7 +534,7 @@ many1 p = (:) <$> p <*> many p
 
 ```haskell
 -- 语法树
-data SyntaxTree = 
+data SyntaxTree =
     Leaf String
   | Node String [SyntaxTree]
 
@@ -577,4 +581,4 @@ instance SyntaxTreeBuilder IO where
 **文档版本**: 1.0  
 **最后更新**: 2024年12月  
 **作者**: 形式化知识体系重构项目  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

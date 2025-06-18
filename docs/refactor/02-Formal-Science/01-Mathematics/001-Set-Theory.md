@@ -7,15 +7,18 @@
 ## 📚 快速导航
 
 ### 相关理论
+
 - [数学本体论](./01-Philosophy/01-Metaphysics/001-Mathematical-Ontology.md)
 - [形式逻辑](./02-Formal-Logic/001-Propositional-Logic.md)
 - [类型论](./04-Type-Theory/001-Simple-Type-Theory.md)
 
 ### 实现示例
+
 - [Haskell集合实现](./haskell/03-Data-Structures/001-Basic-Data-Structures.md)
 - [类型系统](./haskell/01-Basic-Concepts/002-Type-System.md)
 
 ### 应用领域
+
 - [编程语言理论](./03-Theory/01-Programming-Language-Theory/003-Type-Systems.md)
 - [形式化方法](./03-Theory/04-Formal-Methods/002-Theorem-Proving.md)
 
@@ -429,4 +432,4 @@ class InnerModel m where
 **文档版本**: 1.0  
 **最后更新**: 2024年12月  
 **作者**: 形式化知识体系重构项目  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成
