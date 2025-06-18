@@ -552,7 +552,7 @@ safeGeneration typeName = do
 ## 相关链接
 
 - [GHC扩展](../10-Advanced-Features/02-GHC-Extensions.md)
-- [高级类型](../05-Type-System/04-Advanced-Types.md)
+- [高级类型](../04-Type-System/高级类型.md)
 - [设计模式](../06-Design-Patterns/01-Functional-Patterns.md)
 - [性能优化](../10-Advanced-Features/03-Performance-Optimization.md)
 

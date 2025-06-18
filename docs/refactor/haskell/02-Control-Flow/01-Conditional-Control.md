@@ -363,7 +363,7 @@ Haskell的条件控制机制包括：
 
 - [语法基础](../01-Basic-Concepts/03-Syntax-Basics.md)
 - [执行流](../03-Execution-Flow/01-Function-Execution.md)
-- [类型系统](../05-Type-System/01-Basic-Types.md)
+- [类型系统](../04-Type-System/类型基础.md)
 - [设计模式](../06-Design-Patterns/01-Functional-Patterns.md)
 
 ---

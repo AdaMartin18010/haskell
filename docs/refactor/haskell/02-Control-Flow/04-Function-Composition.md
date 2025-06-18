@@ -328,11 +328,10 @@ listProcessing xs =
 
 函数组合体现了函数式编程的数学本质，将复杂的计算分解为简单的函数组合，使得代码既简洁又具有强大的表达能力。
 
----
-
-**相关主题**：
+## 相关链接
 
 - [高阶函数](03-Higher-Order-Functions.md)
-- [函数式编程基础](../01-Basic-Concepts/函数式编程基础.md)
+- [递归函数](02-Recursive-Functions.md)
+- [条件表达式](01-Conditional-Expressions.md)
+- [单子理论](../05-Design-Patterns/单子模式.md)
 - [类型系统](../04-Type-System/类型基础.md)
-- [单子理论](../04-Type-System/高级类型.md)

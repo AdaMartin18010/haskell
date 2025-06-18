@@ -421,7 +421,7 @@ Haskell的语法基础包括：
 
 - [函数式编程基础](01-Functional-Programming-Basics.md)
 - [Haskell语言特性](02-Haskell-Language-Features.md)
-- [类型系统](../05-Type-System/01-Basic-Types.md)
+- [类型系统](../04-Type-System/类型基础.md)
 - [设计模式](../06-Design-Patterns/01-Functional-Patterns.md)
 
 ---

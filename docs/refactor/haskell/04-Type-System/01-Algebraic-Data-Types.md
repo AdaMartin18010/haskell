@@ -557,7 +557,7 @@ Haskell的代数数据类型提供了强大而灵活的数据建模能力：
 ---
 
 **相关链接**:
-- [类型系统基础](../README.md)
-- [类型类](02-Type-Classes.md)
+- [类型系统基础](../../README.md)
+- [类型类](类型类.md)
 - [高级类型特性](03-Advanced-Type-Features.md)
 - [返回主索引](../../README.md)

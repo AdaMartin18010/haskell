@@ -618,7 +618,7 @@ let memory_usage () =
 - [与F#对比](04-Haskell-vs-FSharp.md)
 - [语言特性对比](05-Language-Features-Comparison.md)
 - [Haskell基础](../01-Basic-Concepts/README.md)
-- [类型体系](../05-Type-System/README.md)
+- [类型体系](../04-Type-System/README.md)
 
 ---
 

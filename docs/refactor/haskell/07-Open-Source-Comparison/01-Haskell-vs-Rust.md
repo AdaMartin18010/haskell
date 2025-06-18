@@ -516,7 +516,7 @@ fn ownership_semantics(s: String) -> String {
 
 - [Haskell基础](../01-Basic-Concepts/01-Functional-Programming-Basics.md)
 - [Rust对比](../07-Open-Source-Comparison/02-Haskell-vs-Scala.md)
-- [类型系统](../05-Type-System/01-Basic-Types.md)
+- [类型系统](../04-Type-System/类型基础.md)
 - [并发编程](../10-Advanced-Features/04-Concurrent-Programming.md)
 
 ---

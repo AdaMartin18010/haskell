@@ -33,6 +33,7 @@
 - [类型类](04-Type-System/类型类.md) - 类型类和约束
 - [高级类型](04-Type-System/高级类型.md) - 高级类型特性
 - [类型安全](04-Type-System/类型安全.md) - 类型安全保证
+- [代数数据类型](04-Type-System/01-Algebraic-Data-Types.md) - 代数数据类型定义
 
 ### 05-Design-Patterns (设计模式)
 
@@ -71,10 +72,11 @@
 
 ### 10-Advanced-Features (高级特性)
 
+- [现代Haskell技术栈](10-Advanced-Features/现代Haskell技术栈.md) - 最新Haskell技术栈和工具
 - [类型族](10-Advanced-Features/类型族.md) - 类型族和关联类型
 - [GADT](10-Advanced-Features/GADT.md) - 广义代数数据类型
-- [模板Haskell](10-Advanced-Features/模板Haskell.md) - 元编程技术
-- [扩展语言](10-Advanced-Features/扩展语言.md) - 语言扩展和GHC扩展
+- [模板Haskell](10-Advanced-Features/01-Template-Haskell.md) - 元编程技术
+- [GHC扩展](10-Advanced-Features/02-GHC-Extensions.md) - 语言扩展和GHC扩展
 
 ### 11-Web-Development (Web开发)
 
@@ -93,7 +95,6 @@
 ### 13-Formal-Verification (形式化验证)
 
 - [定理证明](13-Formal-Verification/定理证明.md) - 程序定理证明
-- [类型安全](13-Formal-Verification/类型安全.md) - 类型安全保证
 - [程序验证](13-Formal-Verification/程序验证.md) - 程序正确性验证
 - [属性测试](13-Formal-Verification/属性测试.md) - QuickCheck属性测试
 
@@ -165,6 +166,13 @@
 - 软件事务内存
 - 并行计算
 - 异步编程
+
+### 5. 现代技术栈
+
+- GHC 9.8+ 最新特性
+- 线性类型系统
+- 现代开发工具链
+- 容器化和云原生
 
 ## 质量保证
 

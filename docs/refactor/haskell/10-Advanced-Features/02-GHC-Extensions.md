@@ -518,7 +518,7 @@ GHC扩展大大增强了Haskell的表达能力，主要包括：
 ## 相关链接
 
 - [模板Haskell](01-Template-Haskell.md)
-- [高级类型](../05-Type-System/04-Advanced-Types.md)
+- [高级类型](../04-Type-System/高级类型.md)
 - [性能优化](03-Performance-Optimization.md)
 - [并发编程](04-Concurrent-Programming.md)
 

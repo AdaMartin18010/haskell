@@ -562,7 +562,7 @@ avoidSpaceLeak = foldl' (+) 0
 - [模式匹配](04-Pattern-Matching.md)
 - [高阶函数](05-Higher-Order-Functions.md)
 - [控制流](../02-Control-Flow/README.md)
-- [类型体系](../05-Type-System/README.md)
+- [类型体系](../04-Type-System/README.md)
 
 ---
 
