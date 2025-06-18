@@ -227,6 +227,7 @@ data Tree a = Empty | Node a (Tree a) (Tree a)
 **证明**：
 设 $T$ 是一个代数数据类型，其构造器为 $C_1, C_2, \ldots, C_n$。
 对于函数 $f: T \rightarrow A$，我们可以定义：
+
 ```haskell
 f :: T -> A
 f (C1 x1 ... xk1) = e1
@@ -335,16 +336,19 @@ getFirst (x, _, _) = x
 ## 🔗 相关链接
 
 ### 理论基础
+
 - [代数数据类型](../04-Type-System/002-Algebraic-Data-Types.md)
 - [类型系统理论](../03-Theory/01-Programming-Language-Theory/004-Type-System-Theory.md)
 - [函数式编程理论](../03-Theory/01-Programming-Language-Theory/002-Functional-Programming-Theory.md)
 
 ### 实际应用
+
 - [控制流](./02-Control-Flow/001-Control-Structures.md)
 - [数据流](./03-Data-Flow/001-Data-Transformation.md)
 - [类型系统](./04-Type-System/001-Type-Definitions.md)
 
 ### 高级特性
+
 - [设计模式](./05-Design-Patterns/001-Functional-Patterns.md)
 - [并发编程](./08-Concurrency/001-Concurrent-Programming.md)
 - [性能优化](./09-Performance/001-Algorithm-Optimization.md)
@@ -354,4 +358,4 @@ getFirst (x, _, _) = x
 **最后更新**: 2024年12月
 **版本**: 1.0
 **状态**: ✅ 完成
-**维护者**: 形式化知识体系团队 
+**维护者**: 形式化知识体系团队

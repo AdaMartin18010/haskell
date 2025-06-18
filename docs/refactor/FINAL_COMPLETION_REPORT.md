@@ -28,7 +28,7 @@
 
 ### 7层架构结构
 
-```
+```text
 docs/refactor/
 ├── 01-Philosophy/          # 理念层 - 哲学基础和认识论
 ├── 02-Formal-Science/      # 形式科学层 - 数学和逻辑基础
