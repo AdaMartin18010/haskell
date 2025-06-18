@@ -6,7 +6,7 @@
 
 ## 理论层次结构
 
-```
+```text
 09-Affine-Type-Theory/
 ├── 01-Foundations/
 │   ├── 01-Affine-Logic-Basics.md
@@ -66,13 +66,13 @@ data AffineSum a b = Left a | Right b
 
 ### 仿射类型系统语法
 
-```
+```latex
 A, B ::= α | A ⊸ B | A ⊗ B | A ⊕ B | !A | 1 | 0
 ```
 
 ### 仿射类型系统规则
 
-```
+```latex
 Γ, x:A ⊢ M:B
 ───────────── (⊸I)
 Γ ⊢ λx.M:A⊸B
@@ -96,7 +96,7 @@ A, B ::= α | A ⊸ B | A ⊗ B | A ⊕ B | !A | 1 | 0
 
 ### 嵌入关系
 
-```
+```latex
 线性类型 ⊂ 仿射类型 ⊂ 直觉类型
 ```
 

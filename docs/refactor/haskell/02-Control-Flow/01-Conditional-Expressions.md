@@ -1,306 +1,149 @@
-# Haskell 条件表达式
+# 条件表达式 (Conditional Expressions)
 
 ## 概述
 
-条件表达式是Haskell中控制程序执行流程的基础构造，基于模式匹配和守卫表达式实现。
+条件表达式是Haskell控制流的基础，支持if-then-else、guards和case表达式等多种形式。本文档系统性介绍Haskell条件表达式的理论基础、数学模型和实际应用。
 
-## 数学定义
+## 目录
 
-### 条件表达式形式化定义
+1. [基本概念](#基本概念)
+2. [if-then-else表达式](#if-then-else表达式)
+3. [守卫 (Guards)](#守卫-guards)
+4. [case表达式](#case表达式)
+5. [数学模型](#数学模型)
+6. [Haskell实现](#haskell实现)
+7. [最佳实践](#最佳实践)
 
-给定类型 $A$ 和 $B$，条件表达式定义为：
+## 基本概念
 
-$$\text{if} : \text{Bool} \times A \times A \rightarrow A$$
+### 定义 1.1: 条件表达式 (Conditional Expression)
 
-其中：
+条件表达式根据布尔条件选择不同的分支进行求值。
 
-- $\text{Bool}$ 是布尔类型
-- $A$ 是任意类型
-- 满足：$\text{if}(b, x, y) = \begin{cases} x & \text{if } b = \text{True} \\ y & \text{if } b = \text{False} \end{cases}$
-
-### 守卫表达式形式化定义
-
-守卫表达式定义为：
-
-$$\text{guard} : (A \rightarrow \text{Bool}) \times A \rightarrow A$$
-
-## Haskell实现
-
-### 基础条件表达式
+### 语法
 
 ```haskell
--- 基础if-then-else表达式
-module ControlFlow.Conditional where
+if condition then expr1 else expr2
+```
 
--- 简单条件表达式
-absoluteValue :: Num a => a -> a
-absoluteValue x = if x >= 0 then x else -x
+## if-then-else表达式
 
--- 多条件表达式
+### 形式定义
+
+$$
+\text{if } b \text{ then } e_1 \text{ else } e_2 =
+\begin{cases}
+  e_1 & \text{if } b = \text{True} \\
+  e_2 & \text{if } b = \text{False}
+\end{cases}
+$$
+
+### Haskell示例
+
+```haskell
+max' :: Int -> Int -> Int
+max' x y = if x > y then x else y
+```
+
+## 守卫 (Guards)
+
+### 形式定义
+
+守卫是带条件的函数分支：
+
+```haskell
+f x
+  | p1 = e1
+  | p2 = e2
+  | otherwise = e3
+```
+
+### Haskell示例
+
+```haskell
 grade :: Int -> String
-grade score = if score >= 90 then "A"
-              else if score >= 80 then "B"
-              else if score >= 70 then "C"
-              else if score >= 60 then "D"
-              else "F"
-
--- 条件表达式的类型安全
-safeDivide :: (Fractional a, Eq a) => a -> a -> Maybe a
-safeDivide x y = if y == 0 then Nothing else Just (x / y)
+grade x
+  | x >= 90 = "A"
+  | x >= 80 = "B"
+  | otherwise = "C"
 ```
 
-### 守卫表达式
+## case表达式
+
+### 形式定义
+
+case表达式根据模式匹配选择分支：
 
 ```haskell
--- 使用守卫表达式的函数
-absoluteValue' :: Num a => a -> a
-absoluteValue' x
-  | x >= 0    = x
-  | otherwise = -x
-
--- 多条件守卫
-grade' :: Int -> String
-grade' score
-  | score >= 90 = "A"
-  | score >= 80 = "B"
-  | score >= 70 = "C"
-  | score >= 60 = "D"
-  | otherwise   = "F"
-
--- 复杂条件守卫
-classifyNumber :: (Ord a, Num a) => a -> String
-classifyNumber x
-  | x < 0     = "Negative"
-  | x == 0    = "Zero"
-  | x < 10    = "Small positive"
-  | x < 100   = "Medium positive"
-  | otherwise = "Large positive"
+case expr of
+  pattern1 -> result1
+  pattern2 -> result2
+  _        -> defaultResult
 ```
 
-### 模式匹配条件
+### Haskell示例
 
 ```haskell
--- 基于模式匹配的条件
-data Shape = Circle Double | Rectangle Double Double | Triangle Double Double Double
-
-area :: Shape -> Double
-area (Circle r) = pi * r * r
-area (Rectangle w h) = w * h
-area (Triangle a b c) = 
-  let s = (a + b + c) / 2
-  in sqrt (s * (s - a) * (s - b) * (s - c))
-
--- 列表模式匹配
 safeHead :: [a] -> Maybe a
-safeHead [] = Nothing
-safeHead (x:_) = Just x
-
--- 元组模式匹配
-processTuple :: (Int, String) -> String
-processTuple (0, msg) = "Zero: " ++ msg
-processTuple (n, msg) = "Number " ++ show n ++ ": " ++ msg
+safeHead xs = case xs of
+  [] -> Nothing
+  (x:_) -> Just x
 ```
 
-### 高级条件表达式
-
-```haskell
--- 条件表达式与高阶函数结合
-conditionalMap :: (a -> Bool) -> (a -> b) -> (a -> b) -> [a] -> [b]
-conditionalMap pred f1 f2 = map (\x -> if pred x then f1 x else f2 x)
-
--- 使用示例
-processNumbers :: [Int] -> [String]
-processNumbers = conditionalMap 
-  (> 0) 
-  (\x -> "Positive: " ++ show x)
-  (\x -> "Non-positive: " ++ show x)
-
--- 条件表达式与单子结合
-conditionalIO :: Bool -> IO String
-conditionalIO b = if b 
-  then putStrLn "True branch" >> return "True"
-  else putStrLn "False branch" >> return "False"
-
--- 条件表达式与Applicative结合
-conditionalApply :: Bool -> (a -> b) -> a -> Maybe b
-conditionalApply b f x = if b then Just (f x) else Nothing
-```
-
-## 形式化语义
+## 数学模型
 
 ### 条件表达式的语义
 
-```haskell
--- 条件表达式的语义定义
-data ConditionalSemantics a = 
-  ConditionalSemantics 
-    { condition :: Bool
-    , trueBranch :: a
-    , falseBranch :: a
-    , result :: a
-    }
+$$
+\llbracket \text{if } b \text{ then } e_1 \text{ else } e_2 \rrbracket =
+\begin{cases}
+  \llbracket e_1 \rrbracket & \text{if } \llbracket b \rrbracket = \text{True} \\
+  \llbracket e_2 \rrbracket & \text{if } \llbracket b \rrbracket = \text{False}
+\end{cases}
+$$
 
--- 语义解释函数
-interpretConditional :: ConditionalSemantics a -> a
-interpretConditional (ConditionalSemantics c t f _) = 
-  if c then t else f
+### case表达式的语义
 
--- 条件表达式的代数性质
-class ConditionalAlgebra a where
-  -- 单位元
-  unit :: a
-  -- 条件组合
-  conditional :: Bool -> a -> a -> a
-  -- 分配律
-  distribute :: (a -> b) -> a -> a -> Bool -> b
-```
+$$
+\llbracket \text{case } e \text{ of } p_i \rightarrow e_i \rrbracket =
+\llbracket e_j \rrbracket \text{ where } p_j \sim \llbracket e \rrbracket
+$$
 
-### 守卫表达式的语义
+## Haskell实现
+
+### 综合示例
 
 ```haskell
--- 守卫表达式的语义
-data GuardSemantics a = 
-  GuardSemantics 
-    { predicates :: [a -> Bool]
-    , expressions :: [a -> a]
-    , defaultExpr :: a -> a
-    }
+absVal :: Int -> Int
+absVal x = if x >= 0 then x else -x
 
--- 守卫表达式解释器
-interpretGuard :: GuardSemantics a -> a -> a
-interpretGuard (GuardSemantics preds exprs def) x =
-  case findIndex (\p -> p x) preds of
-    Just i -> (exprs !! i) x
-    Nothing -> def x
+sign :: Int -> String
+sign x
+  | x > 0 = "positive"
+  | x < 0 = "negative"
+  | otherwise = "zero"
+
+safeTail :: [a] -> [a]
+safeTail xs = case xs of
+  [] -> []
+  (_:ts) -> ts
 ```
 
-## 类型安全保证
+## 最佳实践
 
-### 条件表达式的类型系统
+1. **优先使用guards和case表达式**：提高代码可读性和模式匹配能力。
+2. **避免嵌套if-then-else**：多分支时优先用guards或case。
+3. **穷尽性检查**：确保所有可能分支都被覆盖。
+4. **结合类型系统**：利用类型安全避免运行时错误。
 
-```haskell
--- 条件表达式的类型检查
-class TypeSafeConditional a where
-  type ConditionType a
-  type ResultType a
-  
-  -- 类型安全的条件表达式
-  typeSafeIf :: ConditionType a -> ResultType a -> ResultType a -> ResultType a
-  
-  -- 类型安全的守卫
-  typeSafeGuard :: (a -> ConditionType a) -> (a -> ResultType a) -> a -> ResultType a
+## 相关链接
 
--- 实例化
-instance TypeSafeConditional Int where
-  type ConditionType Int = Bool
-  type ResultType Int = Int
-  
-  typeSafeIf c t f = if c then t else f
-  typeSafeGuard p f x = if p x then f x else x
-```
-
-## 性能优化
-
-### 惰性求值优化
-
-```haskell
--- 利用惰性求值优化条件表达式
-lazyConditional :: Bool -> a -> a -> a
-lazyConditional b t f = 
-  -- 只有被选择的分支会被求值
-  if b then t else f
-
--- 避免不必要的计算
-expensiveComputation :: Int -> Int
-expensiveComputation n = 
-  if n <= 0 
-    then 0  -- 避免计算
-    else sum [1..n]  -- 只在需要时计算
-
--- 条件表达式的记忆化
-memoizedConditional :: (Int -> Bool) -> (Int -> Int) -> (Int -> Int) -> Int -> Int
-memoizedConditional pred f1 f2 = 
-  let memo = \n -> if pred n then f1 n else f2 n
-  in memo
-```
-
-## 实际应用
-
-### 业务逻辑中的条件表达式
-
-```haskell
--- 用户权限检查
-data User = User 
-  { userId :: Int
-  , userRole :: String
-  , userPermissions :: [String]
-  }
-
-checkPermission :: User -> String -> Bool
-checkPermission user permission
-  | userRole user == "admin" = True
-  | permission `elem` userPermissions user = True
-  | otherwise = False
-
--- 订单处理逻辑
-data Order = Order 
-  { orderId :: Int
-  , orderAmount :: Double
-  , orderStatus :: String
-  }
-
-processOrder :: Order -> String
-processOrder order
-  | orderAmount order > 1000 = "High value order - manual review required"
-  | orderStatus order == "pending" = "Order is pending"
-  | orderAmount order > 100 = "Standard order processing"
-  | otherwise = "Fast track processing"
-```
-
-### 算法中的条件表达式
-
-```haskell
--- 二分查找中的条件表达式
-binarySearch :: Ord a => [a] -> a -> Maybe Int
-binarySearch [] _ = Nothing
-binarySearch xs target = go 0 (length xs - 1)
-  where
-    go left right
-      | left > right = Nothing
-      | otherwise = 
-          let mid = (left + right) `div` 2
-              midVal = xs !! mid
-          in if target == midVal
-             then Just mid
-             else if target < midVal
-                  then go left (mid - 1)
-                  else go (mid + 1) right
-
--- 快速排序中的条件表达式
-quicksort :: Ord a => [a] -> [a]
-quicksort [] = []
-quicksort (x:xs) = 
-  let smaller = [a | a <- xs, a <= x]
-      larger = [a | a <- xs, a > x]
-  in quicksort smaller ++ [x] ++ quicksort larger
-```
-
-## 总结
-
-Haskell的条件表达式提供了：
-
-1. **类型安全**：编译时检查确保类型正确性
-2. **函数式风格**：基于表达式而非语句
-3. **模式匹配**：强大的模式匹配能力
-4. **惰性求值**：避免不必要的计算
-5. **组合性**：易于与其他函数式构造组合
-
-这些特性使得Haskell的条件表达式既安全又高效，是函数式编程中控制流程的核心工具。
+- [基础概念](../01-Basic-Concepts/README.md)
+- [模式匹配](../02-Language-Features/03-Pattern-Matching.md)
+- [类型系统](../02-Language-Features/01-Type-System.md)
 
 ---
 
-**相关链接**：
-
-- [函数式编程基础](../01-Basic-Concepts/函数式编程基础.md)
-- [模式匹配](../01-Basic-Concepts/模式匹配.md)
-- [高阶函数](../02-Control-Flow/高阶函数.md)
+**作者**: 形式化知识体系重构项目  
+**最后更新**: 2024年12月  
+**版本**: 1.0

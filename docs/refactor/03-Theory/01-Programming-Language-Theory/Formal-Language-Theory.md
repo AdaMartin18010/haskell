@@ -7,15 +7,18 @@
 ## 快速导航
 
 ### 相关理论
+
 - [自动机理论](./../06-Automata-Theory/README.md)
 - [数学逻辑](./../../02-Formal-Science/12-Mathematical-Logic.md)
 - [计算复杂性](./../../02-Formal-Science/09-Computational-Complexity.md)
 
 ### 实现示例
+
 - [Haskell实现](./../../haskell/01-Basic-Concepts/形式语言实现.md)
 - [形式化验证](./../../haskell/13-Formal-Verification/语言验证.md)
 
 ### 应用领域
+
 - [编译器设计](./../../07-Implementation/01-Compiler-Design.md)
 - [语言处理](./../../07-Implementation/02-Language-Processing.md)
 
@@ -454,6 +457,7 @@ computeAttributes grammar tree =
 
 **定义 3.4 (树邻接操作)**
 树邻接操作包括：
+
 1. **替换**：用辅助树替换初始树中的非终结符节点
 2. **邻接**：将辅助树邻接到初始树的非终结符节点
 
@@ -510,6 +514,7 @@ applyAdjunctions tag trees =
 形式语言理论在编译器设计中起着关键作用：
 
 #### 词法分析器
+
 ```haskell
 -- 基于正则表达式的词法分析器
 data LexicalAnalyzer = LexicalAnalyzer
@@ -533,6 +538,7 @@ scanTokens analyzer input =
 ```
 
 #### 语法分析器
+
 ```haskell
 -- 基于上下文无关文法的语法分析器
 data SyntaxAnalyzer = SyntaxAnalyzer
@@ -555,6 +561,7 @@ syntaxAnalyzer tokens =
 形式语言理论在自然语言处理中的应用：
 
 #### 句法分析
+
 ```haskell
 -- 自然语言句法分析器
 data NLPSyntaxAnalyzer = NLPSyntaxAnalyzer
@@ -722,4 +729,4 @@ instance LanguageTesting FormalLanguage where
 1. Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006). *Introduction to Automata Theory, Languages, and Computation*. Pearson Education.
 2. Sipser, M. (2012). *Introduction to the Theory of Computation*. Cengage Learning.
 3. Kozen, D. C. (2006). *Automata and Computability*. Springer.
-4. Arora, S., & Barak, B. (2009). *Computational Complexity: A Modern Approach*. Cambridge University Press. 
+4. Arora, S., & Barak, B. (2009). *Computational Complexity: A Modern Approach*. Cambridge University Press.

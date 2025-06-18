@@ -1,104 +1,225 @@
-# 08. 线性类型理论 (Linear Type Theory)
+# 线性类型理论 (Linear Type Theory)
 
 ## 概述
 
-线性类型理论是现代函数式编程语言中的核心理论，特别是在Haskell中得到了广泛应用。它基于线性逻辑，强调资源的精确使用和不可复制性。
+本目录包含线性类型理论的核心内容，涵盖线性逻辑、线性λ演算、资源管理、并发控制等高级类型系统理论。
 
-## 理论层次结构
+## 目录结构
 
-```
+```text
 08-Linear-Type-Theory/
-├── 01-Foundations/
-│   ├── 01-Linear-Logic-Basics.md
-│   ├── 02-Resource-Management.md
-│   └── 03-Linear-Implications.md
-├── 02-Linear-Type-Systems/
-│   ├── 01-Basic-Linear-Types.md
-│   ├── 02-Linear-Functions.md
-│   ├── 03-Linear-Pairs.md
-│   └── 04-Linear-Sums.md
-├── 03-Advanced-Linear-Theory/
-│   ├── 01-Graded-Monads.md
-│   ├── 02-Linear-Effects.md
-│   ├── 03-Linear-Containers.md
-│   └── 04-Linear-Protocols.md
-├── 04-Haskell-Integration/
-│   ├── 01-Linear-Haskell.md
-│   ├── 02-Resource-Types.md
-│   ├── 03-Linear-IO.md
-│   └── 04-Linear-Concurrency.md
-└── 05-Applications/
-    ├── 01-Memory-Management.md
-    ├── 02-Concurrent-Programming.md
-    ├── 03-Resource-Safety.md
-    └── 04-Performance-Optimization.md
+├── README.md                           # 本文件
+├── 01-Linear-Logic-Foundation.md       # 线性逻辑基础
+├── 02-Linear-Lambda-Calculus.md        # 线性λ演算
+├── 03-Resource-Management.md            # 资源管理
+├── 04-Concurrency-Control.md            # 并发控制
+├── 05-Quantum-Computing.md              # 量子计算
+└── 06-Applications.md                   # 应用领域
 ```
 
-## 核心概念
+## 快速导航
 
-### 1. 线性逻辑基础
+### 基础理论
 
-- **线性蕴含** (⊸): 表示资源的精确使用
-- **乘性连接词** (⊗, ⅋): 表示资源的组合
-- **指数连接词** (!, ?): 表示资源的可重用性
+- [线性逻辑基础](./01-Linear-Logic-Foundation.md) - 线性逻辑公理系统
+- [线性λ演算](./02-Linear-Lambda-Calculus.md) - 线性λ演算和类型系统
+- [资源管理](./03-Resource-Management.md) - 资源管理和内存安全
 
-### 2. 线性类型系统
+### 高级理论
 
-- **线性函数类型**: `A ⊸ B`
-- **线性积类型**: `A ⊗ B`
-- **线性和类型**: `A ⊕ B`
-- **指数类型**: `!A`
+- [并发控制](./04-Concurrency-Control.md) - 并发控制和同步
+- [量子计算](./05-Quantum-Computing.md) - 量子计算类型安全
+- [应用领域](./06-Applications.md) - 实际应用和工程实践
 
-### 3. Haskell实现
+### 相关理论
+
+- [仿射类型理论](../09-Affine-Type-Theory/README.md) - 仿射类型系统
+- [量子类型理论](../10-Quantum-Type-Theory/README.md) - 量子类型系统
+- [时态类型理论](../11-Temporal-Type-Theory/README.md) - 时态类型系统
+
+### 实现示例
+
+- [Haskell实现](../../haskell/02-Advanced-Concepts/线性类型系统.md) - Haskell线性类型
+- [形式化验证](../../haskell/13-Formal-Verification/线性类型验证.md) - 形式化验证方法
+
+## 理论框架
+
+### 1. 线性逻辑框架
 
 ```haskell
--- 线性函数类型
-type LinearFunction a b = a %1 -> b
+-- 线性逻辑连接词
+data LinearConnective = 
+    Tensor        -- 张量积 ⊗
+  | Par           -- 并行积 ⅋
+  | With          -- 与 &
+  | Plus          -- 或 ⊕
+  | Bang          -- 指数 !
+  | Question      -- 弱指数 ?
+  | LinearImpl    -- 线性蕴含 ⊸
+  | LinearNeg     -- 线性否定 (·)⊥
 
--- 线性积类型
-data LinearPair a b = LinearPair a b
+-- 线性逻辑公式
+data LinearFormula = 
+    Atom String
+  | Compound LinearConnective [LinearFormula]
+  | LinearImpl LinearFormula LinearFormula
+  | LinearNeg LinearFormula
 
--- 线性和类型
-data LinearSum a b = Left a | Right b
+-- 线性逻辑证明
+data LinearProof = LinearProof {
+  conclusion :: LinearFormula,
+  premises :: [LinearProof],
+  rule :: LinearRule
+}
 ```
 
-## 形式化定义
+### 2. 线性类型系统框架
 
-### 线性类型系统语法
+```haskell
+-- 线性类型
+data LinearType = 
+    LinearVar String
+  | LinearArrow LinearType LinearType
+  | Tensor LinearType LinearType
+  | Unit
+  | Bang LinearType
 
+-- 线性λ演算项
+data LinearTerm = 
+    LinearVar String
+  | LinearLambda String LinearTerm
+  | LinearApp LinearTerm LinearTerm
+  | TensorIntro LinearTerm LinearTerm
+  | TensorElim String String LinearTerm LinearTerm
+  | BangIntro LinearTerm
+  | BangElim String LinearTerm LinearTerm
+
+-- 线性类型检查
+class LinearTypeSystem m where
+  type LinearContext m
+  type LinearType m
+  type LinearTerm m
+  
+  linearTypeCheck :: LinearContext m -> LinearTerm m -> m (Maybe (LinearType m))
+  linearTypeInfer :: LinearContext m -> LinearTerm m -> m (LinearType m)
 ```
-A, B ::= α | A ⊸ B | A ⊗ B | A ⊕ B | !A | 1 | 0
+
+### 3. 资源管理框架
+
+```haskell
+-- 资源类型
+data Resource = 
+    Memory Int
+  | FileHandle String
+  | NetworkConnection String
+  | Lock String
+  | Channel String
+
+-- 资源管理器
+class ResourceManager m where
+  type ResourceState m
+  
+  allocate :: Resource -> m (ResourceState m)
+  deallocate :: ResourceState m -> m ()
+  use :: ResourceState m -> (a -> m b) -> m b
+
+-- 线性资源管理
+data LinearResource a = LinearResource {
+  resource :: Resource,
+  value :: a,
+  deallocator :: a -> IO ()
+}
 ```
 
-### 线性类型系统规则
+## 核心定理
 
-```
-Γ, x:A ⊢ M:B
-───────────── (⊸I)
-Γ ⊢ λx.M:A⊸B
+### 1. 线性逻辑一致性定理
 
-Γ ⊢ M:A⊸B  Δ ⊢ N:A
-────────────────── (⊸E)
-Γ,Δ ⊢ M N:B
-```
+**定理**: 线性逻辑是一致的，即不能同时证明 $A$ 和 $A^\bot$。
+
+**证明**: 通过切割消除和结构归纳证明。
+
+### 2. 线性类型安全定理
+
+**定理**: 如果 $\Gamma \vdash M : A$，则 $M$ 是线性类型安全的。
+
+**证明**: 通过类型保持性和进度定理证明。
+
+### 3. 资源安全定理
+
+**定理**: 线性类型系统保证资源使用安全，无内存泄漏。
+
+**证明**: 通过线性类型规则和资源管理证明。
 
 ## 应用领域
 
-1. **内存管理**: 精确控制资源分配和释放
-2. **并发编程**: 防止数据竞争和资源冲突
-3. **系统编程**: 底层资源管理
-4. **高性能计算**: 优化内存使用和性能
+### 1. 内存管理
 
-## 与其他理论的关系
+- 自动内存管理
+- 内存安全保证
+- 无垃圾回收
+- 零拷贝优化
 
-- **类型理论**: 线性类型是类型理论的扩展
-- **控制论**: 资源控制和管理
-- **分布式系统**: 分布式资源管理
-- **形式化方法**: 程序正确性验证
+### 2. 并发编程
 
-## 研究方向
+- 无锁数据结构
+- 线程安全保证
+- 死锁预防
+- 并发控制
 
-1. **线性类型推断**: 自动推导线性类型
-2. **线性效应系统**: 结合效应系统的线性类型
-3. **线性协议**: 通信协议的线性类型
-4. **量子计算**: 量子信息的线性类型
+### 3. 系统编程
+
+- 操作系统内核
+- 设备驱动程序
+- 嵌入式系统
+- 实时系统
+
+### 4. 量子计算
+
+- 量子比特管理
+- 量子门操作
+- 量子算法
+- 量子错误纠正
+
+## 学习路径
+
+### 初学者路径
+
+1. [线性逻辑基础](./01-Linear-Logic-Foundation.md) - 基础概念
+2. [线性λ演算](./02-Linear-Lambda-Calculus.md) - 演算系统
+3. [资源管理](./03-Resource-Management.md) - 资源管理
+
+### 进阶路径
+
+1. [并发控制](./04-Concurrency-Control.md) - 并发编程
+2. [量子计算](./05-Quantum-Computing.md) - 量子计算
+3. [应用领域](./06-Applications.md) - 实际应用
+
+### 专家路径
+
+1. [仿射类型理论](../09-Affine-Type-Theory/README.md) - 仿射类型系统
+2. [量子类型理论](../10-Quantum-Type-Theory/README.md) - 量子类型系统
+3. [形式化验证](../../haskell/13-Formal-Verification/README.md) - 形式化方法
+
+## 相关资源
+
+### 基础资源
+
+- [编程语言理论](../01-Programming-Language-Theory/README.md) - 语言理论基础
+- [Haskell实现](../../haskell/README.md) - 具体实现示例
+
+### 高级资源
+
+- [系统理论](../02-System-Theory/README.md) - 系统理论
+- [形式化方法](../04-Formal-Methods/README.md) - 形式化方法
+
+### 应用资源
+
+- [系统编程](../../07-Implementation/03-System-Programming/README.md) - 系统编程
+- [并发编程](../../07-Implementation/04-Concurrent-Programming/README.md) - 并发编程
+
+---
+
+**最后更新**: 2024年12月  
+**维护者**: 形式化知识体系团队  
+**状态**: 🔄 重构进行中

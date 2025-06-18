@@ -1,571 +1,585 @@
-# Haskell语言特性
+# Haskell语言特性 (Haskell Language Features)
 
-## 🎯 概述
+## 概述
 
-Haskell是一种纯函数式编程语言，具有强大的类型系统、惰性求值、模式匹配等特性。本章详细介绍Haskell的核心语言特性，包括语法、类型系统、高级特性等。
+Haskell是一种纯函数式编程语言，具有强大的类型系统、惰性求值、模式匹配等独特特性。本文档详细介绍Haskell的核心语言特性，为深入理解和使用Haskell提供理论基础。
 
-## 📚 核心特性
+## 快速导航
 
-### 1. 强类型系统 (Strong Type System)
+### 相关概念
 
-#### 形式化定义
+- [函数式编程基础](./01-Functional-Programming.md) - 函数式编程核心思想
+- [类型系统](./03-Type-System.md) - 类型理论和类型检查
+- [模式匹配](./06-Pattern-Matching.md) - 模式匹配和数据结构
 
-Haskell使用静态强类型系统，每个表达式在编译时都有确定的类型。类型系统基于Hindley-Milner类型推断算法。
+### 实现示例
 
-数学表示为：
-$$\Gamma \vdash e : \tau \text{ where } \tau \text{ is the type of expression } e$$
+- [标准库](./04-Standard-Library.md) - 标准库使用
+- [惰性求值](./08-Lazy-Evaluation.md) - 惰性求值机制
+- [高阶函数](./07-Higher-Order-Functions.md) - 高阶函数和函数组合
 
-#### Haskell实现
+## 1. Haskell核心特性
+
+### 1.1 强类型系统
+
+**定义 1.1 (强类型)**
+Haskell是强类型语言，所有类型错误在编译时被检测。
+
+**特性 1.1 (类型安全)**:
+
+- 编译时类型检查
+- 类型推断
+- 类型类系统
+- 代数数据类型
 
 ```haskell
--- 基本类型
-intValue :: Int
-intValue = 42
-
-doubleValue :: Double
-doubleValue = 3.14
-
-charValue :: Char
-charValue = 'A'
-
-stringValue :: String
-stringValue = "Hello, Haskell!"
-
-boolValue :: Bool
-boolValue = True
+-- 类型声明
+typeAlias :: Int -> Int
+typeAlias x = x * 2
 
 -- 类型推断
-inferredType = 42  -- Haskell推断为 Int
-inferredList = [1, 2, 3, 4, 5]  -- Haskell推断为 [Int]
+inferredType = map (+1) [1, 2, 3]  -- 类型: [Int]
 
--- 显式类型注解
-explicitType :: [Int]
-explicitType = [1, 2, 3, 4, 5]
+-- 类型类约束
+constrainedFunction :: (Num a, Ord a) => a -> a -> a
+constrainedFunction x y = if x > y then x else y
+
+-- 代数数据类型
+data Shape = 
+    Circle Double
+  | Rectangle Double Double
+  | Triangle Double Double Double
+
+-- 类型类实例
+instance Show Shape where
+  show (Circle r) = "Circle with radius " ++ show r
+  show (Rectangle w h) = "Rectangle " ++ show w ++ "x" ++ show h
+  show (Triangle a b c) = "Triangle with sides " ++ show [a, b, c]
 ```
 
-### 2. 代数数据类型 (Algebraic Data Types)
+### 1.2 惰性求值
 
-#### 形式化定义
+**定义 1.2 (惰性求值)**
+表达式只在需要时才被求值，支持无限数据结构。
 
-代数数据类型是Haskell中定义自定义类型的主要方式，包括乘积类型（记录）和和类型（变体）。
+**特性 1.2 (惰性优势)**:
 
-数学表示为：
-$$T = C_1 \times T_{11} \times \cdots \times T_{1n_1} + \cdots + C_m \times T_{m1} \times \cdots \times T_{mn_m}$$
-
-#### Haskell实现
+- 按需计算
+- 无限数据结构
+- 内存效率
+- 控制流抽象
 
 ```haskell
--- 和类型（变体）
-data Shape = Circle Double | Rectangle Double Double | Triangle Double Double Double
+-- 无限列表
+infiniteList :: [Integer]
+infiniteList = [1..]
 
--- 乘积类型（记录）
-data Person = Person 
-    { name :: String
-    , age :: Int
-    , email :: String
-    }
+-- 惰性计算
+lazyComputation :: Int
+lazyComputation = 
+  let expensive = map expensiveFunction [1..1000]
+      result = sum (take 10 expensive)  -- 只计算前10个
+  in result
 
--- 递归类型
-data List a = Nil | Cons a (List a)
+-- 无限流处理
+infiniteStream :: [Integer]
+infiniteStream = 
+  let fibonacci = 0 : 1 : zipWith (+) fibonacci (tail fibonacci)
+  in take 20 fibonacci
 
--- 参数化类型
-data Maybe a = Nothing | Just a
-
-data Either a b = Left a | Right b
-
--- 使用代数数据类型
-circle :: Shape
-circle = Circle 5.0
-
-rectangle :: Shape
-rectangle = Rectangle 3.0 4.0
-
-person :: Person
-person = Person "Alice" 30 "alice@example.com"
-
--- 模式匹配
-area :: Shape -> Double
-area (Circle r) = pi * r * r
-area (Rectangle w h) = w * h
-area (Triangle a b c) = sqrt (s * (s - a) * (s - b) * (s - c))
-  where s = (a + b + c) / 2
+-- 惰性模式匹配
+lazyPattern :: [a] -> Maybe a
+lazyPattern ~(x:xs) = Just x  -- 不强制求值列表结构
 ```
 
-### 3. 模式匹配 (Pattern Matching)
+### 1.3 模式匹配
 
-#### 形式化定义
+**定义 1.3 (模式匹配)**
+模式匹配是Haskell的核心特性，用于数据解构和条件分支。
 
-模式匹配是函数式编程的核心特性，允许根据数据结构的形式进行条件分支。
+**特性 1.3 (模式匹配类型)**:
 
-数学表示为：
-$$f(x) = \begin{cases}
-g_1(x) & \text{if } x \text{ matches pattern } p_1 \\
-g_2(x) & \text{if } x \text{ matches pattern } p_2 \\
-\vdots \\
-g_n(x) & \text{if } x \text{ matches pattern } p_n
-\end{cases}$$
-
-#### Haskell实现
+- 构造函数模式
+- 变量模式
+- 通配符模式
+- 守卫表达式
 
 ```haskell
 -- 基本模式匹配
-factorial :: Integer -> Integer
-factorial 0 = 1
-factorial n = n * factorial (n - 1)
-
--- 列表模式匹配
-sumList :: [Int] -> Int
-sumList [] = 0
-sumList (x:xs) = x + sumList xs
-
--- 元组模式匹配
-first :: (a, b) -> a
-first (x, _) = x
-
-second :: (a, b) -> b
-second (_, y) = y
+patternMatch :: [a] -> String
+patternMatch [] = "Empty list"
+patternMatch [x] = "Single element: " ++ show x
+patternMatch (x:y:xs) = "Multiple elements starting with: " ++ show x
 
 -- 嵌套模式匹配
 nestedPattern :: [(Int, String)] -> [String]
 nestedPattern [] = []
-nestedPattern ((n, s):xs) =
-    if n > 0 then s : nestedPattern xs else nestedPattern xs
+nestedPattern ((n, s):xs)
+  | n > 0 = s : nestedPattern xs
+  | otherwise = nestedPattern xs
 
--- 守卫表达式（模式匹配的扩展）
-absolute :: (Num a, Ord a) => a -> a
-absolute x
-    | x < 0 = -x
-    | otherwise = x
+-- 记录模式
+data Person = Person {
+  name :: String,
+  age :: Int,
+  city :: String
+}
 
--- 模式匹配与记录
-getAge :: Person -> Int
-getAge (Person {age = a}) = a
+personPattern :: Person -> String
+personPattern (Person {name = n, age = a})
+  | a < 18 = n ++ " is a minor"
+  | a < 65 = n ++ " is an adult"
+  | otherwise = n ++ " is a senior"
 
-getName :: Person -> String
-getName (Person {name = n}) = n
+-- 视图模式
+viewPattern :: [Int] -> String
+viewPattern (length -> 0) = "Empty"
+viewPattern (length -> 1) = "Single"
+viewPattern (length -> n) = "Multiple: " ++ show n
 ```
 
-### 4. 类型类 (Type Classes)
+## 2. 高级语言特性
 
-#### 形式化定义
+### 2.1 类型类系统
 
-类型类是Haskell的接口系统，定义了类型必须实现的操作集合。
+**定义 2.1 (类型类)**
+类型类是Haskell的多态接口系统，类似于其他语言的接口或抽象类。
 
-数学表示为：
-$$C(\tau) \text{ means type } \tau \text{ is an instance of class } C$$
+**特性 2.1 (类型类层次)**:
 
-#### Haskell实现
+- 基本类型类：Eq, Ord, Show, Read
+- 数值类型类：Num, Integral, Fractional
+- 函子类型类：Functor, Applicative, Monad
 
 ```haskell
 -- 类型类定义
-class Eq a where
-    (==) :: a -> a -> Bool
-    (/=) :: a -> a -> Bool
-
-    -- 默认实现
-    x /= y = not (x == y)
+class Printable a where
+  printValue :: a -> String
+  printType :: a -> String
+  printType _ = "Unknown type"
 
 -- 类型类实例
-instance Eq Bool where
-    True == True = True
-    False == False = True
-    _ == _ = False
+instance Printable Int where
+  printValue x = "Integer: " ++ show x
+  printType _ = "Int"
 
--- 自动派生
-data Color = Red | Green | Blue deriving (Eq, Show)
+instance Printable String where
+  printValue s = "String: " ++ s
+  printType _ = "String"
 
--- 多参数类型类
-class Show a => Pretty a where
-    pretty :: a -> String
-    pretty = show
+-- 类型类约束
+constrainedFunction :: (Printable a, Show a) => a -> String
+constrainedFunction x = printValue x ++ " (" ++ printType x ++ ")"
 
--- 函数依赖
-class Collection c e | c -> e where
-    empty :: c
-    insert :: e -> c -> c
-    member :: e -> c -> Bool
+-- 默认方法
+class Defaultable a where
+  defaultValue :: a
+  defaultValue = error "No default value"
 
--- 实例实现
-instance Collection [a] a where
-    empty = []
-    insert x xs = x : xs
-    member _ [] = False
-    member x (y:ys) = x == y || member x ys
+instance Defaultable Int where
+  defaultValue = 0
+
+instance Defaultable String where
+  defaultValue = ""
 ```
 
-### 5. 单子 (Monads)
+### 2.2 高阶函数
 
-#### 形式化定义
+**定义 2.2 (高阶函数)**
+高阶函数是接受函数作为参数或返回函数作为结果的函数。
 
-单子是Haskell中处理副作用和顺序计算的核心抽象。单子是一个类型类，定义了三个操作：return、bind和fail。
+**特性 2.2 (高阶函数类型)**:
 
-数学表示为：
-$$\text{Monad } M \text{ satisfies: } \text{return}: A \rightarrow M A, \text{bind}: M A \rightarrow (A \rightarrow M B) \rightarrow M B$$
-
-#### Haskell实现
+- 函数作为参数
+- 函数作为返回值
+- 函数组合
+- 部分应用
 
 ```haskell
--- 单子类型类
-class Monad m where
-    return :: a -> m a
-    (>>=) :: m a -> (a -> m b) -> m b
-    (>>) :: m a -> m b -> m b
-    fail :: String -> m a
+-- 函数作为参数
+applyTwice :: (a -> a) -> a -> a
+applyTwice f x = f (f x)
 
+-- 函数作为返回值
+makeAdder :: Int -> (Int -> Int)
+makeAdder x = \y -> x + y
+
+-- 函数组合
+compose :: (b -> c) -> (a -> b) -> a -> c
+compose f g = \x -> f (g x)
+
+-- 部分应用
+partialApplication :: (a -> b -> c) -> a -> b -> c
+partialApplication f a = f a
+
+-- 高阶函数示例
+higherOrderExamples :: [Int]
+higherOrderExamples = 
+  let addOne = (+1)
+      double = (*2)
+      filterEven = filter even
+      pipeline = map double . filterEven . map addOne
+  in pipeline [1..10]
+```
+
+### 2.3 单子系统
+
+**定义 2.3 (单子)**
+单子是处理计算上下文的标准方式，用于处理副作用和复杂计算。
+
+**特性 2.3 (单子类型)**:
+
+- Maybe单子：处理可能失败的计算
+- List单子：处理非确定性计算
+- IO单子：处理输入输出
+- State单子：处理状态
+
+```haskell
 -- Maybe单子
-instance Monad Maybe where
-    return = Just
-    Nothing >>= _ = Nothing
-    Just x >>= f = f x
-    fail _ = Nothing
-
--- 列表单子
-instance Monad [] where
-    return x = [x]
-    xs >>= f = concat (map f xs)
-    fail _ = []
-
--- 使用单子
 maybeExample :: Maybe Int
 maybeExample = do
-    x <- Just 5
-    y <- Just 3
-    return (x + y)
+  x <- Just 5
+  y <- Just 3
+  return (x + y)
 
+-- List单子
 listExample :: [Int]
 listExample = do
-    x <- [1, 2, 3]
-    y <- [10, 20]
-    return (x + y)
+  x <- [1, 2, 3]
+  y <- [4, 5, 6]
+  return (x + y)
 
 -- IO单子
 ioExample :: IO String
 ioExample = do
-    putStrLn "Enter your name:"
-    name <- getLine
-    putStrLn ("Hello, " ++ name ++ "!")
-    return name
+  putStrLn "Enter your name:"
+  name <- getLine
+  putStrLn ("Hello, " ++ name ++ "!")
+  return name
+
+-- State单子
+newtype State s a = State { runState :: s -> (a, s) }
+
+instance Monad (State s) where
+  return a = State (\s -> (a, s))
+  State f >>= g = State (\s -> 
+    let (a, s') = f s
+        State h = g a
+    in h s')
+
+-- 状态操作
+get :: State s s
+get = State (\s -> (s, s))
+
+put :: s -> State s ()
+put s = State (\_ -> ((), s))
+
+modify :: (s -> s) -> State s ()
+modify f = State (\s -> ((), f s))
 ```
 
-### 6. 函子 (Functors)
+## 3. 数据类型系统
 
-#### 形式化定义
+### 3.1 代数数据类型
 
-函子是保持结构的映射，将函数应用到容器内的值而不改变容器结构。
+**定义 3.1 (代数数据类型)**
+代数数据类型是Haskell的核心数据结构，支持模式匹配和类型安全。
 
-数学表示为：
-$$F: \mathcal{C} \rightarrow \mathcal{D} \text{ with } fmap: (A \rightarrow B) \rightarrow F A \rightarrow F B$$
+**特性 3.1 (ADT类型)**:
 
-#### Haskell实现
+- 积类型：记录和元组
+- 和类型：枚举和变体
+- 递归类型：列表和树
 
 ```haskell
--- 函子类型类
-class Functor f where
-    fmap :: (a -> b) -> f a -> f b
+-- 积类型
+data Point = Point Double Double
 
--- Maybe函子
-instance Functor Maybe where
-    fmap _ Nothing = Nothing
-    fmap f (Just x) = Just (f x)
+-- 和类型
+data Shape = 
+    Circle Double
+  | Rectangle Double Double
+  | Triangle Double Double Double
 
--- 列表函子
-instance Functor [] where
-    fmap = map
+-- 递归类型
+data Tree a = 
+    Leaf
+  | Node a (Tree a) (Tree a)
 
--- 元组函子（对第二个参数）
-instance Functor ((,) a) where
-    fmap f (x, y) = (x, f y)
+-- 参数化类型
+data Maybe a = 
+    Nothing
+  | Just a
 
--- 使用函子
-maybeFmap :: Maybe Int
-maybeFmap = fmap (+1) (Just 5)  -- Just 6
+data Either a b = 
+    Left a
+  | Right b
 
-listFmap :: [Int]
-listFmap = fmap (*2) [1, 2, 3, 4, 5]  -- [2, 4, 6, 8, 10]
+-- 记录语法
+data Person = Person {
+  name :: String,
+  age :: Int,
+  email :: String
+} deriving (Show, Eq)
 
--- 函子定律验证
-functorLaws :: Bool
-functorLaws =
-    let f = (+1)
-        g = (*2)
-        x = Just 5
-    in fmap id x == x &&  -- 单位律
-       fmap (f . g) x == (fmap f . fmap g) x  -- 复合律
+-- 类型别名
+type Name = String
+type Age = Int
+type Email = String
+
+data Person' = Person' {
+  personName :: Name,
+  personAge :: Age,
+  personEmail :: Email
+}
 ```
 
-### 7. 应用函子 (Applicative Functors)
+### 3.2 广义代数数据类型
 
-#### 形式化定义
+**定义 3.2 (GADT)**
+广义代数数据类型允许构造函数返回不同的类型参数。
 
-应用函子扩展了函子，允许将包含函数的容器应用到包含值的容器。
+**特性 3.2 (GADT应用)**:
 
-数学表示为：
-$$\text{pure}: A \rightarrow F A, \text{<*>}: F (A \rightarrow B) \rightarrow F A \rightarrow F B$$
-
-#### Haskell实现
-
-```haskell
--- 应用函子类型类
-class Functor f => Applicative f where
-    pure :: a -> f a
-    (<*>) :: f (a -> b) -> f a -> f b
-
--- Maybe应用函子
-instance Applicative Maybe where
-    pure = Just
-    Nothing <*> _ = Nothing
-    _ <*> Nothing = Nothing
-    Just f <*> Just x = Just (f x)
-
--- 列表应用函子
-instance Applicative [] where
-    pure x = [x]
-    fs <*> xs = [f x | f <- fs, x <- xs]
-
--- 使用应用函子
-maybeApplicative :: Maybe Int
-maybeApplicative = pure (+) <*> Just 3 <*> Just 4  -- Just 7
-
-listApplicative :: [Int]
-listApplicative = pure (+) <*> [1, 2] <*> [10, 20]  -- [11, 21, 12, 22]
-
--- 应用函子语法糖
-applicativeDo :: Maybe Int
-applicativeDo = do
-    x <- Just 3
-    y <- Just 4
-    return (x + y)
-```
-
-### 8. 惰性求值 (Lazy Evaluation)
-
-#### 形式化定义
-
-惰性求值是一种求值策略，只在需要时才计算表达式的值。
-
-数学表示为：
-$$\text{eval}(e) = \begin{cases}
-\text{value} & \text{if } e \text{ is demanded} \\
-\text{thunk} & \text{otherwise}
-\end{cases}$$
-
-#### Haskell实现
+- 类型安全表达式
+- 类型级编程
+- 嵌入式领域特定语言
 
 ```haskell
--- 无限数据结构
-infiniteList :: [Integer]
-infiniteList = [1..]
-
--- 只计算需要的部分
-finiteList :: [Integer]
-finiteList = take 5 infiniteList
-
--- 惰性求值的好处
-expensiveComputation :: Integer -> Integer
-expensiveComputation n =
-    let result = sum [1..n]
-    in trace ("Computing for " ++ show n) result
-
--- 只有在需要时才计算
-lazyComputation :: [Integer]
-lazyComputation = map expensiveComputation [1, 2, 3, 4, 5]
-
--- 只取前2个，只计算前2个
-partialResult :: [Integer]
-partialResult = take 2 lazyComputation
-
--- 无限递归数据结构
-data InfiniteTree a = Node a (InfiniteTree a) (InfiniteTree a)
-
--- 创建无限树
-infiniteTree :: InfiniteTree Integer
-infiniteTree = Node 1 infiniteTree infiniteTree
-
--- 只访问有限部分
-finiteTreeAccess :: Integer
-finiteTreeAccess = case infiniteTree of
-    Node x _ _ -> x
-```
-
-### 9. 类型族 (Type Families)
-
-#### 形式化定义
-
-类型族允许在类型级别进行函数式编程，提供类型级别的计算能力。
-
-数学表示为：
-$$F: \kappa_1 \rightarrow \kappa_2 \text{ where } \kappa \text{ are kinds}$$
-
-#### Haskell实现
-
-```haskell
--- 类型族定义
-type family Element c :: *
-
--- 类型族实例
-type instance Element [a] = a
-type instance Element (Maybe a) = a
-type instance Element (Either a b) = a
-
--- 关联类型族
-class Collection c where
-    type Elem c :: *
-    empty :: c
-    insert :: Elem c -> c -> c
-
--- 实例实现
-instance Collection [a] where
-    type Elem [a] = a
-    empty = []
-    insert x xs = x : xs
-
--- 数据族
-data family Array i e
-
-data instance Array Int e = IntArray (Vector e)
-data instance Array Bool e = BoolArray (Vector e)
-
--- 使用类型族
-getElement :: Element [Int] -> [Int] -> Element [Int]
-getElement _ [] = error "Empty list"
-getElement _ (x:_) = x
-```
-
-### 10. GADTs (Generalized Algebraic Data Types)
-
-#### 形式化定义
-
-GADTs允许构造函数返回不同的类型，提供类型级别的约束。
-
-数学表示为：
-$$C: \tau_1 \rightarrow \cdots \rightarrow \tau_n \rightarrow T \text{ where } T \text{ may vary}$$
-
-#### Haskell实现
-
-```haskell
--- GADT定义
+-- 类型安全表达式
 data Expr a where
-    LitInt :: Int -> Expr Int
-    LitBool :: Bool -> Expr Bool
-    Add :: Expr Int -> Expr Int -> Expr Int
-    If :: Expr Bool -> Expr a -> Expr a -> Expr a
+  LitInt :: Int -> Expr Int
+  LitBool :: Bool -> Expr Bool
+  Add :: Expr Int -> Expr Int -> Expr Int
+  Mul :: Expr Int -> Expr Int -> Expr Int
+  And :: Expr Bool -> Expr Bool -> Expr Bool
+  Or :: Expr Bool -> Expr Bool -> Expr Bool
+  If :: Expr Bool -> Expr a -> Expr a -> Expr a
 
--- 类型安全的求值
+-- 类型安全求值
 eval :: Expr a -> a
 eval (LitInt n) = n
 eval (LitBool b) = b
 eval (Add e1 e2) = eval e1 + eval e2
+eval (Mul e1 e2) = eval e1 * eval e2
+eval (And e1 e2) = eval e1 && eval e2
+eval (Or e1 e2) = eval e1 || eval e2
 eval (If cond e1 e2) = if eval cond then eval e1 else eval e2
 
--- 使用GADT
-exampleExpr :: Expr Int
-exampleExpr = If (LitBool True) (Add (LitInt 1) (LitInt 2)) (LitInt 0)
-
--- 类型安全的表达式构建
-safeExpr :: Expr Int
-safeExpr = Add (LitInt 5) (LitInt 3)  -- 类型安全
+-- 类型安全示例
+safeExpression :: Expr Int
+safeExpression = If (And (LitBool True) (LitBool False))
+                   (Add (LitInt 1) (LitInt 2))
+                   (Mul (LitInt 3) (LitInt 4))
 ```
 
-## 🛠️ 高级特性
+### 3.3 类型族
 
-### 1. 模板Haskell (Template Haskell)
+**定义 3.3 (类型族)**
+类型族是类型级函数，允许在类型级别进行计算。
+
+**特性 3.3 (类型族类型)**:
+
+- 开放类型族
+- 封闭类型族
+- 关联类型族
 
 ```haskell
--- 模板Haskell示例
+-- 开放类型族
+type family ElementType c
+type instance ElementType [a] = a
+type instance ElementType (Maybe a) = a
+type instance ElementType (Either a b) = a
+
+-- 封闭类型族
+type family Size c where
+  Size [a] = Int
+  Size (Maybe a) = Int
+  Size (a, b) = Int
+
+-- 关联类型族
+class Collection c where
+  type Element c
+  empty :: c
+  insert :: Element c -> c -> c
+  member :: Element c -> c -> Bool
+
+instance Collection [a] where
+  type Element [a] = a
+  empty = []
+  insert x xs = x : xs
+  member x xs = x `elem` xs
+
+instance Collection (Set a) where
+  type Element (Set a) = a
+  empty = Set.empty
+  insert = Set.insert
+  member = Set.member
+```
+
+## 4. 扩展特性
+
+### 4.1 语言扩展
+
+**扩展 4.1 (常用扩展)**:
+
+- GADTs：广义代数数据类型
+- TypeFamilies：类型族
+- MultiParamTypeClasses：多参数类型类
+- FlexibleInstances：灵活实例
+- OverloadedStrings：重载字符串
+
+```haskell
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE OverloadedStrings #-}
+
+-- 使用扩展的示例
+data TypedExpr a where
+  TInt :: Int -> TypedExpr Int
+  TBool :: Bool -> TypedExpr Bool
+  TAdd :: TypedExpr Int -> TypedExpr Int -> TypedExpr Int
+
+class Convertible a b where
+  convert :: a -> b
+
+instance Convertible Int Double where
+  convert = fromIntegral
+
+instance Convertible String Text where
+  convert = pack
+
+-- 重载字符串
+overloadedStringExample :: Text
+overloadedStringExample = "This is a Text value"
+```
+
+### 4.2 模板Haskell
+
+**定义 4.2 (模板Haskell)**
+模板Haskell是Haskell的元编程系统，允许在编译时生成代码。
+
+**特性 4.2 (TH应用)**:
+
+- 代码生成
+- 反射
+- 领域特定语言
+
+```haskell
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE QuasiQuotes #-}
+
+import Language.Haskell.TH
 
 -- 生成记录访问器
-data Person = Person
-    { name :: String
-    , age :: Int
-    } deriving Show
+$(generateAccessors ''Person)
 
--- 使用模板Haskell生成代码
+-- 生成JSON实例
 $(deriveJSON defaultOptions ''Person)
+
+-- 生成测试用例
+$(generateTests ''Person)
+
+-- 准引用
+jsonExample :: Value
+jsonExample = [json|
+  {
+    "name": "John Doe",
+    "age": 30,
+    "email": "john@example.com"
+  }
+|]
 ```
 
-### 2. 类型级编程
+## 5. 性能特性
+
+### 5.1 严格性分析
+
+**定义 5.1 (严格性)**
+严格性分析确定函数参数何时必须被求值。
+
+**特性 5.1 (严格性类型)**:
+
+- 严格参数：必须求值
+- 惰性参数：按需求值
+- 严格函数：强制求值
 
 ```haskell
--- 类型级自然数
-data Zero
-data Succ n
+-- 严格函数
+strictFunction :: Int -> Int
+strictFunction !x = x + 1  -- 严格参数
 
--- 类型级加法
-type family Add a b :: *
-type instance Add Zero b = b
-type instance Add (Succ a) b = Succ (Add a b)
+-- 严格数据类型
+data StrictPair a b = StrictPair !a !b
 
--- 类型级向量
-data Vec n a where
-    Nil :: Vec Zero a
-    Cons :: a -> Vec n a -> Vec (Succ n) a
+-- 严格模式匹配
+strictPattern :: [a] -> a
+strictPattern ~(x:xs) = x  -- 惰性模式
 
--- 类型安全的向量操作
-safeHead :: Vec (Succ n) a -> a
-safeHead (Cons x _) = x
-```
-
-### 3. 并行和并发
-
-```haskell
--- 并行计算
-import Control.Parallel
-
-parallelSum :: [Int] -> Int
-parallelSum xs =
-    let (left, right) = splitAt (length xs `div` 2) xs
-        leftSum = sum left
-        rightSum = sum right
-    in leftSum `par` rightSum `pseq` (leftSum + rightSum)
-
--- 并发计算
-import Control.Concurrent
-
-concurrentExample :: IO ()
-concurrentExample = do
-    threadId1 <- forkIO (putStrLn "Thread 1")
-    threadId2 <- forkIO (putStrLn "Thread 2")
-    putStrLn "Main thread"
-```
-
-## 📊 性能特性
-
-### 1. 严格求值
-
-```haskell
 -- 严格求值
-strictSum :: [Int] -> Int
-strictSum = foldl' (+) 0
+forceEvaluation :: a -> a
+forceEvaluation x = x `seq` x
 
--- 严格数据结构
-data StrictList a = SNil | SCons !a !(StrictList a)
+-- 深度严格求值
+deepStrict :: [Int] -> Int
+deepStrict xs = xs `deepseq` sum xs
 ```
 
-### 2. 内存优化
+### 5.2 内存管理
+
+**特性 5.2 (内存特性)**:
+
+- 垃圾回收
+- 内存池
+- 空间泄漏检测
 
 ```haskell
--- 内存效率的列表处理
-efficientProcessing :: [Int] -> [Int]
-efficientProcessing =
-    foldr (\x acc -> if x > 0 then x*2 : acc else acc) []
+-- 内存效率示例
+memoryEfficient :: [Int] -> Int
+memoryEfficient xs = 
+  let processed = map expensiveFunction xs
+      result = sum (take 10 processed)
+  in result `seq` result  -- 强制求值
 
 -- 避免空间泄漏
 avoidSpaceLeak :: [Int] -> Int
-avoidSpaceLeak = foldl' (+) 0
+avoidSpaceLeak xs = 
+  let go [] acc = acc
+      go (x:xs) acc = go xs (acc + x)
+  in go xs 0  -- 尾递归
+
+-- 内存池使用
+memoryPoolExample :: IO ()
+memoryPoolExample = do
+  let largeList = [1..1000000]
+  print (sum largeList)  -- 使用内存池
 ```
 
-## 🔗 相关链接
+## 6. 总结
 
-- [函数式编程基础](01-Functional-Programming-Basics.md)
-- [类型系统入门](03-Type-System-Introduction.md)
-- [模式匹配](04-Pattern-Matching.md)
-- [高阶函数](05-Higher-Order-Functions.md)
-- [控制流](../02-Control-Flow/README.md)
-- [类型体系](../04-Type-System/README.md)
+Haskell语言特性提供了：
+
+1. **类型安全**：强类型系统和类型推断
+2. **函数式编程**：纯函数、高阶函数、函数组合
+3. **惰性求值**：按需计算和无限数据结构
+4. **模式匹配**：强大的数据解构能力
+5. **类型类系统**：多态接口和抽象
+6. **单子系统**：处理副作用和复杂计算
+7. **高级类型**：GADT、类型族、模板Haskell
+8. **性能优化**：严格性分析和内存管理
+
+这些特性使Haskell成为研究函数式编程和类型理论的理想语言，同时在实际开发中提供强大的抽象能力和类型安全保证。
 
 ---
 
+**相关资源**:
+
+- [函数式编程基础](./01-Functional-Programming.md) - 函数式编程核心思想
+- [类型系统](./03-Type-System.md) - 类型理论和类型检查
+- [模式匹配](./06-Pattern-Matching.md) - 模式匹配和数据结构
+
 **最后更新**: 2024年12月  
-**版本**: 1.0.0  
-**状态**: 完成
+**维护者**: 形式化知识体系团队  
+**状态**: ✅ 重构完成

@@ -7,16 +7,19 @@
 ## 快速导航
 
 ### 相关理论
+
 - [基础线性类型理论](./../01-Foundations/01-Linear-Logic-Basics.md)
 - [线性类型系统](./../02-Linear-Type-Systems/01-Basic-Linear-Types.md)
 - [仿射类型理论](./../../09-Affine-Type-Theory/README.md)
 - [量子类型理论](./../../10-Quantum-Type-Theory/README.md)
 
 ### 实现示例
+
 - [Haskell实现](./../../../haskell/10-Advanced-Features/线性类型实现.md)
 - [形式化验证](./../../../haskell/13-Formal-Verification/线性类型验证.md)
 
 ### 应用领域
+
 - [内存管理](./../04-Haskell-Integration/02-Resource-Types.md)
 - [并发编程](./../04-Haskell-Integration/04-Linear-Concurrency.md)
 - [系统编程](./../../../07-Implementation/05-System-Programming.md)
@@ -30,6 +33,7 @@
 $$A, B ::= \alpha \mid A \multimap B \mid A \otimes B \mid A \oplus B \mid !A \mid 1 \mid 0$$
 
 其中：
+
 - $\alpha$ 是原子公式
 - $A \multimap B$ 是线性蕴含
 - $A \otimes B$ 是乘性合取
@@ -208,6 +212,7 @@ $$\tau ::= \alpha \mid \tau_1 \multimap^e \tau_2 \mid \tau_1 \otimes \tau_2 \mid
 
 **定义 2.3.2 (效应组合)**
 效应组合操作 $\oplus$ 满足：
+
 - 结合律：$(e_1 \oplus e_2) \oplus e_3 = e_1 \oplus (e_2 \oplus e_3)$
 - 交换律：$e_1 \oplus e_2 = e_2 \oplus e_1$
 - 单位元：$e \oplus \emptyset = e$
@@ -266,11 +271,13 @@ $$\text{Monad}^r \tau = \text{Computation with resource } r \text{ of type } \ta
 
 **定义 3.1.2 (分级单子操作)**
 分级单子的基本操作：
+
 - $\text{return} : \tau \rightarrow \text{Monad}^1 \tau$
 - $\text{bind} : \text{Monad}^r \tau \rightarrow (\tau \rightarrow \text{Monad}^s \sigma) \rightarrow \text{Monad}^{r \cdot s} \sigma$
 
 **定理 3.1.1 (分级单子定律)**
 分级单子满足单子定律的线性版本：
+
 1. 左单位元：$\text{bind } (\text{return } x) f = f x$
 2. 右单位元：$\text{bind } m \text{ return} = m$
 3. 结合律：$\text{bind } (\text{bind } m f) g = \text{bind } m (\lambda x. \text{bind } (f x) g)$
@@ -334,12 +341,14 @@ $$\text{Container}^r \tau = \text{Container with resource } r \text{ containing 
 
 **定义 3.2.2 (线性容器操作)**
 线性容器的基本操作：
+
 - $\text{empty} : \text{Container}^0 \tau$
 - $\text{singleton} : \tau \rightarrow \text{Container}^1 \tau$
 - $\text{append} : \text{Container}^r \tau \rightarrow \text{Container}^s \tau \rightarrow \text{Container}^{r + s} \tau$
 
 **定理 3.2.1 (线性容器定律)**
 线性容器满足线性代数定律：
+
 1. 单位元：$\text{append empty c} = c = \text{append c empty}$
 2. 结合律：$\text{append } (\text{append } c_1 c_2) c_3 = \text{append } c_1 (\text{append } c_2 c_3)$
 
@@ -399,6 +408,7 @@ $$\text{Protocol} = \text{Sequence of linear communication actions}$$
 
 **定义 3.3.2 (协议操作)**
 协议的基本操作：
+
 - $\text{send} : \tau \rightarrow \text{Protocol}$
 - $\text{receive} : \text{Protocol} \rightarrow \tau$
 - $\text{choice} : \text{Protocol} \rightarrow \text{Protocol} \rightarrow \text{Protocol}$
@@ -455,12 +465,14 @@ composeProtocols p1 p2 = Parallel p1 p2
 
 **定义 4.1.1 (线性函数类型)**
 线性Haskell中的线性函数类型：
+
 ```haskell
 type LinearFunction a b = a %1 -> b
 ```
 
 **定义 4.1.2 (线性数据类型)**
 线性数据类型定义：
+
 ```haskell
 data LinearPair a b = LinearPair a b
 data LinearSum a b = Left a | Right b
@@ -514,12 +526,14 @@ linearFold f b (Cons x xs) = linearFold f (f b x) xs
 
 **定义 4.2.1 (资源类型)**
 资源类型用于精确控制资源管理：
+
 ```haskell
 newtype Resource a = Resource a
 ```
 
 **定义 4.2.2 (资源操作)**
 资源的基本操作：
+
 - $\text{acquire} : \text{IO } (\text{Resource } a)$
 - $\text{use} : \text{Resource } a \rightarrow (a \rightarrow \text{IO } b) \rightarrow \text{IO } b$
 - $\text{release} : \text{Resource } a \rightarrow \text{IO } ()$
@@ -565,12 +579,14 @@ linearWithResource (Resource a) f = f a
 
 **定义 4.3.1 (线性IO)**
 线性IO系统确保IO操作的线性性：
+
 ```haskell
 type LinearIO a = IO a
 ```
 
 **定义 4.3.2 (线性IO操作)**
 线性IO的基本操作：
+
 - $\text{linearRead} : \text{Handle} \rightarrow \text{LinearIO String}$
 - $\text{linearWrite} : \text{Handle} \rightarrow \text{String} \rightarrow \text{LinearIO ()}$
 - $\text{linearClose} : \text{Handle} \rightarrow \text{LinearIO ()}$
@@ -617,12 +633,14 @@ linearIOCompose f g = \a -> do
 
 **定义 4.4.1 (线性并发)**
 线性并发系统确保并发操作的线性性：
+
 ```haskell
 type LinearMVar a = MVar a
 ```
 
 **定义 4.4.2 (线性并发操作)**
 线性并发的基本操作：
+
 - $\text{newLinearMVar} : a \rightarrow \text{IO } (\text{LinearMVar } a)$
 - $\text{takeLinearMVar} : \text{LinearMVar } a \rightarrow \text{IO } a$
 - $\text{putLinearMVar} : \text{LinearMVar } a \rightarrow a \rightarrow \text{IO } ()$
@@ -864,6 +882,7 @@ linearFold f init (LinearVector vec) = V.foldl f init vec
 5. **应用领域**: 内存管理、并发编程、资源安全、性能优化
 
 每个概念都包含：
+
 - 严格的数学定义
 - 完整的Haskell实现
 - 形式化证明
@@ -877,4 +896,4 @@ linearFold f init (LinearVector vec) = V.foldl f init vec
 2. Wadler, P. (1990). Linear Types can Change the World! Programming Concepts and Methods.
 3. Bernardy, J. P., et al. (2018). Linear Haskell: Practical Linearity in a Higher-Order Polymorphic Language. POPL.
 4. McBride, C. (2016). I Got Plenty o' Nuttin'. A List of Success.
-5. Atkey, R. (2018). The Semantics of Linear Logic. Mathematical Structures in Computer Science. 
+5. Atkey, R. (2018). The Semantics of Linear Logic. Mathematical Structures in Computer Science.

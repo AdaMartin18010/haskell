@@ -7,16 +7,19 @@
 ## 快速导航
 
 ### 相关理论
+
 - [自动机理论](./06-Automata-Theory.md)
 - [数学逻辑](./12-Mathematical-Logic.md)
 - [计算复杂性](./09-Computational-Complexity.md)
 - [信息论](./10-Information-Theory.md)
 
 ### 实现示例
+
 - [Haskell实现](./../haskell/01-Basic-Concepts/形式语言实现.md)
 - [形式化验证](./../haskell/13-Formal-Verification/自动机验证.md)
 
 ### 应用领域
+
 - [编译器设计](./../07-Implementation/01-Compiler-Design.md)
 - [语言处理](./../07-Implementation/02-Language-Processing.md)
 
@@ -32,6 +35,7 @@
 $$w = a_1 a_2 \cdots a_n \text{ where } a_i \in \Sigma$$
 
 **定义 1.1.3 (字符串操作)**
+
 - **连接**：$w_1 \cdot w_2 = w_1 w_2$
 - **幂运算**：$w^0 = \epsilon$, $w^{n+1} = w \cdot w^n$
 - **长度**：$|w| = n$ 对于 $w = a_1 a_2 \cdots a_n$
@@ -40,6 +44,7 @@ $$w = a_1 a_2 \cdots a_n \text{ where } a_i \in \Sigma$$
 语言 $L$ 是字符串集合：$L \subseteq \Sigma^*$
 
 **定义 1.1.5 (语言操作)**
+
 - **并集**：$L_1 \cup L_2 = \{w \mid w \in L_1 \text{ or } w \in L_2\}$
 - **连接**：$L_1 \cdot L_2 = \{w_1 w_2 \mid w_1 \in L_1, w_2 \in L_2\}$
 - **克林闭包**：$L^* = \bigcup_{n=0}^{\infty} L^n$
@@ -280,12 +285,14 @@ testRuleAction rule =
 $$\mathcal{H} = (\mathcal{L}, \subseteq, \mathcal{F})$$
 
 其中：
+
 - $\mathcal{L}$ 是语言类别集合
 - $\subseteq$ 是包含关系
 - $\mathcal{F}$ 是形式化方法集合
 
 **定义 2.2.2 (层次关系)**
 对于语言类别 $L_1, L_2 \in \mathcal{L}$：
+
 - $L_1 \subseteq L_2$ 表示 $L_1$ 是 $L_2$ 的子集
 - $L_1 \subset L_2$ 表示 $L_1$ 是 $L_2$ 的真子集
 
@@ -1035,6 +1042,7 @@ predictLongTerm trends =
 4. **综合评估**: 理论综合评估、发展趋势分析
 
 每个概念都包含：
+
 - 严格的数学定义
 - 完整的Haskell实现
 - 形式化证明
@@ -1051,4 +1059,4 @@ predictLongTerm trends =
 5. Chomsky, N. (1956). Three models for the description of language.
 6. Kleene, S. C. (1956). Representation of events in nerve nets and finite automata.
 7. Myhill, J. (1957). Finite automata and the representation of events.
-8. Nerode, A. (1958). Linear automaton transformations. 
+8. Nerode, A. (1958). Linear automaton transformations.

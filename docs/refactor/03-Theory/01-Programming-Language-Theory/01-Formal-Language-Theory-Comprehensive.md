@@ -7,15 +7,18 @@
 ## 快速导航
 
 ### 相关理论
+
 - [自动机理论](./../../02-Formal-Science/06-Automata-Theory.md)
 - [数学逻辑](./../../02-Formal-Science/12-Mathematical-Logic.md)
 - [计算复杂性](./../../02-Formal-Science/09-Computational-Complexity.md)
 
 ### 实现示例
+
 - [Haskell实现](./../../haskell/01-Basic-Concepts/形式语言实现.md)
 - [形式化验证](./../../haskell/13-Formal-Verification/自动机验证.md)
 
 ### 应用领域
+
 - [编译器设计](./../../07-Implementation/01-Compiler-Design.md)
 - [语言处理](./../../07-Implementation/02-Language-Processing.md)
 
@@ -30,7 +33,8 @@
 字符串是字母表中符号的有限序列：
 $$w = a_1 a_2 \cdots a_n \text{ where } a_i \in \Sigma$$
 
-**定义 1.1.3 (字符串操作)**
+**定义 1.1.3 (字符串操作)**:
+
 - **连接**：$w_1 \cdot w_2 = w_1 w_2$
 - **幂运算**：$w^0 = \epsilon$, $w^{n+1} = w \cdot w^n$
 - **长度**：$|w| = n$ 对于 $w = a_1 a_2 \cdots a_n$
@@ -38,7 +42,8 @@ $$w = a_1 a_2 \cdots a_n \text{ where } a_i \in \Sigma$$
 **定义 1.1.4 (语言)**
 语言 $L$ 是字符串集合：$L \subseteq \Sigma^*$
 
-**定义 1.1.5 (语言操作)**
+**定义 1.1.5 (语言操作)**:
+
 - **并集**：$L_1 \cup L_2 = \{w \mid w \in L_1 \text{ or } w \in L_2\}$
 - **连接**：$L_1 \cdot L_2 = \{w_1 w_2 \mid w_1 \in L_1, w_2 \in L_2\}$
 - **克林闭包**：$L^* = \bigcup_{n=0}^{\infty} L^n$
@@ -104,7 +109,7 @@ $$\text{Regular} \subset \text{CFL} \subset \text{CSL} \subset \text{REL}$$
 2. 存在语言属于更高层次但不属于较低层次
 3. 通过泵引理证明严格包含
 
-#### Haskell实现
+#### 1.3 Haskell实现
 
 ```haskell
 -- 语言类别枚举
@@ -161,7 +166,7 @@ DFA在任意输入上的行为是确定性的。
 
 **证明：** 由于转移函数 $\delta: Q \times \Sigma \rightarrow Q$ 是单值函数，对于任意状态 $q$ 和输入符号 $a$，存在唯一的下一个状态 $\delta(q, a)$。
 
-#### Haskell实现
+#### 2.2 Haskell实现
 
 ```haskell
 -- 确定性有限自动机
@@ -229,7 +234,7 @@ NFA在输入 $w$ 上的计算是一棵树，每个节点表示可能的状态。
 2. DFA转移函数通过子集计算
 3. 接受状态包含NFA接受状态
 
-#### Haskell实现
+#### 2.3 Haskell实现
 
 ```haskell
 -- 非确定性有限自动机
@@ -278,7 +283,8 @@ powerSet s = fromList (map fromList (subsequences (toList s)))
 正则表达式的语法：
 $$R ::= \emptyset \mid \epsilon \mid a \mid R_1 + R_2 \mid R_1 \cdot R_2 \mid R^*$$
 
-**定义 2.3.2 (正则表达式语义)**
+**定义 2.3.2 (正则表达式语义)**:
+
 - $L(\emptyset) = \emptyset$
 - $L(\epsilon) = \{\epsilon\}$
 - $L(a) = \{a\}$
@@ -295,7 +301,7 @@ $$R ::= \emptyset \mid \epsilon \mid a \mid R_1 + R_2 \mid R_1 \cdot R_2 \mid R^
 2. NFA到DFA：通过子集构造
 3. DFA到正则表达式：通过状态消除
 
-#### Haskell实现
+#### 2.3. Haskell实现
 
 ```haskell
 -- 正则表达式数据类型
@@ -373,7 +379,7 @@ $$L(G) = \{w \in T^* \mid S \Rightarrow^* w\}$$
 **定理 3.1.1 (CFG与下推自动机等价)**
 上下文无关文法和下推自动机识别相同的语言类。
 
-#### Haskell实现
+#### 3.2. Haskell实现
 
 ```haskell
 -- 上下文无关文法
@@ -426,7 +432,7 @@ applyAtPosition from to pos rhs =
 2. 消除单位产生式
 3. 转换为CNF形式
 
-#### Haskell实现
+#### 3.3. Haskell实现
 
 ```haskell
 -- 转换为乔姆斯基范式
@@ -482,7 +488,7 @@ stepNullable cfg current =
 **定理 4.1.1 (DPDA语言类)**
 DPDA识别的语言类是确定性上下文无关语言(DCFL)。
 
-#### Haskell实现
+#### 4.2. Haskell实现
 
 ```haskell
 -- 确定性下推自动机
@@ -556,7 +562,7 @@ reachableConfigurations dpda initial =
 2. 图灵机模型等价于递归函数
 3. 所有已知的计算模型都与图灵机等价
 
-#### Haskell实现
+#### 5.2. Haskell实现
 
 ```haskell
 -- 图灵机
@@ -629,7 +635,7 @@ runTM tm config =
 
 **证明：** 通过正则表达式到DFA的转换，可以构造高效的词法分析器。
 
-#### Haskell实现
+#### 6.2. Haskell实现
 
 ```haskell
 -- 词法分析器
@@ -678,7 +684,7 @@ matchLongest input patterns =
 
 **证明：** 通过CFG到下推自动机的转换，可以构造语法分析器。
 
-#### Haskell实现
+#### 6.3. Haskell实现
 
 ```haskell
 -- 语法树节点
@@ -726,7 +732,7 @@ parseStep parser (Right t':stack) (t:input) =
 
 **证明：** 通过最小化算法和等价性测试。
 
-#### Haskell实现
+#### 7.2. Haskell实现
 
 ```haskell
 -- 自动机等价性测试
@@ -796,6 +802,7 @@ findClass partition state =
 5. **形式化验证**: 自动机等价性、最小化算法
 
 每个概念都包含：
+
 - 严格的数学定义
 - 完整的Haskell实现
 - 形式化证明
@@ -808,4 +815,4 @@ findClass partition state =
 1. Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006). Introduction to Automata Theory, Languages, and Computation.
 2. Sipser, M. (2012). Introduction to the Theory of Computation.
 3. Kozen, D. C. (1997). Automata and Computability.
-4. Harrison, M. A. (1978). Introduction to Formal Language Theory. 
+4. Harrison, M. A. (1978). Introduction to Formal Language Theory.

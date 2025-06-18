@@ -7,15 +7,18 @@
 ## 快速导航
 
 ### 相关理论
+
 - [形式语言理论](./07-Formal-Language-Theory.md)
 - [数学逻辑](./12-Mathematical-Logic.md)
 - [计算复杂性](./09-Computational-Complexity.md)
 
 ### 实现示例
+
 - [Haskell实现](./../haskell/01-Basic-Concepts/自动机实现.md)
 - [形式化验证](./../haskell/13-Formal-Verification/自动机验证.md)
 
 ### 应用领域
+
 - [编译器设计](./../07-Implementation/01-Compiler-Design.md)
 - [语言处理](./../07-Implementation/02-Language-Processing.md)
 
@@ -595,6 +598,7 @@ ndtmStepAll ndtm config =
 $$\text{Regular} \subset \text{CFL} \subset \text{CSL} \subset \text{REL}$$
 
 其中：
+
 - **Regular**: 正则语言（有限自动机）
 - **CFL**: 上下文无关语言（下推自动机）
 - **CSL**: 上下文相关语言（线性有界自动机）
@@ -656,6 +660,7 @@ theorem_anbncn_not_cfl =
 自动机在编译器设计中起着关键作用：
 
 #### 词法分析器
+
 ```haskell
 -- 词法分析器
 data Token = Token
@@ -688,6 +693,7 @@ scanTokens dfa input =
 ```
 
 #### 语法分析器
+
 ```haskell
 -- 语法分析器
 data ParseTree = 
@@ -710,6 +716,7 @@ syntaxAnalyzer npda tokens =
 自动机在自然语言处理中的应用：
 
 #### 模式匹配
+
 ```haskell
 -- 基于自动机的模式匹配
 patternMatcher :: DFA Int Char -> String -> [Int]
@@ -869,4 +876,4 @@ instance (Ord q, Ord a) => AutomatonTesting (DFA q a) where
 1. Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006). *Introduction to Automata Theory, Languages, and Computation*. Pearson Education.
 2. Sipser, M. (2012). *Introduction to the Theory of Computation*. Cengage Learning.
 3. Kozen, D. C. (2006). *Automata and Computability*. Springer.
-4. Arora, S., & Barak, B. (2009). *Computational Complexity: A Modern Approach*. Cambridge University Press. 
+4. Arora, S., & Barak, B. (2009). *Computational Complexity: A Modern Approach*. Cambridge University Press.
