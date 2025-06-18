@@ -718,16 +718,19 @@ checkTimeConstraints net timedMarking =
 ## 🔗 相关链接
 
 ### 理论基础
+
 - [Petri网理论](../03-Petri-Net-Theory/001-Petri-Net-Foundation.md)
 - [控制理论](../02-Control-Theory/001-Control-System-Foundation.md)
 - [分布式系统理论](../04-Distributed-Systems-Theory/001-Distributed-System-Foundation.md)
 
 ### 高级系统理论
+
 - [混合系统理论](./002-Hybrid-System-Theory.md)
 - [实时系统理论](./003-Real-Time-System-Theory.md)
 - [自适应系统理论](./004-Adaptive-System-Theory.md)
 
 ### 实际应用
+
 - [系统建模](../haskell/14-Real-World-Applications/006-System-Modeling.md)
 - [控制系统设计](../haskell/14-Real-World-Applications/007-Control-System-Design.md)
 - [实时系统开发](../haskell/14-Real-World-Applications/008-Real-Time-Systems.md)
@@ -737,4 +740,4 @@ checkTimeConstraints net timedMarking =
 **最后更新**: 2024年12月
 **版本**: 1.0
 **状态**: ✅ 完成
-**维护者**: 形式化知识体系团队 
+**维护者**: 形式化知识体系团队

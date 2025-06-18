@@ -628,16 +628,19 @@ checkReachability system targetState =
 ## 🔗 相关链接
 
 ### 理论基础
+
 - [线性代数](../02-Formal-Science/01-Mathematics/001-Linear-Algebra.md)
 - [群论](../02-Formal-Science/01-Mathematics/002-Group-Theory.md)
 - [李代数](../02-Formal-Science/01-Mathematics/004-Lie-Algebra.md)
 
 ### 高级量子理论
+
 - [量子纠错](./002-Quantum-Error-Correction.md)
 - [量子通信](./003-Quantum-Communication.md)
 - [量子密码学](./004-Quantum-Cryptography.md)
 
 ### 实际应用
+
 - [量子计算](../haskell/14-Real-World-Applications/003-Quantum-Computing.md)
 - [量子传感器](../haskell/14-Real-World-Applications/004-Quantum-Sensors.md)
 - [量子网络](../haskell/14-Real-World-Applications/005-Quantum-Networks.md)
@@ -647,4 +650,4 @@ checkReachability system targetState =
 **最后更新**: 2024年12月
 **版本**: 1.0
 **状态**: ✅ 完成
-**维护者**: 形式化知识体系团队 
+**维护者**: 形式化知识体系团队

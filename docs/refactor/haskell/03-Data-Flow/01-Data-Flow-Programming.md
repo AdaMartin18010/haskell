@@ -32,6 +32,7 @@
 ### 数据流图 (Data Flow Graph)
 
 数据流图 $G = (V, E)$ 其中：
+
 - $V$ 是数据节点集合
 - $E \subseteq V \times V$ 是数据边集合
 
