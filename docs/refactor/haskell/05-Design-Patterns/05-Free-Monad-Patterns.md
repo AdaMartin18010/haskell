@@ -1086,10 +1086,10 @@ effectPatternExample = do
         return (f ())
       interpret (StateEffect op f) = do
         putStrLn $ "State: " ++ op
-        return (f 42)  -- 简化实现
+        return (f 42)
       interpret (ReaderEffect key f) = do
         putStrLn $ "Reader: " ++ key
-        return (f "value")  -- 简化实现
+        return (f "value")
   
   -- 使用效果
   let effectProgram = do
@@ -1230,6 +1230,7 @@ realWorldExample = do
 - [函数式设计模式](./01-Functional-Design-Patterns.md)
 - [类型类模式](./02-Type-Class-Patterns.md)
 - [单子变换器模式](./03-Monad-Transformer-Patterns.md)
+- [透镜模式](./04-Lens-Patterns.md)
 
 ---
 
