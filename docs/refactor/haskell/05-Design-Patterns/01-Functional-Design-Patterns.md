@@ -30,6 +30,7 @@
 $$F = (D, C, P, E)$$
 
 其中：
+
 - $D$ 是数据流
 - $C$ 是函数组合
 - $P$ 是纯函数集合
@@ -139,6 +140,7 @@ composeRecursive functions = Function
 $$(f \circ g)(x) = f(g(x))$$
 
 组合的代数性质：
+
 - **结合律**: $(f \circ g) \circ h = f \circ (g \circ h)$
 - **单位元**: $f \circ id = id \circ f = f$
 
@@ -479,6 +481,7 @@ createPartialFunction func appliedArgs = Function
 $$\text{partial}: (A \times B \rightarrow C) \times A \rightarrow (B \rightarrow C)$$
 
 部分应用的性质：
+
 - **左结合性**: $\text{partial}(f, a)(b) = f(a, b)$
 - **右结合性**: $\text{partial}(f, b)(a) = f(a, b)$
 
@@ -915,4 +918,4 @@ mapMaybe f = concatMap (maybe [] (:[]) . f)
 
 **作者**: 形式化知识体系重构项目  
 **最后更新**: 2024年12月  
-**版本**: 1.0 
+**版本**: 1.0

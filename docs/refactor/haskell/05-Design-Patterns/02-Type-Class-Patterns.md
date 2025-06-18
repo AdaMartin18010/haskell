@@ -30,6 +30,7 @@
 $$TC = (P, M, L, I)$$
 
 其中：
+
 - $P$ 是类型参数
 - $M$ 是方法集合
 - $L$ 是定律集合
@@ -171,6 +172,7 @@ checkLaw law instance' =
 $$\text{instance}: TC \Rightarrow T$$
 
 其中：
+
 - $TC$ 是类型类
 - $T$ 是类型
 - $\Rightarrow$ 表示实例关系
@@ -388,10 +390,12 @@ implementationStrategy implementer = ImplementationStrategy
 $$\text{default}: M \rightarrow M_{\text{default}}$$
 
 其中：
+
 - $M$ 是方法集合
 - $M_{\text{default}}$ 是默认方法集合
 
 默认实现的性质：
+
 - **一致性**: $\text{default}(m) \equiv m$ 当且仅当 $m$ 已实现
 - **最小性**: $\text{minimal}(M_{\text{default}}) \subseteq M$
 
@@ -601,11 +605,13 @@ extractLawDependencies law =
 $$\text{extend}: TC_1 \rightarrow TC_2 \rightarrow TC_{\text{extended}}$$
 
 其中：
+
 - $TC_1$ 是基础类型类
 - $TC_2$ 是扩展类型类
 - $TC_{\text{extended}}$ 是扩展后的类型类
 
 扩展的性质：
+
 - **继承性**: $TC_1 \subseteq TC_{\text{extended}}$
 - **组合性**: $TC_2 \subseteq TC_{\text{extended}}$
 - **一致性**: $\text{laws}(TC_1) \cup \text{laws}(TC_2) \subseteq \text{laws}(TC_{\text{extended}})$
@@ -835,6 +841,7 @@ computeResolutionResult steps =
 $$\text{constraint}: C \Rightarrow T$$
 
 其中：
+
 - $C$ 是约束集合
 - $T$ 是类型
 - $\Rightarrow$ 表示约束关系
@@ -843,6 +850,7 @@ $$\text{constraint}: C \Rightarrow T$$
 $$\text{resolve}: C \rightarrow \text{Substitution} \times C'$$
 
 其中：
+
 - $\text{Substitution}$ 是类型替换
 - $C'$ 是剩余约束
 
@@ -1100,4 +1108,4 @@ realWorldExample = do
 
 **作者**: 形式化知识体系重构项目  
 **最后更新**: 2024年12月  
-**版本**: 1.0 
+**版本**: 1.0
