@@ -23,9 +23,11 @@
 ### 01-形而上学 (01-Metaphysics)
 
 #### 主索引
+
 - [形而上学主索引](./01-Metaphysics/README.md)
 
 #### 核心文档
+
 - [数学本体论](./01-Metaphysics/01-Ontology/01-Mathematical-Ontology.md)
 - [现实本体论](./01-Metaphysics/01-Ontology/02-Reality-Ontology.md)
 - [信息本体论](./01-Metaphysics/01-Ontology/03-Information-Ontology.md)
@@ -58,9 +60,11 @@
 ### 02-认识论 (02-Epistemology)
 
 #### 主索引
+
 - [认识论主索引](./02-Epistemology/README.md)
 
 #### 核心文档
+
 - [知识理论](./02-Epistemology/01-Knowledge-Theory/01-Knowledge-Definition.md)
 - [真理理论](./02-Epistemology/01-Knowledge-Theory/02-Truth-Theory.md)
 - [确证理论](./02-Epistemology/01-Knowledge-Theory/03-Justification-Theory.md)
@@ -85,9 +89,11 @@
 ### 03-逻辑学 (03-Logic)
 
 #### 主索引
+
 - [逻辑学主索引](./03-Logic/README.md)
 
 #### 核心文档
+
 - [形式逻辑基础](./03-Logic/01-Formal-Logic/01-Propositional-Logic.md)
 - [谓词逻辑](./03-Logic/01-Formal-Logic/02-Predicate-Logic.md)
 - [模态逻辑](./03-Logic/01-Formal-Logic/03-Modal-Logic.md)
@@ -110,9 +116,11 @@
 ### 04-伦理学 (04-Ethics)
 
 #### 主索引
+
 - [伦理学主索引](./04-Ethics/README.md)
 
 #### 核心文档
+
 - [规范伦理学](./04-Ethics/01-Normative-Ethics/01-Deontology.md)
 - [功利主义](./04-Ethics/01-Normative-Ethics/02-Utilitarianism.md)
 - [德性伦理学](./04-Ethics/01-Normative-Ethics/03-Virtue-Ethics.md)
@@ -138,9 +146,11 @@
 ### 05-交叉领域哲学 (05-Cross-Disciplinary-Philosophy)
 
 #### 主索引
+
 - [交叉领域哲学主索引](./05-Cross-Disciplinary-Philosophy/README.md)
 
 #### 核心文档
+
 - [数学哲学](./05-Cross-Disciplinary-Philosophy/01-Mathematics-Philosophy/01-Mathematical-Truth.md)
 - [数学对象存在性](./05-Cross-Disciplinary-Philosophy/01-Mathematics-Philosophy/02-Mathematical-Object-Existence.md)
 - [数学基础](./05-Cross-Disciplinary-Philosophy/01-Mathematics-Philosophy/03-Mathematical-Foundations.md)
@@ -168,6 +178,7 @@
 ## 🔗 快速导航
 
 ### 主题导航
+
 - [形而上学](./01-Metaphysics/) - 存在论、模态形而上学、时间空间哲学
 - [认识论](./02-Epistemology/) - 知识理论、真理理论、认知科学
 - [逻辑学](./03-Logic/) - 形式逻辑、哲学逻辑、非经典逻辑
@@ -175,6 +186,7 @@
 - [交叉领域哲学](./05-Cross-Disciplinary-Philosophy/) - 数学哲学、科学哲学、AI哲学
 
 ### 学习路径
+
 - [哲学基础路径](./LEARNING_PATH_GUIDE.md) - 从基础到高级的哲学学习路径
 - [理论哲学路径](./COMPLETE_LEARNING_PATH.md) - 重点关注哲学理论发展
 - [应用哲学路径](./CONTRIBUTING_GUIDE.md) - 重点关注哲学实际应用
@@ -182,21 +194,25 @@
 ## 🎯 技术特色
 
 ### 1. 数学形式化
+
 - 使用严格的LaTeX数学公式
 - 提供完整的定理和证明
 - 建立形式化的哲学框架
 
 ### 2. Haskell实现
+
 - 哲学概念的形式化实现
 - 使用Haskell进行概念建模
 - 提供可验证的哲学理论
 
 ### 3. 多层级架构
+
 - 从基础哲学到应用哲学
 - 建立清晰的知识层次
 - 实现理论到实践的转化
 
 ### 4. 交叉学科融合
+
 - 哲学、数学、科学、技术结合
 - 理论研究和实际应用并重
 - 多领域知识整合
