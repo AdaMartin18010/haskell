@@ -5,6 +5,7 @@
 上下文无关文法(CFG)是形式语言理论中的核心概念，对应乔姆斯基层次结构中的2型语言。CFG能够描述嵌套结构，是编程语言语法分析、自然语言处理的理论基础。
 
 **相关文档**:
+
 - [[009-Regular-Languages]] - 正则语言理论
 - [[011-Turing-Machines]] - 图灵机理论
 - [[012-Computability-Theory]] - 可计算性理论
@@ -42,6 +43,7 @@ $$L(G) = \{w \in \Sigma^* \mid S \Rightarrow_G^* w\}$$
 
 **定义 2.2.1** (Chomsky范式)
 文法 $G$ 是Chomsky范式，如果所有产生式都是以下形式之一：
+
 - $A \to BC$ (两个非终结符)
 - $A \to a$ (单个终结符)
 - $S \to \varepsilon$ (仅当 $\varepsilon \in L(G)$)
@@ -50,6 +52,7 @@ $$L(G) = \{w \in \Sigma^* \mid S \Rightarrow_G^* w\}$$
 对于任意上下文无关文法 $G$，存在等价的Chomsky范式文法 $G'$。
 
 **证明**:
+
 1. 消除 $\varepsilon$-产生式
 2. 消除单位产生式
 3. 消除无用符号
@@ -78,6 +81,7 @@ $$L(G) = \{w \in \Sigma^* \mid S \Rightarrow_G^* w\}$$
 
 **定义 3.1.2** (瞬时描述)
 NPDA 的瞬时描述是一个三元组 $(q, w, \gamma)$，其中：
+
 - $q \in Q$ 是当前状态
 - $w \in \Sigma^*$ 是剩余输入
 - $\gamma \in \Gamma^*$ 是栈内容
@@ -109,6 +113,7 @@ $$L(M) = \{w \in \Sigma^* \mid (q_0, w, Z_0) \vdash_M^* (q, \varepsilon, \gamma)
 语言 $L$ 是上下文无关语言当且仅当存在NPDA $M$ 使得 $L = L(M)$。
 
 **证明**:
+
 - **必要性**: 通过标准构造法将CFG转换为NPDA
 - **充分性**: 通过动态规划将NPDA转换为CFG
 
@@ -411,6 +416,7 @@ analyzeSentence words = parse englishGrammar words
 **证明**: 设 $G$ 是生成 $L$ 的Chomsky范式文法，选择 $p = 2^{|V|}$。对于长度 $\geq p$ 的字符串，根据鸽巢原理，存在非终结符重复，可以泵入重复部分。
 
 **应用**: 证明语言非上下文无关性
+
 - $L = \{a^nb^nc^n \mid n \geq 0\}$ 不是上下文无关语言
 - $L = \{ww \mid w \in \{a,b\}^*\}$ 不是上下文无关语言
 
@@ -542,6 +548,7 @@ sentenceProbability pcfg sentence =
 上下文无关文法在编译器设计、自然语言处理、形式语言理论等领域有广泛应用。
 
 **相关文档**:
+
 - [[009-Regular-Languages]] - 正则语言理论
 - [[011-Turing-Machines]] - 图灵机理论
-- [[012-Computability-Theory]] - 可计算性理论 
+- [[012-Computability-Theory]] - 可计算性理论

@@ -5,6 +5,7 @@
 图灵机是计算理论的核心模型，由艾伦·图灵在1936年提出。它提供了可计算性的形式化定义，是计算机科学和形式语言理论的基础。图灵机对应乔姆斯基层次结构中的0型语言，具有最强的计算能力。
 
 **相关文档**:
+
 - [[009-Regular-Languages]] - 正则语言理论
 - [[010-Context-Free-Grammars]] - 上下文无关文法
 - [[012-Computability-Theory]] - 可计算性理论
@@ -27,6 +28,7 @@
 
 **定义 2.1.2** (瞬时描述)
 图灵机的瞬时描述是一个三元组 $(q, \alpha, i)$，其中：
+
 - $q \in Q$ 是当前状态
 - $\alpha \in \Gamma^*$ 是带内容
 - $i \in \mathbb{N}$ 是读写头位置
@@ -38,6 +40,7 @@
 $$(q, \alpha, i) \vdash_M (q', \alpha', i')$$
 
 其中：
+
 - $\alpha'_j = \begin{cases} b & \text{if } j = i \\ \alpha_j & \text{otherwise} \end{cases}$
 - $i' = \begin{cases} i-1 & \text{if } D = L \\ i+1 & \text{if } D = R \end{cases}$
 
@@ -514,7 +517,8 @@ diagonalTM tm input =
 
 **定义**: 语言性质 $P$ 是非平凡的，如果存在图灵机 $M_1$ 使得 $L(M_1) \in P$，且存在图灵机 $M_2$ 使得 $L(M_2) \notin P$。
 
-**应用**: 
+**应用**:
+
 - 语言是否为空集
 - 语言是否为有限集
 - 语言是否包含特定字符串
@@ -634,6 +638,7 @@ executeProbabilisticTM ptm input =
 图灵机在计算理论、形式语言理论、复杂性理论等领域有广泛应用，是计算机科学的核心概念。
 
 **相关文档**:
+
 - [[009-Regular-Languages]] - 正则语言理论
 - [[010-Context-Free-Grammars]] - 上下文无关文法
-- [[012-Computability-Theory]] - 可计算性理论 
+- [[012-Computability-Theory]] - 可计算性理论

@@ -5,6 +5,7 @@
 可计算性理论是研究计算本质和计算能力界限的数学理论。它探讨哪些问题可以通过算法解决，哪些问题在原则上无法解决。可计算性理论为计算机科学提供了理论基础，是理解计算复杂性和算法设计的核心。
 
 **相关文档**:
+
 - [[009-Regular-Languages]] - 正则语言理论
 - [[010-Context-Free-Grammars]] - 上下文无关文法
 - [[011-Turing-Machines]] - 图灵机理论
@@ -21,6 +22,7 @@
 部分函数 $f: \mathbb{N}^k \to \mathbb{N}$ 是可计算的，如果存在图灵机 $M$ 使得：
 
 对于任意 $(n_1, \ldots, n_k) \in \mathbb{N}^k$：
+
 - 如果 $f(n_1, \ldots, n_k)$ 有定义，则 $M$ 在输入 $\langle n_1, \ldots, n_k \rangle$ 上停机并输出 $f(n_1, \ldots, n_k)$
 - 如果 $f(n_1, \ldots, n_k)$ 无定义，则 $M$ 在输入 $\langle n_1, \ldots, n_k \rangle$ 上不停机
 
@@ -57,6 +59,7 @@
 函数 $f$ 是递归函数当且仅当存在图灵机 $M$ 计算 $f$。
 
 **证明**:
+
 - **必要性**: 通过递归函数的构造规则构造图灵机
 - **充分性**: 通过图灵机的编码和模拟构造递归函数
 
@@ -137,7 +140,7 @@ muRecursion f n = findMin (\m -> f m n == Just 0)
 
 -- | 加法函数 (通过原始递归)
 add :: Nat -> Nat -> Nat
-add m n = fromMaybe 0 (primitiveRecursion 
+add m n = fromMaybe 0 (primitiveRecursion
   (\n -> Just n)  -- f(n) = n
   (\prev m n -> Just (successor prev))  -- g(prev, m, n) = prev + 1
   m n)
@@ -172,8 +175,8 @@ type TMEncoding = Nat
 
 -- | 编码图灵机
 encodeTM :: TuringMachine String String -> TMEncoding
-encodeTM tm = 
-  encodeList [encodeStates, encodeAlphabet, encodeTransitions, 
+encodeTM tm =
+  encodeList [encodeStates, encodeAlphabet, encodeTransitions,
               encodeStartState, encodeAcceptStates]
   where
     encodeStates = encodeSet (states tm)
@@ -224,13 +227,13 @@ decodeSet n = do
 
 -- | 解码字符串
 decodeString :: Nat -> Maybe (String, Nat)
-decodeString n = 
+decodeString n =
   let chars = reverse (unfoldr (\x -> if x == 0 then Nothing else Just (chr (fromIntegral (x `mod` 256)), x `div` 256)) n)
   in Just (chars, 0)
 
 -- | 解码列表
 decodeList :: Nat -> Maybe ([Nat], Nat)
-decodeList n = 
+decodeList n =
   let (list, rest) = unfoldr (\x -> if x == 0 then Nothing else Just (x `mod` 2, x `div` 2)) n
   in Just (reverse list, rest)
 ```
@@ -264,14 +267,14 @@ universalTuringMachine = TuringMachine
 
 -- | 模拟图灵机
 simulateTM :: TMEncoding -> [String] -> ExecutionResult String String
-simulateTM code input = 
+simulateTM code input =
   case decodeTM code of
     Just tm -> executeTM tm input
     Nothing -> Reject "decode_error" [] 0
 
 -- | 通用函数计算
 universalFunction :: TMEncoding -> Nat -> Maybe Nat
-universalFunction code input = 
+universalFunction code input =
   case simulateTM code (encodeNat input) of
     Accept _ result _ -> decodeNat result
     _ -> Nothing
@@ -285,7 +288,7 @@ universalFunction code input =
 ```haskell
 -- | 停机问题判定器 (假设存在)
 haltingDecider :: TMEncoding -> Nat -> Bool
-haltingDecider code input = 
+haltingDecider code input =
   case simulateTM code (show input) of
     Accept _ _ _ -> True
     Reject _ _ _ -> True
@@ -293,7 +296,7 @@ haltingDecider code input =
 
 -- | 对角线图灵机
 diagonalTM :: TMEncoding -> Nat -> ExecutionResult String String
-diagonalTM code input = 
+diagonalTM code input =
   if haltingDecider code input
   then Loop  -- 如果停机，则进入无限循环
   else Accept "q_accept" [] 0  -- 如果不停机，则停机
@@ -318,7 +321,7 @@ diagonalTMCode = encodeTM (TuringMachine
 
 -- | 停机问题的矛盾
 haltingContradiction :: Bool
-haltingContradiction = 
+haltingContradiction =
   let result = haltingDecider diagonalTMCode diagonalTMCode
   in result == not result  -- 这会导致矛盾
 ```
@@ -352,17 +355,17 @@ createCalculator = RecursiveCalculator
 
 -- | 计算递归函数
 calculate :: RecursiveCalculator -> String -> [Nat] -> Maybe Nat
-calculate calc name args = 
+calculate calc name args =
   case Map.lookup name (basicFunctions calc) of
     Just f -> if length args == 1 then f (head args) else Nothing
-    Nothing -> 
+    Nothing ->
       case Map.lookup name (compositeFunctions calc) of
         Just f -> f args
         Nothing -> Nothing
 
 -- | 计算示例
 calculationExamples :: [(String, [Nat], Maybe Nat)]
-calculationExamples = 
+calculationExamples =
   [ ("add", [3, 4], Just 7)
   , ("multiply", [5, 6], Just 30)
   , ("factorial", [5], Just 120)
@@ -383,7 +386,7 @@ data DecidabilityProblem = DecidabilityProblem
 
 -- | 可判定性问题集合
 decidabilityProblems :: [DecidabilityProblem]
-decidabilityProblems = 
+decidabilityProblems =
   [ DecidabilityProblem
       { problemName = "停机问题"
       , problemDescription = "给定图灵机M和输入w，判断M在w上是否停机"
@@ -412,7 +415,7 @@ decidabilityProblems =
 
 -- | 检查问题可判定性
 checkDecidability :: String -> Maybe Bool
-checkDecidability problemName = 
+checkDecidability problemName =
   case find (\p -> problemName == problemName p) decidabilityProblems of
     Just problem -> Just (isDecidable problem)
     Nothing -> Nothing
@@ -432,14 +435,14 @@ checkDecidability problemName =
 ```haskell
 -- | Rice定理的应用
 riceTheorem :: String -> Bool -> Bool
-riceTheorem propertyName isTrivial = 
+riceTheorem propertyName isTrivial =
   if isTrivial
   then True  -- 平凡性质可能是可判定的
   else False -- 非平凡性质不可判定
 
 -- | 应用Rice定理
 applyRiceTheorem :: [DecidabilityProblem]
-applyRiceTheorem = 
+applyRiceTheorem =
   [ DecidabilityProblem
       { problemName = "有限性问题"
       , problemDescription = "判断语言是否为有限集"
@@ -489,7 +492,7 @@ data Reduction a b = Reduction
 
 -- | 归约示例
 reductionExamples :: [Reduction String String]
-reductionExamples = 
+reductionExamples =
   [ Reduction
       { reductionType = ManyOneReduction
       , reductionFunction = \x -> "halt_" ++ x
@@ -524,7 +527,7 @@ data RecursivelyEnumerableSet = RecursivelyEnumerableSet
 
 -- | 递归可枚举集示例
 reSetExamples :: [RecursivelyEnumerableSet]
-reSetExamples = 
+reSetExamples =
   [ RecursivelyEnumerableSet
       { setName = "可停机图灵机编码"
       , enumerator = \n -> Just n  -- 简化版本
@@ -571,7 +574,7 @@ relativeTM oracle = TuringMachine
   , inputAlphabet = fromList ["0", "1", "?"]
   , tapeAlphabet = fromList ["0", "1", "?", "B"]
   , transition = \q a -> case (q, a) of
-      ("q0", "?") -> 
+      ("q0", "?") ->
         if oracle "query"
         then Transition "q1" "1" R
         else Transition "q2" "0" R
@@ -600,7 +603,7 @@ data ComputabilityApplication = ComputabilityApplication
 
 -- | 应用示例
 computabilityApplications :: [ComputabilityApplication]
-computabilityApplications = 
+computabilityApplications =
   [ ComputabilityApplication
       { applicationName = "编译器优化"
       , description = "判断程序优化是否保持语义等价"
@@ -634,4 +637,4 @@ computabilityApplications =
 **相关文档**:
 - [[009-Regular-Languages]] - 正则语言理论
 - [[010-Context-Free-Grammars]] - 上下文无关文法
-- [[011-Turing-Machines]] - 图灵机理论 
+- [[011-Turing-Machines]] - 图灵机理论

@@ -5,6 +5,7 @@
 正则语言是形式语言理论中最基础的语言类，对应乔姆斯基层次结构中的3型语言。正则语言具有有限状态的计算能力，是词法分析、模式匹配和文本处理的理论基础。
 
 **相关文档**:
+
 - [[001-Linear-Type-Theory]] - 线性类型理论
 - [[010-Context-Free-Grammars]] - 上下文无关文法
 - [[011-Turing-Machines]] - 图灵机理论
@@ -31,6 +32,7 @@
 正则语言在并、连接和克林闭包运算下构成一个 Kleene 代数。
 
 **证明**:
+
 1. **结合律**: $(L_1 \cup L_2) \cup L_3 = L_1 \cup (L_2 \cup L_3)$
 2. **分配律**: $L_1 \cdot (L_2 \cup L_3) = L_1 \cdot L_2 \cup L_1 \cdot L_3$
 3. **幂等律**: $L \cup L = L$
@@ -66,6 +68,7 @@ $$
 语言 $L$ 是正则语言当且仅当存在正则表达式 $E$ 使得 $L = L(E)$。
 
 **证明**:
+
 - **必要性**: 通过正则语言的归纳定义构造正则表达式
 - **充分性**: 通过有限自动机识别正则表达式语言
 
@@ -126,6 +129,7 @@ $$
 对于每个 NFA，存在等价的 DFA。
 
 **证明** (子集构造法):
+
 1. DFA 的状态集是 NFA 状态集的幂集 $2^Q$
 2. DFA 的转移函数定义为：
    $$\delta'(S, a) = \bigcup_{q \in S} \delta(q, a)$$
@@ -370,6 +374,7 @@ findMatches regex text = concatMap (findMatchesAt regex text) [0..length text - 
 **证明**: 设 $M$ 是识别 $L$ 的 DFA，状态数为 $p$。对于长度 $\geq p$ 的字符串，根据鸽巢原理，存在状态重复，可以泵入重复部分。
 
 **应用**: 证明语言非正则性
+
 - $L = \{a^nb^n \mid n \geq 0\}$ 不是正则语言
 - $L = \{ww \mid w \in \{a,b\}^*\}$ 不是正则语言
 
@@ -379,6 +384,7 @@ findMatches regex text = concatMap (findMatchesAt regex text) [0..length text - 
 DFA 中两个状态 $q_1, q_2$ 等价，当且仅当对于所有输入 $w$，$\delta^*(q_1, w) \in F \iff \delta^*(q_2, w) \in F$。
 
 **算法 6.2.1** (DFA 最小化)
+
 1. 移除不可达状态
 2. 合并等价状态
 3. 更新转移函数
@@ -485,6 +491,7 @@ computeProbability pfa input = sum [pfaStartProb pfa q0 *
 正则语言在词法分析、模式匹配、文本处理等领域有广泛应用，是形式语言理论的重要基础。
 
 **相关文档**:
+
 - [[010-Context-Free-Grammars]] - 上下文无关文法
 - [[011-Turing-Machines]] - 图灵机理论
-- [[012-Computability-Theory]] - 可计算性理论 
+- [[012-Computability-Theory]] - 可计算性理论
