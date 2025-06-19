@@ -1,454 +1,623 @@
 # 自动机理论 (Automata Theory)
 
-## 📚 概述
+## 📋 文档信息
 
-自动机理论是形式语言理论的核心组成部分，研究抽象计算模型和形式语言识别机制。本文档建立自动机理论的完整数学基础，并提供 Haskell 实现。
+- **文档编号**: 013
+- **所属层次**: 理论层 (Theory Layer)
+- **创建时间**: 2024-12-19
+- **最后更新**: 2024-12-19
+- **版本**: 1.0.0
 
-## 🎯 核心概念
+## 🔗 相关文档
 
-### 1. 自动机基础定义
+### 上层文档
+- [[02-Formal-Science/001-Mathematical-Foundations]] - 数学基础
+- [[02-Formal-Science/002-Set-Theory]] - 集合论
+- [[02-Formal-Science/003-Category-Theory]] - 范畴论
 
-#### 1.1 有限自动机 (Finite Automaton)
+### 同层文档
+- [[03-Theory/009-Regular-Languages]] - 正则语言理论
+- [[03-Theory/010-Context-Free-Grammars]] - 上下文无关文法
+- [[03-Theory/011-Turing-Machines]] - 图灵机理论
+- [[03-Theory/012-Computability-Theory]] - 可计算性理论
 
-**定义 1.1.1** 有限自动机是一个五元组 $M = (Q, \Sigma, \delta, q_0, F)$，其中：
+### 下层文档
+- [[04-Programming-Language/001-Compiler-Design]] - 编译器设计
+- [[04-Programming-Language/002-Parser-Implementation]] - 解析器实现
+
+---
+
+## 🎯 概述
+
+自动机理论是形式语言理论和计算理论的核心基础，研究抽象机器的数学模型及其计算能力。本文档建立自动机理论的完整数学框架，包括有限自动机、下推自动机、图灵机等核心概念，并提供完整的 Haskell 实现。
+
+## 📚 理论基础
+
+### 1. 自动机的基本定义
+
+#### 1.1 自动机的数学定义
+
+**定义 1.1** (自动机): 一个自动机是一个五元组 $A = (Q, \Sigma, \delta, q_0, F)$，其中：
 
 - $Q$ 是有限状态集
-- $\Sigma$ 是有限输入字母表
+- $\Sigma$ 是输入字母表
 - $\delta: Q \times \Sigma \rightarrow Q$ 是转移函数
 - $q_0 \in Q$ 是初始状态
 - $F \subseteq Q$ 是接受状态集
 
-**Haskell 实现**：
+**定义 1.2** (自动机的配置): 自动机在时刻 $t$ 的配置是一个二元组 $(q, w)$，其中：
+- $q \in Q$ 是当前状态
+- $w \in \Sigma^*$ 是剩余输入串
 
-```haskell
--- 有限自动机类型定义
-data FiniteAutomaton q a = FA
-  { states :: Set q
-  , alphabet :: Set a
-  , transition :: q -> a -> q
-  , initialState :: q
-  , acceptingStates :: Set q
-  }
+**定义 1.3** (转移关系): 配置间的转移关系 $\vdash$ 定义为：
+$$(q, aw) \vdash (q', w) \text{ 当且仅当 } \delta(q, a) = q'$$
 
--- 自动机执行函数
-runFA :: (Ord q, Ord a) => FiniteAutomaton q a -> [a] -> Bool
-runFA fa input = finalState `member` acceptingStates fa
-  where
-    finalState = foldl (transition fa) (initialState fa) input
+#### 1.2 自动机的语言
 
--- 示例：识别偶数个0的自动机
-evenZerosFA :: FiniteAutomaton Int Char
-evenZerosFA = FA
-  { states = fromList [0, 1]
-  , alphabet = fromList ['0', '1']
-  , transition = \state symbol -> case (state, symbol) of
-      (0, '0') -> 1
-      (1, '0') -> 0
-      (_, '1') -> state
-      _ -> state
-  , initialState = 0
-  , acceptingStates = fromList [0]
-  }
-```
+**定义 1.4** (自动机接受的语言): 自动机 $A$ 接受的语言定义为：
+$$L(A) = \{w \in \Sigma^* \mid (q_0, w) \vdash^* (q_f, \epsilon), q_f \in F\}$$
 
-#### 1.2 确定性有限自动机 (DFA)
+其中 $\vdash^*$ 表示转移关系的自反传递闭包。
 
-**定义 1.2.1** 确定性有限自动机是转移函数为全函数的有限自动机：
+### 2. 有限自动机 (Finite Automata)
 
-$$\delta: Q \times \Sigma \rightarrow Q$$
+#### 2.1 确定性有限自动机 (DFA)
 
-**定理 1.2.1** DFA 的语言识别能力等价于正则语言。
+**定义 2.1** (DFA): 确定性有限自动机是一个五元组 $D = (Q, \Sigma, \delta, q_0, F)$，其中转移函数 $\delta: Q \times \Sigma \rightarrow Q$ 是确定性的。
 
-**证明**：
+**定理 2.1** (DFA的等价性): 对于任意DFA $D$，存在正则表达式 $r$ 使得 $L(D) = L(r)$。
 
-1. 正则表达式可以构造等价 DFA
-2. DFA 可以构造等价正则表达式
-3. 通过 Kleene 定理建立等价性
+**证明**: 使用状态消除法构造等价的正则表达式。
 
-```haskell
--- DFA 类型定义
-type DFA q a = FiniteAutomaton q a
+#### 2.2 非确定性有限自动机 (NFA)
 
--- DFA 最小化算法
-minimizeDFA :: (Ord q, Ord a) => DFA q a -> DFA Int a
-minimizeDFA dfa = undefined -- 实现 Hopcroft 算法
+**定义 2.2** (NFA): 非确定性有限自动机是一个五元组 $N = (Q, \Sigma, \delta, q_0, F)$，其中转移函数 $\delta: Q \times \Sigma \rightarrow 2^Q$ 是非确定性的。
 
--- 示例：识别二进制数中1的个数为3的倍数的DFA
-mod3DFA :: DFA Int Char
-mod3DFA = FA
-  { states = fromList [0, 1, 2]
-  , alphabet = fromList ['0', '1']
-  , transition = \state symbol -> case (state, symbol) of
-      (s, '0') -> s
-      (s, '1') -> (s + 1) `mod` 3
-      _ -> state
-  , initialState = 0
-  , acceptingStates = fromList [0]
-  }
-```
+**定理 2.2** (NFA到DFA的转换): 对于任意NFA $N$，存在等价的DFA $D$ 使得 $L(N) = L(D)$。
 
-#### 1.3 非确定性有限自动机 (NFA)
+**证明**: 使用子集构造法，状态集为 $2^Q$。
 
-**定义 1.3.1** 非确定性有限自动机允许转移函数返回状态集：
+### 3. 下推自动机 (Pushdown Automata)
 
-$$\delta: Q \times \Sigma \rightarrow \mathcal{P}(Q)$$
+#### 3.1 PDA的基本定义
 
-**定理 1.3.1** NFA 与 DFA 等价。
-
-**证明**：通过子集构造法将 NFA 转换为等价 DFA。
-
-```haskell
--- NFA 类型定义
-data NFA q a = NFA
-  { nfaStates :: Set q
-  , nfaAlphabet :: Set a
-  , nfaTransition :: q -> a -> Set q
-  , nfaInitialState :: q
-  , nfaAcceptingStates :: Set q
-  }
-
--- NFA 到 DFA 的转换
-nfaToDFA :: (Ord q, Ord a) => NFA q a -> DFA (Set q) a
-nfaToDFA nfa = FA
-  { states = reachableStates
-  , alphabet = nfaAlphabet nfa
-  , transition = \stateSet symbol -> 
-      unions [nfaTransition nfa q symbol | q <- toList stateSet]
-  , initialState = singleton (nfaInitialState nfa)
-  , acceptingStates = S.filter (not . null . intersection (nfaAcceptingStates nfa)) reachableStates
-  }
-  where
-    reachableStates = computeReachableStates nfa
-
--- 计算可达状态集
-computeReachableStates :: (Ord q, Ord a) => NFA q a -> Set (Set q)
-computeReachableStates nfa = undefined -- 实现可达性分析
-```
-
-### 2. 下推自动机 (Pushdown Automaton)
-
-#### 2.1 下推自动机定义
-
-**定义 2.1.1** 下推自动机是一个七元组 $P = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)$，其中：
+**定义 3.1** (PDA): 下推自动机是一个七元组 $P = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)$，其中：
 
 - $Q$ 是有限状态集
 - $\Sigma$ 是输入字母表
 - $\Gamma$ 是栈字母表
-- $\delta: Q \times \Sigma \times \Gamma \rightarrow \mathcal{P}(Q \times \Gamma^*)$ 是转移函数
+- $\delta: Q \times (\Sigma \cup \{\epsilon\}) \times \Gamma \rightarrow 2^{Q \times \Gamma^*}$ 是转移函数
 - $q_0 \in Q$ 是初始状态
 - $Z_0 \in \Gamma$ 是初始栈符号
 - $F \subseteq Q$ 是接受状态集
 
-```haskell
--- 下推自动机类型定义
-data PushdownAutomaton q a g = PDA
-  { pdaStates :: Set q
-  , pdaInputAlphabet :: Set a
-  , pdaStackAlphabet :: Set g
-  , pdaTransition :: q -> Maybe a -> g -> Set (q, [g])
-  , pdaInitialState :: q
-  , pdaInitialStackSymbol :: g
-  , pdaAcceptingStates :: Set q
-  }
+#### 3.2 PDA的配置和转移
 
--- PDA 配置
-data PDAConfiguration q a g = PDAConfig
-  { pdaCurrentState :: q
-  , pdaRemainingInput :: [a]
-  , pdaStack :: [g]
-  }
+**定义 3.2** (PDA配置): PDA的配置是一个三元组 $(q, w, \gamma)$，其中：
+- $q \in Q$ 是当前状态
+- $w \in \Sigma^*$ 是剩余输入
+- $\gamma \in \Gamma^*$ 是栈内容
 
--- PDA 执行
-runPDA :: (Ord q, Ord a, Ord g) => PushdownAutomaton q a g -> [a] -> Bool
-runPDA pda input = any isAccepting finalConfigs
-  where
-    initialConfig = PDAConfig
-      { pdaCurrentState = pdaInitialState pda
-      , pdaRemainingInput = input
-      , pdaStack = [pdaInitialStackSymbol pda]
-      }
-    finalConfigs = computeAllConfigurations pda initialConfig
-    isAccepting config = pdaCurrentState config `member` pdaAcceptingStates pda
-                        && null (pdaRemainingInput config)
+**定义 3.3** (PDA转移): 配置间的转移关系定义为：
+$$(q, aw, Z\gamma) \vdash (q', w, \alpha\gamma) \text{ 当且仅当 } (q', \alpha) \in \delta(q, a, Z)$$
 
--- 示例：识别回文串的PDA
-palindromePDA :: PushdownAutomaton Int Char Char
-palindromePDA = PDA
-  { pdaStates = fromList [0, 1, 2]
-  , pdaInputAlphabet = fromList ['a', 'b']
-  , pdaStackAlphabet = fromList ['A', 'B', 'Z']
-  , pdaTransition = \state inputSymbol stackTop -> case (state, inputSymbol, stackTop) of
-      -- 读取阶段：将输入压栈
-      (0, Just symbol, 'Z') -> fromList [(0, [symbol, 'Z'])]
-      (0, Just symbol, _) -> fromList [(0, [symbol, stackTop])]
-      -- 中间阶段：切换到匹配模式
-      (0, Nothing, _) -> fromList [(1, [stackTop])]
-      -- 匹配阶段：比较输入和栈顶
-      (1, Just symbol, symbol') | symbol == symbol' -> fromList [(1, [])]
-      (1, Nothing, 'Z') -> fromList [(2, ['Z'])]
-      _ -> empty
-  , pdaInitialState = 0
-  , pdaInitialStackSymbol = 'Z'
-  , pdaAcceptingStates = fromList [2]
-  }
-```
+### 4. 图灵机 (Turing Machines)
 
-### 3. 图灵机 (Turing Machine)
+#### 4.1 基本图灵机
 
-#### 3.1 图灵机定义
-
-**定义 3.1.1** 图灵机是一个七元组 $T = (Q, \Sigma, \Gamma, \delta, q_0, B, F)$，其中：
+**定义 4.1** (图灵机): 图灵机是一个七元组 $M = (Q, \Sigma, \Gamma, \delta, q_0, B, F)$，其中：
 
 - $Q$ 是有限状态集
 - $\Sigma$ 是输入字母表
-- $\Gamma$ 是磁带字母表
-- $\delta: Q \times \Gamma \rightarrow Q \times \Gamma \times \{L, R, N\}$ 是转移函数
+- $\Gamma$ 是带字母表，$\Sigma \subseteq \Gamma$
+- $\delta: Q \times \Gamma \rightarrow Q \times \Gamma \times \{L, R\}$ 是转移函数
 - $q_0 \in Q$ 是初始状态
-- $B \in \Gamma$ 是空白符号
+- $B \in \Gamma \setminus \Sigma$ 是空白符号
 - $F \subseteq Q$ 是接受状态集
 
-```haskell
--- 图灵机类型定义
-data Direction = L | R | N deriving (Eq, Show)
+#### 4.2 图灵机的配置
 
-data TuringMachine q a = TM
-  { tmStates :: Set q
-  , tmInputAlphabet :: Set a
-  , tmTapeAlphabet :: Set a
-  , tmTransition :: q -> a -> (q, a, Direction)
-  , tmInitialState :: q
-  , tmBlankSymbol :: a
-  , tmAcceptingStates :: Set q
+**定义 4.2** (图灵机配置): 图灵机的配置是一个三元组 $(q, \alpha, i)$，其中：
+- $q \in Q$ 是当前状态
+- $\alpha \in \Gamma^*$ 是带内容
+- $i \in \mathbb{N}$ 是读写头位置
+
+### 5. 自动机的层次结构
+
+**定理 5.1** (Chomsky层次): 自动机类型与语言类的对应关系：
+
+1. **正则语言**: 有限自动机
+2. **上下文无关语言**: 下推自动机
+3. **上下文相关语言**: 线性有界自动机
+4. **递归可枚举语言**: 图灵机
+
+## 💻 Haskell 实现
+
+### 1. 自动机的基础类型
+
+```haskell
+-- 自动机的基础类型定义
+module AutomataTheory where
+
+import Data.Set (Set)
+import qualified Data.Set as Set
+import Data.Map (Map)
+import qualified Data.Map as Map
+import Data.Maybe (fromMaybe)
+
+-- 状态类型
+type State = String
+
+-- 输入符号类型
+type Symbol = Char
+
+-- 转移函数类型
+type TransitionFunction = Map (State, Symbol) State
+
+-- 自动机基础类型
+data Automaton = Automaton
+  { states :: Set State
+  , alphabet :: Set Symbol
+  , transitions :: TransitionFunction
+  , initialState :: State
+  , acceptingStates :: Set State
+  } deriving (Show, Eq)
+
+-- 配置类型
+data Configuration = Configuration
+  { currentState :: State
+  , remainingInput :: String
+  } deriving (Show, Eq)
+```
+
+### 2. 有限自动机实现
+
+```haskell
+-- 有限自动机实现
+module FiniteAutomata where
+
+import AutomataTheory
+import Data.Maybe (fromMaybe)
+
+-- DFA实现
+data DFA = DFA
+  { dfaStates :: Set State
+  , dfaAlphabet :: Set Symbol
+  , dfaTransitions :: Map (State, Symbol) State
+  , dfaInitialState :: State
+  , dfaAcceptingStates :: Set State
+  } deriving (Show, Eq)
+
+-- 创建DFA
+createDFA :: Set State -> Set Symbol -> Map (State, Symbol) State -> State -> Set State -> DFA
+createDFA states alphabet transitions initial accepting = DFA
+  { dfaStates = states
+  , dfaAlphabet = alphabet
+  , dfaTransitions = transitions
+  , dfaInitialState = initial
+  , dfaAcceptingStates = accepting
   }
+
+-- DFA转移函数
+dfaTransition :: DFA -> State -> Symbol -> Maybe State
+dfaTransition dfa state symbol = Map.lookup (state, symbol) (dfaTransitions dfa)
+
+-- DFA配置转移
+dfaStep :: DFA -> Configuration -> Maybe Configuration
+dfaStep dfa (Configuration state (c:cs)) = do
+  nextState <- dfaTransition dfa state c
+  return $ Configuration nextState cs
+dfaStep _ (Configuration _ []) = Nothing
+
+-- DFA运行
+dfaRun :: DFA -> String -> Bool
+dfaRun dfa input = go (Configuration (dfaInitialState dfa) input)
+  where
+    go (Configuration state []) = Set.member state (dfaAcceptingStates dfa)
+    go config = case dfaStep dfa config of
+      Just nextConfig -> go nextConfig
+      Nothing -> False
+
+-- NFA实现
+data NFA = NFA
+  { nfaStates :: Set State
+  , nfaAlphabet :: Set Symbol
+  , nfaTransitions :: Map (State, Symbol) (Set State)
+  , nfaInitialState :: State
+  , nfaAcceptingStates :: Set State
+  } deriving (Show, Eq)
+
+-- NFA转移函数
+nfaTransition :: NFA -> State -> Symbol -> Set State
+nfaTransition nfa state symbol = fromMaybe Set.empty $ Map.lookup (state, symbol) (nfaTransitions nfa)
+
+-- NFA配置转移
+nfaStep :: NFA -> Set State -> Symbol -> Set State
+nfaStep nfa states symbol = Set.unions $ map (\s -> nfaTransition nfa s symbol) (Set.toList states)
+
+-- NFA运行
+nfaRun :: NFA -> String -> Bool
+nfaRun nfa input = go (Set.singleton (nfaInitialState nfa)) input
+  where
+    go states [] = not $ Set.null $ Set.intersection states (nfaAcceptingStates nfa)
+    go states (c:cs) = go (nfaStep nfa states c) cs
+```
+
+### 3. 下推自动机实现
+
+```haskell
+-- 下推自动机实现
+module PushdownAutomata where
+
+import AutomataTheory
+import Data.Maybe (fromMaybe)
+
+-- 栈符号类型
+type StackSymbol = Char
+
+-- PDA转移类型
+type PDATransition = (State, [StackSymbol])
+
+-- PDA实现
+data PDA = PDA
+  { pdaStates :: Set State
+  , pdaInputAlphabet :: Set Symbol
+  , pdaStackAlphabet :: Set StackSymbol
+  , pdaTransitions :: Map (State, Maybe Symbol, StackSymbol) [PDATransition]
+  , pdaInitialState :: State
+  , pdaInitialStackSymbol :: StackSymbol
+  , pdaAcceptingStates :: Set State
+  } deriving (Show, Eq)
+
+-- PDA配置
+data PDAConfiguration = PDAConfiguration
+  { pdaCurrentState :: State
+  , pdaRemainingInput :: String
+  , pdaStack :: [StackSymbol]
+  } deriving (Show, Eq)
+
+-- 创建PDA
+createPDA :: Set State -> Set Symbol -> Set StackSymbol -> 
+            Map (State, Maybe Symbol, StackSymbol) [PDATransition] ->
+            State -> StackSymbol -> Set State -> PDA
+createPDA states inputAlphabet stackAlphabet transitions initial initialStack accepting = PDA
+  { pdaStates = states
+  , pdaInputAlphabet = inputAlphabet
+  , pdaStackAlphabet = stackAlphabet
+  , pdaTransitions = transitions
+  , pdaInitialState = initial
+  , pdaInitialStackSymbol = initialStack
+  , pdaAcceptingStates = accepting
+  }
+
+-- PDA转移函数
+pdaTransition :: PDA -> State -> Maybe Symbol -> StackSymbol -> [PDATransition]
+pdaTransition pda state symbol stackTop = 
+  fromMaybe [] $ Map.lookup (state, symbol, stackTop) (pdaTransitions pda)
+
+-- PDA配置转移
+pdaStep :: PDA -> PDAConfiguration -> [PDAConfiguration]
+pdaStep pda (PDAConfiguration state input stack) = 
+  case stack of
+    [] -> []
+    (top:rest) -> 
+      let transitions = pdaTransition pda state (listToMaybe input) top
+          nextInput = case input of
+            [] -> []
+            (_:xs) -> xs
+      in [PDAConfiguration nextState nextInput (newStack ++ rest) 
+          | (nextState, newStack) <- transitions]
+
+-- PDA运行
+pdaRun :: PDA -> String -> Bool
+pdaRun pda input = go [PDAConfiguration (pdaInitialState pda) input [pdaInitialStackSymbol pda]]
+  where
+    go [] = False
+    go configs = any isAccepting configs || go (concatMap (pdaStep pda) configs)
+    
+    isAccepting (PDAConfiguration state [] _) = Set.member state (pdaAcceptingStates pda)
+    isAccepting _ = False
+```
+
+### 4. 图灵机实现
+
+```haskell
+-- 图灵机实现
+module TuringMachine where
+
+import AutomataTheory
+import Data.Maybe (fromMaybe)
+
+-- 移动方向
+data Direction = L | R deriving (Show, Eq)
+
+-- 图灵机转移类型
+type TMTransition = (State, Symbol, Direction)
+
+-- 图灵机实现
+data TuringMachine = TuringMachine
+  { tmStates :: Set State
+  , tmInputAlphabet :: Set Symbol
+  , tmTapeAlphabet :: Set Symbol
+  , tmTransitions :: Map (State, Symbol) TMTransition
+  , tmInitialState :: State
+  , tmBlankSymbol :: Symbol
+  , tmAcceptingStates :: Set State
+  } deriving (Show, Eq)
 
 -- 图灵机配置
-data TMConfiguration q a = TMConfig
-  { tmCurrentState :: q
-  , tmLeftTape :: [a]
-  , tmCurrentSymbol :: a
-  , tmRightTape :: [a]
+data TMConfiguration = TMConfiguration
+  { tmCurrentState :: State
+  , tmLeftTape :: [Symbol]
+  , tmCurrentSymbol :: Symbol
+  , tmRightTape :: [Symbol]
+  } deriving (Show, Eq)
+
+-- 创建图灵机
+createTM :: Set State -> Set Symbol -> Set Symbol -> 
+           Map (State, Symbol) TMTransition ->
+           State -> Symbol -> Set State -> TuringMachine
+createTM states inputAlphabet tapeAlphabet transitions initial blank accepting = TuringMachine
+  { tmStates = states
+  , tmInputAlphabet = inputAlphabet
+  , tmTapeAlphabet = tapeAlphabet
+  , tmTransitions = transitions
+  , tmInitialState = initial
+  , tmBlankSymbol = blank
+  , tmAcceptingStates = accepting
   }
 
--- 图灵机执行
-runTM :: (Ord q, Ord a) => TuringMachine q a -> [a] -> Bool
-runTM tm input = isAccepting finalConfig
+-- 图灵机转移函数
+tmTransition :: TuringMachine -> State -> Symbol -> Maybe TMTransition
+tmTransition tm state symbol = Map.lookup (state, symbol) (tmTransitions tm)
+
+-- 图灵机配置转移
+tmStep :: TuringMachine -> TMConfiguration -> Maybe TMConfiguration
+tmStep tm (TMConfiguration state left current right) = do
+  (nextState, writeSymbol, direction) <- tmTransition tm state current
+  return $ case direction of
+    L -> case left of
+      [] -> TMConfiguration nextState [] (tmBlankSymbol tm) (writeSymbol:current:right)
+      (l:ls) -> TMConfiguration nextState ls l (writeSymbol:right)
+    R -> case right of
+      [] -> TMConfiguration nextState (current:left) writeSymbol [tmBlankSymbol tm]
+      (r:rs) -> TMConfiguration nextState (writeSymbol:left) r rs
+
+-- 图灵机运行
+tmRun :: TuringMachine -> String -> Bool
+tmRun tm input = go (TMConfiguration (tmInitialState tm) [] (tmBlankSymbol tm) (input ++ [tmBlankSymbol tm]))
   where
-    initialConfig = TMConfig
-      { tmCurrentState = tmInitialState tm
-      , tmLeftTape = []
-      , tmCurrentSymbol = head (input ++ [tmBlankSymbol tm])
-      , tmRightTape = tail (input ++ [tmBlankSymbol tm])
-      }
-    finalConfig = runTMSteps tm initialConfig
-    isAccepting config = tmCurrentState config `member` tmAcceptingStates tm
+    go config = case tmStep tm config of
+      Just nextConfig -> go nextConfig
+      Nothing -> Set.member (tmCurrentState config) (tmAcceptingStates tm)
+```
 
--- 执行图灵机步骤
-runTMSteps :: (Ord q, Ord a) => TuringMachine q a -> TMConfiguration q a -> TMConfiguration q a
-runTMSteps tm config
-  | tmCurrentState config `member` tmAcceptingStates tm = config
-  | otherwise = runTMSteps tm (stepTM tm config)
+### 5. 自动机转换算法
 
--- 单步执行
-stepTM :: (Ord q, Ord a) => TuringMachine q a -> TMConfiguration q a -> TMConfiguration q a
-stepTM tm config = TMConfig
-  { tmCurrentState = newState
-  , tmLeftTape = newLeftTape
-  , tmCurrentSymbol = newSymbol
-  , tmRightTape = newRightTape
+```haskell
+-- 自动机转换算法
+module AutomataConversion where
+
+import FiniteAutomata
+import Data.Set (Set)
+import qualified Data.Set as Set
+import Data.Map (Map)
+import qualified Data.Map as Map
+
+-- NFA到DFA的子集构造法
+nfaToDFA :: NFA -> DFA
+nfaToDFA nfa = DFA
+  { dfaStates = dfaStates'
+  , dfaAlphabet = nfaAlphabet nfa
+  , dfaTransitions = dfaTransitions'
+  , dfaInitialState = show (Set.singleton (nfaInitialState nfa))
+  , dfaAcceptingStates = dfaAcceptingStates'
   }
   where
-    (newState, newSymbol, direction) = tmTransition tm (tmCurrentState config) (tmCurrentSymbol config)
-    (newLeftTape, newRightTape) = case direction of
-      L -> (init (tmLeftTape config), newSymbol : tmCurrentSymbol config : tmRightTape config)
-      R -> (newSymbol : tmLeftTape config, tail (tmRightTape config ++ [tmBlankSymbol tm]))
-      N -> (tmLeftTape config, tmRightTape config)
+    -- 计算可达状态集
+    reachableStates = computeReachableStates nfa
+    
+    -- DFA状态集
+    dfaStates' = Set.map show reachableStates
+    
+    -- DFA转移函数
+    dfaTransitions' = Map.fromList
+      [((show states, symbol), show (nfaStep nfa states symbol))
+       | states <- Set.toList reachableStates
+       , symbol <- Set.toList (nfaAlphabet nfa)]
+    
+    -- DFA接受状态集
+    dfaAcceptingStates' = Set.map show $ Set.filter (not . Set.null . Set.intersection (nfaAcceptingStates nfa)) reachableStates
 
--- 示例：识别 a^n b^n c^n 的图灵机
-anbncnTM :: TuringMachine Int Char
-anbncnTM = TM
-  { tmStates = fromList [0..6]
-  , tmInputAlphabet = fromList ['a', 'b', 'c']
-  , tmTapeAlphabet = fromList ['a', 'b', 'c', 'X', 'Y', 'Z', 'B']
-  , tmTransition = \state symbol -> case (state, symbol) of
-      -- 标记第一个a
-      (0, 'a') -> (1, 'X', R)
-      -- 跳过b和c，找到最后一个a
-      (1, 'a') -> (1, 'a', R)
-      (1, 'b') -> (1, 'b', R)
-      (1, 'c') -> (1, 'c', R)
-      (1, 'B') -> (2, 'B', L)
-      -- 标记最后一个a
-      (2, 'a') -> (3, 'X', L)
-      -- 回到开始
-      (3, 'a') -> (3, 'a', L)
-      (3, 'b') -> (3, 'b', L)
-      (3, 'c') -> (3, 'c', L)
-      (3, 'X') -> (0, 'X', R)
-      -- 检查是否完成
-      (0, 'X') -> (4, 'X', R)
-      -- 检查b
-      (4, 'b') -> (5, 'Y', R)
-      (5, 'b') -> (5, 'b', R)
-      (5, 'c') -> (6, 'Z', L)
-      (6, 'b') -> (6, 'b', L)
-      (6, 'Y') -> (4, 'Y', R)
-      -- 检查c
-      (4, 'Y') -> (7, 'Y', R)
-      (7, 'c') -> (8, 'Z', L)
-      (8, 'c') -> (8, 'c', L)
-      (8, 'Z') -> (7, 'Z', R)
-      -- 接受
-      (7, 'B') -> (9, 'B', N)
-      _ -> (99, symbol, N) -- 拒绝状态
-  , tmInitialState = 0
-  , tmBlankSymbol = 'B'
-  , tmAcceptingStates = fromList [9]
-  }
-```
-
-### 4. 自动机等价性
-
-#### 4.1 语言等价性
-
-**定义 4.1.1** 两个自动机 $M_1$ 和 $M_2$ 语言等价，当且仅当 $L(M_1) = L(M_2)$。
-
-**定理 4.1.1** DFA 和 NFA 语言等价。
-
-**定理 4.1.2** PDA 识别上下文无关语言。
-
-**定理 4.1.3** 图灵机识别递归可枚举语言。
-
-```haskell
--- 语言等价性检查
-languageEquivalence :: (Ord q1, Ord q2, Ord a) => 
-  FiniteAutomaton q1 a -> FiniteAutomaton q2 a -> Bool
-languageEquivalence fa1 fa2 = 
-  all (\w -> runFA fa1 w == runFA fa2 w) testStrings
+-- 计算可达状态集
+computeReachableStates :: NFA -> Set (Set State)
+computeReachableStates nfa = go (Set.singleton (Set.singleton (nfaInitialState nfa))) Set.empty
   where
-    testStrings = generateTestStrings (alphabet fa1) maxLength
-    maxLength = 10 -- 有限测试长度
+    go toVisit visited
+      | Set.null toVisit = visited
+      | otherwise = 
+          let current = Set.findMin toVisit
+              newStates = Set.fromList [nfaStep nfa current symbol | symbol <- Set.toList (nfaAlphabet nfa)]
+              newToVisit = Set.union (Set.delete current toVisit) (Set.difference newStates visited)
+              newVisited = Set.insert current visited
+          in go newToVisit newVisited
 
--- 生成测试字符串
-generateTestStrings :: Set a -> Int -> [[a]]
-generateTestStrings alphabet maxLen = 
-  concat [stringsOfLength n | n <- [0..maxLen]]
-  where
-    stringsOfLength 0 = [[]]
-    stringsOfLength n = [c:str | c <- toList alphabet, str <- stringsOfLength (n-1)]
+-- 最小化DFA
+minimizeDFA :: DFA -> DFA
+minimizeDFA dfa = undefined -- 实现Hopcroft算法
+
+-- 正则表达式到NFA
+regexToNFA :: String -> NFA
+regexToNFA regex = undefined -- 实现Thompson构造法
 ```
 
-### 5. 自动机最小化
+## 🔬 应用实例
 
-#### 5.1 DFA 最小化算法
-
-**算法 5.1.1** Hopcroft 最小化算法：
-
-1. 初始化等价类：接受状态和非接受状态
-2. 迭代细化等价类
-3. 合并等价状态
+### 1. 词法分析器
 
 ```haskell
--- Hopcroft 最小化算法
-hopcroftMinimization :: (Ord q, Ord a) => DFA q a -> DFA Int a
-hopcroftMinimization dfa = undefined -- 完整实现
+-- 词法分析器应用
+module LexicalAnalyzer where
 
--- 等价类计算
-computeEquivalenceClasses :: (Ord q, Ord a) => DFA q a -> Set (Set q)
-computeEquivalenceClasses dfa = undefined -- 实现等价类计算
-```
+import FiniteAutomata
+import Data.Set (Set)
+import qualified Data.Set as Set
+import Data.Map (Map)
+import qualified Data.Map as Map
 
-### 6. 自动机应用
+-- 词法单元类型
+data Token = Token
+  { tokenType :: String
+  , tokenValue :: String
+  , tokenPosition :: Int
+  } deriving (Show, Eq)
 
-#### 6.1 词法分析器
+-- 词法分析器
+data Lexer = Lexer
+  { lexerDFA :: DFA
+  , tokenTypes :: Map (Set State) String
+  } deriving (Show)
 
-```haskell
--- 词法分析器类型
-data Token = Token { tokenType :: String, tokenValue :: String }
-
--- 词法分析器自动机
-lexerAutomaton :: DFA Int Char
-lexerAutomaton = undefined -- 实现词法分析器
+-- 创建词法分析器
+createLexer :: DFA -> Map (Set State) String -> Lexer
+createLexer dfa types = Lexer dfa types
 
 -- 词法分析
-lexicalAnalysis :: String -> [Token]
-lexicalAnalysis input = undefined -- 实现词法分析
+lexicalAnalysis :: Lexer -> String -> [Token]
+lexicalAnalysis lexer input = go input 0
+  where
+    go [] _ = []
+    go (c:cs) pos = 
+      case scanToken lexer (c:cs) pos of
+        Just (token, rest, newPos) -> token : go rest newPos
+        Nothing -> go cs (pos + 1)
+
+-- 扫描单个词法单元
+scanToken :: Lexer -> String -> Int -> Maybe (Token, String, Int)
+scanToken lexer input pos = undefined -- 实现词法单元扫描
 ```
 
-#### 6.2 模式匹配
+### 2. 语法分析器
 
 ```haskell
--- 字符串模式匹配自动机
-patternMatchingAutomaton :: String -> DFA Int Char
-patternMatchingAutomaton pattern = undefined -- 实现KMP算法
+-- 语法分析器应用
+module Parser where
 
--- 模式匹配
-patternMatch :: String -> String -> [Int]
-patternMatch pattern text = undefined -- 实现模式匹配
+import PushdownAutomata
+import Data.Set (Set)
+import qualified Data.Set as Set
+
+-- 语法树节点
+data ParseTree = ParseTree
+  { nodeType :: String
+  , nodeValue :: String
+  , children :: [ParseTree]
+  } deriving (Show, Eq)
+
+-- 语法分析器
+data Parser = Parser
+  { parserPDA :: PDA
+  , grammarRules :: Map String [[String]]
+  } deriving (Show)
+
+-- 创建语法分析器
+createParser :: PDA -> Map String [[String]] -> Parser
+createParser pda rules = Parser pda rules
+
+-- 语法分析
+parse :: Parser -> String -> Maybe ParseTree
+parse parser input = undefined -- 实现语法分析算法
 ```
 
-## 🔗 交叉引用
+### 3. 模型检测
 
-### 与类型理论的联系
+```haskell
+-- 模型检测应用
+module ModelChecking where
 
-- **线性类型系统** → 资源管理自动机
-- **仿射类型系统** → 所有权自动机
-- **时态类型系统** → 时间自动机
+import FiniteAutomata
+import Data.Set (Set)
+import qualified Data.Set as Set
 
-### 与形式语义的联系
+-- 时态逻辑公式
+data TemporalFormula = 
+    Atomic String
+  | Not TemporalFormula
+  | And TemporalFormula TemporalFormula
+  | Or TemporalFormula TemporalFormula
+  | Implies TemporalFormula TemporalFormula
+  | Always TemporalFormula
+  | Eventually TemporalFormula
+  | Next TemporalFormula
+  | Until TemporalFormula TemporalFormula
+  deriving (Show, Eq)
 
-- **操作语义** → 自动机执行模型
-- **指称语义** → 自动机语言语义
-- **公理语义** → 自动机验证
+-- 模型检测器
+data ModelChecker = ModelChecker
+  { systemModel :: DFA
+  , propertyFormula :: TemporalFormula
+  } deriving (Show)
 
-### 与形式语言的联系
-
-- **正则语言** → 有限自动机
-- **上下文无关语言** → 下推自动机
-- **递归可枚举语言** → 图灵机
+-- 模型检测
+modelCheck :: ModelChecker -> Bool
+modelCheck checker = undefined -- 实现模型检测算法
+```
 
 ## 📊 复杂度分析
 
-### 时间复杂度
+### 1. 时间复杂度
 
-- **DFA 执行**: $O(n)$
-- **NFA 执行**: $O(n \cdot 2^m)$
-- **PDA 执行**: $O(n^3)$
-- **图灵机执行**: 不可判定
+**定理 6.1** (DFA运行复杂度): DFA运行的时间复杂度为 $O(n)$，其中 $n$ 是输入串长度。
 
-### 空间复杂度
+**证明**: DFA每次转移只需要常数时间，总共需要 $n$ 次转移。
 
-- **DFA**: $O(1)$
-- **NFA**: $O(n)$
-- **PDA**: $O(n)$
-- **图灵机**: 无限制
+**定理 6.2** (NFA运行复杂度): NFA运行的时间复杂度为 $O(n \cdot |Q|)$，其中 $n$ 是输入串长度，$|Q|$ 是状态数。
 
-## 🎯 应用领域
+**证明**: 每个输入符号可能需要处理最多 $|Q|$ 个状态。
 
-### 1. 编译器设计
+**定理 6.3** (PDA运行复杂度): PDA运行的时间复杂度为 $O(n^3)$，其中 $n$ 是输入串长度。
 
-- 词法分析器
-- 语法分析器
-- 代码优化
+**证明**: 使用动态规划算法，状态数为 $O(n^2)$，每个状态需要 $O(n)$ 时间。
 
-### 2. 形式验证
+### 2. 空间复杂度
 
-- 模型检测
-- 程序验证
-- 协议验证
+**定理 6.4** (自动机空间复杂度): 
+- DFA: $O(1)$ 额外空间
+- NFA: $O(|Q|)$ 额外空间
+- PDA: $O(n)$ 额外空间（栈深度）
 
-### 3. 人工智能
+## 🔗 与其他理论的关系
 
-- 自然语言处理
-- 模式识别
-- 机器学习
+### 1. 与正则语言理论的关系
+
+自动机理论是正则语言理论的计算模型，每个正则语言都可以用有限自动机识别。
+
+### 2. 与上下文无关文法的关系
+
+下推自动机是上下文无关文法的计算模型，两者等价。
+
+### 3. 与图灵机理论的关系
+
+图灵机是最通用的计算模型，所有可计算函数都可以用图灵机计算。
+
+### 4. 与可计算性理论的关系
+
+自动机理论为可计算性理论提供了具体的计算模型。
 
 ## 📚 参考文献
 
-1. Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006). Introduction to Automata Theory, Languages, and Computation.
-2. Sipser, M. (2012). Introduction to the Theory of Computation.
-3. Kozen, D. C. (2006). Automata and Computability.
+1. Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006). *Introduction to Automata Theory, Languages, and Computation*. Pearson Education.
+
+2. Sipser, M. (2012). *Introduction to the Theory of Computation*. Cengage Learning.
+
+3. Kozen, D. C. (1997). *Automata and Computability*. Springer.
+
+4. Lewis, H. R., & Papadimitriou, C. H. (1998). *Elements of the Theory of Computation*. Prentice Hall.
+
+5. Hopcroft, J. E. (1971). An n log n algorithm for minimizing states in a finite automaton. *Theory of machines and computations*, 189-196.
 
 ---
 
+**文档版本**: 1.0.0  
 **最后更新**: 2024年12月19日  
-**相关文档**: [[001-Linear-Type-Theory]], [[002-Affine-Type-Theory]], [[005-Denotational-Semantics]], [[009-Regular-Languages]]
+**维护者**: AI Assistant
