@@ -7,6 +7,7 @@
 ## 🔍 定理证明模式
 
 ### 基础定理证明
+
 ```lean
 -- 定理证明模式
 namespace TheoremProving
@@ -45,6 +46,7 @@ end TheoremProving
 ```
 
 ### 高级定理证明
+
 ```lean
 -- 高级定理证明
 namespace AdvancedTheoremProving
@@ -114,6 +116,7 @@ end AdvancedTheoremProving
 ## ✅ 形式化验证模式
 
 ### 程序规范
+
 ```lean
 -- 形式化验证模式
 namespace FormalVerification
@@ -160,6 +163,7 @@ end FormalVerification
 ```
 
 ### 状态机验证
+
 ```lean
 -- 状态机验证
 namespace StateMachineVerification
@@ -253,6 +257,7 @@ end StateMachineVerification
 ## 📋 规范模式
 
 ### 抽象数据类型规范
+
 ```lean
 -- 规范模式
 namespace SpecificationPattern
@@ -306,6 +311,7 @@ end SpecificationPattern
 ```
 
 ### 契约模式
+
 ```lean
 -- 契约模式
 namespace ContractPattern
@@ -351,6 +357,7 @@ end ContractPattern
 ## 🔒 安全模式
 
 ### 类型安全
+
 ```lean
 -- 安全模式
 namespace SafetyPattern
@@ -400,6 +407,7 @@ end SafetyPattern
 ```
 
 ### 资源安全
+
 ```lean
 -- 资源安全
 namespace ResourceSafety
@@ -452,6 +460,7 @@ end ResourceSafety
 ## 🎯 应用场景
 
 ### 1. 算法验证
+
 ```lean
 -- 算法验证
 namespace AlgorithmVerification
@@ -496,6 +505,7 @@ end AlgorithmVerification
 ```
 
 ### 2. 系统规范
+
 ```lean
 -- 系统规范
 namespace SystemSpecification
@@ -546,16 +556,19 @@ end SystemSpecification
 ## 🚀 最佳实践
 
 ### 1. 设计原则
+
 - **形式化**: 使用数学语言描述规范
 - **可证明性**: 确保规范可以被证明
 - **实用性**: 平衡形式化和实用性
 
 ### 2. 实现策略
+
 - **渐进式**: 从简单规范开始
 - **模块化**: 清晰的模块边界
 - **可维护性**: 保持规范的可读性
 
 ### 3. 验证考虑
+
 - **完备性**: 确保规范覆盖所有情况
 - **一致性**: 避免规范间的矛盾
 - **可执行性**: 确保规范可以执行
@@ -565,6 +578,7 @@ end SystemSpecification
 **下一节**: [高级模式](./09-Advanced-Patterns.md)
 
 **相关链接**:
+
 - [并发模式](./07-Concurrent-Patterns.md)
 - [设计模式基础](./01-Design-Patterns-Basics.md)
-- [软件设计](../08-Software-Design/) 
+- [软件设计](../08-Software-Design/)
