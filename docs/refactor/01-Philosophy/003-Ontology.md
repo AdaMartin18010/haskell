@@ -11,13 +11,16 @@
 ## 🔗 相关文档
 
 ### 上层文档
+
 - [[01-Philosophy/001-Philosophical-Foundations]] - 哲学基础
 
 ### 同层文档
+
 - [[01-Philosophy/002-Epistemology]] - 认识论
 - [[01-Philosophy/004-Metaphysics]] - 形而上学
 
 ### 下层文档
+
 - [[02-Formal-Science/001-Mathematical-Foundations]] - 数学基础
 - [[02-Formal-Science/002-Set-Theory]] - 集合论
 
@@ -44,6 +47,7 @@
 #### 1.2 本体论结构
 
 **定义 1.5** (本体论结构): 本体论结构是一个四元组 $O = (E, P, R, I)$，其中：
+
 - $E$ 是实体集
 - $P$ 是属性集
 - $R$ 是关系集
@@ -91,11 +95,13 @@ $$Simple(x) \equiv Entity(x) \wedge \neg Composite(x)$$
 #### 3.2 实体关系
 
 **定义 3.5** (部分关系): 部分关系 $Part(x, y)$ 满足：
+
 1. **自反性**: $\forall x Part(x, x)$
 2. **传递性**: $\forall x \forall y \forall z (Part(x, y) \wedge Part(y, z) \rightarrow Part(x, z))$
 3. **反对称性**: $\forall x \forall y (Part(x, y) \wedge Part(y, x) \rightarrow x = y)$
 
 **定义 3.6** (同一性): 同一性关系 $=$ 满足：
+
 1. **自反性**: $\forall x (x = x)$
 2. **对称性**: $\forall x \forall y (x = y \rightarrow y = x)$
 3. **传递性**: $\forall x \forall y \forall z (x = y \wedge y = z \rightarrow x = z)$
@@ -988,4 +994,4 @@ generateValidationReport result =
 
 **文档版本**: 1.0.0  
 **最后更新**: 2024年12月19日  
-**维护者**: AI Assistant 
+**维护者**: AI Assistant

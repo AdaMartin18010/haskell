@@ -11,16 +11,19 @@
 ## 🔗 相关文档
 
 ### 上层文档
+
 - [[02-Formal-Science/001-Mathematical-Foundations]] - 数学基础
 - [[02-Formal-Science/002-Set-Theory]] - 集合论
 - [[02-Formal-Science/003-Category-Theory]] - 范畴论
 
 ### 同层文档
+
 - [[03-Theory/013-Automata-Theory]] - 自动机理论
 - [[03-Theory/014-Process-Algebra]] - 进程代数
 - [[03-Theory/015-Model-Checking]] - 模型检测
 
 ### 下层文档
+
 - [[04-Programming-Language/005-Program-Analysis]] - 程序分析
 - [[04-Programming-Language/006-Software-Verification]] - 软件验证
 
@@ -39,6 +42,7 @@
 **定义 1.1** (验证问题): 给定一个程序 $P$ 和一个规范 $\phi$，验证问题是判断 $P \models \phi$ 是否成立。
 
 **定义 1.2** (程序规范): 程序规范是一个三元组 $\{pre\} P \{post\}$，其中：
+
 - $pre$ 是前置条件
 - $P$ 是程序
 - $post$ 是后置条件
@@ -48,6 +52,7 @@
 #### 1.2 霍尔逻辑 (Hoare Logic)
 
 **定义 1.4** (霍尔三元组): 霍尔三元组是一个形如 $\{P\} C \{Q\}$ 的断言，其中：
+
 - $P$ 是前置条件
 - $C$ 是命令
 - $Q$ 是后置条件
@@ -115,11 +120,13 @@ $$\{wp(C, Q)\} C \{Q\}$$
 **定义 4.1** (自然演绎): 自然演绎是一种形式化的证明系统，使用推理规则从前提推导结论。
 
 **规则 4.1** (引入规则):
+
 - $\wedge$-I: $\frac{A \quad B}{A \wedge B}$
 - $\vee$-I: $\frac{A}{A \vee B}$ 和 $\frac{B}{A \vee B}$
 - $\rightarrow$-I: $\frac{[A] \quad \vdots \quad B}{A \rightarrow B}$
 
 **规则 4.2** (消除规则):
+
 - $\wedge$-E: $\frac{A \wedge B}{A}$ 和 $\frac{A \wedge B}{B}$
 - $\vee$-E: $\frac{A \vee B \quad A \rightarrow C \quad B \rightarrow C}{C}$
 - $\rightarrow$-E: $\frac{A \rightarrow B \quad A}{B}$
@@ -129,6 +136,7 @@ $$\{wp(C, Q)\} C \{Q\}$$
 **定义 4.2** (归结): 归结是一种自动定理证明技术，通过反驳来证明定理。
 
 **算法 4.1** (归结证明):
+
 1. 将目标公式的否定加入公理集
 2. 重复应用归结规则
 3. 如果得到空子句，则证明完成
@@ -138,6 +146,7 @@ $$\{wp(C, Q)\} C \{Q\}$$
 #### 5.1 抽象域
 
 **定义 5.1** (抽象域): 抽象域是一个格 $(A, \sqsubseteq, \sqcup, \sqcap, \bot, \top)$，其中：
+
 - $A$ 是抽象值集
 - $\sqsubseteq$ 是偏序关系
 - $\sqcup$ 是上确界操作
@@ -146,6 +155,7 @@ $$\{wp(C, Q)\} C \{Q\}$$
 - $\top$ 是最大元素
 
 **定义 5.2** (伽罗瓦连接): 抽象域与具体域之间的伽罗瓦连接是一对函数 $(\alpha, \gamma)$：
+
 - $\alpha: 2^D \rightarrow A$ 是抽象函数
 - $\gamma: A \rightarrow 2^D$ 是具体化函数
 - $\forall X \subseteq D. \forall a \in A. \alpha(X) \sqsubseteq a \Leftrightarrow X \subseteq \gamma(a)$
@@ -153,6 +163,7 @@ $$\{wp(C, Q)\} C \{Q\}$$
 #### 5.2 抽象解释算法
 
 **算法 5.1** (抽象解释):
+
 1. 初始化所有程序点的抽象值为 $\bot$
 2. 重复应用转移函数直到达到不动点
 3. 使用伽罗瓦连接将抽象结果具体化
@@ -830,7 +841,8 @@ verifyMutex = do
 
 ### 2. 空间复杂度
 
-**定理 6.4** (形式验证空间复杂度): 
+**定理 6.4** (形式验证空间复杂度):
+
 - 霍尔逻辑: $O(|C| \cdot |\phi|)$
 - 定理证明: $O(2^{|\phi|})$
 - 抽象解释: $O(|C| \cdot |A|)$

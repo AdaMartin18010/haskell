@@ -2,7 +2,7 @@
 
 ## 📚 目录
 
-- [形式语言基础理论](#形式语言基础理论)
+- [形式语言基础理论 (Formal Language Foundations)](#形式语言基础理论-formal-language-foundations)
   - [📚 目录](#-目录)
   - [🎯 概述](#-概述)
   - [🔬 理论基础](#-理论基础)
@@ -41,11 +41,13 @@
 
 **定义 1.1.3 (字符串长度)**
 字符串 $w$ 的长度 $|w|$ 定义为：
+
 - $|\varepsilon| = 0$
 - $|wa| = |w| + 1$，其中 $a \in \Sigma$
 
 **定义 1.1.4 (字符串连接)**
 字符串 $u$ 和 $v$ 的连接 $u \cdot v$ 定义为：
+
 - $\varepsilon \cdot v = v$
 - $(wa) \cdot v = w \cdot (a \cdot v)$
 
@@ -57,6 +59,7 @@
 $$(u \cdot v) \cdot w = u \cdot (v \cdot w)$$
 
 **证明：** 通过字符串长度归纳法：
+
 - 基础情况：$u = \varepsilon$ 时显然成立
 - 归纳步骤：假设对长度为 $n$ 的字符串成立，证明对长度为 $n+1$ 的字符串也成立
 
@@ -64,6 +67,7 @@ $$(u \cdot v) \cdot w = u \cdot (v \cdot w)$$
 
 **定义 1.2.1 (字符串幂)**
 字符串 $w$ 的 $n$ 次幂 $w^n$ 定义为：
+
 - $w^0 = \varepsilon$
 - $w^{n+1} = w^n \cdot w$
 
@@ -90,6 +94,7 @@ $$L_1 \cdot L_2 = \{w_1 \cdot w_2 \mid w_1 \in L_1, w_2 \in L_2\}$$
 
 **定义 1.3.4 (语言幂)**
 语言 $L$ 的 $n$ 次幂定义为：
+
 - $L^0 = \{\varepsilon\}$
 - $L^{n+1} = L^n \cdot L$
 
@@ -108,6 +113,7 @@ $$L^+ = \bigcup_{n=1}^{\infty} L^n$$
 $$\text{Regular} \subset \text{CFL} \subset \text{CSL} \subset \text{REL}$$
 
 其中：
+
 - **Regular**：正则语言（有限自动机）
 - **CFL**：上下文无关语言（下推自动机）
 - **CSL**：上下文相关语言（线性有界自动机）
@@ -117,6 +123,7 @@ $$\text{Regular} \subset \text{CFL} \subset \text{CSL} \subset \text{REL}$$
 乔姆斯基层次是严格的，即每个包含关系都是真包含。
 
 **证明：** 通过分离语言：
+
 1. **正则语言分离**：$L = \{a^n b^n \mid n \geq 0\}$ 不是正则语言
 2. **上下文无关语言分离**：$L = \{a^n b^n c^n \mid n \geq 0\}$ 不是上下文无关语言
 3. **上下文相关语言分离**：停机问题不是上下文相关语言
@@ -285,6 +292,7 @@ isRecursivelyEnumerable _ = True  -- 所有语言都是递归可枚举的
 
 **定理 3.1.2 (泵引理)**
 如果 $L$ 是正则语言，则存在常数 $p$（泵长度），使得对于任意 $w \in L$ 且 $|w| \geq p$，存在分解 $w = xyz$ 满足：
+
 1. $|xy| \leq p$
 2. $|y| > 0$
 3. 对于所有 $i \geq 0$，$xy^i z \in L$
@@ -295,6 +303,7 @@ isRecursivelyEnumerable _ = True  -- 所有语言都是递归可枚举的
 
 **定义 3.2.1 (语言性质)**
 语言 $L$ 的性质包括：
+
 - **有限性**：$L$ 是有限集合
 - **正则性**：$L$ 可以被有限自动机识别
 - **上下文无关性**：$L$ 可以被下推自动机识别
@@ -302,6 +311,7 @@ isRecursivelyEnumerable _ = True  -- 所有语言都是递归可枚举的
 
 **定理 3.2.1 (语言性质保持)**
 某些语言操作保持语言性质：
+
 1. 正则语言在并集、交集、补集、连接、克林闭包下封闭
 2. 上下文无关语言在并集、连接、克林闭包下封闭
 3. 上下文无关语言在交集和补集下不封闭
@@ -310,6 +320,7 @@ isRecursivelyEnumerable _ = True  -- 所有语言都是递归可枚举的
 
 **定义 3.3.1 (语言识别复杂性)**
 语言识别的计算复杂性：
+
 - **正则语言**：$O(n)$ 时间，$O(1)$ 空间
 - **上下文无关语言**：$O(n^3)$ 时间，$O(n^2)$ 空间
 - **上下文相关语言**：$O(2^n)$ 时间，$O(n)$ 空间
@@ -460,4 +471,4 @@ processNaturalLanguage processor text =
 ---
 
 **最后更新**: 2024年12月19日  
-**相关文档**: [[02-Formal-Language/002-Automata-Theory-Deepening]] - 自动机理论深化 
+**相关文档**: [[02-Formal-Language/002-Automata-Theory-Deepening]] - 自动机理论深化

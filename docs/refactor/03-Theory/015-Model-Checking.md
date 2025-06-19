@@ -11,16 +11,19 @@
 ## 🔗 相关文档
 
 ### 上层文档
+
 - [[02-Formal-Science/001-Mathematical-Foundations]] - 数学基础
 - [[02-Formal-Science/002-Set-Theory]] - 集合论
 - [[02-Formal-Science/003-Category-Theory]] - 范畴论
 
 ### 同层文档
+
 - [[03-Theory/013-Automata-Theory]] - 自动机理论
 - [[03-Theory/014-Process-Algebra]] - 进程代数
 - [[03-Theory/016-Formal-Verification]] - 形式验证
 
 ### 下层文档
+
 - [[04-Programming-Language/005-Program-Analysis]] - 程序分析
 - [[04-Programming-Language/006-Software-Verification]] - 软件验证
 
@@ -39,6 +42,7 @@
 **定义 1.1** (模型检测问题): 给定一个系统模型 $M$ 和一个时态逻辑公式 $\phi$，模型检测问题是判断 $M \models \phi$ 是否成立。
 
 **定义 1.2** (系统模型): 系统模型是一个标签转移系统 $M = (S, S_0, \rightarrow, L)$，其中：
+
 - $S$ 是状态集
 - $S_0 \subseteq S$ 是初始状态集
 - $\rightarrow \subseteq S \times S$ 是转移关系
@@ -50,6 +54,7 @@
 $$\phi ::= p \mid \neg \phi \mid \phi \wedge \psi \mid \phi \vee \psi \mid \phi \rightarrow \psi \mid \mathbf{X} \phi \mid \mathbf{F} \phi \mid \mathbf{G} \phi \mid \phi \mathbf{U} \psi \mid \phi \mathbf{R} \psi$$
 
 其中：
+
 - $p \in AP$ 是原子命题
 - $\mathbf{X}$ 是下一个时间操作符
 - $\mathbf{F}$ 是将来操作符
@@ -65,6 +70,7 @@ $$\phi ::= p \mid \neg \phi \mid \phi \wedge \psi \mid \phi \vee \psi \mid \phi 
 $$\phi ::= p \mid \neg \phi \mid \phi \wedge \psi \mid \phi \vee \psi \mid \mathbf{EX} \phi \mid \mathbf{AX} \phi \mid \mathbf{EF} \phi \mid \mathbf{AF} \phi \mid \mathbf{EG} \phi \mid \mathbf{AG} \phi \mid \mathbf{E}[\phi \mathbf{U} \psi] \mid \mathbf{A}[\phi \mathbf{U} \psi]$$
 
 其中：
+
 - $\mathbf{E}$ 是存在路径量词
 - $\mathbf{A}$ 是全称路径量词
 
@@ -160,6 +166,7 @@ function EG-Set(M, T):
 **定义 5.1** (OBDD): 有序二元决策图是一个有向无环图，表示布尔函数。
 
 **定义 5.2** (OBDD操作): OBDD支持以下操作：
+
 - 布尔运算：$\wedge, \vee, \neg$
 - 存在量化：$\exists x. f(x, y) = f(0, y) \vee f(1, y)$
 - 全称量化：$\forall x. f(x, y) = f(0, y) \wedge f(1, y)$
@@ -827,7 +834,8 @@ verifyABP = do
 
 ### 2. 空间复杂度
 
-**定理 6.4** (模型检测空间复杂度): 
+**定理 6.4** (模型检测空间复杂度):
+
 - CTL: $O(|M| \cdot |\phi|)$
 - LTL: $O(|M| \cdot 2^{|\phi|})$
 - 符号: $O(|M| \cdot |\phi| \cdot \log |M|)$

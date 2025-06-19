@@ -11,16 +11,19 @@
 ## 🔗 相关文档
 
 ### 上层文档
+
 - [[02-Formal-Science/001-Mathematical-Foundations]] - 数学基础
 - [[02-Formal-Science/002-Set-Theory]] - 集合论
 - [[02-Formal-Science/003-Category-Theory]] - 范畴论
 
 ### 同层文档
+
 - [[03-Theory/013-Automata-Theory]] - 自动机理论
 - [[03-Theory/015-Model-Checking]] - 模型检测
 - [[03-Theory/016-Formal-Verification]] - 形式验证
 
 ### 下层文档
+
 - [[04-Programming-Language/003-Concurrent-Programming]] - 并发编程
 - [[04-Programming-Language/004-Distributed-Systems]] - 分布式系统
 
@@ -44,6 +47,7 @@
 $$P ::= \mathbf{0} \mid a.P \mid P + Q \mid P \parallel Q \mid P \setminus L \mid P[f] \mid \text{rec } X.P$$
 
 其中：
+
 - $\mathbf{0}$ 是空进程
 - $a.P$ 是前缀操作
 - $P + Q$ 是选择操作
@@ -55,6 +59,7 @@ $$P ::= \mathbf{0} \mid a.P \mid P + Q \mid P \parallel Q \mid P \setminus L \mi
 #### 1.2 标签转移系统
 
 **定义 1.4** (标签转移系统): 标签转移系统是一个三元组 $(S, \mathcal{A}, \rightarrow)$，其中：
+
 - $S$ 是状态集
 - $\mathcal{A}$ 是动作集
 - $\rightarrow \subseteq S \times \mathcal{A} \times S$ 是转移关系
@@ -74,6 +79,7 @@ $$P ::= \mathbf{0} \mid a.P \mid P + Q \mid P \parallel Q \mid P \setminus L \mi
 $$P ::= \mathbf{0} \mid a.P \mid \bar{a}.P \mid P + Q \mid P \parallel Q \mid P \setminus L \mid P[f] \mid \text{rec } X.P$$
 
 其中：
+
 - $a$ 是输入动作
 - $\bar{a}$ 是输出动作
 - $L$ 是限制的动作集
@@ -101,6 +107,7 @@ $$P ::= \mathbf{0} \mid a.P \mid \bar{a}.P \mid P + Q \mid P \parallel Q \mid P 
 $$P ::= \mathbf{STOP} \mid a \rightarrow P \mid P \sqcap Q \mid P \sqcup Q \mid P \parallel Q \mid P \setminus L \mid P[f]$$
 
 其中：
+
 - $\mathbf{STOP}$ 是停止进程
 - $a \rightarrow P$ 是前缀操作
 - $P \sqcap Q$ 是内部选择

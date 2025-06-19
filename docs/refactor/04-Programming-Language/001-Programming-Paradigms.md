@@ -11,15 +11,18 @@
 ## 🔗 相关文档
 
 ### 上层文档
+
 - [[03-Theory/001-Linear-Type-Theory]] - 线性类型理论
 - [[03-Theory/005-Denotational-Semantics]] - 指称语义
 - [[03-Theory/006-Operational-Semantics]] - 操作语义
 
 ### 同层文档
+
 - [[04-Programming-Language/002-Language-Design]] - 语言设计
 - [[04-Programming-Language/003-Compiler-Design]] - 编译器设计
 
 ### 下层文档
+
 - [[haskell/01-Introduction]] - Haskell 介绍
 - [[haskell/02-Type-System]] - 类型系统
 
@@ -36,6 +39,7 @@
 #### 1.1 范式的定义
 
 **定义 1.1** (编程范式): 编程范式是一个元组 $P = (S, E, C, M)$，其中：
+
 - $S$ 是语法结构集
 - $E$ 是执行模型
 - $C$ 是计算模型
@@ -46,6 +50,7 @@
 #### 1.2 范式分类
 
 **定义 1.3** (范式层次): 编程范式可以按以下层次分类：
+
 1. **低级范式**: 机器语言、汇编语言
 2. **中级范式**: 命令式、过程式
 3. **高级范式**: 函数式、逻辑式、面向对象
@@ -56,10 +61,12 @@
 #### 2.1 命令式特征
 
 **定义 2.1** (命令式程序): 命令式程序是一个状态转换序列 $P = (s_0, c_1, s_1, c_2, s_2, \ldots)$，其中：
+
 - $s_i$ 是程序状态
 - $c_i$ 是命令
 
 **定义 2.2** (状态): 状态是一个函数 $s: V \rightarrow D$，其中：
+
 - $V$ 是变量集
 - $D$ 是值域
 
@@ -82,6 +89,7 @@
 **定义 3.1** (函数式程序): 函数式程序是纯函数的组合，没有副作用。
 
 **定义 3.2** (纯函数): 函数 $f: A \rightarrow B$ 是纯的，当且仅当：
+
 - 对于相同的输入总是产生相同的输出
 - 没有副作用
 
@@ -109,6 +117,7 @@ $$M ::= x \mid \lambda x.M \mid M M$$
 **定义 4.1** (逻辑程序): 逻辑程序是一组 Horn 子句的集合。
 
 **定义 4.2** (Horn子句): Horn子句是形如 $A \leftarrow B_1, B_2, \ldots, B_n$ 的规则，其中：
+
 - $A$ 是头部（结论）
 - $B_1, B_2, \ldots, B_n$ 是体部（前提）
 
@@ -127,6 +136,7 @@ $$M ::= x \mid \lambda x.M \mid M M$$
 #### 5.1 面向对象特征
 
 **定义 5.1** (对象): 对象是一个三元组 $O = (S, M, I)$，其中：
+
 - $S$ 是状态
 - $M$ 是方法集
 - $I$ 是接口
@@ -1028,7 +1038,8 @@ runMultiParadigmProgram program = executeIntegrated program
 
 ### 2. 空间复杂度
 
-**定理 6.4** (编程范式空间复杂度): 
+**定理 6.4** (编程范式空间复杂度):
+
 - 命令式: $O(v)$，其中 $v$ 是变量数
 - 函数式: $O(n)$，其中 $n$ 是λ-项大小
 - 逻辑式: $O(c + g)$，其中 $c$ 是子句数，$g$ 是目标数
@@ -1068,4 +1079,4 @@ runMultiParadigmProgram program = executeIntegrated program
 
 **文档版本**: 1.0.0  
 **最后更新**: 2024年12月19日  
-**维护者**: AI Assistant 
+**维护者**: AI Assistant

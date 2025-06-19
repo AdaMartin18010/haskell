@@ -2,7 +2,7 @@
 
 ## 📚 目录
 
-- [语法分析理论](#语法分析理论)
+- [语法分析理论 (Syntax Analysis Theory)](#语法分析理论-syntax-analysis-theory)
   - [📚 目录](#-目录)
   - [🎯 概述](#-概述)
   - [🔬 理论基础](#-理论基础)
@@ -80,6 +80,7 @@ $$S \Rightarrow^* \gamma B x \Rightarrow \gamma \delta x$$
 
 **定义 1.3.2 (LR项)**
 LR项是形如 $[A \rightarrow \alpha \cdot \beta, a]$ 的对象，其中：
+
 - $A \rightarrow \alpha \beta$ 是产生式
 - $\cdot$ 表示分析位置
 - $a$ 是向前看符号
@@ -486,6 +487,7 @@ elemIndex x xs = findIndex (== x) xs
 如果文法 $G$ 是LL(k)文法，则LL(k)分析器能正确识别 $L(G)$。
 
 **证明：** 通过归纳法：
+
 1. **基础情况**：空字符串
 2. **归纳步骤**：假设对长度为 $n$ 的字符串正确，证明对长度为 $n+1$ 的字符串也正确
 
@@ -493,6 +495,7 @@ elemIndex x xs = findIndex (== x) xs
 如果文法 $G$ 是LR(k)文法，则LR(k)分析器能正确识别 $L(G)$。
 
 **证明：** 通过构造：
+
 1. **状态构造**：每个状态对应一个LR项集
 2. **转移构造**：基于GOTO函数
 3. **动作构造**：基于ACTION函数
@@ -513,6 +516,7 @@ elemIndex x xs = findIndex (== x) xs
 
 **定理 3.3.1 (分析器复杂度)**
 各种分析器的计算复杂度：
+
 - **LL分析**：$O(n)$ 时间，$O(n)$ 空间
 - **LR分析**：$O(n)$ 时间，$O(n)$ 空间
 - **递归下降**：$O(n)$ 时间，$O(n)$ 空间（栈深度）
@@ -679,4 +683,4 @@ buildConfig tokens =
 ---
 
 **最后更新**: 2024年12月19日  
-**相关文档**: [[02-Formal-Language/004-Language-Hierarchy-Theory]] - 语言层次理论 
+**相关文档**: [[02-Formal-Language/004-Language-Hierarchy-Theory]] - 语言层次理论

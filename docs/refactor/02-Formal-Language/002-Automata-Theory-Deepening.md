@@ -2,7 +2,7 @@
 
 ## 📚 目录
 
-- [自动机理论深化](#自动机理论深化)
+- [自动机理论深化 (Automata Theory Deepening)](#自动机理论深化-automata-theory-deepening)
   - [📚 目录](#-目录)
   - [🎯 概述](#-概述)
   - [🔬 理论基础](#-理论基础)
@@ -84,6 +84,7 @@
 
 **定义 1.2.2 (PDA配置)**
 PDA的配置是三元组 $(q, w, \gamma)$，其中：
+
 - $q \in Q$ 是当前状态
 - $w \in \Sigma^*$ 是剩余输入
 - $\gamma \in \Gamma^*$ 是栈内容
@@ -108,6 +109,7 @@ $$(q, aw, Z\gamma) \vdash (p, w, \alpha\gamma)$$
 
 **定义 1.3.2 (图灵机配置)**
 图灵机的配置是三元组 $(q, \alpha, \beta)$，其中：
+
 - $q \in Q$ 是当前状态
 - $\alpha \in \Gamma^*$ 是读写头左侧的带内容
 - $\beta \in \Gamma^*$ 是读写头右侧的带内容
@@ -451,6 +453,7 @@ getTransition tm state symbol =
 对于任意上下文无关文法 $G$，存在等价的下推自动机 $M$ 使得 $L(G) = L(M)$。
 
 **证明：** 通过构造：
+
 1. **自顶向下分析**：从开始符号推导
 2. **自底向上分析**：从输入字符串归约
 3. **LR分析**：结合自顶向下和自底向上
@@ -462,6 +465,7 @@ getTransition tm state symbol =
 $$\text{DFA} = \text{NFA} \subset \text{PDA} \subset \text{LBA} \subset \text{TM}$$
 
 **证明：** 通过分离语言：
+
 1. **正则语言分离**：$\{a^n b^n \mid n \geq 0\}$ 不能被DFA识别
 2. **上下文无关语言分离**：$\{a^n b^n c^n \mid n \geq 0\}$ 不能被PDA识别
 3. **上下文相关语言分离**：停机问题不能被LBA识别
@@ -470,6 +474,7 @@ $$\text{DFA} = \text{NFA} \subset \text{PDA} \subset \text{LBA} \subset \text{TM
 
 **定理 3.3.1 (自动机复杂度)**
 各种自动机的计算复杂度：
+
 - **DFA**：$O(n)$ 时间，$O(1)$ 空间
 - **NFA**：$O(n \cdot |Q|)$ 时间，$O(|Q|)$ 空间
 - **PDA**：$O(n^3)$ 时间，$O(n^2)$ 空间
@@ -718,4 +723,4 @@ matchRegex regex input =
 ---
 
 **最后更新**: 2024年12月19日  
-**相关文档**: [[02-Formal-Language/003-Syntax-Analysis-Theory]] - 语法分析理论 
+**相关文档**: [[02-Formal-Language/003-Syntax-Analysis-Theory]] - 语法分析理论

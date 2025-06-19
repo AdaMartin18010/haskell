@@ -11,13 +11,16 @@
 ## 🔗 相关文档
 
 ### 上层文档
+
 - [[01-Philosophy/001-Philosophical-Foundations]] - 哲学基础
 
 ### 同层文档
+
 - [[01-Philosophy/003-Ontology]] - 本体论
 - [[01-Philosophy/004-Metaphysics]] - 形而上学
 
 ### 下层文档
+
 - [[02-Formal-Science/001-Mathematical-Foundations]] - 数学基础
 - [[02-Formal-Science/002-Set-Theory]] - 集合论
 
@@ -34,6 +37,7 @@
 #### 1.1 知识的定义
 
 **定义 1.1** (知识): 知识是经过证实的真信念，即 $K(p) \equiv B(p) \wedge T(p) \wedge J(p)$，其中：
+
 - $K(p)$ 表示"知道 p"
 - $B(p)$ 表示"相信 p"
 - $T(p)$ 表示"p 为真"
@@ -48,6 +52,7 @@
 #### 1.2 认知状态
 
 **定义 1.5** (认知状态): 认知状态是一个三元组 $(B, E, R)$，其中：
+
 - $B$ 是信念集
 - $E$ 是证据集
 - $R$ 是推理规则集
@@ -61,11 +66,13 @@
 **定义 2.1** (基础信念): 基础信念是不需要其他信念支持的信念，即 $\forall p \in F. \neg \exists q \in B. q \rightarrow p$。
 
 **定义 2.2** (基础主义结构): 基础主义的知识结构是一个有向无环图 $(B, E)$，其中：
+
 - $B$ 是信念集
 - $E \subseteq B \times B$ 是支持关系
 - 存在基础信念集 $F \subseteq B$，使得所有其他信念都直接或间接地由 $F$ 支持
 
-**公理 2.1** (基础主义公理): 
+**公理 2.1** (基础主义公理):
+
 1. 基础信念是自明的
 2. 非基础信念必须由基础信念支持
 3. 支持关系是传递的
@@ -80,6 +87,7 @@ $$\forall p, q \in B. \text{Consistent}(p, q) \wedge \text{Connected}(p, q)$$
 **定义 2.5** (连接性): 信念 $p$ 和 $q$ 是连接的，当且仅当存在推理路径从 $p$ 到 $q$。
 
 **公理 2.2** (融贯主义公理):
+
 1. 知识是信念系统的整体性质
 2. 融贯性是知识的充分条件
 3. 信念间的相互支持关系是循环的
@@ -91,6 +99,7 @@ $$\forall p, q \in B. \text{Consistent}(p, q) \wedge \text{Connected}(p, q)$$
 **定义 2.7** (实用知识): 知识是能指导行动并产生成功结果的信念。
 
 **公理 2.3** (实用主义公理):
+
 1. 真理是成功的信念
 2. 知识必须能指导实践
 3. 效果是真理的标准
@@ -107,6 +116,7 @@ $$\forall p, q \in B. \text{Consistent}(p, q) \wedge \text{Connected}(p, q)$$
 4. **5公理**: $\neg B(p) \rightarrow B(\neg B(p))$
 
 **定义 3.2** (信念更新): 信念更新函数 $\oplus: \mathcal{B} \times \mathcal{E} \rightarrow \mathcal{B}$ 满足：
+
 1. **成功**: $e \in B \oplus e$
 2. **一致性**: 如果 $B \cup \{e\}$ 一致，则 $B \oplus e = B \cup \{e\}$
 3. **最小变化**: $B \oplus e$ 是与 $B$ 最接近的一致信念集
@@ -114,11 +124,13 @@ $$\forall p, q \in B. \text{Consistent}(p, q) \wedge \text{Connected}(p, q)$$
 #### 3.2 信念修正理论
 
 **定义 3.3** (信念修正): 信念修正是处理不一致信念的过程，包括：
+
 - **扩展**: 添加新信念
 - **收缩**: 删除信念
 - **修正**: 替换信念
 
 **公理 3.1** (AGM公理): 信念修正函数 $\circ$ 满足：
+
 1. **闭包**: $B \circ e$ 是逻辑闭包
 2. **成功**: $e \in B \circ e$
 3. **包含**: $B \circ e \subseteq B + e$
@@ -1165,4 +1177,4 @@ calculateAverageCoherence knowledge =
 
 **文档版本**: 1.0.0  
 **最后更新**: 2024年12月19日  
-**维护者**: AI Assistant 
+**维护者**: AI Assistant

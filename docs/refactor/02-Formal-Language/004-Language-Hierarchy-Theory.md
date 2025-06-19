@@ -2,7 +2,7 @@
 
 ## 📚 目录
 
-- [语言层次理论](#语言层次理论)
+- [语言层次理论 (Language Hierarchy Theory)](#语言层次理论-language-hierarchy-theory)
   - [📚 目录](#-目录)
   - [🎯 概述](#-概述)
   - [🔬 理论基础](#-理论基础)
@@ -38,6 +38,7 @@
 $$\text{Regular} \subset \text{CFL} \subset \text{CSL} \subset \text{REL}$$
 
 其中：
+
 - **Regular**：正则语言（有限自动机）
 - **CFL**：上下文无关语言（下推自动机）
 - **CSL**：上下文相关语言（线性有界自动机）
@@ -45,11 +46,13 @@ $$\text{Regular} \subset \text{CFL} \subset \text{CSL} \subset \text{REL}$$
 
 **定义 1.1.2 (语言类)**
 每个语言类都有对应的：
+
 1. **文法类型**：生成语言的形式文法
 2. **自动机模型**：识别语言的自动机
 3. **封闭性质**：在特定操作下的封闭性
 
 **定义 1.1.3 (文法类型)**
+
 - **3型文法（正则文法）**：$A \rightarrow aB$ 或 $A \rightarrow a$
 - **2型文法（上下文无关文法）**：$A \rightarrow \alpha$
 - **1型文法（上下文相关文法）**：$\alpha A \beta \rightarrow \alpha \gamma \beta$
@@ -59,6 +62,7 @@ $$\text{Regular} \subset \text{CFL} \subset \text{CSL} \subset \text{REL}$$
 
 **定义 1.2.1 (封闭性质)**
 语言类在操作下的封闭性：
+
 - **并集封闭**：$L_1, L_2 \in \mathcal{C} \Rightarrow L_1 \cup L_2 \in \mathcal{C}$
 - **交集封闭**：$L_1, L_2 \in \mathcal{C} \Rightarrow L_1 \cap L_2 \in \mathcal{C}$
 - **补集封闭**：$L \in \mathcal{C} \Rightarrow \overline{L} \in \mathcal{C}$
@@ -67,12 +71,14 @@ $$\text{Regular} \subset \text{CFL} \subset \text{CSL} \subset \text{REL}$$
 
 **定理 1.2.1 (正则语言封闭性)**
 正则语言在以下操作下封闭：
+
 - 并集、交集、补集
 - 连接、克林闭包
 - 反转、同态
 
 **定理 1.2.2 (上下文无关语言封闭性)**
 上下文无关语言在以下操作下封闭：
+
 - 并集、连接、克林闭包
 - 同态、反转
 - 不在交集、补集下封闭
@@ -81,18 +87,21 @@ $$\text{Regular} \subset \text{CFL} \subset \text{CSL} \subset \text{REL}$$
 
 **定义 1.3.1 (分离语言)**
 分离语言用于证明层次严格性：
+
 - $L_1 = \{a^n b^n \mid n \geq 0\}$：分离正则语言和上下文无关语言
 - $L_2 = \{a^n b^n c^n \mid n \geq 0\}$：分离上下文无关语言和上下文相关语言
 - $L_3 = \{ww \mid w \in \{a,b\}^*\}$：分离上下文相关语言和递归可枚举语言
 
 **定理 1.3.1 (泵引理)**
 如果 $L$ 是正则语言，则存在常数 $p$，使得对于任意 $w \in L$ 且 $|w| \geq p$，存在分解 $w = xyz$ 满足：
+
 1. $|xy| \leq p$
 2. $|y| > 0$
 3. 对于所有 $i \geq 0$，$xy^i z \in L$
 
 **定理 1.3.2 (上下文无关泵引理)**
 如果 $L$ 是上下文无关语言，则存在常数 $p$，使得对于任意 $w \in L$ 且 $|w| \geq p$，存在分解 $w = uvxyz$ 满足：
+
 1. $|vxy| \leq p$
 2. $|vy| > 0$
 3. 对于所有 $i \geq 0$，$uv^i xy^i z \in L$
@@ -103,6 +112,7 @@ $$\text{Regular} \subset \text{CFL} \subset \text{CSL} \subset \text{REL}$$
 乔姆斯基层次是严格的，即每个包含关系都是真包含。
 
 **证明：** 通过分离语言：
+
 1. **正则语言分离**：$L = \{a^n b^n \mid n \geq 0\}$ 不是正则语言
 2. **上下文无关语言分离**：$L = \{a^n b^n c^n \mid n \geq 0\}$ 不是上下文无关语言
 3. **上下文相关语言分离**：停机问题不是上下文相关语言
@@ -371,11 +381,13 @@ proveHierarchyStrictness = do
 
 **定理 3.2.1 (正则语言封闭性)**
 正则语言在以下操作下封闭：
+
 - 并集、交集、补集
 - 连接、克林闭包
 - 反转、同态
 
 **证明：** 通过构造：
+
 1. **并集**：构造两个DFA的并集DFA
 2. **交集**：构造两个DFA的交集DFA
 3. **补集**：将DFA的接受状态和非接受状态互换
@@ -384,11 +396,13 @@ proveHierarchyStrictness = do
 
 **定理 3.2.2 (上下文无关语言封闭性)**
 上下文无关语言在以下操作下封闭：
+
 - 并集、连接、克林闭包
 - 同态、反转
 - 不在交集、补集下封闭
 
 **证明：** 通过构造：
+
 1. **并集**：构造两个CFG的并集CFG
 2. **连接**：构造两个CFG的连接CFG
 3. **克林闭包**：构造CFG的克林闭包CFG
@@ -398,12 +412,14 @@ proveHierarchyStrictness = do
 
 **定理 3.3.1 (语言识别复杂度)**
 各种语言类的识别复杂度：
+
 - **正则语言**：$O(n)$ 时间，$O(1)$ 空间
 - **上下文无关语言**：$O(n^3)$ 时间，$O(n^2)$ 空间
 - **上下文相关语言**：$O(2^n)$ 时间，$O(n)$ 空间
 - **递归可枚举语言**：不可判定
 
 **证明：** 基于对应的自动机模型：
+
 1. **DFA**：线性时间，常数空间
 2. **PDA**：立方时间，平方空间（CYK算法）
 3. **LBA**：指数时间，线性空间
@@ -699,4 +715,4 @@ typeCheck program =
 ---
 
 **最后更新**: 2024年12月19日  
-**相关文档**: [[02-Formal-Language/005-Formal-Language-Applications]] - 形式语言应用 
+**相关文档**: [[02-Formal-Language/005-Formal-Language-Applications]] - 形式语言应用
