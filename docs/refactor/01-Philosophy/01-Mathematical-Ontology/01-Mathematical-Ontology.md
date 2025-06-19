@@ -108,7 +108,7 @@ class Participates a where
 
 构造主义认为数学对象通过构造过程而存在。
 
-#### 形式化表达
+#### 形式化表达2
 
 ```haskell
 -- 构造过程
@@ -137,7 +137,7 @@ class Constructible a where
 
 形式主义认为数学是符号游戏，数学对象是形式系统中的符号。
 
-#### 形式化表达
+#### 形式化表达3
 
 ```haskell
 -- 形式系统
