@@ -25,9 +25,11 @@
 ### 01-软件架构 (01-Software-Architecture)
 
 #### 主索引
+
 - [软件架构主索引](./01-Software-Architecture/README.md)
 
 #### 核心文档
+
 - [架构设计](./01-Software-Architecture/01-Architecture-Design.md)
 - [架构评估](./01-Software-Architecture/02-Architecture-Evaluation.md)
 - [架构重构](./01-Software-Architecture/03-Architecture-Refactoring.md)
@@ -57,9 +59,11 @@
 ### 02-系统设计 (02-System-Design)
 
 #### 主索引
+
 - [系统设计主索引](./02-System-Design/README.md)
 
 #### 核心文档
+
 - [系统分析](./02-System-Design/01-System-Analysis.md)
 - [系统建模](./02-System-Design/02-System-Modeling.md)
 - [系统分解](./02-System-Design/03-System-Decomposition.md)
@@ -89,9 +93,11 @@
 ### 03-设计模式 (03-Design-Patterns)
 
 #### 主索引
+
 - [设计模式主索引](./03-Design-Patterns/README.md)
 
 #### 核心文档
+
 - [创建型模式](./03-Design-Patterns/01-Creational-Patterns.md)
 - [结构型模式](./03-Design-Patterns/02-Structural-Patterns.md)
 - [行为型模式](./03-Design-Patterns/03-Behavioral-Patterns.md)
@@ -121,9 +127,11 @@
 ### 04-架构模式 (04-Architecture-Patterns)
 
 #### 主索引
+
 - [架构模式主索引](./04-Architecture-Patterns/README.md)
 
 #### 核心文档
+
 - [分层架构](./04-Architecture-Patterns/01-Layered-Architecture.md)
 - [客户端-服务器架构](./04-Architecture-Patterns/02-Client-Server-Architecture.md)
 - [主从架构](./04-Architecture-Patterns/03-Master-Slave-Architecture.md)
@@ -153,9 +161,11 @@
 ### 05-微服务架构 (05-Microservices-Architecture)
 
 #### 主索引
+
 - [微服务架构主索引](./05-Microservices-Architecture/README.md)
 
 #### 核心文档
+
 - [微服务设计](./05-Microservices-Architecture/01-Microservice-Design.md)
 - [服务拆分](./05-Microservices-Architecture/02-Service-Decomposition.md)
 - [服务发现](./05-Microservices-Architecture/03-Service-Discovery.md)
@@ -180,9 +190,11 @@
 ### 06-事件驱动架构 (06-Event-Driven-Architecture)
 
 #### 主索引
+
 - [事件驱动架构主索引](./06-Event-Driven-Architecture/README.md)
 
 #### 核心文档
+
 - [事件建模](./06-Event-Driven-Architecture/01-Event-Modeling.md)
 - [事件流](./06-Event-Driven-Architecture/02-Event-Streams.md)
 - [事件存储](./06-Event-Driven-Architecture/03-Event-Store.md)
@@ -207,9 +219,11 @@
 ### 07-云原生架构 (07-Cloud-Native-Architecture)
 
 #### 主索引
+
 - [云原生架构主索引](./07-Cloud-Native-Architecture/README.md)
 
 #### 核心文档
+
 - [容器化](./07-Cloud-Native-Architecture/01-Containerization.md)
 - [编排](./07-Cloud-Native-Architecture/02-Orchestration.md)
 - [服务网格](./07-Cloud-Native-Architecture/03-Service-Mesh.md)
@@ -234,9 +248,11 @@
 ### 08-分布式架构 (08-Distributed-Architecture)
 
 #### 主索引
+
 - [分布式架构主索引](./08-Distributed-Architecture/README.md)
 
 #### 核心文档
+
 - [分布式系统](./08-Distributed-Architecture/01-Distributed-Systems.md)
 - [分布式算法](./08-Distributed-Architecture/02-Distributed-Algorithms.md)
 - [一致性协议](./08-Distributed-Architecture/03-Consensus-Protocols.md)
@@ -261,6 +277,7 @@
 ## 🔗 快速导航
 
 ### 主题导航
+
 - [软件架构](./01-Software-Architecture/) - 架构设计、架构评估、架构重构、架构演化
 - [系统设计](./02-System-Design/) - 系统分析、系统建模、系统分解、系统集成
 - [设计模式](./03-Design-Patterns/) - 创建型模式、结构型模式、行为型模式、并发模式
@@ -271,6 +288,7 @@
 - [分布式架构](./08-Distributed-Architecture/) - 分布式系统、分布式算法、一致性协议、分布式存储
 
 ### 学习路径
+
 - [架构设计路径](./LEARNING_PATH_GUIDE.md) - 从基础到高级的架构设计学习路径
 - [架构研究路径](./COMPLETE_LEARNING_PATH.md) - 重点关注架构设计发展
 - [架构实践路径](./CONTRIBUTING_GUIDE.md) - 重点关注架构设计实际应用
@@ -278,21 +296,25 @@
 ## 🎯 技术特色
 
 ### 1. 数学形式化
+
 - 使用严格的LaTeX数学公式
 - 提供完整的定理和证明
 - 建立形式化的架构框架
 
 ### 2. Haskell实现
+
 - 架构概念的形式化实现
 - 使用Haskell进行架构建模
 - 提供可验证的架构理论
 
 ### 3. 多层级架构
+
 - 从基础架构到高级架构
 - 建立清晰的知识层次
 - 实现理论到实践的转化
 
 ### 4. 交叉学科融合
+
 - 架构设计、工程学、技术结合
 - 理论研究和实际应用并重
 - 多领域知识整合

@@ -24,9 +24,11 @@
 ### 01-计算机科学 (01-Computer-Science)
 
 #### 主索引
+
 - [计算机科学主索引](./01-Computer-Science/README.md)
 
 #### 核心文档
+
 - [算法设计](./01-Computer-Science/01-Algorithm-Design.md)
 - [数据结构](./01-Computer-Science/02-Data-Structures.md)
 - [计算理论](./01-Computer-Science/03-Computation-Theory.md)
@@ -61,9 +63,11 @@
 ### 02-软件工程 (02-Software-Engineering)
 
 #### 主索引
+
 - [软件工程主索引](./02-Software-Engineering/README.md)
 
 #### 核心文档
+
 - [软件开发](./02-Software-Engineering/01-Software-Development.md)
 - [软件测试](./02-Software-Engineering/02-Software-Testing.md)
 - [软件质量](./02-Software-Engineering/03-Software-Quality.md)
@@ -93,9 +97,11 @@
 ### 03-人工智能 (03-Artificial-Intelligence)
 
 #### 主索引
+
 - [人工智能主索引](./03-Artificial-Intelligence/README.md)
 
 #### 核心文档
+
 - [机器学习](./03-Artificial-Intelligence/01-Machine-Learning.md)
 - [知识表示](./03-Artificial-Intelligence/02-Knowledge-Representation.md)
 - [推理系统](./03-Artificial-Intelligence/03-Reasoning-Systems.md)
@@ -135,9 +141,11 @@
 ### 04-数据科学 (04-Data-Science)
 
 #### 主索引
+
 - [数据科学主索引](./04-Data-Science/README.md)
 
 #### 核心文档
+
 - [统计分析](./04-Data-Science/01-Statistical-Analysis.md)
 - [数据挖掘](./04-Data-Science/02-Data-Mining.md)
 - [数据可视化](./04-Data-Science/03-Data-Visualization.md)
@@ -172,9 +180,11 @@
 ### 05-网络安全 (05-Network-Security)
 
 #### 主索引
+
 - [网络安全主索引](./05-Network-Security/README.md)
 
 #### 核心文档
+
 - [密码学](./05-Network-Security/01-Cryptography.md)
 - [网络安全](./05-Network-Security/02-Network-Security.md)
 - [软件安全](./05-Network-Security/03-Software-Security.md)
@@ -204,9 +214,11 @@
 ### 06-网络科学 (06-Network-Science)
 
 #### 主索引
+
 - [网络科学主索引](./06-Network-Science/README.md)
 
 #### 核心文档
+
 - [网络理论](./06-Network-Science/01-Network-Theory.md)
 - [网络动力学](./06-Network-Science/02-Network-Dynamics.md)
 - [社交网络](./06-Network-Science/03-Social-Networks.md)
@@ -236,9 +248,11 @@
 ### 07-计算机视觉 (07-Computer-Vision)
 
 #### 主索引
+
 - [计算机视觉主索引](./07-Computer-Vision/README.md)
 
 #### 核心文档
+
 - [图像处理](./07-Computer-Vision/01-Image-Processing.md)
 - [模式识别](./07-Computer-Vision/02-Pattern-Recognition.md)
 - [计算机视觉算法](./07-Computer-Vision/03-Computer-Vision-Algorithms.md)
@@ -268,6 +282,7 @@
 ## 🔗 快速导航
 
 ### 主题导航
+
 - [计算机科学](./01-Computer-Science/) - 算法设计、数据结构、计算理论、计算机体系结构
 - [软件工程](./02-Software-Engineering/) - 软件开发、软件测试、软件质量、形式化验证
 - [人工智能](./03-Artificial-Intelligence/) - 机器学习、知识表示、推理系统、自然语言处理
@@ -277,6 +292,7 @@
 - [计算机视觉](./07-Computer-Vision/) - 图像处理、模式识别、计算机视觉算法、深度学习视觉
 
 ### 学习路径
+
 - [应用科学路径](./LEARNING_PATH_GUIDE.md) - 从基础到高级的应用科学学习路径
 - [应用研究路径](./COMPLETE_LEARNING_PATH.md) - 重点关注应用科学发展
 - [应用实践路径](./CONTRIBUTING_GUIDE.md) - 重点关注应用科学实际应用
@@ -284,21 +300,25 @@
 ## 🎯 技术特色
 
 ### 1. 数学形式化
+
 - 使用严格的LaTeX数学公式
 - 提供完整的定理和证明
 - 建立形式化的应用框架
 
 ### 2. Haskell实现
+
 - 应用概念的形式化实现
 - 使用Haskell进行应用建模
 - 提供可验证的应用理论
 
 ### 3. 多层级架构
+
 - 从基础应用到高级应用
 - 建立清晰的知识层次
 - 实现理论到实践的转化
 
 ### 4. 交叉学科融合
+
 - 应用科学、工程学、技术结合
 - 理论研究和实际应用并重
 - 多领域知识整合

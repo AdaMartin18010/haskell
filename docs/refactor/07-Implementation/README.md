@@ -25,9 +25,11 @@
 ### 01-编程语言 (01-Programming-Languages)
 
 #### 主索引
+
 - [编程语言主索引](./01-Programming-Languages/README.md)
 
 #### 核心文档
+
 - [函数式编程](./01-Programming-Languages/01-Functional-Programming.md)
 - [面向对象编程](./01-Programming-Languages/02-Object-Oriented-Programming.md)
 - [过程式编程](./01-Programming-Languages/03-Procedural-Programming.md)
@@ -57,9 +59,11 @@
 ### 02-开发框架 (02-Development-Frameworks)
 
 #### 主索引
+
 - [开发框架主索引](./02-Development-Frameworks/README.md)
 
 #### 核心文档
+
 - [Web框架](./02-Development-Frameworks/01-Web-Frameworks.md)
 - [移动框架](./02-Development-Frameworks/02-Mobile-Frameworks.md)
 - [桌面框架](./02-Development-Frameworks/03-Desktop-Frameworks.md)
@@ -89,9 +93,11 @@
 ### 03-开发工具 (03-Development-Tools)
 
 #### 主索引
+
 - [开发工具主索引](./03-Development-Tools/README.md)
 
 #### 核心文档
+
 - [集成开发环境](./03-Development-Tools/01-Integrated-Development-Environment.md)
 - [代码编辑器](./03-Development-Tools/02-Code-Editor.md)
 - [版本控制](./03-Development-Tools/03-Version-Control.md)
@@ -121,9 +127,11 @@
 ### 04-开发平台 (04-Development-Platforms)
 
 #### 主索引
+
 - [开发平台主索引](./04-Development-Platforms/README.md)
 
 #### 核心文档
+
 - [云平台](./04-Development-Platforms/01-Cloud-Platforms.md)
 - [容器平台](./04-Development-Platforms/02-Container-Platforms.md)
 - [无服务器平台](./04-Development-Platforms/03-Serverless-Platforms.md)
@@ -153,9 +161,11 @@
 ### 05-数据库技术 (05-Database-Technology)
 
 #### 主索引
+
 - [数据库技术主索引](./05-Database-Technology/README.md)
 
 #### 核心文档
+
 - [关系数据库](./05-Database-Technology/01-Relational-Databases.md)
 - [NoSQL数据库](./05-Database-Technology/02-NoSQL-Databases.md)
 - [图数据库](./05-Database-Technology/03-Graph-Databases.md)
@@ -180,9 +190,11 @@
 ### 06-网络技术 (06-Network-Technology)
 
 #### 主索引
+
 - [网络技术主索引](./06-Network-Technology/README.md)
 
 #### 核心文档
+
 - [网络协议](./06-Network-Technology/01-Network-Protocols.md)
 - [网络架构](./06-Network-Technology/02-Network-Architecture.md)
 - [网络技术应用](./06-Network-Technology/03-Network-Technology-Applications.md)
@@ -207,9 +219,11 @@
 ### 07-安全技术 (07-Security-Technology)
 
 #### 主索引
+
 - [安全技术主索引](./07-Security-Technology/README.md)
 
 #### 核心文档
+
 - [加密技术](./07-Security-Technology/01-Encryption-Technology.md)
 - [认证技术](./07-Security-Technology/02-Authentication-Technology.md)
 - [授权技术](./07-Security-Technology/03-Authorization-Technology.md)
@@ -234,9 +248,11 @@
 ### 08-运维技术 (08-Operations-Technology)
 
 #### 主索引
+
 - [运维技术主索引](./08-Operations-Technology/README.md)
 
 #### 核心文档
+
 - [部署技术](./08-Operations-Technology/01-Deployment-Technology.md)
 - [监控技术](./08-Operations-Technology/02-Monitoring-Technology.md)
 - [日志技术](./08-Operations-Technology/03-Logging-Technology.md)
@@ -261,6 +277,7 @@
 ## 🔗 快速导航
 
 ### 主题导航
+
 - [编程语言](./01-Programming-Languages/) - 函数式编程、面向对象编程、过程式编程、逻辑编程
 - [开发框架](./02-Development-Frameworks/) - Web框架、移动框架、桌面框架、游戏框架
 - [开发工具](./03-Development-Tools/) - 集成开发环境、代码编辑器、版本控制、构建工具
@@ -271,6 +288,7 @@
 - [运维技术](./08-Operations-Technology/) - 部署技术、监控技术、日志技术、运维技术应用
 
 ### 学习路径
+
 - [实现技术路径](./LEARNING_PATH_GUIDE.md) - 从基础到高级的实现技术学习路径
 - [实现研究路径](./COMPLETE_LEARNING_PATH.md) - 重点关注实现技术发展
 - [实现实践路径](./CONTRIBUTING_GUIDE.md) - 重点关注实现技术实际应用
@@ -278,21 +296,25 @@
 ## 🎯 技术特色
 
 ### 1. 数学形式化
+
 - 使用严格的LaTeX数学公式
 - 提供完整的定理和证明
 - 建立形式化的实现框架
 
 ### 2. Haskell实现
+
 - 实现概念的形式化实现
 - 使用Haskell进行实现建模
 - 提供可验证的实现理论
 
 ### 3. 多层级架构
+
 - 从基础实现到高级实现
 - 建立清晰的知识层次
 - 实现理论到实践的转化
 
 ### 4. 交叉学科融合
+
 - 实现技术、工程学、技术结合
 - 理论研究和实际应用并重
 - 多领域知识整合
