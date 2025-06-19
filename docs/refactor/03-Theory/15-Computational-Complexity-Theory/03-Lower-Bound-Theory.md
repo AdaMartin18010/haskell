@@ -93,30 +93,30 @@ type Distribution a = [(a, Probability)]
 
 -- 信息熵计算
 entropy :: Distribution a -> Double
-entropy dist = 
+entropy dist =
   let totalProb = sum [p | (_, p) <- dist]
       normalizedDist = [(x, p/totalProb) | (x, p) <- dist]
   in -sum [p * logBase 2 p | (_, p) <- normalizedDist, p > 0]
 
 -- 条件熵计算
 conditionalEntropy :: Distribution (a, b) -> Double
-conditionalEntropy jointDist = 
+conditionalEntropy jointDist =
   let -- 计算边缘分布
       yDist = groupBy (\a b -> snd a == snd b) (sortBy (\a b -> compare (snd a) (snd b)) jointDist)
       yProbs = [(y, sum [p | (_, p) <- group]) | group <- yDist]
-      
+
       -- 计算条件熵
-      condEntropies = [prob * entropy [(x, p/prob) | ((x, _), p) <- group] 
-                      | (y, prob) <- yProbs, 
+      condEntropies = [prob * entropy [(x, p/prob) | ((x, _), p) <- group]
+                      | (y, prob) <- yProbs,
                         let group = filter (\((_, y'), _) -> y' == y) jointDist]
   in sum condEntropies
 
 -- 互信息计算
 mutualInformation :: Distribution (a, b) -> Double
-mutualInformation jointDist = 
+mutualInformation jointDist =
   let xDist = [(x, sum [p | ((x', _), p) <- jointDist, x' == x]) | (x, _) <- jointDist]
       yDist = [(y, sum [p | ((_, y'), p) <- jointDist, y' == y]) | (_, y) <- jointDist]
-      
+
       hX = entropy xDist
       hY = entropy yDist
       hXY = entropy jointDist
@@ -124,7 +124,7 @@ mutualInformation jointDist =
 
 -- 信息论下界
 informationTheoreticLowerBound :: Distribution a -> Int
-informationTheoreticLowerBound dist = 
+informationTheoreticLowerBound dist =
   let h = entropy dist
   in ceiling h
 ```
@@ -133,7 +133,7 @@ informationTheoreticLowerBound dist =
 
 ```haskell
 -- 决策树节点
-data DecisionTree a b = 
+data DecisionTree a b =
   Leaf b
   | Node (a -> Bool) (DecisionTree a b) (DecisionTree a b)
   deriving Show
@@ -151,35 +151,35 @@ treeSize (Node _ left right) = 1 + treeSize left + treeSize right
 -- 决策树执行
 executeDecisionTree :: DecisionTree a b -> a -> b
 executeDecisionTree (Leaf value) _ = value
-executeDecisionTree (Node predicate left right) input = 
+executeDecisionTree (Node predicate left right) input =
   if predicate input
     then executeDecisionTree left input
     else executeDecisionTree right input
 
 -- 比较决策树
-data ComparisonTree a = 
+data ComparisonTree a =
   ComparisonLeaf a
   | ComparisonNode Int Int (ComparisonTree a) (ComparisonTree a)  -- 比较位置i和j
   deriving Show
 
 -- 排序决策树
 sortingDecisionTree :: ComparisonTree [Int]
-sortingDecisionTree = 
-  ComparisonNode 0 1 
-    (ComparisonNode 1 2 
+sortingDecisionTree =
+  ComparisonNode 0 1
+    (ComparisonNode 1 2
       (ComparisonLeaf [0,1,2])
-      (ComparisonNode 0 2 
+      (ComparisonNode 0 2
         (ComparisonLeaf [0,2,1])
         (ComparisonLeaf [2,0,1])))
-    (ComparisonNode 1 2 
-      (ComparisonNode 0 2 
+    (ComparisonNode 1 2
+      (ComparisonNode 0 2
         (ComparisonLeaf [1,0,2])
         (ComparisonLeaf [1,2,0]))
       (ComparisonLeaf [2,1,0]))
 
 -- 决策树下界证明
 decisionTreeLowerBound :: Int -> Int
-decisionTreeLowerBound n = 
+decisionTreeLowerBound n =
   let -- 对于排序问题，有n!种可能的输出
       possibleOutputs = factorial n
       -- 决策树必须能够区分所有可能的输出
@@ -193,7 +193,7 @@ factorial n = n * factorial (n-1)
 
 -- 信息论方法证明排序下界
 sortingLowerBound :: Int -> Double
-sortingLowerBound n = 
+sortingLowerBound n =
   let -- 随机排列的熵
       entropy = logBase 2 (fromIntegral (factorial n))
       -- 每次比较最多提供1位信息
@@ -208,7 +208,7 @@ sortingLowerBound n =
 type BooleanFunction = [Bool] -> Bool
 
 -- 布尔门类型
-data BooleanGate = 
+data BooleanGate =
   AND
   | OR
   | NOT
@@ -216,7 +216,7 @@ data BooleanGate =
   deriving Show
 
 -- 电路节点
-data CircuitNode = 
+data CircuitNode =
   Input Int
   | Gate BooleanGate [Int]  -- 门类型和输入节点索引
   deriving Show
@@ -236,13 +236,13 @@ circuitSize circuit = length [node | node <- nodes circuit, isGate node]
 
 -- 电路深度
 circuitDepth :: BooleanCircuit -> Int
-circuitDepth circuit = 
+circuitDepth circuit =
   let depths = map (nodeDepth circuit) [0..length (nodes circuit) - 1]
   in maximum depths
 
 -- 节点深度
 nodeDepth :: BooleanCircuit -> Int -> Int
-nodeDepth circuit nodeIndex = 
+nodeDepth circuit nodeIndex =
   let node = nodes circuit !! nodeIndex
   in case node of
        Input _ -> 0
@@ -250,17 +250,17 @@ nodeDepth circuit nodeIndex =
 
 -- 电路执行
 executeCircuit :: BooleanCircuit -> [Bool] -> Bool
-executeCircuit circuit input = 
+executeCircuit circuit input =
   let values = map (evaluateNode circuit input) [0..length (nodes circuit) - 1]
   in values !! (output circuit)
 
 -- 评估节点
 evaluateNode :: BooleanCircuit -> [Bool] -> Int -> Bool
-evaluateNode circuit input nodeIndex = 
+evaluateNode circuit input nodeIndex =
   let node = nodes circuit !! nodeIndex
   in case node of
        Input i -> input !! i
-       Gate gateType inputs -> 
+       Gate gateType inputs ->
          let inputValues = map (evaluateNode circuit input) inputs
          in applyGate gateType inputValues
 
@@ -278,7 +278,7 @@ xor a b = (a || b) && not (a && b)
 
 -- 电路下界
 circuitLowerBound :: BooleanFunction -> Int
-circuitLowerBound f = 
+circuitLowerBound f =
   let -- 使用信息论方法
       inputSize = 3  -- 假设3个输入
       truthTable = [f input | input <- sequence (replicate inputSize [True, False])]
@@ -292,7 +292,7 @@ circuitLowerBound f =
 
 ```haskell
 -- 通信协议
-data CommunicationProtocol = 
+data CommunicationProtocol =
   OneWayProtocol (Int -> Int)  -- 单向协议
   | TwoWayProtocol (Int -> Int) (Int -> Int)  -- 双向协议
   deriving Show
@@ -300,12 +300,12 @@ data CommunicationProtocol =
 -- 通信复杂度
 communicationComplexity :: CommunicationProtocol -> Int -> Int
 communicationComplexity protocol inputSize = case protocol of
-  OneWayProtocol f -> 
+  OneWayProtocol f ->
     let maxOutput = maximum [f x | x <- [0..2^inputSize-1]]
         bits = ceiling (logBase 2 (fromIntegral maxOutput))
     in bits
   
-  TwoWayProtocol f1 f2 -> 
+  TwoWayProtocol f1 f2 ->
     let maxOutput1 = maximum [f1 x | x <- [0..2^inputSize-1]]
         maxOutput2 = maximum [f2 x | x <- [0..2^inputSize-1]]
         bits1 = ceiling (logBase 2 (fromIntegral maxOutput1))
@@ -314,7 +314,7 @@ communicationComplexity protocol inputSize = case protocol of
 
 -- 通信复杂度下界
 communicationLowerBound :: (Int -> Int -> Int) -> Int
-communicationLowerBound f = 
+communicationLowerBound f =
   let -- 使用信息论方法
       inputSize = 4  -- 假设4位输入
       outputs = [f x y | x <- [0..2^inputSize-1], y <- [0..2^inputSize-1]]
@@ -328,7 +328,7 @@ communicationLowerBound f =
 
 ```haskell
 -- 量子查询复杂度
-data QuantumQuery = 
+data QuantumQuery =
   ClassicalQuery Int  -- 经典查询
   | QuantumQuery Int  -- 量子查询
   deriving Show
@@ -341,12 +341,12 @@ data QuantumQueryAlgorithm = QuantumQueryAlgorithm
 
 -- 量子查询复杂度
 quantumQueryComplexity :: QuantumQueryAlgorithm -> Int
-quantumQueryComplexity algorithm = 
+quantumQueryComplexity algorithm =
   length [q | q <- queries algorithm, case q of QuantumQuery _ -> True; _ -> False]
 
 -- 量子下界
 quantumLowerBound :: (Int -> Bool) -> Int
-quantumLowerBound f = 
+quantumLowerBound f =
   let -- 使用量子信息论方法
       inputSize = 3  -- 假设3位输入
       outputs = [f x | x <- [0..2^inputSize-1]]
@@ -357,7 +357,7 @@ quantumLowerBound f =
 
 -- 量子熵（简化）
 quantumEntropy :: [Bool] -> Double
-quantumEntropy outputs = 
+quantumEntropy outputs =
   let trueCount = length (filter id outputs)
       totalCount = length outputs
       p = fromIntegral trueCount / fromIntegral totalCount
@@ -371,13 +371,13 @@ quantumEntropy outputs =
 ```haskell
 -- 排序问题下界分析
 sortingLowerBoundAnalysis :: Int -> (Double, Int, Int)
-sortingLowerBoundAnalysis n = 
+sortingLowerBoundAnalysis n =
   let -- 信息论下界
       infoLowerBound = sortingLowerBound n
-      
+
       -- 决策树下界
       decisionLowerBound = decisionTreeLowerBound n
-      
+
       -- 实际最优算法复杂度
       optimalComplexity = n * ceiling (logBase 2 (fromIntegral n))
   in (infoLowerBound, decisionLowerBound, optimalComplexity)
@@ -398,14 +398,14 @@ compareLowerBounds n = do
 ```haskell
 -- 搜索问题下界
 searchLowerBound :: Int -> Double
-searchLowerBound n = 
+searchLowerBound n =
   let -- 在n个元素中搜索，需要区分n种可能
       entropy = logBase 2 (fromIntegral n)
   in entropy
 
 -- 量子搜索下界
 quantumSearchLowerBound :: Int -> Double
-quantumSearchLowerBound n = 
+quantumSearchLowerBound n =
   let -- Grover算法提供O(√n)复杂度
       classicalBound = logBase 2 (fromIntegral n)
       quantumBound = sqrt (fromIntegral n)
@@ -466,4 +466,4 @@ majorityFunction input = length (filter id input) > length input `div` 2
 
 **文档版本**: 1.0.0  
 **维护者**: AI Assistant  
-**最后更新**: 2024年12月19日 
+**最后更新**: 2024年12月19日
