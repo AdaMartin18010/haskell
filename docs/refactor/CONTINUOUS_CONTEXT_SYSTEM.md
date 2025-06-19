@@ -88,15 +88,15 @@ graph TD
 - [x] 模型检测 (015-Model-Checking.md)
 - [x] 形式验证 (016-Formal-Verification.md)
 
-### 优先级7: FormalLanguage层重构 (进行中) 🔄
+### 优先级7: FormalLanguage层重构 (已完成) ✅
 
-- [ ] 形式语言基础理论 (001-Formal-Language-Foundations.md)
-- [ ] 自动机理论深化 (002-Automata-Theory-Deepening.md)
-- [ ] 语法分析理论 (003-Syntax-Analysis-Theory.md)
-- [ ] 语言层次理论 (004-Language-Hierarchy-Theory.md)
-- [ ] 形式语言应用 (005-Formal-Language-Applications.md)
+- [x] 形式语言基础理论 (001-Formal-Language-Foundations.md)
+- [x] 自动机理论深化 (002-Automata-Theory-Deepening.md)
+- [x] 语法分析理论 (003-Syntax-Analysis-Theory.md)
+- [x] 语言层次理论 (004-Language-Hierarchy-Theory.md)
+- [x] 形式语言应用 (005-Formal-Language-Applications.md)
 
-### 优先级8: Philosophy层重构 (待开始) ⏳
+### 优先级8: Philosophy层重构 (进行中) 🔄
 
 - [ ] 哲学基础 (001-Philosophical-Foundations.md)
 - [ ] 认识论 (002-Epistemology.md)
