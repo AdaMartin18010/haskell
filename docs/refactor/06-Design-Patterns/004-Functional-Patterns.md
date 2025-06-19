@@ -1,6 +1,7 @@
 # 函数式模式 (Functional Patterns)
 
 ## 📋 文档信息
+
 - **文档编号**: 06-01-004
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 函数式模式可形式化为：
 $$\mathcal{F} = (F, C, M)$$
+
 - $F$：函数集合
 - $C$：组合运算
 - $M$：代数结构
@@ -31,6 +33,7 @@ $$\mathcal{F} = (F, C, M)$$
 $$H: (A \rightarrow B) \rightarrow (C \rightarrow D)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 高阶函数模式
 map :: (a -> b) -> [a] -> [b]
@@ -64,6 +67,7 @@ x |> f = f x
 $$\forall f: A \rightarrow B, F(f): F(A) \rightarrow F(B)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 函子类型类
 class Functor f where
@@ -99,6 +103,7 @@ functorComposition x f g = fmap (f . g) x == (fmap f . fmap g) x
 $$\forall f: A \rightarrow B, g: F(A), F(f) \circledast g: F(B)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 应用函子类型类
 class Functor f => Applicative f where
@@ -132,6 +137,7 @@ applicativeComposition u v w = (pure (.) <*> u <*> v <*> w) == (u <*> (v <*> w))
 $$\mu: M(M(A)) \rightarrow M(A), \eta: A \rightarrow M(A)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 单子类型类
 class Applicative m => Monad m where
@@ -168,6 +174,7 @@ monadAssociativity m f g = ((m >>= f) >>= g) == (m >>= (\x -> f x >>= g))
 $$Lens(S, A) = (S \rightarrow A, S \rightarrow A \rightarrow S)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 透镜类型
 type Lens s a = forall f. Functor f => (a -> f a) -> s -> f s
@@ -202,6 +209,7 @@ _2 f (a, b) = fmap (\b' -> (a, b')) (f b)
 $$\forall a \in A, \exists f: a \rightarrow B$$
 
 **Haskell实现**：
+
 ```haskell
 -- 类型类定义
 class Show a where
@@ -254,6 +262,7 @@ sort (x:xs) = sort smaller ++ [x] ++ sort bigger
 $$\text{curry}: (A \times B \rightarrow C) \rightarrow (A \rightarrow (B \rightarrow C))$$
 
 **Haskell实现**：
+
 ```haskell
 -- 柯里化函数
 curry :: ((a, b) -> c) -> a -> b -> c
@@ -415,4 +424,4 @@ processUser =
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

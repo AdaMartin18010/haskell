@@ -1,6 +1,7 @@
 # 虚拟机设计 (Virtual Machine Design)
 
 ## 📋 文档信息
+
 - **文档编号**: 07-01-003
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 虚拟机可形式化为：
 $$\mathcal{VM} = (IS, MM, EE, IO)$$
+
 - $IS$：指令集（Instruction Set）
 - $MM$：内存模型（Memory Model）
 - $EE$：执行引擎（Execution Engine）
@@ -33,6 +35,7 @@ $$\delta : (State, Instruction) \rightarrow State$$
 ### 2.1 指令集设计
 
 **Haskell实现**：
+
 ```haskell
 -- 指令定义
 data Instruction =
@@ -69,11 +72,13 @@ runVM vm = if pc vm >= length (code vm) then vm else runVM (step vm)
 ```
 
 ### 2.2 内存模型
+
 - 栈式内存
 - 寄存器模型
 - 堆内存
 
 ### 2.3 执行引擎
+
 - 解释执行
 - JIT编译
 
@@ -99,6 +104,7 @@ $$\forall code, \exists n, runVM^n(init) = halt$$
 ---
 
 ## 5. 实际应用
+
 - 脚本语言运行时
 - 区块链虚拟机（如EVM）
 - 嵌入式系统
@@ -125,6 +131,7 @@ $$\forall code, \exists n, runVM^n(init) = halt$$
 ---
 
 ## 📚 参考文献
+
 1. Virtual Machines: Versatile Platforms for Systems and Processes, James E. Smith, Ravi Nair, 2005.
 2. The Art of Virtual Machine Design, Paolo Faraboschi, 2010.
 3. Simon Peyton Jones. The Implementation of Functional Programming Languages. 1987.
@@ -132,6 +139,7 @@ $$\forall code, \exists n, runVM^n(init) = halt$$
 ---
 
 ## 🔗 相关链接
+
 - [[07-Implementation/001-Compiler-Design]]
 - [[07-Implementation/002-Interpreter-Design]]
 - [[03-Theory/012-Automata-Theory]]
@@ -141,4 +149,4 @@ $$\forall code, \exists n, runVM^n(init) = halt$$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

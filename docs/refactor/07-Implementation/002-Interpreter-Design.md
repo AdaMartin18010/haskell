@@ -1,6 +1,7 @@
 # 解释器设计 (Interpreter Design)
 
 ## 📋 文档信息
+
 - **文档编号**: 07-01-002
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 解释器可形式化为：
 $$\mathcal{I} = (AST, Eval, Env, Result)$$
+
 - $AST$：抽象语法树
 - $Eval$：求值函数
 - $Env$：环境模型
@@ -33,6 +35,7 @@ $$Eval : AST \times Env \rightarrow Result$$
 ### 2.1 抽象语法树遍历
 
 **Haskell实现**：
+
 ```haskell
 -- 抽象语法树定义
  data AST = ... -- 参见编译器设计文档
@@ -73,11 +76,13 @@ eval (App f e) env =
 ```
 
 ### 2.2 求值策略
+
 - 严格求值（Eager Evaluation）
 - 惰性求值（Lazy Evaluation）
 - 按需求值（Call-by-Need）
 
 ### 2.3 环境模型
+
 - 静态作用域
 - 动态作用域
 
@@ -103,6 +108,7 @@ $$\forall x, env: x \in dom(env) \implies \exists v, Eval(Variable(x), env) = v$
 ---
 
 ## 5. 实际应用
+
 - 交互式命令行（REPL）
 - 配置语言解释
 - 教学语言实现
@@ -129,6 +135,7 @@ $$\forall x, env: x \in dom(env) \implies \exists v, Eval(Variable(x), env) = v$
 ---
 
 ## 📚 参考文献
+
 1. John Mitchell. Concepts in Programming Languages. 2002.
 2. Simon Peyton Jones. The Implementation of Functional Programming Languages. 1987.
 3. Benjamin C. Pierce. Types and Programming Languages. 2002.
@@ -136,6 +143,7 @@ $$\forall x, env: x \in dom(env) \implies \exists v, Eval(Variable(x), env) = v$
 ---
 
 ## 🔗 相关链接
+
 - [[07-Implementation/001-Compiler-Design]]
 - [[07-Implementation/003-Virtual-Machine-Design]]
 - [[03-Theory/010-Lambda-Calculus]]
@@ -145,4 +153,4 @@ $$\forall x, env: x \in dom(env) \implies \exists v, Eval(Variable(x), env) = v$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

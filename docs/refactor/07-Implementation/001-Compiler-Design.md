@@ -1,6 +1,7 @@
 # 编译器设计 (Compiler Design)
 
 ## 📋 文档信息
+
 - **文档编号**: 07-01-001
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 编译器可形式化为：
 $$\mathcal{C} = (L, P, S, I, O, T)$$
+
 - $L$：词法分析器
 - $P$：语法分析器
 - $S$：语义分析器
@@ -39,6 +41,7 @@ $$Source \xrightarrow{L} Tokens \xrightarrow{P} AST \xrightarrow{S} SymbolTable 
 $$L: \Sigma^* \rightarrow Token^*$$
 
 **Haskell实现**：
+
 ```haskell
 -- 词法单元类型
 data Token = Token
@@ -146,6 +149,7 @@ isOperator c = c `elem` "+-*/=<>!&|"
 $$P: Token^* \rightarrow AST$$
 
 **Haskell实现**：
+
 ```haskell
 -- 抽象语法树
 data AST = 
@@ -375,6 +379,7 @@ expect parser expectedType =
 $$S: AST \rightarrow SymbolTable$$
 
 **Haskell实现**：
+
 ```haskell
 -- 符号表
 data SymbolTable = SymbolTable
@@ -498,6 +503,7 @@ lookupSymbol table name = Map.lookup name (symbols table)
 $$I: AST \rightarrow IR$$
 
 **Haskell实现**：
+
 ```haskell
 -- 中间表示
 data IR = 
@@ -604,6 +610,7 @@ generateExpressions generator (expr:exprs) =
 $$O: IR \rightarrow OptimizedIR$$
 
 **Haskell实现**：
+
 ```haskell
 -- 优化器
 data Optimizer = Optimizer
@@ -745,6 +752,7 @@ isStatementLive liveVars statement =
 $$T: OptimizedIR \rightarrow TargetCode$$
 
 **Haskell实现**：
+
 ```haskell
 -- 目标代码
 data TargetCode = TargetCode
@@ -1029,4 +1037,4 @@ statefulCompiler state source =
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

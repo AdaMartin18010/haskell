@@ -1,6 +1,7 @@
 # 语言处理与转换 (Language Processing and Transformation)
 
 ## 📋 文档信息
+
 - **文档编号**: 07-01-004
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 语言处理器可形式化为：
 $$\mathcal{LP} = (L, P, S, T)$$
+
 - $L$：词法分析
 - $P$：语法分析
 - $S$：语义分析
@@ -31,11 +33,13 @@ $$Trans : AST_1 \rightarrow AST_2$$
 ## 2. 结构与实现
 
 ### 2.1 词法/语法/语义处理
+
 - 参见编译器设计文档
 
 ### 2.2 转换器实现
 
 **Haskell实现**：
+
 ```haskell
 -- AST转换器
 type Transformer = AST -> AST
@@ -54,6 +58,7 @@ constantFolding e = e
 ```
 
 ### 2.3 多语言支持
+
 - 语法树转换
 - 语义保持
 
@@ -78,6 +83,7 @@ $$\exists Trans^{-1}, Trans^{-1}(Trans(ast)) = ast$$
 ---
 
 ## 5. 实际应用
+
 - 语言互操作
 - 代码迁移与重构
 - 领域特定语言（DSL）
@@ -104,6 +110,7 @@ $$\exists Trans^{-1}, Trans^{-1}(Trans(ast)) = ast$$
 ---
 
 ## 📚 参考文献
+
 1. Eelco Visser. Syntax Definition, Analysis and Transformation. 2010.
 2. Martin Fowler. Domain-Specific Languages. 2010.
 3. Simon Peyton Jones. The Implementation of Functional Programming Languages. 1987.
@@ -111,6 +118,7 @@ $$\exists Trans^{-1}, Trans^{-1}(Trans(ast)) = ast$$
 ---
 
 ## 🔗 相关链接
+
 - [[07-Implementation/001-Compiler-Design]]
 - [[07-Implementation/002-Interpreter-Design]]
 - [[07-Implementation/003-Virtual-Machine-Design]]
@@ -120,4 +128,4 @@ $$\exists Trans^{-1}, Trans^{-1}(Trans(ast)) = ast$$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

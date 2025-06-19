@@ -1,6 +1,7 @@
 # 并发模式 (Concurrency Patterns)
 
 ## 📋 文档信息
+
 - **文档编号**: 06-01-005
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 并发模式可形式化为：
 $$\mathcal{C} = (P, S, T)$$
+
 - $P$：进程/线程集合
 - $S$：同步原语
 - $T$：时间关系
@@ -31,6 +33,7 @@ $$\mathcal{C} = (P, S, T)$$
 $$\forall a \in A, \exists m: a \rightarrow a'$$
 
 **Haskell实现**：
+
 ```haskell
 -- Actor模型
 data Actor msg = Actor
@@ -74,6 +77,7 @@ createActor id = return $ Actor id (\msg -> simpleActor id msg) []
 $$P_1 \parallel P_2 \parallel ... \parallel P_n$$
 
 **Haskell实现**：
+
 ```haskell
 -- CSP通道
 data Channel a = Channel
@@ -126,6 +130,7 @@ parallel processes = do
 $$F: A \rightarrow Future(B)$$
 
 **Haskell实现**：
+
 ```haskell
 -- Future类型
 data Future a = Future
@@ -188,6 +193,7 @@ async computation = do
 $$Pool = \{T_1, T_2, ..., T_n\}, \forall T_i: T_i \in Threads$$
 
 **Haskell实现**：
+
 ```haskell
 -- 线程池
 data ThreadPool = ThreadPool
@@ -247,6 +253,7 @@ shutdown pool = do
 $$\forall t \in T, \exists l \in L: acquire(l, t) \rightarrow release(l, t)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 互斥锁
 data Mutex = Mutex
@@ -351,6 +358,7 @@ releaseWrite rwlock = do
 $$S: \mathbb{N} \rightarrow \{P, V\}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 信号量
 data Semaphore = Semaphore
@@ -545,4 +553,4 @@ concurrentMap f xs = do
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

@@ -1,6 +1,7 @@
 # 物联网 (Internet of Things)
 
 ## 📋 文档信息
+
 - **文档编号**: 05-01-003
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 网络图：
 $$G = (V, E, W)$$
+
 - $V$：设备节点集合
 - $E$：连接边集合
 - $W$：权重函数
@@ -25,6 +27,7 @@ $$G = (V, E, W)$$
 
 数据流：
 $$\mathcal{F} = \{(t_i, d_i) | i \in \mathbb{N}\}$$
+
 - $t_i$：时间戳
 - $d_i$：数据包
 
@@ -122,6 +125,7 @@ $$\forall t, \forall s_i, s_j: |data_i(t) - data_j(t)| \leq \epsilon$$
 ---
 
 ## 📚 参考文献
+
 1. Atzori, L., Iera, A., & Morabito, G. (2010). The internet of things: A survey. Computer networks, 54(15), 2787-2805.
 2. Gubbi, J., Buyya, R., Marusic, S., & Palaniswami, M. (2013). Internet of Things (IoT): A vision, architectural elements, and future directions. Future generation computer systems, 29(7), 1645-1660.
 
@@ -130,4 +134,4 @@ $$\forall t, \forall s_i, s_j: |data_i(t) - data_j(t)| \leq \epsilon$$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

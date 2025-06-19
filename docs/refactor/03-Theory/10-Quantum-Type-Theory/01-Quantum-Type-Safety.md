@@ -222,7 +222,7 @@ pauliZ :: QuantumGate Qubit Qubit
 pauliZ = QuantumGate $ \q -> Qubit (unQubit q * (1 :+ 0))
 
 hadamard :: QuantumGate Qubit Qubit
-hadamard = QuantumGate $ \q -> 
+hadamard = QuantumGate $ \q ->
   let (a :+ b) = unQubit q
       factor = 1 / sqrt 2
   in Qubit (factor * (a + b) :+ factor * (a - b))
@@ -245,7 +245,7 @@ controlled :: QuantumGate Qubit Qubit -> QuantumGate (Qubit, Qubit) (Qubit, Qubi
 controlled gate = QuantumGate $ \(control, target) ->
   let (c :+ _) = unQubit control
       magnitude = sqrt (c * c)
-  in if magnitude > 0.5 
+  in if magnitude > 0.5
      then (control, applyGate gate target)
      else (control, target)
 ```
@@ -314,7 +314,7 @@ groverAlgorithm = QuantumAlgorithm $ \qubits ->
       iterations = floor (pi / 4 * sqrt (2^n))
       -- Grover迭代
       groverIteration :: [Qubit] -> [Qubit]
-      groverIteration qs = 
+      groverIteration qs =
         let -- Oracle查询
             oracleResult = map (applyGate hadamard) qs
             -- 扩散操作
@@ -325,7 +325,7 @@ groverAlgorithm = QuantumAlgorithm $ \qubits ->
       -- 测量
       measurements = map (runMeasurement measureQubit) finalState
       -- 转换为整数
-      result = sum $ zipWith (\b i -> if unMeasured b then 2^i else 0) 
+      result = sum $ zipWith (\b i -> if unMeasured b then 2^i else 0)
                             measurements [0..]
   in Measured result
 
@@ -335,7 +335,7 @@ quantumFourierTransform = QuantumAlgorithm $ \qubits ->
   let n = length qubits
       -- QFT实现
       qftStep :: Int -> [Qubit] -> [Qubit]
-      qftStep i qs = 
+      qftStep i qs =
         let -- 应用Hadamard门
             hadamardResult = applyGate hadamard (qs !! i)
             -- 应用受控相位门
@@ -343,7 +343,7 @@ quantumFourierTransform = QuantumAlgorithm $ \qubits ->
             phaseResult = foldr (.) id phaseGates hadamardResult
         in take i qs ++ [phaseResult] ++ drop (i+1) qs
       where
-        phaseGate j = QuantumGate $ \q -> 
+        phaseGate j = QuantumGate $ \q ->
           let phase = 2 * pi / (2^j)
           in Qubit (unQubit q * (cos phase :+ sin phase))
       -- 执行QFT
@@ -355,15 +355,15 @@ quantumFourierTransform = QuantumAlgorithm $ \qubits ->
 
 ```haskell
 -- 量子错误纠正码
-data QuantumErrorCode = 
-  ShorCode | 
-  SteaneCode | 
+data QuantumErrorCode =
+  ShorCode |
+  SteaneCode |
   SurfaceCode Int Int
 
 -- 错误类型
-data QuantumError = 
-  BitFlip | 
-  PhaseFlip | 
+data QuantumError =
+  BitFlip |
+  PhaseFlip |
   CombinedFlip
 
 -- 错误纠正
@@ -648,7 +648,7 @@ quantumParallelization = QuantumAlgorithm $ \qubits ->
 ```haskell
 -- 量子资源管理
 withQuantumResource :: Qubit -> (Qubit -> a) -> a
-withQuantumResource qubit f = 
+withQuantumResource qubit f =
   let result = f qubit
       _ = destroyQubit qubit  -- 确保资源释放
   in result
@@ -672,4 +672,4 @@ withQuantumResource qubit f =
 
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
-**版本**: 1.0.0 
+**版本**: 1.0.0

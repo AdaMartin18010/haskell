@@ -1,6 +1,7 @@
 # 行为型模式 (Behavioral Patterns)
 
 ## 📋 文档信息
+
 - **文档编号**: 06-01-003
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 行为型模式可形式化为：
 $$\mathcal{B} = (S, A, T)$$
+
 - $S$：状态集合
 - $A$：行为集合
 - $T$：转换函数
@@ -31,6 +33,7 @@ $$\mathcal{B} = (S, A, T)$$
 $$\forall r \in R, \exists next(r) \in R \cup \{\bot\}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 责任链模式
 class Handler a where
@@ -65,6 +68,7 @@ data Response = Response { responseData :: String }
 $$C = (A, P), \text{where } A \text{ is action, } P \text{ is parameters}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 命令模式
 class Command a where
@@ -107,6 +111,7 @@ performAction receiver action = receiver { receiverState = action }
 $$\forall s \in S, \forall o \in O: notify(s, o)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 观察者模式
 class Observer a where
@@ -147,6 +152,7 @@ addObserver subject observer =
 $$S = \{s_1, s_2, ..., s_n\}, \forall s_i: s_i \rightarrow s_j$$
 
 **Haskell实现**：
+
 ```haskell
 -- 状态模式
 class State a where
@@ -189,6 +195,7 @@ transition context = case currentState context of
 $$\forall s \in S, \exists f_s: A \rightarrow B$$
 
 **Haskell实现**：
+
 ```haskell
 -- 策略模式
 class Strategy a where
@@ -227,6 +234,7 @@ selectStrategy _ = Left ConcreteStrategyA
 $$T = f \circ g \circ h, \text{where } f, g, h \text{ are steps}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 模板方法模式
 class TemplateMethod a where
@@ -257,6 +265,7 @@ instance TemplateMethod ConcreteTemplate where
 $$\forall e \in E, \forall v \in V: visit(v, e)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 访问者模式
 class Visitor v where
@@ -416,4 +425,4 @@ transition sm input =
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

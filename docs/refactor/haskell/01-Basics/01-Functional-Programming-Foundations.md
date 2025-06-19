@@ -19,12 +19,14 @@
 #### 1.1 函数定义
 
 函数 $f: A \to B$ 是从集合 $A$ 到集合 $B$ 的映射，满足：
+
 - **单值性**: 对于每个 $a \in A$，存在唯一的 $b \in B$ 使得 $f(a) = b$
 - **全域性**: 对于每个 $a \in A$，$f(a)$ 都有定义
 
 #### 1.2 函数性质
 
 **纯函数**: 函数 $f$ 是纯函数，当且仅当：
+
 - 对于相同的输入，总是产生相同的输出
 - 没有副作用（不修改外部状态）
 - 不依赖外部状态
@@ -32,6 +34,7 @@
 数学表达：$f(x) = f(x)$ 对于所有 $x \in \text{dom}(f)$
 
 **高阶函数**: 函数 $F$ 是高阶函数，当且仅当：
+
 - $F$ 接受函数作为参数，或
 - $F$ 返回函数作为结果
 
@@ -54,6 +57,7 @@ $$(f \circ g) \circ h = f \circ (g \circ h)$$
 $$\tau ::= \alpha \mid \tau_1 \to \tau_2 \mid \tau_1 \times \tau_2 \mid \text{Unit}$$
 
 其中：
+
 - $\alpha$ 是类型变量
 - $\tau_1 \to \tau_2$ 是函数类型
 - $\tau_1 \times \tau_2$ 是积类型
@@ -83,22 +87,26 @@ $$\frac{\Gamma \vdash e : \tau_1 \times \tau_2}{\Gamma \vdash \pi_2(e) : \tau_2}
 #### 3.1 范畴定义
 
 范畴 $\mathcal{C}$ 由以下组成：
+
 - 对象集合 $\text{Ob}(\mathcal{C})$
 - 态射集合 $\text{Hom}(A, B)$ 对于每对对象 $A, B$
 - 单位态射 $\text{id}_A: A \to A$
 - 态射组合 $\circ: \text{Hom}(B, C) \times \text{Hom}(A, B) \to \text{Hom}(A, C)$
 
 满足：
+
 - 结合律：$(f \circ g) \circ h = f \circ (g \circ h)$
 - 单位律：$\text{id}_B \circ f = f = f \circ \text{id}_A$
 
 #### 3.2 函子
 
 函子 $F: \mathcal{C} \to \mathcal{D}$ 是范畴之间的映射：
+
 - 对象映射：$F: \text{Ob}(\mathcal{C}) \to \text{Ob}(\mathcal{D})$
 - 态射映射：$F: \text{Hom}(A, B) \to \text{Hom}(F(A), F(B))$
 
 满足：
+
 - $F(\text{id}_A) = \text{id}_{F(A)}$
 - $F(f \circ g) = F(f) \circ F(g)$
 
@@ -367,16 +375,19 @@ f $! x = x `seq` f x
 ### 1. 时间复杂度
 
 **函数应用**: $O(1)$
+
 - 函数应用是常数时间操作
 - 不涉及额外的计算开销
 
 **列表操作**:
+
 - `map`: $O(n)$，其中 $n$ 是列表长度
 - `filter`: $O(n)$，其中 $n$ 是列表长度
 - `foldr/foldl`: $O(n)$，其中 $n$ 是列表长度
 - `length`: $O(n)$，其中 $n$ 是列表长度
 
 **惰性求值**:
+
 - 创建无限列表: $O(1)$
 - 访问第 $n$ 个元素: $O(n)$
 - 强制求值: $O(k)$，其中 $k$ 是强制求值的元素数量
@@ -384,16 +395,19 @@ f $! x = x `seq` f x
 ### 2. 空间复杂度
 
 **函数定义**: $O(1)$
+
 - 函数定义本身不占用额外空间
 - 参数和返回值按需分配
 
 **列表操作**:
+
 - `map`: $O(n)$，创建新列表
 - `filter`: $O(k)$，其中 $k$ 是满足条件的元素数量
 - `foldr/foldl`: $O(1)$，尾递归优化
 - `scanr/scanl`: $O(n)$，存储所有中间结果
 
 **惰性求值**:
+
 - 创建无限列表: $O(1)$
 - 存储已计算的值: $O(k)$，其中 $k$ 是已计算的元素数量
 
@@ -610,4 +624,4 @@ prop_id_idempotent x = idempotent id x
 
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
-**版本**: 1.0.0 
+**版本**: 1.0.0

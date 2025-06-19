@@ -1,6 +1,7 @@
 # 软件质量保证 (Software Quality Assurance)
 
 ## 📋 文档信息
+
 - **文档编号**: 03-01-004
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,12 +18,14 @@
 
 质量向量：
 $$\mathbf{Q} = (Q_1, Q_2, ..., Q_n)$$
+
 - $Q_i$：各质量属性（功能性、可靠性等）
 
 ### 1.2 质量度量
 
 度量函数：
 $$M: S \rightarrow \mathbb{R}^n$$
+
 - $S$：软件系统集合
 - $M$：度量映射
 
@@ -83,6 +86,7 @@ $$\forall Q_i,~0 \leq Q_i \leq 1$$
 ---
 
 ## 📚 参考文献
+
 1. Fenton, N. E., & Pfleeger, S. L. (1997). Software Metrics: A Rigorous and Practical Approach. PWS Publishing.
 2. ISO/IEC 9126. Software engineering — Product quality.
 
@@ -91,4 +95,4 @@ $$\forall Q_i,~0 \leq Q_i \leq 1$$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

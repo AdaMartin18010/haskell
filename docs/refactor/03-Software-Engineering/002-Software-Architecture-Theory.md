@@ -1,6 +1,7 @@
 # 软件架构理论 (Software Architecture Theory)
 
 ## 📋 文档信息
+
 - **文档编号**: 03-01-002
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 软件架构可形式化为有向图：
 $$\mathcal{A} = (M, C, D)$$
+
 - $M$：模块集合
 - $C$：连接关系（如依赖、调用）
 - $D$：数据流/控制流
@@ -96,6 +98,7 @@ $$\forall \text{路径}~p,~p~\text{中无环}$$
 ---
 
 ## 📚 参考文献
+
 1. Bass, L., Clements, P., & Kazman, R. (2012). Software Architecture in Practice. Addison-Wesley.
 2. Garlan, D., & Shaw, M. (1993). An Introduction to Software Architecture. Advances in Software Engineering and Knowledge Engineering.
 
@@ -104,4 +107,4 @@ $$\forall \text{路径}~p,~p~\text{中无环}$$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

@@ -1,6 +1,7 @@
 # 人工智能 (Artificial Intelligence)
 
 ## 📋 文档信息
+
 - **文档编号**: 05-01-005
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 学习函数：
 $$f: \mathcal{X} \rightarrow \mathcal{Y}$$
+
 - $\mathcal{X}$：输入空间
 - $\mathcal{Y}$：输出空间
 
@@ -98,6 +100,7 @@ $$P(|L_{test} - L_{train}| > \epsilon) \leq 2e^{-2n\epsilon^2}$$
 ---
 
 ## 📚 参考文献
+
 1. Russell, S., & Norvig, P. (2009). Artificial Intelligence: A Modern Approach. Prentice Hall.
 2. Bishop, C. M. (2006). Pattern Recognition and Machine Learning. Springer.
 
@@ -106,4 +109,4 @@ $$P(|L_{test} - L_{train}| > \epsilon) \leq 2e^{-2n\epsilon^2}$$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

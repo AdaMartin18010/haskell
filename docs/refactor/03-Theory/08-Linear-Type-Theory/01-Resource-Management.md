@@ -160,15 +160,15 @@ data FileHandle = FileHandle { filePath :: FilePath, isOpen :: Bool }
 instance ResourceManager FileHandle where
   type ResourceState FileHandle = [FilePath]
   
-  allocate paths = 
+  allocate paths =
     case paths of
       [] -> error "No available file paths"
       (p:ps) -> (ResourceHandle (FileHandle p True), ps)
   
-  deallocate (ResourceHandle h) paths = 
+  deallocate (ResourceHandle h) paths =
     if isOpen h then filePath h : paths else paths
   
-  use (ResourceHandle h) f x = 
+  use (ResourceHandle h) f x =
     if isOpen h then f x else error "File handle is closed"
 
 -- 内存资源管理
@@ -177,19 +177,19 @@ data MemoryBlock = MemoryBlock { size :: Int, address :: Int }
 instance ResourceManager MemoryBlock where
   type ResourceState MemoryBlock = [Int]
   
-  allocate addresses = 
+  allocate addresses =
     case addresses of
       [] -> error "No available memory addresses"
       (addr:addrs) -> (ResourceHandle (MemoryBlock 0 addr), addrs)
   
-  deallocate (ResourceHandle block) addresses = 
+  deallocate (ResourceHandle block) addresses =
     address block : addresses
   
   use (ResourceHandle block) f x = f x
 
 -- 线性资源使用示例
 linearFileOperation :: FilePath %1 -> String %1 -> String
-linearFileOperation path content = 
+linearFileOperation path content =
   let (handle, remainingPaths) = allocate [path]
       result = use handle (\c -> c ++ " processed") content
       finalPaths = deallocate handle remainingPaths
@@ -197,7 +197,7 @@ linearFileOperation path content =
 
 -- 线性内存操作示例
 linearMemoryOperation :: Int %1 -> Int %1 -> Int
-linearMemoryOperation size data' = 
+linearMemoryOperation size data' =
   let (block, remainingAddrs) = allocate [0..1000]
       result = use block (\d -> d * 2) data'
       finalAddrs = deallocate block remainingAddrs
@@ -389,7 +389,7 @@ linearStrictMap f = go
 
 ```haskell
 -- 资源池管理
-data ResourcePool r = ResourcePool { 
+data ResourcePool r = ResourcePool {
   available :: [r],
   inUse :: [r]
 }
@@ -397,12 +397,12 @@ data ResourcePool r = ResourcePool {
 -- 高效资源分配
 allocateFromPool :: ResourcePool r %1 -> (ResourceHandle r, ResourcePool r)
 allocateFromPool (ResourcePool [] inUse) = error "No available resources"
-allocateFromPool (ResourcePool (r:rs) inUse) = 
+allocateFromPool (ResourcePool (r:rs) inUse) =
   (ResourceHandle r, ResourcePool rs (r:inUse))
 
 -- 高效资源释放
 deallocateToPool :: ResourceHandle r %1 -> ResourcePool r %1 -> ResourcePool r
-deallocateToPool (ResourceHandle r) (ResourcePool available inUse) = 
+deallocateToPool (ResourceHandle r) (ResourcePool available inUse) =
   ResourcePool (r:available) (filter (/= r) inUse)
 ```
 
@@ -428,7 +428,7 @@ deallocateToPool (ResourceHandle r) (ResourcePool available inUse) =
 ```haskell
 -- 资源使用模式
 withResource :: ResourceHandle r %1 -> (r %1 -> a) %1 -> a
-withResource handle f = 
+withResource handle f =
   let resource = unHandle handle
       result = f resource
       _ = deallocate handle
@@ -453,4 +453,4 @@ withResource handle f =
 
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
-**版本**: 1.0.0 
+**版本**: 1.0.0

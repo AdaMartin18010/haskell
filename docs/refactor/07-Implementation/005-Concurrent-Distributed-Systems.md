@@ -1,6 +1,7 @@
 # 并发与分布式系统实现 (Concurrent and Distributed Systems Implementation)
 
 ## 📋 文档信息
+
 - **文档编号**: 07-01-005
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 并发系统可形式化为：
 $$\mathcal{CS} = (P, S, T, R)$$
+
 - $P$：进程集合
 - $S$：状态空间
 - $T$：时间模型
@@ -25,6 +27,7 @@ $$\mathcal{CS} = (P, S, T, R)$$
 ### 1.2 分布式系统模型
 
 $$\mathcal{DS} = (N, C, F, L)$$
+
 - $N$：节点集合
 - $C$：通信通道
 - $F$：故障模型
@@ -37,6 +40,7 @@ $$\mathcal{DS} = (N, C, F, L)$$
 ### 2.1 Actor模型
 
 **Haskell实现**：
+
 ```haskell
 -- Actor系统
 data ActorSystem = ActorSystem
@@ -297,4 +301,4 @@ withTimeout timeout action = do
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

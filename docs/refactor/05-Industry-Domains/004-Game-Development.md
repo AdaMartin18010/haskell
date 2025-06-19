@@ -1,6 +1,7 @@
 # 游戏开发 (Game Development)
 
 ## 📋 文档信息
+
 - **文档编号**: 05-01-004
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 游戏状态：
 $$S = (P, E, W, T)$$
+
 - $P$：玩家状态集合
 - $E$：实体集合
 - $W$：世界状态
@@ -130,6 +132,7 @@ $$\forall \mathbf{v}, \mathbf{v}_{screen} \in [0,1]^2$$
 ---
 
 ## 📚 参考文献
+
 1. Gregory, J. (2018). Game Engine Architecture (3rd ed.). CRC Press.
 2. Eberly, D. H. (2006). 3D Game Engine Design: A Practical Approach to Real-Time Computer Graphics. Morgan Kaufmann.
 
@@ -138,4 +141,4 @@ $$\forall \mathbf{v}, \mathbf{v}_{screen} \in [0,1]^2$$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

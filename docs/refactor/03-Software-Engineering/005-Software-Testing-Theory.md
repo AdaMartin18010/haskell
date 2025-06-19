@@ -30,6 +30,7 @@
 $$\mathcal{T} = (I, O, R, \phi)$$
 
 其中：
+
 - $I$ 是输入空间
 - $O$ 是输出空间
 - $R$ 是预期结果空间
@@ -660,4 +661,4 @@ runPerformanceTest (PerformanceTest name func iterations warmup timeout) = do
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

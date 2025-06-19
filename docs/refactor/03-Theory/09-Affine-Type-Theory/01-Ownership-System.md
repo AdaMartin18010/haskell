@@ -171,33 +171,33 @@ class OwnershipManager a where
   returnBorrow :: BorrowHandle a -> ()
 
 -- 内存所有权管理
-data MemoryOwnership = MemoryOwnership { 
-  address :: Int, 
-  size :: Int, 
-  isOwned :: Bool 
+data MemoryOwnership = MemoryOwnership {
+  address :: Int,
+  size :: Int,
+  isOwned :: Bool
 }
 
 instance OwnershipManager MemoryOwnership where
   type OwnershipState MemoryOwnership = [Int]
   
   create mem = OwnershipHandle mem
-  destroy (OwnershipHandle mem) = 
+  destroy (OwnershipHandle mem) =
     if isOwned mem then () else error "Cannot destroy unowned memory"
   borrow (OwnershipHandle mem) = BorrowHandle mem
   returnBorrow (BorrowHandle mem) = ()
 
 -- 文件所有权管理
-data FileOwnership = FileOwnership { 
-  filePath :: FilePath, 
-  isOpen :: Bool, 
-  isOwned :: Bool 
+data FileOwnership = FileOwnership {
+  filePath :: FilePath,
+  isOpen :: Bool,
+  isOwned :: Bool
 }
 
 instance OwnershipManager FileOwnership where
   type OwnershipState FileOwnership = [FilePath]
   
   create file = OwnershipHandle file
-  destroy (OwnershipHandle file) = 
+  destroy (OwnershipHandle file) =
     if isOwned file then () else error "Cannot destroy unowned file"
   borrow (OwnershipHandle file) = BorrowHandle file
   returnBorrow (BorrowHandle file) = ()
@@ -212,7 +212,7 @@ checkBorrow _ = True
 
 -- 所有权借用示例
 ownershipExample :: MemoryOwnership -> String
-ownershipExample mem = 
+ownershipExample mem =
   let owner = create mem
       borrowed = borrow owner
       result = "Memory borrowed successfully"
@@ -317,14 +317,14 @@ instance Drop (Box a) where
 newtype Rc a = Rc { unRc :: a, count :: Int }
 
 instance Drop (Rc a) where
-  drop (Rc a count) = 
+  drop (Rc a count) =
     if count <= 1 then () else () -- 减少引用计数
 
 -- Rust风格的原子引用计数
 newtype Arc a = Arc { unArc :: a, atomicCount :: Int }
 
 instance Drop (Arc a) where
-  drop (Arc a count) = 
+  drop (Arc a count) =
     if count <= 1 then () else () -- 原子减少引用计数
 ```
 
@@ -419,20 +419,20 @@ affineMemoryAlloc size = do
 
 ```haskell
 -- 仿射通道
-data AffineChannel a = AffineChannel { 
-  send :: a -> (), 
-  receive :: () -> a 
+data AffineChannel a = AffineChannel {
+  send :: a -> (),
+  receive :: () -> a
 }
 
 -- 仿射互斥锁
-data AffineMutex a = AffineMutex { 
-  lock :: () -> a, 
-  unlock :: a -> () 
+data AffineMutex a = AffineMutex {
+  lock :: () -> a,
+  unlock :: a -> ()
 }
 
 -- 仿射原子操作
-newtype AffineAtomic a = AffineAtomic { 
-  atomicUpdate :: (a -> a) -> a 
+newtype AffineAtomic a = AffineAtomic {
+  atomicUpdate :: (a -> a) -> a
 }
 ```
 
@@ -440,15 +440,15 @@ newtype AffineAtomic a = AffineAtomic {
 
 ```haskell
 -- 仿射数据库连接
-data AffineConnection = AffineConnection { 
-  execute :: String -> ResultSet, 
-  close :: () -> () 
+data AffineConnection = AffineConnection {
+  execute :: String -> ResultSet,
+  close :: () -> ()
 }
 
 -- 仿射事务
-data AffineTransaction a = AffineTransaction { 
-  commit :: a -> (), 
-  rollback :: () -> () 
+data AffineTransaction a = AffineTransaction {
+  commit :: a -> (),
+  rollback :: () -> ()
 }
 ```
 
@@ -478,7 +478,7 @@ ownershipStrictMap f = go
 
 ```haskell
 -- 所有权池管理
-data OwnershipPool r = OwnershipPool { 
+data OwnershipPool r = OwnershipPool {
   available :: [r],
   owned :: [r]
 }
@@ -486,12 +486,12 @@ data OwnershipPool r = OwnershipPool {
 -- 高效所有权分配
 allocateOwnership :: OwnershipPool r -> (OwnershipHandle r, OwnershipPool r)
 allocateOwnership (OwnershipPool [] owned) = error "No available resources"
-allocateOwnership (OwnershipPool (r:rs) owned) = 
+allocateOwnership (OwnershipPool (r:rs) owned) =
   (OwnershipHandle r, OwnershipPool rs (r:owned))
 
 -- 高效所有权释放
 deallocateOwnership :: OwnershipHandle r -> OwnershipPool r -> OwnershipPool r
-deallocateOwnership (OwnershipHandle r) (OwnershipPool available owned) = 
+deallocateOwnership (OwnershipHandle r) (OwnershipPool available owned) =
   OwnershipPool (r:available) (filter (/= r) owned)
 ```
 
@@ -538,4 +538,4 @@ uniqueOwnership h1 h2 = h1 /= h2 -- 编译时保证
 
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
-**版本**: 1.0.0 
+**版本**: 1.0.0

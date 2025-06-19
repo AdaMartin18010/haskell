@@ -1,6 +1,7 @@
 # 安全机制实现 (Security Mechanisms Implementation)
 
 ## 📋 文档信息
+
 - **文档编号**: 07-01-009
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 安全机制可形式化为：
 $$\mathcal{SM} = (A, P, C, E)$$
+
 - $A$：主体（Actors）
 - $P$：权限（Permissions）
 - $C$：控制策略（Control Policies）
@@ -33,6 +35,7 @@ $$M : Subjects \times Objects \rightarrow Permissions$$
 ### 2.1 对称加密（AES）
 
 **Haskell实现**：
+
 ```haskell
 -- AES加密
 import Crypto.Cipher.AES (AES128)
@@ -92,6 +95,7 @@ checkPermission user res perm ac =
 ```
 
 ### 3.2 强制访问控制（MAC）
+
 - 安全标签、等级划分
 
 ---
@@ -121,6 +125,7 @@ $$\forall m: encrypt(m, k) \rightarrow \neg leak(m)$$
 ---
 
 ## 6. 实际应用
+
 - 网络安全
 - 数据加密存储
 - 访问控制系统
@@ -148,6 +153,7 @@ $$\forall m: encrypt(m, k) \rightarrow \neg leak(m)$$
 ---
 
 ## 📚 参考文献
+
 1. William Stallings. Cryptography and Network Security. 2020.
 2. Bruce Schneier. Applied Cryptography. 2015.
 3. Ross Anderson. Security Engineering. 2020.
@@ -155,6 +161,7 @@ $$\forall m: encrypt(m, k) \rightarrow \neg leak(m)$$
 ---
 
 ## 🔗 相关链接
+
 - [[07-Implementation/008-Network-Protocols]]
 - [[07-Implementation/007-Operating-Systems]]
 - [[03-Theory/017-Security-Theory]]
@@ -164,4 +171,4 @@ $$\forall m: encrypt(m, k) \rightarrow \neg leak(m)$$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

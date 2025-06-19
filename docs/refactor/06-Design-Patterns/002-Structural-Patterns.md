@@ -1,6 +1,7 @@
 # 结构型模式 (Structural Patterns)
 
 ## 📋 文档信息
+
 - **文档编号**: 06-01-002
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 结构型模式可形式化为：
 $$\mathcal{S} = (C, R, T)$$
+
 - $C$：组件集合
 - $R$：关系集合
 - $T$：变换函数
@@ -31,6 +33,7 @@ $$\mathcal{S} = (C, R, T)$$
 $$\exists f: A \rightarrow B, \forall a \in A: f(a) \in B$$
 
 **Haskell实现**：
+
 ```haskell
 -- 适配器模式
 class Target a where
@@ -62,6 +65,7 @@ adapter = Adapter
 $$B = A \times I, \text{where } A \text{ is abstraction, } I \text{ is implementation}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 桥接模式
 class Implementation a where
@@ -90,6 +94,7 @@ instance Implementation impl => Abstraction (RefinedAbstraction impl) where
 $$\forall c \in C: c \text{ is either leaf or composite}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 组合模式
 class Component a where
@@ -127,6 +132,7 @@ instance Component Composite where
 $$D = W \circ F, \text{where } W \text{ is wrapper, } F \text{ is function}$$
 
 **Haskell实现**：
+
 ```haskell
 -- 装饰器模式
 class Component a where
@@ -162,6 +168,7 @@ instance Component a => Component (ConcreteDecorator a) where
 $$F: \prod_{i=1}^{n} S_i \rightarrow R$$
 
 **Haskell实现**：
+
 ```haskell
 -- 外观模式
 class Subsystem1 a where
@@ -189,6 +196,7 @@ facadeOperation (Facade s1 s2) =
 $$\forall f \in F, \exists! s \in S: f \text{ shares } s$$
 
 **Haskell实现**：
+
 ```haskell
 -- 享元模式
 data Flyweight = Flyweight 
@@ -220,6 +228,7 @@ createFactory = FlyweightFactory
 $$P: A \rightarrow A, \text{where } P \text{ controls access to } A$$
 
 **Haskell实现**：
+
 ```haskell
 -- 代理模式
 class Subject a where
@@ -351,4 +360,4 @@ instance Show a => Show (LazyProxy a) where
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

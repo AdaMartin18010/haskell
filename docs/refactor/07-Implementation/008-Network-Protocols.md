@@ -1,6 +1,7 @@
 # 网络协议实现 (Network Protocols Implementation)
 
 ## 📋 文档信息
+
 - **文档编号**: 07-01-008
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 网络协议可形式化为：
 $$\mathcal{NP} = (L, P, S, T)$$
+
 - $L$：分层结构（如OSI、TCP/IP）
 - $P$：协议集合
 - $S$：状态机
@@ -31,14 +33,17 @@ $$\delta : (State, Input) \rightarrow State$$
 ## 2. 协议设计与实现
 
 ### 2.1 OSI七层模型
+
 - 物理层、数据链路层、网络层、传输层、会话层、表示层、应用层
 
 ### 2.2 TCP/IP协议族
+
 - 链路层、网络层、传输层、应用层
 
 ### 2.3 协议状态机实现
 
 **Haskell实现**：
+
 ```haskell
 -- TCP状态机
  data TCPState = CLOSED | LISTEN | SYN_SENT | SYN_RECEIVED | ESTABLISHED | FIN_WAIT_1 | FIN_WAIT_2 | CLOSE_WAIT | CLOSING | LAST_ACK | TIME_WAIT
@@ -101,6 +106,7 @@ $$\forall s: \neg deadlock(s)$$
 ---
 
 ## 5. 实际应用
+
 - 互联网通信
 - 局域网协议
 - 无线通信协议
@@ -128,6 +134,7 @@ $$\forall s: \neg deadlock(s)$$
 ---
 
 ## 📚 参考文献
+
 1. Andrew S. Tanenbaum. Computer Networks. 2010.
 2. W. Richard Stevens. TCP/IP Illustrated. 1994.
 3. James F. Kurose, Keith W. Ross. Computer Networking: A Top-Down Approach. 2021.
@@ -135,6 +142,7 @@ $$\forall s: \neg deadlock(s)$$
 ---
 
 ## 🔗 相关链接
+
 - [[07-Implementation/005-Concurrent-Distributed-Systems]]
 - [[07-Implementation/007-Operating-Systems]]
 - [[03-Theory/016-Network-Theory]]
@@ -144,4 +152,4 @@ $$\forall s: \neg deadlock(s)$$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

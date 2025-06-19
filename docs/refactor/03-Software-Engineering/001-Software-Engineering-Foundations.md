@@ -30,6 +30,7 @@
 $$\mathcal{S} = (S, I, O, T, Q, \delta)$$
 
 其中：
+
 - $S$ 是状态集合
 - $I$ 是输入集合
 - $O$ 是输出集合
@@ -44,6 +45,7 @@ $$\mathcal{S} = (S, I, O, T, Q, \delta)$$
 $$G_{LC} = (V_{LC}, E_{LC}, \tau_{LC})$$
 
 其中：
+
 - $V_{LC} = \{v_1, v_2, ..., v_n\}$ 是生命周期阶段集合
 - $E_{LC} \subseteq V_{LC} \times V_{LC}$ 是阶段间关系
 - $\tau_{LC}: E_{LC} \rightarrow \mathbb{R}^+$ 是时间权重函数
@@ -73,6 +75,7 @@ $w_{ij}$ 是权重，$m_{ij}$ 是度量值。
 $$\text{SE} = \{\text{Methods}, \text{Tools}, \text{Processes}, \text{Standards}\}$$
 
 其中：
+
 - $\text{Methods}$ 是方法论集合
 - $\text{Tools}$ 是工具集合
 - $\text{Processes}$ 是过程集合
@@ -92,6 +95,7 @@ $$\text{LC} = \langle \text{Requirements}, \text{Design}, \text{Implementation},
 软件质量属性是衡量软件系统特性的量化指标。
 
 **核心质量属性**：
+
 - **功能性** (Functionality): $F = \frac{|F_{actual}|}{|F_{required}|}$
 - **可靠性** (Reliability): $R = 1 - \frac{\text{MTBF}}{\text{MTBF} + \text{MTTR}}$
 - **可用性** (Usability): $U = \frac{\text{Successful\_Tasks}}{\text{Total\_Tasks}}$
@@ -247,6 +251,7 @@ calculateCyclomaticComplexity codeLines =
 ### 4.2 空间复杂度
 
 软件工程过程的空间复杂度主要取决于：
+
 - 状态空间大小: O(|S|)
 - 生命周期阶段数: O(|V|)
 - 质量属性维度: O(m)
@@ -392,6 +397,7 @@ runAutomatedTests testSuite =
 ### 7.2 与计算机科学的关系
 
 软件工程是计算机科学的应用分支，但更注重：
+
 - 工程实践和方法
 - 项目管理
 - 质量保证
@@ -448,4 +454,4 @@ runAutomatedTests testSuite =
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

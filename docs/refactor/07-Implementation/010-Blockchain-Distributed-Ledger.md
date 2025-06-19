@@ -1,6 +1,7 @@
 # 区块链与分布式账本实现 (Blockchain and Distributed Ledger Implementation)
 
 ## 📋 文档信息
+
 - **文档编号**: 07-01-010
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 区块链可形式化为：
 $$\mathcal{BC} = (B, C, T, S)$$
+
 - $B$：区块集合
 - $C$：共识机制
 - $T$：交易集合
@@ -33,6 +35,7 @@ $$Block = (index, prevHash, timestamp, txs, nonce, hash)$$
 ### 2.1 区块结构
 
 **Haskell实现**：
+
 ```haskell
 -- 区块定义
 data Block = Block
@@ -67,6 +70,7 @@ createBlock prevBlock txs nonce =
 ### 2.2 共识机制
 
 #### 工作量证明（PoW）
+
 ```haskell
 mineBlock :: Block -> [Transaction] -> Int -> Block
 mineBlock prevBlock txs difficulty =
@@ -79,6 +83,7 @@ mineBlock prevBlock txs difficulty =
 ```
 
 #### 权益证明（PoS）
+
 - 省略具体实现，描述选举与验证流程
 
 ### 2.3 智能合约
@@ -124,6 +129,7 @@ $$\forall c: executeContract(c, txs) \text{ terminates}$$
 ---
 
 ## 5. 实际应用
+
 - 数字货币
 - 供应链金融
 - 数字身份
@@ -151,6 +157,7 @@ $$\forall c: executeContract(c, txs) \text{ terminates}$$
 ---
 
 ## 📚 参考文献
+
 1. Satoshi Nakamoto. Bitcoin: A Peer-to-Peer Electronic Cash System. 2008.
 2. Andreas M. Antonopoulos. Mastering Bitcoin. 2017.
 3. Arvind Narayanan et al. Bitcoin and Cryptocurrency Technologies. 2016.
@@ -158,6 +165,7 @@ $$\forall c: executeContract(c, txs) \text{ terminates}$$
 ---
 
 ## 🔗 相关链接
+
 - [[07-Implementation/009-Security-Mechanisms]]
 - [[07-Implementation/005-Concurrent-Distributed-Systems]]
 - [[03-Theory/018-Distributed-Ledger-Theory]]
@@ -167,4 +175,4 @@ $$\forall c: executeContract(c, txs) \text{ terminates}$$
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成

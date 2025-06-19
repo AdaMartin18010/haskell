@@ -1,6 +1,7 @@
 # 创建型模式 (Creational Patterns)
 
 ## 📋 文档信息
+
 - **文档编号**: 06-01-001
 - **创建时间**: 2024年12月19日
 - **最后更新**: 2024年12月19日
@@ -17,6 +18,7 @@
 
 创建型模式可形式化为：
 $$\mathcal{C} = (F, D, R)$$
+
 - $F$：工厂函数集合
 - $D$：依赖关系
 - $R$：创建规则
@@ -31,6 +33,7 @@ $$\mathcal{C} = (F, D, R)$$
 $$\exists! x \in X, \forall y \in X: y = x$$
 
 **Haskell实现**：
+
 ```haskell
 -- 单例模式
 singleton :: a -> IO (IO a)
@@ -51,6 +54,7 @@ getInstance = singleton "Hello World"
 $$\forall t \in T, \exists f: f(t) = o_t$$
 
 **Haskell实现**：
+
 ```haskell
 -- 工厂模式
 class Factory a where
@@ -72,6 +76,7 @@ factory ProductB = return "Product B"
 $$B = \prod_{i=1}^{n} S_i$$
 
 **Haskell实现**：
+
 ```haskell
 -- 建造者模式
 data Builder a = Builder
@@ -95,6 +100,7 @@ build builder initial =
 $$\forall p \in P, clone(p) = p' \land p' \equiv p$$
 
 **Haskell实现**：
+
 ```haskell
 -- 原型模式
 class Prototype a where
@@ -115,6 +121,7 @@ instance Prototype [a] where
 $$\forall f \in F, \forall p \in P: f(p) \in ProductFamily(p)$$
 
 **Haskell实现**：
+
 ```haskell
 -- 抽象工厂
 class AbstractFactory a where
@@ -238,4 +245,4 @@ databaseBuilder =
 **文档维护者**: AI Assistant  
 **最后更新**: 2024年12月19日  
 **版本**: 1.0.0  
-**状态**: ✅ 完成 
+**状态**: ✅ 完成
