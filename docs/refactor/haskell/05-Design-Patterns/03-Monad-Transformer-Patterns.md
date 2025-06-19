@@ -391,7 +391,7 @@ $$\text{lift}: M \rightarrow T \circ M$$
 - **单位律**: $\text{lift}(\text{return}_M) = \text{return}_{T \circ M}$
 - **结合律**: $\text{lift}(m \gg= f) = \text{lift}(m) \gg= (\text{lift} \circ f)$
 
-### 实际应用示例
+### 实际应用示例3
 
 ```haskell
 -- 提升模式示例
@@ -607,7 +607,7 @@ $$\text{compose}: [T] \rightarrow T_{\text{composed}}$$
 - **结合律**: $\text{compose}(T_1, T_2, T_3) = \text{compose}(\text{compose}(T_1, T_2), T_3)$
 - **交换律**: $\text{compose}(T_1, T_2) = \text{compose}(T_2, T_1)$ (当适用时)
 
-### 实际应用示例
+### 实际应用示例4
 
 ```haskell
 -- 组合模式示例
@@ -850,7 +850,7 @@ $$\text{decouple}: M \rightarrow [M_i]$$
 - **保持性**: $\text{effects}(M) = \bigcup_i \text{effects}(M_i)$
 - **独立性**: $\text{effects}(M_i) \cap \text{effects}(M_j) = \emptyset$ (当$i \neq j$时)
 
-### 实际应用示例
+### 实际应用示例5
 
 ```haskell
 -- 解耦模式示例
@@ -1073,7 +1073,7 @@ decouplingExample = do
   putStrLn $ "State: " ++ show state
 ```
 
-### 实际应用示例
+### 实际应用示例6
 
 ```haskell
 -- 实际应用示例

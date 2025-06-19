@@ -13,12 +13,13 @@
 - [高阶函数](./004-Higher-Order-Functions.md)
 - [数据结构](./06-Data-Structures/001-Basic-Data-Structures.md)
 - [算法实现](./07-Algorithms/001-Sorting-Algorithms.md)
+- [性能优化](./09-Performance/001-Performance-Analysis.md)
 
 ### 应用领域
 
 - [Web开发](./11-Web-Development/001-Web-Development-Foundation.md)
-- [科学计算](./14-Real-World-Applications/002-Scientific-Computing.md)
-- [数据处理](./14-Real-World-Applications/003-Data-Processing.md)
+- [系统编程](./12-System-Programming/001-System-Programming-Foundation.md)
+- [科学计算](./09-Scientific-Computing/001-Numerical-Computation.md)
 
 ## 🎯 概述
 
@@ -741,3 +742,4 @@ Haskell的递归和列表处理提供了：
 **实现示例**:
 - [数据结构](./06-Data-Structures/001-Basic-Data-Structures.md)
 - [算法实现](./07-Algorithms/001-Sorting-Algorithms.md)
+- [性能优化](./09-Performance/001-Performance-Analysis.md)

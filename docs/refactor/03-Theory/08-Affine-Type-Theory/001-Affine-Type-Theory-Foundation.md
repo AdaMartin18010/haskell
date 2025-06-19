@@ -37,6 +37,7 @@ $$\Gamma : \text{Var} \rightarrow \text{Type}$$
 $$\tau ::= \text{Base} \mid \tau_1 \rightarrow \tau_2 \mid \tau_1 \& \tau_2 \mid \tau_1 \oplus \tau_2$$
 
 其中：
+
 - $\rightarrow$ 表示仿射函数类型
 - $\&$ 表示合取类型（with类型）
 - $\oplus$ 表示析取类型（sum类型）
@@ -632,7 +633,7 @@ validateBorrow _ _ = True  -- 简化实现
 
 ### 7.2 函数式编程中的仿射类型
 
-**定义 6.1 (仿射函数)**
+**定义 6.1 (仿射函数)**:
 
 ```haskell
 class Affine a where
@@ -832,10 +833,12 @@ instance AffineIntuitionCorrespondence AffineType where
 ---
 
 **相关文档**：
+
 - [线性类型理论](../07-Linear-Type-Theory/001-Linear-Type-Theory-Foundation.md)
 - [时态类型理论](../10-Temporal-Type-Theory/001-Temporal-Constraints.md)
 - [量子类型理论](../09-Quantum-Type-Theory/001-Quantum-Computation.md)
 
 **实现示例**：
+
 - [Haskell仿射类型实现](../../haskell/04-Type-System/003-Affine-Type-System.md)
 - [形式化验证工具](../../haskell/13-Formal-Verification/002-Type-Safety.md)

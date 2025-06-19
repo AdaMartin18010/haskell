@@ -1,525 +1,856 @@
-# 001. 类型系统基础 - Type System Foundation
+# Haskell类型系统基础
 
-## 📋 文档信息
+## 📚 快速导航
 
-**文档编号**: `haskell/04-Type-System/001-Type-System-Foundation.md`  
-**创建日期**: 2024年12月  
-**最后更新**: 2024年12月  
-**文档状态**: 完成  
-**质量等级**: A+  
+### 相关理论
 
-**相关文档**:
-
-- [函数式编程基础](../01-Basic-Concepts/001-Functional-Programming.md)
-- [递归与列表](../01-Basic-Concepts/003-Recursion-and-Lists.md)
+- [函数式编程基础](../01-Basic-Concepts/001-Functional-Programming-Foundation.md)
 - [高阶函数](../01-Basic-Concepts/004-Higher-Order-Functions.md)
-- [代数数据类型](002-Algebraic-Data-Types.md)
+- [线性类型理论](../../03-Theory/07-Linear-Type-Theory/001-Linear-Type-Theory-Foundation.md)
 
----
+### 实现示例
 
-## 🎯 核心概念
+- [高级类型](../02-Advanced-Types/001-GADTs.md)
+- [类型类](../03-Type-Classes/001-Type-Classes-Foundation.md)
+- [依赖类型](../04-Dependent-Types/001-Dependent-Types-Foundation.md)
 
-### 1. 类型理论基础
+### 应用领域
 
-#### 1.1 类型系统数学定义
+- [形式验证](../13-Formal-Verification/001-Formal-Verification-Foundation.md)
+- [编译器设计](../14-Compiler-Design/001-Compiler-Foundation.md)
+- [系统编程](../12-System-Programming/001-System-Programming-Foundation.md)
 
-**定义 1.1** (类型): 类型是值的集合，表示为 $T$，其中每个值 $v$ 属于类型 $T$ 记作 $v : T$。
+## 🎯 概述
 
-**定义 1.2** (类型环境): 类型环境 $\Gamma$ 是从变量到类型的映射：
-$$\Gamma = \{x_1 : T_1, x_2 : T_2, \ldots, x_n : T_n\}$$
+Haskell的类型系统是其最强大的特性之一，提供了编译时类型检查、类型安全保证和丰富的抽象能力。本文档深入探讨Haskell类型系统的基础概念、类型推导、类型类等核心内容。
 
-**定义 1.3** (类型判断): 类型判断 $\Gamma \vdash e : T$ 表示在环境 $\Gamma$ 下，表达式 $e$ 具有类型 $T$。
+## 📖 1. 类型系统基础
 
-**定义 1.4** (类型规则): 类型规则的形式为：
-$$\frac{\text{前提}_1 \quad \text{前提}_2 \quad \ldots \quad \text{前提}_n}{\text{结论}}$$
+### 1.1 类型定义
 
-#### 1.2 基本类型规则
+**定义 1.1 (类型)**
+类型是值的集合，描述了值的形式和可以进行的操作。
 
-**规则 1.1** (变量规则):
-$$\frac{x : T \in \Gamma}{\Gamma \vdash x : T}$$
+**数学表示：**
+$$T : \text{Type} \rightarrow \text{Set}$$
 
-**规则 1.2** (函数抽象规则):
-$$\frac{\Gamma, x : T_1 \vdash e : T_2}{\Gamma \vdash \lambda x.e : T_1 \rightarrow T_2}$$
-
-**规则 1.3** (函数应用规则):
-$$\frac{\Gamma \vdash e_1 : T_1 \rightarrow T_2 \quad \Gamma \vdash e_2 : T_1}{\Gamma \vdash e_1 e_2 : T_2}$$
-
-### 2. Haskell类型系统
-
-#### 2.1 基本类型
+**Haskell实现：**
 
 ```haskell
--- 基本类型定义
-data Bool = True | False
-data Int = ... -- 整数类型
-data Integer = ... -- 任意精度整数
-data Float = ... -- 单精度浮点数
-data Double = ... -- 双精度浮点数
-data Char = ... -- 字符类型
-data String = [Char] -- 字符串类型
+-- 基本类型
+basicTypes :: IO ()
+basicTypes = do
+  let intVal :: Int = 42
+      doubleVal :: Double = 3.14
+      charVal :: Char = 'a'
+      stringVal :: String = "Hello"
+      boolVal :: Bool = True
+      unitVal :: () = ()
+  putStrLn $ "Int: " ++ show intVal
+  putStrLn $ "Double: " ++ show doubleVal
+  putStrLn $ "Char: " ++ show charVal
+  putStrLn $ "String: " ++ show stringVal
+  putStrLn $ "Bool: " ++ show boolVal
+  putStrLn $ "Unit: " ++ show unitVal
 
--- 类型注解
-main :: IO ()
-main = do
-    let x :: Int
-        x = 42
-    
-    let y :: Double
-        y = 3.14
-    
-    let z :: Char
-        z = 'A'
-    
-    let w :: String
-        w = "Hello, Haskell!"
-    
-    print x  -- 42
-    print y  -- 3.14
-    print z  -- 'A'
-    print w  -- "Hello, Haskell!"
+-- 类型别名
+type Name = String
+type Age = Int
+type Person = (Name, Age)
+
+-- 类型别名示例
+typeAliasExample :: IO ()
+typeAliasExample = do
+  let person :: Person = ("Alice", 25)
+      (name, age) = person
+  putStrLn $ "Person: " ++ show person
+  putStrLn $ "Name: " ++ name
+  putStrLn $ "Age: " ++ show age
 ```
 
-#### 2.2 函数类型
+### 1.2 函数类型
+
+**定义 1.2 (函数类型)**
+函数类型表示函数的签名，包括参数类型和返回类型。
+
+**数学表示：**
+$$A \rightarrow B = \{f \mid f : A \rightarrow B\}$$
+
+**Haskell实现：**
 
 ```haskell
--- 函数类型定义
-type BinaryFunction a b c = a -> b -> c
-type UnaryFunction a b = a -> b
-type Predicate a = a -> Bool
-
--- 函数类型示例
-main :: IO ()
-main = do
-    let add :: Int -> Int -> Int
-        add x y = x + y
-    
-    let isPositive :: Int -> Bool
-        isPositive x = x > 0
-    
-    let square :: Double -> Double
-        square x = x * x
-    
-    print $ add 3 4        -- 7
-    print $ isPositive 5   -- True
-    print $ square 2.5     -- 6.25
+-- 函数类型
+functionTypes :: IO ()
+functionTypes = do
+  let -- 基本函数类型
+      add :: Int -> Int -> Int
+      add x y = x + y
+      
+      -- 高阶函数类型
+      mapInt :: (Int -> Int) -> [Int] -> [Int]
+      mapInt = map
+      
+      -- 多态函数类型
+      idPoly :: a -> a
+      idPoly x = x
+      
+      -- 函数应用
+      result1 = add 5 3
+      result2 = mapInt (*2) [1, 2, 3, 4, 5]
+      result3 = idPoly "hello"
+  putStrLn $ "Add result: " ++ show result1
+  putStrLn $ "Map result: " ++ show result2
+  putStrLn $ "Id result: " ++ show result3
 ```
 
-**定理 2.1** (函数类型性质): 函数类型满足：
+### 1.3 类型推导
 
-1. 右结合性：$A \rightarrow B \rightarrow C = A \rightarrow (B \rightarrow C)$
-2. 柯里化：$(A \times B) \rightarrow C \cong A \rightarrow (B \rightarrow C)$
+**定义 1.3 (类型推导)**
+Haskell编译器可以自动推导表达式的类型，无需显式声明。
 
-### 3. 类型推断
-
-#### 3.1 Hindley-Milner类型系统
-
-**定义 3.1** (类型变量): 类型变量 $\alpha, \beta, \gamma, \ldots$ 表示未知类型。
-
-**定义 3.2** (类型模式): 类型模式是类型变量的集合，表示为 $\forall \alpha_1 \alpha_2 \ldots \alpha_n. \tau$。
-
-**算法 3.1** (类型推断算法):
-
-1. 为每个表达式分配类型变量
-2. 生成类型约束
-3. 求解类型约束
-4. 生成最一般类型
+**Haskell实现：**
 
 ```haskell
--- 类型推断示例
-main :: IO ()
-main = do
-    -- 自动类型推断
-    let x = 42              -- x :: Num a => a
-    let y = 3.14            -- y :: Fractional a => a
-    let z = x + y           -- z :: Fractional a => a
-    let f = \x -> x + 1     -- f :: Num a => a -> a
-    let g = \x -> x * 2     -- g :: Num a => a -> a
-    let h = f . g           -- h :: Num a => a -> a
-    
-    print $ h 5  -- 11 (f(g(5)) = f(10) = 11)
+-- 类型推导示例
+typeInference :: IO ()
+typeInference = do
+  let -- 自动推导类型
+      x = 42                    -- 推导为 Int
+      y = 3.14                  -- 推导为 Double
+      z = "hello"               -- 推导为 String
+      f = \x -> x + 1           -- 推导为 Num a => a -> a
+      g = \x -> show x          -- 推导为 Show a => a -> String
+      
+      -- 显式类型声明
+      explicitX :: Int = 42
+      explicitF :: Int -> Int = \x -> x + 1
+  putStrLn $ "Inferred x: " ++ show x
+  putStrLn $ "Inferred y: " ++ show y
+  putStrLn $ "Inferred z: " ++ show z
+  putStrLn $ "Inferred f 5: " ++ show (f 5)
+  putStrLn $ "Inferred g 42: " ++ show (g 42)
 ```
 
-#### 3.2 类型约束
+## 🔧 2. 代数数据类型
+
+### 2.1 基本代数数据类型
+
+**定义 2.1 (代数数据类型)**
+代数数据类型是Haskell中定义复杂数据结构的基本方法。
+
+**Haskell实现：**
 
 ```haskell
--- 类型约束示例
-main :: IO ()
-main = do
-    -- 显式类型约束
-    let f :: (Num a, Show a) => a -> String
-        f x = show (x + 1)
-    
-    -- 类型约束推断
-    let g x = show (x + 1)  -- g :: (Num a, Show a) => a -> String
-    
-    print $ f 5    -- "6"
-    print $ g 5    -- "6"
-    print $ f 3.14 -- "4.14"
-    print $ g 3.14 -- "4.14"
+-- 基本代数数据类型
+data Shape = 
+  Circle Double | 
+  Rectangle Double Double | 
+  Triangle Double Double Double
+  deriving (Show)
+
+-- 代数数据类型操作
+area :: Shape -> Double
+area (Circle r) = pi * r * r
+area (Rectangle w h) = w * h
+area (Triangle a b c) = 
+  let s = (a + b + c) / 2
+  in sqrt (s * (s - a) * (s - b) * (s - c))
+
+-- 代数数据类型示例
+algebraicDataExample :: IO ()
+algebraicDataExample = do
+  let shapes = [Circle 5, Rectangle 3 4, Triangle 3 4 5]
+      areas = map area shapes
+  putStrLn $ "Shapes: " ++ show shapes
+  putStrLn $ "Areas: " ++ show areas
 ```
 
-### 4. 多态类型
+### 2.2 参数化类型
 
-#### 4.1 参数多态
+**定义 2.2 (参数化类型)**
+参数化类型是多态类型，可以包含类型参数。
 
-**定义 4.1** (参数多态): 参数多态允许类型变量在类型中自由出现，表示为 $\forall \alpha. \tau$。
+**Haskell实现：**
 
 ```haskell
--- 参数多态示例
-main :: IO ()
-main = do
-    -- 多态函数
-    let id :: a -> a
-        id x = x
-    
-    let const :: a -> b -> a
-        const x _ = x
-    
-    let fst :: (a, b) -> a
-        fst (x, _) = x
-    
-    let snd :: (a, b) -> b
-        snd (_, y) = y
-    
-    print $ id 42           -- 42
-    print $ id "hello"      -- "hello"
-    print $ const 5 "test"  -- 5
-    print $ fst (1, "two")  -- 1
-    print $ snd (1, "two")  -- "two"
+-- 参数化类型
+data Maybe a = 
+  Nothing | 
+  Just a
+  deriving (Show)
+
+data Either a b = 
+  Left a | 
+  Right b
+  deriving (Show)
+
+data List a = 
+  Nil | 
+  Cons a (List a)
+  deriving (Show)
+
+-- 参数化类型操作
+safeHead :: [a] -> Maybe a
+safeHead [] = Nothing
+safeHead (x:_) = Just x
+
+safeDivide :: Double -> Double -> Either String Double
+safeDivide _ 0 = Left "Division by zero"
+safeDivide x y = Right (x / y)
+
+-- 参数化类型示例
+parametricTypeExample :: IO ()
+parametricTypeExample = do
+  let maybeInt = Just 42
+      maybeNothing = Nothing
+      eitherResult = safeDivide 10 2
+      eitherError = safeDivide 10 0
+  putStrLn $ "Maybe Int: " ++ show maybeInt
+  putStrLn $ "Maybe Nothing: " ++ show maybeNothing
+  putStrLn $ "Either result: " ++ show eitherResult
+  putStrLn $ "Either error: " ++ show eitherError
 ```
 
-**定理 4.1** (参数多态性质): 参数多态函数满足：
+### 2.3 递归数据类型
 
-1. 类型安全性：不会产生运行时类型错误
-2. 可重用性：同一函数可用于不同类型
-3. 编译时检查：类型错误在编译时发现
+**定义 2.3 (递归数据类型)**
+递归数据类型包含对自身的引用，用于表示复杂的数据结构。
 
-#### 4.2 特设多态
-
-**定义 4.2** (特设多态): 特设多态通过类型类实现，允许不同类型实现相同接口。
+**Haskell实现：**
 
 ```haskell
--- 特设多态示例
+-- 递归数据类型
+data BinaryTree a = 
+  Empty | 
+  Node a (BinaryTree a) (BinaryTree a)
+  deriving (Show)
+
+data Expr a = 
+  Literal a |
+  Add (Expr a) (Expr a) |
+  Multiply (Expr a) (Expr a)
+  deriving (Show)
+
+-- 递归数据类型操作
+treeDepth :: BinaryTree a -> Int
+treeDepth Empty = 0
+treeDepth (Node _ left right) = 1 + max (treeDepth left) (treeDepth right)
+
+evaluate :: Num a => Expr a -> a
+evaluate (Literal x) = x
+evaluate (Add e1 e2) = evaluate e1 + evaluate e2
+evaluate (Multiply e1 e2) = evaluate e1 * evaluate e2
+
+-- 递归数据类型示例
+recursiveTypeExample :: IO ()
+recursiveTypeExample = do
+  let tree = Node 5 (Node 3 Empty Empty) (Node 7 Empty Empty)
+      expr = Add (Literal 3) (Multiply (Literal 4) (Literal 5))
+  putStrLn $ "Tree: " ++ show tree
+  putStrLn $ "Tree depth: " ++ show (treeDepth tree)
+  putStrLn $ "Expression: " ++ show expr
+  putStrLn $ "Expression value: " ++ show (evaluate expr)
+```
+
+## 💾 3. 类型类
+
+### 3.1 类型类基础
+
+**定义 3.1 (类型类)**
+类型类是Haskell中实现多态性的机制，类似于其他语言中的接口。
+
+**Haskell实现：**
+
+```haskell
+-- 基本类型类
 class Show a where
-    show :: a -> String
+  show :: a -> String
 
 class Eq a where
-    (==) :: a -> a -> Bool
-    (/=) :: a -> a -> Bool
+  (==) :: a -> a -> Bool
+  (/=) :: a -> a -> Bool
 
--- 实例定义
-instance Show Int where
-    show = showInt
+class Ord a where
+  compare :: a -> a -> Ordering
+  (<) :: a -> a -> Bool
+  (<=) :: a -> a -> Bool
+  (>) :: a -> a -> Bool
+  (>=) :: a -> a -> Bool
+  max :: a -> a -> a
+  min :: a -> a -> a
 
-instance Eq Int where
-    (==) = eqInt
-    (/=) x y = not (x == y)
+-- 自定义类型类
+class Printable a where
+  printValue :: a -> IO ()
 
--- 使用示例
-main :: IO ()
-main = do
-    print $ show 42         -- "42"
-    print $ 5 == 5          -- True
-    print $ 5 /= 3          -- True
+-- 类型类实例
+instance Printable Int where
+  printValue x = putStrLn $ "Integer: " ++ show x
+
+instance Printable String where
+  printValue x = putStrLn $ "String: " ++ show x
+
+-- 类型类示例
+typeClassExample :: IO ()
+typeClassExample = do
+  let intVal = 42
+      stringVal = "hello"
+  printValue intVal
+  printValue stringVal
+  putStrLn $ "Int == 42: " ++ show (intVal == 42)
+  putStrLn $ "String < 'world': " ++ show (stringVal < "world")
 ```
 
-### 5. 类型安全
+### 3.2 类型类约束
 
-#### 5.1 类型安全定义
+**定义 3.2 (类型类约束)**
+类型类约束限制类型参数必须满足特定的类型类。
 
-**定义 5.1** (类型安全): 程序是类型安全的，如果所有表达式在运行时都有正确的类型。
-
-**定义 5.2** (类型错误): 类型错误是在运行时尝试对错误类型的值执行操作。
+**Haskell实现：**
 
 ```haskell
--- 类型安全示例
-main :: IO ()
-main = do
-    -- 类型安全的操作
-    let x :: Int
-        x = 5
-    
-    let y :: Int
-        y = 3
-    
-    let result :: Int
-        result = x + y  -- 类型安全：Int + Int = Int
-    
-    -- 类型不安全的操作（在Haskell中会被编译时检查）
-    -- let bad = x + "hello"  -- 编译错误：类型不匹配
-    
-    print result  -- 8
+-- 类型类约束
+sumList :: Num a => [a] -> a
+sumList = foldr (+) 0
+
+sortList :: Ord a => [a] -> [a]
+sortList = sort
+
+showList :: Show a => [a] -> String
+showList xs = "[" ++ intercalate ", " (map show xs) ++ "]"
+
+-- 多重约束
+complexFunction :: (Show a, Ord a, Num a) => a -> a -> String
+complexFunction x y = 
+  if x < y 
+  then "First is smaller: " ++ show x
+  else "Second is smaller or equal: " ++ show y
+
+-- 类型类约束示例
+typeClassConstraintExample :: IO ()
+typeClassConstraintExample = do
+  let numbers = [3, 1, 4, 1, 5, 9, 2, 6]
+      sumResult = sumList numbers
+      sortedResult = sortList numbers
+      showResult = showList numbers
+  putStrLn $ "Sum: " ++ show sumResult
+  putStrLn $ "Sorted: " ++ show sortedResult
+  putStrLn $ "Show: " ++ showResult
+  putStrLn $ "Complex: " ++ complexFunction 5 3
 ```
 
-#### 5.2 类型安全证明
+### 3.3 类型类层次结构
 
-**定理 5.1** (类型安全定理): 如果 $\Gamma \vdash e : T$ 且 $e \rightarrow^* v$，则 $v : T$。
+**定义 3.3 (类型类层次)**
+类型类可以形成层次结构，子类继承父类的约束。
 
-**证明**: 使用结构归纳法
-
-- 基础情况：$e$ 是值，直接满足
-- 归纳情况：$e$ 是复合表达式，使用类型规则和归约规则
-
-### 6. 类型系统扩展
-
-#### 6.1 高级类型特性
+**Haskell实现：**
 
 ```haskell
--- 类型别名
-type Point = (Double, Double)
-type Vector = [Double]
-type Matrix = [[Double]]
+-- 类型类层次结构
+class Eq a => Ord a where
+  compare :: a -> a -> Ordering
+  (<) :: a -> a -> Bool
+  (<=) :: a -> a -> Bool
+  (>) :: a -> a -> Bool
+  (>=) :: a -> a -> Bool
+  max :: a -> a -> a
+  min :: a -> a -> a
 
--- 新类型
-newtype Age = Age Int
-newtype Name = Name String
-newtype Email = Email String
+class (Eq a, Show a) => Printable a where
+  printValue :: a -> IO ()
+  printValue = putStrLn . show
 
--- 使用示例
-main :: IO ()
-main = do
-    let p :: Point
-        p = (3.0, 4.0)
-    
-    let v :: Vector
-        v = [1.0, 2.0, 3.0]
-    
-    let age :: Age
-        age = Age 25
-    
-    let name :: Name
-        name = Name "Alice"
-    
-    print p     -- (3.0,4.0)
-    print v     -- [1.0,2.0,3.0]
-    print age   -- Age 25
-    print name  -- Name "Alice"
+-- 自定义类型类层次
+class Basic a where
+  basic :: a -> String
+
+class (Basic a) => Advanced a where
+  advanced :: a -> String
+  advanced x = "Advanced " ++ basic x
+
+-- 类型类层次示例
+typeClassHierarchyExample :: IO ()
+typeClassHierarchyExample = do
+  let -- 使用层次结构
+      compareValues :: Ord a => a -> a -> String
+      compareValues x y = 
+        case compare x y of
+          LT -> "Less than"
+          EQ -> "Equal"
+          GT -> "Greater than"
+  putStrLn $ "Compare 3 5: " ++ compareValues 3 5
+  putStrLn $ "Compare 5 3: " ++ compareValues 5 3
+  putStrLn $ "Compare 3 3: " ++ compareValues 3 3
 ```
 
-#### 6.2 类型族
+## 🎭 4. 函子和应用函子
+
+### 4.1 函子
+
+**定义 4.1 (函子)**
+函子是支持映射操作的类型类。
+
+**数学表示：**
+$$F : \mathcal{C} \rightarrow \mathcal{D}$$
+
+**Haskell实现：**
 
 ```haskell
--- 类型族定义
+-- 函子类型类
+class Functor f where
+  fmap :: (a -> b) -> f a -> f b
+
+-- Maybe函子实例
+instance Functor Maybe where
+  fmap _ Nothing = Nothing
+  fmap f (Just x) = Just (f x)
+
+-- 列表函子实例
+instance Functor [] where
+  fmap = map
+
+-- 函子定律验证
+functorLaws :: IO ()
+functorLaws = do
+  let -- 第一定律：fmap id = id
+      law1 = fmap id (Just 5) == id (Just 5)
+      
+      -- 第二定律：fmap (f . g) = fmap f . fmap g
+      f = (*2)
+      g = (+1)
+      law2 = fmap (f . g) [1, 2, 3] == (fmap f . fmap g) [1, 2, 3]
+  putStrLn $ "Functor law 1: " ++ show law1
+  putStrLn $ "Functor law 2: " ++ show law2
+```
+
+### 4.2 应用函子
+
+**定义 4.2 (应用函子)**
+应用函子是函子的扩展，支持函数应用。
+
+**Haskell实现：**
+
+```haskell
+-- 应用函子类型类
+class Functor f => Applicative f where
+  pure :: a -> f a
+  (<*>) :: f (a -> b) -> f a -> f b
+
+-- Maybe应用函子实例
+instance Applicative Maybe where
+  pure = Just
+  Nothing <*> _ = Nothing
+  _ <*> Nothing = Nothing
+  Just f <*> Just x = Just (f x)
+
+-- 列表应用函子实例
+instance Applicative [] where
+  pure x = [x]
+  fs <*> xs = [f x | f <- fs, x <- xs]
+
+-- 应用函子示例
+applicativeExample :: IO ()
+applicativeExample = do
+  let -- Maybe应用函子
+      maybeAdd = Just (+)
+      maybeFive = Just 5
+      maybeThree = Just 3
+      maybeResult = maybeAdd <*> maybeFive <*> maybeThree
+      
+      -- 列表应用函子
+      listAdd = [(+), (*)]
+      listFive = [5]
+      listThree = [3]
+      listResult = listAdd <*> listFive <*> listThree
+  putStrLn $ "Maybe applicative: " ++ show maybeResult
+  putStrLn $ "List applicative: " ++ show listResult
+```
+
+## ⚡ 5. 单子
+
+### 5.1 单子基础
+
+**定义 5.1 (单子)**
+单子是应用函子的扩展，支持顺序计算和错误处理。
+
+**Haskell实现：**
+
+```haskell
+-- 单子类型类
+class Applicative m => Monad m where
+  return :: a -> m a
+  (>>=) :: m a -> (a -> m b) -> m b
+
+-- Maybe单子实例
+instance Monad Maybe where
+  return = Just
+  Nothing >>= _ = Nothing
+  Just x >>= f = f x
+
+-- 列表单子实例
+instance Monad [] where
+  return x = [x]
+  xs >>= f = concat (map f xs)
+
+-- 单子操作
+safeDivide :: Double -> Double -> Maybe Double
+safeDivide _ 0 = Nothing
+safeDivide x y = Just (x / y)
+
+-- 单子示例
+monadExample :: IO ()
+monadExample = do
+  let -- Maybe单子链
+      maybeChain = Just 10 >>= \x -> 
+                   safeDivide x 2 >>= \y ->
+                   safeDivide y 3
+      
+      -- 列表单子链
+      listChain = [1, 2, 3] >>= \x ->
+                  [x, x*2] >>= \y ->
+                  [y, y+1]
+  putStrLn $ "Maybe monad: " ++ show maybeChain
+  putStrLn $ "List monad: " ++ show listChain
+```
+
+### 5.2 do记法
+
+**定义 5.2 (do记法)**
+do记法是单子操作的语法糖，使代码更易读。
+
+**Haskell实现：**
+
+```haskell
+-- do记法示例
+doNotationExample :: IO ()
+doNotationExample = do
+  let -- Maybe do记法
+      maybeDo :: Maybe Double
+      maybeDo = do
+        x <- Just 10
+        y <- safeDivide x 2
+        z <- safeDivide y 3
+        return z
+      
+      -- 列表do记法
+      listDo :: [Int]
+      listDo = do
+        x <- [1, 2, 3]
+        y <- [x, x*2]
+        z <- [y, y+1]
+        return z
+  putStrLn $ "Maybe do notation: " ++ show maybeDo
+  putStrLn $ "List do notation: " ++ show listDo
+```
+
+## 🔄 6. 类型系统的高级特性
+
+### 6.1 类型族
+
+**定义 6.1 (类型族)**
+类型族允许在类型级别进行计算。
+
+**Haskell实现：**
+
+```haskell
+-- 类型族
 type family ElementType (f :: * -> *) :: *
 type instance ElementType [] = a
 type instance ElementType Maybe = a
-type instance ElementType (Either e) = a
 
--- 类型族使用
+-- 类型族应用
 class Container c where
-    empty :: c a
-    insert :: ElementType c -> c (ElementType c) -> c (ElementType c)
+  type Element c
+  empty :: c
+  insert :: Element c -> c -> c
+  contains :: Element c -> c -> Bool
 
--- 实例定义
-instance Container [] where
-    empty = []
-    insert x xs = x : xs
+instance Container [a] where
+  type Element [a] = a
+  empty = []
+  insert x xs = x : xs
+  contains _ [] = False
+  contains x (y:ys) = x == y || contains x ys
 
-instance Container Maybe where
-    empty = Nothing
-    insert x _ = Just x
+-- 类型族示例
+typeFamilyExample :: IO ()
+typeFamilyExample = do
+  let list = [1, 2, 3, 4, 5]
+      newList = insert 6 list
+      hasThree = contains 3 list
+      hasTen = contains 10 list
+  putStrLn $ "Original list: " ++ show list
+  putStrLn $ "After insert: " ++ show newList
+  putStrLn $ "Contains 3: " ++ show hasThree
+  putStrLn $ "Contains 10: " ++ show hasTen
 ```
 
-### 7. 类型系统实现
+### 6.2 数据族
 
-#### 7.1 类型检查器
+**定义 6.2 (数据族)**
+数据族允许根据类型参数定义不同的数据结构。
+
+**Haskell实现：**
 
 ```haskell
--- 简单类型检查器
-data Type = TInt | TBool | TFun Type Type | TVar String
-    deriving (Show, Eq)
+-- 数据族
+data family Vector a
+data instance Vector Int = IntVector [Int]
+data instance Vector Double = DoubleVector [Double]
 
-data Expr = Var String | LitInt Int | LitBool Bool | App Expr Expr | Lam String Expr
-    deriving (Show)
+-- 数据族操作
+class VectorOps v where
+  type Elem v
+  vempty :: v
+  vcons :: Elem v -> v -> v
+  vhead :: v -> Elem v
+  vtail :: v -> v
 
--- 类型环境
-type TypeEnv = [(String, Type)]
+instance VectorOps (Vector Int) where
+  type Elem (Vector Int) = Int
+  vempty = IntVector []
+  vcons x (IntVector xs) = IntVector (x : xs)
+  vhead (IntVector (x:_)) = x
+  vtail (IntVector (_:xs)) = IntVector xs
 
--- 类型检查函数
-typeCheck :: TypeEnv -> Expr -> Maybe Type
-typeCheck env (Var x) = lookup x env
-typeCheck env (LitInt _) = Just TInt
-typeCheck env (LitBool _) = Just TBool
-typeCheck env (App e1 e2) = do
-    t1 <- typeCheck env e1
-    t2 <- typeCheck env e2
-    case t1 of
-        TFun t11 t12 | t11 == t2 -> Just t12
-        _ -> Nothing
-typeCheck env (Lam x e) = do
-    t <- typeCheck ((x, TVar "a") : env) e
-    return (TFun (TVar "a") t)
+instance VectorOps (Vector Double) where
+  type Elem (Vector Double) = Double
+  vempty = DoubleVector []
+  vcons x (DoubleVector xs) = DoubleVector (x : xs)
+  vhead (DoubleVector (x:_)) = x
+  vtail (DoubleVector (_:xs)) = DoubleVector xs
 
--- 示例
-main :: IO ()
-main = do
-    let expr = App (Lam "x" (Var "x")) (LitInt 42)
-    let result = typeCheck [] expr
-    print result  -- Just (TFun (TVar "a") (TVar "a"))
+-- 数据族示例
+dataFamilyExample :: IO ()
+dataFamilyExample = do
+  let intVec = vcons 1 (vcons 2 (vcons 3 vempty))
+      doubleVec = vcons 1.5 (vcons 2.5 (vcons 3.5 vempty))
+  putStrLn $ "Int vector head: " ++ show (vhead intVec)
+  putStrLn $ "Double vector head: " ++ show (vhead doubleVec)
 ```
 
-#### 7.2 类型推断器
+## 🛠️ 7. 类型系统的最佳实践
+
+### 7.1 类型安全
+
+**定义 7.1 (类型安全)**
+类型安全确保程序在编译时就能发现类型错误。
+
+**Haskell实现：**
 
 ```haskell
--- 类型推断器
-data TypeVar = TV String | TCon String | TApp TypeVar TypeVar
-    deriving (Show, Eq)
-
--- 类型约束
-type Constraint = (TypeVar, TypeVar)
-
--- 类型推断函数
-inferType :: TypeEnv -> Expr -> (TypeVar, [Constraint])
-inferType env (Var x) = case lookup x env of
-    Just t -> (t, [])
-    Nothing -> error $ "Unbound variable: " ++ x
-inferType env (LitInt _) = (TCon "Int", [])
-inferType env (LitBool _) = (TCon "Bool", [])
-inferType env (App e1 e2) = (t3, c1 ++ c2 ++ [(t1, TApp (TApp (TCon "->") t2) t3)])
-  where
-    (t1, c1) = inferType env e1
-    (t2, c2) = inferType env e2
-    t3 = TV "a"  -- 新的类型变量
-inferType env (Lam x e) = (TApp (TApp (TCon "->") t1) t2, c)
-  where
-    (t2, c) = inferType ((x, t1) : env) e
-    t1 = TV "b"  -- 新的类型变量
+-- 类型安全示例
+typeSafetyExample :: IO ()
+typeSafetyExample = do
+  let -- 类型安全的函数
+      safeAdd :: Int -> Int -> Int
+      safeAdd x y = x + y
+      
+      -- 类型安全的列表操作
+      safeHead :: [a] -> Maybe a
+      safeHead [] = Nothing
+      safeHead (x:_) = Just x
+      
+      -- 类型安全的除法
+      safeDivide :: Double -> Double -> Maybe Double
+      safeDivide _ 0 = Nothing
+      safeDivide x y = Just (x / y)
+  putStrLn $ "Safe add: " ++ show (safeAdd 5 3)
+  putStrLn $ "Safe head [1,2,3]: " ++ show (safeHead [1,2,3])
+  putStrLn $ "Safe head []: " ++ show (safeHead [])
+  putStrLn $ "Safe divide 10 2: " ++ show (safeDivide 10 2)
+  putStrLn $ "Safe divide 10 0: " ++ show (safeDivide 10 0)
 ```
 
-### 8. 类型系统优化
+### 7.2 类型抽象
 
-#### 8.1 类型优化技术
+**定义 7.2 (类型抽象)**
+类型抽象隐藏实现细节，只暴露必要的接口。
+
+**Haskell实现：**
+
+```haskell
+-- 类型抽象示例
+module Stack (Stack, empty, push, pop, top, isEmpty) where
+
+-- 隐藏实现
+newtype Stack a = Stack [a]
+
+-- 公共接口
+empty :: Stack a
+empty = Stack []
+
+push :: a -> Stack a -> Stack a
+push x (Stack xs) = Stack (x : xs)
+
+pop :: Stack a -> Maybe (a, Stack a)
+pop (Stack []) = Nothing
+pop (Stack (x:xs)) = Just (x, Stack xs)
+
+top :: Stack a -> Maybe a
+top (Stack []) = Nothing
+top (Stack (x:_)) = Just x
+
+isEmpty :: Stack a -> Bool
+isEmpty (Stack []) = True
+isEmpty _ = False
+
+-- 类型抽象使用
+stackExample :: IO ()
+stackExample = do
+  let s1 = empty
+      s2 = push 1 s1
+      s3 = push 2 s2
+      s4 = push 3 s3
+      
+      topResult = top s4
+      (popped, s5) = case pop s4 of
+                       Just (x, s) -> (x, s)
+                       Nothing -> error "Empty stack"
+  putStrLn $ "Top of stack: " ++ show topResult
+  putStrLn $ "Popped: " ++ show popped
+  putStrLn $ "Is empty after pop: " ++ show (isEmpty s5)
+```
+
+## 📊 8. 类型系统的性能考虑
+
+### 8.1 类型擦除
+
+**定义 8.1 (类型擦除)**
+Haskell在运行时擦除类型信息，只保留值。
+
+**Haskell实现：**
+
+```haskell
+-- 类型擦除示例
+typeErasureExample :: IO ()
+typeErasureExample = do
+  let -- 编译时类型检查
+      intList :: [Int] = [1, 2, 3, 4, 5]
+      doubleList :: [Double] = [1.0, 2.0, 3.0, 4.0, 5.0]
+      
+      -- 运行时类型信息被擦除
+      intSum = sum intList
+      doubleSum = sum doubleList
+  putStrLn $ "Int sum: " ++ show intSum
+  putStrLn $ "Double sum: " ++ show doubleSum
+  putStrLn "Type information is erased at runtime!"
+```
+
+### 8.2 类型优化
+
+**定义 8.2 (类型优化)**
+编译器可以基于类型信息进行优化。
+
+**Haskell实现：**
 
 ```haskell
 -- 类型优化示例
-main :: IO ()
-main = do
-    -- 类型特化
-    let f :: Int -> Int
-        f x = x + 1
-    
-    let g :: Double -> Double
-        g x = x + 1.0
-    
-    -- 类型融合
-    let h = f . fromIntegral  -- h :: Integral a => a -> Int
-    
-    print $ f 5      -- 6
-    print $ g 3.14   -- 4.14
-    print $ h 5      -- 6
+typeOptimizationExample :: IO ()
+typeOptimizationExample = do
+  let -- 编译器可以优化类型已知的操作
+      optimizedSum :: Int -> Int
+      optimizedSum n = sum [1..n]
+      
+      -- 多态函数可能需要运行时类型信息
+      polymorphicSum :: Num a => [a] -> a
+      polymorphicSum = sum
+      
+      result1 = optimizedSum 1000
+      result2 = polymorphicSum [1..1000]
+  putStrLn $ "Optimized sum: " ++ show result1
+  putStrLn $ "Polymorphic sum: " ++ show result2
 ```
 
-#### 8.2 类型级编程
+## 🔗 9. 与其他类型系统的比较
+
+### 9.1 静态类型vs动态类型
+
+**定理 9.1 (静态类型优势)**
+Haskell的静态类型系统相比动态类型系统具有更好的安全性和性能。
+
+**Haskell实现：**
 
 ```haskell
--- 类型级编程示例
-data Zero
-data Succ n
-
--- 类型级自然数
-type One = Succ Zero
-type Two = Succ One
-type Three = Succ Two
-
--- 类型级加法
-type family Add (a :: *) (b :: *) :: *
-type instance Add Zero b = b
-type instance Add (Succ a) b = Succ (Add a b)
-
--- 类型级列表长度
-data Vec (n :: *) (a :: *) where
-    Nil :: Vec Zero a
-    Cons :: a -> Vec n a -> Vec (Succ n) a
-
--- 类型安全索引
-index :: Vec n a -> Proxy n -> a
-index (Cons x _) _ = x
+-- 静态类型检查
+staticTypeCheck :: IO ()
+staticTypeCheck = do
+  let -- 编译时类型检查
+      addInts :: Int -> Int -> Int
+      addInts x y = x + y
+      
+      -- 以下代码在编译时会报错
+      -- addInts "hello" 5  -- 类型错误
+      -- addInts 5 "world"  -- 类型错误
+      
+      result = addInts 5 3
+  putStrLn $ "Static type check result: " ++ show result
+  putStrLn "Type errors are caught at compile time!"
 ```
 
-### 9. 实际应用案例
+### 9.2 强类型vs弱类型
 
-#### 9.1 类型安全的数据结构
+**定理 9.2 (强类型优势)**
+Haskell的强类型系统防止隐式类型转换。
+
+**Haskell实现：**
 
 ```haskell
--- 类型安全的栈
-data Stack a = Empty | Push a (Stack a)
-
--- 栈操作
-empty :: Stack a
-empty = Empty
-
-push :: a -> Stack a -> Stack a
-push x s = Push x s
-
-pop :: Stack a -> Maybe (a, Stack a)
-pop Empty = Nothing
-pop (Push x s) = Just (x, s)
-
-top :: Stack a -> Maybe a
-top Empty = Nothing
-top (Push x _) = Just x
-
--- 使用示例
-main :: IO ()
-main = do
-    let s1 = empty
-    let s2 = push 1 s1
-    let s3 = push 2 s2
-    let s4 = push 3 s3
-    
-    print $ top s4     -- Just 3
-    print $ pop s4     -- Just (3,Push 2 (Push 1 Empty))
+-- 强类型系统
+strongTypeSystem :: IO ()
+strongTypeSystem = do
+  let -- 显式类型转换
+      intToDouble :: Int -> Double
+      intToDouble = fromIntegral
+      
+      doubleToInt :: Double -> Int
+      doubleToInt = round
+      
+      -- 以下代码在编译时会报错
+      -- let x = 5 + 3.14  -- 需要显式转换
+      
+      result1 = intToDouble 5 + 3.14
+      result2 = doubleToInt 3.14
+  putStrLn $ "Int to double: " ++ show result1
+  putStrLn $ "Double to int: " ++ show result2
+  putStrLn "No implicit type conversions!"
 ```
 
-#### 9.2 类型安全的配置系统
+## 📚 10. 总结与展望
 
-```haskell
--- 类型安全的配置
-data Config a = Config { value :: a, description :: String }
+### 10.1 类型系统的核心概念
 
--- 配置类型
-type StringConfig = Config String
-type IntConfig = Config Int
-type BoolConfig = Config Bool
+1. **类型安全**：编译时错误检查
+2. **类型推导**：自动类型推断
+3. **类型类**：多态性机制
+4. **代数数据类型**：复杂数据结构定义
 
--- 配置操作
-getValue :: Config a -> a
-getValue = value
+### 10.2 类型系统的优势
 
-setValue :: a -> Config a -> Config a
-setValue v c = c { value = v }
+1. **安全性**：编译时发现错误
+2. **性能**：运行时优化
+3. **表达力**：丰富的类型抽象
+4. **可维护性**：类型作为文档
 
--- 使用示例
-main :: IO ()
-main = do
-    let portConfig = Config 8080 "Server port"
-    let hostConfig = Config "localhost" "Server host"
-    let debugConfig = Config True "Debug mode"
-    
-    print $ getValue portConfig   -- 8080
-    print $ getValue hostConfig   -- "localhost"
-    print $ getValue debugConfig  -- True
-    
-    let newPortConfig = setValue 9090 portConfig
-    print $ getValue newPortConfig  -- 9090
-```
+### 10.3 未来发展方向
+
+1. **依赖类型**：更丰富的类型系统
+2. **线性类型**：资源管理
+3. **类型级编程**：编译时计算
+4. **类型系统扩展**：更强大的抽象
 
 ---
 
-## 📚 参考文献
+**相关文档**：
 
-1. Pierce, B. C. (2002). *Types and Programming Languages*. MIT Press.
-2. Cardelli, L., & Wegner, P. (1985). *On Understanding Types, Data Abstraction, and Polymorphism*. ACM Computing Surveys.
-3. Milner, R. (1978). *A Theory of Type Polymorphism in Programming*. Journal of Computer and System Sciences.
-4. Hindley, J. R. (1969). *The Principal Type-Scheme of an Object in Combinatory Logic*. Transactions of the American Mathematical Society.
-
----
-
-## 🔗 相关链接
-
-- [函数式编程基础](../01-Basic-Concepts/001-Functional-Programming.md)
-- [递归与列表](../01-Basic-Concepts/003-Recursion-and-Lists.md)
+- [函数式编程基础](../01-Basic-Concepts/001-Functional-Programming-Foundation.md)
 - [高阶函数](../01-Basic-Concepts/004-Higher-Order-Functions.md)
-- [代数数据类型](002-Algebraic-Data-Types.md)
-- [类型类](003-Type-Classes.md)
-- [高级类型特性](004-Advanced-Type-Features.md)
+- [高级类型](../02-Advanced-Types/001-GADTs.md)
+- [类型类](../03-Type-Classes/001-Type-Classes-Foundation.md)
+
+**实现示例**：
+
+- [依赖类型](../04-Dependent-Types/001-Dependent-Types-Foundation.md)
+- [形式验证](../13-Formal-Verification/001-Formal-Verification-Foundation.md)
+- [编译器设计](../14-Compiler-Design/001-Compiler-Foundation.md)

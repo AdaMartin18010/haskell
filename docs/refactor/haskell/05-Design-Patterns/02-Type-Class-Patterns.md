@@ -399,7 +399,7 @@ $$\text{default}: M \rightarrow M_{\text{default}}$$
 - **一致性**: $\text{default}(m) \equiv m$ 当且仅当 $m$ 已实现
 - **最小性**: $\text{minimal}(M_{\text{default}}) \subseteq M$
 
-### 实际应用示例
+### 实际应用示例1
 
 ```haskell
 -- 默认实现示例
@@ -616,7 +616,7 @@ $$\text{extend}: TC_1 \rightarrow TC_2 \rightarrow TC_{\text{extended}}$$
 - **组合性**: $TC_2 \subseteq TC_{\text{extended}}$
 - **一致性**: $\text{laws}(TC_1) \cup \text{laws}(TC_2) \subseteq \text{laws}(TC_{\text{extended}})$
 
-### 实际应用示例
+### 实际应用示例2
 
 ```haskell
 -- 扩展模式示例
@@ -854,7 +854,7 @@ $$\text{resolve}: C \rightarrow \text{Substitution} \times C'$$
 - $\text{Substitution}$ 是类型替换
 - $C'$ 是剩余约束
 
-### 实际应用示例
+### 实际应用示例3
 
 ```haskell
 -- 约束模式示例
@@ -1033,7 +1033,7 @@ sort (x:xs) = sort smaller ++ [x] ++ sort bigger
     bigger = [a | a <- xs, a > x]
 ```
 
-### 实际应用示例
+### 实际应用示例4
 
 ```haskell
 -- 实际应用示例

@@ -8,7 +8,7 @@
 
 ### Model目录结构分析
 
-```
+```text
 docs/model/
 ├── Theory/                    # 理论层 - 形式化理论体系
 ├── ProgrammingLanguage/       # 编程语言层 - 语言特性和比较
@@ -22,7 +22,7 @@ docs/model/
 
 ### 重构目标结构
 
-```
+```text
 docs/refactor/
 ├── 01-Philosophy/            # 理念层 - 哲学基础和认识论
 ├── 02-Formal-Science/        # 形式科学层 - 数学和逻辑基础

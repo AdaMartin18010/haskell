@@ -311,7 +311,7 @@ $$\text{curry}: (A \times B \rightarrow C) \rightarrow (A \rightarrow (B \righta
 柯里化的逆操作：
 $$\text{uncurry}: (A \rightarrow (B \rightarrow C)) \rightarrow (A \times B \rightarrow C)$$
 
-### 实际应用示例
+### 实际应用示例2
 
 ```haskell
 -- 柯里化示例
@@ -485,7 +485,7 @@ $$\text{partial}: (A \times B \rightarrow C) \times A \rightarrow (B \rightarrow
 - **左结合性**: $\text{partial}(f, a)(b) = f(a, b)$
 - **右结合性**: $\text{partial}(f, b)(a) = f(a, b)$
 
-### 实际应用示例
+### 实际应用示例3
 
 ```haskell
 -- 部分应用示例
@@ -658,7 +658,7 @@ $$liftA: (a \rightarrow b) \rightarrow F a \rightarrow F b$$
 **Monad提升**:
 $$liftM: (a \rightarrow b) \rightarrow M a \rightarrow M b$$
 
-### 实际应用示例
+### 实际应用示例4
 
 ```haskell
 -- 函数提升示例
@@ -858,7 +858,7 @@ comprehensivePatternExample = do
   putStrLn $ "Safe division results: " ++ show maybeResults
 ```
 
-### 实际应用示例
+### 实际应用示例5
 
 ```haskell
 -- 实际应用示例

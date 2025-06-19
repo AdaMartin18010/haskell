@@ -1,811 +1,703 @@
-# 001. 函数式设计模式 - Functional Design Patterns
+# Haskell函数式设计模式 (Haskell Functional Design Patterns)
 
-## 📋 文档信息
+## 📚 快速导航
 
-**文档编号**: `haskell/05-Design-Patterns/001-Functional-Design-Patterns.md`  
-**创建日期**: 2024年12月  
-**最后更新**: 2024年12月  
-**文档状态**: 完成  
-**质量等级**: A+  
+### 相关理论
 
-**相关文档**:
+- [函数式编程理论](../../02-Formal-Science/09-Functional-Programming/001-Lambda-Calculus.md)
+- [类型系统基础](../02-Type-System/001-Type-System-Foundation.md)
+- [控制流基础](../03-Control-Flow/001-Control-Flow-Foundation.md)
 
-- [函数式编程基础](../01-Basic-Concepts/001-Functional-Programming.md)
-- [高阶函数](../01-Basic-Concepts/004-Higher-Order-Functions.md)
-- [类型系统基础](../04-Type-System/001-Type-System-Foundation.md)
-- [代数数据类型](../04-Type-System/002-Algebraic-Data-Types.md)
+### 实现示例
+
+- [Monad模式](../002-Monad-Patterns.md)
+- [Applicative模式](../003-Applicative-Patterns.md)
+- [Functor模式](../004-Functor-Patterns.md)
+
+### 应用领域
+
+- [软件架构](../../../haskell/10-Software-Architecture/001-Architecture-Foundation.md)
+- [数据处理](../../../haskell/09-Data-Processing/001-Data-Processing-Foundation.md)
 
 ---
 
-## 🎯 核心概念
+## 🎯 概述
 
-### 1. 设计模式理论基础
+函数式设计模式是Haskell中解决常见编程问题的标准化解决方案。本文档详细介绍了Haskell中的核心设计模式，包括Functor、Applicative、Monad等类型类模式，以及函数式编程中的常见模式。
 
-#### 1.1 函数式设计模式定义
+## 1. 类型类设计模式
 
-**定义 1.1** (设计模式): 设计模式是解决软件设计中常见问题的可重用解决方案模板。
+### 1.1 Functor模式
 
-**定义 1.2** (函数式设计模式): 函数式设计模式是基于函数式编程原则的设计模式，强调：
+**定义 1.1 (Functor)**
+Functor是支持映射操作的容器类型。
 
-- 不可变性 (Immutability)
-- 纯函数 (Pure Functions)
-- 高阶函数 (Higher-Order Functions)
-- 类型安全 (Type Safety)
+**数学定义：**
+Functor是一个类型构造函数 $F$ 和函数 $fmap$，满足：
+$$fmap: (A \rightarrow B) \rightarrow F(A) \rightarrow F(B)$$
 
-**定义 1.3** (模式分类): 函数式设计模式可分为：
+**定理 1.1 (Functor定律)**
+Functor必须满足以下定律：
 
-- **构造模式**: 对象创建和组合
-- **结构模式**: 对象组合和接口适配
-- **行为模式**: 对象间通信和协作
+1. **恒等律**：$fmap\ id = id$
+2. **结合律**：$fmap\ (f \circ g) = fmap\ f \circ fmap\ g$
 
-#### 1.2 模式数学基础
-
-**定义 1.4** (模式同构): 两个模式 $P_1$ 和 $P_2$ 是同构的，如果存在双射 $f: P_1 \rightarrow P_2$ 保持结构。
-
-**定理 1.1** (模式组合律): 对于模式 $P_1, P_2, P_3$：
-$$(P_1 \circ P_2) \circ P_3 = P_1 \circ (P_2 \circ P_3)$$
-
-### 2. 构造模式 (Creational Patterns)
-
-#### 2.1 工厂模式
-
-**定义 2.1** (工厂模式): 工厂模式通过函数创建对象，隐藏对象创建细节。
+**Haskell实现：**
 
 ```haskell
--- 工厂模式实现
-data Shape = Circle Double | Rectangle Double Double | Triangle Double Double Double
+-- Functor类型类
+class Functor f where
+  fmap :: (a -> b) -> f a -> f b
 
--- 工厂函数
-createCircle :: Double -> Shape
-createCircle radius = Circle radius
+-- Maybe Functor实例
+instance Functor Maybe where
+  fmap f Nothing = Nothing
+  fmap f (Just x) = Just (f x)
 
-createRectangle :: Double -> Double -> Shape
-createRectangle width height = Rectangle width height
+-- 列表Functor实例
+instance Functor [] where
+  fmap = map
 
-createTriangle :: Double -> Double -> Double -> Shape
-createTriangle a b c = Triangle a b c
+-- Either Functor实例
+instance Functor (Either a) where
+  fmap f (Left x) = Left x
+  fmap f (Right y) = Right (f y)
 
--- 智能构造函数
-createValidCircle :: Double -> Maybe Shape
-createValidCircle radius
-    | radius > 0 = Just (Circle radius)
-    | otherwise = Nothing
+-- 元组Functor实例
+instance Functor ((,) a) where
+  fmap f (x, y) = (x, f y)
 
-createValidRectangle :: Double -> Double -> Maybe Shape
-createValidRectangle width height
-    | width > 0 && height > 0 = Just (Rectangle width height)
-    | otherwise = Nothing
+-- Functor模式应用
+functorPattern :: [Int] -> [String]
+functorPattern = fmap show
 
--- 使用示例
-main :: IO ()
-main = do
-    let circle = createCircle 5.0
-    let rectangle = createRectangle 3.0 4.0
-    let triangle = createTriangle 3.0 4.0 5.0
-    
-    let validCircle = createValidCircle 5.0
-    let invalidCircle = createValidCircle (-1.0)
-    
-    print circle        -- Circle 5.0
-    print rectangle     -- Rectangle 3.0 4.0
-    print triangle      -- Triangle 3.0 4.0 5.0
-    print validCircle   -- Just (Circle 5.0)
-    print invalidCircle -- Nothing
+-- Functor组合
+functorComposition :: [Int] -> [String]
+functorComposition = fmap (show . (* 2))
+
+-- Functor与错误处理
+safeFunctor :: Maybe Int -> Maybe String
+safeFunctor = fmap (\x -> "Value: " ++ show x)
+
+-- Functor与条件处理
+conditionalFunctor :: [Int] -> [String]
+conditionalFunctor = fmap (\x -> 
+  if x > 0 then "Positive: " ++ show x else "Non-positive: " ++ show x)
+
+-- 自定义Functor
+data Tree a = Leaf a | Node (Tree a) (Tree a)
+
+instance Functor Tree where
+  fmap f (Leaf x) = Leaf (f x)
+  fmap f (Node left right) = Node (fmap f left) (fmap f right)
+
+-- Functor模式示例
+treeFunctorPattern :: Tree Int -> Tree String
+treeFunctorPattern = fmap show
 ```
 
-**定理 2.1** (工厂模式性质): 工厂模式满足：
+### 1.2 Applicative模式
 
-1. 封装性：隐藏对象创建细节
-2. 可扩展性：易于添加新的对象类型
-3. 类型安全：编译时类型检查
+**定义 1.2 (Applicative)**
+Applicative是支持函数应用的Functor。
 
-#### 2.2 构建者模式
+**数学定义：**
+Applicative是一个类型构造函数 $F$ 和函数：
 
-**定义 2.2** (构建者模式): 构建者模式通过链式调用构建复杂对象。
+- $pure: A \rightarrow F(A)$
+- $<*>: F(A \rightarrow B) \rightarrow F(A) \rightarrow F(B)$
+
+**定理 1.2 (Applicative定律)**
+Applicative必须满足以下定律：
+
+1. **恒等律**：$pure\ id <*> v = v$
+2. **同态律**：$pure\ f <*> pure\ x = pure\ (f\ x)$
+3. **交换律**：$u <*> pure\ y = pure\ (\lambda f \rightarrow f\ y) <*> u$
+4. **结合律**：$u <*> (v <*> w) = pure\ (.) <*> u <*> v <*> w$
+
+**Haskell实现：**
 
 ```haskell
--- 构建者模式实现
-data Person = Person
-    { name :: String
-    , age :: Int
-    , email :: String
-    , address :: String
-    } deriving (Show)
+-- Applicative类型类
+class Functor f => Applicative f where
+  pure :: a -> f a
+  (<*>) :: f (a -> b) -> f a -> f b
 
--- 构建者类型
-data PersonBuilder = PersonBuilder
-    { pbName :: Maybe String
-    , pbAge :: Maybe Int
-    , pbEmail :: Maybe String
-    , pbAddress :: Maybe String
-    }
+-- Maybe Applicative实例
+instance Applicative Maybe where
+  pure = Just
+  Nothing <*> _ = Nothing
+  Just f <*> x = fmap f x
 
--- 初始构建者
-emptyPersonBuilder :: PersonBuilder
-emptyPersonBuilder = PersonBuilder Nothing Nothing Nothing Nothing
+-- 列表Applicative实例
+instance Applicative [] where
+  pure x = [x]
+  fs <*> xs = [f x | f <- fs, x <- xs]
 
--- 构建方法
-withName :: String -> PersonBuilder -> PersonBuilder
-withName name builder = builder { pbName = Just name }
+-- Either Applicative实例
+instance Applicative (Either e) where
+  pure = Right
+  Left e <*> _ = Left e
+  Right f <*> x = fmap f x
 
-withAge :: Int -> PersonBuilder -> PersonBuilder
-withAge age builder = builder { pbAge = Just age }
+-- Applicative模式应用
+applicativePattern :: Maybe Int -> Maybe Int -> Maybe Int
+applicativePattern x y = (+) <$> x <*> y
 
-withEmail :: String -> PersonBuilder -> PersonBuilder
-withEmail email builder = builder { pbEmail = Just email }
+-- Applicative与函数应用
+functionApplication :: Maybe (Int -> Int -> Int) -> Maybe Int -> Maybe Int -> Maybe Int
+functionApplication f x y = f <*> x <*> y
 
-withAddress :: String -> PersonBuilder -> PersonBuilder
-withAddress address builder = builder { pbAddress = Just address }
+-- Applicative与列表处理
+listApplicativePattern :: [Int] -> [Int] -> [Int]
+listApplicativePattern xs ys = (+) <$> xs <*> ys
 
--- 构建完成
-build :: PersonBuilder -> Maybe Person
-build (PersonBuilder name age email address) = do
-    n <- name
-    a <- age
-    e <- email
-    addr <- address
-    return $ Person n a e addr
+-- Applicative与错误处理
+safeApplicative :: Either String Int -> Either String Int -> Either String Int
+safeApplicative x y = (+) <$> x <*> y
 
--- 使用示例
-main :: IO ()
-main = do
-    let person = emptyPersonBuilder
-        `withName` "Alice"
-        `withAge` 25
-        `withEmail` "alice@example.com"
-        `withAddress` "123 Main St"
-    
-    let result = build person
-    print result  -- Just (Person {name = "Alice", age = 25, email = "alice@example.com", address = "123 Main St"})
+-- Applicative与条件处理
+conditionalApplicative :: [Int] -> [Int] -> [Int]
+conditionalApplicative xs ys = 
+  filter (> 0) <$> xs <*> ys
+
+-- 自定义Applicative
+data Validation e a = Success a | Failure e
+
+instance Functor (Validation e) where
+  fmap f (Success x) = Success (f x)
+  fmap _ (Failure e) = Failure e
+
+instance Applicative (Validation e) where
+  pure = Success
+  Success f <*> Success x = Success (f x)
+  Failure e <*> _ = Failure e
+  _ <*> Failure e = Failure e
+
+-- Applicative模式示例
+validationPattern :: Validation String Int -> Validation String Int -> Validation String Int
+validationPattern x y = (+) <$> x <*> y
 ```
 
-### 3. 结构模式 (Structural Patterns)
+### 1.3 Monad模式
 
-#### 3.1 适配器模式
+**定义 1.3 (Monad)**
+Monad是支持顺序计算的Applicative。
 
-**定义 3.1** (适配器模式): 适配器模式使不兼容的接口能够协同工作。
+**数学定义：**
+Monad是一个类型构造函数 $M$ 和函数：
 
-```haskell
--- 适配器模式实现
--- 旧接口
-class OldInterface a where
-    oldMethod :: a -> String
+- $return: A \rightarrow M(A)$
+- $>>=: M(A) \rightarrow (A \rightarrow M(B)) \rightarrow M(B)$
 
--- 新接口
-class NewInterface a where
-    newMethod :: a -> String
+**定理 1.3 (Monad定律)**
+Monad必须满足以下定律：
 
--- 旧实现
-data OldClass = OldClass String
+1. **左单位律**：$return\ a >>= f = f\ a$
+2. **右单位律**：$m >>= return = m$
+3. **结合律**：$(m >>= f) >>= g = m >>= (\lambda x \rightarrow f\ x >>= g)$
 
-instance OldInterface OldClass where
-    oldMethod (OldClass s) = "Old: " ++ s
-
--- 适配器
-data Adapter = Adapter OldClass
-
-instance NewInterface Adapter where
-    newMethod (Adapter old) = "New: " ++ oldMethod old
-
--- 使用示例
-main :: IO ()
-main = do
-    let old = OldClass "data"
-    let adapter = Adapter old
-    
-    print $ oldMethod old      -- "Old: data"
-    print $ newMethod adapter  -- "New: Old: data"
-```
-
-**定理 3.1** (适配器模式性质): 适配器模式保持：
-
-1. 接口兼容性：新接口与旧接口兼容
-2. 功能完整性：不丢失原有功能
-3. 类型安全：编译时类型检查
-
-#### 3.2 装饰器模式
-
-**定义 3.2** (装饰器模式): 装饰器模式动态地为对象添加功能。
+**Haskell实现：**
 
 ```haskell
--- 装饰器模式实现
-class Component a where
-    operation :: a -> String
+-- Monad类型类
+class Applicative m => Monad m where
+  return :: a -> m a
+  (>>=) :: m a -> (a -> m b) -> m b
 
--- 基础组件
-data ConcreteComponent = ConcreteComponent String
-
-instance Component ConcreteComponent where
-    operation (ConcreteComponent s) = s
-
--- 装饰器基类
-data Decorator a = Decorator a
-
-instance Component a => Component (Decorator a) where
-    operation (Decorator component) = operation component
-
--- 具体装饰器
-data BoldDecorator a = BoldDecorator a
-
-instance Component a => Component (BoldDecorator a) where
-    operation (BoldDecorator component) = "**" ++ operation component ++ "**"
-
-data ItalicDecorator a = ItalicDecorator a
-
-instance Component a => Component (ItalicDecorator a) where
-    operation (ItalicDecorator component) = "*" ++ operation component ++ "*"
-
--- 使用示例
-main :: IO ()
-main = do
-    let component = ConcreteComponent "Hello, World!"
-    let boldComponent = BoldDecorator component
-    let italicBoldComponent = ItalicDecorator boldComponent
-    
-    print $ operation component           -- "Hello, World!"
-    print $ operation boldComponent       -- "**Hello, World!**"
-    print $ operation italicBoldComponent -- "***Hello, World!**"
-```
-
-### 4. 行为模式 (Behavioral Patterns)
-
-#### 4.1 策略模式
-
-**定义 4.1** (策略模式): 策略模式定义算法族，使算法可以互换。
-
-```haskell
--- 策略模式实现
-class Strategy a where
-    execute :: a -> Int -> Int -> Int
-
--- 具体策略
-data AddStrategy = AddStrategy
-
-instance Strategy AddStrategy where
-    execute _ x y = x + y
-
-data MultiplyStrategy = MultiplyStrategy
-
-instance Strategy MultiplyStrategy where
-    execute _ x y = x * y
-
-data SubtractStrategy = SubtractStrategy
-
-instance Strategy SubtractStrategy where
-    execute _ x y = x - y
-
--- 上下文
-data Context a = Context a
-
-executeStrategy :: Strategy a => Context a -> Int -> Int -> Int
-executeStrategy (Context strategy) = execute strategy
-
--- 使用示例
-main :: IO ()
-main = do
-    let addContext = Context AddStrategy
-    let multiplyContext = Context MultiplyStrategy
-    let subtractContext = Context SubtractStrategy
-    
-    print $ executeStrategy addContext 5 3      -- 8
-    print $ executeStrategy multiplyContext 5 3 -- 15
-    print $ executeStrategy subtractContext 5 3 -- 2
-```
-
-**定理 4.1** (策略模式性质): 策略模式满足：
-
-1. 开闭原则：对扩展开放，对修改封闭
-2. 单一职责：每个策略只负责一种算法
-3. 依赖倒置：依赖抽象而非具体实现
-
-#### 4.2 观察者模式
-
-**定义 4.2** (观察者模式): 观察者模式定义对象间的一对多依赖关系。
-
-```haskell
--- 观察者模式实现
-class Observer a where
-    update :: a -> String -> IO ()
-
--- 具体观察者
-data ConsoleObserver = ConsoleObserver
-
-instance Observer ConsoleObserver where
-    update _ message = putStrLn $ "Console: " ++ message
-
-data FileObserver = FileObserver String
-
-instance Observer FileObserver where
-    update (FileObserver filename) message = 
-        writeFile filename ("File: " ++ message ++ "\n")
-
--- 主题
-data Subject = Subject
-    { observers :: [String -> IO ()]
-    , state :: String
-    }
-
--- 主题操作
-createSubject :: String -> Subject
-createSubject initialState = Subject [] initialState
-
-addObserver :: (String -> IO ()) -> Subject -> Subject
-addObserver observer subject = subject { observers = observer : observers subject }
-
-removeObserver :: (String -> IO ()) -> Subject -> Subject
-removeObserver observer subject = subject { observers = filter (/= observer) (observers subject) }
-
-notifyObservers :: Subject -> Subject
-notifyObservers subject = subject { observers = map ($ state subject) (observers subject) }
-
-setState :: String -> Subject -> Subject
-setState newState subject = notifyObservers $ subject { state = newState }
-
--- 使用示例
-main :: IO ()
-main = do
-    let consoleObs = update ConsoleObserver
-    let fileObs = update (FileObserver "log.txt")
-    
-    let subject = createSubject "Initial state"
-        `addObserver` consoleObs
-        `addObserver` fileObs
-    
-    let updatedSubject = setState "New state" subject
-    
-    return ()
-```
-
-### 5. 函数式特定模式
-
-#### 5.1 单子模式
-
-**定义 5.1** (单子模式): 单子模式用于处理计算上下文和副作用。
-
-```haskell
--- 单子模式实现
-class Monad m where
-    return :: a -> m a
-    (>>=) :: m a -> (a -> m b) -> m b
-
--- Maybe单子
+-- Maybe Monad实例
 instance Monad Maybe where
-    return = Just
-    Nothing >>= _ = Nothing
-    Just x >>= f = f x
+  return = Just
+  Nothing >>= _ = Nothing
+  Just x >>= f = f x
 
--- 列表单子
+-- 列表Monad实例
 instance Monad [] where
-    return x = [x]
-    xs >>= f = concat (map f xs)
+  return x = [x]
+  xs >>= f = concat (map f xs)
 
--- 状态单子
+-- Either Monad实例
+instance Monad (Either e) where
+  return = Right
+  Left e >>= _ = Left e
+  Right x >>= f = f x
+
+-- Monad模式应用
+monadPattern :: Maybe Int -> Maybe String
+monadPattern mx = mx >>= \x -> 
+  if x > 0 then Just ("Positive: " ++ show x) else Nothing
+
+-- Monad与错误处理
+safeMonad :: Either String Int -> Either String String
+safeMonad mx = mx >>= \x -> 
+  if x > 0 then Right ("Value: " ++ show x) else Left "Non-positive value"
+
+-- Monad与列表处理
+listMonadPattern :: [Int] -> [String]
+listMonadPattern xs = xs >>= \x -> 
+  if x > 0 then [show x] else []
+
+-- Monad与状态处理
 newtype State s a = State { runState :: s -> (a, s) }
 
+instance Functor (State s) where
+  fmap f (State g) = State $ \s -> 
+    let (a, s') = g s in (f a, s')
+
+instance Applicative (State s) where
+  pure a = State $ \s -> (a, s)
+  State f <*> State g = State $ \s ->
+    let (h, s') = f s
+        (a, s'') = g s'
+    in (h a, s'')
+
 instance Monad (State s) where
-    return a = State $ \s -> (a, s)
-    State f >>= g = State $ \s ->
-        let (a, s') = f s
-            State h = g a
-        in h s'
+  State f >>= g = State $ \s ->
+    let (a, s') = f s
+        State h = g a
+    in h s'
 
--- 使用示例
-main :: IO ()
-main = do
-    -- Maybe单子
-    let maybeResult = Just 5 >>= \x -> Just (x * 2)
-    print maybeResult  -- Just 10
-    
-    -- 列表单子
-    let listResult = [1,2,3] >>= \x -> [x, x*2]
-    print listResult   -- [1,2,2,4,3,6]
-    
-    -- 状态单子
-    let stateComputation = do
-            x <- State $ \s -> (s, s + 1)
-            y <- State $ \s -> (s * 2, s + 1)
-            return (x + y)
-    
-    let (result, finalState) = runState stateComputation 0
-    print result       -- 2
-    print finalState   -- 2
+-- Monad模式示例
+stateMonadPattern :: State Int Int
+stateMonadPattern = do
+  x <- get
+  put (x + 1)
+  return (x * 2)
+
+-- Monad与IO
+ioMonadPattern :: IO String
+ioMonadPattern = do
+  putStrLn "Enter a number:"
+  input <- getLine
+  let number = read input :: Int
+  return ("You entered: " ++ show number)
 ```
 
-#### 5.2 函子模式
+## 2. 函数式编程模式
 
-**定义 5.2** (函子模式): 函子模式用于在上下文中应用函数。
+### 2.1 高阶函数模式
+
+**定义 2.1 (高阶函数模式)**
+高阶函数模式是使用函数作为参数或返回值的模式。
+
+**数学定义：**
+高阶函数可以表示为：
+$$f: (A \rightarrow B) \rightarrow C$$
+或
+$$f: A \rightarrow (B \rightarrow C)$$
+
+**Haskell实现：**
 
 ```haskell
--- 函子模式实现
-class Functor f where
-    fmap :: (a -> b) -> f a -> f b
+-- 高阶函数模式
+-- Map模式
+mapPattern :: (a -> b) -> [a] -> [b]
+mapPattern f = map f
 
--- Maybe函子
-instance Functor Maybe where
-    fmap _ Nothing = Nothing
-    fmap f (Just x) = Just (f x)
+-- Filter模式
+filterPattern :: (a -> Bool) -> [a] -> [a]
+filterPattern p = filter p
 
--- 列表函子
-instance Functor [] where
-    fmap = map
+-- Fold模式
+foldPattern :: (a -> b -> b) -> b -> [a] -> b
+foldPattern f z = foldr f z
 
--- 函数函子
-instance Functor ((->) r) where
-    fmap f g = f . g
+-- 函数组合模式
+composePattern :: (b -> c) -> (a -> b) -> a -> c
+composePattern f g = f . g
 
--- 使用示例
-main :: IO ()
-main = do
-    -- Maybe函子
-    print $ fmap (+1) (Just 5)     -- Just 6
-    print $ fmap (+1) Nothing      -- Nothing
-    
-    -- 列表函子
-    print $ fmap (+1) [1,2,3]      -- [2,3,4]
-    print $ fmap show [1,2,3]      -- ["1","2","3"]
-    
-    -- 函数函子
-    let f = (+1)
-    let g = (*2)
-    let h = fmap f g
-    print $ h 5  -- 11 (f(g(5)) = f(10) = 11)
+-- 部分应用模式
+partialApplicationPattern :: (a -> b -> c) -> a -> b -> c
+partialApplicationPattern f x = f x
+
+-- 柯里化模式
+curryPattern :: ((a, b) -> c) -> a -> b -> c
+curryPattern f a b = f (a, b)
+
+-- 高阶函数组合
+higherOrderPattern :: [Int] -> [String]
+higherOrderPattern = 
+  map show 
+  . filter (> 0) 
+  . map (* 2)
+
+-- 高阶函数与错误处理
+safeHigherOrderPattern :: [String] -> [Int]
+safeHigherOrderPattern = 
+  concatMap (\s -> case reads s of
+    [(n, "")] -> [n]
+    _ -> [])
+  . filter (not . null)
+
+-- 高阶函数与条件处理
+conditionalHigherOrderPattern :: [Int] -> [String]
+conditionalHigherOrderPattern = 
+  map (\x -> if x > 0 then "Positive" else "Non-positive")
+  . filter (/= 0)
 ```
 
-### 6. 高级模式
+### 2.2 不可变数据结构模式
 
-#### 6.1 透镜模式
+**定义 2.2 (不可变数据结构模式)**
+不可变数据结构模式是使用不可变数据结构的模式。
 
-**定义 6.1** (透镜模式): 透镜模式提供访问和修改嵌套数据结构的方法。
+**定理 2.1 (不可变性优势)**
+不可变数据结构具有以下优势：
+
+1. **线程安全**：天然支持并发
+2. **简化推理**：值不会意外改变
+3. **优化机会**：编译器可以进行更多优化
+4. **调试简化**：问题更容易追踪
+
+**Haskell实现：**
 
 ```haskell
--- 透镜模式实现
-data Lens s a = Lens
-    { view :: s -> a
-    , set :: a -> s -> s
-    }
+-- 不可变数据结构模式
+-- 不可变列表
+immutableListPattern :: [Int] -> [Int]
+immutableListPattern xs = 
+  let filtered = filter (> 0) xs
+      doubled = map (* 2) filtered
+      sorted = sort doubled
+  in sorted
 
--- 透镜操作
-over :: Lens s a -> (a -> a) -> s -> s
-over lens f s = set lens (f (view lens s)) s
+-- 不可变树
+data Tree a = Leaf a | Node (Tree a) (Tree a)
 
--- 透镜组合
-compose :: Lens b c -> Lens a b -> Lens a c
-compose (Lens v1 s1) (Lens v2 s2) = Lens
-    { view = v1 . v2
-    , set = \c a -> s2 (s1 c (v2 a)) a
-    }
+immutableTreePattern :: Tree Int -> Tree String
+immutableTreePattern (Leaf x) = Leaf (show x)
+immutableTreePattern (Node left right) = 
+  Node (immutableTreePattern left) (immutableTreePattern right)
 
--- 示例数据结构
-data Person = Person
-    { personName :: String
-    , personAge :: Int
-    , personAddress :: Address
-    } deriving (Show)
+-- 不可变映射
+immutableMapPattern :: [(String, Int)] -> [(String, Int)]
+immutableMapPattern pairs = 
+  let filtered = filter (\(_, v) -> v > 0) pairs
+      doubled = map (\(k, v) -> (k, v * 2)) filtered
+      sorted = sortBy (comparing snd) doubled
+  in sorted
 
-data Address = Address
-    { street :: String
-    , city :: String
-    } deriving (Show)
+-- 不可变栈
+data Stack a = Empty | Push a (Stack a)
 
--- 透镜定义
-nameLens :: Lens Person String
-nameLens = Lens personName (\name person -> person { personName = name })
+immutableStackPattern :: Stack Int -> Stack String
+immutableStackPattern Empty = Empty
+immutableStackPattern (Push x s) = Push (show x) (immutableStackPattern s)
 
-ageLens :: Lens Person Int
-ageLens = Lens personAge (\age person -> person { personAge = age })
+-- 不可变队列
+data Queue a = Queue [a] [a]
 
-addressLens :: Lens Person Address
-addressLens = Lens personAddress (\addr person -> person { personAddress = addr })
+immutableQueuePattern :: Queue Int -> Queue String
+immutableQueuePattern (Queue front back) = 
+  Queue (map show front) (map show back)
 
-streetLens :: Lens Address String
-streetLens = Lens street (\str addr -> addr { street = str })
+-- 不可变集合
+immutableSetPattern :: [Int] -> [Int]
+immutableSetPattern = 
+  nub 
+  . sort 
+  . filter (> 0)
 
--- 组合透镜
-personStreetLens :: Lens Person String
-personStreetLens = streetLens `compose` addressLens
+-- 不可变记录
+data Person = Person {
+  name :: String,
+  age :: Int,
+  email :: String
+}
 
--- 使用示例
-main :: IO ()
-main = do
-    let person = Person "Alice" 25 (Address "123 Main St" "New York")
-    
-    print $ view nameLens person                    -- "Alice"
-    print $ view personStreetLens person            -- "123 Main St"
-    
-    let updatedPerson = set nameLens "Bob" person
-    print updatedPerson                             -- Person {personName = "Bob", personAge = 25, personAddress = Address {street = "123 Main St", city = "New York"}}
-    
-    let agedPerson = over ageLens (+1) person
-    print agedPerson                                -- Person {personName = "Alice", personAge = 26, personAddress = Address {street = "123 Main St", city = "New York"}}
+immutableRecordPattern :: Person -> Person
+immutableRecordPattern person = 
+  person { age = age person + 1 }
 ```
 
-#### 6.2 自由单子模式
+### 2.3 惰性求值模式
 
-**定义 6.2** (自由单子模式): 自由单子模式用于构建可解释的DSL。
+**定义 2.3 (惰性求值模式)**
+惰性求值模式是使用惰性求值的模式。
+
+**数学定义：**
+惰性求值可以表示为：
+$$eval_{lazy}(expr) = \begin{cases}
+eval(expr) & \text{if } needed(expr) \\
+\bot & \text{otherwise}
+\end{cases}$$
+
+**Haskell实现：**
 
 ```haskell
--- 自由单子模式实现
-data Free f a = Pure a | Free (f (Free f a))
+-- 惰性求值模式
+-- 无限列表模式
+infiniteListPattern :: [Integer]
+infiniteListPattern = [1..]
 
-instance Functor f => Monad (Free f) where
-    return = Pure
-    Pure a >>= f = f a
-    Free m >>= f = Free (fmap (>>= f) m)
+-- 惰性计算模式
+lazyComputationPattern :: [Integer] -> [Integer]
+lazyComputationPattern =
+  take 10
+  . map (* 2)
+  . filter even
 
--- 示例DSL：计算器
-data CalculatorF a
-    = Add Int a
-    | Subtract Int a
-    | Multiply Int a
-    | GetValue (Int -> a)
+-- 惰性斐波那契模式
+lazyFibonacciPattern :: [Integer]
+lazyFibonacciPattern = 0 : 1 : zipWith (+) lazyFibonacciPattern (tail lazyFibonacciPattern)
 
-instance Functor CalculatorF where
-    fmap f (Add x next) = Add x (f next)
-    fmap f (Subtract x next) = Subtract x (f next)
-    fmap f (Multiply x next) = Multiply x (f next)
-    fmap f (GetValue k) = GetValue (f . k)
+-- 惰性素数模式
+lazyPrimePattern :: [Integer]
+lazyPrimePattern = 2 : [n | n <- [3..], all (\p -> n `mod` p /= 0) (takeWhile (\p -> p * p <= n) lazyPrimePattern)]
 
--- DSL操作
-add :: Int -> Free CalculatorF ()
-add x = Free (Add x (Pure ()))
+-- 惰性流处理模式
+lazyStreamPattern :: [Integer] -> [Integer]
+lazyStreamPattern =
+  map (* 2)
+  . filter (> 0)
+  . take 100
 
-subtract :: Int -> Free CalculatorF ()
-subtract x = Free (Subtract x (Pure ()))
+-- 惰性记忆化模式
+lazyMemoizationPattern :: Integer -> Integer
+lazyMemoizationPattern = (map factorial [0..] !!)
+  where
+    factorial 0 = 1
+    factorial n = n * factorial (n - 1)
 
-multiply :: Int -> Free CalculatorF ()
-multiply x = Free (Multiply x (Pure ()))
+-- 惰性条件模式
+lazyConditionalPattern :: [Integer] -> [Integer]
+lazyConditionalPattern xs =
+  let positive = filter (> 0) xs
+      negative = filter (< 0) xs
+  in if length positive > length negative
+     then take 10 positive
+     else take 10 (map abs negative)
 
-getValue :: Free CalculatorF Int
-getValue = Free (GetValue Pure)
-
--- 解释器
-interpret :: Free CalculatorF a -> Int -> (a, Int)
-interpret (Pure a) value = (a, value)
-interpret (Free (Add x next)) value = interpret next (value + x)
-interpret (Free (Subtract x next)) value = interpret next (value - x)
-interpret (Free (Multiply x next)) value = interpret next (value * x)
-interpret (Free (GetValue k)) value = interpret (k value) value
-
--- 使用示例
-main :: IO ()
-main = do
-    let program = do
-            add 5
-            multiply 2
-            subtract 3
-            result <- getValue
-            return result
-    
-    let (result, finalValue) = interpret program 0
-    print result      -- 7
-    print finalValue  -- 7
+-- 惰性错误处理模式
+lazyErrorHandlingPattern :: [String] -> [Int]
+lazyErrorHandlingPattern =
+  take 100
+  . concatMap (\s -> case reads s of
+      [(n, "")] -> [n]
+      _ -> [])
+  . filter (not . null)
 ```
 
-### 7. 模式组合
+## 3. 错误处理模式
 
-#### 7.1 模式融合
+### 3.1 Maybe模式
+
+**定义 3.1 (Maybe模式)**
+Maybe模式是处理可能失败的计算的模式。
+
+**数学定义：**
+Maybe类型可以表示为：
+$$Maybe(A) = \{Nothing\} \cup \{Just(a) \mid a \in A\}$$
+
+**Haskell实现：**
 
 ```haskell
--- 模式融合示例：策略+工厂+装饰器
-class Strategy a where
-    execute :: a -> String -> String
+-- Maybe模式
+-- 基本Maybe模式
+maybePattern :: Maybe Int -> Maybe String
+maybePattern Nothing = Nothing
+maybePattern (Just x) = Just (show x)
 
-data UpperCaseStrategy = UpperCaseStrategy
-data LowerCaseStrategy = LowerCaseStrategy
-data ReverseStrategy = ReverseStrategy
+-- Maybe与模式匹配
+maybePatternMatching :: Maybe Int -> String
+maybePatternMatching Nothing = "No value"
+maybePatternMatching (Just x) = "Value: " ++ show x
 
-instance Strategy UpperCaseStrategy where
-    execute _ s = map toUpper s
+-- Maybe与函数组合
+maybeCompositionPattern :: Maybe Int -> Maybe Int -> Maybe Int
+maybeCompositionPattern mx my = do
+  x <- mx
+  y <- my
+  return (x + y)
 
-instance Strategy LowerCaseStrategy where
-    execute _ s = map toLower s
+-- Maybe与错误处理
+maybeErrorHandlingPattern :: String -> Maybe Int
+maybeErrorHandlingPattern s =
+  case reads s of
+    [(n, "")] -> Just n
+    _ -> Nothing
 
-instance Strategy ReverseStrategy where
-    execute _ s = reverse s
+-- Maybe与条件处理
+maybeConditionalPattern :: Int -> Maybe String
+maybeConditionalPattern x
+  | x > 0 = Just ("Positive: " ++ show x)
+  | x == 0 = Just "Zero"
+  | otherwise = Nothing
 
--- 工厂函数
-createStrategy :: String -> Maybe (String -> String)
-createStrategy "upper" = Just (execute UpperCaseStrategy)
-createStrategy "lower" = Just (execute LowerCaseStrategy)
-createStrategy "reverse" = Just (execute ReverseStrategy)
-createStrategy _ = Nothing
+-- Maybe与列表处理
+maybeListPattern :: [Maybe Int] -> [Int]
+maybeListPattern =
+  concatMap (\m -> case m of
+    Just x -> [x]
+    Nothing -> [])
 
--- 装饰器
-data TextProcessor = TextProcessor (String -> String)
+-- Maybe与默认值
+maybeDefaultPattern :: Maybe Int -> Int
+maybeDefaultPattern Nothing = 0
+maybeDefaultPattern (Just x) = x
 
-process :: TextProcessor -> String -> String
-process (TextProcessor f) = f
-
-addPrefix :: String -> TextProcessor -> TextProcessor
-addPrefix prefix (TextProcessor f) = TextProcessor (\s -> prefix ++ f s)
-
-addSuffix :: String -> TextProcessor -> TextProcessor
-addSuffix suffix (TextProcessor f) = TextProcessor (\s -> f s ++ suffix)
-
--- 使用示例
-main :: IO ()
-main = do
-    let strategy = createStrategy "upper"
-    case strategy of
-        Just f -> do
-            let processor = TextProcessor f
-                `addPrefix` "PREFIX: "
-                `addSuffix` " :SUFFIX"
-            
-            let result = process processor "hello world"
-            print result  -- "PREFIX: HELLO WORLD :SUFFIX"
-        Nothing -> putStrLn "Invalid strategy"
+-- Maybe与转换
+maybeTransformPattern :: Maybe Int -> Maybe String
+maybeTransformPattern = fmap show
 ```
 
-### 8. 性能分析
+### 3.2 Either模式
 
-#### 8.1 模式性能特征
+**定义 3.2 (Either模式)**
+Either模式是处理可能失败的计算并提供错误信息的模式。
 
-**定理 8.1** (模式性能):
+**数学定义：**
+Either类型可以表示为：
+$$Either(E, A) = \{Left(e) \mid e \in E\} \cup \{Right(a) \mid a \in A\}$$
 
-- 工厂模式：$O(1)$ 创建时间
-- 装饰器模式：$O(n)$ 包装时间，$O(1)$ 操作时间
-- 策略模式：$O(1)$ 切换时间
-- 观察者模式：$O(n)$ 通知时间（$n$ 为观察者数量）
-
-#### 8.2 内存使用分析
+**Haskell实现：**
 
 ```haskell
--- 内存使用分析示例
-main :: IO ()
-main = do
-    -- 工厂模式内存使用
-    let factories = replicate 1000 (createCircle 5.0)
-    
-    -- 装饰器模式内存使用
-    let decorators = foldr (.) id (replicate 1000 (+1))
-    
-    -- 策略模式内存使用
-    let strategies = replicate 1000 AddStrategy
-    
-    print $ length factories   -- 1000
-    print $ decorators 5       -- 1005
-    print $ length strategies  -- 1000
+-- Either模式
+-- 基本Either模式
+eitherPattern :: Either String Int -> Either String String
+eitherPattern (Left e) = Left e
+eitherPattern (Right x) = Right (show x)
+
+-- Either与模式匹配
+eitherPatternMatching :: Either String Int -> String
+eitherPatternMatching (Left e) = "Error: " ++ e
+eitherPatternMatching (Right x) = "Success: " ++ show x
+
+-- Either与函数组合
+eitherCompositionPattern :: Either String Int -> Either String Int -> Either String Int
+eitherCompositionPattern ex ey = do
+  x <- ex
+  y <- ey
+  return (x + y)
+
+-- Either与错误处理
+eitherErrorHandlingPattern :: String -> Either String Int
+eitherErrorHandlingPattern s =
+  case reads s of
+    [(n, "")] -> Right n
+    _ -> Left ("Invalid number: " ++ s)
+
+-- Either与条件处理
+eitherConditionalPattern :: Int -> Either String String
+eitherConditionalPattern x
+  | x > 0 = Right ("Positive: " ++ show x)
+  | x == 0 = Right "Zero"
+  | otherwise = Left ("Negative number: " ++ show x)
+
+-- Either与列表处理
+eitherListPattern :: [Either String Int] -> Either String [Int]
+eitherListPattern =
+  foldr (\e acc -> do
+    x <- e
+    xs <- acc
+    return (x:xs)) (Right [])
+
+-- Either与转换
+eitherTransformPattern :: Either String Int -> Either String String
+eitherTransformPattern = fmap show
+
+-- Either与错误聚合
+eitherErrorAggregationPattern :: [Either String Int] -> (String, [Int])
+eitherErrorAggregationPattern =
+  foldr (\e (errors, values) ->
+    case e of
+      Left err -> (err : errors, values)
+      Right val -> (errors, val : values)) ([], [])
 ```
 
-### 9. 实际应用案例
+### 3.3 异常处理模式
 
-#### 9.1 配置管理系统
+**定义 3.3 (异常处理模式)**
+异常处理模式是使用异常处理机制的模式。
+
+**Haskell实现：**
 
 ```haskell
--- 配置管理系统
-data Config = Config
-    { database :: DatabaseConfig
-    , server :: ServerConfig
-    , logging :: LoggingConfig
-    } deriving (Show)
+-- 异常处理模式
+-- 基本异常处理
+exceptionPattern :: IO String
+exceptionPattern = do
+  result <- try (readFile "nonexistent.txt")
+  case result of
+    Left e -> return ("Error: " ++ show (e :: IOError))
+    Right content -> return ("Content: " ++ content)
 
-data DatabaseConfig = DatabaseConfig
-    { host :: String
-    , port :: Int
-    , name :: String
-    } deriving (Show)
+-- 异常处理与Maybe
+exceptionMaybePattern :: IO (Maybe String)
+exceptionMaybePattern = do
+  result <- try (readFile "file.txt")
+  case result of
+    Left _ -> return Nothing
+    Right content -> return (Just content)
 
-data ServerConfig = ServerConfig
-    { port :: Int
-    , host :: String
-    } deriving (Show)
+-- 异常处理与Either
+exceptionEitherPattern :: IO (Either String String)
+exceptionEitherPattern = do
+  result <- try (readFile "file.txt")
+  case result of
+    Left e -> return (Left ("IO Error: " ++ show (e :: IOError)))
+    Right content -> return (Right content)
 
-data LoggingConfig = LoggingConfig
-    { level :: String
-    , file :: String
-    } deriving (Show)
+-- 异常处理与恢复
+exceptionRecoveryPattern :: IO String
+exceptionRecoveryPattern = do
+  result <- try (readFile "primary.txt")
+  case result of
+    Left _ -> do
+      backupResult <- try (readFile "backup.txt")
+      case backupResult of
+        Left _ -> return "No file available"
+        Right content -> return content
+    Right content -> return content
 
--- 配置构建器
-class ConfigBuilder a where
-    build :: a -> Config
+-- 异常处理与清理
+exceptionCleanupPattern :: IO String
+exceptionCleanupPattern = do
+  handle <- openFile "file.txt" ReadMode
+  result <- try (hGetContents handle)
+  hClose handle
+  case result of
+    Left e -> return ("Error: " ++ show (e :: IOError))
+    Right content -> return content
 
-data DatabaseConfigBuilder = DatabaseConfigBuilder
-    { dbHost :: Maybe String
-    , dbPort :: Maybe Int
-    , dbName :: Maybe String
-    }
-
-data ServerConfigBuilder = ServerConfigBuilder
-    { srvPort :: Maybe Int
-    , srvHost :: Maybe String
-    }
-
-data LoggingConfigBuilder = LoggingConfigBuilder
-    { logLevel :: Maybe String
-    , logFile :: Maybe String
-    }
-
--- 构建方法
-withDbHost :: String -> DatabaseConfigBuilder -> DatabaseConfigBuilder
-withDbHost host builder = builder { dbHost = Just host }
-
-withDbPort :: Int -> DatabaseConfigBuilder -> DatabaseConfigBuilder
-withDbPort port builder = builder { dbPort = Just port }
-
-withDbName :: String -> DatabaseConfigBuilder -> DatabaseConfigBuilder
-withDbName name builder = builder { dbName = Just name }
-
--- 使用示例
-main :: IO ()
-main = do
-    let dbConfig = DatabaseConfigBuilder Nothing Nothing Nothing
-        `withDbHost` "localhost"
-        `withDbPort` 5432
-        `withDbName` "myapp"
-    
-    print dbConfig
+-- 异常处理与重试
+exceptionRetryPattern :: Int -> IO String
+exceptionRetryPattern 0 = return "Max retries exceeded"
+exceptionRetryPattern n = do
+  result <- try (readFile "file.txt")
+  case result of
+    Left _ -> exceptionRetryPattern (n - 1)
+    Right content -> return content
 ```
 
-#### 9.2 事件处理系统
+## 4. 总结
 
-```haskell
--- 事件处理系统
-data Event = Click Int Int | KeyPress Char | MouseMove Int Int
+Haskell函数式设计模式提供了强大而灵活的问题解决方案，基于数学理论和类型安全。
 
-class EventHandler a where
-    handle :: a -> Event -> IO ()
+### 关键模式
 
-data ClickHandler = ClickHandler (Int -> Int -> IO ())
-data KeyHandler = KeyHandler (Char -> IO ())
-data MouseHandler = MouseHandler (Int -> Int -> IO ())
+1. **类型类模式**：Functor、Applicative、Monad
+2. **函数式模式**：高阶函数、不可变数据结构、惰性求值
+3. **错误处理模式**：Maybe、Either、异常处理
 
-instance EventHandler ClickHandler where
-    handle (ClickHandler f) (Click x y) = f x y
-    handle _ _ = return ()
+### 优势
 
-instance EventHandler KeyHandler where
-    handle (KeyHandler f) (KeyPress c) = f c
-    handle _ _ = return ()
+1. **类型安全**：编译时保证正确性
+2. **可组合性**：模式可以安全组合
+3. **可重用性**：提高代码重用性
+4. **表达力**：强大的抽象能力
 
-instance EventHandler MouseHandler where
-    handle (MouseHandler f) (MouseMove x y) = f x y
-    handle _ _ = return ()
+### 应用领域
 
--- 事件分发器
-data EventDispatcher = EventDispatcher [Event -> IO ()]
-
-addHandler :: EventHandler a => a -> EventDispatcher -> EventDispatcher
-addHandler handler (EventDispatcher handlers) = 
-    EventDispatcher (handle handler : handlers)
-
-dispatch :: EventDispatcher -> Event -> IO ()
-dispatch (EventDispatcher handlers) event = 
-    mapM_ ($ event) handlers
-
--- 使用示例
-main :: IO ()
-main = do
-    let clickHandler = ClickHandler (\x y -> putStrLn $ "Click at (" ++ show x ++ "," ++ show y ++ ")")
-    let keyHandler = KeyHandler (\c -> putStrLn $ "Key pressed: " ++ [c])
-    let mouseHandler = MouseHandler (\x y -> putStrLn $ "Mouse moved to (" ++ show x ++ "," ++ show y ++ ")")
-    
-    let dispatcher = EventDispatcher []
-        `addHandler` clickHandler
-        `addHandler` keyHandler
-        `addHandler` mouseHandler
-    
-    dispatch dispatcher (Click 100 200)
-    dispatch dispatcher (KeyPress 'a')
-    dispatch dispatcher (MouseMove 150 250)
-```
+1. **数据处理**：ETL和数据转换
+2. **错误处理**：安全的错误管理
+3. **并发编程**：线程安全的数据处理
+4. **系统编程**：类型安全的系统开发
 
 ---
 
-## 📚 参考文献
-
-1. Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). *Design Patterns: Elements of Reusable Object-Oriented Software*. Addison-Wesley.
-2. Hutton, G. (2016). *Programming in Haskell*. Cambridge University Press.
-3. Bird, R. (2015). *Thinking Functionally with Haskell*. Cambridge University Press.
-4. Milewski, B. (2019). *Category Theory for Programmers*. Blurb.
-
----
-
-## 🔗 相关链接
-
-- [函数式编程基础](../01-Basic-Concepts/001-Functional-Programming.md)
-- [高阶函数](../01-Basic-Concepts/004-Higher-Order-Functions.md)
-- [类型系统基础](../04-Type-System/001-Type-System-Foundation.md)
-- [代数数据类型](../04-Type-System/002-Algebraic-Data-Types.md)
-- [函子与单子](../04-Type-System/003-Functors-and-Monads.md)
-- [高级类型特性](../04-Type-System/004-Advanced-Type-Features.md)
+**相关文档**：
+- [Monad模式](../002-Monad-Patterns.md)
+- [Applicative模式](../003-Applicative-Patterns.md)
+- [Functor模式](../004-Functor-Patterns.md)

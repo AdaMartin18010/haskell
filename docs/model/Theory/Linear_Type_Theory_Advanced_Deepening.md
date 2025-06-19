@@ -105,7 +105,7 @@ applyRuleBackward rule conclusion =
 2. **闭结构**：存在内部同态对象 $\multimap$
 3. **指数结构**：存在共幺子 $\delta : A \rightarrow !A$ 和 $\varepsilon : !A \rightarrow A$
 
-**算法 1.2 (线性逻辑模型构造)**
+**算法 1.2 (线性逻辑模型构造)**:
 
 ```haskell
 data LinearModel = LinearModel {
@@ -165,7 +165,7 @@ $$\frac{\Gamma \vdash M : A \multimap B \quad \Delta \vdash N : A}{\Gamma, \Delt
 
 $$\frac{\Gamma \vdash M : A \quad \Delta \vdash N : B}{\Gamma, \Delta \vdash M \otimes N : A \otimes B} \text{ (张量积)}$$
 
-**算法 2.1 (线性类型检查)**
+**算法 2.1 (线性类型检查)**:
 
 ```haskell
 data LinearLambda = LinearLambda {
@@ -237,7 +237,7 @@ inferType lambda term =
 **定义 2.4 (相关类型系统)**
 相关类型系统要求变量必须使用至少一次。
 
-**算法 2.2 (多态线性类型系统)**
+**算法 2.2 (多态线性类型系统)**:
 
 ```haskell
 data PolymorphicLinear = PolymorphicLinear {
@@ -290,7 +290,7 @@ inferPolymorphicType poly term =
 **定义 3.2 (资源安全)**
 资源安全确保资源不会泄漏或重复释放。
 
-**算法 3.1 (资源管理器)**
+**算法 3.1 (资源管理器)**:
 
 ```haskell
 data ResourceManager = ResourceManager {
@@ -354,7 +354,7 @@ releaseResource manager resourceId =
 **定义 3.4 (线性互斥锁)**
 线性互斥锁确保锁的正确使用。
 
-**算法 3.2 (线性并发原语)**
+**算法 3.2 (线性并发原语)**:
 
 ```haskell
 data LinearChannel = LinearChannel {
@@ -450,7 +450,7 @@ releaseMutex mutex =
 - **量子测量**：$\text{measure}$ (量子测量)
 - **量子叠加**：$\oplus_q$ (量子叠加)
 
-**算法 4.1 (量子线性类型检查)**
+**算法 4.1 (量子线性类型检查)**:
 
 ```haskell
 data QuantumLinearLogic = QuantumLinearLogic {
