@@ -7,6 +7,7 @@
 ## 🧩 依赖注入模式 (Dependency Injection)
 
 ### 类型级依赖注入
+
 ```lean
 -- 类型级依赖注入
 namespace DependencyInjection
@@ -31,6 +32,7 @@ end DependencyInjection
 ```
 
 ### 对比
+
 - **Lean**：类型级依赖注入，支持静态检查和证明。
 - **Haskell**：ReaderT模式，类型类约束。
 - **Rust**：trait对象+构造注入，生命周期管理。
@@ -38,6 +40,7 @@ end DependencyInjection
 ## 🏛️ 领域驱动设计 (DDD)
 
 ### 领域建模
+
 ```lean
 -- 领域驱动建模
 namespace DomainDrivenDesign
@@ -63,6 +66,7 @@ end DomainDrivenDesign
 ```
 
 ### 对比
+
 - **Lean**：依赖类型建模，领域约束可形式化证明。
 - **Haskell**：newtype+GADT建模，类型安全。
 - **Rust**：struct+trait，生命周期和所有权。
@@ -70,6 +74,7 @@ end DomainDrivenDesign
 ## 🧬 元编程与宏模式 (Metaprogramming & Macros)
 
 ### Lean元编程
+
 ```lean
 -- Lean元编程
 namespace Metaprogramming
@@ -93,6 +98,7 @@ end Metaprogramming
 ```
 
 ### 对比
+
 - **Lean**：原生支持宏、元编程、定理生成。
 - **Haskell**：Template Haskell，类型级编程。
 - **Rust**：宏系统、proc-macro。
@@ -100,6 +106,7 @@ end Metaprogramming
 ## 🔄 反应式与流模式 (Reactive & Stream Patterns)
 
 ### 事件流与信号
+
 ```lean
 -- 反应式模式
 namespace ReactivePattern
@@ -123,6 +130,7 @@ end ReactivePattern
 ```
 
 ### 对比
+
 - **Lean**：类型安全事件流，支持证明流属性。
 - **Haskell**：FRP库（如reflex）、Arrowized FRP。
 - **Rust**：futures/streams，异步trait。
@@ -130,6 +138,7 @@ end ReactivePattern
 ## 🧠 组合范式 (Compositional Paradigms)
 
 ### 类型级组合
+
 ```lean
 -- 类型级组合
 namespace CompositionalPattern
@@ -149,6 +158,7 @@ end CompositionalPattern
 ```
 
 ### 对比
+
 - **Lean**：类型级组合、证明组合律。
 - **Haskell**：函数组合、Arrow、Category。
 - **Rust**：trait组合、函数式链式调用。
@@ -163,7 +173,8 @@ end CompositionalPattern
 ---
 
 **相关链接**:
+
 - [形式化模式](./08-Formal-Patterns.md)
 - [类型级模式](./06-Type-Level-Patterns.md)
 - [设计模式基础](./01-Design-Patterns-Basics.md)
-- [软件设计](../08-Software-Design/) 
+- [软件设计](../08-Software-Design/)
