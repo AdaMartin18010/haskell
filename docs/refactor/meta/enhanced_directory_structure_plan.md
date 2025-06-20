@@ -8,7 +8,7 @@
 
 ### 1. Haskell目录结构
 
-```
+```text
 docs/refactor/Haskell/
 ├── 01-Basic-Concepts/                    # 基础概念
 │   ├── 01-Functional-Programming.md     # 函数式编程基础
@@ -127,7 +127,7 @@ docs/refactor/Haskell/
 
 ### 2. Lean目录结构
 
-```
+```text
 docs/refactor/Lean/
 ├── 01-Basic-Concepts/                   # 基础概念
 │   ├── 01-Functional-Programming.md     # 函数式编程基础
@@ -246,7 +246,7 @@ docs/refactor/Lean/
 
 ### 3. 关联性分析目录
 
-```
+```text
 docs/refactor/meta/
 ├── lean_haskell_deep_integration_analysis.md    # 深度整合分析
 ├── enhanced_directory_structure_plan.md         # 增强目录结构规划

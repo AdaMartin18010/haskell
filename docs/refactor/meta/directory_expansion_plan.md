@@ -10,7 +10,7 @@
 
 #### 1.1 目录层次结构
 
-```
+```text
 docs/refactor/
 ├── Haskell/
 │   ├── 01-Basics/                    # 基础概念
@@ -56,7 +56,7 @@ docs/refactor/
 
 #### 2.1 07-Design-Patterns 深度展开
 
-```
+```text
 Haskell/07-Design-Patterns/
 ├── README.md                        # 主索引
 ├── 01-Basic-Patterns/               # 基础设计模式
@@ -264,7 +264,7 @@ Haskell/07-Design-Patterns/
 
 #### 2.2 08-Software-Design 深度展开
 
-```
+```text
 Haskell/08-Software-Design/
 ├── README.md                        # 主索引
 ├── 01-Software-Design-Principles/   # 软件设计原则
@@ -406,7 +406,7 @@ Haskell/08-Software-Design/
 
 #### 3.1 07-Design-Patterns 深度展开
 
-```
+```text
 Lean/07-Design-Patterns/
 ├── README.md                        # 主索引
 ├── 01-Basic-Patterns/               # 基础设计模式
