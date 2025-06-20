@@ -233,12 +233,12 @@
 
 - 编写全面的单元测试
 - 使用属性测试和模糊测试
-- 进行形式化验证（Lean）
+- 进行形式化验证（Lean）text
 - 建立测试和验证的自动化流程
 
 ## 📋 项目结构
 
-```
+```text
 docs/refactor/
 ├── meta/                                    # 元分析和规划文档
 │   ├── lean_haskell_deep_integration_analysis.md

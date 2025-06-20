@@ -10,7 +10,7 @@
 
 #### 1.1 快速原型开发项目
 
-**推荐技术：Haskell**
+**推荐技术：Haskell**:
 
 **选择理由：**
 
@@ -45,7 +45,7 @@ main = do
 
 #### 1.2 安全关键系统项目
 
-**推荐技术：Lean**
+**推荐技术：Lean**:
 
 **选择理由：**
 
@@ -79,7 +79,7 @@ by induction xs with
 
 #### 1.3 数学软件项目
 
-**推荐技术：Lean**
+**推荐技术：Lean**:
 
 **选择理由：**
 
@@ -116,7 +116,7 @@ by induction n with
 
 #### 1.4 并发系统项目
 
-**推荐技术：Haskell**
+**推荐技术：Haskell**:
 
 **选择理由：**
 
@@ -160,7 +160,7 @@ main = do
 
 #### 1.5 编译器开发项目
 
-**混合技术：Haskell + Lean**
+**混合技术：Haskell + Lean**:
 
 **选择理由：**
 
@@ -197,7 +197,7 @@ by induction e with
 
 #### 2.1 初学者团队
 
-**推荐技术：Haskell**
+**推荐技术：Haskell**:
 
 **选择理由：**
 
@@ -215,7 +215,7 @@ by induction e with
 
 #### 2.2 中级团队
 
-**推荐策略：Haskell + Lean混合**
+**推荐策略：Haskell + Lean混合**:
 
 **选择理由：**
 
@@ -232,7 +232,7 @@ by induction e with
 
 #### 2.3 专家团队
 
-**推荐策略：根据项目需求灵活选择**
+**推荐策略：根据项目需求灵活选择**:
 
 **选择理由：**
 
@@ -250,7 +250,7 @@ by induction e with
 
 #### 3.1 高性能系统
 
-**推荐技术：Haskell**
+**推荐技术：Haskell**:
 
 **选择理由：**
 
@@ -279,7 +279,7 @@ data OptimizedData = OptimizedData
 
 #### 3.2 正确性优先系统
 
-**推荐技术：Lean**
+**推荐技术：Lean**:
 
 **选择理由：**
 
@@ -309,7 +309,7 @@ by induction input with
 
 #### 4.1 快速开发项目
 
-**推荐技术：Haskell**
+**推荐技术：Haskell**:
 
 **选择理由：**
 
@@ -340,7 +340,7 @@ getUsers = do
 
 #### 4.2 长期维护项目
 
-**推荐技术：Lean**
+**推荐技术：Lean**:
 
 **选择理由：**
 
@@ -367,7 +367,7 @@ by exact sys.correctness
 
 #### 5.1 现有系统集成
 
-**推荐技术：Haskell**
+**推荐技术：Haskell**:
 
 **选择理由：**
 
@@ -391,7 +391,7 @@ haskellSin = realToFrac . c_sin . realToFrac
 
 #### 5.2 新系统开发
 
-**推荐技术：根据需求选择**
+**推荐技术：根据需求选择**:
 
 **选择策略：**
 
