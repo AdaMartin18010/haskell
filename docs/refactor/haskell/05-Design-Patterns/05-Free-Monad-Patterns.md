@@ -430,7 +430,7 @@ $$\text{State} \times \text{Command} \rightarrow \text{State} \times \text{Resul
 解释器组合：
 $$\text{interpret}_1 \circ \text{interpret}_2 = \text{interpret}_{\text{combined}}$$
 
-### 实际应用示例
+### 实际应用示例3
 
 ```haskell
 -- 解释器模式示例
@@ -599,7 +599,7 @@ $$A = (S, O, L)$$
 - **单位律**: $e \cdot a = a \cdot e = a$
 - **逆律**: $a \cdot a^{-1} = a^{-1} \cdot a = e$
 
-### 实际应用示例
+### 实际应用示例1
 
 ```haskell
 -- 代数模式示例
@@ -778,7 +778,7 @@ $$E = (T, O, H)$$
 效果组合：
 $$E_1 \circ E_2 = (T_1 \circ T_2, O_1 \cup O_2, H_1 \cup H_2)$$
 
-### 实际应用示例
+### 实际应用示例2
 
 ```haskell
 -- 效果模式示例
@@ -1106,7 +1106,7 @@ effectPatternExample = do
   interpretEffect effectProgram
 ```
 
-### 实际应用示例
+### 实际应用示例4
 
 ```haskell
 -- 实际应用示例
