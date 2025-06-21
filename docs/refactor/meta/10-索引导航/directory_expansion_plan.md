@@ -621,7 +621,7 @@ Lean/07-Design-Patterns/
 
 #### 4.1 跨语言关联性
 
-```
+```text
 docs/refactor/meta/
 ├── lean_haskell_comprehensive_comparison.md    # 全面对比分析
 ├── lean_haskell_deep_analysis.md              # 深度关联性分析
