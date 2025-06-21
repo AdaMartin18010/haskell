@@ -10,4 +10,4 @@
 - current_status.md：当前状态文档
 - progress_report.md：进度报告
 - session_summary.md：会话总结
-- project_completion_summary.md：项目完成总结 
+- project_completion_summary.md：项目完成总结

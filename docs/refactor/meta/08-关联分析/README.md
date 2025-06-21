@@ -6,4 +6,4 @@
 - 02-architecture-correlation.md：架构关联主文档
 - 03-execution-flow-correlation.md：执行流关联主文档
 - lean_haskell_advanced_correlation_analysis.md：高级关联分析
-- lean_haskell_deep_correlation_analysis.md：深度关联分析 
+- lean_haskell_deep_correlation_analysis.md：深度关联分析
