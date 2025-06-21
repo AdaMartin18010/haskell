@@ -5,9 +5,5 @@
 - 01-当前状态.md：当前状态与进度报告主文档
 - 02-进度报告.md：详细进度报告（待整合）
 - 03-完成总结.md：项目完成总结（待整合）
-- updated_progress_report.md：更新进度报告
-- deepening_progress_report.md：深化进度报告
-- current_status.md：当前状态文档
-- progress_report.md：进度报告
-- session_summary.md：会话总结
-- project_completion_summary.md：项目完成总结
+
+本目录的主要文档是 `01-当前状态.md`，作为当前状态与进度报告的权威入口。其他文件将在后续整理中进一步整合或补充。
