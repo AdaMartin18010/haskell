@@ -319,3 +319,16 @@ docs/refactor/
 - [Lean官方文档](https://leanprover.github.io/documentation/)
 - [函数式编程资源](https://github.com/xgrommx/awesome-functional-programming)
 - [形式化验证资源](https://github.com/ligurio/awesome-verification)
+
+# 索引导航目录说明
+
+本目录收录Haskell与Lean相关项目的索引、导航、规划等文档，提供整个知识体系的快速访问入口。
+
+- 01-总索引.md：总索引主文档，权威入口
+- 02-快速导航.md：快速导航主文档
+- 知识图谱导航.md：可视化知识图谱
+- context_reminder.md：上下文提醒系统
+- quality_checker.md：质量检查工具
+- QUALITY_CHECKLIST.md：质量检查清单
+
+其余文件为规划和目录结构相关文档，可在整理完成后考虑合并或删除。
