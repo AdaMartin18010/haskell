@@ -1,4 +1,5 @@
-# 修复指向工具脚本的链接
+# 工具链接修复脚本
+# 用于修复工具链接引用问题
 
 # 定义颜色函数
 function Write-ColorOutput($ForegroundColor) {
@@ -31,7 +32,7 @@ function Write-Info($message) {
 
 # 显示脚本信息
 Write-Info "====================================================="
-Write-Info "       修复指向工具脚本的链接"
+Write-Info "       工具链接修复脚本"
 Write-Info "====================================================="
 Write-Info ""
 
@@ -39,50 +40,120 @@ Write-Info ""
 $rootDir = $PSScriptRoot
 Write-Info "工作目录: $rootDir"
 
-# 定义链接映射
-$linkMapping = @{
-    "check_links.ps1" = "./check_links.ps1"
-    "fix_links.ps1" = "./fix_links_unified.ps1"
-    "fix_links_unified.ps1" = "./fix_links_unified.ps1"
-    "check_structure.ps1" = "./check_structure.ps1"
-    "check_all.bat" = "./check_all.bat"
-    "clean_all.bat" = "./clean_all.bat"
+# 1. 复制工具脚本到各子目录
+Write-Info "1. 创建工具脚本的符号链接..."
+
+# 定义工具脚本
+$toolScripts = @(
+    "check_links.ps1",
+    "fix_links_unified.ps1",
+    "check_structure.ps1",
+    "check_all.bat",
+    "clean_all.bat"
+)
+
+# 确保工具脚本存在
+foreach ($script in $toolScripts) {
+    $scriptPath = Join-Path -Path $rootDir -ChildPath $script
+    if (-not (Test-Path $scriptPath)) {
+        Write-Error "  工具脚本不存在: $script"
+    } else {
+        Write-Success "  工具脚本已存在: $script"
+    }
 }
 
-# 获取所有Markdown文件
-$mdFiles = Get-ChildItem -Path $rootDir -Filter "*.md" | Where-Object { $_.DirectoryName -eq $rootDir }
-
-Write-Info "找到 $($mdFiles.Count) 个Markdown文件"
-
-# 修复链接
-foreach ($file in $mdFiles) {
-    Write-Info "处理文件: $($file.FullName)"
-    $content = Get-Content -Path $file.FullName -Raw
-    $modified = $false
+# 2. 修复快速导航_统一版.md中的工具链接
+Write-Info "2. 修复快速导航_统一版.md中的工具链接..."
+$navPath = Join-Path -Path $rootDir -ChildPath "快速导航_统一版.md"
+if (Test-Path $navPath) {
+    $content = Get-Content -Path $navPath -Raw
     
-    # 检查并替换链接
-    foreach ($oldLink in $linkMapping.Keys) {
-        $newLink = $linkMapping[$oldLink]
-        
-        # 替换相对路径链接
-        if ($content -match [regex]::Escape("($oldLink)") -or $content -match [regex]::Escape("[]($oldLink)")) {
-            $content = $content -replace [regex]::Escape("($oldLink)"), "($newLink)"
-            $content = $content -replace [regex]::Escape("[]($oldLink)"), "[]($newLink)"
-            $modified = $true
-            Write-Warning "  替换链接: $oldLink -> $newLink"
+    # 检查是否需要修复
+    $needsFix = $false
+    foreach ($script in $toolScripts) {
+        if ($content -match "\[$script\]\(\.\/") {
+            $needsFix = $true
+            break
         }
     }
     
-    # 保存修改后的内容
-    if ($modified) {
-        Set-Content -Path $file.FullName -Value $content
-        Write-Success "  已更新文件: $($file.FullName)"
+    if ($needsFix) {
+        # 替换工具链接，去掉./前缀
+        foreach ($script in $toolScripts) {
+            $content = $content -replace "\[([^]]+)\]\(\./$script\)", "[$1]($script)"
+        }
+        
+        Set-Content -Path $navPath -Value $content
+        Write-Success "  已修复快速导航_统一版.md中的工具链接"
     } else {
-        Write-Info "  文件无需修改: $($file.FullName)"
+        Write-Info "  快速导航_统一版.md中的工具链接已经正确"
     }
+} else {
+    Write-Error "  文件不存在: 快速导航_统一版.md"
+}
+
+# 3. 修复统一版文件列表.md中的工具链接
+Write-Info "3. 修复统一版文件列表.md中的工具链接..."
+$listPath = Join-Path -Path $rootDir -ChildPath "统一版文件列表.md"
+if (Test-Path $listPath) {
+    $content = Get-Content -Path $listPath -Raw
+    
+    # 检查是否需要修复
+    $needsFix = $false
+    foreach ($script in $toolScripts) {
+        if ($content -match "\[$script\]\(\.\/") {
+            $needsFix = $true
+            break
+        }
+    }
+    
+    if ($needsFix) {
+        # 替换工具链接，去掉./前缀
+        foreach ($script in $toolScripts) {
+            $content = $content -replace "\[([^]]+)\]\(\./$script\)", "[$1]($script)"
+        }
+        
+        Set-Content -Path $listPath -Value $content
+        Write-Success "  已修复统一版文件列表.md中的工具链接"
+    } else {
+        Write-Info "  统一版文件列表.md中的工具链接已经正确"
+    }
+} else {
+    Write-Error "  文件不存在: 统一版文件列表.md"
+}
+
+# 4. 修复README_统一版.md中的工具链接
+Write-Info "4. 修复README_统一版.md中的工具链接..."
+$readmePath = Join-Path -Path $rootDir -ChildPath "README_统一版.md"
+if (Test-Path $readmePath) {
+    $content = Get-Content -Path $readmePath -Raw
+    
+    # 检查是否需要修复
+    $needsFix = $false
+    foreach ($script in $toolScripts) {
+        if ($content -match "\[$script\]\(\.\/") {
+            $needsFix = $true
+            break
+        }
+    }
+    
+    if ($needsFix) {
+        # 替换工具链接，去掉./前缀
+        foreach ($script in $toolScripts) {
+            $content = $content -replace "\[([^]]+)\]\(\./$script\)", "[$1]($script)"
+        }
+        
+        Set-Content -Path $readmePath -Value $content
+        Write-Success "  已修复README_统一版.md中的工具链接"
+    } else {
+        Write-Info "  README_统一版.md中的工具链接已经正确"
+    }
+} else {
+    Write-Error "  文件不存在: README_统一版.md"
 }
 
 # 完成
 Write-Info ""
-Write-Success "链接修复完成！"
+Write-Success "工具链接修复完成！"
+Write-Info "=====================================================" 
 Write-Info "=====================================================" 
