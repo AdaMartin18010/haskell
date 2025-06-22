@@ -28,12 +28,13 @@
 
 ## 工具支持
 
-- [链接检查脚本](check_links.ps1)：检查链接有效性
-- [链接修复脚本](fix_links_unified.ps1)：修复文件间的链接关系
-- [目录结构检查脚本](check_structure.ps1)：检查目录结构完整性
-- [一键检查工具](check_all.bat)：自动检查链接和目录结构
-- [一键整理工具](clean_all.bat)：执行所有整理步骤
+- [链接检查脚本](./check_links.ps1)：检查链接有效性
+- [链接修复脚本](./fix_links_unified.ps1)：修复文件间的链接关系
+- [目录结构检查脚本](./check_structure.ps1)：检查目录结构完整性
+- [一键检查工具](./check_all.bat)：自动检查链接和目录结构
+- [一键整理工具](./clean_all.bat)：执行所有整理步骤
 
 ---
 
 -*最后更新：2024年整理完成*
+

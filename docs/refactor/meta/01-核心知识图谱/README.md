@@ -9,7 +9,7 @@
 
 ## 相关资源
 
-- [整合知识图谱](../lean_haskell_knowledge_graph.md)：最新整合的Lean与Haskell知识图谱
+- [整合知识图谱](../lean_haskell_unified_knowledge_graph.md)：最新整合的Lean与Haskell知识图谱
 - [深度分析整合](../02-深度分析/01-深度分析-整合.md)：深度整合与关联性分析
 - [快速导航](../快速导航_更新版.md)：知识体系的快速访问入口
 
@@ -20,3 +20,4 @@
 ---
 
 -*最后更新：2024年整理阶段*
+

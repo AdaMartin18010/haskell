@@ -369,9 +369,9 @@ docs/refactor/
 
 ## 相关资源
 
-- [Lean与Haskell知识图谱](../lean_haskell_knowledge_graph.md)：整合两种语言的核心概念和关联性
+- [Lean与Haskell知识图谱](../lean_haskell_unified_knowledge_graph.md)：整合两种语言的核心概念和关联性
 - [快速导航（更新版）](../快速导航_更新版.md)：更新版的快速导航
-- [整理总结报告](../整理总结报告_更新版.md)：整理工作的总结和后续计划
+- [整理总结报告](../整理工作报告.md)：整理工作的总结和后续计划
 - [链接修复计划](../link_fix_plan_new.md)：链接修复的计划和方法
 
 ## 目录说明
@@ -381,3 +381,4 @@ docs/refactor/
 ---
 
 -*最后更新：2024年*
+
