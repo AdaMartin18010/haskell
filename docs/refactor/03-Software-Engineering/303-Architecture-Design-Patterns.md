@@ -1,21 +1,70 @@
 # 303 架构与设计模式（Architecture & Design Patterns）
 
-## 1. 概述
+- [1. 引言](#1-引言)
+- [2. 架构基础理论](#2-架构基础理论)
+- [3. 常用设计模式分类](#3-常用设计模式分类)
+- [4. Haskell/Rust/Lean设计模式对比](#4-haskellrustlean设计模式对比)
+- [5. 代码示例与模式应用](#5-代码示例与模式应用)
+- [6. 结构图与模式图](#6-结构图与模式图)
+- [7. 参考文献](#7-参考文献)
+
+---
+
+## 1. 引言
 
 架构与设计模式是软件工程中提升系统可维护性、可扩展性与复用性的核心理论与实践。架构关注系统整体结构与分层，设计模式关注局部结构与通用解决方案。
 
-## 2. 主要分支/流派/方法
+## 2. 架构基础理论
 
-- 架构风格：分层架构、微服务、事件驱动、管道-过滤器等
-- 设计模式：创建型、结构型、行为型（如单例、工厂、观察者、装饰器、策略等）
-- 领域驱动设计（DDD）、架构决策记录（ADR）
-
-## 3. 理论体系与工程流程
-
-- 架构建模与视图（如C4模型、UML）
-- 设计模式的分类与适用场景
+- 分层架构、微服务、事件驱动、管道-过滤器等
 - 架构决策与权衡分析
-- Mermaid/UML结构图示例：
+- 典型架构流程与结构图（见下方Mermaid示例）
+
+## 3. 常用设计模式分类
+
+- 创建型：单例、工厂、建造者、原型等
+- 结构型：适配器、装饰器、组合、外观、代理等
+- 行为型：观察者、策略、命令、状态、责任链等
+- 并发/分布式：生产者-消费者、读写锁、分布式事务等
+
+## 4. Haskell/Rust/Lean设计模式对比
+
+| 模式/特性   | Haskell           | Rust              | Lean                |
+|-------------|-------------------|-------------------|---------------------|
+| 单例        | IORef/STM实现     | 静态变量/Mutex    | 依赖类型/模块化     |
+| 工厂        | 类型类/高阶函数   | Trait/泛型        | 类型类/证明辅助     |
+| 观察者      | FRP/事件流        | 通道/回调         | 依赖类型事件建模    |
+| 并发支持    | STM/Async         | 线程/async/await  | Lean4支持并发建模   |
+
+## 5. 代码示例与模式应用
+
+```haskell
+-- Haskell中的单例模式实现
+module Singleton where
+import Data.IORef
+import System.IO.Unsafe (unsafePerformIO)
+
+singleton :: IORef Int
+singleton = unsafePerformIO (newIORef 0)
+```
+
+```rust
+// Rust中的单例模式实现（伪代码）
+use std::sync::{Once, ONCE_INIT};
+static mut INSTANCE: Option<MyType> = None;
+static INIT: Once = ONCE_INIT;
+
+fn get_instance() -> &'static MyType {
+    unsafe {
+        INIT.call_once(|| {
+            INSTANCE = Some(MyType::new());
+        });
+        INSTANCE.as_ref().unwrap()
+    }
+}
+```
+
+## 6. 结构图与模式图
 
 ```mermaid
 classDiagram
@@ -30,37 +79,7 @@ classDiagram
   Service --> Repository
 ```
 
-## 4. Haskell工程实践示例
-
-```haskell
--- Haskell中的单例模式实现
-module Singleton where
-import Data.IORef
-import System.IO.Unsafe (unsafePerformIO)
-
-singleton :: IORef Int
-singleton = unsafePerformIO (newIORef 0)
-```
-
-## 5. 相关证明与形式化表达
-
-- 架构正确性与一致性证明思路
-- 设计模式的可复用性与可组合性分析
-
-## 6. 应用案例与工程经验
-
-- Haskell在微服务、事件驱动等架构中的应用
-- 典型设计模式在实际项目中的落地经验
-
-## 7. 与Rust/Lean工程对比
-
-| 特性         | Haskell           | Rust              | Lean                |
-|--------------|-------------------|-------------------|---------------------|
-| 架构支持     | 支持多种架构风格  | 支持微服务/嵌入式 | Lean4支持模块化     |
-| 设计模式     | 支持函数式/面向对象| 支持多范式        | 以证明与组合为主    |
-| 工具链       | Stack/Cabal       | Cargo             | Lean工具链          |
-
-## 8. 参考文献
+## 7. 参考文献
 
 - [1] Gamma, E. et al. (1994). Design Patterns: Elements of Reusable Object-Oriented Software.
 - [2] Bass, L., Clements, P., & Kazman, R. (2012). Software Architecture in Practice.
