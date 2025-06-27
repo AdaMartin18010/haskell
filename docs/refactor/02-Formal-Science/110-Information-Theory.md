@@ -1,13 +1,14 @@
 # 110 信息论（Information Theory）
 
-- [1. 引言](#1-引言)
-- [2. 核心理论体系](#2-核心理论体系)
-- [3. Haskell/Lean代码示例](#3-haskelllean代码示例)
-- [4. 数学表达与证明](#4-数学表达与证明)
-- [5. 图表与结构图](#5-图表与结构图)
-- [6. 工程与应用案例](#6-工程与应用案例)
-- [7. 对比分析（Haskell/Rust/Lean）](#7-对比分析haskellrustlean)
-- [8. 参考文献](#8-参考文献)
+- [110 信息论（Information Theory）](#110-信息论information-theory)
+  - [1. 引言](#1-引言)
+  - [2. 核心理论体系](#2-核心理论体系)
+  - [3. Haskell/Lean代码示例](#3-haskelllean代码示例)
+  - [4. 数学表达与证明](#4-数学表达与证明)
+  - [5. 图表与结构图](#5-图表与结构图)
+  - [6. 工程与应用案例](#6-工程与应用案例)
+  - [7. 对比分析（Haskell/Rust/Lean）](#7-对比分析haskellrustlean)
+  - [8. 参考文献](#8-参考文献)
 
 ---
 
@@ -80,4 +81,4 @@ graph TD
 
 - [1] Shannon, C. E. (1948). A Mathematical Theory of Communication.
 - [2] Cover, T. M., & Thomas, J. A. (2006). Elements of Information Theory.
-- [3] MacKay, D. J. C. (2003). Information Theory, Inference, and Learning Algorithms. 
+- [3] MacKay, D. J. C. (2003). Information Theory, Inference, and Learning Algorithms.

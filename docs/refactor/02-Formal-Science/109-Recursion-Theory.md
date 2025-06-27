@@ -1,13 +1,14 @@
 # 109 递归论（Recursion Theory）
 
-- [1. 引言](#1-引言)
-- [2. 核心理论体系](#2-核心理论体系)
-- [3. Haskell/Lean代码示例](#3-haskelllean代码示例)
-- [4. 数学表达与证明](#4-数学表达与证明)
-- [5. 图表与结构图](#5-图表与结构图)
-- [6. 工程与应用案例](#6-工程与应用案例)
-- [7. 对比分析（Haskell/Rust/Lean）](#7-对比分析haskellrustlean)
-- [8. 参考文献](#8-参考文献)
+- [109 递归论（Recursion Theory）](#109-递归论recursion-theory)
+  - [1. 引言](#1-引言)
+  - [2. 核心理论体系](#2-核心理论体系)
+  - [3. Haskell/Lean代码示例](#3-haskelllean代码示例)
+  - [4. 数学表达与证明](#4-数学表达与证明)
+  - [5. 图表与结构图](#5-图表与结构图)
+  - [6. 工程与应用案例](#6-工程与应用案例)
+  - [7. 对比分析（Haskell/Rust/Lean）](#7-对比分析haskellrustlean)
+  - [8. 参考文献](#8-参考文献)
 
 ---
 
@@ -74,4 +75,4 @@ graph TD
 
 - [1] Rogers, H. (1987). Theory of Recursive Functions and Effective Computability.
 - [2] Soare, R. I. (2016). Turing Computability: Theory and Applications.
-- [3] Odifreddi, P. (1992). Classical Recursion Theory. 
+- [3] Odifreddi, P. (1992). Classical Recursion Theory.
