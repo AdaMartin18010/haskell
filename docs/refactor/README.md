@@ -124,19 +124,19 @@ docs/refactor/
 
 ### 应用路径
 
-4. **应用科学** (04-Applied-Science) - 计算机科学和软件工程
-5. **行业领域** (05-Industry-Domains) - 具体应用场景
-6. **架构设计** (06-Architecture) - 系统设计模式
+1. **应用科学** (04-Applied-Science) - 计算机科学和软件工程
+2. **行业领域** (05-Industry-Domains) - 具体应用场景
+3. **架构设计** (06-Architecture) - 系统设计模式
 
 ### 实践路径
 
-7. **实现层** (07-Implementation) - Haskell代码实现
-8. **编程语言** (08-Programming-Languages) - 语言对比分析
-9. **形式化方法** (09-Formal-Methods) - 验证和证明技术
+1. **实现层** (07-Implementation) - Haskell代码实现
+2. **编程语言** (08-Programming-Languages) - 语言对比分析
+3. **形式化方法** (09-Formal-Methods) - 验证和证明技术
 
 ### 集成路径
 
-10. **集成总结** (10-Integration) - 完整知识体系
+1. **集成总结** (10-Integration) - 完整知识体系
 
 ## 特色内容
 

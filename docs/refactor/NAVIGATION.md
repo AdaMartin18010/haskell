@@ -22,6 +22,16 @@
 - [006-Automata-Theory.md](./02-Formal-Science/006-Automata-Theory.md) - 自动机理论
 - [007-Topology.md](./02-Formal-Science/007-Topology.md) - 拓扑学
 - [08-Probability-Statistics/](./02-Formal-Science/08-Probability-Statistics/) - 概率统计
+- [101-Mathematical-Foundations.md](./02-Formal-Science/101-Mathematical-Foundations.md) - 数学基础
+- [102-Formal-Language.md](./02-Formal-Science/102-Formal-Language.md) - 形式语言
+- [103-Logical-Systems.md](./02-Formal-Science/103-Logical-Systems.md) - 逻辑系统
+- [201-Type-Theory.md](./02-Formal-Science/201-Type-Theory.md) - 类型理论
+- [202-Set-Theory.md](./02-Formal-Science/202-Set-Theory.md) - 集合论
+- [203-Category-Theory.md](./02-Formal-Science/203-Category-Theory.md) - 范畴论
+- [204-Model-Theory.md](./02-Formal-Science/204-Model-Theory.md) - 模型论
+- [205-Proof-Theory.md](./02-Formal-Science/205-Proof-Theory.md) - 证明论
+- [206-Recursion-Theory.md](./02-Formal-Science/206-Recursion-Theory.md) - 递归论
+- [207-Information-Theory.md](./02-Formal-Science/207-Information-Theory.md) - 信息论
 
 ### 🧮 理论层 (03-Theory)
 
@@ -95,12 +105,23 @@
 - [003-Theorem-Proving.md](./09-Formal-Methods/003-Theorem-Proving.md) - 定理证明
 - [004-Program-Analysis.md](./09-Formal-Methods/004-Program-Analysis.md) - 程序分析
 
+### 🏗️ 工程层 (03-Software-Engineering)
+
+- [301-Software-Engineering-Foundations.md](./03-Software-Engineering/301-Software-Engineering-Foundations.md) - 软件工程基础
+- [302-Development-Methodologies.md](./03-Software-Engineering/302-Development-Methodologies.md) - 软件开发方法论
+- [303-Architecture-Design-Patterns.md](./03-Software-Engineering/303-Architecture-Design-Patterns.md) - 架构与设计模式
+- [304-Formal-Methods-Verification.md](./03-Software-Engineering/304-Formal-Methods-Verification.md) - 形式化方法与验证
+- [305-Haskell-Engineering-Practice.md](./03-Software-Engineering/305-Haskell-Engineering-Practice.md) - Haskell工程实践
+
 ### 🔗 集成与总结 (10-Integration)
 
 - [001-Complete-Learning-Path.md](./10-Integration/001-Complete-Learning-Path.md) - 完整学习路径
 - [002-Navigation-Index.md](./10-Integration/002-Navigation-Index.md) - 导航索引
 - [003-Project-Summary.md](./10-Integration/003-Project-Summary.md) - 项目总结
 - [004-Quality-Assurance.md](./10-Integration/004-Quality-Assurance.md) - 质量保证
+- [Progress-Report.md](./10-Integration/Progress-Report.md) - 阶段性进度报告
+- [Global-Index.md](./10-Integration/Global-Index.md) - 全局索引
+- [Quality-Assurance.md](./10-Integration/Quality-Assurance.md) - 质量评估报告
 
 ## 主题导航
 
