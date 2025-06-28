@@ -7,6 +7,7 @@
 ## 核心概念
 
 ### 线性类型
+
 ```haskell
 -- 线性类型确保值只使用一次
 data Linear a = Linear a
@@ -20,6 +21,7 @@ linearId (Linear x) = Linear x
 ```
 
 ### 在Rust中的实现
+
 ```rust
 // Rust的所有权系统实现线性类型
 fn main() {
@@ -32,6 +34,7 @@ fn main() {
 ## 应用场景
 
 ### 资源管理
+
 ```haskell
 -- 文件句柄的线性使用
 data FileHandle = FileHandle FilePath
@@ -54,6 +57,7 @@ withFile path action = do
 ```
 
 ### 内存安全
+
 ```haskell
 -- 线性数组
 data LinearArray a = LinearArray [a]
@@ -69,6 +73,7 @@ readArray (LinearArray xs) i = (LinearArray xs, xs !! i)
 ## 类型系统
 
 ### 线性逻辑
+
 ```haskell
 -- 线性逻辑连接词
 -- A ⊗ B : 同时拥有A和B
@@ -82,6 +87,7 @@ data Bang a = Bang a
 ```
 
 ### 类型检查
+
 ```haskell
 -- 线性类型检查器
 type LinearContext = [(String, LinearType)]
@@ -105,6 +111,7 @@ linearTypeCheck ctx (App f arg) = do
 ## 实际应用
 
 ### 并发编程
+
 ```haskell
 -- 线性通道
 data LinearChannel a = LinearChannel (Chan a)
@@ -122,6 +129,7 @@ receive (LinearChannel chan) = readChan chan
 ```
 
 ### 数据库连接
+
 ```haskell
 -- 线性数据库连接
 data LinearConnection = LinearConnection Connection
@@ -159,5 +167,6 @@ withConnection connStr action = do
 ---
 
 **相关链接**：
+
 - [编程语言理论](./001-Programming-Language-Theory.md)
-- [仿射类型理论](./003-Affine-Type-Theory.md) 
+- [仿射类型理论](./003-Affine-Type-Theory.md)

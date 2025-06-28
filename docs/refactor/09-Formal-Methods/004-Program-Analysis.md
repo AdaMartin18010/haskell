@@ -7,6 +7,7 @@
 ## 静态分析
 
 ### 类型检查
+
 ```haskell
 -- 静态类型检查
 data Tree a = Empty | Node a (Tree a) (Tree a)
@@ -19,6 +20,7 @@ insert x (Node y left right)
 ```
 
 ### 数据流分析
+
 ```haskell
 -- 活跃变量分析
 type VarSet = Set String
@@ -32,6 +34,7 @@ analyzeLiveness prog = -- 实现活跃变量分析
 ## 动态分析
 
 ### 性能分析
+
 ```haskell
 -- 性能监控
 import System.CPUTime
@@ -46,6 +49,7 @@ measureTime action = do
 ```
 
 ### 内存分析
+
 ```haskell
 -- 内存使用分析
 import GHC.Stats
@@ -74,5 +78,6 @@ analyzeMemory = do
 ---
 
 **相关链接**：
+
 - [形式化验证](./001-Formal-Verification.md)
-- [模型检查](./002-Model-Checking.md) 
+- [模型检查](./002-Model-Checking.md)

@@ -7,6 +7,7 @@
 ## 形式语义
 
 ### 操作语义
+
 ```haskell
 -- 简单表达式语言
 data Expr = Lit Int
@@ -21,6 +22,7 @@ eval (Mul e1 e2) = eval e1 * eval e2
 ```
 
 ### 指称语义
+
 ```haskell
 -- 环境
 type Env = [(String, Int)]
@@ -37,6 +39,7 @@ evalDenot (Add e1 e2) env = evalDenot e1 env + evalDenot e2 env
 ## 类型理论
 
 ### 简单类型λ演算
+
 ```haskell
 -- 类型定义
 data Type = TInt | TBool | TArrow Type Type
@@ -67,6 +70,7 @@ typeCheck ctx (App f arg) = do
 ## 编译原理
 
 ### 词法分析
+
 ```haskell
 -- 词法单元
 data Token = TInt Int
@@ -83,6 +87,7 @@ lexer = undefined -- 实现词法分析
 ```
 
 ### 语法分析
+
 ```haskell
 -- 抽象语法树
 data AST = Num Int
@@ -105,5 +110,6 @@ parse = undefined -- 实现语法分析
 ---
 
 **相关链接**：
+
 - [线性类型理论](./002-Linear-Type-Theory.md)
-- [仿射类型理论](./003-Affine-Type-Theory.md) 
+- [仿射类型理论](./003-Affine-Type-Theory.md)
