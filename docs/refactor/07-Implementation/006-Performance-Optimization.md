@@ -7,6 +7,7 @@
 ## 编译优化
 
 ### GHC优化标志
+
 ```bash
 # 基本优化
 ghc -O2 Main.hs
@@ -19,6 +20,7 @@ ghc -O2 -funbox-strict-fields -fstrictness Main.hs
 ```
 
 ### 优化级别说明
+
 ```haskell
 -- -O0: 无优化
 -- -O1: 基本优化
@@ -30,6 +32,7 @@ ghc -O2 -funbox-strict-fields -fstrictness Main.hs
 ## 内存优化
 
 ### 严格求值
+
 ```haskell
 -- 使用严格字段
 data StrictRecord = StrictRecord 
@@ -48,6 +51,7 @@ strictPattern x = x * 2
 ```
 
 ### 内存泄漏避免
+
 ```haskell
 -- 避免空间泄漏
 sumList :: [Int] -> Int
@@ -68,6 +72,7 @@ processLargeList = foldl' (\acc x -> acc + x * x) 0
 ```
 
 ### 垃圾回收调优
+
 ```haskell
 -- 运行时参数
 -- +RTS -H1G -A32M -RTS
@@ -80,6 +85,7 @@ processLargeList = foldl' (\acc x -> acc + x * x) 0
 ## 算法优化
 
 ### 尾递归优化
+
 ```haskell
 -- 尾递归版本
 factorial :: Integer -> Integer
@@ -97,6 +103,7 @@ reverse' = go []
 ```
 
 ### 惰性求值优化
+
 ```haskell
 -- 使用惰性求值避免不必要计算
 lazyFilter :: (a -> Bool) -> [a] -> [a]
@@ -111,6 +118,7 @@ takeFirst n = take n
 ```
 
 ### 缓存优化
+
 ```haskell
 -- 记忆化
 memoize :: (Int -> a) -> Int -> a
@@ -130,6 +138,7 @@ memoizedFib = memo integral fib
 ## 数据结构优化
 
 ### 选择合适的数据结构
+
 ```haskell
 -- 频繁查找：使用Map
 import Data.Map (Map)
@@ -154,6 +163,7 @@ queueOperations = (Seq.|> 42) . (10 Seq.<|)
 ```
 
 ### 字符串优化
+
 ```haskell
 -- 使用Text而不是String
 import Data.Text (Text)
@@ -172,6 +182,7 @@ buildString = toLazyText . mconcat . map fromString
 ## 并发优化
 
 ### 并行计算
+
 ```haskell
 -- 使用par进行并行计算
 import Control.Parallel
@@ -193,6 +204,7 @@ parallelMap f = parMap rpar f
 ```
 
 ### 异步IO
+
 ```haskell
 -- 使用async进行并发IO
 import Control.Concurrent.Async
@@ -209,6 +221,7 @@ concurrentIO = do
 ## 性能分析
 
 ### 性能测量
+
 ```haskell
 -- 使用criterion进行基准测试
 import Criterion.Main
@@ -232,6 +245,7 @@ timeIt action = do
 ```
 
 ### 内存分析
+
 ```haskell
 -- 使用GHC.Profiling进行内存分析
 -- 编译时添加 -prof -fprof-auto
@@ -247,6 +261,7 @@ analyzeHeap = do
 ```
 
 ### 性能监控
+
 ```haskell
 -- 使用GHC.Stats监控运行时统计
 import GHC.Stats
@@ -262,6 +277,7 @@ monitorPerformance = do
 ## 编译时优化
 
 ### 内联优化
+
 ```haskell
 -- 使用INLINE编译指示
 {-# INLINE optimizedFunction #-}
@@ -275,6 +291,7 @@ flexibleFunction x = x * 2 + 1
 ```
 
 ### 特殊化
+
 ```haskell
 -- 使用SPECIALIZE编译指示
 {-# SPECIALIZE specializedFunction :: Int -> Int #-}
@@ -283,6 +300,7 @@ specializedFunction x = x * 2 + 1
 ```
 
 ### 展开优化
+
 ```haskell
 -- 使用UNPACK编译指示
 data OptimizedRecord = OptimizedRecord
@@ -294,6 +312,7 @@ data OptimizedRecord = OptimizedRecord
 ## 运行时优化
 
 ### 线程优化
+
 ```haskell
 -- 设置线程数
 -- +RTS -N4 -RTS  -- 使用4个线程
@@ -308,6 +327,7 @@ setThreadAffinity = do
 ```
 
 ### 内存分配优化
+
 ```haskell
 -- 调整分配区域大小
 -- +RTS -A32M -RTS  -- 32MB分配区域
@@ -319,6 +339,7 @@ setThreadAffinity = do
 ## 最佳实践
 
 ### 代码组织
+
 ```haskell
 -- 模块化设计
 module OptimizedModule 
@@ -336,6 +357,7 @@ type UserName = String
 ```
 
 ### 错误处理优化
+
 ```haskell
 -- 使用Maybe而不是异常
 safeDivide :: Double -> Double -> Maybe Double
@@ -354,5 +376,6 @@ safeOperation x
 ---
 
 **相关链接**：
+
 - [数据结构](./005-Data-Structures.md)
-- [算法](./004-Algorithms.md) 
+- [算法](./004-Algorithms.md)
