@@ -9,6 +9,7 @@
 ### 1. 函数式架构原则
 
 #### 纯函数优先
+
 ```haskell
 -- 纯函数设计
 data User = User 
@@ -35,6 +36,7 @@ processUser user = do
 ```
 
 #### 不可变性设计
+
 ```haskell
 -- 不可变数据结构
 data SystemState = SystemState
@@ -55,6 +57,7 @@ type StateM a = StateT SystemState IO a
 ### 2. 类型驱动设计
 
 #### 强类型系统
+
 ```haskell
 -- 使用类型确保正确性
 newtype UserId = UserId { unUserId :: UUID }
@@ -78,6 +81,7 @@ data UserError =
 ```
 
 #### 依赖注入
+
 ```haskell
 -- 通过类型类定义接口
 class Monad m => UserRepository m where
@@ -98,6 +102,7 @@ instance UserRepository AppM where
 ### 3. 分层架构
 
 #### 领域层 (Domain Layer)
+
 ```haskell
 -- 领域模型
 data User = User
@@ -123,6 +128,7 @@ data UserEvent =
 ```
 
 #### 应用层 (Application Layer)
+
 ```haskell
 -- 应用服务
 newtype UserApplicationService m = UserApplicationService
@@ -147,6 +153,7 @@ registerUserUseCase app email password = do
 ```
 
 #### 基础设施层 (Infrastructure Layer)
+
 ```haskell
 -- 数据库实现
 newtype DatabaseUserRepository = DatabaseUserRepository
@@ -174,6 +181,7 @@ instance EventPublisher KafkaEventPublisher where
 ### 1. 服务拆分原则
 
 #### 领域驱动设计 (DDD)
+
 ```haskell
 -- 用户上下文
 module UserContext where
@@ -192,6 +200,7 @@ module PaymentContext where
 ```
 
 #### 服务边界
+
 ```haskell
 -- 服务接口定义
 data UserServiceAPI = UserServiceAPI
@@ -212,6 +221,7 @@ type ServiceCommunication =
 ### 2. 服务发现与注册
 
 #### 服务注册
+
 ```haskell
 -- 服务注册中心
 class Monad m => ServiceRegistry m where
@@ -228,6 +238,7 @@ data ServiceInfo = ServiceInfo
 ```
 
 #### 负载均衡
+
 ```haskell
 -- 负载均衡器
 data LoadBalancer = LoadBalancer
@@ -251,6 +262,7 @@ balanceLoad lb req = case strategy lb of
 ### 3. 事件驱动架构
 
 #### 事件总线
+
 ```haskell
 -- 事件总线
 class Monad m => EventBus m where
@@ -269,6 +281,7 @@ data Event =
 ```
 
 #### 事件溯源
+
 ```haskell
 -- 事件存储
 class Monad m => EventStore m where
@@ -296,6 +309,7 @@ applyEvent agg event =
 ### 1. 一致性模式
 
 #### 最终一致性
+
 ```haskell
 -- 最终一致性实现
 data ConsistencyLevel = 
@@ -317,6 +331,7 @@ data ReplicationConfig = ReplicationConfig
 ```
 
 #### CAP定理处理
+
 ```haskell
 -- 分区容忍性优先
 data CAPStrategy = 
@@ -338,6 +353,7 @@ data PartitionRecovery = PartitionRecovery
 ### 2. 容错设计
 
 #### 断路器模式
+
 ```haskell
 -- 断路器状态
 data CircuitBreakerState = 
@@ -369,6 +385,7 @@ runWithCircuitBreaker cb action = do
 ```
 
 #### 重试机制
+
 ```haskell
 -- 重试策略
 data RetryStrategy = RetryStrategy
@@ -406,6 +423,7 @@ retryLoop strategy action attempt = do
 ### 1. 缓存策略
 
 #### 多层缓存
+
 ```haskell
 -- 缓存层次
 data CacheLayer = 
@@ -434,6 +452,7 @@ data WritePolicy =
 ```
 
 #### 缓存一致性
+
 ```haskell
 -- 缓存失效策略
 data InvalidationStrategy = 
@@ -451,6 +470,7 @@ class Monad m => CacheSynchronizer m where
 ### 2. 异步处理
 
 #### 消息队列
+
 ```haskell
 -- 消息队列接口
 class Monad m => MessageQueue m where
@@ -469,6 +489,7 @@ data MessageRouter = MessageRouter
 ```
 
 #### 异步任务
+
 ```haskell
 -- 任务调度器
 class Monad m => TaskScheduler m where
@@ -489,6 +510,7 @@ data TaskExecutor = TaskExecutor
 ### 1. 认证与授权
 
 #### 身份认证
+
 ```haskell
 -- 认证服务
 class Monad m => AuthenticationService m where
@@ -511,6 +533,7 @@ hashPassword password = do
 ```
 
 #### 权限控制
+
 ```haskell
 -- 权限模型
 data Permission = Permission
@@ -534,6 +557,7 @@ class Monad m => AuthorizationService m where
 ### 2. 数据安全
 
 #### 加密
+
 ```haskell
 -- 加密服务
 class Monad m => EncryptionService m where
@@ -555,6 +579,7 @@ class Monad m => SecureStorage m where
 ### 1. 日志系统
 
 #### 结构化日志
+
 ```haskell
 -- 日志级别
 data LogLevel = Debug | Info | Warn | Error | Fatal
@@ -574,6 +599,7 @@ data LogContext = LogContext
 ```
 
 #### 分布式追踪
+
 ```haskell
 -- 追踪上下文
 data TraceContext = TraceContext
@@ -593,6 +619,7 @@ class Monad m => TracingService m where
 ### 2. 指标收集
 
 #### 性能指标
+
 ```haskell
 -- 指标类型
 data Metric = 
@@ -609,6 +636,7 @@ class Monad m => MetricsCollector m where
 ```
 
 #### 健康检查
+
 ```haskell
 -- 健康状态
 data HealthStatus = 
@@ -633,6 +661,7 @@ data HealthCheck = HealthCheck
 ---
 
 **相关链接**：
+
 - [软件工程基础](../03-Software-Engineering/301-Software-Engineering-Foundations.md)
 - [开发方法论](../03-Software-Engineering/302-Development-Methodologies.md)
-- [架构设计模式](../03-Software-Engineering/303-Architecture-Design-Patterns.md) 
+- [架构设计模式](../03-Software-Engineering/303-Architecture-Design-Patterns.md)
