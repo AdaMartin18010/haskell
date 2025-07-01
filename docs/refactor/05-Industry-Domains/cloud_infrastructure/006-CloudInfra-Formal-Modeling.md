@@ -3,6 +3,7 @@
 ## 1. 基础设施即代码的形式化
 
 ### 1.1 资源模型
+
 ```haskell
 -- 云资源抽象
 data CloudResource = 
@@ -35,6 +36,7 @@ data NetworkResource = NetworkResource
 ```
 
 ### 1.2 配置验证
+
 ```haskell
 -- 配置验证
 class Validatable a where
@@ -61,6 +63,7 @@ mkComputeResource iType cap avail = do
 ## 2. 状态管理形式化
 
 ### 2.1 状态转换
+
 ```haskell
 -- 基础设施状态
 data InfraState = InfraState
@@ -84,6 +87,7 @@ transition state (CreateResource rid resource) = do
 ```
 
 ### 2.2 不变量维护
+
 ```haskell
 -- 系统不变量
 class Invariant a where
@@ -106,6 +110,7 @@ validateState state =
 ## 3. 安全性形式化
 
 ### 3.1 访问控制
+
 ```haskell
 -- 访问控制模型
 data Permission = 
@@ -127,6 +132,7 @@ checkPermission role perm resource =
 ```
 
 ### 3.2 安全策略
+
 ```rust
 // Rust实现的安全策略
 #[derive(Debug, Clone)]
@@ -150,6 +156,7 @@ impl SecurityPolicy {
 ## 4. 可用性形式化
 
 ### 4.1 故障模型
+
 ```haskell
 -- 故障模型
 data Failure = 
@@ -168,6 +175,7 @@ analyzeAvailability sys failures =
 ```
 
 ### 4.2 恢复策略
+
 ```rust
 // 恢复策略
 pub enum RecoveryStrategy {
@@ -192,6 +200,7 @@ impl RecoveryStrategy {
 ## 5. 性能形式化
 
 ### 5.1 性能模型
+
 ```haskell
 -- 性能指标
 data PerformanceMetric = PerformanceMetric
@@ -209,6 +218,7 @@ analyzePerformance sys load = do
 ```
 
 ### 5.2 容量规划
+
 ```lean
 -- Lean形式化
 def capacity_planning (sys : System) (load : Load) : Option Capacity :=
@@ -231,6 +241,7 @@ end
 ## 6. 工程实践
 
 ### 6.1 验证工具链
+
 ```haskell
 -- 验证管道
 data VerificationPipeline = VerificationPipeline
@@ -248,6 +259,7 @@ runVerification pipeline sys = do
 ```
 
 ### 6.2 持续验证
+
 ```yaml
 # 持续验证配置
 verification:
@@ -266,6 +278,7 @@ verification:
 ## 7. 最佳实践
 
 ### 7.1 建模指南
+
 1. 从核心资源模型开始
 2. 定义清晰的状态转换
 3. 建立完整的不变量系统
@@ -273,6 +286,7 @@ verification:
 5. 构建性能模型
 
 ### 7.2 验证策略
+
 1. 静态分析保证基本正确性
 2. 模型检查验证状态空间
 3. 定理证明保证关键属性

@@ -3,6 +3,7 @@
 ## 1. 安全模型形式化
 
 ### 1.1 访问控制模型
+
 ```haskell
 -- 访问控制矩阵
 data AccessControlMatrix = AccessControlMatrix
@@ -28,6 +29,7 @@ checkAccess matrix subject object permission =
 ```
 
 ### 1.2 安全策略模型
+
 ```haskell
 -- 安全策略
 data SecurityPolicy = SecurityPolicy
@@ -53,6 +55,7 @@ evaluatePolicy policy request =
 ## 2. 威胁模型形式化
 
 ### 2.1 威胁建模
+
 ```haskell
 -- 威胁模型
 data ThreatModel = ThreatModel
@@ -79,6 +82,7 @@ assessRisk model asset =
 ```
 
 ### 2.2 攻击树模型
+
 ```haskell
 -- 攻击树
 data AttackTree = 
@@ -99,6 +103,7 @@ findAttackPaths (Or trees) =
 ## 3. 密码学形式化
 
 ### 3.1 加密系统
+
 ```haskell
 -- 加密系统
 class Encryption e where
@@ -122,6 +127,7 @@ instance Encryption AES where
 ```
 
 ### 3.2 数字签名
+
 ```haskell
 -- 数字签名系统
 class DigitalSignature d where
@@ -149,6 +155,7 @@ instance DigitalSignature RSA where
 ## 4. 网络安全协议形式化
 
 ### 4.1 TLS协议
+
 ```haskell
 -- TLS状态机
 data TLSState = 
@@ -178,6 +185,7 @@ tlsTransition _ _ = Left InvalidTransition
 ```
 
 ### 4.2 认证协议
+
 ```rust
 // Rust实现的认证协议
 #[derive(Debug, Clone)]
@@ -203,6 +211,7 @@ impl AuthenticationProtocol {
 ## 5. 入侵检测形式化
 
 ### 5.1 异常检测
+
 ```haskell
 -- 异常检测模型
 data AnomalyDetector = AnomalyDetector
@@ -226,6 +235,7 @@ detectAnomaly detector behavior =
 ```
 
 ### 5.2 入侵响应
+
 ```haskell
 -- 响应策略
 data ResponseStrategy = 
@@ -252,6 +262,7 @@ executeResponse system threat =
 ## 6. 安全验证
 
 ### 6.1 形式化验证
+
 ```lean
 -- Lean形式化验证
 def security_property (sys : SecuritySystem) : Prop :=
@@ -269,6 +280,7 @@ end
 ```
 
 ### 6.2 模型检验
+
 ```haskell
 -- 模型检验
 data ModelChecker = ModelChecker
@@ -289,6 +301,7 @@ checkProperty checker property =
 ## 7. 工程实践
 
 ### 7.1 安全开发生命周期
+
 ```haskell
 -- SDLC阶段
 data SDLCPhase = 
@@ -314,6 +327,7 @@ manageSDLC activities phase =
 ```
 
 ### 7.2 安全测试
+
 ```rust
 // 安全测试框架
 pub struct SecurityTestFramework {
@@ -337,6 +351,7 @@ impl SecurityTestFramework {
 ## 8. 最佳实践
 
 ### 8.1 建模指南
+
 1. 从威胁模型开始
 2. 定义安全策略
 3. 建立访问控制模型
@@ -344,6 +359,7 @@ impl SecurityTestFramework {
 5. 验证安全属性
 
 ### 8.2 验证策略
+
 1. 静态分析检查代码安全
 2. 模型检验验证协议正确性
 3. 定理证明保证关键属性
