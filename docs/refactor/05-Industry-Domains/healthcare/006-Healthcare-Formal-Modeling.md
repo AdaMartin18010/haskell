@@ -1,4 +1,4 @@
-# AI/ML 形式化建模与验证
+# Healthcare 形式化建模与验证
 
 ## 形式化建模流程
 
@@ -11,36 +11,36 @@
 ## Haskell建模示例
 
 ```haskell
--- 形式化描述神经网络层
-class Layer l where
-  type Input l
-  type Output l
-  forward :: l -> Input l -> Output l
+-- 形式化描述医疗诊断
+class Diagnosis d where
+  type Input d
+  type Output d
+  diagnose :: d -> Input d -> Output d
 ```
 
 ## Rust建模示例
 
 ```rust
-trait Layer {
+trait Diagnosis {
     type Input;
     type Output;
-    fn forward(&self, input: Self::Input) -> Self::Output;
+    fn diagnose(&self, input: Self::Input) -> Self::Output;
 }
 ```
 
 ## Lean形式化证明
 
 ```lean
-theorem loss_nonneg (net : NeuralNet) (data : TrainingData) :
-  0 ≤ net.loss data :=
+theorem diagnosis_consistent (d : Diagnosis) (input : Input) :
+  is_consistent (d.diagnose input) :=
 begin
-  -- 证明损失函数非负
+  -- 证明诊断的一致性
 end
 ```
 
 ## 工程应用
 
-- 金融风控、医疗AI等高可靠性场景的形式化保障。
+- 医疗诊断、药物发现、生物信息学等高可靠性场景的形式化保障。
 
 ## 参考资料
 

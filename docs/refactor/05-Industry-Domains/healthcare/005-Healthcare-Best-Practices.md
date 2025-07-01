@@ -1,13 +1,13 @@
-# FinTech 行业最佳实践
+# Healthcare 行业最佳实践
 
 ## 类型安全建模
 
-- 使用Haskell的GADT、TypeFamilies等特性，确保金融交易逻辑的类型安全。
+- 使用Haskell的GADT、TypeFamilies等特性，确保医疗数据的类型安全和隐私保护。
 - Rust中利用trait和泛型实现高性能与安全性。
 
 ## 工程可验证性
 
-- 结合Lean对关键金融算法进行形式化证明，提升系统可靠性。
+- 结合Lean对关键医疗算法进行形式化证明，提升系统可靠性。
 - Haskell QuickCheck等工具进行属性测试。
 
 ## 跨语言协作

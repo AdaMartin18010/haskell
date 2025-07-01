@@ -3,9 +3,11 @@
 ## 案例1：类型安全的医疗数据分析系统
 
 ### 问题建模
+
 - 目标：实现一个可形式化验证的医疗数据分析系统，确保数据处理的安全性和准确性。
 
 ### Haskell实现
+
 ```haskell
 {-# LANGUAGE GADTs, DataKinds, KindSignatures #-}
 data PatientData = PatientData
@@ -28,6 +30,7 @@ analyzeVitalSigns vitals
 ```
 
 ### Rust实现
+
 ```rust
 use serde::{Deserialize, Serialize};
 
@@ -59,6 +62,7 @@ impl VitalSigns {
 ```
 
 ### Lean形式化
+
 ```lean
 def analyze_vital_signs (vitals : VitalSigns) : RiskAssessment :=
   if vitals.heart_rate > 100 then
@@ -77,9 +81,11 @@ end
 ```
 
 ### 对比分析
+
 - Haskell强调类型级安全和业务逻辑抽象，Rust注重高性能和内存安全，Lean可形式化证明医疗算法的正确性。
 
 ### 工程落地
+
 - 适用于医院信息系统、远程医疗、健康监测等场景。
 
 ---
@@ -87,9 +93,11 @@ end
 ## 案例2：生物信息学中的序列分析
 
 ### 问题建模
+
 - 目标：实现一个可形式化验证的DNA序列分析系统，确保分析结果的准确性。
 
 ### Haskell实现
+
 ```haskell
 data DNASequence = DNASequence [Nucleotide]
 data Nucleotide = A | T | G | C
@@ -112,6 +120,7 @@ findPattern (DNASequence pattern) (DNASequence sequence) =
 ```
 
 ### Rust实现
+
 ```rust
 #[derive(Debug, Clone, PartialEq)]
 pub enum Nucleotide {
@@ -158,6 +167,7 @@ impl DNASequence {
 ```
 
 ### Lean形式化
+
 ```lean
 inductive Nucleotide
 | A : Nucleotide
@@ -179,14 +189,17 @@ end
 ```
 
 ### 对比分析
+
 - Haskell提供清晰的函数式抽象和类型安全，Rust确保高性能计算和内存安全，Lean可形式化证明生物信息学算法的数学性质。
 
 ### 工程落地
+
 - 适用于基因组学、蛋白质组学、药物发现等生物信息学场景。
 
 ---
 
 ## 参考文献
+
 - [Haskell for Bioinformatics](https://hackage.haskell.org/package/bioinformatics)
 - [Rust for Healthcare](https://github.com/rust-healthcare)
-- [Lean for Healthcare](https://leanprover-community.github.io/) 
+- [Lean for Healthcare](https://leanprover-community.github.io/)

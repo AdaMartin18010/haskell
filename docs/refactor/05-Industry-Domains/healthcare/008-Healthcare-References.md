@@ -1,15 +1,15 @@
-# FinTech 参考文献与资源索引
+# Healthcare 参考文献与资源索引
 
 ## 论文与书籍
 
-- [Formal Methods for Finance](https://arxiv.org/abs/2107.10121)
+- [Formal Methods for Healthcare](https://arxiv.org/abs/2107.10121)
 - [Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-- [Finance with Haskell](https://hackage.haskell.org/package/finance)
+- [Healthcare with Haskell](https://hackage.haskell.org/package/healthcare)
 
 ## 开源项目
 
-- [Haskell finance](https://hackage.haskell.org/package/finance)
-- [Rust-Finance](https://github.com/rust-finance)
+- [Haskell healthcare](https://hackage.haskell.org/package/healthcare)
+- [Rust-Healthcare](https://github.com/rust-healthcare)
 - [Lean mathlib](https://github.com/leanprover-community/mathlib)
 
 ## 工具链
@@ -20,8 +20,8 @@
 
 ## 社区与文档
 
-- [Haskell Finance](https://wiki.haskell.org/Finance)
-- [Rust for FinTech](https://github.com/rust-finance)
+- [Haskell Healthcare](https://wiki.haskell.org/Healthcare)
+- [Rust for Healthcare](https://github.com/rust-healthcare)
 - [Lean Prover Community](https://leanprover-community.github.io/)
 
 ## 交叉引用
