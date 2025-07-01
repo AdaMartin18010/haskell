@@ -1,13 +1,13 @@
-# Game Development 行业最佳实践
+# Cloud Infrastructure 行业最佳实践
 
 ## 类型安全建模
 
-- 使用Haskell的GADT、TypeFamilies等特性，确保游戏逻辑的类型安全和状态一致性。
+- 使用Haskell的GADT、TypeFamilies等特性，确保云基础设施的类型安全和资源管理正确性。
 - Rust中利用trait和泛型实现高性能与安全性。
 
 ## 工程可验证性
 
-- 结合Lean对关键游戏算法进行形式化证明，提升系统可靠性。
+- 结合Lean对关键云基础设施算法进行形式化证明，提升系统可靠性。
 - Haskell QuickCheck等工具进行属性测试。
 
 ## 跨语言协作
@@ -27,5 +27,5 @@
 ## 推荐工具
 
 - Haskell: QuickCheck, STM, hmatrix
-- Rust: bevy, nalgebra, tokio
+- Rust: tokio, serde, kubernetes
 - Lean: mathlib, Lean 4

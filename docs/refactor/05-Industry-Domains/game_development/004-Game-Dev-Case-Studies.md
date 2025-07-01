@@ -3,9 +3,11 @@
 ## 案例1：类型安全的游戏状态管理
 
 ### 问题建模
+
 - 目标：实现一个可形式化验证的游戏状态管理系统，确保游戏逻辑的正确性和一致性。
 
 ### Haskell实现
+
 ```haskell
 {-# LANGUAGE GADTs, DataKinds, KindSignatures #-}
 data GameState = GameState
@@ -42,6 +44,7 @@ updatePlayer dt player = player
 ```
 
 ### Rust实现
+
 ```rust
 use bevy::prelude::*;
 
@@ -77,6 +80,7 @@ impl GameState {
 ```
 
 ### Lean形式化
+
 ```lean
 def update_game (dt : ℝ) (state : GameState) : GameState :=
   { state with 
@@ -93,9 +97,11 @@ end
 ```
 
 ### 对比分析
+
 - Haskell强调类型级安全和函数式抽象，Rust注重高性能和内存安全，Lean可形式化证明游戏逻辑的正确性。
 
 ### 工程落地
+
 - 适用于实时游戏、策略游戏、模拟游戏等场景。
 
 ---
@@ -103,9 +109,11 @@ end
 ## 案例2：物理引擎的形式化验证
 
 ### 问题建模
+
 - 目标：实现一个可形式化验证的物理引擎，确保物理计算的准确性和稳定性。
 
 ### Haskell实现
+
 ```haskell
 data PhysicsObject = PhysicsObject
   { mass :: Double
@@ -136,6 +144,7 @@ calculateAcceleration force mass =
 ```
 
 ### Rust实现
+
 ```rust
 use nalgebra::Vector3;
 
@@ -168,6 +177,7 @@ impl PhysicsObject {
 ```
 
 ### Lean形式化
+
 ```lean
 def apply_force (force : Force) (obj : PhysicsObject) : PhysicsObject :=
   { obj with 
@@ -188,9 +198,11 @@ end
 ```
 
 ### 对比分析
+
 - Haskell提供清晰的数学表达和类型安全，Rust确保高性能计算和内存安全，Lean可形式化证明物理定律的数学性质。
 
 ### 工程落地
+
 - 适用于3D游戏、物理仿真、VR/AR等场景。
 
 ---
@@ -198,9 +210,11 @@ end
 ## 案例3：多人网络同步的形式化建模
 
 ### 问题建模
+
 - 目标：实现一个可形式化验证的多人网络同步系统，确保数据一致性和网络效率。
 
 ### Haskell实现
+
 ```haskell
 data NetworkMessage = NetworkMessage
   { messageId :: MessageId
@@ -227,6 +241,7 @@ updatePlayerPosition msg state =
 ```
 
 ### Rust实现
+
 ```rust
 use serde::{Deserialize, Serialize};
 use tokio::net::TcpStream;
@@ -273,6 +288,7 @@ impl GameState {
 ```
 
 ### Lean形式化
+
 ```lean
 def process_network_message (msg : NetworkMessage) (state : GameState) : GameState :=
   match msg.message_type with
@@ -290,14 +306,17 @@ end
 ```
 
 ### 对比分析
+
 - Haskell提供强类型安全和函数式抽象，Rust确保高性能网络处理和内存安全，Lean可形式化证明网络同步的正确性。
 
 ### 工程落地
+
 - 适用于MMO、MOBA、FPS等多人游戏场景。
 
 ---
 
 ## 参考文献
+
 - [Haskell for Game Development](https://hackage.haskell.org/package/game)
 - [Rust for Game Development](https://github.com/rust-gamedev)
-- [Lean for Game Development](https://leanprover-community.github.io/) 
+- [Lean for Game Development](https://leanprover-community.github.io/)
