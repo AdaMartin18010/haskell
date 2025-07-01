@@ -2,666 +2,576 @@
 
 ## 概述
 
-本文档介绍基于函数式编程的系统架构设计原则和实践。
+本文档介绍基于函数式编程和形式方法的现代系统架构设计模式，重点关注Haskell、Rust和Lean在大规模系统中的应用。
 
-## 架构设计原则
+## 架构层次
 
-### 1. 函数式架构原则
-
-#### 纯函数优先
+### 1. 分层架构
 
 ```haskell
--- 纯函数设计
-data User = User 
-  { userId :: UserId
-  , userName :: String
-  , userEmail :: Email
-  }
+-- 传统分层架构的函数式实现
+{-# LANGUAGE DerivingStrategies #-}
 
--- 纯函数：输入确定，输出确定
-validateUser :: User -> Either ValidationError User
-validateUser user = 
-  case validateEmail (userEmail user) of
-    Left err -> Left err
-    Right _ -> Right user
+-- 领域层
+module Domain.User where
 
--- 避免副作用
-processUser :: User -> IO (Either ProcessError User)
-processUser user = do
-  -- 将副作用限制在IO monad中
-  result <- validateUser user
-  case result of
-    Left err -> return (Left err)
-    Right validUser -> saveUser validUser
-```
-
-#### 不可变性设计
-
-```haskell
--- 不可变数据结构
-data SystemState = SystemState
-  { users :: Map UserId User
-  , sessions :: Map SessionId Session
-  , config :: SystemConfig
-  }
-
--- 状态更新通过创建新状态
-updateUser :: UserId -> User -> SystemState -> SystemState
-updateUser uid user state = 
-  state { users = Map.insert uid user (users state) }
-
--- 避免可变状态
-type StateM a = StateT SystemState IO a
-```
-
-### 2. 类型驱动设计
-
-#### 强类型系统
-
-```haskell
--- 使用类型确保正确性
-newtype UserId = UserId { unUserId :: UUID }
-newtype Email = Email { unEmail :: String }
-newtype Password = Password { unPassword :: String }
-
--- 类型安全的API
-data UserAPI = UserAPI
-  { createUser :: Email -> Password -> IO (Either UserError UserId)
-  , getUser :: UserId -> IO (Either UserError User)
-  , updateUser :: UserId -> User -> IO (Either UserError ())
-  , deleteUser :: UserId -> IO (Either UserError ())
-  }
-
--- 错误类型
-data UserError = 
-  UserNotFound UserId
-  | InvalidEmail String
-  | DuplicateEmail Email
-  | DatabaseError String
-```
-
-#### 依赖注入
-
-```haskell
--- 通过类型类定义接口
-class Monad m => UserRepository m where
-  saveUser :: User -> m (Either UserError UserId)
-  findUser :: UserId -> m (Either UserError User)
-  updateUser :: UserId -> User -> m (Either UserError ())
-  deleteUser :: UserId -> m (Either UserError ())
-
--- 具体实现
-newtype AppM a = AppM { runAppM :: ReaderT AppConfig IO a }
-
-instance UserRepository AppM where
-  saveUser user = AppM $ do
-    config <- ask
-    liftIO $ saveUserToDatabase config user
-```
-
-### 3. 分层架构
-
-#### 领域层 (Domain Layer)
-
-```haskell
--- 领域模型
 data User = User
   { userId :: UserId
-  , userName :: String
-  , userEmail :: Email
-  , userStatus :: UserStatus
-  }
+  , email :: Email
+  , name :: UserName
+  } deriving stock (Show, Eq)
 
-data UserStatus = Active | Inactive | Suspended
+newtype UserId = UserId Text deriving newtype (Show, Eq, Hashable)
+newtype Email = Email Text deriving newtype (Show, Eq)
+newtype UserName = UserName Text deriving newtype (Show, Eq)
 
--- 领域服务
-class Monad m => UserService m where
-  registerUser :: Email -> Password -> m (Either UserError UserId)
-  activateUser :: UserId -> m (Either UserError ())
-  suspendUser :: UserId -> m (Either UserError ())
+-- 应用层
+module Application.UserService where
 
--- 领域事件
-data UserEvent = 
-  UserRegistered UserId Email
-  | UserActivated UserId
-  | UserSuspended UserId
+class Monad m => UserRepository m where
+  findUser :: UserId -> m (Maybe User)
+  saveUser :: User -> m ()
+
+createUser :: UserRepository m => Email -> UserName -> m (Either UserError User)
+createUser email name = do
+  let newUser = User (UserId "generated") email name
+  saveUser newUser
+  return $ Right newUser
+
+data UserError = InvalidEmail | UserExists deriving (Show, Eq)
+
+-- 基础设施层
+module Infrastructure.UserRepo where
+
+import Database.PostgreSQL.Simple
+
+instance UserRepository IO where
+  findUser (UserId uid) = do
+    conn <- connectPostgreSQL "dbname=myapp"
+    result <- query conn "SELECT * FROM users WHERE id = ?" (Only uid)
+    return $ case result of
+      [user] -> Just user
+      _ -> Nothing
 ```
 
-#### 应用层 (Application Layer)
+### 2. 六边形架构(端口适配器)
 
-```haskell
--- 应用服务
-newtype UserApplicationService m = UserApplicationService
-  { userService :: UserService m
-  , userRepository :: UserRepository m
-  , eventPublisher :: EventPublisher m
-  }
+```rust
+// Rust中的六边形架构
+use async_trait::async_trait;
+use std::collections::HashMap;
 
--- 用例实现
-registerUserUseCase :: 
-  UserApplicationService m -> 
-  Email -> 
-  Password -> 
-  m (Either UserError UserId)
-registerUserUseCase app email password = do
-  userId <- userService app `registerUser` email `withPassword` password
-  case userId of
-    Left err -> return (Left err)
-    Right uid -> do
-      publishEvent (UserRegistered uid email)
-      return (Right uid)
+// 领域核心
+#[derive(Debug, Clone)]
+pub struct User {
+    pub id: String,
+    pub email: String,
+    pub name: String,
+}
+
+#[derive(Debug)]
+pub enum UserError {
+    NotFound,
+    ValidationError(String),
+    DatabaseError(String),
+}
+
+// 端口(抽象接口)
+#[async_trait]
+pub trait UserRepository: Send + Sync {
+    async fn find_by_id(&self, id: &str) -> Result<Option<User>, UserError>;
+    async fn save(&self, user: &User) -> Result<(), UserError>;
+}
+
+#[async_trait]
+pub trait EmailService: Send + Sync {
+    async fn send_welcome_email(&self, user: &User) -> Result<(), UserError>;
+}
+
+// 应用服务(用例)
+pub struct UserService<R: UserRepository, E: EmailService> {
+    user_repo: R,
+    email_service: E,
+}
+
+impl<R: UserRepository, E: EmailService> UserService<R, E> {
+    pub fn new(user_repo: R, email_service: E) -> Self {
+        Self { user_repo, email_service }
+    }
+    
+    pub async fn create_user(&self, email: String, name: String) -> Result<User, UserError> {
+        let user = User {
+            id: uuid::Uuid::new_v4().to_string(),
+            email,
+            name,
+        };
+        
+        self.user_repo.save(&user).await?;
+        self.email_service.send_welcome_email(&user).await?;
+        
+        Ok(user)
+    }
+}
+
+// 适配器实现
+pub struct PostgresUserRepository {
+    pool: sqlx::PgPool,
+}
+
+#[async_trait]
+impl UserRepository for PostgresUserRepository {
+    async fn find_by_id(&self, id: &str) -> Result<Option<User>, UserError> {
+        let result = sqlx::query_as!(
+            User,
+            "SELECT id, email, name FROM users WHERE id = $1",
+            id
+        )
+        .fetch_optional(&self.pool)
+        .await
+        .map_err(|e| UserError::DatabaseError(e.to_string()))?;
+        
+        Ok(result)
+    }
+    
+    async fn save(&self, user: &User) -> Result<(), UserError> {
+        sqlx::query!(
+            "INSERT INTO users (id, email, name) VALUES ($1, $2, $3)",
+            user.id, user.email, user.name
+        )
+        .execute(&self.pool)
+        .await
+        .map_err(|e| UserError::DatabaseError(e.to_string()))?;
+        
+        Ok(())
+    }
+}
 ```
 
-#### 基础设施层 (Infrastructure Layer)
+### 3. 微服务架构
 
 ```haskell
--- 数据库实现
-newtype DatabaseUserRepository = DatabaseUserRepository
-  { connection :: DatabaseConnection
-  }
+-- 微服务通信模式
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeOperators #-}
 
-instance UserRepository DatabaseUserRepository where
-  saveUser user = do
-    conn <- asks connection
-    liftIO $ executeQuery conn "INSERT INTO users ..." user
+import Servant
 
--- 事件发布实现
-newtype KafkaEventPublisher = KafkaEventPublisher
-  { producer :: KafkaProducer
-  }
+-- API定义
+type UserAPI = 
+       "users" :> Get '[JSON] [User]
+  :<|> "users" :> ReqBody '[JSON] CreateUserRequest :> Post '[JSON] User
+  :<|> "users" :> Capture "id" UserId :> Get '[JSON] User
 
-instance EventPublisher KafkaEventPublisher where
-  publishEvent event = do
-    prod <- asks producer
-    liftIO $ sendMessage prod (serializeEvent event)
-```
-
-## 微服务架构
-
-### 1. 服务拆分原则
-
-#### 领域驱动设计 (DDD)
-
-```haskell
--- 用户上下文
-module UserContext where
-  data User = User { ... }
-  data UserService = UserService { ... }
-  
--- 订单上下文
-module OrderContext where
-  data Order = Order { ... }
-  data OrderService = OrderService { ... }
-  
--- 支付上下文
-module PaymentContext where
-  data Payment = Payment { ... }
-  data PaymentService = PaymentService { ... }
-```
-
-#### 服务边界
-
-```haskell
--- 服务接口定义
-data UserServiceAPI = UserServiceAPI
-  { getUser :: UserId -> IO (Either UserError User)
-  , createUser :: CreateUserRequest -> IO (Either UserError UserId)
-  }
-
-data OrderServiceAPI = OrderServiceAPI
-  { createOrder :: CreateOrderRequest -> IO (Either OrderError OrderId)
-  , getOrder :: OrderId -> IO (Either OrderError Order)
-  }
+type OrderAPI = 
+       "orders" :> Get '[JSON] [Order]
+  :<|> "orders" :> ReqBody '[JSON] CreateOrderRequest :> Post '[JSON] Order
 
 -- 服务间通信
-type ServiceCommunication = 
-  UserServiceAPI -> OrderServiceAPI -> PaymentServiceAPI
-```
-
-### 2. 服务发现与注册
-
-#### 服务注册
-
-```haskell
--- 服务注册中心
-class Monad m => ServiceRegistry m where
-  registerService :: ServiceInfo -> m (Either RegistryError ())
-  discoverService :: ServiceName -> m (Either RegistryError ServiceInfo)
-  deregisterService :: ServiceId -> m (Either RegistryError ())
-
-data ServiceInfo = ServiceInfo
-  { serviceId :: ServiceId
-  , serviceName :: ServiceName
-  , serviceUrl :: URL
-  , serviceHealth :: HealthStatus
-  }
-```
-
-#### 负载均衡
-
-```haskell
--- 负载均衡器
-data LoadBalancer = LoadBalancer
-  { strategy :: LoadBalancingStrategy
-  , services :: [ServiceInfo]
+data ServiceDiscovery = ServiceDiscovery
+  { userServiceUrl :: Text
+  , orderServiceUrl :: Text
+  , paymentServiceUrl :: Text
   }
 
-data LoadBalancingStrategy = 
-  RoundRobin
-  | LeastConnections
-  | WeightedRoundRobin [Weight]
+-- HTTP客户端
+callUserService :: ServiceDiscovery -> UserId -> IO (Maybe User)
+callUserService sd userId = do
+  manager <- newManager defaultManagerSettings
+  let url = userServiceUrl sd <> "/users/" <> unUserId userId
+  response <- httpLBS =<< parseRequest (T.unpack url)
+  return $ decode (responseBody response)
 
--- 负载均衡实现
-balanceLoad :: LoadBalancer -> Request -> IO (Either LoadBalancerError ServiceInfo)
-balanceLoad lb req = case strategy lb of
-  RoundRobin -> roundRobinSelect (services lb)
-  LeastConnections -> leastConnectionsSelect (services lb)
-  WeightedRoundRobin weights -> weightedSelect (services lb) weights
+-- 事件驱动架构
+data DomainEvent
+  = UserCreated User
+  | OrderPlaced Order
+  | PaymentProcessed Payment
+  deriving (Show, Generic, ToJSON, FromJSON)
+
+-- 事件发布
+publishEvent :: DomainEvent -> IO ()
+publishEvent event = do
+  -- 发布到消息队列(Redis/RabbitMQ/Kafka)
+  putStrLn $ "Publishing event: " <> show event
 ```
 
-### 3. 事件驱动架构
+## 并发和并行架构
 
-#### 事件总线
+### Actor模型
 
-```haskell
--- 事件总线
-class Monad m => EventBus m where
-  publish :: Event -> m (Either EventBusError ())
-  subscribe :: EventType -> EventHandler m -> m (Either EventBusError SubscriptionId)
-  unsubscribe :: SubscriptionId -> m (Either EventBusError ())
+```rust
+// Rust Actor模型实现
+use tokio::sync::mpsc;
+use std::collections::HashMap;
 
--- 事件处理器
-type EventHandler m = Event -> m (Either EventHandlerError ())
+#[derive(Debug)]
+pub enum Message {
+    GetUser { id: String, respond_to: mpsc::Sender<Option<User>> },
+    CreateUser { user: User, respond_to: mpsc::Sender<Result<(), String>> },
+    Stop,
+}
 
--- 事件类型
-data Event = 
-  UserCreated UserId
-  | OrderPlaced OrderId UserId
-  | PaymentProcessed PaymentId OrderId
+pub struct UserActor {
+    receiver: mpsc::Receiver<Message>,
+    users: HashMap<String, User>,
+}
+
+impl UserActor {
+    pub fn new(receiver: mpsc::Receiver<Message>) -> Self {
+        Self {
+            receiver,
+            users: HashMap::new(),
+        }
+    }
+    
+    pub async fn run(&mut self) {
+        while let Some(msg) = self.receiver.recv().await {
+            match msg {
+                Message::GetUser { id, respond_to } => {
+                    let user = self.users.get(&id).cloned();
+                    let _ = respond_to.send(user).await;
+                }
+                Message::CreateUser { user, respond_to } => {
+                    let id = user.id.clone();
+                    self.users.insert(id, user);
+                    let _ = respond_to.send(Ok(())).await;
+                }
+                Message::Stop => break,
+            }
+        }
+    }
+}
+
+// Actor句柄
+#[derive(Clone)]
+pub struct UserActorHandle {
+    sender: mpsc::Sender<Message>,
+}
+
+impl UserActorHandle {
+    pub fn new() -> Self {
+        let (sender, receiver) = mpsc::channel(32);
+        let mut actor = UserActor::new(receiver);
+        
+        tokio::spawn(async move {
+            actor.run().await;
+        });
+        
+        Self { sender }
+    }
+    
+    pub async fn get_user(&self, id: String) -> Option<User> {
+        let (send, mut recv) = mpsc::channel(1);
+        let msg = Message::GetUser { id, respond_to: send };
+        
+        if self.sender.send(msg).await.is_ok() {
+            recv.recv().await.unwrap_or(None)
+        } else {
+            None
+        }
+    }
+}
 ```
 
-#### 事件溯源
+### STM并发控制
 
 ```haskell
--- 事件存储
-class Monad m => EventStore m where
-  appendEvent :: StreamId -> Event -> m (Either EventStoreError EventNumber)
-  readEvents :: StreamId -> EventNumber -> m (Either EventStoreError [Event])
-  readAllEvents :: StreamId -> m (Either EventStoreError [Event])
+-- 软件事务内存
+import Control.Concurrent.STM
 
--- 聚合根
-data UserAggregate = UserAggregate
-  { userId :: UserId
-  , events :: [UserEvent]
-  , currentState :: UserState
+-- 共享状态
+data BankAccount = BankAccount
+  { balance :: TVar Money
+  , accountId :: AccountId
+  } deriving (Eq)
+
+-- 原子转账操作
+transfer :: Money -> BankAccount -> BankAccount -> STM ()
+transfer amount from to = do
+  fromBalance <- readTVar (balance from)
+  when (fromBalance < amount) retry
+  
+  toBalance <- readTVar (balance to)
+  writeTVar (balance from) (fromBalance - amount)
+  writeTVar (balance to) (toBalance + amount)
+
+-- 批量转账
+batchTransfer :: [(Money, BankAccount, BankAccount)] -> IO ()
+batchTransfer transfers = atomically $ do
+  mapM_ (\(amt, from, to) -> transfer amt from to) transfers
+
+-- 账户监控
+monitorAccount :: BankAccount -> Money -> STM ()
+monitorAccount account threshold = do
+  currentBalance <- readTVar (balance account)
+  when (currentBalance < threshold) $ do
+    -- 触发告警
+    unsafeIOToSTM $ putStrLn "Low balance alert!"
+```
+
+## 函数式架构模式
+
+### Monad Transformer Stack
+
+```haskell
+-- 应用程序Monad栈
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+
+type AppStack = ReaderT Config (StateT AppState (ExceptT AppError IO))
+
+newtype App a = App { unApp :: AppStack a }
+  deriving ( Functor, Applicative, Monad
+           , MonadReader Config, MonadState AppState
+           , MonadError AppError, MonadIO )
+
+data Config = Config
+  { dbConnection :: ConnectionString
+  , logLevel :: LogLevel
+  , serverPort :: Port
   }
 
--- 事件应用
-applyEvent :: UserAggregate -> UserEvent -> UserAggregate
-applyEvent agg event = 
-  agg { events = event : events agg
-      , currentState = updateState (currentState agg) event
-      }
-```
-
-## 分布式系统架构
-
-### 1. 一致性模式
-
-#### 最终一致性
-
-```haskell
--- 最终一致性实现
-data ConsistencyLevel = 
-  Strong
-  | Eventual
-  | ReadYourWrites
-
--- 读写分离
-class Monad m => ReadWriteSeparation m where
-  write :: WriteOperation -> m (Either WriteError ())
-  read :: ReadOperation -> ConsistencyLevel -> m (Either ReadError ReadResult)
-
--- 异步复制
-data ReplicationConfig = ReplicationConfig
-  { replicationFactor :: Int
-  , consistencyLevel :: ConsistencyLevel
-  , timeout :: Timeout
-  }
-```
-
-#### CAP定理处理
-
-```haskell
--- 分区容忍性优先
-data CAPStrategy = 
-  CP -- 一致性 + 分区容忍性
-  | AP -- 可用性 + 分区容忍性
-
--- 分区检测
-class Monad m => PartitionDetector m where
-  detectPartition :: NodeId -> m Bool
-  handlePartition :: Partition -> m PartitionResponse
-
--- 分区恢复
-data PartitionRecovery = PartitionRecovery
-  { mergeStrategy :: MergeStrategy
-  , conflictResolution :: ConflictResolution
-  }
-```
-
-### 2. 容错设计
-
-#### 断路器模式
-
-```haskell
--- 断路器状态
-data CircuitBreakerState = 
-  Closed
-  | Open
-  | HalfOpen
-
--- 断路器实现
-data CircuitBreaker = CircuitBreaker
-  { state :: IORef CircuitBreakerState
-  , failureThreshold :: Int
-  , timeout :: Timeout
-  , failureCount :: IORef Int
+data AppState = AppState
+  { requestCount :: Int
+  , activeUsers :: Set UserId
   }
 
--- 断路器操作
-runWithCircuitBreaker :: CircuitBreaker -> IO a -> IO (Either CircuitBreakerError a)
-runWithCircuitBreaker cb action = do
-  currentState <- readIORef (state cb)
-  case currentState of
-    Closed -> do
-      result <- try action
-      case result of
-        Left _ -> incrementFailureCount cb
-        Right _ -> resetFailureCount cb
-      return result
-    Open -> return (Left CircuitBreakerOpen)
-    HalfOpen -> -- 尝试恢复逻辑
-```
+data AppError
+  = DatabaseError Text
+  | ValidationError Text
+  | AuthenticationError
+  deriving (Show)
 
-#### 重试机制
+-- 运行应用
+runApp :: Config -> AppState -> App a -> IO (Either AppError (a, AppState))
+runApp config state app = 
+  runExceptT $ runStateT (runReaderT (unApp app) config) state
 
-```haskell
--- 重试策略
-data RetryStrategy = RetryStrategy
-  { maxRetries :: Int
-  , backoffPolicy :: BackoffPolicy
-  , retryCondition :: RetryCondition
-  }
-
-data BackoffPolicy = 
-  FixedDelay Timeout
-  | ExponentialBackoff Timeout Timeout
-  | JitteredBackoff Timeout
-
--- 重试实现
-retryWithStrategy :: RetryStrategy -> IO a -> IO (Either RetryError a)
-retryWithStrategy strategy action = 
-  retryLoop strategy action 0
-
-retryLoop :: RetryStrategy -> IO a -> Int -> IO (Either RetryError a)
-retryLoop strategy action attempt = do
-  result <- try action
+-- 数据库操作
+dbQuery :: Query -> App [Row]
+dbQuery query = do
+  connStr <- asks dbConnection
+  result <- liftIO $ runQuery connStr query
   case result of
-    Right value -> return (Right value)
-    Left error -> 
-      if attempt >= maxRetries strategy
-      then return (Left (MaxRetriesExceeded error))
-      else do
-        delay <- calculateDelay strategy attempt
-        threadDelay delay
-        retryLoop strategy action (attempt + 1)
+    Left err -> throwError (DatabaseError err)
+    Right rows -> return rows
 ```
 
-## 性能优化架构
-
-### 1. 缓存策略
-
-#### 多层缓存
+### Free Monad架构
 
 ```haskell
--- 缓存层次
-data CacheLayer = 
-  L1Cache -- 内存缓存
-  | L2Cache -- 分布式缓存
-  | L3Cache -- 持久化缓存
+-- Free Monad DSL
+{-# LANGUAGE DeriveFunctor #-}
 
--- 缓存接口
-class Monad m => Cache m where
-  get :: Key -> m (Maybe Value)
-  set :: Key -> Value -> TTL -> m ()
-  delete :: Key -> m ()
-  clear :: m ()
+data DatabaseF next
+  = Query Text ([Row] -> next)
+  | Insert Text next
+  | Update Text next
+  deriving Functor
 
--- 缓存策略
-data CacheStrategy = CacheStrategy
-  { writePolicy :: WritePolicy
-  , evictionPolicy :: EvictionPolicy
-  , ttl :: TTL
-  }
+type Database = Free DatabaseF
 
-data WritePolicy = 
-  WriteThrough
-  | WriteBack
-  | WriteAround
+-- DSL构造器
+query :: Text -> Database [Row]
+query sql = liftF $ Query sql id
+
+insert :: Text -> Database ()
+insert sql = liftF $ Insert sql ()
+
+update :: Text -> Database ()  
+update sql = liftF $ Update sql ()
+
+-- 解释器
+interpretDB :: Database a -> IO a
+interpretDB = iterM go
+  where
+    go (Query sql next) = do
+      rows <- runSQL sql  -- 实际数据库操作
+      return $ next rows
+    go (Insert sql next) = do
+      runSQL sql
+      return next
+    go (Update sql next) = do
+      runSQL sql
+      return next
+
+-- 测试解释器
+interpretDBTest :: Database a -> State TestDB a
+interpretDBTest = iterM go
+  where
+    go (Query sql next) = do
+      rows <- gets (mockQuery sql)
+      return $ next rows
+    go (Insert sql next) = do
+      modify (mockInsert sql)
+      return next
+    go (Update sql next) = do
+      modify (mockUpdate sql)
+      return next
 ```
 
-#### 缓存一致性
+## 错误处理架构
 
-```haskell
--- 缓存失效策略
-data InvalidationStrategy = 
-  TimeBased TTL
-  | EventBased [EventType]
-  | Manual
+### 类型安全错误处理
 
--- 缓存同步
-class Monad m => CacheSynchronizer m where
-  invalidateCache :: CacheKey -> m ()
-  updateCache :: CacheKey -> Value -> m ()
-  syncCache :: CacheKey -> m ()
+```rust
+// 分层错误处理
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum DomainError {
+    #[error("User not found: {id}")]
+    UserNotFound { id: String },
+    
+    #[error("Invalid email format: {email}")]
+    InvalidEmail { email: String },
+    
+    #[error("Business rule violation: {rule}")]
+    BusinessRuleViolation { rule: String },
+}
+
+#[derive(Error, Debug)]
+pub enum InfrastructureError {
+    #[error("Database error: {0}")]
+    Database(#[from] sqlx::Error),
+    
+    #[error("Network error: {0}")]
+    Network(#[from] reqwest::Error),
+    
+    #[error("Serialization error: {0}")]
+    Serialization(#[from] serde_json::Error),
+}
+
+#[derive(Error, Debug)]
+pub enum ApplicationError {
+    #[error("Domain error: {0}")]
+    Domain(#[from] DomainError),
+    
+    #[error("Infrastructure error: {0}")]
+    Infrastructure(#[from] InfrastructureError),
+}
+
+// 结果类型链
+pub type DomainResult<T> = Result<T, DomainError>;
+pub type InfraResult<T> = Result<T, InfrastructureError>;
+pub type AppResult<T> = Result<T, ApplicationError>;
+
+// 错误恢复
+pub async fn get_user_with_fallback(id: &str) -> AppResult<User> {
+    match get_user_from_cache(id).await {
+        Ok(user) => Ok(user),
+        Err(_) => {
+            // 缓存失败，尝试数据库
+            match get_user_from_db(id).await {
+                Ok(user) => {
+                    // 更新缓存
+                    let _ = update_cache(id, &user).await;
+                    Ok(user)
+                }
+                Err(e) => Err(e.into())
+            }
+        }
+    }
+}
 ```
 
-### 2. 异步处理
+## 形式化架构验证
 
-#### 消息队列
+```lean
+-- 架构不变量的形式化
+structure SystemArchitecture where
+  components : Set Component
+  connections : Component → Component → Prop
+  constraints : Set ArchConstraint
 
-```haskell
--- 消息队列接口
-class Monad m => MessageQueue m where
-  enqueue :: QueueName -> Message -> m (Either QueueError MessageId)
-  dequeue :: QueueName -> m (Either QueueError (Maybe Message))
-  acknowledge :: MessageId -> m (Either QueueError ())
+-- 层级约束
+def LayeredConstraint (arch : SystemArchitecture) : Prop :=
+  ∀ c1 c2, arch.connections c1 c2 → layer c1 ≤ layer c2
 
--- 消息处理器
-type MessageHandler m = Message -> m (Either HandlerError ())
+-- 循环依赖检测
+def AcyclicConstraint (arch : SystemArchitecture) : Prop :=
+  ∀ c, ¬ arch.connections c c ∧ 
+  ∀ c1 c2 c3, arch.connections c1 c2 → arch.connections c2 c3 → 
+             ¬ arch.connections c3 c1
 
--- 消息路由
-data MessageRouter = MessageRouter
-  { routes :: Map MessageType QueueName
-  , deadLetterQueue :: QueueName
-  }
+-- 架构演化
+def ArchitectureEvolution (old new : SystemArchitecture) : Prop :=
+  -- 向后兼容性
+  (∀ c ∈ old.components, c ∈ new.components) ∧
+  -- 接口稳定性  
+  (∀ c1 c2, old.connections c1 c2 → new.connections c1 c2)
+
+-- 性能保证
+def PerformanceInvariant (arch : SystemArchitecture) (load : Load) : Prop :=
+  response_time arch load ≤ max_response_time ∧
+  throughput arch load ≥ min_throughput
 ```
 
-#### 异步任务
+## 部署和运维架构
 
-```haskell
--- 任务调度器
-class Monad m => TaskScheduler m where
-  scheduleTask :: Task -> Schedule -> m (Either SchedulerError TaskId)
-  cancelTask :: TaskId -> m (Either SchedulerError ())
-  getTaskStatus :: TaskId -> m (Either SchedulerError TaskStatus)
+### 容器化部署
 
--- 任务执行器
-data TaskExecutor = TaskExecutor
-  { workerPool :: WorkerPool
-  , taskQueue :: TaskQueue
-  , resultStore :: ResultStore
-  }
+```dockerfile
+# Haskell服务容器
+FROM haskell:8.10 as builder
+WORKDIR /app
+COPY stack.yaml package.yaml ./
+RUN stack build --dependencies-only
+
+COPY . .
+RUN stack build --copy-bins
+
+FROM ubuntu:20.04
+RUN apt-get update && apt-get install -y ca-certificates
+COPY --from=builder /root/.local/bin/myapp /usr/local/bin/
+EXPOSE 8080
+CMD ["myapp"]
 ```
 
-## 安全架构
-
-### 1. 认证与授权
-
-#### 身份认证
-
-```haskell
--- 认证服务
-class Monad m => AuthenticationService m where
-  authenticate :: Credentials -> m (Either AuthError AuthToken)
-  validateToken :: AuthToken -> m (Either AuthError UserInfo)
-  refreshToken :: AuthToken -> m (Either AuthError AuthToken)
-
--- JWT实现
-data JWTToken = JWTToken
-  { header :: JWTHeader
-  , payload :: JWTPayload
-  , signature :: JWTSignature
-  }
-
--- 密码哈希
-hashPassword :: Password -> IO HashedPassword
-hashPassword password = do
-  salt <- generateSalt
-  return $ hashWithSalt salt password
+```yaml
+# Kubernetes部署配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: myregistry/user-service:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: url
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
 ```
 
-#### 权限控制
+## 总结
 
-```haskell
--- 权限模型
-data Permission = Permission
-  { resource :: Resource
-  , action :: Action
-  , conditions :: [Condition]
-  }
+现代系统架构设计需要考虑：
 
-data Role = Role
-  { roleName :: RoleName
-  , permissions :: [Permission]
-  }
+1. **模块化**: 清晰的分层和组件边界
+2. **可扩展性**: 水平和垂直扩展能力
+3. **容错性**: 优雅的错误处理和恢复
+4. **可维护性**: 代码的可读性和可测试性
+5. **性能**: 合理的资源利用和响应时间
+6. **安全性**: 多层防护和访问控制
 
--- 授权检查
-class Monad m => AuthorizationService m where
-  checkPermission :: UserId -> Permission -> m Bool
-  getUserRoles :: UserId -> m [Role]
-  grantPermission :: UserId -> Permission -> m (Either AuthError ())
-```
-
-### 2. 数据安全
-
-#### 加密
-
-```haskell
--- 加密服务
-class Monad m => EncryptionService m where
-  encrypt :: PlainText -> Key -> m (Either EncryptionError CipherText)
-  decrypt :: CipherText -> Key -> m (Either EncryptionError PlainText)
-  generateKey :: KeySize -> m (Either EncryptionError Key)
-
--- 敏感数据处理
-newtype SensitiveData a = SensitiveData { unSensitiveData :: a }
-
--- 安全存储
-class Monad m => SecureStorage m where
-  storeSecurely :: SensitiveData a -> m (Either StorageError StorageId)
-  retrieveSecurely :: StorageId -> m (Either StorageError (SensitiveData a))
-```
-
-## 监控与可观测性
-
-### 1. 日志系统
-
-#### 结构化日志
-
-```haskell
--- 日志级别
-data LogLevel = Debug | Info | Warn | Error | Fatal
-
--- 日志记录器
-class Monad m => Logger m where
-  log :: LogLevel -> LogMessage -> m ()
-  logWithContext :: LogLevel -> LogMessage -> LogContext -> m ()
-
--- 日志上下文
-data LogContext = LogContext
-  { requestId :: RequestId
-  , userId :: Maybe UserId
-  , timestamp :: UTCTime
-  , metadata :: Map String String
-  }
-```
-
-#### 分布式追踪
-
-```haskell
--- 追踪上下文
-data TraceContext = TraceContext
-  { traceId :: TraceId
-  , spanId :: SpanId
-  , parentSpanId :: Maybe SpanId
-  }
-
--- 追踪服务
-class Monad m => TracingService m where
-  startSpan :: SpanName -> m SpanId
-  endSpan :: SpanId -> m ()
-  addSpanTag :: SpanId -> Tag -> m ()
-  injectContext :: TraceContext -> m ()
-```
-
-### 2. 指标收集
-
-#### 性能指标
-
-```haskell
--- 指标类型
-data Metric = 
-  Counter MetricName Int
-  | Gauge MetricName Double
-  | Histogram MetricName [Double]
-
--- 指标收集器
-class Monad m => MetricsCollector m where
-  incrementCounter :: MetricName -> m ()
-  setGauge :: MetricName -> Double -> m ()
-  recordHistogram :: MetricName -> Double -> m ()
-  getMetrics :: m [Metric]
-```
-
-#### 健康检查
-
-```haskell
--- 健康状态
-data HealthStatus = 
-  Healthy
-  | Unhealthy String
-  | Degraded String
-
--- 健康检查服务
-class Monad m => HealthCheckService m where
-  checkHealth :: m HealthStatus
-  registerHealthCheck :: HealthCheck -> m ()
-  getHealthReport :: m HealthReport
-
--- 健康检查
-data HealthCheck = HealthCheck
-  { checkName :: String
-  , checkFunction :: IO HealthStatus
-  , timeout :: Timeout
-  }
-```
-
----
-
-**相关链接**：
-
-- [软件工程基础](../03-Software-Engineering/301-Software-Engineering-Foundations.md)
-- [开发方法论](../03-Software-Engineering/302-Development-Methodologies.md)
-- [架构设计模式](../03-Software-Engineering/303-Architecture-Design-Patterns.md)
+函数式编程和形式方法为架构设计提供了强大的工具，确保系统的正确性、可靠性和可维护性。

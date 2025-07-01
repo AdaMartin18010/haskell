@@ -190,7 +190,7 @@ evaluateModel model data =
 
 ### 2. 逻辑回归
 
-#### 模型定义
+#### 模型定义1
 
 ```haskell
 -- 逻辑回归模型
