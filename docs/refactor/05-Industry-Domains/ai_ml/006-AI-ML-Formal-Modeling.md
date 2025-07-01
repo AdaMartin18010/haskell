@@ -3,6 +3,7 @@
 ## 1. 机器学习模型形式化
 
 ### 1.1 模型抽象
+
 ```haskell
 -- 机器学习模型
 class MLModel m where
@@ -31,6 +32,7 @@ data EvaluationMetrics = EvaluationMetrics
 ```
 
 ### 1.2 神经网络模型
+
 ```haskell
 -- 神经网络
 data NeuralNetwork = NeuralNetwork
@@ -62,6 +64,7 @@ backwardPropagate network input target =
 ## 2. 深度学习形式化
 
 ### 2.1 张量运算
+
 ```rust
 // Rust实现的张量运算
 #[derive(Debug, Clone)]
@@ -103,6 +106,7 @@ impl<T: Clone + Default + std::ops::Add<Output = T> + std::ops::Mul<Output = T>>
 ```
 
 ### 2.2 自动微分
+
 ```haskell
 -- 自动微分
 data Dual a = Dual a a deriving (Show, Eq)
@@ -129,6 +133,7 @@ gradientVector f xs =
 ## 3. 强化学习形式化
 
 ### 3.1 马尔可夫决策过程
+
 ```haskell
 -- 马尔可夫决策过程
 data MDP s a = MDP
@@ -157,6 +162,7 @@ bellmanEquation mdp v s =
 ```
 
 ### 3.2 Q学习算法
+
 ```rust
 // Rust实现的Q学习
 pub struct QLearning<S, A> {
@@ -218,6 +224,7 @@ impl<S: Clone + Eq + Hash, A: Clone + Eq + Hash> QLearning<S, A> {
 ## 4. 自然语言处理形式化
 
 ### 4.1 语言模型
+
 ```haskell
 -- 语言模型
 data LanguageModel = LanguageModel
@@ -251,6 +258,7 @@ generateTokens model context remaining =
 ```
 
 ### 4.2 注意力机制
+
 ```rust
 // Rust实现的注意力机制
 pub struct Attention {
@@ -299,6 +307,7 @@ impl Attention {
 ## 5. 计算机视觉形式化
 
 ### 5.1 卷积神经网络
+
 ```haskell
 -- 卷积层
 data ConvLayer = ConvLayer
@@ -336,6 +345,7 @@ data PoolType = MaxPool | AvgPool deriving (Show, Eq)
 ```
 
 ### 5.2 图像处理
+
 ```rust
 // Rust实现的图像处理
 pub struct Image {
@@ -409,6 +419,7 @@ impl Image {
 ## 6. 形式化验证
 
 ### 6.1 模型验证
+
 ```lean
 -- Lean形式化验证
 def model_correctness (model : MLModel) (spec : ModelSpec) : Prop :=
@@ -431,6 +442,7 @@ def adversarial_robustness (model : MLModel) (epsilon : ℝ) : Prop :=
 ```
 
 ### 6.2 公平性验证
+
 ```haskell
 -- 公平性指标
 data FairnessMetric = 
@@ -461,6 +473,7 @@ checkDemographicParity model testData =
 ## 7. 工程实践
 
 ### 7.1 模型部署
+
 ```rust
 // 模型部署
 pub struct ModelDeployment {
@@ -491,6 +504,7 @@ impl ModelDeployment {
 ```
 
 ### 7.2 实验管理
+
 ```haskell
 -- 实验管理
 data Experiment = Experiment
@@ -522,6 +536,7 @@ trackExperiment experiment = do
 ## 8. 最佳实践
 
 ### 8.1 建模指南
+
 1. 从问题定义开始
 2. 选择适当的模型架构
 3. 实现形式化验证
@@ -529,6 +544,7 @@ trackExperiment experiment = do
 5. 部署和监控
 
 ### 8.2 验证策略
+
 1. 静态分析检查模型结构
 2. 动态测试验证模型行为
 3. 形式化证明保证关键属性
