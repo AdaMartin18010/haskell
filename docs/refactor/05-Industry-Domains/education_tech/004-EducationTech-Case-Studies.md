@@ -3,9 +3,11 @@
 ## 案例1：类型安全的学习管理系统
 
 ### 问题建模
+
 - 目标：实现一个可形式化验证的学习管理系统，确保学习路径和评估的正确性。
 
 ### Haskell实现
+
 ```haskell
 {-# LANGUAGE GADTs, DataKinds, KindSignatures #-}
 data Student = Student
@@ -55,6 +57,7 @@ updateProgress student moduleId assessmentId score =
 ```
 
 ### Rust实现
+
 ```rust
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -157,6 +160,7 @@ impl Student {
 ```
 
 ### Lean形式化
+
 ```lean
 def enroll_student (student : Student) (course : Course) : option Student :=
   if meets_prerequisites student course then
@@ -185,9 +189,11 @@ end
 ```
 
 ### 对比分析
+
 - Haskell强调类型级安全和函数式抽象，Rust注重高性能和内存安全，Lean可形式化证明学习管理系统的正确性。
 
 ### 工程落地
+
 - 适用于在线教育平台、MOOC、企业培训等场景。
 
 ---
@@ -195,9 +201,11 @@ end
 ## 案例2：自适应学习算法
 
 ### 问题建模
+
 - 目标：实现一个可形式化验证的自适应学习算法，确保学习路径的个性化和有效性。
 
 ### Haskell实现
+
 ```haskell
 data LearningStyle = Visual | Auditory | Kinesthetic | Reading deriving (Show, Eq)
 
@@ -243,6 +251,7 @@ calculateScore path content =
 ```
 
 ### Rust实现
+
 ```rust
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -345,6 +354,7 @@ impl LearningPath {
 ```
 
 ### Lean形式化
+
 ```lean
 def recommend_next_content (path : LearningPath) (available_content : list AdaptiveContent) : option AdaptiveContent :=
   let suitable_content := list.filter (is_suitable path) available_content in
@@ -365,14 +375,17 @@ end
 ```
 
 ### 对比分析
+
 - Haskell提供清晰的函数式抽象和类型安全，Rust确保高性能计算和内存安全，Lean可形式化证明自适应学习算法的正确性。
 
 ### 工程落地
+
 - 适用于个性化学习平台、智能辅导系统、教育数据分析等场景。
 
 ---
 
 ## 参考文献
+
 - [Haskell for Education Tech](https://hackage.haskell.org/package/education)
 - [Rust for Education Tech](https://github.com/rust-education)
-- [Lean for Education Tech](https://leanprover-community.github.io/) 
+- [Lean for Education Tech](https://leanprover-community.github.io/)
