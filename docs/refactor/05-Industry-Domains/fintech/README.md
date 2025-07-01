@@ -952,6 +952,6 @@ impl<T: Default + Clone> MemoryPool<T> {
 ## 参考资料
 
 - [Quantitative Finance in Haskell](https://www.example.com)
-- [Rust for Financial Systems](https://www.example.com) 
+- [Rust for Financial Systems](https://www.example.com)
 - [Formal Verification in Finance](https://www.example.com)
-- [High-Frequency Trading Systems](https://www.example.com) 
+- [High-Frequency Trading Systems](https://www.example.com)
