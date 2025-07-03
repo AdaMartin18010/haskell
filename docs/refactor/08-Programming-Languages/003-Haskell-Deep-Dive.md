@@ -24,11 +24,14 @@ squares = [x*x | x <- [1..10]]
 
 - 强类型、类型推断、类型类、GADT、数据类型提升
 - 类型类示例：
+
 ```haskell
 class Eq a where
   (==) :: a -> a -> Bool
 ```
+
 - GADT示例：
+
 ```haskell
 data Expr a where
   LitInt  :: Int -> Expr Int
@@ -39,19 +42,24 @@ data Expr a where
 ## 4. Monad与高阶抽象
 
 - Monad定义：
+
 ```haskell
 class Monad m where
   (>>=)  :: m a -> (a -> m b) -> m b
   return :: a -> m a
 ```
+
 - IO Monad示例：
+
 ```haskell
 main = do
   putStrLn "Hello, Haskell!"
   x <- readLn
   print (x * 2)
 ```
+
 - State Monad示例：
+
 ```haskell
 import Control.Monad.State
 inc :: State Int Int
@@ -64,12 +72,15 @@ inc = do
 ## 5. 泛型与高阶类型
 
 - 多态函数：
+
 ```haskell
 map :: (a -> b) -> [a] -> [b]
 map _ [] = []
 map f (x:xs) = f x : map f xs
 ```
+
 - 类型提升与DataKinds：
+
 ```haskell
 {-# LANGUAGE DataKinds, KindSignatures #-}
 data Nat = Z | S Nat
@@ -81,6 +92,7 @@ data Vec (n :: Nat) a where
 ## 6. 并发与并行
 
 - 轻量线程与STM：
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -108,11 +120,13 @@ main = do
 | 工程生态  | Hackage/Stack   | Cargo/crates.io | Lake/mathlib    |
 
 ## 9. 典型应用
+
 - 编译器、DSL、金融建模、分布式系统、形式化验证
 
 ---
 
 **相关链接**：
+
 - [Rust实现](../07-Implementation/002-Rust-Implementation.md)
 - [Lean实现](../07-Implementation/003-Lean-Implementation.md)
 - [语言比较](./002-Language-Comparison.md)

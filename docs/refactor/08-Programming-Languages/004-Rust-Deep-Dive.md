@@ -28,6 +28,7 @@ let squares: Vec<i32> = (1..=10).map(|x| x*x).collect();
 
 - 静态强类型、trait、生命周期、泛型、类型推断
 - 所有权与借用：
+
 ```rust
 fn main() {
     let s = String::from("hello");
@@ -38,7 +39,9 @@ fn takes_ownership(s: String) {
     println!("{}", s);
 }
 ```
+
 - 借用检查：
+
 ```rust
 fn print_len(s: &String) {
     println!("len = {}", s.len());
@@ -48,6 +51,7 @@ fn print_len(s: &String) {
 ## 4. 并发与安全
 
 - 线程与消息传递：
+
 ```rust
 use std::thread;
 let handle = thread::spawn(|| {
@@ -55,7 +59,9 @@ let handle = thread::spawn(|| {
 });
 handle.join().unwrap();
 ```
+
 - 互斥与通道：
+
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -74,10 +80,13 @@ for h in handles { h.join().unwrap(); }
 ## 5. 泛型与trait
 
 - 泛型函数：
+
 ```rust
 fn add<T: std::ops::Add<Output=T>>(x: T, y: T) -> T { x + y }
 ```
+
 - trait与实现：
+
 ```rust
 trait Drawable {
     fn draw(&self);
@@ -107,11 +116,13 @@ impl Drawable for Circle {
 | 工程生态  | Cargo/crates.io | Hackage/Stack   | Lake/mathlib    |
 
 ## 8. 典型应用
+
 - 操作系统、嵌入式、WebAssembly、区块链、网络服务
 
 ---
 
 **相关链接**：
+
 - [Haskell实现](../07-Implementation/001-Haskell-Implementation.md)
 - [Lean实现](../07-Implementation/003-Lean-Implementation.md)
 - [语言比较](./002-Language-Comparison.md)

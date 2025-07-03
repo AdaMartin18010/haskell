@@ -21,15 +21,20 @@
 | Lean   | 依赖类型         | typeclass、归纳| ✅           | ✅       |
 
 - Haskell示例：
+
 ```haskell
 add :: Num a => a -> a -> a
 add x y = x + y
 ```
+
 - Rust示例：
+
 ```rust
 fn add<T: std::ops::Add<Output=T>>(x: T, y: T) -> T { x + y }
 ```
+
 - Lean示例：
+
 ```lean
 def add [Add α] (x y : α) : α := x + y
 ```
@@ -51,13 +56,16 @@ def add [Add α] (x y : α) : α := x + y
 | Lean   | 任务/并发库      | 理论为主       |
 
 - Haskell STM示例：
+
 ```haskell
 import Control.Concurrent.STM
 atomically $ do
   v <- readTVar tvar
   writeTVar tvar (v+1)
 ```
+
 - Rust线程示例：
+
 ```rust
 use std::thread;
 let handle = thread::spawn(|| println!("hi"));
@@ -73,16 +81,21 @@ handle.join().unwrap();
 | Lean   | typeclass、meta  | tactic/宏      |
 
 - Haskell泛型：
+
 ```haskell
 map :: (a -> b) -> [a] -> [b]
 ```
+
 - Rust泛型：
+
 ```rust
 fn map<T, F: Fn(T) -> U, U>(xs: Vec<T>, f: F) -> Vec<U> {
     xs.into_iter().map(f).collect()
 }
 ```
+
 - Lean泛型：
+
 ```lean
 def map {α β} (f : α → β) : List α → List β
 | [] => []
@@ -115,6 +128,7 @@ def map {α β} (f : α → β) : List α → List β
 ---
 
 **相关链接**：
+
 - [Haskell实现](../07-Implementation/001-Haskell-Implementation.md)
 - [Rust实现](../07-Implementation/002-Rust-Implementation.md)
 - [Lean实现](../07-Implementation/003-Lean-Implementation.md)

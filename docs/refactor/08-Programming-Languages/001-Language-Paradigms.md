@@ -16,8 +16,10 @@
 | 声明式       | SQL, Haskell     | 关注"做什么"而非"怎么做"         | 数据库、配置       |
 
 ### 1. 命令式范式
+
 - 以状态变更和顺序执行为核心。
 - 典型代码（Rust）：
+
 ```rust
 let mut x = 0;
 for i in 0..10 {
@@ -26,20 +28,26 @@ for i in 0..10 {
 ```
 
 ### 2. 函数式范式
+
 - 强调不可变性、递归和高阶函数。
 - 典型代码（Haskell）：
+
 ```haskell
 sumList :: [Int] -> Int
 sumList = foldr (+) 0
 ```
+
 - Lean 也支持纯函数式风格：
+
 ```lean
 def sumList (xs : List Nat) : Nat := xs.foldr (· + ·) 0
 ```
 
 ### 3. 面向对象范式
+
 - 以对象、类、封装、继承为核心。
 - Rust 通过trait和struct实现OOP：
+
 ```rust
 trait Drawable {
     fn draw(&self);
@@ -51,15 +59,19 @@ impl Drawable for Circle {
 ```
 
 ### 4. 逻辑范式
+
 - 以规则、关系和推理为核心。
 - Lean支持定理证明和逻辑推理：
+
 ```lean
 theorem and_comm (a b : Prop) : a ∧ b ↔ b ∧ a := by constructor; intro h; cases h; constructor; assumption; assumption
 ```
 
 ### 5. 并发范式
+
 - 以进程、线程、消息传递为核心。
 - Rust并发示例：
+
 ```rust
 use std::thread;
 let handle = thread::spawn(|| {
@@ -69,8 +81,10 @@ handle.join().unwrap();
 ```
 
 ### 6. 声明式范式
+
 - 关注"做什么"而非"怎么做"。
 - Haskell的列表推导：
+
 ```haskell
 squares = [x*x | x <- [1..10]]
 ```
@@ -87,6 +101,7 @@ squares = [x*x | x <- [1..10]]
 | 类型系统  | 强类型/高阶     | 零成本抽象      | 依赖类型        |
 
 ## 典型应用场景
+
 - Haskell：形式化建模、编译器、金融建模、并发服务器
 - Rust：系统编程、嵌入式、WebAssembly、并发网络
 - Lean：数学证明、形式化验证、教育、自动推理
@@ -98,6 +113,7 @@ squares = [x*x | x <- [1..10]]
 ---
 
 **相关链接**：
+
 - [Haskell实现](../07-Implementation/001-Haskell-Implementation.md)
 - [Rust实现](../07-Implementation/002-Rust-Implementation.md)
 - [Lean实现](../07-Implementation/003-Lean-Implementation.md)

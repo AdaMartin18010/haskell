@@ -8,12 +8,15 @@ Lean 是一门基于依赖类型理论的定理证明器和编程语言，广泛
 
 - 依赖类型、归纳类型、类型族、typeclass
 - 依赖类型示例：
+
 ```lean
 def Vector (α : Type) : Nat → Type
   | 0 => Unit
   | n + 1 => α × Vector α n
 ```
+
 - 归纳类型：
+
 ```lean
 inductive Tree (α : Type) where
   | leaf : Tree α
@@ -24,13 +27,16 @@ inductive Tree (α : Type) where
 
 - 命题即类型、归纳证明、自动化证明
 - 证明示例：
+
 ```lean
 theorem add_zero (n : Nat) : n + 0 = n := by
   induction n with
   | zero => rfl
   | succ n ih => rw [Nat.add_succ, ih]
 ```
+
 - 自动化：
+
 ```lean
 theorem simple_arith : 2 + 2 = 4 := by simp
 ```
@@ -39,6 +45,7 @@ theorem simple_arith : 2 + 2 = 4 := by simp
 
 - tactic语言、宏系统、反射
 - tactic示例：
+
 ```lean
 def my_tactic : tactic Unit :=
   tactic.trace "Hello from tactic!"
@@ -59,11 +66,13 @@ def my_tactic : tactic Unit :=
 | 工程生态  | Lake/mathlib    | Hackage/Stack   | Cargo/crates.io |
 
 ## 7. 典型应用
+
 - 数学证明、形式化验证、教育、自动推理
 
 ---
 
 **相关链接**：
+
 - [Haskell实现](../07-Implementation/001-Haskell-Implementation.md)
 - [Rust实现](../07-Implementation/002-Rust-Implementation.md)
 - [语言比较](./002-Language-Comparison.md)
