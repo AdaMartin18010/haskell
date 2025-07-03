@@ -260,3 +260,156 @@ safeHead (x:_) = Just x
 ---
 
 （可按需在各结构型模式下补充更细致的Haskell实现）
+
+# Lean 典型实现片段
+
+## 依赖类型与结构体
+
+```lean
+-- 依赖类型
+def Vector (α : Type) : Nat → Type
+  | 0 => Unit
+  | n + 1 => α × Vector α n
+
+-- 结构体
+structure Point where
+  x : Nat
+  y : Nat
+```
+
+## 适配器模式
+
+```lean
+-- 目标接口
+def Target := String → String
+
+-- 被适配的类
+def Adaptee := Nat → String
+
+-- 适配器
+def Adapter (adaptee : Adaptee) : Target := λ s => adaptee (s.length)
+
+-- 使用
+def adaptee : Adaptee := λ n => "Number: " ++ toString n
+def target : Target := Adapter adaptee
+```
+
+## 桥接模式
+
+```lean
+-- 实现接口
+def Implementation := String → String
+
+-- 抽象接口
+def Abstraction := Implementation → String → String
+
+-- 具体实现
+def ConcreteImplementation : Implementation := λ s => "Concrete: " ++ s
+
+-- 具体抽象
+def RefinedAbstraction : Abstraction := λ impl s => impl s ++ " (refined)"
+```
+
+## 组合模式
+
+```lean
+-- 组件接口
+inductive Component where
+  | Leaf (name : String) : Component
+  | Composite (name : String) (children : List Component) : Component
+
+-- 操作
+def Component.operation : Component → String
+  | Component.Leaf name => "Leaf: " ++ name
+  | Component.Composite name children => 
+    "Composite: " ++ name ++ " [" ++ 
+    String.join (List.map operation children) ++ "]"
+```
+
+## 装饰器模式
+
+```lean
+-- 组件接口
+def Component := String → String
+
+-- 具体组件
+def ConcreteComponent : Component := λ s => "Component: " ++ s
+
+-- 装饰器
+def Decorator (component : Component) : Component := 
+  λ s => "Decorated(" ++ component s ++ ")"
+
+-- 使用
+def decorated : Component := Decorator ConcreteComponent
+```
+
+## 外观模式
+
+```lean
+-- 子系统
+def SubsystemA := String → String
+def SubsystemB := String → String
+def SubsystemC := String → String
+
+-- 外观
+structure Facade where
+  subsystemA : SubsystemA
+  subsystemB : SubsystemB
+  subsystemC : SubsystemC
+
+-- 简化接口
+def Facade.operation (f : Facade) (s : String) : String :=
+  let result1 := f.subsystemA s
+  let result2 := f.subsystemB result1
+  f.subsystemC result2
+```
+
+## 享元模式
+
+```lean
+-- 享元接口
+def Flyweight := String → String
+
+-- 享元工厂
+def FlyweightFactory := String → Flyweight
+
+-- 具体享元
+def ConcreteFlyweight (intrinsic : String) : Flyweight :=
+  λ extrinsic => "Flyweight(" ++ intrinsic ++ ", " ++ extrinsic ++ ")"
+
+-- 工厂实现
+def createFlyweight : FlyweightFactory := λ key => ConcreteFlyweight key
+```
+
+## 代理模式
+
+```lean
+-- 主题接口
+def Subject := String → String
+
+-- 真实主题
+def RealSubject : Subject := λ s => "Real: " ++ s
+
+-- 代理
+def Proxy (real : Subject) : Subject := 
+  λ s => "Proxy: " ++ real s
+
+-- 使用
+def proxy : Subject := Proxy RealSubject
+```
+
+## 证明系统
+
+```lean
+-- 策略语言
+theorem proxy_preserves_operation (s : String) : 
+  Proxy RealSubject s = "Proxy: Real: " ++ s := by simp
+
+-- 自动化证明
+theorem decorator_composition (c : Component) (s : String) :
+  Decorator (Decorator c) s = "Decorated(Decorated(" ++ c s ++ "))" := by simp
+```
+
+---
+
+（可按需在各模式下补充更细致的Lean实现）

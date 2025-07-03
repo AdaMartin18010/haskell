@@ -292,3 +292,110 @@ prop_reverse xs = reverse (reverse xs) == xs
 ---
 
 （可按需在各模式下补充更细致的Haskell实现）
+
+# Lean 典型实现片段
+
+## 依赖类型与命题即类型
+
+```lean
+-- 依赖类型：类型可以依赖于值
+def Vector (α : Type) : Nat → Type
+  | 0 => Unit
+  | n + 1 => α × Vector α n
+
+-- 命题即类型：证明就是程序
+def Even : Nat → Prop
+  | 0 => True
+  | 1 => False
+  | n + 2 => Even n
+```
+
+## 工厂模式
+
+```lean
+-- 抽象产品
+inductive Product where
+  | ConcreteA : Product
+  | ConcreteB : Product
+
+-- 工厂接口
+def Factory := Product → Product
+
+-- 具体工厂
+def ConcreteFactoryA : Factory := λ _ => Product.ConcreteA
+def ConcreteFactoryB : Factory := λ _ => Product.ConcreteB
+
+-- 使用
+def createProduct (factory : Factory) : Product := factory Product.ConcreteA
+```
+
+## 单例模式
+
+```lean
+-- 单例类型
+def Singleton := Unit
+
+-- 单例实例
+def singleton : Singleton := ()
+
+-- 证明唯一性
+theorem singleton_unique (x y : Singleton) : x = y := by
+  cases x; cases y; rfl
+```
+
+## 建造者模式
+
+```lean
+-- 产品
+structure ComplexObject where
+  part1 : String
+  part2 : Nat
+  part3 : Bool
+
+-- 建造者
+structure Builder where
+  part1 : String
+  part2 : Nat
+  part3 : Bool
+
+-- 构建方法
+def Builder.build (b : Builder) : ComplexObject :=
+  { part1 := b.part1, part2 := b.part2, part3 := b.part3 }
+
+-- 链式调用
+def Builder.withPart1 (b : Builder) (p1 : String) : Builder :=
+  { b with part1 := p1 }
+
+def Builder.withPart2 (b : Builder) (p2 : Nat) : Builder :=
+  { b with part2 := p2 }
+```
+
+## 原型模式
+
+```lean
+-- 原型接口
+def Prototype (α : Type) := α → α
+
+-- 具体原型
+def StringPrototype : Prototype String := λ s => s ++ "_copy"
+
+-- 深度复制
+def deepCopy {α : Type} [Repr α] (x : α) : α := x
+```
+
+## 证明系统
+
+```lean
+-- 策略语言
+theorem add_zero (n : Nat) : n + 0 = n := by
+  induction n with
+  | zero => rw [Nat.add_zero]
+  | succ n ih => rw [Nat.add_succ, ih]
+
+-- 自动化证明
+theorem simple_arithmetic : 2 + 2 = 4 := by simp
+```
+
+---
+
+（可按需在各模式下补充更细致的Lean实现）
