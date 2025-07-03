@@ -6,7 +6,7 @@
 
 ## 目录结构
 
-```
+```text
 06-Design-Patterns/
 ├── 01-Creational/                    # 创建型模式
 │   ├── 1-总述.md                     # 创建型模式总述
