@@ -221,3 +221,42 @@ async fn main() {
 ---
 
 （后续可继续补充组合、装饰器、外观等模式的多实现代码）
+
+# Haskell 典型实现片段
+
+## 类型系统与数据结构
+
+```haskell
+data Tree a = Empty | Node a (Tree a) (Tree a)
+```
+
+## 惰性求值
+
+```haskell
+naturals :: [Integer]
+naturals = [0..]
+
+take 5 naturals -- [0,1,2,3,4]
+```
+
+## 高阶函数与组合
+
+```haskell
+map :: (a -> b) -> [a] -> [b]
+map _ [] = []
+map f (x:xs) = f x : map f xs
+```
+
+## Maybe类型与模式匹配
+
+```haskell
+data Maybe a = Nothing | Just a
+
+safeHead :: [a] -> Maybe a
+safeHead [] = Nothing
+safeHead (x:_) = Just x
+```
+
+---
+
+（可按需在各结构型模式下补充更细致的Haskell实现）

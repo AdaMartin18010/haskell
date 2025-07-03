@@ -230,3 +230,65 @@ fn main() {
 ---
 
 （后续可继续补充抽象工厂、建造者、原型、对象池等模式的多实现代码）
+
+# Haskell 典型实现片段
+
+## 类型系统与数据结构
+
+```haskell
+data Tree a = Empty | Node a (Tree a) (Tree a)
+
+class Monad m where
+  return :: a -> m a
+  (>>=) :: m a -> (a -> m b) -> m b
+```
+
+## 惰性求值
+
+```haskell
+naturals :: [Integer]
+naturals = [0..]
+
+take 5 naturals -- [0,1,2,3,4]
+```
+
+## 并发编程（STM事务型内存）
+
+```haskell
+import Control.Concurrent.STM
+
+type Account = TVar Double
+
+transfer :: Account -> Account -> Double -> STM ()
+transfer from to amount = do
+  fromBalance <- readTVar from
+  when (fromBalance >= amount) $ do
+    writeTVar from (fromBalance - amount)
+    toBalance <- readTVar to
+    writeTVar to (toBalance + amount)
+```
+
+## 性能优化（严格求值）
+
+```haskell
+{-# LANGUAGE BangPatterns #-}
+
+factorial :: Integer -> Integer
+factorial n = go n 1
+  where
+    go 0 !acc = acc
+    go n !acc = go (n - 1) (n * acc)
+```
+
+## QuickCheck属性测试
+
+```haskell
+import Test.QuickCheck
+
+prop_reverse :: [Int] -> Bool
+prop_reverse xs = reverse (reverse xs) == xs
+```
+
+---
+
+（可按需在各模式下补充更细致的Haskell实现）
