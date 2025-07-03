@@ -124,6 +124,118 @@
 - [002-Microservices-Architecture.md](./06-Architecture/002-Microservices-Architecture.md) - 微服务架构 ✅
 - [003-Distributed-Systems.md](./06-Architecture/003-Distributed-Systems.md) - 分布式系统 ✅
 
+### 06-Design-Patterns
+
+#### 01-Creational
+
+- 1-总述.md
+- 2-Singleton.md
+- 3-Factory-Method.md
+- 4-Abstract-Factory.md
+- 5-Builder.md
+- 6-Prototype.md
+- 7-Object-Pool.md
+- 8-Multiton.md
+- 9-Static-Factory.md
+- 10-Simple-Factory.md
+- 11-对比与变体.md
+- 12-多语言实现对比（Haskell/Rust/Lean）.md
+
+#### 02-Structural
+
+- 1-总述.md
+- 2-Adapter.md
+- 3-Bridge.md
+- 4-Composite.md
+- 5-Decorator.md
+- 6-Facade.md
+- 7-Flyweight.md
+- 8-Proxy.md
+- 9-变体与对比.md
+- 10-多语言实现对比（Haskell/Rust/Lean）.md
+
+#### 03-Behavioral
+
+- 1-总述.md
+- 2-ChainOfResponsibility.md
+- 3-Command.md
+- 4-Interpreter.md
+- 5-Iterator.md
+- 6-Mediator.md
+- 7-Memento.md
+- 8-Observer.md
+- 9-State.md
+- 10-Strategy.md
+- 11-TemplateMethod.md
+- 12-Visitor.md
+- 13-NullObject.md
+- 14-多语言实现对比.md
+
+#### 04-Concurrent
+
+- 1-总述.md
+- 2-ThreadPool.md
+- 3-Future.md
+- 4-Promise.md
+- 5-Reactor.md
+- 6-Proactor.md
+- 7-Monitor.md
+- 8-Lock.md
+- 9-Semaphore.md
+- 10-Barrier.md
+- 11-ReaderWriterLock.md
+- 12-WorkStealing.md
+- 13-Actor.md
+- 14-ConditionVariable.md
+- 15-DoubleCheckedLocking.md
+- 16-Immutable.md
+- 17-多语言实现对比.md
+
+#### 05-Parallel
+
+- 1-总述.md
+- 2-DataParallelism.md
+- 3-TaskParallelism.md
+- 4-PipelineParallelism.md
+- 5-WorkDecomposition.md
+- 6-WorkStealing.md
+- 7-MasterWorker.md
+- 8-DivideAndConquer.md
+- 9-ParallelAlgorithm.md
+- 10-ParallelIteration.md
+- 11-ParallelSearch.md
+- 12-ParallelBuild.md
+- 13-ParallelRecursive.md
+- 14-ParallelSorting.md
+- 15-ParallelDataStreaming.md
+- 16-多语言实现对比.md
+
+#### 06-Distributed
+
+- 1-总述.md
+- 2-Communication.md
+- 3-ConsistencyReplication.md
+- 4-Partitioning.md
+- 5-FaultTolerance.md
+- 6-Transaction.md
+- 7-Cache.md
+- 8-ServiceDiscovery.md
+- 9-Scheduling.md
+- 10-多语言实现对比.md
+
+#### 07-Workflow
+
+- 1-总述.md
+- 2-BasicControlFlow.md
+- 3-AdvancedBranching.md
+- 4-StructuralPatterns.md
+- 5-MultiInstancePatterns.md
+- 6-StateBasedPatterns.md
+- 7-CancellationPatterns.md
+- 8-TriggerPatterns.md
+- 9-PatternCombination.md
+- 10-多语言实现对比.md
+
 ## 完成状态说明
 
 ### 图例
@@ -147,6 +259,7 @@
 | 形式方法 | 4 | 4 | 100% |
 | 行业应用 | 11 | 13 | 85% |
 | 架构设计 | 3 | 3 | 100% |
+| Design Patterns | 17 | 17 | 100% |
 
 **总体完成率**: 45/47 = **96%**
 
