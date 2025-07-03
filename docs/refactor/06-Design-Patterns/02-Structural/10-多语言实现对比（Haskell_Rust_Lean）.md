@@ -3,6 +3,7 @@
 ## 1. 适配器模式（Adapter Pattern）
 
 ### 异步实现
+
 ```rust
 trait Target {
     fn request(&self) -> String;
@@ -33,6 +34,7 @@ async fn main() {
 ```
 
 ### 同步实现
+
 ```rust
 trait Target {
     fn request(&self) -> String;
@@ -62,6 +64,7 @@ fn main() {
 ```
 
 ### 多线程实现
+
 ```rust
 trait Target {
     fn request(&self);
@@ -96,6 +99,7 @@ async fn main() {
 ## 2. 桥接模式（Bridge Pattern）
 
 ### 异步实现
+
 ```rust
 trait Implementor {
     fn operation_impl(&self) -> String;
@@ -136,6 +140,7 @@ async fn main() {
 ```
 
 ### 同步实现
+
 ```rust
 trait Implementor {
     fn operation_impl(&self) -> String;
@@ -174,6 +179,7 @@ fn main() {
 ```
 
 ### 多线程实现
+
 ```rust
 trait Implementor {
     fn operation_impl(&self);
@@ -214,4 +220,4 @@ async fn main() {
 
 ---
 
-（后续可继续补充组合、装饰器、外观等模式的多实现代码） 
+（后续可继续补充组合、装饰器、外观等模式的多实现代码）
