@@ -1,95 +1,30 @@
-# 001 责任链模式
+# 责任链模式（Chain of Responsibility Pattern）
 
-## 1. 理论基础
+## 概述
 
-责任链模式是一种行为型设计模式，将请求的发送者和接收者解耦，沿着链传递请求直到被处理。每个处理器决定是否处理请求或传递给下一个处理器。
+责任链模式是一种行为型设计模式，允许多个对象处理同一个请求，而无需明确指定接收者。请求沿着处理者链进行传递，直到有一个处理者处理它。
 
-## 2. 接口设计
+## 理论基础
 
-```haskell
--- Haskell接口设计
-class Handler a where
-  setNext :: a -> a -> a
-  handle :: a -> Request -> Maybe Response
+- **请求传递**：请求在链中依次传递
+- **处理者解耦**：发送者与接收者解耦
+- **动态链构建**：运行时动态构建处理链
 
--- 请求和响应
-data Request = Request String deriving Show
-data Response = Response String deriving Show
-
--- 处理器基类
-data BaseHandler = BaseHandler (Maybe BaseHandler)
-```
-
-## 3. 多语言实现
-
-### Haskell实现
-
-```haskell
--- 请求和响应类型
-data Request = Request String deriving Show
-data Response = Response String deriving Show
-
--- 处理器接口
-class Handler a where
-  setNext :: a -> a -> a
-  handle :: a -> Request -> Maybe Response
-
--- 具体处理器
-data ConcreteHandlerA = ConcreteHandlerA (Maybe ConcreteHandlerA) deriving Show
-data ConcreteHandlerB = ConcreteHandlerB (Maybe ConcreteHandlerB) deriving Show
-
-instance Handler ConcreteHandlerA where
-  setNext handler next = ConcreteHandlerA (Just next)
-  handle (ConcreteHandlerA _) (Request req) = 
-    if "A" `isInfixOf` req
-    then Just $ Response "Handled by A"
-    else Nothing
-
-instance Handler ConcreteHandlerB where
-  setNext handler next = ConcreteHandlerB (Just next)
-  handle (ConcreteHandlerB _) (Request req) = 
-    if "B" `isInfixOf` req
-    then Just $ Response "Handled by B"
-    else Nothing
-
--- 使用示例
-main :: IO ()
-main = do
-  let handlerA = ConcreteHandlerA Nothing
-  let handlerB = ConcreteHandlerB Nothing
-  let chain = setNext handlerA handlerB
-  let request = Request "Request for B"
-  print $ handle chain request
-```
-
-### Rust实现
+## Rust实现示例
 
 ```rust
-// 请求和响应
-#[derive(Debug)]
-struct Request {
-    content: String,
-}
-
-#[derive(Debug)]
-struct Response {
-    content: String,
-}
-
-// 处理器trait
 trait Handler {
     fn set_next(&mut self, next: Box<dyn Handler>);
-    fn handle(&self, request: &Request) -> Option<Response>;
+    fn handle(&self, request: &str) -> Option<String>;
 }
 
-// 具体处理器A
 struct ConcreteHandlerA {
     next: Option<Box<dyn Handler>>,
 }
 
 impl ConcreteHandlerA {
     fn new() -> Self {
-        ConcreteHandlerA { next: None }
+        Self { next: None }
     }
 }
 
@@ -98,25 +33,22 @@ impl Handler for ConcreteHandlerA {
         self.next = Some(next);
     }
     
-    fn handle(&self, request: &Request) -> Option<Response> {
-        if request.content.contains("A") {
-            Some(Response {
-                content: "Handled by A".to_string(),
-            })
+    fn handle(&self, request: &str) -> Option<String> {
+        if request.contains("A") {
+            Some("HandlerA处理了请求".to_string())
         } else {
             self.next.as_ref().and_then(|h| h.handle(request))
         }
     }
 }
 
-// 具体处理器B
 struct ConcreteHandlerB {
     next: Option<Box<dyn Handler>>,
 }
 
 impl ConcreteHandlerB {
     fn new() -> Self {
-        ConcreteHandlerB { next: None }
+        Self { next: None }
     }
 }
 
@@ -125,74 +57,101 @@ impl Handler for ConcreteHandlerB {
         self.next = Some(next);
     }
     
-    fn handle(&self, request: &Request) -> Option<Response> {
-        if request.content.contains("B") {
-            Some(Response {
-                content: "Handled by B".to_string(),
-            })
+    fn handle(&self, request: &str) -> Option<String> {
+        if request.contains("B") {
+            Some("HandlerB处理了请求".to_string())
         } else {
             self.next.as_ref().and_then(|h| h.handle(request))
         }
     }
 }
+
+fn main() {
+    let mut handler_a = ConcreteHandlerA::new();
+    let mut handler_b = ConcreteHandlerB::new();
+    
+    handler_a.set_next(Box::new(handler_b));
+    
+    println!("{:?}", handler_a.handle("请求A"));
+    println!("{:?}", handler_a.handle("请求B"));
+    println!("{:?}", handler_a.handle("请求C"));
+}
 ```
 
-### Lean实现
+## Haskell实现示例
+
+```haskell
+class Handler a where
+    setNext :: a -> a -> a
+    handle :: a -> String -> Maybe String
+
+data ConcreteHandlerA = ConcreteHandlerA (Maybe ConcreteHandlerB)
+instance Handler ConcreteHandlerA where
+    setNext (ConcreteHandlerA _) next = ConcreteHandlerA (Just next)
+    handle (ConcreteHandlerA next) request
+        | "A" `isInfixOf` request = Just "HandlerA处理了请求"
+        | otherwise = case next of
+            Just h -> handle h request
+            Nothing -> Nothing
+
+data ConcreteHandlerB = ConcreteHandlerB (Maybe ConcreteHandlerA)
+instance Handler ConcreteHandlerB where
+    setNext (ConcreteHandlerB _) next = ConcreteHandlerB (Just next)
+    handle (ConcreteHandlerB next) request
+        | "B" `isInfixOf` request = Just "HandlerB处理了请求"
+        | otherwise = case next of
+            Just h -> handle h request
+            Nothing -> Nothing
+
+main = do
+    let handlerA = ConcreteHandlerA Nothing
+    let handlerB = ConcreteHandlerB Nothing
+    let chain = setNext handlerA handlerB
+    
+    putStrLn $ show $ handle chain "请求A"
+    putStrLn $ show $ handle chain "请求B"
+    putStrLn $ show $ handle chain "请求C"
+```
+
+## Lean实现思路
 
 ```lean
--- 请求和响应类型
-def Request := String
-def Response := String
+class Handler (α : Type) where
+  setNext : α → α → α
+  handle : α → String → Option String
 
--- 处理器类型
-inductive Handler where
-  | ConcreteA : Option Handler → Handler
-  | ConcreteB : Option Handler → Handler
+structure ConcreteHandlerA where
+  next : Option ConcreteHandlerB
 
--- 处理函数
-def handle : Handler → Request → Option Response
-  | Handler.ConcreteA next, req => 
-    if "A" ∈ req then some "Handled by A"
-    else match next with
-      | none => none
-      | some h => handle h req
-  | Handler.ConcreteB next, req => 
-    if "B" ∈ req then some "Handled by B"
-    else match next with
-      | none => none
-      | some h => handle h req
+instance : Handler ConcreteHandlerA where
+  setNext h next := { h with next := some next }
+  handle h request :=
+    if "A" ∈ request then some "HandlerA处理了请求"
+    else match h.next with
+    | some next => handle next request
+    | none => none
 
--- 责任链正确性定理
-theorem chain_termination :
-  ∀ h : Handler, ∀ req : Request,
-  handle h req ≠ none ∨ handle h req = none :=
-  by simp [handle]
+structure ConcreteHandlerB where
+  next : Option ConcreteHandlerA
+
+instance : Handler ConcreteHandlerB where
+  setNext h next := { h with next := some next }
+  handle h request :=
+    if "B" ∈ request then some "HandlerB处理了请求"
+    else match h.next with
+    | some next => handle next request
+    | none => none
 ```
 
-## 4. 工程实践
+## 应用场景
 
-- 请求处理流程
 - 异常处理链
-- 中间件模式
-- 过滤器链
+- 中间件处理
+- 权限验证链
+- 日志处理链
 
-## 5. 性能优化
+## 最佳实践
 
-- 避免过长链
-- 缓存处理结果
-- 异步处理
-- 负载均衡
-
-## 6. 应用场景
-
-- 异常处理
-- 日志记录
-- 权限验证
-- 请求过滤
-
-## 7. 最佳实践
-
-- 保持链简洁
-- 避免循环引用
-- 考虑性能影响
-- 实现默认处理
+- 避免链过长影响性能
+- 确保链的完整性
+- 提供默认处理机制

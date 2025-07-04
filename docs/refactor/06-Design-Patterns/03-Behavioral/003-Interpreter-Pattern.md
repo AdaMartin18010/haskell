@@ -1,169 +1,194 @@
-# 003 解释器模式
+# 解释器模式（Interpreter Pattern）
 
-## 1. 理论基础
+## 概述
 
-解释器模式是一种行为型设计模式，为语言创建解释器。定义语法表示和解释方法，用于解释特定语言或表达式。
+解释器模式是一种行为型设计模式，为语言创建解释器，定义语法的表示以及解释该语法的方法。
 
-## 2. 接口设计
+## 理论基础
 
-```haskell
--- Haskell接口设计
-class Expression a where
-  interpret :: a -> Context -> Int
+- **抽象语法树**：构建语法树表示
+- **递归解释**：递归遍历语法树
+- **上下文环境**：维护解释上下文
 
--- 上下文
-data Context = Context (Map String Int)
-
--- 表达式类型
-data TerminalExpression = TerminalExpression String
-data NonTerminalExpression = NonTerminalExpression Expression Expression
-```
-
-## 3. 多语言实现
-
-### Haskell实现
-
-```haskell
-import Data.Map (Map)
-import qualified Data.Map as Map
-
--- 表达式接口
-class Expression a where
-  interpret :: a -> Context -> Int
-
--- 上下文
-data Context = Context (Map String Int) deriving Show
-
--- 终结表达式
-data TerminalExpression = TerminalExpression String deriving Show
-
-instance Expression TerminalExpression where
-  interpret (TerminalExpression var) (Context context) = 
-    Map.findWithDefault 0 var context
-
--- 非终结表达式
-data NonTerminalExpression = NonTerminalExpression TerminalExpression TerminalExpression deriving Show
-
-instance Expression NonTerminalExpression where
-  interpret (NonTerminalExpression left right) context = 
-    interpret left context + interpret right context
-
--- 使用示例
-main :: IO ()
-main = do
-  let context = Context $ Map.fromList [("x", 10), ("y", 20)]
-  let expr = NonTerminalExpression 
-              (TerminalExpression "x") 
-              (TerminalExpression "y")
-  print $ interpret expr context
-```
-
-### Rust实现
+## Rust实现示例
 
 ```rust
-use std::collections::HashMap;
-
-// 表达式trait
 trait Expression {
     fn interpret(&self, context: &Context) -> i32;
 }
 
-// 上下文
 struct Context {
-    variables: HashMap<String, i32>,
+    variables: std::collections::HashMap<String, i32>,
 }
 
 impl Context {
     fn new() -> Self {
-        Context {
-            variables: HashMap::new(),
-        }
+        Self { variables: std::collections::HashMap::new() }
     }
     
-    fn set(&mut self, key: &str, value: i32) {
-        self.variables.insert(key.to_string(), value);
+    fn set_variable(&mut self, name: &str, value: i32) {
+        self.variables.insert(name.to_string(), value);
     }
     
-    fn get(&self, key: &str) -> i32 {
-        *self.variables.get(key).unwrap_or(&0)
+    fn get_variable(&self, name: &str) -> Option<&i32> {
+        self.variables.get(name)
     }
 }
 
-// 终结表达式
-struct TerminalExpression {
-    variable: String,
+struct NumberExpression {
+    value: i32,
 }
 
-impl Expression for TerminalExpression {
+impl Expression for NumberExpression {
+    fn interpret(&self, _context: &Context) -> i32 {
+        self.value
+    }
+}
+
+struct VariableExpression {
+    name: String,
+}
+
+impl Expression for VariableExpression {
     fn interpret(&self, context: &Context) -> i32 {
-        context.get(&self.variable)
+        context.get_variable(&self.name).copied().unwrap_or(0)
     }
 }
 
-// 非终结表达式
-struct NonTerminalExpression {
+struct AddExpression {
     left: Box<dyn Expression>,
     right: Box<dyn Expression>,
 }
 
-impl Expression for NonTerminalExpression {
+impl Expression for AddExpression {
     fn interpret(&self, context: &Context) -> i32 {
         self.left.interpret(context) + self.right.interpret(context)
     }
 }
+
+struct SubtractExpression {
+    left: Box<dyn Expression>,
+    right: Box<dyn Expression>,
+}
+
+impl Expression for SubtractExpression {
+    fn interpret(&self, context: &Context) -> i32 {
+        self.left.interpret(context) - self.right.interpret(context)
+    }
+}
+
+fn main() {
+    let mut context = Context::new();
+    context.set_variable("x", 10);
+    context.set_variable("y", 5);
+    
+    let expression = AddExpression {
+        left: Box::new(VariableExpression { name: "x".to_string() }),
+        right: Box::new(SubtractExpression {
+            left: Box::new(VariableExpression { name: "y".to_string() }),
+            right: Box::new(NumberExpression { value: 2 }),
+        }),
+    };
+    
+    let result = expression.interpret(&context);
+    println!("结果: {}", result);
+}
 ```
 
-### Lean实现
+## Haskell实现示例
+
+```haskell
+class Expression a where
+    interpret :: a -> Context -> Int
+
+data Context = Context { variables :: [(String, Int)] }
+newContext :: Context
+newContext = Context []
+setVariable :: Context -> String -> Int -> Context
+setVariable (Context vars) name value = Context ((name, value) : vars)
+getVariable :: Context -> String -> Int
+getVariable (Context vars) name = maybe 0 id (lookup name vars)
+
+data NumberExpression = NumberExpression Int
+instance Expression NumberExpression where
+    interpret (NumberExpression value) _ = value
+
+data VariableExpression = VariableExpression String
+instance Expression VariableExpression where
+    interpret (VariableExpression name) context = getVariable context name
+
+data AddExpression = AddExpression Expression Expression
+instance Expression AddExpression where
+    interpret (AddExpression left right) context = 
+        interpret left context + interpret right context
+
+data SubtractExpression = SubtractExpression Expression Expression
+instance Expression SubtractExpression where
+    interpret (SubtractExpression left right) context = 
+        interpret left context - interpret right context
+
+main = do
+    let context = setVariable (setVariable newContext "x" 10) "y" 5
+    let expression = AddExpression 
+        (VariableExpression "x") 
+        (SubtractExpression (VariableExpression "y") (NumberExpression 2))
+    let result = interpret expression context
+    putStrLn $ "结果: " ++ show result
+```
+
+## Lean实现思路
 
 ```lean
--- 表达式类型
-inductive Expression where
-  | Terminal : String → Expression
-  | NonTerminal : Expression → Expression → Expression
+class Expression (α : Type) where
+  interpret : α → Context → Int
 
--- 上下文
-def Context := List (String × ℕ)
+structure Context where
+  variables : List (String × Int)
 
--- 解释函数
-def interpret : Expression → Context → ℕ
-  | Expression.Terminal var, ctx => 
-    match ctx.lookup var with
-    | some value => value
-    | none => 0
-  | Expression.NonTerminal left right, ctx =>
-    interpret left ctx + interpret right ctx
+def newContext : Context := { variables := [] }
+def setVariable (context : Context) (name : String) (value : Int) : Context :=
+  { context with variables := (name, value) :: context.variables }
+def getVariable (context : Context) (name : String) : Int :=
+  match context.variables.find? (fun (k, _) => k = name) with
+  | some (_, v) => v
+  | none => 0
 
--- 解释器正确性定理
-theorem interpreter_correctness :
-  ∀ expr : Expression, ∀ ctx : Context,
-  interpret expr ctx ≥ 0 :=
-  by simp [interpret]
+structure NumberExpression where
+  value : Int
+
+instance : Expression NumberExpression where
+  interpret e _ := e.value
+
+structure VariableExpression where
+  name : String
+
+instance : Expression VariableExpression where
+  interpret e context := getVariable context e.name
+
+structure AddExpression where
+  left : Expression
+  right : Expression
+
+instance : Expression AddExpression where
+  interpret e context := interpret e.left context + interpret e.right context
+
+structure SubtractExpression where
+  left : Expression
+  right : Expression
+
+instance : Expression SubtractExpression where
+  interpret e context := interpret e.left context - interpret e.right context
 ```
 
-## 4. 工程实践
+## 应用场景
 
-- 语法解析
-- 表达式求值
-- 规则引擎
-- 配置解析
-
-## 5. 性能优化
-
-- 表达式缓存
-- 预编译优化
-- 内存管理
-- 并行解释
-
-## 6. 应用场景
-
+- 编程语言解释器
 - 配置文件解析
-- 查询语言
+- 查询语言处理
 - 规则引擎
-- 脚本解释器
 
-## 7. 最佳实践
+## 最佳实践
 
-- 保持语法简单
-- 实现错误处理
-- 考虑性能影响
-- 支持扩展语法
+- 构建清晰的语法树结构
+- 优化解释性能
+- 支持错误处理和恢复

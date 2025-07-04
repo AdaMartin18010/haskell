@@ -1,160 +1,94 @@
-# 006 享元模式
+# 享元模式（Flyweight Pattern）
 
-## 1. 理论基础
+## 概述
 
-享元模式是一种结构型设计模式，通过共享技术有效支持大量细粒度对象的复用。减少内存使用，提高系统性能。
+享元模式是一种结构型设计模式，通过共享技术有效支持大量细粒度对象的复用，节省内存和提升性能。
 
-## 2. 接口设计
+## 理论基础
 
-```haskell
--- Haskell接口设计
-class Flyweight a where
-  operation :: a -> String -> String
+- **内部状态与外部状态分离**
+- **对象池/缓存机制**
+- **共享不可变对象**
 
--- 享元工厂
-data FlyweightFactory = FlyweightFactory (Map String Flyweight)
-
--- 具体享元
-data ConcreteFlyweight = ConcreteFlyweight String
-```
-
-## 3. 多语言实现
-
-### Haskell实现
-
-```haskell
-import Data.Map (Map)
-import qualified Data.Map as Map
-
--- 享元接口
-class Flyweight a where
-  operation :: a -> String -> String
-
--- 具体享元
-data ConcreteFlyweight = ConcreteFlyweight String deriving Show
-
-instance Flyweight ConcreteFlyweight where
-  operation (ConcreteFlyweight intrinsic) extrinsic = 
-    "Intrinsic: " ++ intrinsic ++ ", Extrinsic: " ++ extrinsic
-
--- 享元工厂
-data FlyweightFactory = FlyweightFactory (Map String ConcreteFlyweight)
-
--- 工厂操作
-getFlyweight :: FlyweightFactory -> String -> (ConcreteFlyweight, FlyweightFactory)
-getFlyweight (FlyweightFactory cache) key = 
-  case Map.lookup key cache of
-    Just flyweight -> (flyweight, FlyweightFactory cache)
-    Nothing -> 
-      let newFlyweight = ConcreteFlyweight key
-          newCache = Map.insert key newFlyweight cache
-      in (newFlyweight, FlyweightFactory newCache)
-
--- 使用示例
-main :: IO ()
-main = do
-  let factory = FlyweightFactory Map.empty
-  let (flyweight1, factory1) = getFlyweight factory "shared"
-  let (flyweight2, factory2) = getFlyweight factory1 "shared"
-  print $ operation flyweight1 "extrinsic1"
-  print $ operation flyweight2 "extrinsic2"
-```
-
-### Rust实现
+## Rust实现示例
 
 ```rust
 use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
 
-// 享元trait
-trait Flyweight {
-    fn operation(&self, extrinsic: &str) -> String;
-}
-
-// 具体享元
-struct ConcreteFlyweight {
+struct Flyweight {
     intrinsic: String,
 }
 
-impl Flyweight for ConcreteFlyweight {
-    fn operation(&self, extrinsic: &str) -> String {
-        format!("Intrinsic: {}, Extrinsic: {}", self.intrinsic, extrinsic)
-    }
-}
-
-// 享元工厂
 struct FlyweightFactory {
-    cache: HashMap<String, ConcreteFlyweight>,
+    pool: Mutex<HashMap<String, Arc<Flyweight>>>,
 }
 
 impl FlyweightFactory {
     fn new() -> Self {
-        FlyweightFactory {
-            cache: HashMap::new(),
-        }
+        Self { pool: Mutex::new(HashMap::new()) }
     }
-    
-    fn get_flyweight(&mut self, key: &str) -> &ConcreteFlyweight {
-        if !self.cache.contains_key(key) {
-            let flyweight = ConcreteFlyweight {
-                intrinsic: key.to_string(),
-            };
-            self.cache.insert(key.to_string(), flyweight);
-        }
-        self.cache.get(key).unwrap()
+    fn get(&self, key: &str) -> Arc<Flyweight> {
+        let mut pool = self.pool.lock().unwrap();
+        pool.entry(key.to_string())
+            .or_insert_with(|| Arc::new(Flyweight { intrinsic: key.to_string() }))
+            .clone()
     }
+}
+fn main() {
+    let factory = FlyweightFactory::new();
+    let f1 = factory.get("A");
+    let f2 = factory.get("A");
+    assert!(Arc::ptr_eq(&f1, &f2));
 }
 ```
 
-### Lean实现
+## Haskell实现示例
 
-```lean
--- 享元类型
-def Flyweight := String → String → String
+```haskell
+import qualified Data.Map as M
+import Data.IORef
+import System.IO.Unsafe (unsafePerformIO)
 
--- 具体享元
-def concreteFlyweight (intrinsic : String) : Flyweight :=
-  fun extrinsic => "Intrinsic: " ++ intrinsic ++ ", Extrinsic: " ++ extrinsic
-
--- 享元工厂
-def FlyweightFactory := List (String × Flyweight)
-
--- 获取享元
-def getFlyweight : FlyweightFactory → String → Flyweight
-  | [], key => concreteFlyweight key
-  | (k, f) :: rest, key => 
-    if k = key then f else getFlyweight rest key
-
--- 享元共享定理
-theorem flyweight_sharing :
-  ∀ factory : FlyweightFactory, ∀ key : String,
-  getFlyweight factory key = getFlyweight factory key :=
-  by simp [getFlyweight]
+data Flyweight = Flyweight String
+type Pool = IORef (M.Map String Flyweight)
+pool :: Pool
+pool = unsafePerformIO $ newIORef M.empty
+getFlyweight :: String -> Flyweight
+getFlyweight key = unsafePerformIO $ do
+    m <- readIORef pool
+    case M.lookup key m of
+        Just f -> return f
+        Nothing -> do
+            let f = Flyweight key
+            writeIORef pool (M.insert key f m)
+            return f
 ```
 
-## 4. 工程实践
+## Lean实现思路
 
-- 对象池管理
-- 内存优化
-- 缓存策略
-- 线程安全
+```lean
+structure Flyweight where
+  intrinsic : String
 
-## 5. 性能优化
+abbrev Pool := List (String × Flyweight)
 
-- 对象复用
-- 内存池
-- 延迟初始化
-- 缓存清理
+def getFlyweight (key : String) (pool : Pool) : (Flyweight × Pool) :=
+  match pool.find? (fun (k, _) => k = key) with
+  | some (_, f) => (f, pool)
+  | none =>
+    let f := { intrinsic := key }
+    (f, (key, f) :: pool)
+```
 
-## 6. 应用场景
+## 应用场景
 
-- 文本编辑器
-- 游戏对象
-- 图形渲染
+- 字符串常量池
+- 图形对象复用
 - 数据库连接池
 
-## 7. 最佳实践
+## 最佳实践
 
-- 合理使用共享
-- 避免过度优化
-- 考虑线程安全
-- 监控内存使用
+- 只共享不可变状态
+- 外部状态由客户端维护
+- 结合对象池和缓存策略

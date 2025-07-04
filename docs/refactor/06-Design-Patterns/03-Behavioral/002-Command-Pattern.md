@@ -1,127 +1,61 @@
-# 002 命令模式
+# 命令模式（Command Pattern）
 
-## 1. 理论基础
+## 概述
 
-命令模式是一种行为型设计模式，将请求封装成对象，从而可以用不同的请求对客户进行参数化。支持撤销操作、宏命令、事务处理等。
+命令模式是一种行为型设计模式，将请求封装成对象，从而可以用不同的请求对客户进行参数化，对请求排队或记录请求日志，以及支持可撤销的操作。
 
-## 2. 接口设计
+## 理论基础
 
-```haskell
--- Haskell接口设计
-class Command a where
-  execute :: a -> IO ()
-  undo :: a -> IO ()
+- **请求封装**：将请求封装为对象
+- **参数化**：支持不同请求的参数化
+- **撤销重做**：支持操作的撤销和重做
 
--- 接收者
-data Receiver = Receiver String
-
--- 具体命令
-data ConcreteCommand = ConcreteCommand Receiver String
-```
-
-## 3. 多语言实现
-
-### Haskell实现
-
-```haskell
--- 命令接口
-class Command a where
-  execute :: a -> IO ()
-  undo :: a -> IO ()
-
--- 接收者
-data Receiver = Receiver String deriving Show
-
--- 具体命令
-data ConcreteCommand = ConcreteCommand Receiver String deriving Show
-
-instance Command ConcreteCommand where
-  execute (ConcreteCommand (Receiver name) action) = 
-    putStrLn $ "Executing " ++ action ++ " on " ++ name
-  undo (ConcreteCommand (Receiver name) action) = 
-    putStrLn $ "Undoing " ++ action ++ " on " ++ name
-
--- 调用者
-data Invoker = Invoker [ConcreteCommand] deriving Show
-
--- 调用者操作
-addCommand :: Invoker -> ConcreteCommand -> Invoker
-addCommand (Invoker commands) command = Invoker (command : commands)
-
-executeAll :: Invoker -> IO ()
-executeAll (Invoker commands) = mapM_ execute commands
-
--- 使用示例
-main :: IO ()
-main = do
-  let receiver = Receiver "File"
-  let command1 = ConcreteCommand receiver "Open"
-  let command2 = ConcreteCommand receiver "Save"
-  let invoker = Invoker []
-  let invoker' = addCommand invoker command1
-  let invoker'' = addCommand invoker' command2
-  executeAll invoker''
-```
-
-### Rust实现
+## Rust实现示例
 
 ```rust
-// 命令trait
 trait Command {
     fn execute(&self);
     fn undo(&self);
 }
 
-// 接收者
-struct Receiver {
-    name: String,
-}
-
+struct Receiver;
 impl Receiver {
-    fn new(name: &str) -> Self {
-        Receiver {
-            name: name.to_string(),
-        }
+    fn action(&self) {
+        println!("执行操作");
     }
     
-    fn action(&self, action: &str) {
-        println!("Executing {} on {}", action, self.name);
+    fn undo_action(&self) {
+        println!("撤销操作");
     }
 }
 
-// 具体命令
 struct ConcreteCommand {
     receiver: Receiver,
-    action: String,
 }
 
 impl ConcreteCommand {
-    fn new(receiver: Receiver, action: &str) -> Self {
-        ConcreteCommand {
-            receiver,
-            action: action.to_string(),
-        }
+    fn new(receiver: Receiver) -> Self {
+        Self { receiver }
     }
 }
 
 impl Command for ConcreteCommand {
     fn execute(&self) {
-        self.receiver.action(&self.action);
+        self.receiver.action();
     }
     
     fn undo(&self) {
-        println!("Undoing {} on {}", self.action, self.receiver.name);
+        self.receiver.undo_action();
     }
 }
 
-// 调用者
 struct Invoker {
     commands: Vec<Box<dyn Command>>,
 }
 
 impl Invoker {
     fn new() -> Self {
-        Invoker { commands: Vec::new() }
+        Self { commands: Vec::new() }
     }
     
     fn add_command(&mut self, command: Box<dyn Command>) {
@@ -134,59 +68,86 @@ impl Invoker {
         }
     }
 }
+
+fn main() {
+    let receiver = Receiver;
+    let command = ConcreteCommand::new(receiver);
+    let mut invoker = Invoker::new();
+    
+    invoker.add_command(Box::new(command));
+    invoker.execute_all();
+}
 ```
 
-### Lean实现
+## Haskell实现示例
+
+```haskell
+class Command a where
+    execute :: a -> IO ()
+    undo :: a -> IO ()
+
+data Receiver = Receiver
+action :: Receiver -> IO ()
+action _ = putStrLn "执行操作"
+undoAction :: Receiver -> IO ()
+undoAction _ = putStrLn "撤销操作"
+
+data ConcreteCommand = ConcreteCommand Receiver
+instance Command ConcreteCommand where
+    execute (ConcreteCommand receiver) = action receiver
+    undo (ConcreteCommand receiver) = undoAction receiver
+
+data Invoker = Invoker [ConcreteCommand]
+addCommand :: Invoker -> ConcreteCommand -> Invoker
+addCommand (Invoker commands) command = Invoker (command : commands)
+executeAll :: Invoker -> IO ()
+executeAll (Invoker commands) = mapM_ execute commands
+
+main = do
+    let receiver = Receiver
+    let command = ConcreteCommand receiver
+    let invoker = Invoker []
+    let invoker' = addCommand invoker command
+    executeAll invoker'
+```
+
+## Lean实现思路
 
 ```lean
--- 命令类型
-def Command := String → IO Unit
+class Command (α : Type) where
+  execute : α → IO Unit
+  undo : α → IO Unit
 
--- 接收者
-def Receiver := String
+structure Receiver
+def action (_ : Receiver) : IO Unit := IO.println "执行操作"
+def undoAction (_ : Receiver) : IO Unit := IO.println "撤销操作"
 
--- 具体命令
-def concreteCommand (receiver : Receiver) (action : String) : Command :=
-  fun _ => IO.println ("Executing " ++ action ++ " on " ++ receiver)
+structure ConcreteCommand where
+  receiver : Receiver
 
--- 命令执行
-def execute (cmd : Command) : IO Unit :=
-  cmd ""
+instance : Command ConcreteCommand where
+  execute c := action c.receiver
+  undo c := undoAction c.receiver
 
--- 命令撤销
-def undo (cmd : Command) : IO Unit :=
-  IO.println "Undoing command"
+structure Invoker where
+  commands : List ConcreteCommand
 
--- 命令模式正确性定理
-theorem command_encapsulation :
-  ∀ cmd : Command, execute cmd ≠ undo cmd :=
-  by simp [execute, undo]
+def addCommand (invoker : Invoker) (command : ConcreteCommand) : Invoker :=
+  { invoker with commands := command :: invoker.commands }
+
+def executeAll (invoker : Invoker) : IO Unit :=
+  invoker.commands.forM Command.execute
 ```
 
-## 4. 工程实践
+## 应用场景
 
-- 撤销/重做功能
-- 宏命令
+- GUI按钮事件处理
+- 宏录制和回放
 - 事务处理
-- 日志记录
+- 撤销重做功能
 
-## 5. 性能优化
+## 最佳实践
 
-- 命令缓存
-- 批量执行
-- 异步处理
-- 内存管理
-
-## 6. 应用场景
-
-- 文本编辑器
-- 图形界面
-- 游戏控制
-- 数据库事务
-
-## 7. 最佳实践
-
-- 保持命令简单
-- 实现撤销功能
-- 考虑内存使用
-- 支持复合命令
+- 命令对象应保持轻量
+- 支持命令的组合和批处理
+- 实现撤销机制时考虑状态管理
