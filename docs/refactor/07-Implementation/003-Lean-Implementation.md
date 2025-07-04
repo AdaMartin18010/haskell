@@ -291,7 +291,7 @@ theorem fundamental_theorem_of_calculus
 
 ## 类型论
 
-### 依赖类型
+### 依赖类型1
 
 ```lean
 -- 依赖对类型
