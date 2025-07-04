@@ -1,1092 +1,1095 @@
-# 区块链与Web3概述（Blockchain & Web3 Overview）
+# 区块链和Web3行业领域概述
 
-## 概述
+## 1. 理论基础
 
-区块链与Web3技术通过去中心化、密码学和共识机制构建可信的数字基础设施。涵盖分布式账本、智能合约、去中心化应用、数字资产等多个技术领域。
+### 1.1 区块链基础
 
-## 理论基础
+- **分布式账本**: 去中心化的数据存储和验证机制
+- **密码学**: 哈希函数、数字签名、公钥密码学
+- **共识机制**: PoW、PoS、DPoS、PBFT等
+- **智能合约**: 可编程的自动化合约执行
 
-- **密码学**：哈希函数、数字签名、零知识证明
-- **共识机制**：PoW、PoS、DPoS、BFT
-- **分布式系统**：拜占庭容错、网络同步、状态复制
-- **经济学**：代币经济学、激励机制、治理机制
+### 1.2 Web3概念
 
-## 核心领域
+- **去中心化**: 消除中心化权威，实现用户自治
+- **可组合性**: 协议间的互操作性和组合能力
+- **代币经济**: 通证激励机制和经济模型
+- **隐私保护**: 零知识证明、同态加密等技术
 
-### 1. 区块链基础
-- 区块结构
-- 链式存储
-- 共识算法
-- 网络协议
+### 1.3 技术栈
 
-### 2. 智能合约
-- 合约语言
-- 执行环境
-- 安全验证
-- 升级机制
+- **区块链平台**: Ethereum、Polkadot、Solana、Cosmos
+- **开发框架**: Hardhat、Truffle、Foundry、Anchor
+- **前端集成**: Web3.js、Ethers.js、Wagmi
+- **存储方案**: IPFS、Arweave、Filecoin
 
-### 3. 去中心化应用
-- DApp架构
-- 前端集成
-- 数据存储
-- 用户体验
+## 2. 核心概念
 
-### 4. 数字资产
-- 代币标准
-- NFT协议
-- DeFi协议
-- 跨链桥接
-
-## Haskell实现
-
-### 区块链核心
+### 2.1 区块链架构
 
 ```haskell
-import Data.Time
-import Data.ByteString (ByteString)
-import qualified Data.ByteString as BS
-import Crypto.Hash (hash, SHA256)
-import Data.Serialize
+-- 区块链结构
+data Blockchain = Blockchain
+  { blocks :: [Block]
+  , consensus :: ConsensusMechanism
+  , network :: NetworkConfig
+  , state :: GlobalState
+  }
+
+-- 区块结构
+data Block = Block
+  { blockHeader :: BlockHeader
+  , transactions :: [Transaction]
+  , merkleRoot :: Hash
+  , timestamp :: Timestamp
+  , nonce :: Nonce
+  }
 
 -- 区块头
-data BlockHeader = BlockHeader {
-  version :: Int,
-  previousHash :: ByteString,
-  merkleRoot :: ByteString,
-  timestamp :: UTCTime,
-  difficulty :: Int,
-  nonce :: Int
-} deriving (Show, Eq)
+data BlockHeader = BlockHeader
+  { previousHash :: Hash
+  , merkleRoot :: Hash
+  , timestamp :: Timestamp
+  , difficulty :: Difficulty
+  , nonce :: Nonce
+  }
 
--- 区块
-data Block = Block {
-  header :: BlockHeader,
-  transactions :: [Transaction],
-  hash :: ByteString
-} deriving (Show, Eq)
+-- 交易结构
+data Transaction = Transaction
+  { from :: Address
+  , to :: Address
+  , value :: Wei
+  , data :: ByteString
+  , nonce :: Nonce
+  , gasPrice :: GasPrice
+  , gasLimit :: GasLimit
+  , signature :: Signature
+  }
+```
 
--- 交易
-data Transaction = Transaction {
-  txId :: ByteString,
-  inputs :: [TxInput],
-  outputs :: [TxOutput],
-  signature :: ByteString
-} deriving (Show, Eq)
+### 2.2 智能合约
 
--- 交易输入
-data TxInput = TxInput {
-  previousTxId :: ByteString,
-  outputIndex :: Int,
-  scriptSig :: ByteString
-} deriving (Show, Eq)
+```haskell
+-- 智能合约接口
+class SmartContract contract where
+  deploy :: contract -> DeployConfig -> IO ContractAddress
+  call :: contract -> FunctionCall -> IO TransactionResult
+  getState :: contract -> IO ContractState
+  updateState :: contract -> StateUpdate -> IO ()
 
--- 交易输出
-data TxOutput = TxOutput {
-  value :: Integer,
-  scriptPubKey :: ByteString
-} deriving (Show, Eq)
+-- 合约状态
+data ContractState = ContractState
+  { storage :: Map StorageKey StorageValue
+  , balance :: Wei
+  , code :: ByteCode
+  , owner :: Address
+  }
 
--- 区块链
-data Blockchain = Blockchain {
-  blocks :: [Block],
-  pendingTransactions :: [Transaction],
-  difficulty :: Int
-} deriving (Show)
+-- 函数调用
+data FunctionCall = FunctionCall
+  { functionName :: Text
+  , parameters :: [Parameter]
+  , value :: Wei
+  , gasLimit :: GasLimit
+  }
+
+-- 交易结果
+data TransactionResult = TransactionResult
+  { success :: Bool
+  , gasUsed :: Gas
+  , logs :: [Log]
+  , returnValue :: Maybe ByteString
+  , error :: Maybe String
+  }
+```
+
+### 2.3 共识机制
+
+```haskell
+-- 共识机制类型
+data ConsensusMechanism = 
+  | ProofOfWork Difficulty
+  | ProofOfStake StakeConfig
+  | DelegatedProofOfStake DPoSConfig
+  | PracticalByzantineFaultTolerance PBFTConfig
+
+-- 工作量证明
+data ProofOfWork = ProofOfWork
+  { difficulty :: Difficulty
+  | target :: Hash
+  | blockTime :: Time
+  }
+
+-- 权益证明
+data ProofOfStake = ProofOfStake
+  { validators :: [Validator]
+  | stakeThreshold :: Wei
+  | rewardRate :: Double
+  | slashingConditions :: [SlashingCondition]
+  }
+
+-- 验证者
+data Validator = Validator
+  { address :: Address
+  | stake :: Wei
+  | commission :: Double
+  | status :: ValidatorStatus
+  }
+```
+
+## 3. 多语言实现
+
+### 3.1 Haskell实现
+
+#### 3.1.1 区块链核心
+
+```haskell
+import Crypto.Hash (SHA256, hash)
+import Data.ByteString (ByteString)
+import Data.Time
+import Control.Monad.State
+import Data.Map (Map)
+import qualified Data.Map as Map
+
+-- 哈希函数
+type Hash = ByteString
+type Address = ByteString
+type Wei = Integer
+type Nonce = Integer
+type Timestamp = UTCTime
+
+-- 区块链状态
+data BlockchainState = BlockchainState
+  { accounts :: Map Address Account
+  , pendingTransactions :: [Transaction]
+  , difficulty :: Difficulty
+  , blockHeight :: Integer
+  }
+
+-- 账户
+data Account = Account
+  { balance :: Wei
+  , nonce :: Nonce
+  , code :: Maybe ByteCode
+  , storage :: Map StorageKey StorageValue
+  }
+
+-- 区块链操作
+class Monad m => BlockchainOps m where
+  addBlock :: Block -> m Bool
+  addTransaction :: Transaction -> m Bool
+  getBalance :: Address -> m Wei
+  transfer :: Address -> Address -> Wei -> m Bool
+
+-- 区块链实现
+newtype BlockchainM a = BlockchainM 
+  { runBlockchainM :: StateT BlockchainState IO a }
+  deriving (Functor, Applicative, Monad)
+
+instance BlockchainOps BlockchainM where
+  addBlock block = BlockchainM $ do
+    state <- get
+    let newState = state { 
+      blockHeight = blockHeight state + 1,
+      pendingTransactions = []
+    }
+    put newState
+    return True
+
+  addTransaction tx = BlockchainM $ do
+    state <- get
+    let newPending = tx : pendingTransactions state
+    put $ state { pendingTransactions = newPending }
+    return True
+
+  getBalance addr = BlockchainM $ do
+    state <- get
+    let account = Map.findWithDefault (Account 0 0 Nothing Map.empty) addr (accounts state)
+    return $ balance account
+
+  transfer from to amount = BlockchainM $ do
+    state <- get
+    let fromAccount = Map.findWithDefault (Account 0 0 Nothing Map.empty) from (accounts state)
+    let toAccount = Map.findWithDefault (Account 0 0 Nothing Map.empty) to (accounts state)
+    
+    if balance fromAccount >= amount
+      then do
+        let newFromAccount = fromAccount { balance = balance fromAccount - amount }
+        let newToAccount = toAccount { balance = balance toAccount + amount }
+        let newAccounts = Map.insert from newFromAccount $ Map.insert to newToAccount (accounts state)
+        put $ state { accounts = newAccounts }
+        return True
+      else return False
+
+-- 挖矿
+mineBlock :: [Transaction] -> Hash -> Difficulty -> IO Block
+mineBlock transactions previousHash difficulty = do
+  timestamp <- getCurrentTime
+  let target = calculateTarget difficulty
+  let block = findValidBlock transactions previousHash timestamp target
+  return block
+
+-- 寻找有效区块
+findValidBlock :: [Transaction] -> Hash -> Timestamp -> Hash -> Block
+findValidBlock transactions previousHash timestamp target = 
+  let nonce = 0
+      header = BlockHeader previousHash (calculateMerkleRoot transactions) timestamp difficulty nonce
+      block = Block header transactions (calculateMerkleRoot transactions) timestamp nonce
+  in if hashBlock block < target
+     then block
+     else findValidBlock transactions previousHash timestamp target (nonce + 1)
 
 -- 计算区块哈希
-calculateBlockHash :: BlockHeader -> ByteString
-calculateBlockHash header = 
-  let serialized = encode header
-  in hash serialized
-
--- 创建创世区块
-createGenesisBlock :: Block
-createGenesisBlock = 
-  let header = BlockHeader {
-    version = 1,
-    previousHash = BS.replicate 32 0,
-    merkleRoot = BS.replicate 32 0,
-    timestamp = undefined, -- 需要实际时间
-    difficulty = 4,
-    nonce = 0
-  }
-  in Block {
-    header = header,
-    transactions = [],
-    hash = calculateBlockHash header
-  }
-
--- 创建新区块
-createNewBlock :: Blockchain -> [Transaction] -> Int -> Block
-createNewBlock blockchain transactions nonce = 
-  let previousBlock = last (blocks blockchain)
-      header = BlockHeader {
-        version = 1,
-        previousHash = hash previousBlock,
-        merkleRoot = calculateMerkleRoot transactions,
-        timestamp = undefined, -- 需要实际时间
-        difficulty = difficulty blockchain,
-        nonce = nonce
-      }
-      block = Block {
-        header = header,
-        transactions = transactions,
-        hash = calculateBlockHash header
-      }
-  in block
+hashBlock :: Block -> Hash
+hashBlock block = hash $ serializeBlock block
 
 -- 计算默克尔根
-calculateMerkleRoot :: [Transaction] -> ByteString
-calculateMerkleRoot [] = BS.replicate 32 0
-calculateMerkleRoot [tx] = hash (encode tx)
+calculateMerkleRoot :: [Transaction] -> Hash
+calculateMerkleRoot [] = hash ""
+calculateMerkleRoot [tx] = hash $ serializeTransaction tx
 calculateMerkleRoot txs = 
-  let hashes = map (hash . encode) txs
+  let hashes = map (hash . serializeTransaction) txs
       paired = pairHashes hashes
   in calculateMerkleRoot paired
 
 -- 配对哈希
-pairHashes :: [ByteString] -> [ByteString]
+pairHashes :: [Hash] -> [Hash]
 pairHashes [] = []
 pairHashes [h] = [h]
-pairHashes (h1:h2:rest) = 
-  let combined = BS.append h1 h2
-      combinedHash = hash combined
-  in combinedHash : pairHashes rest
-
--- 工作量证明
-proofOfWork :: Blockchain -> [Transaction] -> Block
-proofOfWork blockchain transactions = 
-  let target = BS.replicate (difficulty blockchain) 0
-      findValidBlock nonce = 
-        let block = createNewBlock blockchain transactions nonce
-            blockHash = hash block
-        in if BS.take (difficulty blockchain) blockHash == target
-           then block
-           else findValidBlock (nonce + 1)
-  in findValidBlock 0
-
--- 验证区块
-validateBlock :: Block -> Block -> Bool
-validateBlock previousBlock currentBlock = 
-  let expectedHash = calculateBlockHash (header currentBlock)
-      actualHash = hash currentBlock
-      correctHash = expectedHash == actualHash
-      correctPrevious = previousHash (header currentBlock) == hash previousBlock
-      validProof = validateProofOfWork currentBlock
-  in correctHash && correctPrevious && validProof
-
--- 验证工作量证明
-validateProofOfWork :: Block -> Bool
-validateProofOfWork block = 
-  let blockHash = hash block
-      target = BS.replicate (difficulty (header block)) 0
-  in BS.take (difficulty (header block)) blockHash == target
-
--- 添加区块到链
-addBlock :: Blockchain -> Block -> Blockchain
-addBlock blockchain block = 
-  if validateBlock (last (blocks blockchain)) block
-  then blockchain { blocks = blocks blockchain ++ [block] }
-  else error "Invalid block"
-
--- 使用示例
-demoBlockchain :: IO ()
-demoBlockchain = do
-  let genesisBlock = createGenesisBlock
-  let blockchain = Blockchain [genesisBlock] [] 4
-  
-  putStrLn $ "Genesis block created: " ++ show genesisBlock
-  putStrLn $ "Blockchain initialized with difficulty: " ++ show (difficulty blockchain)
+pairHashes (h1:h2:rest) = hash (h1 <> h2) : pairHashes rest
 ```
 
-### 智能合约系统
+#### 3.1.2 智能合约虚拟机
 
 ```haskell
-import Data.Map (Map)
-import qualified Data.Map as Map
-import Control.Monad.State
-
--- 智能合约
-data SmartContract = SmartContract {
-  contractId :: String,
-  code :: String,
-  state :: Map String Value,
-  balance :: Integer
-} deriving (Show)
-
--- 合约值
-data Value = 
-  IntValue Integer
-  | StringValue String
-  | BoolValue Bool
-  | AddressValue String
-  | ArrayValue [Value]
-  deriving (Show, Eq)
-
--- 合约执行环境
-data ContractEnv = ContractEnv {
-  contracts :: Map String SmartContract,
-  accounts :: Map String Integer,
-  currentContract :: Maybe String,
-  gasUsed :: Integer,
-  gasLimit :: Integer
-} deriving (Show)
-
--- 合约执行状态
-type ContractState = State ContractEnv
-
--- 创建合约
-createContract :: String -> String -> ContractState SmartContract
-createContract contractId code = do
-  let contract = SmartContract {
-    contractId = contractId,
-    code = code,
-    state = Map.empty,
-    balance = 0
+-- 虚拟机状态
+data VMState = VMState
+  { programCounter :: Int
+  , stack :: [Value]
+  , memory :: Map Int ByteString
+  , gas :: Gas
+  , accounts :: Map Address Account
   }
-  env <- get
-  put $ env { contracts = Map.insert contractId contract (contracts env) }
-  return contract
 
--- 调用合约函数
-callContract :: String -> String -> [Value] -> ContractState (Maybe Value)
-callContract contractId functionName args = do
-  env <- get
-  case Map.lookup contractId (contracts env) of
-    Just contract -> do
-      let result = executeFunction contract functionName args
-      case result of
-        Just (newContract, returnValue) -> do
-          put $ env { 
-            contracts = Map.insert contractId newContract (contracts env),
-            currentContract = Just contractId
-          }
-          return $ Just returnValue
-        Nothing -> return Nothing
-    Nothing -> return Nothing
+-- 虚拟机值
+data Value = 
+  | VInt Integer
+  | VAddress Address
+  | VBytes ByteString
+  | VBool Bool
 
--- 执行合约函数
-executeFunction :: SmartContract -> String -> [Value] -> Maybe (SmartContract, Value)
-executeFunction contract functionName args = 
-  case functionName of
-    "transfer" -> executeTransfer contract args
-    "getBalance" -> executeGetBalance contract args
-    "setValue" -> executeSetValue contract args
-    "getValue" -> executeGetValue contract args
-    _ -> Nothing
+-- 虚拟机指令
+data Instruction = 
+  | PUSH Value
+  | POP
+  | ADD
+  | SUB
+  | MUL
+  | DIV
+  | SSTORE StorageKey Value
+  | SLOAD StorageKey
+  | CALL Address Wei ByteString
+  | RETURN
 
--- 执行转账
-executeTransfer :: SmartContract -> [Value] -> Maybe (SmartContract, Value)
-executeTransfer contract args = 
-  case args of
-    [AddressValue to, IntValue amount] -> 
-      if amount <= balance contract
-      then Just (contract { balance = balance contract - amount }, BoolValue True)
-      else Just (contract, BoolValue False)
-    _ -> Nothing
+-- 虚拟机执行
+class Monad m => VirtualMachine m where
+  execute :: ByteCode -> VMState -> m (VMState, [Log])
+  step :: Instruction -> VMState -> m VMState
+  gasCost :: Instruction -> Gas
 
--- 执行获取余额
-executeGetBalance :: SmartContract -> [Value] -> Maybe (SmartContract, Value)
-executeGetBalance contract _ = 
-  Just (contract, IntValue (balance contract))
+-- 虚拟机实现
+newtype VMM a = VMM { runVMM :: StateT VMState IO a }
+  deriving (Functor, Applicative, Monad)
 
--- 执行设置值
-executeSetValue :: SmartContract -> [Value] -> Maybe (SmartContract, Value)
-executeSetValue contract args = 
-  case args of
-    [StringValue key, value] -> 
-      let newState = Map.insert key value (state contract)
-      in Just (contract { state = newState }, BoolValue True)
-    _ -> Nothing
+instance VirtualMachine VMM where
+  execute code state = VMM $ do
+    let instructions = decodeInstructions code
+    finalState <- executeInstructions instructions state
+    logs <- gets (\s -> []) -- 简化日志收集
+    return (finalState, logs)
 
--- 执行获取值
-executeGetValue :: SmartContract -> [Value] -> Maybe (SmartContract, Value)
-executeGetValue contract args = 
-  case args of
-    [StringValue key] -> 
-      case Map.lookup key (state contract) of
-        Just value -> Just (contract, value)
-        Nothing -> Just (contract, StringValue "")
-    _ -> Nothing
+  step instruction state = VMM $ do
+    case instruction of
+      PUSH value -> do
+        modify $ \s -> s { stack = value : stack s }
+        modify $ \s -> s { gas = gas s - gasCost instruction }
+      
+      POP -> do
+        modify $ \s -> s { stack = tail (stack s) }
+        modify $ \s -> s { gas = gas s - gasCost instruction }
+      
+      ADD -> do
+        stack <- gets stack
+        case stack of
+          (VInt a : VInt b : rest) -> do
+            modify $ \s -> s { stack = VInt (a + b) : rest }
+            modify $ \s -> s { gas = gas s - gasCost instruction }
+          _ -> error "Invalid stack for ADD"
+      
+      SSTORE key value -> do
+        modify $ \s -> s { memory = Map.insert key (serializeValue value) (memory s) }
+        modify $ \s -> s { gas = gas s - gasCost instruction }
+      
+      SLOAD key -> do
+        memory <- gets memory
+        let value = Map.findWithDefault "" key memory
+        modify $ \s -> s { stack = VBytes value : stack s }
+        modify $ \s -> s { gas = gas s - gasCost instruction }
 
--- 部署代币合约
-deployTokenContract :: String -> String -> Integer -> ContractState SmartContract
-deployTokenContract contractId name totalSupply = do
-  let code = "ERC20 Token Contract"
-  contract <- createContract contractId code
-  let contractWithBalance = contract { balance = totalSupply }
-  env <- get
-  put $ env { contracts = Map.insert contractId contractWithBalance (contracts env) }
-  return contractWithBalance
+  gasCost instruction = case instruction of
+    PUSH _ -> 3
+    POP -> 2
+    ADD -> 3
+    SUB -> 3
+    MUL -> 5
+    DIV -> 5
+    SSTORE _ _ -> 20000
+    SLOAD _ -> 200
+    CALL _ _ _ -> 21000
+    RETURN -> 0
 
--- 使用示例
-demoSmartContract :: IO ()
-demoSmartContract = do
-  let initialState = ContractEnv Map.empty Map.empty Nothing 0 1000000
-  let (result, finalState) = runState (do
-    -- 部署代币合约
-    tokenContract <- deployTokenContract "TOKEN001" "MyToken" 1000000
-    
-    -- 调用转账函数
-    transferResult <- callContract "TOKEN001" "transfer" [AddressValue "0x123", IntValue 100]
-    
-    -- 获取余额
-    balanceResult <- callContract "TOKEN001" "getBalance" []
-    
-    return (transferResult, balanceResult)) initialState
-  
-  putStrLn $ "Smart contract execution result: " ++ show result
+-- 执行指令序列
+executeInstructions :: [Instruction] -> VMState -> VMM VMState
+executeInstructions [] state = return state
+executeInstructions (inst:rest) state = do
+  newState <- step inst state
+  executeInstructions rest newState
 ```
 
-## Rust实现
+### 3.2 Rust实现
 
-### 区块链节点
+#### 3.2.1 区块链核心
 
 ```rust
+use sha2::{Sha256, Digest};
+use serde::{Serialize, Deserialize};
 use std::collections::HashMap;
 use std::time::{SystemTime, UNIX_EPOCH};
-use serde::{Serialize, Deserialize};
-use sha2::{Sha256, Digest};
-use tokio::sync::mpsc;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-struct BlockHeader {
-    version: u32,
-    previous_hash: Vec<u8>,
-    merkle_root: Vec<u8>,
-    timestamp: u64,
-    difficulty: u32,
-    nonce: u64,
+pub struct Block {
+    pub header: BlockHeader,
+    pub transactions: Vec<Transaction>,
+    pub merkle_root: Vec<u8>,
+    pub timestamp: u64,
+    pub nonce: u64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-struct Block {
-    header: BlockHeader,
-    transactions: Vec<Transaction>,
-    hash: Vec<u8>,
+pub struct BlockHeader {
+    pub previous_hash: Vec<u8>,
+    pub merkle_root: Vec<u8>,
+    pub timestamp: u64,
+    pub difficulty: u32,
+    pub nonce: u64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-struct Transaction {
-    tx_id: Vec<u8>,
-    inputs: Vec<TxInput>,
-    outputs: Vec<TxOutput>,
-    signature: Vec<u8>,
+pub struct Transaction {
+    pub from: Vec<u8>,
+    pub to: Vec<u8>,
+    pub value: u64,
+    pub data: Vec<u8>,
+    pub nonce: u64,
+    pub gas_price: u64,
+    pub gas_limit: u64,
+    pub signature: Vec<u8>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-struct TxInput {
-    previous_tx_id: Vec<u8>,
-    output_index: u32,
-    script_sig: Vec<u8>,
+#[derive(Debug, Clone)]
+pub struct Account {
+    pub balance: u64,
+    pub nonce: u64,
+    pub code: Option<Vec<u8>>,
+    pub storage: HashMap<Vec<u8>, Vec<u8>>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-struct TxOutput {
-    value: u64,
-    script_pub_key: Vec<u8>,
-}
-
-#[derive(Debug)]
-struct Blockchain {
-    blocks: Vec<Block>,
-    pending_transactions: Vec<Transaction>,
-    difficulty: u32,
-    accounts: HashMap<String, u64>,
+pub struct Blockchain {
+    pub blocks: Vec<Block>,
+    pub accounts: HashMap<Vec<u8>, Account>,
+    pub pending_transactions: Vec<Transaction>,
+    pub difficulty: u32,
 }
 
 impl Blockchain {
-    fn new(difficulty: u32) -> Self {
-        let genesis_block = Self::create_genesis_block();
-        Self {
-            blocks: vec![genesis_block],
-            pending_transactions: Vec::new(),
-            difficulty,
-            accounts: HashMap::new(),
-        }
-    }
-    
-    fn create_genesis_block() -> Block {
-        let header = BlockHeader {
-            version: 1,
-            previous_hash: vec![0; 32],
+    pub fn new() -> Self {
+        let genesis_block = Block {
+            header: BlockHeader {
+                previous_hash: vec![0; 32],
+                merkle_root: vec![0; 32],
+                timestamp: SystemTime::now()
+                    .duration_since(UNIX_EPOCH)
+                    .unwrap()
+                    .as_secs(),
+                difficulty: 1,
+                nonce: 0,
+            },
+            transactions: vec![],
             merkle_root: vec![0; 32],
             timestamp: SystemTime::now()
                 .duration_since(UNIX_EPOCH)
                 .unwrap()
                 .as_secs(),
-            difficulty: 4,
             nonce: 0,
         };
-        
-        let hash = Self::calculate_block_hash(&header);
-        Block {
-            header,
-            transactions: Vec::new(),
-            hash,
+
+        Self {
+            blocks: vec![genesis_block],
+            accounts: HashMap::new(),
+            pending_transactions: vec![],
+            difficulty: 1,
         }
     }
-    
-    fn calculate_block_hash(header: &BlockHeader) -> Vec<u8> {
-        let serialized = bincode::serialize(header).unwrap();
-        let mut hasher = Sha256::new();
-        hasher.update(&serialized);
-        hasher.finalize().to_vec()
-    }
-    
-    fn calculate_merkle_root(transactions: &[Transaction]) -> Vec<u8> {
-        if transactions.is_empty() {
-            return vec![0; 32];
-        }
-        
-        let mut hashes: Vec<Vec<u8>> = transactions
-            .iter()
-            .map(|tx| {
-                let mut hasher = Sha256::new();
-                hasher.update(&bincode::serialize(tx).unwrap());
-                hasher.finalize().to_vec()
-            })
-            .collect();
-        
-        while hashes.len() > 1 {
-            let mut new_hashes = Vec::new();
-            for chunk in hashes.chunks(2) {
-                let mut combined = chunk[0].clone();
-                if chunk.len() > 1 {
-                    combined.extend_from_slice(&chunk[1]);
-                }
-                let mut hasher = Sha256::new();
-                hasher.update(&combined);
-                new_hashes.push(hasher.finalize().to_vec());
-            }
-            hashes = new_hashes;
-        }
-        
-        hashes[0].clone()
-    }
-    
-    fn mine_block(&mut self, transactions: Vec<Transaction>) -> Block {
-        let previous_block = &self.blocks[self.blocks.len() - 1];
-        let merkle_root = Self::calculate_merkle_root(&transactions);
-        
-        let mut nonce = 0u64;
-        loop {
-            let header = BlockHeader {
-                version: 1,
-                previous_hash: previous_block.hash.clone(),
-                merkle_root: merkle_root.clone(),
-                timestamp: SystemTime::now()
-                    .duration_since(UNIX_EPOCH)
-                    .unwrap()
-                    .as_secs(),
-                difficulty: self.difficulty,
-                nonce,
-            };
-            
-            let hash = Self::calculate_block_hash(&header);
-            if Self::is_valid_hash(&hash, self.difficulty) {
-                return Block {
-                    header,
-                    transactions,
-                    hash,
-                };
-            }
-            
-            nonce += 1;
-        }
-    }
-    
-    fn is_valid_hash(hash: &[u8], difficulty: u32) -> bool {
-        let target_zeros = difficulty as usize;
-        hash.iter().take(target_zeros).all(|&byte| byte == 0)
-    }
-    
-    fn add_block(&mut self, block: Block) -> bool {
+
+    pub fn add_block(&mut self, block: Block) -> bool {
         if self.validate_block(&block) {
-            self.blocks.push(block);
+            self.blocks.push(block.clone());
+            self.process_transactions(&block.transactions);
             true
         } else {
             false
         }
     }
-    
+
+    pub fn add_transaction(&mut self, transaction: Transaction) -> bool {
+        if self.validate_transaction(&transaction) {
+            self.pending_transactions.push(transaction);
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn get_balance(&self, address: &[u8]) -> u64 {
+        self.accounts
+            .get(address)
+            .map(|account| account.balance)
+            .unwrap_or(0)
+    }
+
+    pub fn transfer(&mut self, from: &[u8], to: &[u8], amount: u64) -> bool {
+        let from_balance = self.get_balance(from);
+        if from_balance >= amount {
+            let from_account = self.accounts.entry(from.to_vec()).or_insert(Account {
+                balance: 0,
+                nonce: 0,
+                code: None,
+                storage: HashMap::new(),
+            });
+            from_account.balance -= amount;
+
+            let to_account = self.accounts.entry(to.to_vec()).or_insert(Account {
+                balance: 0,
+                nonce: 0,
+                code: None,
+                storage: HashMap::new(),
+            });
+            to_account.balance += amount;
+
+            true
+        } else {
+            false
+        }
+    }
+
     fn validate_block(&self, block: &Block) -> bool {
-        let calculated_hash = Self::calculate_block_hash(&block.header);
-        if calculated_hash != block.hash {
-            return false;
+        // 验证工作量证明
+        let block_hash = self.calculate_block_hash(block);
+        let target = self.calculate_target();
+        
+        block_hash < target
+    }
+
+    fn validate_transaction(&self, transaction: &Transaction) -> bool {
+        // 验证签名和余额
+        let from_balance = self.get_balance(&transaction.from);
+        from_balance >= transaction.value
+    }
+
+    fn process_transactions(&mut self, transactions: &[Transaction]) {
+        for transaction in transactions {
+            self.transfer(&transaction.from, &transaction.to, transaction.value);
+        }
+    }
+
+    fn calculate_block_hash(&self, block: &Block) -> Vec<u8> {
+        let mut hasher = Sha256::new();
+        hasher.update(&bincode::serialize(&block.header).unwrap());
+        hasher.finalize().to_vec()
+    }
+
+    fn calculate_target(&self) -> Vec<u8> {
+        // 简化的目标计算
+        vec![0; 32 - self.difficulty as usize]
+    }
+}
+
+// 挖矿
+pub fn mine_block(transactions: Vec<Transaction>, previous_hash: Vec<u8>, difficulty: u32) -> Block {
+    let mut nonce = 0u64;
+    let target = calculate_target(difficulty);
+    
+    loop {
+        let timestamp = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs();
+        
+        let header = BlockHeader {
+            previous_hash: previous_hash.clone(),
+            merkle_root: calculate_merkle_root(&transactions),
+            timestamp,
+            difficulty,
+            nonce,
+        };
+        
+        let block = Block {
+            header,
+            transactions: transactions.clone(),
+            merkle_root: calculate_merkle_root(&transactions),
+            timestamp,
+            nonce,
+        };
+        
+        let block_hash = calculate_block_hash(&block);
+        if block_hash < target {
+            return block;
         }
         
-        if !Self::is_valid_hash(&block.hash, self.difficulty) {
-            return false;
-        }
-        
-        if let Some(previous_block) = self.blocks.last() {
-            if block.header.previous_hash != previous_block.hash {
-                return false;
+        nonce += 1;
+    }
+}
+
+fn calculate_merkle_root(transactions: &[Transaction]) -> Vec<u8> {
+    if transactions.is_empty() {
+        return vec![0; 32];
+    }
+    
+    let mut hashes: Vec<Vec<u8>> = transactions
+        .iter()
+        .map(|tx| {
+            let mut hasher = Sha256::new();
+            hasher.update(&bincode::serialize(tx).unwrap());
+            hasher.finalize().to_vec()
+        })
+        .collect();
+    
+    while hashes.len() > 1 {
+        let mut new_hashes = Vec::new();
+        for chunk in hashes.chunks(2) {
+            let mut hasher = Sha256::new();
+            hasher.update(&chunk[0]);
+            if chunk.len() > 1 {
+                hasher.update(&chunk[1]);
+            } else {
+                hasher.update(&chunk[0]);
             }
+            new_hashes.push(hasher.finalize().to_vec());
         }
-        
-        true
+        hashes = new_hashes;
     }
     
-    fn add_transaction(&mut self, transaction: Transaction) {
-        self.pending_transactions.push(transaction);
-    }
-    
-    fn get_balance(&self, address: &str) -> u64 {
-        *self.accounts.get(address).unwrap_or(&0)
-    }
+    hashes[0].clone()
 }
 
-#[derive(Debug)]
-struct BlockchainNode {
-    blockchain: Blockchain,
-    peers: Vec<String>,
-    tx_sender: mpsc::Sender<Transaction>,
-    tx_receiver: mpsc::Receiver<Transaction>,
+fn calculate_block_hash(block: &Block) -> Vec<u8> {
+    let mut hasher = Sha256::new();
+    hasher.update(&bincode::serialize(&block.header).unwrap());
+    hasher.finalize().to_vec()
 }
 
-impl BlockchainNode {
-    fn new(difficulty: u32) -> Self {
-        let (tx_sender, tx_receiver) = mpsc::channel(100);
-        Self {
-            blockchain: Blockchain::new(difficulty),
-            peers: Vec::new(),
-            tx_sender,
-            tx_receiver,
-        }
-    }
-    
-    async fn start_mining(&mut self) {
-        loop {
-            if !self.blockchain.pending_transactions.is_empty() {
-                let transactions = self.blockchain.pending_transactions.drain(..).collect();
-                let new_block = self.blockchain.mine_block(transactions);
-                
-                if self.blockchain.add_block(new_block.clone()) {
-                    println!("Mined new block: {:?}", new_block.hash);
-                    self.broadcast_block(&new_block).await;
-                }
-            }
-            
-            tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
-        }
-    }
-    
-    async fn broadcast_block(&self, block: &Block) {
-        // 简化的区块广播
-        println!("Broadcasting block to {} peers", self.peers.len());
-    }
-    
-    async fn process_transactions(&mut self) {
-        while let Some(transaction) = self.tx_receiver.recv().await {
-            self.blockchain.add_transaction(transaction);
-        }
-    }
-    
-    fn add_peer(&mut self, peer: String) {
-        self.peers.push(peer);
-    }
-}
-
-// 使用示例
-#[tokio::main]
-async fn demo_blockchain() {
-    let mut node = BlockchainNode::new(4);
-    
-    // 添加一些交易
-    let transaction = Transaction {
-        tx_id: vec![1, 2, 3, 4],
-        inputs: vec![],
-        outputs: vec![TxOutput {
-            value: 100,
-            script_pub_key: vec![1, 2, 3],
-        }],
-        signature: vec![5, 6, 7, 8],
-    };
-    
-    let _ = node.tx_sender.send(transaction).await;
-    
-    // 启动挖矿和交易处理
-    let mining_handle = tokio::spawn(async move {
-        node.start_mining().await;
-    });
-    
-    println!("Blockchain node started");
+fn calculate_target(difficulty: u32) -> Vec<u8> {
+    vec![0; 32 - difficulty as usize]
 }
 ```
 
-### 智能合约虚拟机
+#### 3.2.2 智能合约
 
 ```rust
 use std::collections::HashMap;
-use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-enum Value {
-    Int(i64),
-    String(String),
-    Bool(bool),
-    Address(String),
-    Array(Vec<Value>),
+#[derive(Debug, Clone)]
+pub struct VMState {
+    pub program_counter: usize,
+    pub stack: Vec<Value>,
+    pub memory: HashMap<Vec<u8>, Vec<u8>>,
+    pub gas: u64,
+    pub accounts: HashMap<Vec<u8>, Account>,
 }
 
 #[derive(Debug, Clone)]
-struct SmartContract {
-    contract_id: String,
-    code: String,
-    state: HashMap<String, Value>,
-    balance: u64,
+pub enum Value {
+    Int(i64),
+    Address(Vec<u8>),
+    Bytes(Vec<u8>),
+    Bool(bool),
 }
 
-#[derive(Debug)]
-struct ContractVM {
-    contracts: HashMap<String, SmartContract>,
-    accounts: HashMap<String, u64>,
-    gas_used: u64,
-    gas_limit: u64,
+#[derive(Debug, Clone)]
+pub enum Instruction {
+    Push(Value),
+    Pop,
+    Add,
+    Sub,
+    Mul,
+    Div,
+    SStore(Vec<u8>, Value),
+    SLoad(Vec<u8>),
+    Call(Vec<u8>, u64, Vec<u8>),
+    Return,
 }
 
-impl ContractVM {
-    fn new(gas_limit: u64) -> Self {
+pub struct VirtualMachine {
+    pub state: VMState,
+}
+
+impl VirtualMachine {
+    pub fn new() -> Self {
         Self {
-            contracts: HashMap::new(),
-            accounts: HashMap::new(),
-            gas_used: 0,
-            gas_limit,
+            state: VMState {
+                program_counter: 0,
+                stack: Vec::new(),
+                memory: HashMap::new(),
+                gas: 1000000,
+                accounts: HashMap::new(),
+            },
         }
     }
-    
-    fn deploy_contract(&mut self, contract_id: String, code: String, initial_balance: u64) -> Result<(), String> {
-        if self.gas_used >= self.gas_limit {
-            return Err("Gas limit exceeded".to_string());
+
+    pub fn execute(&mut self, code: Vec<Instruction>) -> Result<Vec<u8>, String> {
+        while self.state.program_counter < code.len() {
+            let instruction = &code[self.state.program_counter];
+            self.step(instruction)?;
+            self.state.program_counter += 1;
         }
         
-        let contract = SmartContract {
-            contract_id: contract_id.clone(),
-            code,
-            state: HashMap::new(),
-            balance: initial_balance,
-        };
-        
-        self.contracts.insert(contract_id, contract);
-        self.gas_used += 1000; // 部署消耗的gas
+        // 返回栈顶值
+        if let Some(Value::Bytes(bytes)) = self.state.stack.last() {
+            Ok(bytes.clone())
+        } else {
+            Ok(vec![])
+        }
+    }
+
+    fn step(&mut self, instruction: &Instruction) -> Result<(), String> {
+        match instruction {
+            Instruction::Push(value) => {
+                self.state.stack.push(value.clone());
+                self.consume_gas(3);
+            }
+            
+            Instruction::Pop => {
+                self.state.stack.pop().ok_or("Stack underflow")?;
+                self.consume_gas(2);
+            }
+            
+            Instruction::Add => {
+                let b = self.state.stack.pop().ok_or("Stack underflow")?;
+                let a = self.state.stack.pop().ok_or("Stack underflow")?;
+                
+                match (a, b) {
+                    (Value::Int(a), Value::Int(b)) => {
+                        self.state.stack.push(Value::Int(a + b));
+                    }
+                    _ => return Err("Invalid types for ADD".to_string()),
+                }
+                self.consume_gas(3);
+            }
+            
+            Instruction::SStore(key, value) => {
+                let bytes = self.serialize_value(value);
+                self.state.memory.insert(key.clone(), bytes);
+                self.consume_gas(20000);
+            }
+            
+            Instruction::SLoad(key) => {
+                let value = self.state.memory.get(key).cloned().unwrap_or_default();
+                self.state.stack.push(Value::Bytes(value));
+                self.consume_gas(200);
+            }
+            
+            Instruction::Call(address, value, data) => {
+                // 简化的调用实现
+                self.consume_gas(21000);
+            }
+            
+            Instruction::Return => {
+                self.consume_gas(0);
+            }
+            
+            _ => return Err("Unsupported instruction".to_string()),
+        }
         
         Ok(())
     }
-    
-    fn call_contract(&mut self, contract_id: &str, function_name: &str, args: Vec<Value>) -> Result<Value, String> {
-        if self.gas_used >= self.gas_limit {
-            return Err("Gas limit exceeded".to_string());
+
+    fn consume_gas(&mut self, amount: u64) {
+        if self.state.gas < amount {
+            panic!("Out of gas");
         }
-        
-        let contract = self.contracts.get_mut(contract_id)
-            .ok_or("Contract not found")?;
-        
-        let result = self.execute_function(contract, function_name, args)?;
-        self.gas_used += 100; // 函数调用消耗的gas
-        
-        Ok(result)
+        self.state.gas -= amount;
     }
-    
-    fn execute_function(&self, contract: &mut SmartContract, function_name: &str, args: Vec<Value>) -> Result<Value, String> {
-        match function_name {
-            "transfer" => self.execute_transfer(contract, args),
-            "getBalance" => self.execute_get_balance(contract, args),
-            "setValue" => self.execute_set_value(contract, args),
-            "getValue" => self.execute_get_value(contract, args),
-            _ => Err("Unknown function".to_string()),
+
+    fn serialize_value(&self, value: &Value) -> Vec<u8> {
+        match value {
+            Value::Int(i) => i.to_le_bytes().to_vec(),
+            Value::Address(addr) => addr.clone(),
+            Value::Bytes(bytes) => bytes.clone(),
+            Value::Bool(b) => vec![if *b { 1 } else { 0 }],
         }
-    }
-    
-    fn execute_transfer(&self, contract: &mut SmartContract, args: Vec<Value>) -> Result<Value, String> {
-        if args.len() != 2 {
-            return Err("Transfer requires 2 arguments".to_string());
-        }
-        
-        let (to, amount) = match (&args[0], &args[1]) {
-            (Value::Address(to), Value::Int(amount)) => (to.clone(), *amount as u64),
-            _ => return Err("Invalid arguments for transfer".to_string()),
-        };
-        
-        if amount > contract.balance {
-            return Ok(Value::Bool(false));
-        }
-        
-        contract.balance -= amount;
-        Ok(Value::Bool(true))
-    }
-    
-    fn execute_get_balance(&self, contract: &SmartContract, _args: Vec<Value>) -> Result<Value, String> {
-        Ok(Value::Int(contract.balance as i64))
-    }
-    
-    fn execute_set_value(&self, contract: &mut SmartContract, args: Vec<Value>) -> Result<Value, String> {
-        if args.len() != 2 {
-            return Err("SetValue requires 2 arguments".to_string());
-        }
-        
-        let (key, value) = match (&args[0], &args[1]) {
-            (Value::String(key), value) => (key.clone(), value.clone()),
-            _ => return Err("Invalid arguments for setValue".to_string()),
-        };
-        
-        contract.state.insert(key, value);
-        Ok(Value::Bool(true))
-    }
-    
-    fn execute_get_value(&self, contract: &SmartContract, args: Vec<Value>) -> Result<Value, String> {
-        if args.len() != 1 {
-            return Err("GetValue requires 1 argument".to_string());
-        }
-        
-        let key = match &args[0] {
-            Value::String(key) => key,
-            _ => return Err("Invalid argument for getValue".to_string()),
-        };
-        
-        Ok(contract.state.get(key).cloned().unwrap_or(Value::String("".to_string())))
-    }
-    
-    fn get_contract_state(&self, contract_id: &str) -> Option<&HashMap<String, Value>> {
-        self.contracts.get(contract_id).map(|c| &c.state)
     }
 }
 
-// 使用示例
-fn demo_smart_contract() {
-    let mut vm = ContractVM::new(1000000);
-    
-    // 部署代币合约
-    let contract_code = "ERC20 Token Contract".to_string();
-    vm.deploy_contract("TOKEN001".to_string(), contract_code, 1000000).unwrap();
-    
-    // 调用转账函数
-    let transfer_args = vec![
-        Value::Address("0x123".to_string()),
-        Value::Int(100),
-    ];
-    let transfer_result = vm.call_contract("TOKEN001", "transfer", transfer_args).unwrap();
-    println!("Transfer result: {:?}", transfer_result);
-    
-    // 获取余额
-    let balance_result = vm.call_contract("TOKEN001", "getBalance", vec![]).unwrap();
-    println!("Balance: {:?}", balance_result);
-    
-    // 设置和获取状态
-    let set_args = vec![
-        Value::String("owner".to_string()),
-        Value::Address("0x456".to_string()),
-    ];
-    vm.call_contract("TOKEN001", "setValue", set_args).unwrap();
-    
-    let get_args = vec![Value::String("owner".to_string())];
-    let owner = vm.call_contract("TOKEN001", "getValue", get_args).unwrap();
-    println!("Owner: {:?}", owner);
+// 智能合约示例
+pub struct ERC20Contract {
+    pub name: String,
+    pub symbol: String,
+    pub decimals: u8,
+    pub total_supply: u64,
+    pub balances: HashMap<Vec<u8>, u64>,
+    pub allowances: HashMap<(Vec<u8>, Vec<u8>), u64>,
+}
+
+impl ERC20Contract {
+    pub fn new(name: String, symbol: String, decimals: u8, total_supply: u64) -> Self {
+        let mut balances = HashMap::new();
+        balances.insert(vec![0; 20], total_supply); // 初始供应给合约创建者
+        
+        Self {
+            name,
+            symbol,
+            decimals,
+            total_supply,
+            balances,
+            allowances: HashMap::new(),
+        }
+    }
+
+    pub fn transfer(&mut self, from: Vec<u8>, to: Vec<u8>, amount: u64) -> bool {
+        let from_balance = self.balances.get(&from).unwrap_or(&0);
+        if *from_balance >= amount {
+            *self.balances.entry(from).or_insert(0) -= amount;
+            *self.balances.entry(to).or_insert(0) += amount;
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn approve(&mut self, owner: Vec<u8>, spender: Vec<u8>, amount: u64) -> bool {
+        self.allowances.insert((owner, spender), amount);
+        true
+    }
+
+    pub fn transfer_from(&mut self, spender: Vec<u8>, from: Vec<u8>, to: Vec<u8>, amount: u64) -> bool {
+        let allowance = self.allowances.get(&(from.clone(), spender)).unwrap_or(&0);
+        let from_balance = self.balances.get(&from).unwrap_or(&0);
+        
+        if *allowance >= amount && *from_balance >= amount {
+            *self.allowances.entry((from.clone(), spender)).or_insert(0) -= amount;
+            *self.balances.entry(from).or_insert(0) -= amount;
+            *self.balances.entry(to).or_insert(0) += amount;
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn balance_of(&self, address: &[u8]) -> u64 {
+        *self.balances.get(address).unwrap_or(&0)
+    }
 }
 ```
 
-## Lean实现
+### 3.3 Lean实现
 
-### 形式化区块链模型
+#### 3.3.1 形式化区块链模型
 
 ```lean
--- 区块头
-structure BlockHeader where
-  version : Nat
-  previousHash : List Nat
-  merkleRoot : List Nat
-  timestamp : Nat
-  difficulty : Nat
-  nonce : Nat
-  deriving Repr
+-- 区块链的形式化定义
+structure Blockchain where
+  blocks : List Block
+  consensus : ConsensusMechanism
+  network : NetworkConfig
 
--- 区块
+-- 区块的形式化定义
 structure Block where
   header : BlockHeader
   transactions : List Transaction
-  hash : List Nat
-  deriving Repr
+  merkleRoot : Hash
+  timestamp : Nat
+  nonce : Nat
+
+-- 区块头
+structure BlockHeader where
+  previousHash : Hash
+  merkleRoot : Hash
+  timestamp : Nat
+  difficulty : Nat
+  nonce : Nat
 
 -- 交易
 structure Transaction where
-  txId : List Nat
-  inputs : List TxInput
-  outputs : List TxOutput
-  signature : List Nat
-  deriving Repr
+  from : Address
+  to : Address
+  value : Wei
+  data : List Nat
+  nonce : Nat
+  gasPrice : Wei
+  gasLimit : Nat
+  signature : Signature
 
--- 交易输入
-structure TxInput where
-  previousTxId : List Nat
-  outputIndex : Nat
-  scriptSig : List Nat
-  deriving Repr
+-- 区块链不变量
+def blockchainInvariant (bc : Blockchain) : Prop :=
+  bc.blocks.length > 0 ∧
+  ∀ block ∈ bc.blocks, blockInvariant block ∧
+  ∀ i, i < bc.blocks.length - 1 →
+    (bc.blocks.get i).header.hash = (bc.blocks.get (i + 1)).header.previousHash
 
--- 交易输出
-structure TxOutput where
-  value : Nat
-  scriptPubKey : List Nat
-  deriving Repr
+-- 区块不变量
+def blockInvariant (block : Block) : Prop :=
+  block.timestamp > 0 ∧
+  block.merkleRoot = calculateMerkleRoot block.transactions ∧
+  validateProofOfWork block
 
--- 区块链
-structure Blockchain where
-  blocks : List Block
-  pendingTransactions : List Transaction
-  difficulty : Nat
-  deriving Repr
+-- 工作量证明验证
+def validateProofOfWork (block : Block) : Prop :=
+  let target := calculateTarget block.header.difficulty
+  block.header.hash < target
 
--- 计算区块哈希
-def calculateBlockHash (header : BlockHeader) : List Nat :=
-  -- 简化的哈希计算
-  header.version :: header.previousHash ++ header.merkleRoot ++ [header.timestamp, header.difficulty, header.nonce]
-
--- 创建创世区块
-def createGenesisBlock : Block :=
-  let header := BlockHeader.mk 1 [] [] 0 4 0
-  Block.mk header [] (calculateBlockHash header)
-
--- 创建新区块
-def createNewBlock (blockchain : Blockchain) (transactions : List Transaction) (nonce : Nat) : Block :=
-  let previousBlock := blockchain.blocks.head?.getD createGenesisBlock
-  let header := BlockHeader.mk 1 previousBlock.hash (calculateMerkleRoot transactions) 0 blockchain.difficulty nonce
-  Block.mk header transactions (calculateBlockHash header)
-
--- 计算默克尔根
-def calculateMerkleRoot (transactions : List Transaction) : List Nat :=
+-- 默克尔根计算
+def calculateMerkleRoot (transactions : List Transaction) : Hash :=
   match transactions with
-  | [] => []
-  | [tx] => tx.txId
+  | [] => emptyHash
+  | [tx] => hashTransaction tx
   | txs => 
-    let hashes := txs.map (λ tx => tx.txId)
+    let hashes := txs.map hashTransaction
     let paired := pairHashes hashes
     calculateMerkleRoot paired
 
--- 配对哈希
-def pairHashes (hashes : List (List Nat)) : List (List Nat) :=
+-- 哈希配对
+def pairHashes (hashes : List Hash) : List Hash :=
   match hashes with
   | [] => []
   | [h] => [h]
-  | h1 :: h2 :: rest => (h1 ++ h2) :: pairHashes rest
+  | h1 :: h2 :: rest => hash (h1 ++ h2) :: pairHashes rest
 
--- 工作量证明
-def proofOfWork (blockchain : Blockchain) (transactions : List Transaction) : Block :=
-  let target := List.replicate blockchain.difficulty 0
-  let findValidBlock (nonce : Nat) : Block :=
-    let block := createNewBlock blockchain transactions nonce
-    let blockHash := block.hash
-    if List.take blockchain.difficulty blockHash = target then block else findValidBlock (nonce + 1)
-  findValidBlock 0
+-- 区块链正确性证明
+theorem blockchainCorrectness (bc : Blockchain) :
+  blockchainInvariant bc →
+  ∀ block ∈ bc.blocks, blockInvariant block := by
+  -- 证明区块链的正确性
 
--- 验证区块
-def validateBlock (previousBlock : Block) (currentBlock : Block) : Bool :=
-  let expectedHash := calculateBlockHash currentBlock.header
-  let actualHash := currentBlock.hash
-  let correctHash := expectedHash = actualHash
-  let correctPrevious := currentBlock.header.previousHash = previousBlock.hash
-  let validProof := validateProofOfWork currentBlock
-  correctHash ∧ correctPrevious ∧ validProof
-
--- 验证工作量证明
-def validateProofOfWork (block : Block) : Bool :=
-  let blockHash := block.hash
-  let target := List.replicate block.header.difficulty 0
-  List.take block.header.difficulty blockHash = target
-
--- 智能合约
+-- 智能合约的形式化定义
 structure SmartContract where
-  contractId : String
-  code : String
-  state : List (String × Value)
-  balance : Nat
-  deriving Repr
+  address : Address
+  code : List Instruction
+  storage : Map StorageKey StorageValue
+  balance : Wei
 
--- 合约值
-inductive Value
-| Int : Nat → Value
-| String : String → Value
-| Bool : Bool → Value
-| Address : String → Value
-deriving Repr
+-- 虚拟机状态
+structure VMState where
+  programCounter : Nat
+  stack : List Value
+  memory : Map Nat (List Nat)
+  gas : Nat
+  accounts : Map Address Account
 
--- 合约执行环境
-structure ContractEnv where
-  contracts : List (String × SmartContract)
-  accounts : List (String × Nat)
-  gasUsed : Nat
-  gasLimit : Nat
-  deriving Repr
-
--- 创建合约
-def createContract (contractId : String) (code : String) (env : ContractEnv) : ContractEnv :=
-  let contract := SmartContract.mk contractId code [] 0
-  { env with contracts := (contractId, contract) :: env.contracts }
-
--- 调用合约函数
-def callContract (contractId : String) (functionName : String) (args : List Value) (env : ContractEnv) : Option (Value × ContractEnv) :=
-  let contract := env.contracts.find? (λ (id, _) => id = contractId)
-  match contract with
-  | some (_, contract) =>
-    let result := executeFunction contract functionName args
-    match result with
-    | some (newContract, returnValue) =>
-      let updatedContracts := env.contracts.map (λ (id, c) => if id = contractId then (id, newContract) else (id, c))
-      some (returnValue, { env with contracts := updatedContracts })
+-- 虚拟机执行
+def executeVM (code : List Instruction) (initialState : VMState) : Option VMState :=
+  match code with
+  | [] => some initialState
+  | instruction :: rest =>
+    match executeInstruction instruction initialState with
+    | some newState => executeVM rest newState
     | none => none
-  | none => none
 
--- 执行合约函数
-def executeFunction (contract : SmartContract) (functionName : String) (args : List Value) : Option (SmartContract × Value) :=
-  match functionName with
-  | "transfer" => executeTransfer contract args
-  | "getBalance" => executeGetBalance contract args
-  | "setValue" => executeSetValue contract args
-  | "getValue" => executeGetValue contract args
-  | _ => none
+-- 指令执行
+def executeInstruction (instruction : Instruction) (state : VMState) : Option VMState :=
+  match instruction with
+  | Instruction.push value =>
+    some { state with stack := value :: state.stack }
+  | Instruction.pop =>
+    match state.stack with
+    | _ :: rest => some { state with stack := rest }
+    | [] => none
+  | Instruction.add =>
+    match state.stack with
+    | v2 :: v1 :: rest =>
+      some { state with stack := (v1 + v2) :: rest }
+    | _ => none
+  | Instruction.sstore key value =>
+    let newMemory := state.memory.insert key value
+    some { state with memory := newMemory }
+  | Instruction.sload key =>
+    let value := state.memory.find key
+    some { state with stack := value :: state.stack }
 
--- 执行转账
-def executeTransfer (contract : SmartContract) (args : List Value) : Option (SmartContract × Value) :=
-  match args with
-  | [Value.Address to, Value.Int amount] =>
-    if amount ≤ contract.balance then
-      some ({ contract with balance := contract.balance - amount }, Value.Bool true)
-    else
-      some (contract, Value.Bool false)
-  | _ => none
-
--- 执行获取余额
-def executeGetBalance (contract : SmartContract) (args : List Value) : Option (SmartContract × Value) :=
-  some (contract, Value.Int contract.balance)
-
--- 执行设置值
-def executeSetValue (contract : SmartContract) (args : List Value) : Option (SmartContract × Value) :=
-  match args with
-  | [Value.String key, value] =>
-    let newState := (key, value) :: contract.state
-    some ({ contract with state := newState }, Value.Bool true)
-  | _ => none
-
--- 执行获取值
-def executeGetValue (contract : SmartContract) (args : List Value) : Option (SmartContract × Value) :=
-  match args with
-  | [Value.String key] =>
-    let value := contract.state.find? (λ (k, _) => k = key) |>.map (λ (_, v) => v) |>.getD (Value.String "")
-    some (contract, value)
-  | _ => none
-
--- 使用示例
-def demoBlockchain : IO Unit := do
-  let genesisBlock := createGenesisBlock
-  let blockchain := Blockchain.mk [genesisBlock] [] 4
-  
-  IO.println s!"Genesis block created: {genesisBlock}"
-  IO.println s!"Blockchain initialized with difficulty: {blockchain.difficulty}"
-
-def demoSmartContract : IO Unit := do
-  let env := ContractEnv.mk [] [] 0 1000000
-  let env' := createContract "TOKEN001" "ERC20 Token Contract" env
-  
-  let transferArgs := [Value.Address "0x123", Value.Int 100]
-  let result := callContract "TOKEN001" "transfer" transferArgs env'
-  
-  match result with
-  | some (value, _) => IO.println s!"Transfer result: {value}"
-  | none => IO.println "Transfer failed"
+-- 智能合约正确性
+theorem smartContractCorrectness (contract : SmartContract) (input : List Nat) :
+  let result := executeContract contract input
+  result.isSome → contractInvariant contract := by
+  -- 证明智能合约的正确性
 ```
 
-### 形式化验证
+## 4. 工程实践
 
-```lean
--- 区块链不变量
-def blockchainInvariant (blockchain : Blockchain) : Prop :=
-  blockchain.difficulty > 0 ∧
-  blockchain.blocks.all (λ block => block.header.difficulty = blockchain.difficulty)
+### 4.1 区块链开发框架
 
--- 区块验证性质
-theorem block_validation_property (previousBlock : Block) (currentBlock : Block) :
-  validateBlock previousBlock currentBlock → 
-  currentBlock.header.previousHash = previousBlock.hash := by
-  simp [validateBlock]
-  -- 证明区块验证的正确性
+```haskell
+-- 区块链开发框架
+data BlockchainFramework = BlockchainFramework
+  { node :: BlockchainNode
+  , wallet :: WalletManager
+  , explorer :: BlockchainExplorer
+  , api :: BlockchainAPI
+  }
 
--- 工作量证明性质
-theorem proof_of_work_property (blockchain : Blockchain) (transactions : List Transaction) :
-  let block := proofOfWork blockchain transactions
-  validateProofOfWork block := by
-  simp [proofOfWork, validateProofOfWork]
-  -- 证明工作量证明的有效性
+-- 区块链节点
+data BlockchainNode = BlockchainNode
+  { peers :: [Peer]
+  , mempool :: Mempool
+  , chain :: Blockchain
+  , consensus :: ConsensusEngine
+  }
 
--- 智能合约不变量
-def contractInvariant (contract : SmartContract) : Prop :=
-  contract.contractId.length > 0 ∧
-  contract.code.length > 0
+-- 钱包管理器
+data WalletManager = WalletManager
+  { accounts :: [Account]
+  , keyStore :: KeyStore
+  , transactionBuilder :: TransactionBuilder
+  }
 
--- 合约执行性质
-theorem contract_execution_property (contract : SmartContract) (functionName : String) (args : List Value) :
-  let result := executeFunction contract functionName args
-  match result with
-  | some (newContract, _) => contractInvariant newContract
-  | none => true := by
-  simp [executeFunction, contractInvariant]
-  -- 证明合约执行保持不变量
-
--- 使用示例
-def demoFormalVerification : IO Unit := do
-  let blockchain := Blockchain.mk [] [] 4
-  
-  if blockchainInvariant blockchain then
-    IO.println "Blockchain invariant satisfied"
-    let genesisBlock := createGenesisBlock
-    let updatedBlockchain := { blockchain with blocks := [genesisBlock] }
-    IO.println s!"Updated blockchain: {updatedBlockchain}"
-  else
-    IO.println "Blockchain invariant violated"
+-- 区块链浏览器
+data BlockchainExplorer = BlockchainExplorer
+  { indexer :: ChainIndexer
+  , search :: SearchEngine
+  , analytics :: AnalyticsEngine
+  }
 ```
 
-## 工程与形式化对比
+### 4.2 DeFi协议
 
-| 维度 | Haskell | Rust | Lean |
-|------|---------|------|------|
-| 类型安全 | 强类型系统 | 所有权系统 | 依赖类型 |
-| 性能 | 中等 | 高 | 中等 |
-| 并发支持 | STM/Async | 多线程/异步 | 有限支持 |
-| 形式化验证 | QuickCheck | 有限验证 | 完整证明 |
-| 区块链生态 | 有限 | 丰富 | 有限 |
+```haskell
+-- DeFi协议接口
+class DeFiProtocol protocol where
+  deposit :: protocol -> Address -> Wei -> IO TransactionResult
+  withdraw :: protocol -> Address -> Wei -> IO TransactionResult
+  swap :: protocol -> Token -> Token -> Wei -> IO TransactionResult
+  getAPY :: protocol -> IO Double
 
-## 最佳实践
+-- 借贷协议
+data LendingProtocol = LendingProtocol
+  { reserves :: Map Token Reserve
+  , users :: Map Address User
+  , interestRateModel :: InterestRateModel
+  }
 
-### 1. 安全性
-- 密码学验证
-- 智能合约审计
-- 攻击防护
-- 密钥管理
+-- 流动性协议
+data LiquidityProtocol = LiquidityProtocol
+  { pools :: Map PoolId Pool
+  , fees :: FeeStructure
+  , governance :: GovernanceToken
+  }
+```
 
-### 2. 性能优化
-- 共识算法优化
-- 网络同步
-- 存储优化
-- 计算优化
+### 4.3 NFT和元数据
 
-### 3. 可扩展性
-- 分片技术
-- 侧链机制
-- 跨链协议
-- 二层解决方案
+```haskell
+-- NFT合约
+data NFTContract = NFTContract
+  { tokens :: Map TokenId Token
+  , metadata :: Map TokenId Metadata
+  , royalties :: Map TokenId Royalty
+  }
 
-### 4. 治理机制
-- 去中心化治理
-- 提案投票
-- 升级机制
-- 争议解决
+-- 元数据标准
+data Metadata = Metadata
+  { name :: Text
+  , description :: Text
+  , image :: URI
+  , attributes :: [Attribute]
+  , externalUrl :: Maybe URI
+  }
+```
 
-## 应用场景
+## 5. 行业应用
 
-- **金融应用**：DeFi、支付、借贷、保险
-- **数字资产**：NFT、代币、数字收藏品
-- **供应链**：溯源、认证、透明化
-- **身份认证**：去中心化身份、隐私保护
-- **游戏娱乐**：区块链游戏、虚拟资产
+### 5.1 金融应用
 
-## 总结
+- **DeFi**: 去中心化金融、借贷、交易、衍生品
+- **支付**: 跨境支付、微支付、稳定币
+- **资产代币化**: 房地产、艺术品、证券代币化
 
-区块链与Web3技术需要高安全性、高可靠性和高性能的系统。Haskell适合智能合约和形式化验证，Rust适合区块链核心和性能关键部分，Lean适合关键算法的形式化证明。实际应用中应根据具体需求选择合适的技术栈，并注重安全性、可扩展性和治理机制。 
+### 5.2 供应链管理
+
+- **溯源**: 产品溯源、质量追踪、防伪验证
+- **物流**: 运输跟踪、库存管理、自动化结算
+- **合规**: 监管报告、审计追踪、合规证明
+
+### 5.3 身份和认证
+
+- **DID**: 去中心化身份、自主身份管理
+- **认证**: 零知识证明、隐私保护认证
+- **授权**: 基于属性的访问控制、权限管理
+
+## 6. 最佳实践
+
+### 6.1 安全实践
+
+```haskell
+-- 安全最佳实践
+data SecurityBestPractice = 
+  | FormalVerification
+  | PenetrationTesting
+  | CodeAudit
+  | MultiSigWallets
+  | TimeLocks
+  | CircuitBreakers
+
+-- 智能合约安全
+data ContractSecurity = ContractSecurity
+  { reentrancyProtection :: Bool
+  , overflowProtection :: Bool
+  , accessControl :: AccessControl
+  , emergencyStop :: Bool
+  }
+```
+
+### 6.2 性能优化
+
+```haskell
+-- 性能优化策略
+data PerformanceOptimization = 
+  | Layer2Scaling
+  | Sharding
+  | StateChannels
+  | Rollups
+  | Sidechains
+
+-- 扩展性解决方案
+data ScalingSolution = ScalingSolution
+  { type :: ScalingType
+  , throughput :: Int
+  , latency :: Time
+  , security :: SecurityLevel
+  }
+```
+
+## 7. 未来趋势
+
+### 7.1 技术发展
+
+- **Layer 2**: 二层扩展、状态通道、侧链
+- **跨链**: 跨链桥、原子交换、互操作性
+- **隐私**: 零知识证明、同态加密、隐私计算
+
+### 7.2 应用发展
+
+- **Web3**: 去中心化应用、DAO治理、元宇宙
+- **AI集成**: AI驱动的DeFi、智能合约优化
+- **绿色区块链**: 环保共识机制、碳足迹追踪
+
+## 8. 总结
+
+区块链和Web3技术正在重塑数字世界的基础设施，通过多语言实现和形式化验证，可以构建更加安全、高效和可扩展的去中心化系统。未来的发展将更加注重可扩展性、互操作性和用户体验。
