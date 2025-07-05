@@ -1,14 +1,17 @@
 # Fork-Join模式（Fork-Join Pattern）
 
 ## 概述
+
 Fork-Join模式是一种并行编程模式，将任务分解为多个子任务并行执行，然后等待所有子任务完成后合并结果。
 
 ## 理论基础
+
 - **任务分解**：将大任务分解为可并行的小任务
 - **并行执行**：子任务在多个线程/进程中并行执行
 - **结果合并**：等待所有子任务完成后合并结果
 
 ## Rust实现示例
+
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -233,6 +236,7 @@ fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Parallel
 import Control.Parallel.Strategies
@@ -345,6 +349,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 -- Fork-Join框架
 structure ForkJoin (α β : Type) where
@@ -393,12 +398,14 @@ def executeRecursiveForkJoin (rfj : RecursiveForkJoin α β) (inputs : List α) 
 ```
 
 ## 应用场景
+
 - 并行排序算法
 - 矩阵运算
 - 图像处理
 - 分治算法
 
 ## 最佳实践
+
 - 合理选择任务粒度
 - 避免过度并行化
 - 实现负载均衡
