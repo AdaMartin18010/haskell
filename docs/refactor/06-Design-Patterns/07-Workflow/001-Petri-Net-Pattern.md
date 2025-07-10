@@ -1,15 +1,18 @@
 # Petri网模式（Petri Net Pattern）
 
 ## 概述
+
 Petri网模式是一种工作流设计模式，使用Petri网理论来建模和执行业务流程，通过库所（Place）和变迁（Transition）来描述系统的状态和转换。
 
 ## 理论基础
+
 - **库所（Place）**：表示系统状态
 - **变迁（Transition）**：表示状态转换
 - **令牌（Token）**：表示资源或条件
 - **点火（Firing）**：执行变迁的条件
 
 ## Rust实现示例
+
 ```rust
 use std::collections::{HashMap, HashSet};
 use std::sync::{Arc, Mutex};
@@ -511,4 +514,4 @@ async fn main() {
     } else {
         println!("Petri网不是活的");
     }
-} 
+}

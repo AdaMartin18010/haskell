@@ -1,15 +1,18 @@
 # 状态机模式（State Machine Pattern）
 
 ## 概述
+
 状态机模式是一种工作流设计模式，通过定义有限状态和状态转换来建模复杂的工作流程，每个状态都有特定的行为和转换条件。
 
 ## 理论基础
+
 - **状态（State）**：系统在某一时刻的配置
 - **事件（Event）**：触发状态转换的输入
 - **转换（Transition）**：从一个状态到另一个状态的映射
 - **动作（Action）**：状态转换时执行的操作
 
 ## Rust实现示例
+
 ```rust
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
@@ -465,6 +468,7 @@ async fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -813,6 +817,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 -- 状态枚举
 inductive OrderState where
@@ -1058,12 +1063,14 @@ def getAllMachines (manager : StateMachineManager) : List StateMachine :=
 ```
 
 ## 应用场景
+
 - 业务流程管理
 - 订单处理系统
 - 工作流引擎
 - 游戏状态管理
 
 ## 最佳实践
+
 - 合理设计状态和事件
 - 实现状态持久化
 - 添加状态验证

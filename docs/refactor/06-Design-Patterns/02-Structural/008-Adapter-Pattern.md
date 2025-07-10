@@ -1,4 +1,5 @@
-## Rust异步适配器实现
+# Rust异步适配器实现
+
 ```rust
 use async_trait::async_trait;
 
@@ -27,6 +28,7 @@ impl AsyncTarget for AsyncAdapter {
 ```
 
 ## Haskell异步适配器实现
+
 ```haskell
 class AsyncTarget a where
     asyncRequest :: a -> IO String
@@ -41,6 +43,7 @@ instance AsyncTarget AsyncAdapter where
 ```
 
 ## Lean异步适配器实现思路
+
 ```lean
 class AsyncTarget (α : Type) where
   asyncRequest : α → IO String
@@ -58,6 +61,7 @@ instance : AsyncTarget AsyncAdapter where
 ```
 
 ## 配置驱动适配器实现（Rust示例）
+
 ```rust
 use std::collections::HashMap;
 
@@ -84,11 +88,13 @@ impl ConfigurableTarget for ConfigurableAdapter {
 ```
 
 ## 最佳实践
+
 - 明确适配目标和适配方式
 - 控制适配层级，避免过度嵌套
 - 结合依赖注入和配置管理提升灵活性
 
 ## 性能考虑
+
 - 避免适配器链过长导致性能损耗
 - 异步适配器需关注并发安全
-- 配置驱动适配器需优化配置解析 
+- 配置驱动适配器需优化配置解析
