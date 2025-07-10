@@ -3,21 +3,26 @@
 ## 1. 理论基础
 
 ### 1.1 模式定义
+
 代理模式是一种结构型设计模式，为其他对象提供一种代理以控制对这个对象的访问。代理模式在访问对象时引入一定程度的间接性，根据不同的目的，代理模式有多种变体。
 
 ### 1.2 核心概念
+
 - **Subject（抽象主题）**: 定义真实主题和代理主题的共同接口
 - **RealSubject（真实主题）**: 实现抽象主题，定义代理所代表的真实对象
 - **Proxy（代理）**: 实现抽象主题，维护对真实主题的引用，控制对真实主题的访问
 - **Client（客户端）**: 使用代理对象访问真实主题
 
 ### 1.3 设计原则
+
 - **单一职责**: 代理只负责访问控制，真实主题只负责业务逻辑
 - **开闭原则**: 支持扩展新的代理类型
 - **依赖倒置**: 客户端依赖抽象而非具体实现
 
 ### 1.4 优缺点分析
+
 **优点：**
+
 - 控制对对象的访问
 - 支持远程访问
 - 实现延迟加载
@@ -25,6 +30,7 @@
 - 支持缓存和优化
 
 **缺点：**
+
 - 增加系统复杂性
 - 可能影响性能
 - 代理层可能成为瓶颈
@@ -33,6 +39,7 @@
 ## 2. 接口设计
 
 ### 2.1 核心接口
+
 ```haskell
 -- Haskell接口设计
 class Subject a where
@@ -48,6 +55,7 @@ class (Subject a) => Proxy a where
 ```
 
 ### 2.2 扩展接口
+
 ```haskell
 -- 支持缓存的代理
 class (Proxy a) => CachedProxy a where
@@ -699,12 +707,14 @@ def main : IO Unit := do
 ## 4. 工程实践
 
 ### 4.1 设计考虑
+
 - **代理类型选择**: 根据需求选择合适的代理类型
 - **性能影响**: 考虑代理层对性能的影响
 - **错误处理**: 处理代理可能出现的异常
 - **线程安全**: 确保多线程环境下的安全性
 
 ### 4.2 实现模式
+
 ```haskell
 -- 智能代理
 data SmartProxy = SmartProxy {
@@ -727,6 +737,7 @@ data LoggingProxy = LoggingProxy {
 ```
 
 ### 4.3 错误处理
+
 ```haskell
 -- 错误类型
 data ProxyError = 
@@ -746,11 +757,13 @@ safeProxyRequest proxy =
 ## 5. 性能优化
 
 ### 5.1 缓存策略
+
 - **LRU缓存**: 最近最少使用策略
 - **TTL缓存**: 基于时间的缓存过期
 - **分层缓存**: 多级缓存架构
 
 ### 5.2 连接池
+
 ```haskell
 -- 连接池代理
 data ConnectionPoolProxy = ConnectionPoolProxy {
@@ -769,6 +782,7 @@ manageConnection proxy = do
 ```
 
 ### 5.3 异步处理
+
 ```haskell
 -- 异步代理
 data AsyncProxy = AsyncProxy {
@@ -786,6 +800,7 @@ asyncRequest proxy message = do
 ## 6. 应用场景
 
 ### 6.1 远程代理
+
 ```haskell
 -- RPC代理
 data RPCProxy = RPCProxy {
@@ -803,6 +818,7 @@ remoteCall proxy method args = do
 ```
 
 ### 6.2 虚拟代理
+
 ```haskell
 -- 图片代理
 data ImageProxy = ImageProxy {
@@ -822,6 +838,7 @@ loadImage proxy = case realImage proxy of
 ```
 
 ### 6.3 保护代理
+
 ```haskell
 -- 权限代理
 data PermissionProxy = PermissionProxy {
@@ -837,6 +854,7 @@ checkPermission proxy operation =
 ```
 
 ### 6.4 缓存代理
+
 ```haskell
 -- 数据库代理
 data DatabaseProxy = DatabaseProxy {
@@ -860,12 +878,14 @@ cachedQuery proxy query = do
 ## 7. 最佳实践
 
 ### 7.1 设计原则
+
 - **透明性**: 客户端无需知道代理的存在
 - **职责分离**: 代理只负责控制访问，不处理业务逻辑
 - **性能考虑**: 避免代理成为性能瓶颈
 - **错误处理**: 妥善处理代理可能出现的异常
 
 ### 7.2 实现建议
+
 ```haskell
 -- 代理工厂
 class ProxyFactory a where
@@ -887,6 +907,7 @@ data ThreadSafeProxyManager = ThreadSafeProxyManager {
 ```
 
 ### 7.3 测试策略
+
 ```haskell
 -- 代理测试
 testProxy :: Proxy a => a -> Bool
@@ -904,6 +925,7 @@ benchmarkProxy proxy = do
 ```
 
 ### 7.4 扩展性考虑
+
 - **插件系统**: 支持动态加载新的代理类型
 - **序列化**: 支持代理的序列化和反序列化
 - **版本控制**: 支持代理接口的版本管理

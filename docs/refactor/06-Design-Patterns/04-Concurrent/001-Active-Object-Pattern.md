@@ -1,14 +1,17 @@
 # 主动对象模式（Active Object Pattern）
 
 ## 概述
+
 主动对象模式是一种并发设计模式，将方法调用与执行分离，每个主动对象都有自己的控制线程，方法调用被封装成请求对象并放入队列中异步执行。
 
 ## 理论基础
+
 - **方法调用与执行分离**：调用立即返回，执行异步进行
 - **请求队列**：使用队列管理待执行的请求
 - **调度器**：独立的调度线程处理请求
 
 ## Rust实现示例
+
 ```rust
 use std::collections::VecDeque;
 use std::sync::{Arc, Mutex, Condvar};
@@ -128,6 +131,7 @@ fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -219,6 +223,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 -- 请求类型类
 class Request (α : Type) where
@@ -269,13 +274,15 @@ def shutdown (activeObject : ActiveObject) : ActiveObject :=
 ```
 
 ## 应用场景
+
 - 异步任务处理
 - 消息队列系统
 - 事件驱动架构
 - 并发服务器
 
 ## 最佳实践
+
 - 合理控制队列大小
 - 实现请求优先级
 - 提供取消机制
-- 监控队列状态 
+- 监控队列状态

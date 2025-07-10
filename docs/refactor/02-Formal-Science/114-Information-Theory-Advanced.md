@@ -516,7 +516,7 @@ def channelCapacity (transitionMatrix : List (List Float)) : Float :=
 
 ## 最佳实践
 
-### 1. 熵计算
+### 1. *熵计算*
 
 - 处理零概率情况
 - 使用对数底数一致性

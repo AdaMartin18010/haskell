@@ -3,27 +3,33 @@
 ## 1. 理论基础
 
 ### 1.1 模式定义
+
 外观模式是一种结构型设计模式，为子系统中的一组接口提供一个统一的高层接口，使子系统更易使用。外观模式通过封装复杂子系统，简化客户端的调用，降低系统的耦合度。
 
 ### 1.2 核心概念
+
 - **Facade（外观）**: 为子系统提供一个统一的高层接口
 - **Subsystem（子系统）**: 实现子系统的功能，被外观对象调用
 - **Client（客户端）**: 通过外观对象访问子系统
 - **Complex Subsystem（复杂子系统）**: 包含多个相互依赖的类
 
 ### 1.3 设计原则
+
 - **单一职责**: 外观只负责简化接口，不处理业务逻辑
 - **开闭原则**: 支持扩展新的子系统
 - **依赖倒置**: 客户端依赖外观抽象而非具体子系统
 
 ### 1.4 优缺点分析
+
 **优点：**
+
 - 简化客户端调用
 - 降低系统耦合度
 - 提供统一接口
 - 易于维护和扩展
 
 **缺点：**
+
 - 可能成为"上帝对象"
 - 增加系统复杂性
 - 可能违反开闭原则
@@ -32,6 +38,7 @@
 ## 2. 接口设计
 
 ### 2.1 核心接口
+
 ```haskell
 -- Haskell接口设计
 class Facade a where
@@ -46,6 +53,7 @@ class Subsystem a where
 ```
 
 ### 2.2 扩展接口
+
 ```haskell
 -- 支持配置的外观
 class (Facade a) => ConfigurableFacade a where
@@ -819,12 +827,14 @@ def main : IO Unit := do
 ## 4. 工程实践
 
 ### 4.1 设计考虑
+
 - **接口简化**: 确保外观提供简洁的接口
 - **子系统封装**: 合理封装子系统复杂性
 - **错误处理**: 统一处理子系统错误
 - **性能优化**: 避免外观成为性能瓶颈
 
 ### 4.2 实现模式
+
 ```haskell
 -- 分层外观
 data LayeredFacade = LayeredFacade {
@@ -847,6 +857,7 @@ data CachedFacade = CachedFacade {
 ```
 
 ### 4.3 错误处理
+
 ```haskell
 -- 错误类型
 data FacadeError = 
@@ -866,11 +877,13 @@ safeFacadeOperation facade =
 ## 5. 性能优化
 
 ### 5.1 缓存策略
+
 - **结果缓存**: 缓存外观操作结果
 - **连接池**: 复用子系统连接
 - **异步处理**: 非阻塞子系统调用
 
 ### 5.2 负载均衡
+
 ```haskell
 -- 负载均衡外观
 data LoadBalancedFacade = LoadBalancedFacade {
@@ -882,6 +895,7 @@ data LoadBalancingStrategy = RoundRobin | LeastConnections | RandomChoice
 ```
 
 ### 5.3 监控和指标
+
 - **性能监控**: 监控外观操作性能
 - **错误统计**: 统计子系统错误
 - **资源使用**: 监控子系统资源使用
@@ -889,6 +903,7 @@ data LoadBalancingStrategy = RoundRobin | LeastConnections | RandomChoice
 ## 6. 应用场景
 
 ### 6.1 复杂子系统封装
+
 ```haskell
 -- 数据库外观
 data DatabaseFacade = DatabaseFacade {
@@ -916,6 +931,7 @@ executeQuery facade query = do
 ```
 
 ### 6.2 旧系统迁移
+
 ```haskell
 -- 遗留系统外观
 data LegacySystemFacade = LegacySystemFacade {
@@ -936,6 +952,7 @@ legacyOperation facade request = do
 ```
 
 ### 6.3 分层架构
+
 ```haskell
 -- 分层外观
 data LayeredArchitectureFacade = LayeredArchitectureFacade {
@@ -958,6 +975,7 @@ layeredOperation facade request = do
 ```
 
 ### 6.4 微服务网关
+
 ```haskell
 -- 微服务外观
 data MicroserviceFacade = MicroserviceFacade {
@@ -987,12 +1005,14 @@ callService facade request = do
 ## 7. 最佳实践
 
 ### 7.1 设计原则
+
 - **保持外观简单**: 避免外观成为"上帝对象"
 - **合理封装**: 只封装必要的复杂性
 - **接口稳定**: 确保外观接口的稳定性
 - **错误处理**: 统一处理子系统错误
 
 ### 7.2 实现建议
+
 ```haskell
 -- 外观工厂
 class FacadeFactory a where
@@ -1014,6 +1034,7 @@ data ThreadSafeFacadeManager = ThreadSafeFacadeManager {
 ```
 
 ### 7.3 测试策略
+
 ```haskell
 -- 外观测试
 testFacade :: Facade a => a -> Bool
@@ -1031,6 +1052,7 @@ benchmarkFacade facade = do
 ```
 
 ### 7.4 扩展性考虑
+
 - **插件系统**: 支持动态加载新的外观类型
 - **序列化**: 支持外观的序列化和反序列化
 - **版本控制**: 支持外观接口的版本管理

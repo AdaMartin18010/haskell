@@ -3,9 +3,11 @@
 ## 1. 理论基础
 
 ### 1.1 模式定义
+
 模板方法模式是一种行为型设计模式，定义一个算法的骨架，将一些步骤延迟到子类中实现。模板方法使得子类可以在不改变算法结构的情况下，重新定义算法的某些特定步骤。
 
 ### 1.2 核心概念
+
 - **AbstractClass（抽象类）**: 定义模板方法和抽象操作
 - **ConcreteClass（具体类）**: 实现抽象操作，提供具体行为
 - **Template Method（模板方法）**: 定义算法骨架，调用抽象操作
@@ -13,18 +15,22 @@
 - **Hook（钩子）**: 子类可选择重写的操作
 
 ### 1.3 设计原则
+
 - **开闭原则**: 对扩展开放，对修改封闭
 - **单一职责**: 每个类只负责算法的一个部分
 - **依赖倒置**: 高层模块不依赖低层模块
 
 ### 1.4 优缺点分析
+
 **优点：**
+
 - 代码复用，避免重复代码
 - 扩展性好，易于添加新的具体实现
 - 控制子类扩展，防止子类改变算法结构
 - 提供默认实现，减少子类负担
 
 **缺点：**
+
 - 可能违反里氏替换原则
 - 继承关系固定，不够灵活
 - 可能导致"继承地狱"
@@ -32,6 +38,7 @@
 ## 2. 接口设计
 
 ### 2.1 核心接口
+
 ```haskell
 -- Haskell接口设计
 class TemplateMethod a where
@@ -51,6 +58,7 @@ templateMethodDefault obj = do
 ```
 
 ### 2.2 扩展接口
+
 ```haskell
 -- 支持参数化模板方法
 class ParameterizedTemplate a b where
@@ -424,12 +432,14 @@ def main : IO Unit := do
 ## 4. 工程实践
 
 ### 4.1 设计考虑
+
 - **算法稳定性**: 确保模板方法的核心逻辑稳定
 - **扩展点设计**: 合理设计抽象操作和钩子
 - **性能影响**: 考虑虚函数调用的性能开销
 - **测试策略**: 设计可测试的模板方法
 
 ### 4.2 实现模式
+
 ```haskell
 -- 带配置的模板方法
 data ConfigurableTemplate config = ConfigurableTemplate {
@@ -451,6 +461,7 @@ data MonitoredTemplate metrics = MonitoredTemplate {
 ```
 
 ### 4.3 错误处理
+
 ```haskell
 -- 错误类型
 data TemplateError = 
@@ -469,11 +480,13 @@ safeTemplateMethod obj =
 ## 5. 性能优化
 
 ### 5.1 编译时优化
+
 - **内联优化**: 编译器内联简单操作
 - **常量折叠**: 编译时计算常量表达式
 - **死代码消除**: 移除未使用的代码路径
 
 ### 5.2 运行时优化
+
 ```haskell
 -- 缓存模板结果
 data CachedTemplate result = CachedTemplate {
@@ -489,6 +502,7 @@ data LazyTemplate = LazyTemplate {
 ```
 
 ### 5.3 内存优化
+
 - **对象池**: 复用模板对象
 - **智能指针**: 自动内存管理
 - **内存对齐**: 优化访问性能
@@ -496,6 +510,7 @@ data LazyTemplate = LazyTemplate {
 ## 6. 应用场景
 
 ### 6.1 框架开发
+
 ```haskell
 -- Web框架模板
 class WebFramework a where
@@ -515,6 +530,7 @@ handleRequestDefault framework request = do
 ```
 
 ### 6.2 算法框架
+
 ```haskell
 -- 排序算法模板
 class SortingAlgorithm a where
@@ -543,6 +559,7 @@ instance SortingAlgorithm QuickSort where
 ```
 
 ### 6.3 测试框架
+
 ```haskell
 -- 测试框架模板
 class TestFramework a where
@@ -561,6 +578,7 @@ runTestDefault framework testCase = do
 ```
 
 ### 6.4 构建系统
+
 ```haskell
 -- 构建系统模板
 class BuildSystem a where
@@ -581,12 +599,14 @@ buildDefault system project = do
 ## 7. 最佳实践
 
 ### 7.1 设计原则
+
 - **保持模板简单**: 避免复杂的条件逻辑
 - **提供扩展点**: 设计合理的抽象操作
 - **考虑性能影响**: 避免过度抽象
 - **实现文档化**: 清晰说明模板方法的行为
 
 ### 7.2 实现建议
+
 ```haskell
 -- 模板方法工厂
 class TemplateFactory a where
@@ -608,6 +628,7 @@ data ThreadSafeTemplateManager = ThreadSafeTemplateManager {
 ```
 
 ### 7.3 测试策略
+
 ```haskell
 -- 模板方法测试
 testTemplate :: TemplateMethod a => a -> Bool
@@ -625,6 +646,7 @@ benchmarkTemplate obj = do
 ```
 
 ### 7.4 扩展性考虑
+
 - **插件系统**: 支持动态加载新的模板方法
 - **序列化**: 支持模板方法的序列化
 - **版本控制**: 支持模板方法接口的版本管理

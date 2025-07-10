@@ -3,9 +3,11 @@
 ## 1. 理论基础
 
 ### 1.1 模式定义
+
 享元模式是一种结构型设计模式，通过共享技术有效支持大量细粒度对象的复用，节省内存和提升性能。享元模式将对象的状态分为内部状态（可共享）和外部状态（不可共享）。
 
 ### 1.2 核心概念
+
 - **Flyweight（享元）**: 包含内部状态的共享对象
 - **ConcreteFlyweight（具体享元）**: 实现享元接口，存储内部状态
 - **UnsharedConcreteFlyweight（非共享具体享元）**: 不能被共享的享元子类
@@ -13,18 +15,22 @@
 - **Client（客户端）**: 维护对享元的引用，计算或存储享元的外部状态
 
 ### 1.3 设计原则
+
 - **单一职责**: 享元只负责内部状态，客户端负责外部状态
 - **开闭原则**: 支持扩展新的享元类型
 - **最小知识原则**: 享元对象之间相互独立
 
 ### 1.4 优缺点分析
+
 **优点：**
+
 - 大幅减少内存使用
 - 提高系统性能
 - 支持大量对象
 - 对象复用效率高
 
 **缺点：**
+
 - 增加系统复杂性
 - 外部状态管理复杂
 - 可能影响线程安全
@@ -33,6 +39,7 @@
 ## 2. 接口设计
 
 ### 2.1 核心接口
+
 ```haskell
 -- Haskell接口设计
 class Flyweight a where
@@ -47,6 +54,7 @@ class FlyweightFactory a where
 ```
 
 ### 2.2 扩展接口
+
 ```haskell
 -- 支持缓存的享元
 class (Flyweight a) => CachedFlyweight a where
@@ -616,12 +624,14 @@ def main : IO Unit := do
 ## 4. 工程实践
 
 ### 4.1 设计考虑
+
 - **状态分离**: 明确区分内部状态和外部状态
 - **线程安全**: 确保享元工厂的线程安全
 - **内存管理**: 合理管理享元对象的生命周期
 - **性能优化**: 避免享元成为性能瓶颈
 
 ### 4.2 实现模式
+
 ```haskell
 -- 线程安全享元工厂
 data ThreadSafeFlyweightFactory = ThreadSafeFlyweightFactory {
@@ -643,6 +653,7 @@ data MonitoredFlyweight = MonitoredFlyweight {
 ```
 
 ### 4.3 错误处理
+
 ```haskell
 -- 错误类型
 data FlyweightError = 
@@ -661,11 +672,13 @@ safeGetFlyweight factory key =
 ## 5. 性能优化
 
 ### 5.1 内存优化
+
 - **对象池**: 复用享元对象
 - **弱引用**: 自动回收未使用的享元
 - **内存对齐**: 优化访问性能
 
 ### 5.2 缓存策略
+
 ```haskell
 -- LRU缓存享元
 data LRUFlyweightCache = LRUFlyweightCache {
@@ -681,6 +694,7 @@ data TTLFlyweightCache = TTLFlyweightCache {
 ```
 
 ### 5.3 并发优化
+
 - **读写锁**: 支持并发读取
 - **分片缓存**: 减少锁竞争
 - **异步加载**: 非阻塞享元创建
@@ -688,6 +702,7 @@ data TTLFlyweightCache = TTLFlyweightCache {
 ## 6. 应用场景
 
 ### 6.1 字符串常量池
+
 ```haskell
 -- 字符串享元
 data StringFlyweight = StringFlyweight {
@@ -716,6 +731,7 @@ getString factory content = do
 ```
 
 ### 6.2 图形对象复用
+
 ```haskell
 -- 图形享元
 data GraphicsFlyweight = GraphicsFlyweight {
@@ -745,6 +761,7 @@ getGraphics factory shapeType color style = do
 ```
 
 ### 6.3 数据库连接池
+
 ```haskell
 -- 连接享元
 data ConnectionFlyweight = ConnectionFlyweight {
@@ -782,6 +799,7 @@ getConnection pool connectionString = do
 ```
 
 ### 6.4 字体对象复用
+
 ```haskell
 -- 字体享元
 data FontFlyweight = FontFlyweight {
@@ -813,12 +831,14 @@ getFont factory name size style = do
 ## 7. 最佳实践
 
 ### 7.1 设计原则
+
 - **状态分离**: 明确区分内部状态和外部状态
 - **对象复用**: 最大化对象复用，减少内存使用
 - **线程安全**: 确保享元工厂的线程安全
 - **性能考虑**: 避免享元成为性能瓶颈
 
 ### 7.2 实现建议
+
 ```haskell
 -- 享元工厂
 class FlyweightFactory a where
@@ -840,6 +860,7 @@ data ThreadSafeFlyweightManager = ThreadSafeFlyweightManager {
 ```
 
 ### 7.3 测试策略
+
 ```haskell
 -- 享元测试
 testFlyweight :: Flyweight a => a -> Bool
@@ -857,6 +878,7 @@ benchmarkFlyweight flyweight = do
 ```
 
 ### 7.4 扩展性考虑
+
 - **插件系统**: 支持动态加载新的享元类型
 - **序列化**: 支持享元的序列化和反序列化
 - **版本控制**: 支持享元接口的版本管理

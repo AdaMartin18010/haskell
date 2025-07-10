@@ -3,9 +3,11 @@
 ## 1. 理论基础
 
 ### 1.1 模式定义
+
 屏障模式是一种并发设计模式，使多个线程在某个同步点等待，直到所有线程都到达后再继续执行。屏障模式常用于阶段性同步、并行计算和资源协调等场景。
 
 ### 1.2 核心概念
+
 - **Barrier（屏障）**: 同步点，所有线程必须到达后才能继续
 - **Participant（参与者）**: 参与同步的线程
 - **Phase（阶段）**: 屏障同步的阶段或轮次
@@ -13,19 +15,23 @@
 - **CountDownLatch（倒计时锁）**: 一次性屏障
 
 ### 1.3 设计原则
+
 - **同步性**: 确保所有线程在同步点等待
 - **公平性**: 避免线程饥饿
 - **可扩展性**: 支持动态调整参与者数量
 - **容错性**: 处理线程异常和超时
 
 ### 1.4 优缺点分析
+
 **优点：**
+
 - 实现精确的线程同步
 - 支持阶段性并行计算
 - 简化复杂的同步逻辑
 - 提高并行算法效率
 
 **缺点：**
+
 - 可能导致死锁
 - 性能开销较大
 - 调试困难
@@ -34,6 +40,7 @@
 ## 2. 接口设计
 
 ### 2.1 核心接口
+
 ```haskell
 -- Haskell接口设计
 class Barrier a where
@@ -50,6 +57,7 @@ class (Barrier a) => CyclicBarrier a where
 ```
 
 ### 2.2 扩展接口
+
 ```haskell
 -- 支持超时的屏障
 class (Barrier a) => TimeoutBarrier a where
@@ -755,12 +763,14 @@ def main : IO Unit := do
 ## 4. 工程实践
 
 ### 4.1 设计考虑
+
 - **同步精度**: 确保所有线程精确同步
 - **性能影响**: 最小化屏障对性能的影响
 - **错误处理**: 处理线程异常和超时
 - **可扩展性**: 支持动态调整参与者数量
 
 ### 4.2 实现模式
+
 ```haskell
 -- 自旋等待屏障
 data SpinBarrier = SpinBarrier {
@@ -782,6 +792,7 @@ data AdaptiveBarrier = AdaptiveBarrier {
 ```
 
 ### 4.3 错误处理
+
 ```haskell
 -- 错误类型
 data BarrierError = 
@@ -800,11 +811,13 @@ safeBarrierWait barrier =
 ## 5. 性能优化
 
 ### 5.1 自旋等待
+
 - **自适应自旋**: 根据系统负载调整自旋时间
 - **指数退避**: 避免过度消耗CPU
 - **缓存友好**: 优化内存访问模式
 
 ### 5.2 分层同步
+
 ```haskell
 -- 分层屏障优化
 data OptimizedBarrier = OptimizedBarrier {
@@ -825,6 +838,7 @@ hierarchicalSync barrier = do
 ```
 
 ### 5.3 动态调整
+
 - **参与者数量**: 根据系统负载动态调整
 - **超时时间**: 自适应超时设置
 - **同步策略**: 根据性能指标选择策略
@@ -832,6 +846,7 @@ hierarchicalSync barrier = do
 ## 6. 应用场景
 
 ### 6.1 并行算法
+
 ```haskell
 -- 并行排序屏障
 data ParallelSortBarrier = ParallelSortBarrier {
@@ -852,6 +867,7 @@ parallelSort sortBarrier = do
 ```
 
 ### 6.2 科学计算
+
 ```haskell
 -- 数值计算屏障
 data NumericalComputationBarrier = NumericalComputationBarrier {
@@ -875,6 +891,7 @@ stagedComputation compBarrier = do
 ```
 
 ### 6.3 批量任务
+
 ```haskell
 -- 批量处理屏障
 data BatchProcessingBarrier = BatchProcessingBarrier {
@@ -897,6 +914,7 @@ batchProcess batchBarrier tasks = do
 ```
 
 ### 6.4 多阶段流程
+
 ```haskell
 -- 多阶段流程屏障
 data MultiStageBarrier = MultiStageBarrier {
@@ -922,12 +940,14 @@ multiStageProcess multiBarrier input = do
 ## 7. 最佳实践
 
 ### 7.1 设计原则
+
 - **合理设置参与者数量**: 避免过多或过少的参与者
 - **避免死锁**: 确保所有线程都能到达屏障
 - **监控屏障状态**: 实时监控屏障的性能和状态
 - **实现超时机制**: 防止无限等待
 
 ### 7.2 实现建议
+
 ```haskell
 -- 屏障工厂
 class BarrierFactory a where
@@ -949,6 +969,7 @@ data ThreadSafeBarrierManager = ThreadSafeBarrierManager {
 ```
 
 ### 7.3 测试策略
+
 ```haskell
 -- 屏障测试
 testBarrier :: Barrier a => a -> Bool
@@ -966,6 +987,7 @@ benchmarkBarrier barrier = do
 ```
 
 ### 7.4 扩展性考虑
+
 - **插件系统**: 支持动态加载新的屏障类型
 - **序列化**: 支持屏障状态的序列化
 - **版本控制**: 支持屏障接口的版本管理
