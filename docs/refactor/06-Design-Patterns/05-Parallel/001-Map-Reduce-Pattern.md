@@ -1,14 +1,17 @@
 # Map-Reduce模式（Map-Reduce Pattern）
 
 ## 概述
+
 Map-Reduce模式是一种并行编程模式，将大规模数据处理分解为两个阶段：Map阶段将数据分解为键值对，Reduce阶段将相同键的值进行聚合处理。
 
 ## 理论基础
+
 - **数据并行**：将数据分割到多个处理单元
 - **函数式编程**：使用纯函数进行数据处理
 - **容错性**：支持节点失败和数据重新分配
 
 ## Rust实现示例
+
 ```rust
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
@@ -216,6 +219,7 @@ fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Parallel
 import Control.Parallel.Strategies
@@ -334,6 +338,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 -- Map函数类型
 def MapFunction (α κ ν : Type) := α → List (κ × ν)
@@ -406,13 +411,15 @@ def executeDistributedMR [Ord κ] (dmr : DistributedMapReduce α κ ν ρ) (data
 ```
 
 ## 应用场景
+
 - 大数据处理
 - 日志分析
 - 搜索引擎
 - 机器学习
 
 ## 最佳实践
+
 - 合理选择分片大小
 - 优化数据本地性
 - 实现容错机制
-- 监控处理进度 
+- 监控处理进度
