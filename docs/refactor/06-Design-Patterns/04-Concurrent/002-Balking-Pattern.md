@@ -1,14 +1,17 @@
 # 犹豫模式（Balking Pattern）
 
 ## 概述
+
 犹豫模式是一种并发设计模式，当对象处于不适当的状态时，立即返回而不执行操作。这种模式用于防止对象在不适当的状态下执行操作。
 
 ## 理论基础
+
 - **状态检查**：在执行操作前检查对象状态
 - **快速失败**：状态不当时立即返回
 - **状态保护**：防止对象在不适当状态下被操作
 
 ## Rust实现示例
+
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -117,6 +120,7 @@ fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -192,6 +196,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 inductive ObjectState where
   | Ready
@@ -228,13 +233,15 @@ def getState (object : BalkingObject) : ObjectState :=
 ```
 
 ## 应用场景
+
 - 资源池管理
 - 连接池控制
 - 服务状态管理
 - 缓存状态控制
 
 ## 最佳实践
+
 - 明确状态转换规则
 - 提供状态查询接口
 - 实现优雅关闭
-- 记录状态变化日志 
+- 记录状态变化日志
