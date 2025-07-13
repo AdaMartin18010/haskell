@@ -1,14 +1,17 @@
 # 双重检查锁定模式（Double-Checked Locking Pattern）
 
 ## 概述
+
 双重检查锁定模式是一种并发设计模式，用于减少获取锁的开销，通过两次检查来确保线程安全，同时避免不必要的同步开销。
 
 ## 理论基础
+
 - **延迟初始化**：只在需要时创建对象
 - **双重检查**：先无锁检查，再锁定检查
 - **内存屏障**：确保可见性和有序性
 
 ## Rust实现示例
+
 ```rust
 use std::sync::{Arc, Mutex, Once};
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -157,6 +160,7 @@ fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -250,6 +254,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 -- 单例结构
 structure Singleton where
@@ -293,13 +298,15 @@ def getInstanceSTM : IO Singleton := do
 ```
 
 ## 应用场景
+
 - 单例模式实现
 - 延迟初始化
 - 缓存管理
 - 连接池初始化
 
 ## 最佳实践
+
 - 确保内存屏障正确
 - 避免ABA问题
 - 考虑性能开销
-- 实现优雅关闭 
+- 实现优雅关闭

@@ -1,14 +1,17 @@
 # Future模式（Future Pattern）
 
 ## 概述
+
 Future模式是一种并发设计模式，用于表示异步计算的结果。Future对象代表一个可能还没有完成的计算结果，可以在计算完成后获取结果。
 
 ## 理论基础
+
 - **异步计算**：表示尚未完成的计算
 - **结果获取**：提供获取计算结果的方法
 - **状态管理**：管理计算的不同状态（进行中、完成、失败）
 
 ## Rust实现示例
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -170,6 +173,7 @@ async fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -304,6 +308,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 -- Future状态
 inductive FutureState (α : Type) where
@@ -353,12 +358,14 @@ def mapFuture (f : α → β) (future : Future α) : Future β :=
 ```
 
 ## 应用场景
+
 - 异步I/O操作
 - 并行计算
 - 网络请求处理
 - 数据库查询
 
 ## 最佳实践
+
 - 合理处理超时
 - 实现取消机制
 - 避免Future嵌套过深
