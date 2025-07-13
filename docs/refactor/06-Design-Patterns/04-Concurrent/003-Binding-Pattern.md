@@ -1,14 +1,17 @@
 # 绑定模式（Binding Pattern）
 
 ## 概述
+
 绑定模式是一种并发设计模式，用于将异步操作的结果绑定到后续操作，形成操作链。这种模式常用于处理异步编程中的依赖关系。
 
 ## 理论基础
+
 - **操作链**：将多个异步操作串联
 - **结果传递**：前一个操作的结果传递给下一个操作
 - **错误处理**：链式操作中的错误传播
 
 ## Rust实现示例
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -118,6 +121,7 @@ async fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Monad
 import Control.Concurrent
@@ -202,6 +206,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 -- 绑定类型类
 class Bindable (m : Type → Type) where
@@ -274,13 +279,15 @@ def bindingWithErrorHandling : Async (Sum AsyncError Nat) := do
 ```
 
 ## 应用场景
+
 - 异步数据处理管道
 - 网络请求链
 - 数据库操作序列
 - 文件处理流程
 
 ## 最佳实践
+
 - 保持操作链简洁
 - 统一错误处理
 - 支持操作取消
-- 实现超时机制 
+- 实现超时机制

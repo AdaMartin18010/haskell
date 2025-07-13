@@ -144,7 +144,7 @@ def singleton (create : IO α) : IO α :=
 
 ## 工厂模式
 
-### Haskell实现
+### Haskell实现1
 
 ```haskell
 -- 工厂模式
@@ -154,7 +154,7 @@ factory :: (String -> a) -> String -> a
 factory create name = create name
 ```
 
-### Rust实现
+### Rust实现1
 
 ```rust
 // 工厂模式
@@ -163,7 +163,7 @@ fn factory<T, F: Fn(&str) -> T>(create: F, name: &str) -> T {
 }
 ```
 
-### Lean实现
+### Lean实现1
 
 ```lean
 -- 工厂模式

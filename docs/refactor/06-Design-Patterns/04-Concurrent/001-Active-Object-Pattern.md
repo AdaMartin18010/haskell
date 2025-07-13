@@ -3,9 +3,11 @@
 ## 1. 理论基础
 
 ### 1.1 模式定义
+
 主动对象模式是一种并发设计模式，它将方法调用与执行分离。每个主动对象都有自己的控制线程，方法调用被封装成请求对象并放入队列中异步执行。这种模式实现了调用者与执行者的解耦，提高了系统的并发性和响应性。
 
 ### 1.2 形式化定义
+
 ```lean
 -- 主动对象模式的形式化定义
 inductive ActiveObjectPattern : Type
@@ -38,6 +40,7 @@ theorem active_object_thread_safety (ao : ActiveObject) :
 ```
 
 ### 1.3 语义模型
+
 ```haskell
 -- 主动对象模式的语义模型
 data ActiveObjectSemantics = ActiveObjectSemantics
@@ -75,12 +78,14 @@ validateActiveObject semantics =
 ## 2. 设计原则
 
 ### 2.1 核心原则
+
 1. **调用与执行分离**：方法调用立即返回，执行异步进行
 2. **请求队列管理**：使用线程安全的队列管理待执行请求
 3. **独立控制线程**：每个主动对象有自己的控制线程
 4. **异步响应机制**：支持Future/Promise模式获取执行结果
 
 ### 2.2 设计约束
+
 ```rust
 // 主动对象设计约束
 trait ActiveObjectConstraints {
@@ -103,6 +108,7 @@ trait ActiveObjectConstraints {
 ### 3.1 Rust实现
 
 #### 3.1.1 基础主动对象
+
 ```rust
 use std::collections::VecDeque;
 use std::sync::{Arc, Mutex, Condvar};
@@ -418,6 +424,7 @@ pub enum ActiveObjectError {
 ```
 
 #### 3.1.2 高级主动对象
+
 ```rust
 // 支持Future的主动对象
 use std::future::Future;
@@ -491,6 +498,7 @@ impl BatchActiveObject {
 ### 3.2 Haskell实现
 
 #### 3.2.1 函数式主动对象
+
 ```haskell
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE FlexibleContexts #-}
@@ -700,6 +708,7 @@ getMetrics activeObject = readIORef (objectMetrics activeObject)
 ```
 
 #### 3.2.2 高级Haskell实现
+
 ```haskell
 -- 支持Future的主动对象
 import Control.Concurrent.MVar
@@ -765,6 +774,7 @@ batchRequest batchObject requests = do
 ### 3.3 Lean实现
 
 #### 3.3.1 形式化主动对象
+
 ```lean
 import Lean.Data.HashMap
 import Lean.Data.Json
@@ -904,6 +914,7 @@ def shutdown (activeObject : ActiveObject) : IO Unit := do
 ## 4. 工程实践
 
 ### 4.1 架构设计
+
 ```rust
 // 主动对象架构设计
 pub mod active_object {
@@ -967,6 +978,7 @@ pub mod active_object {
 ```
 
 ### 4.2 配置管理
+
 ```rust
 use serde::{Deserialize, Serialize};
 use std::time::Duration;
@@ -1031,6 +1043,7 @@ impl Default for ActiveObjectConfig {
 ```
 
 ### 4.3 错误处理
+
 ```rust
 use thiserror::Error;
 
@@ -1084,6 +1097,7 @@ impl ActiveObjectError {
 ## 5. 性能优化
 
 ### 5.1 线程池优化
+
 ```rust
 use std::sync::Arc;
 use tokio::sync::Semaphore;
@@ -1178,6 +1192,7 @@ pub enum ThreadPoolError {
 ```
 
 ### 5.2 内存管理
+
 ```rust
 use std::alloc::{alloc, dealloc, Layout};
 use std::ptr::NonNull;
@@ -1233,6 +1248,7 @@ impl Drop for MemoryPool {
 ## 6. 应用场景
 
 ### 6.1 异步任务处理
+
 ```rust
 // 异步任务处理示例
 pub struct AsyncTaskProcessor {
@@ -1276,6 +1292,7 @@ pub enum TaskError {
 ```
 
 ### 6.2 消息队列系统
+
 ```rust
 // 消息队列系统示例
 pub struct MessageQueue {
@@ -1334,24 +1351,28 @@ pub enum MessageError {
 ## 7. 最佳实践
 
 ### 7.1 设计原则
+
 1. **单一职责**：每个主动对象只负责一种类型的任务
 2. **资源管理**：合理管理线程池和内存资源
 3. **错误处理**：实现完善的错误处理和恢复机制
 4. **监控指标**：建立完善的监控和指标收集
 
 ### 7.2 性能考虑
+
 1. **线程池调优**：根据负载调整线程池大小
 2. **内存优化**：使用对象池减少内存分配
 3. **队列管理**：实现优先级队列和背压机制
 4. **异步处理**：充分利用异步编程提高并发性能
 
 ### 7.3 错误处理
+
 1. **超时处理**：实现请求超时和重试机制
 2. **降级策略**：提供降级方案保证系统可用性
 3. **监控告警**：建立完善的监控和告警机制
 4. **日志记录**：记录关键操作和错误信息
 
 ### 7.4 安全考虑
+
 1. **输入验证**：验证所有输入数据
 2. **资源限制**：限制单个请求的资源使用
 3. **访问控制**：实现适当的访问控制机制
