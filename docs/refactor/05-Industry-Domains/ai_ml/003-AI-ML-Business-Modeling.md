@@ -132,7 +132,7 @@ pub struct ModelService { /* ... */ }
 
 > 本文档为AI/ML行业应用业务建模分层详解，后续将持续补充具体案例与形式化建模实践。
 
-# AI/ML业务建模（Business Modeling in AI/ML）
+## AI/ML业务建模（Business Modeling in AI/ML）
 
 ## 概述
 
