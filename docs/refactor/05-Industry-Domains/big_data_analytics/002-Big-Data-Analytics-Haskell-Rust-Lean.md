@@ -194,7 +194,7 @@ def distributed_stream_process {α β : Type}
 
 ## 机器学习算法
 
-### Haskell实现
+### Haskell实现1
 
 ```haskell
 -- 机器学习算法框架
@@ -258,7 +258,7 @@ trainKMeans data kmeans = do
     else trainKMeans data $ kmeans { centroids = newCentroids }
 ```
 
-### Rust实现
+### Rust实现1
 
 ```rust
 // 机器学习算法框架
@@ -338,7 +338,7 @@ impl KMeans {
 }
 ```
 
-### Lean实现
+### Lean实现1
 
 ```lean
 -- 机器学习算法框架
@@ -386,7 +386,7 @@ def train_kmeans
 
 ## 分布式计算
 
-### Haskell实现
+### Haskell实现2
 
 ```haskell
 -- 分布式计算框架
@@ -453,7 +453,7 @@ scheduleTask task scheduler = do
   return worker
 ```
 
-### Rust实现
+### Rust实现2
 
 ```rust
 // 分布式计算框架
@@ -539,7 +539,7 @@ impl TaskScheduler {
 }
 ```
 
-### Lean实现
+### Lean实现2
 
 ```lean
 -- 分布式计算框架

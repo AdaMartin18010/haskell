@@ -173,7 +173,7 @@ def factory {α : Type} (create : String → α) (name : String) : α :=
 
 ## 观察者模式
 
-### Haskell实现
+### Haskell实现2
 
 ```haskell
 -- 观察者模式
@@ -190,7 +190,7 @@ notify ref val = do
   mapM_ ($ val) callbacks
 ```
 
-### Rust实现
+### Rust实现2
 
 ```rust
 // 观察者模式
@@ -210,7 +210,7 @@ impl<T> Observer<T> {
 }
 ```
 
-### Lean实现
+### Lean实现2
 
 ```lean
 -- 观察者模式
@@ -226,7 +226,7 @@ def notify (obs : Observer α) (val : α) : IO Unit :=
 
 ## 策略模式
 
-### Haskell实现
+### Haskell实现3
 
 ```haskell
 -- 策略模式
@@ -236,7 +236,7 @@ strategy :: (a -> IO ()) -> a -> IO ()
 strategy exec val = exec val
 ```
 
-### Rust实现
+### Rust实现3
 
 ```rust
 // 策略模式
@@ -249,7 +249,7 @@ fn use_strategy<T>(strategy: &Strategy<T>, value: T) {
 }
 ```
 
-### Lean实现
+### Lean实现3
 
 ```lean
 -- 策略模式
@@ -259,7 +259,7 @@ def strategy {α : Type} (exec : α → IO Unit) (val : α) : IO Unit :=
 
 ## 装饰器模式
 
-### Haskell实现
+### Haskell实现4
 
 ```haskell
 -- 装饰器模式
@@ -269,7 +269,7 @@ decorator :: (a -> a) -> a -> a
 decorator decorate val = decorate val
 ```
 
-### Rust实现
+### Rust实现4
 
 ```rust
 // 装饰器模式
@@ -278,7 +278,7 @@ fn decorator<T, F: Fn(T) -> T>(decorate: F, value: T) -> T {
 }
 ```
 
-### Lean实现
+### Lean实现4
 
 ```lean
 -- 装饰器模式

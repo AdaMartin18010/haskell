@@ -165,7 +165,7 @@ def stm_example (tvar : IO.Ref Nat) : IO Unit :=
 
 ## 内存管理
 
-### Haskell实现
+### Haskell实现1
 
 ```haskell
 -- 内存管理
@@ -179,7 +179,7 @@ memoryPool :: Int -> IO (VU.Vector Int)
 memoryPool size = VU.thaw $ VU.replicate size 0
 ```
 
-### Rust实现
+### Rust实现1
 
 ```rust
 // 内存管理
@@ -192,7 +192,7 @@ fn arena_allocator() {
 }
 ```
 
-### Lean实现
+### Lean实现2
 
 ```lean
 -- 内存管理
@@ -202,7 +202,7 @@ def memory_pool (size : Nat) : IO (Array Nat) :=
 
 ## IO优化
 
-### Haskell实现
+### Haskell实现2
 
 ```haskell
 -- IO优化
@@ -215,7 +215,7 @@ bufferedRead :: FilePath -> IO String
 bufferedRead path = withFile path ReadMode hGetContents
 ```
 
-### Rust实现
+### Rust实现3
 
 ```rust
 // IO优化
@@ -231,7 +231,7 @@ fn buffered_read(path: &str) -> std::io::Result<String> {
 }
 ```
 
-### Lean实现
+### Lean实现3
 
 ```lean
 -- IO优化
@@ -241,7 +241,7 @@ def buffered_read (path : String) : IO String :=
 
 ## 数据结构与算法优化
 
-### Haskell实现
+### Haskell实现3
 
 ```haskell
 -- 数据结构与算法优化
@@ -254,7 +254,7 @@ vectorSum :: V.Vector Int -> Int
 vectorSum = V.sum
 ```
 
-### Rust实现
+### Rust实现4
 
 ```rust
 // 数据结构与算法优化
@@ -263,7 +263,7 @@ fn vector_sum(vec: &Vec<i32>) -> i32 {
 }
 ```
 
-### Lean实现
+### Lean实现4
 
 ```lean
 -- 数据结构与算法优化
