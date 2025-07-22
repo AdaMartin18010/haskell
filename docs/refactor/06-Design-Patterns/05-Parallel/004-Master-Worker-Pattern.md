@@ -1,14 +1,17 @@
 # Master-Worker模式（Master-Worker Pattern）
 
 ## 概述
+
 Master-Worker模式是一种并行设计模式，由一个Master节点负责任务分配和结果收集，多个Worker节点并行执行具体任务。
 
 ## 理论基础
+
 - **任务分配**：Master负责任务分解和分配
 - **并行执行**：Worker并行处理分配的任务
 - **结果收集**：Master收集和整合Worker的结果
 
 ## Rust实现示例
+
 ```rust
 use std::collections::VecDeque;
 use std::sync::{Arc, Mutex, Condvar};
@@ -287,6 +290,7 @@ fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -474,6 +478,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 -- 任务类型
 structure Task where
@@ -536,13 +541,15 @@ def generateTasks (count : Nat) : List Task :=
 ```
 
 ## 应用场景
+
 - 分布式计算
 - 图像渲染
 - 数据处理
 - 网络爬虫
 
 ## 最佳实践
+
 - 实现负载均衡
 - 处理Worker故障
 - 监控任务进度
-- 优化任务粒度 
+- 优化任务粒度

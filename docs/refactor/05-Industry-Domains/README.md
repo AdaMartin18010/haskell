@@ -91,13 +91,6 @@ impl OrderBook {
 }
 ```
 
-**应用场景**：
-
-- 支付系统
-- 投资组合管理
-- 保险理赔
-- 监管报告
-
 ### 🎮 游戏开发 (Game Development)
 
 **核心技术**：
@@ -725,3 +718,4 @@ sharedInfrastructure solution = Infrastructure
 - [Safety-Critical Systems in Rust](https://www.example.com)
 - [Formal Methods in Finance](https://www.example.com)
 - [Haskell in Production](https://www.example.com)
+- [电子商务](./05-Industry-Domains/ecommerce/) - 电子商务 📝

@@ -1,14 +1,17 @@
 # 数据并行模式（Data Parallel Pattern）
 
 ## 概述
+
 数据并行模式是一种并行编程模式，将相同操作应用于不同的数据元素，每个处理单元处理数据的一个子集。
 
 ## 理论基础
+
 - **数据分割**：将数据分割为多个子集
 - **并行处理**：每个子集在独立处理单元上并行处理
 - **结果合并**：将各处理单元的结果合并
 
 ## Rust实现示例
+
 ```rust
 use rayon::prelude::*;
 use std::collections::HashMap;
@@ -276,6 +279,7 @@ fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Parallel
 import Control.Parallel.Strategies
@@ -418,6 +422,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 -- 数据并行处理器
 structure DataParallelProcessor (α β : Type) where
@@ -482,13 +487,15 @@ def parallelVariance (data : List Double) : Double :=
 ```
 
 ## 应用场景
+
 - 大规模数据处理
 - 科学计算
 - 图像和视频处理
 - 机器学习算法
 
 ## 最佳实践
+
 - 合理选择数据分块大小
 - 避免数据竞争
 - 优化内存访问模式
-- 监控并行效率 
+- 监控并行效率

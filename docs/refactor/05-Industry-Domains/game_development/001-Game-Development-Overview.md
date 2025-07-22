@@ -394,7 +394,7 @@ dotProduct (Vector3 x1 y1 z1) (Vector3 x2 y2 z2) =
 
 ## Rust实现
 
-### 游戏引擎核心
+### 游戏引擎核心1
 
 ```rust
 use std::collections::HashMap;

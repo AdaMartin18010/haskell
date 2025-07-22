@@ -1,14 +1,17 @@
 # 分布式共识模式（Consensus Pattern）
 
 ## 概述
+
 分布式共识模式是一种分布式系统设计模式，确保在多个节点之间达成一致的状态或决策，即使在网络分区和节点故障的情况下也能保持一致性。
 
 ## 理论基础
+
 - **一致性**：所有节点最终达成相同状态
 - **可用性**：系统在部分节点故障时仍可提供服务
 - **分区容错性**：在网络分区时保持一致性
 
 ## Rust实现示例
+
 ```rust
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
@@ -382,6 +385,7 @@ async fn main() {
 ```
 
 ## Haskell实现示例
+
 ```haskell
 import Control.Concurrent
 import Control.Concurrent.STM
@@ -600,6 +604,7 @@ main = do
 ```
 
 ## Lean实现思路
+
 ```lean
 -- 节点状态
 inductive NodeState where
@@ -678,13 +683,15 @@ def propose (node : PaxosNode) (value : String) (peers : List Nat) : Sum String 
 ```
 
 ## 应用场景
+
 - 分布式数据库
 - 区块链系统
 - 分布式锁服务
 - 配置管理
 
 ## 最佳实践
+
 - 合理设置超时时间
 - 实现日志压缩
 - 优化网络通信
-- 监控节点状态 
+- 监控节点状态
