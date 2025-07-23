@@ -69,9 +69,9 @@ graph TD
 ```
 
 - **相关主题跳转**：
-  - [类型级自动化 Type-Level Automation](../27-Type-Level-Automation/01-Type-Level-Automation-in-Haskell.md)
-  - [类型级编程 Type-Level Programming](../12-Type-Level-Programming/01-Type-Level-Programming-in-Haskell.md)
-  - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
+  - [类型级自动化 Type-Level Automation](./01-Type-Level-Automation.md)
+  - [类型级编程 Type-Level Programming](./01-Type-Level-Programming.md)
+  - [类型安全 Type Safety](./01-Type-Safety.md)
 
 ---
 

@@ -5,63 +5,55 @@
 ## 1.1 类型级自动化简介（Introduction to Type-Level Automation）
 
 - **定义（Definition）**：
-  - **中文**：类型级自动化是指在类型系统层面自动推导、归约、约束求解和实例生成等机制，提升类型系统的表达力与自动化能力。Haskell通过类型族、类型类、GADT等机制支持类型级自动化。
-  - **English**: Type-level automation refers to mechanisms at the type system level for automatic inference, reduction, constraint solving, and instance generation, enhancing the expressiveness and automation of the type system. Haskell supports type-level automation via type families, type classes, GADTs, etc.
+  - **中文**：类型级自动化是指在类型系统层面自动推导、验证和生成类型属性、约束和结构的机制。Haskell通过类型族、类型类、GADT等机制支持类型级自动化。
+  - **English**: Type-level automation refers to mechanisms at the type system level for automatically inferring, verifying, and generating type properties, constraints, and structures. Haskell supports type-level automation via type families, type classes, GADTs, etc.
 
 - **Wiki风格国际化解释（Wiki-style Explanation）**：
-  - 类型级自动化极大提升了Haskell类型系统的泛型能力和工程效率，广泛用于自动推导、类型驱动代码生成和泛型库。
-  - Type-level automation greatly enhances the generic capability and engineering efficiency of Haskell's type system, widely used in automatic inference, type-driven code generation, and generic libraries.
+  - 类型级自动化极大提升了类型系统的表达力和自动推理能力，广泛用于泛型编程、约束求解和编译期验证。
+  - Type-level automation greatly enhances the expressiveness and automated reasoning capabilities of the type system, widely used in generic programming, constraint solving, and compile-time verification.
 
 ## 1.2 Haskell中的类型级自动化语法与语义（Syntax and Semantics of Type-Level Automation in Haskell）
 
-- **类型族与自动推导**
+- **类型族与自动化推理**
 
 ```haskell
-{-# LANGUAGE TypeFamilies, MultiParamTypeClasses, FlexibleInstances, UndecidableInstances #-}
-
-class AutoInstance a where
-  type Result a
-  auto :: a -> Result a
-
-instance AutoInstance Int where
-  type Result Int = Bool
-  auto n = n > 0
-
-instance AutoInstance Bool where
-  type Result Bool = Int
-  auto b = if b then 1 else 0
-```
-
-- **类型级约束自动传播**
-
-```haskell
-{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeFamilies, DataKinds, TypeOperators #-}
 
 type family And (a :: Bool) (b :: Bool) :: Bool where
   And 'True  'True  = 'True
   And _      _      = 'False
 ```
 
+- **类型类与自动化约束**
+
+```haskell
+class AutoShow a where
+  autoShow :: a -> String
+
+instance AutoShow Int where
+  autoShow = show
+```
+
 ## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
 - **类型级自动化与范畴论关系**
-  - 类型级自动化可视为范畴中的函子自动提升与结构归约。
+  - 类型级自动化可视为范畴中的自动推理与结构生成。
 
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
-| 自动推导 | 类型族/类型类 | `auto :: a -> Result a` | 类型级自动化 |
-| 约束求解 | 类型族 | `And a b` | 类型级逻辑 |
-| 实例生成 | 类型类 | `instance AutoInstance ...` | 自动实例 |
+| 自动推理 | 类型族 | `And a b` | 类型级自动推理 |
+| 自动约束 | 类型类 | `AutoShow a` | 类型级自动约束 |
+| 自动生成 | 类型族/类型类 | `autoShow` | 类型级自动生成 |
 
 ## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
 
-- **自动化一致性证明**
-  - **中文**：证明类型级自动化机制不会破坏类型系统一致性。
-  - **English**: Prove that type-level automation mechanisms preserve type system consistency.
+- **自动化推理一致性证明**
+  - **中文**：证明类型级自动化推理过程与类型系统一致。
+  - **English**: Prove that the type-level automation reasoning process is consistent with the type system.
 
-- **自动推导能力证明**
-  - **中文**：证明类型级自动化可自动推导复杂类型关系和实例。
-  - **English**: Prove that type-level automation can automatically infer complex type relations and instances.
+- **自动化能力证明**
+  - **中文**：证明类型级自动化可自动推导和生成复杂类型结构。
+  - **English**: Prove that type-level automation can automatically infer and generate complex type structures.
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -69,15 +61,15 @@ type family And (a :: Bool) (b :: Bool) :: Bool where
 
 ```mermaid
 graph TD
-  A[类型族 Type Family] --> B[类型级自动推导 Type-Level Inference]
-  B --> C[约束求解 Constraint Solving]
-  C --> D[实例生成 Instance Generation]
+  A[类型族自动推理 Type Family Automation] --> B[类型类自动约束 Typeclass Automation]
+  B --> C[自动生成结构 Automated Generation]
+  C --> D[类型安全 Type Safety]
 ```
 
 - **相关主题跳转**：
-  - [类型级编程 Type-Level Programming](../12-Type-Level-Programming/01-Type-Level-Programming-in-Haskell.md)
-  - [类型元编程 Type Metaprogramming](../18-Type-Metaprogramming/01-Type-Metaprogramming-in-Haskell.md)
-  - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
+  - [类型级推理 Type-Level Reasoning](./01-Type-Level-Reasoning.md)
+  - [类型级验证 Type-Level Verification](./01-Type-Level-Verification.md)
+  - [类型安全 Type Safety](./01-Type-Safety.md)
 
 ---
 
