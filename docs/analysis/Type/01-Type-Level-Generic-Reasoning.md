@@ -1,41 +1,39 @@
-# 01. 类型级泛型推理在Haskell中的理论与实践（Type-Level Generic Reasoning in Haskell）
+# 01. 类型级泛型推理（Type-Level Generic Reasoning in Haskell）
 
 > **中英双语核心定义 | Bilingual Core Definitions**
 
 ## 1.1 类型级泛型推理简介（Introduction to Type-Level Generic Reasoning）
 
 - **定义（Definition）**：
-  - **中文**：类型级泛型推理是指在类型系统层面对泛型数据结构和算法进行自动化推导、约束传播和结论生成。Haskell通过类型族、GADT、GHC.Generics等机制支持类型级泛型推理。
-  - **English**: Type-level generic reasoning refers to automated inference, constraint propagation, and conclusion generation for generic data structures and algorithms at the type system level. Haskell supports type-level generic reasoning via type families, GADTs, GHC.Generics, etc.
+  - **中文**：类型级泛型推理是指在类型系统层面自动推导泛型类型关系、约束和结论的机制，支持类型安全的自动化证明与类型级泛型编程。Haskell通过类型族、类型类、GADT等机制支持类型级泛型推理。
+  - **English**: Type-level generic reasoning refers to mechanisms at the type system level for automatically inferring generic type relations, constraints, and conclusions, supporting type-safe automated proofs and type-level generic programming in Haskell.
 
 - **Wiki风格国际化解释（Wiki-style Explanation）**：
-  - 类型级泛型推理极大提升了Haskell类型系统的自动化能力和泛型表达力，广泛用于泛型库、自动推导和类型安全推理。
-  - Type-level generic reasoning greatly enhances the automation and generic expressiveness of Haskell's type system, widely used in generic libraries, automatic inference, and type-safe reasoning.
+  - 类型级泛型推理极大提升了Haskell类型系统的自动化能力和表达力，广泛用于类型安全推导、约束求解和泛型库。
+  - Type-level generic reasoning greatly enhances the automation and expressiveness of Haskell's type system, widely used in type-safe inference, constraint solving, and generic libraries.
 
 ## 1.2 Haskell中的类型级泛型推理语法与语义（Syntax and Semantics of Type-Level Generic Reasoning in Haskell）
 
-- **GHC.Generics与类型级推理**
+- **类型族与推理链**
 
 ```haskell
-{-# LANGUAGE DeriveGeneric, TypeFamilies, GADTs #-}
-import GHC.Generics
+{-# LANGUAGE TypeFamilies, ConstraintKinds, TypeOperators, UndecidableInstances #-}
+import GHC.Exts (Constraint)
 
-data Tree a = Leaf a | Node (Tree a) (Tree a) deriving (Generic)
+type family Reason (a :: Constraint) (b :: Constraint) :: Constraint where
+  Reason a b = (a, b)
 
--- 类型级推理定义
-class GReasoning f where
-  greason :: f a -> r
-
-instance GReasoning U1 where
-  greason U1 = ...
+class (a ~ b, Show a) => ReasonConstraint a b
 ```
 
-- **类型族与自动推理**
+- **类型级自动化推理**
 
 ```haskell
-type family AllEq xs where
-  AllEq '[] = 'True
-  AllEq (x ': xs) = (x ~ x) && AllEq xs
+{-# LANGUAGE TypeFamilies #-}
+
+type family And (a :: Bool) (b :: Bool) :: Bool where
+  And 'True  'True  = 'True
+  And _      _      = 'False
 ```
 
 ## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
@@ -45,19 +43,19 @@ type family AllEq xs where
 
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
-| 泛型推理 | GHC.Generics | `greason` | 泛型推理方法 |
-| 自动推理 | 类型族 | `AllEq xs` | 类型级自动推理 |
-| 约束传播 | 类型类 | `GReasoning f` | 泛型约束传播 |
+| 推理链 | 类型族 | `Reason a b` | 类型级泛型约束链 |
+| 自动推理 | 类型族 | `And a b` | 类型级泛型自动化 |
+| 约束传播 | 类型类 | `ReasonConstraint a b` | 类型级泛型约束传播 |
 
 ## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
 
-- **泛型推理一致性证明**
+- **推理一致性证明**
   - **中文**：证明类型级泛型推理过程与类型系统一致。
   - **English**: Prove that the type-level generic reasoning process is consistent with the type system.
 
 - **自动推理能力证明**
-  - **中文**：证明类型级泛型推理可自动推导复杂泛型关系和结论。
-  - **English**: Prove that type-level generic reasoning can automatically infer complex generic relations and conclusions.
+  - **中文**：证明类型级泛型推理可自动推导复杂类型关系和结论。
+  - **English**: Prove that type-level generic reasoning can automatically infer complex type relations and conclusions.
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -65,15 +63,16 @@ type family AllEq xs where
 
 ```mermaid
 graph TD
-  A[GHC.Generics] --> B[泛型推理 GReasoning]
-  B --> C[自动推理 Type Family Inference]
+  A[类型族 Reason] --> B[推理链 Constraint Chain]
+  B --> C[自动推理 Automated Reasoning]
   C --> D[约束传播 Constraint Propagation]
 ```
 
 - **相关主题跳转**：
-  - [类型级泛型 Type-Level Generic](../24-Type-Level-Generic/01-Type-Level-Generic-in-Haskell.md)
-  - [类型级推理 Type-Level Reasoning](../29-Type-Level-Reasoning/01-Type-Level-Reasoning-in-Haskell.md)
-  - [类型安全 Type Safety](../01-Type-Safety-in-Haskell.md)
+  - [类型级泛型自动化 Type-Level Generic Automation](./01-Type-Level-Generic-Automation.md)
+  - [类型级泛型归纳 Type-Level Generic Induction](./01-Type-Level-Generic-Induction.md)
+  - [类型级泛型安全 Type-Level Generic Safety](./01-Type-Level-Generic-Safety.md)
+  - [类型安全 Type Safety](./01-Type-Safety.md)
 
 ---
 

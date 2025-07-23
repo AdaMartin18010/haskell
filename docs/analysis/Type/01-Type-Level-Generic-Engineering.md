@@ -1,65 +1,64 @@
-# 01. 类型级泛型工程实践在Haskell中的理论与实践（Type-Level Generic Engineering in Haskell）
+# 01. 类型级泛型工程实践（Type-Level Generic Engineering Practice in Haskell）
 
 > **中英双语核心定义 | Bilingual Core Definitions**
 
 ## 1.1 类型级泛型工程简介（Introduction to Type-Level Generic Engineering）
 
 - **定义（Definition）**：
-  - **中文**：类型级泛型工程实践是指在实际工程中利用类型级泛型技术实现高效、类型安全和可扩展的代码生成、库设计和自动化推理。Haskell通过类型族、GADT、GHC.Generics等机制支持类型级泛型工程。
-  - **English**: Type-level generic engineering refers to applying type-level generic techniques in real-world engineering to achieve efficient, type-safe, and extensible code generation, library design, and automated reasoning. Haskell supports type-level generic engineering via type families, GADTs, GHC.Generics, etc.
+  - **中文**：类型级泛型工程实践是指在Haskell类型系统层面，将类型级泛型编程、验证、自动化等理论应用于实际工程项目，提升代码安全性、可维护性和自动化能力。
+  - **English**: Type-level generic engineering practice refers to applying type-level generic programming, verification, automation, and related theories in real-world Haskell engineering projects to improve code safety, maintainability, and automation.
 
 - **Wiki风格国际化解释（Wiki-style Explanation）**：
-  - 类型级泛型工程极大提升了Haskell在大型系统、泛型库和自动化工具中的工程能力和可维护性。
-  - Type-level generic engineering greatly enhances Haskell's engineering capability and maintainability in large systems, generic libraries, and automation tools.
+  - 类型级泛型工程实践推动了类型驱动开发、自动化验证和高可靠性系统的落地。
+  - Type-level generic engineering practice drives type-driven development, automated verification, and the implementation of high-reliability systems.
 
-## 1.2 Haskell中的类型级泛型工程应用（Type-Level Generic Engineering Applications in Haskell）
+## 1.2 Haskell中的类型级泛型工程语法与语义（Syntax and Semantics of Type-Level Generic Engineering in Haskell）
 
-- **泛型代码生成与自动化推理**
-
-```haskell
-{-# LANGUAGE DeriveGeneric, TypeFamilies, GADTs #-}
-import GHC.Generics
-
-data Person = Person { name :: String, age :: Int } deriving (Generic)
-
--- 泛型自动推导
-class GAuto f where
-  gauto :: f a -> r
-
-instance GAuto U1 where
-  gauto U1 = ...
-```
-
-- **工程案例：类型安全的序列化库**
+- **类型驱动开发与工程结构**
 
 ```haskell
-class GSerialize f where
-  gserialize :: f a -> String
+{-# LANGUAGE DataKinds, TypeFamilies, GADTs #-}
 
-instance GSerialize U1 where
-  gserialize U1 = "U1"
+data Role = User | Admin
+
+type family CanEdit (r :: Role) :: Bool where
+  CanEdit 'Admin = 'True
+  CanEdit 'User  = 'False
+
+editResource :: (CanEdit r ~ 'True) => proxy r -> String -> String
+editResource _ content = "Edited: " ++ content
 ```
 
-## 1.3 工程应用与范畴论建模（Engineering Applications & Category-Theoretic Modeling）
+- **自动化验证与工程约束**
+
+```haskell
+class ValidConfig a where
+  validate :: a -> Bool
+
+instance ValidConfig Int where
+  validate x = x > 0
+```
+
+## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
 - **类型级泛型工程与范畴论关系**
-  - 类型级泛型工程可视为范畴中的自由代数结构与自动化工具。
+  - 类型级泛型工程可视为范畴中的结构约束与自动化映射。
 
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
-| 泛型自动化 | GHC.Generics | `gauto` | 泛型自动化 |
-| 工程应用 | 类型类 | `GSerialize` | 泛型工程实践 |
-| 自动推理 | 类型族 | `Replicate n a` | 类型级自动推理 |
+| 工程约束 | 类型族 | `CanEdit r` | 工程权限约束 |
+| 工程验证 | 类型类 | `ValidConfig a` | 工程配置验证 |
+| 工程操作 | 类型安全函数 | `editResource` | 工程安全操作 |
 
 ## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
 
-- **工程一致性与安全性证明**
-  - **中文**：证明类型级泛型工程机制在实际工程中保持类型安全和一致性。
-  - **English**: Prove that type-level generic engineering mechanisms maintain type safety and consistency in real-world engineering.
+- **工程约束一致性证明**
+  - **中文**：证明类型级泛型工程约束与实际工程需求一致。
+  - **English**: Prove that type-level generic engineering constraints are consistent with real-world engineering requirements.
 
-- **自动化能力证明**
-  - **中文**：证明类型级泛型工程可自动推导复杂工程关系和实例。
-  - **English**: Prove that type-level generic engineering can automatically infer complex engineering relations and instances.
+- **自动化验证能力证明**
+  - **中文**：证明类型级泛型自动化验证可提升工程安全性和可靠性。
+  - **English**: Prove that type-level generic automated verification can improve engineering safety and reliability.
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -67,16 +66,13 @@ instance GSerialize U1 where
 
 ```mermaid
 graph TD
-  A[GHC.Generics] --> B[泛型自动化 GAuto]
-  B --> C[工程应用 GSerialize]
-  C --> D[自动推理 Type Family Inference]
+  A[类型驱动开发 Type-Driven Development] --> B[工程约束 Engineering Constraint]
+  B --> C[自动化验证 Automated Verification]
+  C --> D[高可靠性 High Reliability]
 ```
 
 - **相关主题跳转**：
-  - [类型级泛型 Type-Level Generic](../24-Type-Level-Generic/01-Type-Level-Generic-in-Haskell.md)
-  - [类型级自动化 Type-Level Automation](../27-Type-Level-Automation/01-Type-Level-Automation-in-Haskell.md)
-  - [类型安全 Type Safety](../01-Type-Safety-in-Haskell.md)
-
----
-
-> 本文档为类型级泛型工程实践在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。
+  - [类型级泛型自动化 Type-Level Generic Automation](./01-Type-Level-Generic-Automation.md)
+  - [类型级泛型验证 Type-Level Generic Verification](./01-Type-Level-Generic-Verification.md)
+  - [类型级泛型安全 Type-Level Generic Safety](./01-Type-Level-Generic-Safety.md)
+  - [类型安全 Type Safety](./01-Type-Safety.md)

@@ -1,65 +1,70 @@
-# 01. 类型级泛型测试在Haskell中的理论与实践（Type-Level Generic Testing in Haskell）
+# 01. 类型级泛型测试（Type-Level Generic Testing in Haskell）
 
 > **中英双语核心定义 | Bilingual Core Definitions**
 
 ## 1.1 类型级泛型测试简介（Introduction to Type-Level Generic Testing）
 
 - **定义（Definition）**：
-  - **中文**：类型级泛型测试是指在类型系统层面对泛型数据结构和算法进行自动化测试、属性验证和安全性检查。Haskell通过类型族、GADT、GHC.Generics等机制支持类型级泛型测试。
-  - **English**: Type-level generic testing refers to automated testing, property verification, and safety checking for generic data structures and algorithms at the type system level. Haskell supports type-level generic testing via type families, GADTs, GHC.Generics, etc.
+  - **中文**：类型级泛型测试是指在类型系统层面对类型级泛型属性、约束和推理过程进行自动化测试和验证，确保类型安全和逻辑正确性。
+  - **English**: Type-level generic testing refers to automated testing and verification of type-level generic properties, constraints, and reasoning processes at the type system level, ensuring type safety and logical correctness.
 
 - **Wiki风格国际化解释（Wiki-style Explanation）**：
-  - 类型级泛型测试极大提升了Haskell泛型库的可靠性和工程质量，广泛用于自动化测试、属性验证和类型安全保障。
-  - Type-level generic testing greatly enhances the reliability and engineering quality of Haskell's generic libraries, widely used in automated testing, property verification, and type safety assurance.
+  - 类型级泛型测试是类型安全、自动化验证和工程可靠性的基础。
+  - Type-level generic testing is the foundation of type safety, automated verification, and engineering reliability.
 
 ## 1.2 Haskell中的类型级泛型测试语法与语义（Syntax and Semantics of Type-Level Generic Testing in Haskell）
 
-- **GHC.Generics与自动化测试**
+- **类型级泛型断言与测试结构**
 
 ```haskell
-{-# LANGUAGE DeriveGeneric, TypeFamilies, GADTs #-}
-import GHC.Generics
+{-# LANGUAGE DataKinds, TypeFamilies, TypeOperators, GADTs #-}
 
-data Tree a = Leaf a | Node (Tree a) (Tree a) deriving (Generic)
+type family Assert (cond :: Bool) :: Bool where
+  Assert 'True  = 'True
+  Assert 'False = TypeError ('Text "Type-level assertion failed")
 
--- 泛型测试定义
-class GTest f where
-  gtest :: f a -> Bool
+-- 示例：类型级泛型加法测试
 
-instance GTest U1 where
-  gtest U1 = True
+type family Add n m where
+  Add 0 m = m
+  Add n m = 1 + Add (n - 1) m
+
+-- 测试 Add 2 3 == 5
+assertAdd :: (Assert (Add 2 3 == 5) ~ 'True) => ()
+assertAdd = ()
 ```
 
-- **类型族与属性测试**
+- **GADT与类型级泛型测试用例**
 
 ```haskell
-type family AllTest xs where
-  AllTest '[] = 'True
-  AllTest (x ': xs) = (x ~ x) && AllTest xs
+data SNat (n :: Nat) where
+  SZ :: SNat 0
+  SS :: SNat n -> SNat (n + 1)
+
+testAdd :: SNat 2 -> SNat 3 -> SNat 5
+-- 省略具体实现
 ```
 
-## 1.3 工程案例与范畴论建模（Engineering Cases & Category-Theoretic Modeling）
+## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
-- **类型级泛型测试在工程中的应用**
-  - 泛型库自动化测试、属性验证、类型安全保障
-- **范畴论映射**
-  - 类型级泛型测试可视为范畴中的属性验证与结构保障
+- **类型级泛型测试与范畴论关系**
+  - 类型级泛型测试可视为范畴中的属性验证与结构一致性检查。
 
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
-| 泛型测试 | GHC.Generics | `gtest` | 泛型自动化测试 |
-| 属性测试 | 类型族 | `AllTest xs` | 类型级属性测试 |
-| 安全保障 | 类型类 | `GTest f` | 泛型安全保障 |
+| 断言 | 类型族 | `Assert cond` | 类型级泛型断言 |
+| 测试用例 | GADT | `testAdd` | 类型级泛型测试用例 |
+| 一致性检查 | 类型约束 | `Assert (Add 2 3 == 5)` | 类型级泛型一致性 |
 
 ## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
 
-- **测试正确性证明**
-  - **中文**：证明类型级泛型测试机制能检测所有属性和类型安全问题。
-  - **English**: Prove that the generic testing mechanism detects all properties and type safety issues.
+- **测试覆盖性证明**
+  - **中文**：证明类型级泛型测试覆盖所有关键属性和约束。
+  - **English**: Prove that type-level generic tests cover all key properties and constraints.
 
-- **工程一致性证明**
-  - **中文**：证明类型级泛型测试下的工程一致性和类型安全。
-  - **English**: Prove engineering consistency and type safety under type-level generic testing.
+- **一致性与安全性证明**
+  - **中文**：证明类型级泛型测试能保证类型系统一致性和安全性。
+  - **English**: Prove that type-level generic testing ensures type system consistency and safety.
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -67,15 +72,16 @@ type family AllTest xs where
 
 ```mermaid
 graph TD
-  A[GHC.Generics] --> B[泛型测试 GTest]
-  B --> C[属性测试 Type Family Test]
-  C --> D[安全保障 Safe Assurance]
+  A[类型级泛型断言 Type-Level Generic Assertion] --> B[类型级泛型测试用例 Type-Level Generic Test Case]
+  B --> C[一致性检查 Consistency Check]
+  C --> D[类型安全 Type Safety]
 ```
 
 - **相关主题跳转**：
-  - [类型级泛型 Type-Level Generic](../24-Type-Level-Generic/01-Type-Level-Generic-in-Haskell.md)
-  - [类型级泛型验证 Type-Level Generic Verification](../37-Type-Level-Generic-Verification/01-Type-Level-Generic-Verification-in-Haskell.md)
-  - [类型安全 Type Safety](../01-Type-Safety-in-Haskell.md)
+  - [类型级泛型验证 Type-Level Generic Verification](./01-Type-Level-Generic-Verification.md)
+  - [类型级泛型自动化 Type-Level Generic Automation](./01-Type-Level-Generic-Automation.md)
+  - [类型级泛型安全 Type-Level Generic Safety](./01-Type-Level-Generic-Safety.md)
+  - [类型安全 Type Safety](./01-Type-Safety.md)
 
 ---
 

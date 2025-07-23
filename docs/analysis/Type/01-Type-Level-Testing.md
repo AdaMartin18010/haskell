@@ -80,4 +80,4 @@ graph TD
 - **相关主题跳转**：
   - [类型级验证 Type-Level Verification](./01-Type-Level-Verification.md)
   - [类型级自动化 Type-Level Automation](./01-Type-Level-Automation.md)
-  - [类型安全 Type Safety](./01-Type-Safety.md) 
+  - [类型安全 Type Safety](./01-Type-Safety.md)

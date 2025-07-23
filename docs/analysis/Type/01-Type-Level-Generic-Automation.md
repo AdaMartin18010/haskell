@@ -1,63 +1,59 @@
-# 01. 类型级泛型自动化在Haskell中的理论与实践（Type-Level Generic Automation in Haskell）
+# 01. 类型级泛型自动化（Type-Level Generic Automation in Haskell）
 
 > **中英双语核心定义 | Bilingual Core Definitions**
 
 ## 1.1 类型级泛型自动化简介（Introduction to Type-Level Generic Automation）
 
 - **定义（Definition）**：
-  - **中文**：类型级泛型自动化是指在类型系统层面对泛型数据结构和算法进行自动推导、实例生成和约束求解。Haskell通过类型族、GADT、GHC.Generics等机制支持类型级泛型自动化。
-  - **English**: Type-level generic automation refers to automatic inference, instance generation, and constraint solving for generic data structures and algorithms at the type system level. Haskell supports type-level generic automation via type families, GADTs, GHC.Generics, etc.
+  - **中文**：类型级泛型自动化是指在类型系统层面自动推导、验证和生成泛型类型属性、约束和结构的机制。Haskell通过类型族、类型类、GADT等机制支持类型级泛型自动化。
+  - **English**: Type-level generic automation refers to mechanisms at the type system level for automatically inferring, verifying, and generating generic type properties, constraints, and structures. Haskell supports type-level generic automation via type families, type classes, GADTs, etc.
 
 - **Wiki风格国际化解释（Wiki-style Explanation）**：
-  - 类型级泛型自动化极大提升了Haskell类型系统的工程效率和泛型库的自动推导能力，广泛用于自动实例生成、类型驱动代码生成和泛型推理。
-  - Type-level generic automation greatly enhances the engineering efficiency and automatic inference capability of Haskell's type system and generic libraries, widely used in automatic instance generation, type-driven code generation, and generic reasoning.
+  - 类型级泛型自动化极大提升了类型系统的表达力和自动推理能力，广泛用于泛型编程、约束求解和编译期验证。
+  - Type-level generic automation greatly enhances the expressiveness and automated reasoning capabilities of the type system, widely used in generic programming, constraint solving, and compile-time verification.
 
 ## 1.2 Haskell中的类型级泛型自动化语法与语义（Syntax and Semantics of Type-Level Generic Automation in Haskell）
 
-- **GHC.Generics与自动实例生成**
+- **类型族与自动化推理**
 
 ```haskell
-{-# LANGUAGE DeriveGeneric, TypeFamilies, GADTs #-}
-import GHC.Generics
+{-# LANGUAGE TypeFamilies, DataKinds, TypeOperators #-}
 
-data Tree a = Leaf a | Node (Tree a) (Tree a) deriving (Generic)
-
--- 泛型自动化定义
-class GAuto f where
-  gauto :: f a -> r
-
-instance GAuto U1 where
-  gauto U1 = ...
+type family And (a :: Bool) (b :: Bool) :: Bool where
+  And 'True  'True  = 'True
+  And _      _      = 'False
 ```
 
-- **类型族与自动推导**
+- **类型类与自动化约束**
 
 ```haskell
-type family Replicate n a where
-  Replicate 0 a = '[]
-  Replicate n a = a ': Replicate (n-1) a
+class AutoShow a where
+  autoShow :: a -> String
+
+instance AutoShow Int where
+  autoShow = show
 ```
 
 ## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
 - **类型级泛型自动化与范畴论关系**
-  - 类型级泛型自动化可视为范畴中的自由代数结构与自动提升。
+  - 类型级泛型自动化可视为范畴中的自动推理与结构生成。
 
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
-| 自动实例生成 | GHC.Generics | `gauto` | 泛型自动化 |
-| 自动推导 | 类型族 | `Replicate n a` | 类型级自动推导 |
-| 约束求解 | 类型类 | `GAuto f` | 泛型约束求解 |
+| 自动推理 | 类型族 | `And a b` | 类型级泛型自动推理 |
+| 自动约束 | 类型类 | `AutoShow a` | 类型级泛型自动约束 |
+| 自动生成 | 类型族/类型类 | `autoShow` | 类型级泛型自动生成 |
 
 ## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
 
-- **自动化一致性证明**
-  - **中文**：证明类型级泛型自动化机制不会破坏类型系统一致性。
-  - **English**: Prove that type-level generic automation mechanisms preserve type system consistency.
+- **自动化推理一致性证明**
+  - **中文**：证明类型级泛型自动化推理过程与类型系统一致。
+  - **English**: Prove that the type-level generic automation reasoning process is consistent with the type system.
 
-- **自动推导能力证明**
-  - **中文**：证明类型级泛型自动化可自动推导复杂泛型关系和实例。
-  - **English**: Prove that type-level generic automation can automatically infer complex generic relations and instances.
+- **自动化能力证明**
+  - **中文**：证明类型级泛型自动化可自动推导和生成复杂类型结构。
+  - **English**: Prove that type-level generic automation can automatically infer and generate complex type structures.
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -65,15 +61,16 @@ type family Replicate n a where
 
 ```mermaid
 graph TD
-  A[GHC.Generics] --> B[自动实例生成 GAuto]
-  B --> C[自动推导 Type Family Inference]
-  C --> D[约束求解 Constraint Solving]
+  A[类型族自动推理 Type Family Automation] --> B[类型类自动约束 Typeclass Automation]
+  B --> C[自动生成结构 Automated Generation]
+  C --> D[类型安全 Type Safety]
 ```
 
 - **相关主题跳转**：
-  - [类型级泛型 Type-Level Generic](../24-Type-Level-Generic/01-Type-Level-Generic-in-Haskell.md)
-  - [类型级自动化 Type-Level Automation](../27-Type-Level-Automation/01-Type-Level-Automation-in-Haskell.md)
-  - [类型安全 Type Safety](../01-Type-Safety-in-Haskell.md)
+  - [类型级泛型推理 Type-Level Generic Reasoning](./01-Type-Level-Generic-Reasoning.md)
+  - [类型级泛型验证 Type-Level Generic Verification](./01-Type-Level-Generic-Verification.md)
+  - [类型级泛型安全 Type-Level Generic Safety](./01-Type-Level-Generic-Safety.md)
+  - [类型安全 Type Safety](./01-Type-Safety.md)
 
 ---
 
