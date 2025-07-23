@@ -1,66 +1,61 @@
-# 01. 类型级编程在Haskell中的理论与实践（Type-Level Programming in Haskell）
+# 01. 类型级编程（Type-Level Programming in Haskell）
 
 > **中英双语核心定义 | Bilingual Core Definitions**
 
 ## 1.1 类型级编程简介（Introduction to Type-Level Programming）
 
 - **定义（Definition）**：
-  - **中文**：类型级编程是指在类型系统层面进行计算和逻辑推理，Haskell通过类型族、GADT、类型类等机制支持类型级函数、类型级数据结构和类型级约束。
-  - **English**: Type-level programming refers to computation and logic reasoning at the type system level. Haskell supports type-level functions, data structures, and constraints via type families, GADTs, type classes, etc.
+  - **中文**：类型级编程是指在类型系统层面进行计算、推导和约束的编程范式。Haskell通过类型族、GADT、DataKinds等机制支持类型级编程。
+  - **English**: Type-level programming refers to the paradigm of computation, inference, and constraint at the type system level. Haskell supports type-level programming via type families, GADTs, DataKinds, etc.
 
 - **Wiki风格国际化解释（Wiki-style Explanation）**：
-  - 类型级编程极大提升了Haskell的类型安全和抽象能力，广泛用于泛型编程、类型安全API和编译期验证。
-  - Type-level programming greatly enhances Haskell's type safety and abstraction, widely used in generic programming, type-safe APIs, and compile-time verification.
+  - 类型级编程极大提升了类型系统的表达力和自动化能力。
+  - Type-level programming greatly enhances the expressiveness and automation of the type system.
 
 ## 1.2 Haskell中的类型级编程语法与语义（Syntax and Semantics of Type-Level Programming in Haskell）
 
-- **类型级自然数与数据结构（Type-Level Naturals and Data Structures）**
+- **类型族与类型级计算**
 
 ```haskell
-{-# LANGUAGE DataKinds, TypeFamilies, GADTs #-}
+{-# LANGUAGE TypeFamilies, DataKinds #-}
 
 data Nat = Z | S Nat
 
-data Vec a n where
-  VNil  :: Vec a 'Z
-  VCons :: a -> Vec a n -> Vec a ('S n)
-```
-
-- **类型级函数与类型族（Type-Level Functions and Type Families）**
-
-```haskell
 type family Add n m where
   Add 'Z     m = m
   Add ('S n) m = 'S (Add n m)
 ```
 
-- **类型级约束与编译期验证（Type-Level Constraints and Compile-Time Verification）**
+- **GADT与类型级结构**
 
 ```haskell
-class KnownNat n where
-  natVal :: proxy n -> Integer
+{-# LANGUAGE GADTs #-}
+
+data Vec n a where
+  VNil  :: Vec 'Z a
+  VCons :: a -> Vec n a -> Vec ('S n) a
 ```
 
 ## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
 - **类型级编程与范畴论关系**
-  - 类型级编程可视为类型范畴上的运算和约束。
+  - 类型级编程可视为范畴中的对象、函子与自然变换。
 
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
-| 类型级数据 | DataKinds/GADT | `data Nat = Z \| S Nat` | 类型级自然数 |
-| 类型级函数 | 类型族 | `type family Add n m` | 类型级加法 |
-| 类型级约束 | 类型类 | `class KnownNat n` | 编译期约束 |
+| 类型级计算 | 类型族 | `Add n m` | 类型级计算 |
+| 类型级结构 | GADT | `Vec n a` | 类型级结构 |
+| 类型级推导 | 类型族+GADT | `Add n m` | 类型级推导 |
 
 ## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
 
-- **类型级编程安全性证明**
-  - **中文**：证明类型级编程下的类型约束和运算在编译期得到保证。
-  - **English**: Prove that type-level constraints and computations are guaranteed at compile time in type-level programming.
+- **类型级计算正确性证明**
+  - **中文**：证明类型级计算的正确性和一致性。
+  - **English**: Prove the correctness and consistency of type-level computation.
 
-- **表达能力证明**
-  - **中文**：证明类型级编程可表达复杂的类型关系和编译期逻辑。
-  - **English**: Prove that type-level programming can express complex type relations and compile-time logic.
+- **类型级结构归纳证明**
+  - **中文**：通过归纳证明类型级结构的性质。
+  - **English**: Use induction to prove properties of type-level structures.
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -68,15 +63,14 @@ class KnownNat n where
 
 ```mermaid
 graph TD
-  A[类型级数据 Type-Level Data] --> B[类型级函数 Type-Level Function]
-  B --> C[类型级约束 Type-Level Constraint]
-  C --> D[编译期验证 Compile-Time Verification]
+  A[类型级计算 Type-Level Computation] --> B[类型级结构 Type-Level Structure]
+  B --> C[类型级推导 Type-Level Inference]
+  C --> D[类型级编程 Type-Level Programming]
 ```
 
 - **相关主题跳转**：
-  - [类型族 Type Family](./01-Type-Family.md)
-  - [依赖类型 Dependent Type](./01-Dependent-Type.md)
-  - [GADT in Haskell](./01-GADT.md)
+  - [类型级证明 Type-Level Proof](./01-Type-Level-Proof.md)
+  - [类型级验证 Type-Level Verification](./01-Type-Level-Verification.md)
   - [类型安全 Type Safety](./01-Type-Safety.md)
 
 ---

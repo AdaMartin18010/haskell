@@ -5,64 +5,61 @@
 ## 1.1 类型级泛型验证简介（Introduction to Type-Level Generic Verification）
 
 - **定义（Definition）**：
-  - **中文**：类型级泛型验证是指在类型系统层面对泛型类型属性、约束和不变量进行形式化验证，确保类型安全和语义正确性。Haskell通过类型族、GADT、类型类等机制支持类型级泛型验证。
-  - **English**: Type-level generic verification refers to the formal verification of generic type properties, constraints, and invariants at the type system level, ensuring type safety and semantic correctness. Haskell supports type-level generic verification via type families, GADTs, type classes, etc.
+  - **中文**：类型级泛型验证是指在类型系统层面，通过泛型机制对任意类型结构进行属性验证和一致性检查。Haskell通过类型族、GADT、类型类等机制支持类型级泛型验证。
+  - **English**: Type-level generic verification refers to property verification and consistency checking over arbitrary type structures at the type system level via generic mechanisms. Haskell supports type-level generic verification via type families, GADTs, type classes, etc.
 
 - **Wiki风格国际化解释（Wiki-style Explanation）**：
-  - 类型级泛型验证是类型安全、编译期保证和形式化方法的基础，广泛用于高可靠性系统。
-  - Type-level generic verification is the foundation of type safety, compile-time guarantees, and formal methods, widely used in high-reliability systems.
+  - 类型级泛型验证是类型安全、自动化和形式化验证的基础。
+  - Type-level generic verification is the foundation of type safety, automation, and formal verification.
 
 ## 1.2 Haskell中的类型级泛型验证语法与语义（Syntax and Semantics of Type-Level Generic Verification in Haskell）
 
-- **类型级不变量与约束**
+- **类型级验证结构与泛型一致性**
 
 ```haskell
-{-# LANGUAGE GADTs, TypeFamilies, DataKinds, TypeOperators #-}
+{-# LANGUAGE TypeFamilies, DataKinds, GADTs #-}
 
 data Nat = Z | S Nat
 
-type family Add n m where
-  Add 'Z     m = m
-  Add ('S n) m = 'S (Add n m)
+type family IsEven (n :: Nat) :: Bool where
+  IsEven 'Z = 'True
+  IsEven ('S 'Z) = 'False
+  IsEven ('S ('S n)) = IsEven n
 
-data Vec n a where
-  VNil  :: Vec 'Z a
-  VCons :: a -> Vec n a -> Vec ('S n) a
-
--- 验证向量拼接长度
-append :: Vec n a -> Vec m a -> Vec (Add n m) a
-append VNil ys = ys
-append (VCons x xs) ys = VCons x (append xs ys)
+-- 泛型验证：判断类型级自然数是否为偶数
 ```
 
-- **类型级验证与证明结构**
+- **类型类与泛型验证实例**
 
 ```haskell
--- 归纳证明：Add n 'Z = n
-plusZero :: SNat n -> (n ~ Add n 'Z) => ()
-plusZero _ = ()
+class GVerify f where
+  gverify :: f a -> Bool
+
+instance GVerify Maybe where
+  gverify Nothing  = True
+  gverify (Just _) = True
 ```
 
 ## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
 - **类型级泛型验证与范畴论关系**
-  - 类型级泛型验证可视为范畴中的不变量保持与结构映射。
+  - 类型级泛型验证可视为范畴中的对象、函子与属性验证。
 
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
-| 不变量 | 类型约束 | `(n ~ Add n 'Z)` | 类型级泛型不变量 |
-| 验证结构 | GADT | `Vec n a` | 类型级泛型结构验证 |
-| 归纳证明 | 类型族+GADT | `plusZero` | 类型级泛型归纳证明 |
+| 泛型验证 | 类型族 | `IsEven n` | 泛型验证 |
+| 泛型验证实例 | 类型类 | `GVerify` | 泛型验证实例 |
+| 属性验证 | 类型族+类型类 | `gverify` | 属性验证 |
 
 ## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
 
-- **类型级不变量证明**
-  - **中文**：证明类型级泛型结构满足不变量和约束。
-  - **English**: Prove that type-level generic structures satisfy invariants and constraints.
+- **泛型验证一致性证明**
+  - **中文**：证明类型级泛型验证与类型系统一致。
+  - **English**: Prove that type-level generic verification is consistent with the type system.
 
-- **归纳验证能力证明**
-  - **中文**：证明类型级泛型归纳结构可验证复杂属性。
-  - **English**: Prove that type-level generic induction structures can verify complex properties.
+- **自动化验证能力证明**
+  - **中文**：证明类型级泛型验证可自动验证复杂类型属性。
+  - **English**: Prove that type-level generic verification can automatically verify complex type properties.
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -70,17 +67,12 @@ plusZero _ = ()
 
 ```mermaid
 graph TD
-  A[类型级不变量 Type-Level Invariant] --> B[类型级结构验证 Structure Verification]
-  B --> C[归纳证明 Inductive Proof]
-  C --> D[类型安全 Type Safety]
+  A[泛型验证 Generic Verification] --> B[泛型验证实例 Generic Verification Instance]
+  B --> C[属性验证 Property Verification]
+  C --> D[类型级泛型验证 Type-Level Generic Verification]
 ```
 
 - **相关主题跳转**：
-  - [类型级泛型归纳 Type-Level Generic Induction](./01-Type-Level-Generic-Induction.md)
   - [类型级泛型推理 Type-Level Generic Reasoning](./01-Type-Level-Generic-Reasoning.md)
-  - [类型级泛型安全 Type-Level Generic Safety](./01-Type-Level-Generic-Safety.md)
+  - [类型级泛型编程 Type-Level Generic Programming](./01-Type-Level-Generic-Programming.md)
   - [类型安全 Type Safety](./01-Type-Safety.md)
-
----
-
-> 本文档为类型级泛型验证在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。
