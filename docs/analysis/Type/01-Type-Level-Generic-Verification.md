@@ -5,74 +5,49 @@
 ## 1.1 类型级泛型验证简介（Introduction to Type-Level Generic Verification）
 
 - **定义（Definition）**：
-  - **中文**：类型级泛型验证是指在类型系统层面，通过泛型机制对任意类型结构进行属性验证和一致性检查。Haskell通过类型族、GADT、类型类等机制支持类型级泛型验证。
-  - **English**: Type-level generic verification refers to property verification and consistency checking over arbitrary type structures at the type system level via generic mechanisms. Haskell supports type-level generic verification via type families, GADTs, type classes, etc.
+  - **中文**：类型级泛型验证是指在类型系统层面对泛型类型属性、约束和推理过程进行自动化验证，确保类型安全和泛型逻辑正确性。
+  - **English**: Type-level generic verification refers to automated verification of generic type properties, constraints, and reasoning processes at the type system level, ensuring type safety and generic logical correctness.
 
 - **Wiki风格国际化解释（Wiki-style Explanation）**：
-  - 类型级泛型验证是类型安全、自动化和形式化验证的基础。
-  - Type-level generic verification is the foundation of type safety, automation, and formal verification.
+  - 类型级泛型验证是类型安全、自动化泛型推理和工程可靠性的基础。
+  - Type-level generic verification is the foundation of type safety, automated generic reasoning, and engineering reliability.
 
 ## 1.2 Haskell中的类型级泛型验证语法与语义（Syntax and Semantics of Type-Level Generic Verification in Haskell）
 
-- **类型级验证结构与泛型一致性**
+- **类型级泛型验证结构**
 
 ```haskell
-{-# LANGUAGE TypeFamilies, DataKinds, GADTs #-}
+{-# LANGUAGE DataKinds, TypeFamilies, TypeOperators, GADTs #-}
 
-data Nat = Z | S Nat
+type family Verify (cond :: Bool) :: Bool where
+  Verify 'True  = 'True
+  Verify 'False = TypeError ('Text "Type-level generic verification failed")
 
-type family IsEven (n :: Nat) :: Bool where
-  IsEven 'Z = 'True
-  IsEven ('S 'Z) = 'False
-  IsEven ('S ('S n)) = IsEven n
+-- 示例：类型级泛型等价验证
 
--- 泛型验证：判断类型级自然数是否为偶数
-```
+type family EqType a b where
+  EqType a a = 'True
+  EqType a b = 'False
 
-- **类型类与泛型验证实例**
-
-```haskell
-class GVerify f where
-  gverify :: f a -> Bool
-
-instance GVerify Maybe where
-  gverify Nothing  = True
-  gverify (Just _) = True
+-- 验证 EqType Int Int == True
+verifyEq :: (Verify (EqType Int Int) ~ 'True) => ()
+verifyEq = ()
 ```
 
 ## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
 - **类型级泛型验证与范畴论关系**
-  - 类型级泛型验证可视为范畴中的对象、函子与属性验证。
+  - 类型级泛型验证可视为范畴中的泛型结构一致性与属性验证。
 
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
-| 泛型验证 | 类型族 | `IsEven n` | 泛型验证 |
-| 泛型验证实例 | 类型类 | `GVerify` | 泛型验证实例 |
-| 属性验证 | 类型族+类型类 | `gverify` | 属性验证 |
+| 泛型验证 | 类型族 | `Verify cond` | 泛型验证 |
+| 泛型等价 | 类型族 | `EqType a b` | 泛型等价 |
+| 一致性验证 | 类型族+GADT | `verifyEq` | 一致性验证 |
 
-## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
-
-- **泛型验证一致性证明**
-  - **中文**：证明类型级泛型验证与类型系统一致。
-  - **English**: Prove that type-level generic verification is consistent with the type system.
-
-- **自动化验证能力证明**
-  - **中文**：证明类型级泛型验证可自动验证复杂类型属性。
-  - **English**: Prove that type-level generic verification can automatically verify complex type properties.
-
-## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
-
-- **类型级泛型验证结构图（Type-Level Generic Verification Structure Diagram）**
-
-```mermaid
-graph TD
-  A[泛型验证 Generic Verification] --> B[泛型验证实例 Generic Verification Instance]
-  B --> C[属性验证 Property Verification]
-  C --> D[类型级泛型验证 Type-Level Generic Verification]
-```
+## 1.4 多表征与本地跳转（Multi-representation & Local Reference）
 
 - **相关主题跳转**：
-  - [类型级泛型推理 Type-Level Generic Reasoning](./01-Type-Level-Generic-Reasoning.md)
+  - [类型级泛型测试 Type-Level Generic Testing](./01-Type-Level-Generic-Testing.md)
   - [类型级泛型编程 Type-Level Generic Programming](./01-Type-Level-Generic-Programming.md)
   - [类型安全 Type Safety](./01-Type-Safety.md)
