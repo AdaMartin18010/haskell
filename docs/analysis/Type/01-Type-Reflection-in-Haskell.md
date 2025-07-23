@@ -24,9 +24,6 @@ data MyType = MyCon Int deriving (Typeable)
 
 showType :: Typeable a => a -> String
 showType x = show (typeOf x)
-
--- 示例
--- showType (Just 3) == "Maybe Integer"
 ```
 
 - **Data类型类与泛型编程**
