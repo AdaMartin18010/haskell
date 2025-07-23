@@ -1,4 +1,4 @@
-# 01. 类型级测试在Haskell中的理论与实践（Type-Level Testing in Haskell）
+# 01. 类型级测试（Type-Level Testing in Haskell）
 
 > **中英双语核心定义 | Bilingual Core Definitions**
 
@@ -53,31 +53,12 @@ testAdd :: SNat 2 -> SNat 3 -> SNat 5
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
 | 断言 | 类型族 | `Assert cond` | 类型级断言 |
-| 测试用例 | GADT | `testAdd` | 类型级测试用例 |
-| 一致性检查 | 类型约束 | `Assert (Add 2 3 == 5)` | 类型级一致性 |
+| 测试用例 | GADT | `SNat n` | 类型级测试用例 |
+| 一致性验证 | 类型族+GADT | `assertAdd` | 一致性验证 |
 
-## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
-
-- **测试覆盖性证明**
-  - **中文**：证明类型级测试覆盖所有关键属性和约束。
-  - **English**: Prove that type-level tests cover all key properties and constraints.
-
-- **一致性与安全性证明**
-  - **中文**：证明类型级测试能保证类型系统一致性和安全性。
-  - **English**: Prove that type-level testing ensures type system consistency and safety.
-
-## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
-
-- **类型级测试结构图（Type-Level Testing Structure Diagram）**
-
-```mermaid
-graph TD
-  A[类型级断言 Type-Level Assertion] --> B[类型级测试用例 Type-Level Test Case]
-  B --> C[一致性检查 Consistency Check]
-  C --> D[类型安全 Type Safety]
-```
+## 1.4 多表征与本地跳转（Multi-representation & Local Reference）
 
 - **相关主题跳转**：
   - [类型级验证 Type-Level Verification](./01-Type-Level-Verification.md)
-  - [类型级自动化 Type-Level Automation](./01-Type-Level-Automation.md)
+  - [类型级编程 Type-Level Programming](./01-Type-Level-Programming.md)
   - [类型安全 Type Safety](./01-Type-Safety.md)

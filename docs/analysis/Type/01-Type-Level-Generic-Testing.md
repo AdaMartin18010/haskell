@@ -52,35 +52,15 @@ testAdd :: SNat 2 -> SNat 3 -> SNat 5
 
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
-| 断言 | 类型族 | `Assert cond` | 类型级泛型断言 |
-| 测试用例 | GADT | `testAdd` | 类型级泛型测试用例 |
-| 一致性检查 | 类型约束 | `Assert (Add 2 3 == 5)` | 类型级泛型一致性 |
+| 泛型断言 | 类型族 | `Assert cond` | 泛型断言 |
+| 泛型测试用例 | GADT | `SNat n` | 泛型测试用例 |
+| 一致性验证 | 类型族+GADT | `assertAdd` | 一致性验证 |
 
-## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
-
-- **测试覆盖性证明**
-  - **中文**：证明类型级泛型测试覆盖所有关键属性和约束。
-  - **English**: Prove that type-level generic tests cover all key properties and constraints.
-
-- **一致性与安全性证明**
-  - **中文**：证明类型级泛型测试能保证类型系统一致性和安全性。
-  - **English**: Prove that type-level generic testing ensures type system consistency and safety.
-
-## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
-
-- **类型级泛型测试结构图（Type-Level Generic Testing Structure Diagram）**
-
-```mermaid
-graph TD
-  A[类型级泛型断言 Type-Level Generic Assertion] --> B[类型级泛型测试用例 Type-Level Generic Test Case]
-  B --> C[一致性检查 Consistency Check]
-  C --> D[类型安全 Type Safety]
-```
+## 1.4 多表征与本地跳转（Multi-representation & Local Reference）
 
 - **相关主题跳转**：
   - [类型级泛型验证 Type-Level Generic Verification](./01-Type-Level-Generic-Verification.md)
-  - [类型级泛型自动化 Type-Level Generic Automation](./01-Type-Level-Generic-Automation.md)
-  - [类型级泛型安全 Type-Level Generic Safety](./01-Type-Level-Generic-Safety.md)
+  - [类型级泛型编程 Type-Level Generic Programming](./01-Type-Level-Generic-Programming.md)
   - [类型安全 Type Safety](./01-Type-Safety.md)
 
 ---

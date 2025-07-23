@@ -35,6 +35,6 @@ graph TD
 ## 1.4 多表征与本地跳转（Multi-representation & Local Reference）
 
 - **相关主题跳转**：
-  - [类型级工程 Type-Level Engineering](./01-Type-Level-Engineering.md)
-  - [类型级自动化 Type-Level Automation](./01-Type-Level-Automation.md)
+  - [类型级泛型未来趋势 Type-Level Generic Future Trends](./01-Type-Level-Generic-Future.md)
+  - [类型级编程 Type-Level Programming](./01-Type-Level-Programming.md)
   - [类型安全 Type Safety](./01-Type-Safety.md)

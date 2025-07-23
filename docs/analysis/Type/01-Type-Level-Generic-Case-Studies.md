@@ -49,33 +49,13 @@ type family Add n m where
 
 | 概念 | Haskell实现 | 代码示例 | 中文解释 |
 |------|-------------|----------|----------|
-| 工程案例 | GADT | `Config k` | 类型安全泛型配置 |
-| 理论案例 | 类型族 | `Add n m` | 类型级泛型自然数运算 |
-| 案例验证 | 类型约束 | `ConfigType k` | 类型级属性验证 |
+| 工程案例 | GADT | `Config k` | 类型安全配置 |
+| 理论案例 | 类型族 | `Add n m` | 类型级泛型运算 |
+| 属性验证 | 类型族+GADT | `getConfig` | 类型安全验证 |
 
-## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
-
-- **案例有效性证明**
-  - **中文**：证明类型级泛型案例能有效支撑理论与工程需求。
-  - **English**: Prove that type-level generic case studies effectively support theoretical and engineering requirements.
-
-- **属性验证能力证明**
-  - **中文**：证明类型级泛型案例能验证关键属性和约束。
-  - **English**: Prove that type-level generic case studies can verify key properties and constraints.
-
-## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
-
-- **类型级泛型案例结构图（Type-Level Generic Case Structure Diagram）**
-
-```mermaid
-graph TD
-  A[工程案例 Engineering Case] --> B[理论案例 Theoretical Case]
-  B --> C[属性验证 Property Verification]
-  C --> D[类型安全 Type Safety]
-```
+## 1.4 多表征与本地跳转（Multi-representation & Local Reference）
 
 - **相关主题跳转**：
-  - [类型级泛型工程 Type-Level Generic Engineering](./01-Type-Level-Generic-Engineering.md)
-  - [类型级泛型验证 Type-Level Generic Verification](./01-Type-Level-Generic-Verification.md)
-  - [类型级泛型安全 Type-Level Generic Safety](./01-Type-Level-Generic-Safety.md)
+  - [类型级泛型编程 Type-Level Generic Programming](./01-Type-Level-Generic-Programming.md)
+  - [类型级泛型推理 Type-Level Generic Reasoning](./01-Type-Level-Generic-Reasoning.md)
   - [类型安全 Type Safety](./01-Type-Safety.md)
