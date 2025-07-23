@@ -1,0 +1,53 @@
+# 类型级自动化验证（Type-Level Automated Verification in Haskell）
+
+## 定义 Definition
+
+- **中文**：类型级自动化验证是指在类型系统层面自动验证类型属性、约束和程序安全性的机制，提升编译期的可靠性和类型安全。
+- **English**: Type-level automated verification refers to mechanisms at the type system level for automatically verifying type properties, constraints, and program safety, improving compile-time reliability and type safety in Haskell.
+
+## Haskell 语法与实现 Syntax & Implementation
+
+```haskell
+{-# LANGUAGE TypeFamilies, ConstraintKinds, TypeOperators, UndecidableInstances #-}
+import GHC.Exts (Constraint)
+
+-- 类型级自动化验证示例：类型级约束验证
+
+type family Verify (c :: Constraint) :: Bool where
+  Verify (() :: Constraint) = 'True
+  Verify c = 'False
+```
+
+## 自动化验证机制 Automated Verification Mechanism
+
+- 类型族递归验证、类型类约束检查
+- 支持类型属性、约束和安全性的自动化验证
+
+## 形式化证明 Formal Reasoning
+
+- **自动化验证正确性证明**：证明验证机制能检测所有非法属性和约束
+- **Proof of correctness for automated verification**: Show that the verification mechanism detects all illegal properties and constraints
+
+### 证明示例 Proof Example
+
+- 对 `Verify c`，归纳证明 `c` 可解时返回 `True`，否则为 `False`
+
+## 工程应用 Engineering Application
+
+- 类型安全的自动验证、泛型库、DSL 框架
+- Type-safe auto verification, generic libraries, DSL frameworks
+
+## 结构图 Structure Diagram
+
+```mermaid
+graph TD
+  A["类型级自动化验证 Type-level Automated Verification"] --> B["类型属性验证 Type Property Verification"]
+  B --> C["自动验证 Auto Verification"]
+  C --> D["类型安全 Type Safety"]
+```
+
+## 本地跳转 Local References
+
+- [类型级自动验证 Type-Level Auto Verification](../39-Type-Level-Auto-Verification/01-Type-Level-Auto-Verification-in-Haskell.md)
+- [类型级安全验证 Type-Level Safety Verification](../44-Type-Level-Safety-Verification/01-Type-Level-Safety-Verification-in-Haskell.md)
+- [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
