@@ -55,3 +55,6 @@ graph TD
 - [类型级递归反射 Type-Level Recursive Reflection](../68-Type-Level-Recursive-Reflection/01-Type-Level-Recursive-Reflection-in-Haskell.md)
 - [类型级递归泛型算法 Type-Level Recursive Generic Algorithm](../72-Type-Level-Recursive-Generic-Algorithm/01-Type-Level-Recursive-Generic-Algorithm-in-Haskell.md)
 - [类型级元编程 Type Metaprogramming](../16-Type-Metaprogramming/01-Type-Metaprogramming-in-Haskell.md)
+- [类型级递归反射 Type-Level Recursive Reflection](../68-Type-Level-Recursive-Reflection/01-Type-Level-Recursive-Reflection-in-Haskell.md)
+- [类型元编程 Type Metaprogramming](../18-Type-Metaprogramming/01-Type-Metaprogramming-in-Haskell.md)
+- [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)

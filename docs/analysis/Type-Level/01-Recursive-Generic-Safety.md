@@ -58,3 +58,6 @@ graph TD
 - [类型级递归泛型实例 Type-Level Recursive Generic Instance](../77-Type-Level-Recursive-Generic-Instance/01-Type-Level-Recursive-Generic-Instance-in-Haskell.md)
 - [类型级递归泛型归纳 Type-Level Recursive Generic Induction](../82-Type-Level-Recursive-Generic-Induction/01-Type-Level-Recursive-Generic-Induction-in-Haskell.md)
 - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
+- [类型级递归泛型验证 Type-Level Recursive Generic Verification](../91-Type-Level-Recursive-Generic-Verification/01-Type-Level-Recursive-Generic-Verification-in-Haskell.md)
+- [类型级递归泛型约束 Type-Level Recursive Generic Constraint](../78-Type-Level-Recursive-Generic-Constraint/01-Type-Level-Recursive-Generic-Constraint-in-Haskell.md)
+- [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
