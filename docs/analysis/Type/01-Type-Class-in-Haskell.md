@@ -79,6 +79,9 @@ graph TD
   - [类型推断与多态 Type Inference and Polymorphism](../06-Type-Inference-and-Polymorphism/01-Type-Inference-and-Polymorphism-in-Haskell.md)
   - [范畴论与Haskell类型系统 Category Theory and Haskell Type System](../05-Category-Theory/01-Category-Theory-and-Haskell-Type-System.md)
   - [函子 Functor](../05-Category-Theory/02-Functor/01-Functor-and-Haskell.md)
+  - [类型推断与多态 Type Inference and Polymorphism](../26-Type-Inference-and-Polymorphism/01-Type-Inference-and-Polymorphism-in-Haskell.md)
+  - [高阶类型 Higher-Kinded Types](../08-Higher-Kinded-Types/01-Higher-Kinded-Types-in-Haskell.md)
+  - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
 
 ---
 

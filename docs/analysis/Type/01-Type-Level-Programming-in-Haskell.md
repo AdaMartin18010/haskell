@@ -77,6 +77,9 @@ graph TD
   - [类型族 Type Family](../11-Type-Family/01-Type-Family-in-Haskell.md)
   - [依赖类型 Dependent Type](../10-Dependent-Type/01-Dependent-Type-in-Haskell.md)
   - [GADT in Haskell](../09-GADT/01-GADT-in-Haskell.md)
+  - [GADT](../29-GADT/01-GADT-in-Haskell.md)
+  - [类型族 Type Family](../31-Type-Family/01-Type-Family-in-Haskell.md)
+  - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
 
 ---
 

@@ -75,6 +75,9 @@ graph TD
 - **相关主题跳转**：
   - [高阶类型 Higher-Kinded Types](../08-Higher-Kinded-Types/01-Higher-Kinded-Types-in-Haskell.md)
   - [类型推断与多态 Type Inference and Polymorphism](../06-Type-Inference-and-Polymorphism/01-Type-Inference-and-Polymorphism-in-Haskell.md)
+  - [高阶类型 Higher-Kinded Types](../28-Higher-Kinded-Types/01-Higher-Kinded-Types-in-Haskell.md)
+  - [类型级编程 Type-Level Programming](../30-Type-Level-Programming/01-Type-Level-Programming-in-Haskell.md)
+  - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
 
 ---
 

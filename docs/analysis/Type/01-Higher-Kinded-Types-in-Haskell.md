@@ -80,6 +80,9 @@ graph TD
   - [类型类 Type Class](../07-Type-Class/01-Type-Class-in-Haskell.md)
   - [函子 Functor](../05-Category-Theory/02-Functor/01-Functor-and-Haskell.md)
   - [单子 Monad](../05-Category-Theory/03-Monad/01-Monad-and-Haskell.md)
+  - [类型类 Type Class](../27-Type-Class/01-Type-Class-in-Haskell.md)
+  - [类型推断与多态 Type Inference and Polymorphism](../26-Type-Inference-and-Polymorphism/01-Type-Inference-and-Polymorphism-in-Haskell.md)
+  - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
 
 ---
 
