@@ -81,9 +81,9 @@ graph TD
 ```
 
 - **相关主题跳转**：
-  - [类型级编程 Type-Level Programming](../12-Type-Level-Programming/01-Type-Level-Programming-in-Haskell.md)
-  - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
-  - [类型级证明 Type-Level Proof](../17-Type-Level-Proof/01-Type-Level-Proof-in-Haskell.md)
+  - [类型级编程 Type-Level Programming](./01-Type-Level-Programming.md)
+  - [类型安全 Type Safety](./01-Type-Safety.md)
+  - [类型级证明 Type-Level Proof](./01-Type-Level-Proof.md)
 
 ---
 

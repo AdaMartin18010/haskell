@@ -56,8 +56,8 @@ graph TD
 
 ## 本地跳转 Local References
 
-- [类型理论基础 Type Theory Foundation](../01-Type-Theory/01-Type-Theory-Foundation.md)
-- [类型推断与多态 Type Inference and Polymorphism](../06-Type-Inference-and-Polymorphism/01-Type-Inference-and-Polymorphism-in-Haskell.md)
-- [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
-- [类型等价 Type Equality](../13-Type-Equality/01-Type-Equality-in-Haskell.md)
-- [GADT in Haskell](../09-GADT/01-GADT-in-Haskell.md)
+- [类型理论基础 Type Theory Foundation](./01-Type-Theory.md)
+- [类型推断与多态 Type Inference and Polymorphism](./01-Type-Inference-and-Polymorphism.md)
+- [类型安全 Type Safety](./01-Type-Safety.md)
+- [类型等价 Type Equality](./01-Type-Equality.md)
+- [GADT in Haskell](./01-GADT.md)

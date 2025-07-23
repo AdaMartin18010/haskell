@@ -81,9 +81,9 @@ graph TD
 ```
 
 - **相关主题跳转**：
-  - [类型级编程 Type-Level Programming](../12-Type-Level-Programming/01-Type-Level-Programming-in-Haskell.md)
-  - [类型等价 Type Equality](../13-Type-Equality/01-Type-Equality-in-Haskell.md)
-  - [依赖类型 Dependent Type](../10-Dependent-Type/01-Dependent-Type-in-Haskell.md)
+  - [类型级编程 Type-Level Programming](./01-Type-Level-Programming.md)
+  - [类型等价 Type Equality](./01-Type-Equality.md)
+  - [依赖类型 Dependent Type](./01-Dependent-Type.md)
 
 ---
 

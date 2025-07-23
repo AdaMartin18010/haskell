@@ -69,8 +69,8 @@ graph TD
 ```
 
 - **相关主题跳转**：
-  - [依赖类型 Dependent Type](../10-Dependent-Type/01-Dependent-Type-in-Haskell.md)
-  - [GADT in Haskell](../09-GADT/01-GADT-in-Haskell.md)
+  - [依赖类型 Dependent Type](./01-Dependent-Type.md)
+  - [GADT in Haskell](./01-GADT.md)
 
 ---
 

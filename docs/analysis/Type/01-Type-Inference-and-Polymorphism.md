@@ -91,13 +91,11 @@ graph TD
 ```
 
 - **相关主题跳转**：
-  - [类型理论 Type Theory](../01-Type-Theory/01-Type-Theory-Foundation.md)
-  - [范畴论与Haskell类型系统 Category Theory and Haskell Type System](../05-Category-Theory/01-Category-Theory-and-Haskell-Type-System.md)
-  - [自然变换 Natural Transformation](../05-Category-Theory/04-Natural-Transformation/01-Natural-Transformation-and-Haskell.md)
-  - [类型理论基础 Type Theory Foundation](../01-Type-Theory/01-Type-Theory-Foundation.md)
-  - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
-  - [类型类 Type Class](../07-Type-Class/01-Type-Class-in-Haskell.md)
-  - [高阶类型 Higher-Kinded Types](../08-Higher-Kinded-Types/01-Higher-Kinded-Types-in-Haskell.md)
+  - [类型理论基础 Type Theory Foundation](./01-Type-Theory.md)
+  - [范畴论与Haskell类型系统 Category Theory and Haskell Type System](./01-Category-Theory-and-Haskell.md)
+  - [类型类 Type Class](./01-Type-Class.md)
+  - [高阶类型 Higher-Kinded Types](./01-Higher-Kinded-Types.md)
+  - [类型安全 Type Safety](./01-Type-Safety.md)
 
 ---
 

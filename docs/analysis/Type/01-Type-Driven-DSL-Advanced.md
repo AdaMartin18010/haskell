@@ -60,6 +60,6 @@ graph TD
 
 ## 本地跳转 Local References
 
-- [GADT](../09-GADT/01-GADT-in-Haskell.md)
-- [类型级编程 Type-level Programming](../12-Type-Level-Programming/01-Type-Level-Programming-in-Haskell.md)
-- [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
+- [GADT in Haskell](./01-GADT.md)
+- [类型级编程 Type-Level Programming](./01-Type-Level-Programming.md)
+- [类型安全 Type Safety](./01-Type-Safety.md)
