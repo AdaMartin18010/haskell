@@ -1,4 +1,4 @@
-# 形式语言理论
+# 形式语言理论（Formal Language Theory）
 
 ## 概述
 
@@ -240,6 +240,60 @@ parse = undefined -- 实现语法分析
 - **Flex**: 词法分析器生成器
 - **Bison**: 语法分析器生成器
 - **ANTLR**: 解析器生成器
+
+---
+
+## 哲科视角与国际化扩展 Philosophical-Scientific Perspective & Internationalization
+
+### 定义 Definition
+
+- **中文**：形式语言理论是研究符号串集合及其生成、识别和变换机制的理论，是计算机科学、语言学和逻辑学的基础。它关注语法、语义、自动机、文法、正则表达式等形式系统。
+- **English**: Formal language theory is the study of sets of strings of symbols and their mechanisms of generation, recognition, and transformation. It is foundational to computer science, linguistics, and logic, focusing on syntax, semantics, automata, grammars, regular expressions, and other formal systems.
+
+### 历史与发展 History & Development
+
+- **中文**：形式语言理论起源于20世纪初，Chomsky提出文法分层，Kleene、Turing等奠定了自动机与可计算性理论。现代形式语言理论与编译原理、自然语言处理、人工智能等深度融合。
+- **English**: Formal language theory originated in the early 20th century, with Chomsky's hierarchy of grammars and foundational work by Kleene, Turing, and others on automata and computability. Modern formal language theory is deeply integrated with compiler theory, natural language processing, artificial intelligence, etc.
+
+### 哲学科学特性分析 Philosophical-Scientific Feature Analysis
+
+- **中文**：形式语言理论不仅关注符号系统的技术细节，更关涉语言本质、结构主义、可计算性、信息论等哲学基础。它与证明论、模型论、类型理论等共同构成现代形式科学的基石。
+- **English**: Formal language theory is concerned not only with the technical details of symbolic systems, but also with philosophical foundations such as the nature of language, structuralism, computability, and information theory. Together with proof theory, model theory, and type theory, it forms the cornerstone of modern formal science.
+
+### 应用 Applications
+
+- **中文**：编译原理、词法分析、语法分析、正则表达式、自动机、自然语言处理、形式化验证、人工智能等。
+- **English**: Compiler theory, lexical analysis, syntax analysis, regular expressions, automata, natural language processing, formal verification, artificial intelligence, etc.
+
+### 例子 Examples
+
+```haskell
+-- Haskell: 字母表与语言的建模
+import qualified Data.Set as Set
+
+type Alphabet = Set.Set Char
+type Language = Set.Set String
+
+-- 语言连接
+concatenate :: Language -> Language -> Language
+concatenate lang1 lang2 = Set.fromList [s1 ++ s2 | s1 <- Set.toList lang1, s2 <- Set.toList lang2]
+```
+
+### 相关理论 Related Theories
+
+- 证明论 Proof Theory
+- 模型论 Model Theory
+- 类型理论 Type Theory
+- 自动机理论 Automata Theory
+- 系统理论 System Theory
+- 计算复杂性理论 Computational Complexity Theory
+
+### 参考文献 References
+
+- [1] Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006). Introduction to Automata Theory, Languages, and Computation.
+- [2] Chomsky, N. (1956). Three models for the description of language.
+- [3] Wikipedia: Formal Language <https://en.wikipedia.org/wiki/Formal_language>
+- [4] Types and Programming Languages, Benjamin C. Pierce
 
 ---
 

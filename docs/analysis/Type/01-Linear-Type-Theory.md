@@ -57,3 +57,61 @@ graph TD
 - [仿射类型理论 Affine Type Theory](../03-Affine-Type-Theory/01-Affine-Type-Theory-Foundation.md)
 - [时序类型理论 Temporal Type Theory](../04-Temporal-Type-Theory/01-Temporal-Type-Theory-Foundation.md)
 - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
+
+---
+
+## 历史与发展 History & Development
+
+- **中文**：线性类型理论由Jean-Yves Girard于1987年提出，最初用于逻辑学，后广泛应用于资源管理、并发和编程语言。Haskell自GHC 8.12引入LinearTypes扩展后，成为主流函数式语言中率先支持线性类型的代表。
+- **English**: Linear type theory was introduced by Jean-Yves Girard in 1987, initially for logic, and later widely applied to resource management, concurrency, and programming languages. Since GHC 8.12, Haskell has been a leading functional language supporting linear types via the LinearTypes extension.
+
+## Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- 资源敏感类型、不可变数据结构、类型安全的内存管理等。
+- Resource-sensitive types, immutable data structures, type-safe memory management, etc.
+
+### 最新特性 Latest Features
+
+- **Linear Types（线性类型）**：GHC 8.12+正式支持，变量必须恰好使用一次。
+- **Multiplicities**：支持多重性类型参数。
+- **Type-level Programming**：类型级资源管理与约束。
+- **GHC 2021/2022**：标准化线性类型相关扩展。
+
+- **English**:
+  - Linear Types: Officially supported since GHC 8.12, variables must be used exactly once.
+  - Multiplicities: Support for multiplicity type parameters.
+  - Type-level programming: Type-level resource management and constraints.
+  - GHC 2021/2022: Standardizes linear type extensions.
+
+## 应用 Applications
+
+- **中文**：资源安全的API、并发与分布式系统、内存安全、文件句柄管理、不可变数据结构等。
+- **English**: Resource-safe APIs, concurrency and distributed systems, memory safety, file handle management, immutable data structures, etc.
+
+## 例子 Examples
+
+```haskell
+{-# LANGUAGE LinearTypes #-}
+f :: a %1 -> (a, a)
+f x = (x, x)  -- 错误：x被用两次，违反线性约束
+
+import System.IO.Linear
+withFile :: FilePath %1 -> (File %1 -> Ur b) %1 -> Ur b
+```
+
+## 相关理论 Related Theories
+
+- 线性逻辑（Linear Logic）
+- 资源敏感类型系统（Resource-sensitive Type Systems）
+- 不可变数据结构（Immutable Data Structures）
+- 并发与分布式系统（Concurrency and Distributed Systems）
+
+## 参考文献 References
+
+- [Wikipedia: Linear Type](https://en.wikipedia.org/wiki/Linear_type)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Linear Haskell](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/linear_types.html)
+- [Jean-Yves Girard: Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)

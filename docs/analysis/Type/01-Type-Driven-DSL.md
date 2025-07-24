@@ -89,4 +89,70 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：类型驱动DSL的思想源自类型理论、范畴论和函数式编程。Haskell自GADT、类型类、类型级编程等特性引入后，成为类型驱动DSL设计的主流平台。GHC不断扩展类型级能力，如Type Families、Dependent Types、Singletons等，极大提升了DSL的表达力和安全性。
+- **English**: The idea of type-driven DSLs originates from type theory, category theory, and functional programming. With the introduction of GADTs, type classes, and type-level programming, Haskell has become a mainstream platform for type-driven DSL design. GHC has continuously extended type-level capabilities, such as Type Families, Dependent Types, and Singletons, greatly enhancing the expressiveness and safety of DSLs.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- GADTs、类型类、类型推断、类型安全解释器、类型级约束。
+- GADTs, type classes, type inference, type-safe interpreters, type-level constraints.
+
+### 最新特性 Latest Features
+
+- **Type Families/Type-level Programming**：类型级DSL、类型级归纳与验证。
+- **Dependent Types（依赖类型）**：GHC 9.x实验性支持，类型依赖于DSL结构。
+- **Singletons**：类型与值的单例化，支持类型安全的DSL操作。
+- **QuantifiedConstraints/RankNTypes**：高阶类型与约束。
+- **GHC 2021/2022**：标准化更多类型级DSL相关扩展。
+
+- **English**:
+  - Type Families/Type-level Programming: Type-level DSLs, type-level induction and verification.
+  - Dependent Types: Experimental in GHC 9.x, types depending on DSL structure.
+  - Singletons: Singletonization of types and values, supporting type-safe DSL operations.
+  - QuantifiedConstraints/RankNTypes: Higher-order types and constraints.
+  - GHC 2021/2022: Standardizes more type-level DSL extensions.
+
+## 1.8 应用 Applications
+
+- **中文**：嵌入式DSL、配置语言、形式化验证、编译器前端、不可变数据结构、类型安全API等。
+- **English**: Embedded DSLs, configuration languages, formal verification, compiler frontends, immutable data structures, type-safe APIs, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE GADTs, TypeFamilies, DataKinds, KindSignatures #-}
+data Nat = Z | S Nat
+data Vec a n where
+  VNil  :: Vec a 'Z
+  VCons :: a -> Vec a n -> Vec a ('S n)
+
+safeHead :: Vec a ('S n) -> a
+safeHead (VCons x _) = x
+
+-- 类型级DSL扩展
+class DSLExpr e where
+  litInt  :: Int -> e Int
+  add     :: e Int -> e Int -> e Int
+  if_     :: e Bool -> e a -> e a -> e a
+```
+
+## 1.10 相关理论 Related Theories
+
+- 类型理论（Type Theory）
+- 范畴论（Category Theory）
+- 类型级编程（Type-level Programming）
+- 依赖类型理论（Dependent Type Theory）
+- 形式化验证（Formal Verification）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为类型驱动DSL在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

@@ -60,3 +60,59 @@ graph TD
 - [线性类型理论 Linear Type Theory](../02-Linear-Type-Theory/01-Linear-Type-Theory-Foundation.md)
 - [仿射类型理论 Affine Type Theory](../03-Affine-Type-Theory/01-Affine-Type-Theory-Foundation.md)
 - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
+
+---
+
+## 历史与发展 History & Development
+
+- **中文**：时序类型理论源自时序逻辑和实时系统建模，20世纪后期发展起来，广泛应用于嵌入式、实时和分布式系统。Haskell等函数式语言通过类型系统扩展和GADT等机制支持时序建模。
+- **English**: Temporal type theory originated from temporal logic and real-time system modeling, developed in the late 20th century, and is widely used in embedded, real-time, and distributed systems. Functional languages like Haskell support temporal modeling via type system extensions and GADTs.
+
+## Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- GADTs、类型类、不可变数据结构、类型安全的状态建模等。
+- GADTs, type classes, immutable data structures, type-safe state modeling, etc.
+
+### 最新特性 Latest Features
+
+- **Type-level Programming**：类型级时序建模与约束。
+- **Dependent Types**：实验性支持，类型依赖于时间参数。
+- **GHC 2021/2022**：标准化时序相关类型系统扩展。
+
+- **English**:
+  - Type-level programming: Type-level temporal modeling and constraints.
+  - Dependent Types: Experimental support, types depending on time parameters.
+  - GHC 2021/2022: Standardizes temporal type system extensions.
+
+## 应用 Applications
+
+- **中文**：实时系统、嵌入式系统、分布式系统、时序逻辑建模、类型安全的时序API等。
+- **English**: Real-time systems, embedded systems, distributed systems, temporal logic modeling, type-safe temporal APIs, etc.
+
+## 例子 Examples
+
+```haskell
+data Time = T0 | T1 | T2 deriving (Eq, Ord, Show)
+data Temporal a = At Time a | Always a | Eventually a
+
+-- 在T1时刻执行操作
+temporalAtT1 :: Temporal Int -> Maybe Int
+temporalAtT1 (At T1 x) = Just x
+temporalAtT1 _ = Nothing
+```
+
+## 相关理论 Related Theories
+
+- 时序逻辑（Temporal Logic）
+- 实时系统理论（Real-Time System Theory）
+- 状态机建模（State Machine Modeling）
+- 形式化验证（Formal Verification）
+
+## 参考文献 References
+
+- [Wikipedia: Temporal Logic](https://en.wikipedia.org/wiki/Temporal_logic)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)

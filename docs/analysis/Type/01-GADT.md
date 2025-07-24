@@ -80,4 +80,68 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：GADT（广义代数数据类型）最早由Simon Peyton Jones等人在2000年代提出，作为Haskell类型系统的重要扩展。GADT为Haskell带来了部分依赖类型能力，极大提升了类型表达力和类型安全。GHC自6.6版本起正式支持GADT，并不断扩展相关特性。
+- **English**: GADTs (Generalized Algebraic Data Types) were first proposed by Simon Peyton Jones et al. in the 2000s as a major extension to the Haskell type system. GADTs bring some dependent type capabilities to Haskell, greatly enhancing type expressiveness and safety. GHC has officially supported GADTs since version 6.6 and has continuously extended related features.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- 精确类型约束、类型安全表达式、模式匹配增强、类型推断改进。
+- Precise type constraints, type-safe expressions, enhanced pattern matching, improved type inference.
+
+### 最新特性 Latest Features
+
+- **Type Families/Type-level Programming**：类型级GADT、类型级归纳。
+- **Dependent Types（依赖类型）**：GADT为依赖类型提供基础。
+- **QuantifiedConstraints/RankNTypes**：高阶类型与约束。
+- **GHC 2021/2022**：标准化更多GADT相关扩展。
+
+- **English**:
+  - Type Families/Type-level Programming: Type-level GADTs, type-level induction.
+  - Dependent Types: GADTs provide a foundation for dependent types.
+  - QuantifiedConstraints/RankNTypes: Higher-order types and constraints.
+  - GHC 2021/2022: Standardizes more GADT-related extensions.
+
+## 1.8 应用 Applications
+
+- **中文**：类型安全AST、解释器、编译器、DSL、形式化验证、不可变数据结构等。
+- **English**: Type-safe ASTs, interpreters, compilers, DSLs, formal verification, immutable data structures, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE GADTs, TypeFamilies #-}
+data Value a where
+  VInt  :: Int -> Value Int
+  VBool :: Bool -> Value Bool
+
+data Expr a where
+  Lit    :: Value a -> Expr a
+  Add    :: Expr Int -> Expr Int -> Expr Int
+  If     :: Expr Bool -> Expr a -> Expr a -> Expr a
+
+eval :: Expr a -> a
+eval (Lit (VInt n))  = n
+eval (Lit (VBool b)) = b
+eval (Add e1 e2)     = eval e1 + eval e2
+eval (If c t f)      = if eval c then eval t else eval f
+```
+
+## 1.10 相关理论 Related Theories
+
+- 依赖类型理论（Dependent Type Theory）
+- 类型级编程（Type-level Programming）
+- 代数数据类型（Algebraic Data Types）
+- 形式化验证（Formal Verification）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Generalized Algebraic Data Type](https://en.wikipedia.org/wiki/Generalized_algebraic_data_type)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为GADT在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

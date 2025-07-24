@@ -86,4 +86,66 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：类型反射理论起源于面向对象和泛型编程。Haskell自Typeable、Data等类型类引入后，成为类型安全反射和泛型编程的主流平台。GHC不断扩展类型反射相关特性，如TypeRep、TypeApplications、Typeable的多态种类支持等。
+- **English**: Type reflection theory originated from object-oriented and generic programming. With the introduction of Typeable and Data type classes, Haskell has become a mainstream platform for type-safe reflection and generic programming. GHC has continuously extended type reflection features, such as TypeRep, TypeApplications, and polymorphic kind support for Typeable.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- Typeable类型类、Data类型类、运行时类型信息、类型安全转换、泛型编程。
+- Typeable type class, Data type class, runtime type information, type-safe conversion, generic programming.
+
+### 最新特性 Latest Features
+
+- **TypeRep**：类型级反射与类型表示。
+- **TypeApplications**：类型应用语法，支持显式类型传递。
+- **PolyKinds/Typeable多态种类**：Typeable支持多种类类型。
+- **GHC 2021/2022**：标准化更多类型反射相关扩展。
+
+- **English**:
+  - TypeRep: Type-level reflection and type representation.
+  - TypeApplications: Syntax for explicit type passing.
+  - PolyKinds/Typeable polymorphic kinds: Typeable supports polymorphic kinds.
+  - GHC 2021/2022: Standardizes more type reflection extensions.
+
+## 1.8 应用 Applications
+
+- **中文**：泛型编程、序列化、类型安全容器、运行时类型检查、DSL、类型驱动设计等。
+- **English**: Generic programming, serialization, type-safe containers, runtime type checking, DSLs, type-driven design, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE TypeApplications #-}
+import Data.Typeable
+
+showType' :: forall a. Typeable a => a -> String
+showType' _ = show (typeRep @a)
+
+-- 类型安全容器
+import Data.Dynamic
+
+data Box = forall a. Typeable a => Box a
+
+unbox :: Typeable a => Box -> Maybe a
+unbox (Box x) = cast x
+```
+
+## 1.10 相关理论 Related Theories
+
+- 类型系统理论（Type System Theory）
+- 泛型编程（Generic Programming）
+- 运行时反射（Runtime Reflection）
+- 形式化验证（Formal Verification）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Type reflection](https://en.wikipedia.org/wiki/Type_reflection)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为类型反射在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

@@ -83,4 +83,67 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：类型类由Philip Wadler等人在1988年提出，是Haskell类型系统的核心创新之一。类型类机制极大推动了泛型编程、接口约束和高阶多态的发展。GHC不断扩展类型类相关特性，如多参数类型类、函数依赖、关联类型族等。
+- **English**: Type classes were introduced by Philip Wadler et al. in 1988 as a core innovation of the Haskell type system. The mechanism greatly advanced generic programming, interface constraints, and higher-order polymorphism. GHC has continuously extended type class features, such as multi-parameter type classes, functional dependencies, and associated type families.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- 单参数类型类、实例推导、类型约束、多态函数。
+- Single-parameter type classes, instance derivation, type constraints, polymorphic functions.
+
+### 最新特性 Latest Features
+
+- **多参数类型类（Multi-parameter Type Classes）**
+- **函数依赖（Functional Dependencies）**
+- **关联类型族（Associated Type Families）**
+- **FlexibleInstances/UndecidableInstances/OverlappingInstances**
+- **QuantifiedConstraints/RankNTypes**
+- **GHC 2021/2022**：标准化更多类型类相关扩展。
+
+- **English**:
+  - Multi-parameter type classes
+  - Functional dependencies
+  - Associated type families
+  - FlexibleInstances/UndecidableInstances/OverlappingInstances
+  - QuantifiedConstraints/RankNTypes
+  - GHC 2021/2022: Standardizes more type class extensions
+
+## 1.8 应用 Applications
+
+- **中文**：泛型编程、接口抽象、类型安全API、DSL、自动推导、依赖注入等。
+- **English**: Generic programming, interface abstraction, type-safe APIs, DSLs, automatic derivation, dependency injection, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE MultiParamTypeClasses, FunctionalDependencies, TypeFamilies #-}
+class Convertible a b where
+  convert :: a -> b
+
+instance Convertible Int String where
+  convert = show
+
+class Collection c where
+  type Elem c
+  insert :: Elem c -> c -> c
+```
+
+## 1.10 相关理论 Related Theories
+
+- 范畴论（Category Theory）
+- 多态类型系统（Polymorphic Type Systems）
+- 代数数据类型（Algebraic Data Types）
+- 类型推断与约束（Type Inference and Constraints）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Type Class](https://en.wikipedia.org/wiki/Type_class)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为类型类在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

@@ -96,4 +96,66 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：类型理论起源于20世纪初，Russell和Church等人提出，后发展为Martin-Löf类型理论、依赖类型理论等。Haskell等现代编程语言不断吸收类型理论成果，推动类型系统演进。
+- **English**: Type theory originated in the early 20th century, proposed by Russell and Church, and later developed into Martin-Löf type theory, dependent type theory, etc. Modern programming languages like Haskell have continuously incorporated advances in type theory, driving the evolution of type systems.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- Hindley-Milner类型推断、类型多态、类型类、代数数据类型等。
+- Hindley-Milner type inference, type polymorphism, type classes, algebraic data types, etc.
+
+### 最新特性 Latest Features
+
+- **GADTs**：表达能力更强的类型。
+- **Type Families/Type-level Programming**：类型级函数与运算。
+- **Linear Types**：资源敏感类型。
+- **Dependent Types**：实验性支持。
+- **QuantifiedConstraints/RankNTypes**：更高阶类型抽象。
+- **GHC 2021/2022**：标准化类型系统扩展。
+
+- **English**:
+  - GADTs: More expressive types.
+  - Type Families/Type-level Programming: Type-level functions and computation.
+  - Linear Types: Resource-sensitive types.
+  - Dependent Types: Experimental support.
+  - QuantifiedConstraints/RankNTypes: Higher-order type abstraction.
+  - GHC 2021/2022: Standardizes type system extensions.
+
+## 1.8 应用 Applications
+
+- **中文**：泛型编程、DSL、形式化验证、编译器实现、类型安全API等。
+- **English**: Generic programming, DSLs, formal verification, compiler implementation, type-safe APIs, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE GADTs, TypeFamilies #-}
+data Term a where
+  TInt  :: Int -> Term Int
+  TBool :: Bool -> Term Bool
+  TIf   :: Term Bool -> Term a -> Term a -> Term a
+
+type family Eval (t :: Term a) :: a where
+  Eval ('TInt n) = n
+  Eval ('TBool b) = b
+```
+
+## 1.10 相关理论 Related Theories
+
+- 范畴论（Category Theory）
+- 线性类型理论（Linear Type Theory）
+- 依赖类型理论（Dependent Type Theory）
+- 形式化验证（Formal Verification）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Type Theory](https://en.wikipedia.org/wiki/Type_theory)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为类型理论基础的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

@@ -84,4 +84,58 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：自然变换概念源自范畴论，20世纪中叶提出。Haskell自设计之初即引入Functor和自然变换思想，成为泛型编程和高阶抽象的基础。GHC不断扩展相关特性，如RankNTypes、QuantifiedConstraints等。
+- **English**: The concept of natural transformation originates from category theory, introduced in the mid-20th century. Haskell has included the ideas of functors and natural transformations since its inception, forming the basis of generic programming and higher-order abstractions. GHC has continuously extended related features, such as RankNTypes and QuantifiedConstraints.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- Functor类型类、forall多态、结构性映射、类型安全转换。
+- Functor type class, forall polymorphism, structural mapping, type-safe conversion.
+
+### 最新特性 Latest Features
+
+- **RankNTypes/QuantifiedConstraints**
+- **Type-level Programming**
+- **GHC 2021/2022**：标准化更多自然变换相关扩展。
+
+- **English**:
+  - RankNTypes/QuantifiedConstraints
+  - Type-level Programming
+  - GHC 2021/2022: Standardizes more natural transformation extensions
+
+## 1.8 应用 Applications
+
+- **中文**：泛型编程、容器转换、DSL、类型安全API、异步与并发抽象等。
+- **English**: Generic programming, container conversion, DSLs, type-safe APIs, async and concurrency abstractions, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+-- Maybe 到 List 的自然变换
+maybeToList :: Maybe a -> [a]
+maybeToList Nothing  = []
+maybeToList (Just x) = [x]
+
+-- RankNTypes 的自然变换
+nt :: forall a. f a -> g a
+```
+
+## 1.10 相关理论 Related Theories
+
+- 范畴论（Category Theory）
+- Functor与Monad理论（Functor and Monad Theory）
+- 类型级编程（Type-level Programming）
+- 泛型编程（Generic Programming）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Natural Transformation](https://en.wikipedia.org/wiki/Natural_transformation)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+- [Category Theory for Programmers](https://bartoszmilewski.com/category/category-theory/)
+
 > 本文档为自然变换与Haskell类型系统的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

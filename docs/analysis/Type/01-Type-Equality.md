@@ -81,4 +81,73 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：类型等价理论起源于类型系统和逻辑学。Haskell自GADT、Type Families、TypeOperators等特性引入后，类型等价约束和类型级等价成为类型安全和依赖类型的基础。GHC不断扩展类型等价相关特性，如Data.Type.Equality、TypeInType、QuantifiedConstraints等。
+- **English**: Type equality theory originates from type systems and logic. With the introduction of GADTs, Type Families, and TypeOperators, type equality constraints and type-level equality have become the foundation of type safety and dependent types in Haskell. GHC has continuously extended type equality features, such as Data.Type.Equality, TypeInType, and QuantifiedConstraints.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- 类型等价约束、GADT等价证明、类型级等价、类型安全转换。
+- Type equality constraints, GADT equality proofs, type-level equality, type-safe conversions.
+
+### 最新特性 Latest Features
+
+- **Data.Type.Equality**：类型级等价运算符(:~:)和等价证明。
+- **TypeInType**：类型与种类的等价。
+- **QuantifiedConstraints/RankNTypes**：高阶等价约束。
+- **Dependent Types（依赖类型）**：GHC 9.x实验性支持。
+- **GHC 2021/2022**：标准化更多类型等价相关扩展。
+
+- **English**:
+  - Data.Type.Equality: Type-level equality operator (:~:) and equality proofs.
+  - TypeInType: Equality of types and kinds.
+  - QuantifiedConstraints/RankNTypes: Higher-order equality constraints.
+  - Dependent Types: Experimental in GHC 9.x.
+  - GHC 2021/2022: Standardizes more type equality extensions.
+
+## 1.8 应用 Applications
+
+- **中文**：类型安全转换、依赖类型、类型级推断、泛型编程、编译期验证、不可变数据结构等。
+- **English**: Type-safe conversions, dependent types, type-level inference, generic programming, compile-time verification, immutable data structures, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE GADTs, TypeFamilies, TypeOperators, DataKinds #-}
+import Data.Type.Equality
+
+data Nat = Z | S Nat
+
+data Vec (n :: Nat) a where
+  VNil  :: Vec 'Z a
+  VCons :: a -> Vec n a -> Vec ('S n) a
+
+-- 类型等价证明与安全转换
+safeCast :: (a :~: b) -> a -> b
+safeCast Refl x = x
+
+-- 类型级等价判断
+ type family EqType a b where
+   EqType a a = True
+   EqType a b = False
+```
+
+## 1.10 相关理论 Related Theories
+
+- 类型级编程（Type-level Programming）
+- 依赖类型理论（Dependent Type Theory）
+- 代数数据类型（Algebraic Data Types）
+- 形式化验证（Formal Verification）
+- 类型系统理论（Type System Theory）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Type equality](https://en.wikipedia.org/wiki/Type_equality)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为类型等价在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

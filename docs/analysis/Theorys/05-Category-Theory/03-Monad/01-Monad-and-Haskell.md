@@ -100,4 +100,63 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：单子（Monad）概念源自范畴论，20世纪中叶提出。Eugenio Moggi于1989年首次将单子引入计算机科学，随后Wadler等人将其引入Haskell，成为处理副作用和顺序计算的核心抽象。GHC不断扩展Monad相关特性，如MonadFail、MonadComprehensions、Monad Transformers等。
+- **English**: The concept of monad originates from category theory, introduced in the mid-20th century. Eugenio Moggi brought monads into computer science in 1989, and Wadler et al. introduced them into Haskell, making them the core abstraction for handling effects and sequential computation. GHC has continuously extended Monad-related features, such as MonadFail, MonadComprehensions, and Monad Transformers.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- Monad类型类、(>>=)、return、do语法、Kleisli范畴。
+- Monad type class, (>>=), return, do-notation, Kleisli category.
+
+### 最新特性 Latest Features
+
+- **MonadFail/MonadComprehensions**
+- **Monad Transformers**
+- **QuantifiedConstraints/RankNTypes**
+- **GHC 2021/2022**：标准化更多Monad相关扩展。
+
+- **English**:
+  - MonadFail/MonadComprehensions
+  - Monad Transformers
+  - QuantifiedConstraints/RankNTypes
+  - GHC 2021/2022: Standardizes more Monad extensions
+
+## 1.8 应用 Applications
+
+- **中文**：副作用建模、异步与并发、解析器组合器、DSL、资源管理、错误处理等。
+- **English**: Effect modeling, async and concurrency, parser combinators, DSLs, resource management, error handling, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+-- Monad Transformer 例子
+import Control.Monad.Trans.Maybe
+import Control.Monad.Trans.Class
+
+example :: MaybeT IO String
+example = do
+  lift $ putStrLn "Enter something:"
+  x <- lift getLine
+  if null x then MaybeT (return Nothing) else return x
+```
+
+## 1.10 相关理论 Related Theories
+
+- 范畴论（Category Theory）
+- Kleisli范畴（Kleisli Category）
+- 类型类（Type Classes）
+- 代数效应（Algebraic Effects）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Monad (category theory)](https://en.wikipedia.org/wiki/Monad_(category_theory))
+- [Wikipedia: Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming))
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+- [Category Theory for Programmers](https://bartoszmilewski.com/category/category-theory/)
+
 > 本文档为单子与Haskell类型系统的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

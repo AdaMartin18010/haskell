@@ -87,4 +87,65 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：类型元编程思想起源于元编程和类型理论。Haskell自Template Haskell、GHC.Generics、类型族等特性引入后，成为类型级自动化和泛型编程的主流平台。GHC不断扩展类型元编程相关特性，如TypeApplications、DerivingVia、Type-level Macros等。
+- **English**: The idea of type metaprogramming originates from metaprogramming and type theory. With the introduction of Template Haskell, GHC.Generics, and type families, Haskell has become a mainstream platform for type-level automation and generic programming. GHC has continuously extended type metaprogramming features, such as TypeApplications, DerivingVia, and type-level macros.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- Template Haskell、GHC.Generics、类型族、GADTs、自动派生、类型级递归。
+- Template Haskell, GHC.Generics, type families, GADTs, automatic derivation, type-level recursion.
+
+### 最新特性 Latest Features
+
+- **TypeApplications**：类型应用语法，支持显式类型传递。
+- **DerivingVia/DerivingStrategies**：灵活的自动派生机制。
+- **Type-level Macros/Meta-programming**：类型级宏与元编程。
+- **GHC 2021/2022**：标准化更多类型元编程相关扩展。
+
+- **English**:
+  - TypeApplications: Syntax for explicit type passing.
+  - DerivingVia/DerivingStrategies: Flexible automatic derivation mechanisms.
+  - Type-level Macros/Meta-programming: Type-level macros and metaprogramming.
+  - GHC 2021/2022: Standardizes more type metaprogramming extensions.
+
+## 1.8 应用 Applications
+
+- **中文**：自动派生、泛型库、类型安全DSL、编译期验证、序列化、不可变数据结构等。
+- **English**: Automatic derivation, generic libraries, type-safe DSLs, compile-time verification, serialization, immutable data structures, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE TemplateHaskell, DeriveGeneric, TypeApplications #-}
+import Language.Haskell.TH
+import GHC.Generics
+
+-- 自动生成Show实例
+$(deriveShow ''MyType)
+
+data Person = Person { name :: String, age :: Int } deriving (Generic)
+
+-- 使用TypeApplications进行类型安全操作
+typeName :: forall a. Typeable a => String
+typeName = show (typeRep @a)
+```
+
+## 1.10 相关理论 Related Theories
+
+- 类型级编程（Type-level Programming）
+- 泛型编程（Generic Programming）
+- 元编程理论（Metaprogramming Theory）
+- 形式化验证（Formal Verification）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为类型元编程在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

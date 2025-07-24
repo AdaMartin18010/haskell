@@ -99,4 +99,71 @@ graph TD
 
 ---
 
+## 1.7 历史与发展 History & Development
+
+- **中文**：类型推断理论起源于20世纪60年代，Hindley和Milner提出了著名的Hindley-Milner类型系统。Haskell自诞生以来采用该系统，并不断扩展支持类型类多态、RankNTypes、GADTs等。类型推断和多态极大提升了代码的抽象性和安全性。
+- **English**: Type inference theory originated in the 1960s, with the Hindley-Milner type system proposed by Hindley and Milner. Haskell has adopted and extended this system since its inception, supporting type class polymorphism, RankNTypes, GADTs, etc. Type inference and polymorphism greatly enhance code abstraction and safety.
+
+## 1.8 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- Hindley-Milner类型推断、参数多态、类型类多态、自动类型推导。
+- Hindley-Milner type inference, parametric polymorphism, type class polymorphism, automatic type deduction.
+
+### 最新特性 Latest Features
+
+- **RankNTypes/ExistentialQuantification**：高阶多态与存在类型。
+- **GADTs（广义代数数据类型）**：更强的类型表达能力。
+- **Type Families/Type-level Programming**：类型级多态与推断。
+- **QuantifiedConstraints**：约束多态。
+- **GHC 2021/2022**：标准化更多类型推断与多态相关扩展。
+
+- **English**:
+  - RankNTypes/ExistentialQuantification: Higher-rank polymorphism and existential types.
+  - GADTs: More expressive types.
+  - Type Families/Type-level Programming: Type-level polymorphism and inference.
+  - QuantifiedConstraints: Constraint polymorphism.
+  - GHC 2021/2022: Standardizes more type inference and polymorphism extensions.
+
+## 1.9 应用 Applications
+
+- **中文**：泛型编程、类型安全API、DSL、自动推导、类型级编程、依赖注入等。
+- **English**: Generic programming, type-safe APIs, DSLs, automatic deduction, type-level programming, dependency injection, etc.
+
+## 1.10 例子 Examples
+
+```haskell
+{-# LANGUAGE RankNTypes, GADTs, TypeFamilies #-}
+-- 高阶多态
+applyTwice :: (forall a. a -> a) -> (Int, Bool)
+applyTwice f = (f 1, f True)
+
+-- GADT与类型推断
+ data Expr a where
+   LitInt  :: Int -> Expr Int
+   LitBool :: Bool -> Expr Bool
+   If      :: Expr Bool -> Expr a -> Expr a -> Expr a
+
+-- 类型级多态
+ type family F a where
+   F Int = Bool
+   F Bool = Int
+```
+
+## 1.11 相关理论 Related Theories
+
+- Hindley-Milner类型系统（Hindley-Milner Type System）
+- 多态类型系统（Polymorphic Type Systems）
+- 类型类（Type Classes）
+- 类型级编程（Type-level Programming）
+
+## 1.12 参考文献 References
+
+- [Wikipedia: Type Inference](https://en.wikipedia.org/wiki/Type_inference)
+- [Wikipedia: Polymorphism (computer science)](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为类型推断与多态在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

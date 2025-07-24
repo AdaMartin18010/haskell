@@ -75,4 +75,69 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：类型级编程思想起源于类型理论和元编程。Haskell自GADT、Type Families、DataKinds等特性引入后，成为类型级编程的主流平台。GHC不断扩展类型级能力，如Singletons、TypeLits、Dependent Types等，极大提升了类型系统的表达力和自动化能力。
+- **English**: The idea of type-level programming originates from type theory and metaprogramming. With the introduction of GADTs, Type Families, and DataKinds, Haskell has become a mainstream platform for type-level programming. GHC has continuously extended type-level capabilities, such as Singletons, TypeLits, and Dependent Types, greatly enhancing the expressiveness and automation of the type system.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- 类型族、GADTs、DataKinds、类型推断、类型级归纳。
+- Type families, GADTs, DataKinds, type inference, type-level induction.
+
+### 最新特性 Latest Features
+
+- **Singletons**：类型与值的单例化，桥接类型级与值级。
+- **TypeLits**：类型级自然数与符号。
+- **Dependent Types（依赖类型）**：GHC 9.x实验性支持，类型依赖于值。
+- **QuantifiedConstraints/RankNTypes**：高阶类型与约束。
+- **GHC 2021/2022**：标准化更多类型级编程相关扩展。
+
+- **English**:
+  - Singletons: Singletonization of types and values, bridging type and value levels.
+  - TypeLits: Type-level naturals and symbols.
+  - Dependent Types: Experimental in GHC 9.x, types depending on values.
+  - QuantifiedConstraints/RankNTypes: Higher-order types and constraints.
+  - GHC 2021/2022: Standardizes more type-level programming extensions.
+
+## 1.8 应用 Applications
+
+- **中文**：类型安全DSL、编译期验证、不可变数据结构、泛型编程、形式化验证、类型安全API等。
+- **English**: Type-safe DSLs, compile-time verification, immutable data structures, generic programming, formal verification, type-safe APIs, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE DataKinds, TypeFamilies, GADTs, TypeOperators, KindSignatures #-}
+data Nat = Z | S Nat
+type family Mul n m where
+  Mul 'Z     m = 'Z
+  Mul ('S n) m = Add m (Mul n m)
+
+data Vec (n :: Nat) a where
+  VNil  :: Vec 'Z a
+  VCons :: a -> Vec n a -> Vec ('S n) a
+
+-- 类型级约束与类型安全操作
+tailVec :: Vec ('S n) a -> Vec n a
+tailVec (VCons _ xs) = xs
+```
+
+## 1.10 相关理论 Related Theories
+
+- 类型理论（Type Theory）
+- 依赖类型理论（Dependent Type Theory）
+- 范畴论（Category Theory）
+- 形式化验证（Formal Verification）
+- 泛型编程（Generic Programming）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Type-level programming](https://en.wikipedia.org/wiki/Type-level_programming)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为类型级编程在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

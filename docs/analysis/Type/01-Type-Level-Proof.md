@@ -87,4 +87,75 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：类型级证明思想起源于类型理论、归纳法和形式化验证。Haskell自GADT、类型族、DataKinds等特性引入后，成为类型级归纳、等价和安全性证明的主流平台。GHC不断扩展类型级证明相关特性，如Singletons、TypeLits、QuantifiedConstraints、Dependent Types等。
+- **English**: The idea of type-level proof originates from type theory, induction, and formal verification. With the introduction of GADTs, type families, and DataKinds, Haskell has become a mainstream platform for type-level induction, equality, and safety proofs. GHC has continuously extended type-level proof features, such as Singletons, TypeLits, QuantifiedConstraints, and Dependent Types.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- GADTs、类型族、类型等价、类型级归纳、类型级断言。
+- GADTs, type families, type equality, type-level induction, type-level assertions.
+
+### 最新特性 Latest Features
+
+- **Singletons**：类型与值的单例化，桥接类型级与值级。
+- **TypeLits**：类型级自然数与符号。
+- **QuantifiedConstraints/RankNTypes**：高阶类型与约束。
+- **Dependent Types（依赖类型）**：GHC 9.x实验性支持。
+- **GHC 2021/2022**：标准化更多类型级证明相关扩展。
+
+- **English**:
+  - Singletons: Singletonization of types and values, bridging type and value levels.
+  - TypeLits: Type-level naturals and symbols.
+  - QuantifiedConstraints/RankNTypes: Higher-order types and constraints.
+  - Dependent Types: Experimental in GHC 9.x.
+  - GHC 2021/2022: Standardizes more type-level proof extensions.
+
+## 1.8 应用 Applications
+
+- **中文**：不可变数据结构、类型安全API、编译期验证、泛型编程、形式化验证、类型安全DSL等。
+- **English**: Immutable data structures, type-safe APIs, compile-time verification, generic programming, formal verification, type-safe DSLs, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE GADTs, DataKinds, TypeFamilies, TypeOperators #-}
+data Nat = Z | S Nat
+data SNat n where
+  SZ :: SNat 'Z
+  SS :: SNat n -> SNat ('S n)
+
+type family Add n m where
+  Add 'Z     m = m
+  Add ('S n) m = 'S (Add n m)
+
+-- 类型级归纳证明：n + 0 = n
+plusZero :: SNat n -> (n ~ Add n 'Z) => ()
+plusZero _ = ()
+
+-- 类型等价证明
+ data EqProof a b where
+   Refl :: EqProof a a
+
+symm :: EqProof a b -> EqProof b a
+symm Refl = Refl
+```
+
+## 1.10 相关理论 Related Theories
+
+- 类型级编程（Type-level Programming）
+- 依赖类型理论（Dependent Type Theory）
+- 形式化验证（Formal Verification）
+- 类型系统理论（Type System Theory）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Type-level proof](https://en.wikipedia.org/wiki/Type-level_programming#Proofs)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为类型级证明在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

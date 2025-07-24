@@ -75,4 +75,68 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：类型级验证思想起源于类型理论和形式化方法。Haskell自GADT、类型族、DataKinds等特性引入后，成为类型级验证和编译期安全保证的主流平台。GHC不断扩展类型级验证相关特性，如Singletons、TypeLits、Dependent Types等。
+- **English**: The idea of type-level verification originates from type theory and formal methods. With the introduction of GADTs, type families, and DataKinds, Haskell has become a mainstream platform for type-level verification and compile-time safety guarantees. GHC has continuously extended type-level verification features, such as Singletons, TypeLits, and Dependent Types.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- 类型族、GADTs、DataKinds、类型级约束、类型安全索引。
+- Type families, GADTs, DataKinds, type-level constraints, type-safe indexing.
+
+### 最新特性 Latest Features
+
+- **Singletons**：类型与值的单例化，桥接类型级与值级。
+- **TypeLits**：类型级自然数与符号。
+- **Dependent Types（依赖类型）**：GHC 9.x实验性支持。
+- **GHC 2021/2022**：标准化更多类型级验证相关扩展。
+
+- **English**:
+  - Singletons: Singletonization of types and values, bridging type and value levels.
+  - TypeLits: Type-level naturals and symbols.
+  - Dependent Types: Experimental in GHC 9.x.
+  - GHC 2021/2022: Standardizes more type-level verification extensions.
+
+## 1.8 应用 Applications
+
+- **中文**：类型安全DSL、编译期验证、不可变数据结构、泛型编程、形式化验证、类型安全API等。
+- **English**: Type-safe DSLs, compile-time verification, immutable data structures, generic programming, formal verification, type-safe APIs, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE DataKinds, TypeFamilies, GADTs, TypeOperators, KindSignatures #-}
+data Nat = Z | S Nat
+data Vec (n :: Nat) a where
+  VNil  :: Vec 'Z a
+  VCons :: a -> Vec n a -> Vec ('S n) a
+
+type family LessThan n m where
+  LessThan 'Z     ('S m) = 'True
+  LessThan ('S n) ('S m) = LessThan n m
+  LessThan n      m      = 'False
+
+-- 类型级验证：安全索引
+safeIndex :: Fin n -> Vec n a -> a
+safeIndex FZ     (VCons x _)  = x
+safeIndex (FS k) (VCons _ xs) = safeIndex k xs
+```
+
+## 1.10 相关理论 Related Theories
+
+- 类型级编程（Type-level Programming）
+- 依赖类型理论（Dependent Type Theory）
+- 形式化验证（Formal Verification）
+- 类型系统理论（Type System Theory）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Type-level verification](https://en.wikipedia.org/wiki/Type-level_programming#Verification)
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Types and Programming Languages, Benjamin C. Pierce]
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
 > 本文档为类型级验证在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

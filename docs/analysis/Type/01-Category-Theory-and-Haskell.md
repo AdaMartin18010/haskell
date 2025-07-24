@@ -63,3 +63,72 @@ graph TD
 - [函子 Functor](../05-Category-Theory/02-Functor/01-Functor-and-Haskell.md)
 - [单子 Monad](../05-Category-Theory/03-Monad/01-Monad-and-Haskell.md)
 - [自然变换 Natural Transformation](../05-Category-Theory/04-Natural-Transformation/01-Natural-Transformation-and-Haskell.md)
+
+---
+
+## 历史与发展 History & Development
+
+- **中文**：范畴论起源于20世纪40年代，由Eilenberg和Mac Lane提出，最初用于代数拓扑，后广泛影响数学、逻辑和计算机科学。Haskell自1990年代诞生以来，其类型系统不断吸收范畴论思想，推动了类型类、Functor、Monad等概念的普及。
+- **English**: Category theory originated in the 1940s, introduced by Eilenberg and Mac Lane for algebraic topology, and later influenced mathematics, logic, and computer science. Since the 1990s, Haskell's type system has incorporated category theory concepts, popularizing type classes, Functors, Monads, etc.
+
+## Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- 类型类（Type Classes）、Functor、Monad、Applicative、自然变换（Natural Transformation）等，均有范畴论基础。
+- Type classes, Functor, Monad, Applicative, and natural transformations in Haskell are all rooted in category theory.
+
+### 最新特性 Latest Features
+
+- **GADTs（广义代数数据类型）**：更强的类型表达能力，支持更复杂的范畴结构。
+- **Type Families/Type-level Programming**：类型级函数和类型运算，支持类型范畴的抽象。
+- **Linear Types（线性类型）**：GHC 8.12+，引入资源敏感的范畴结构。
+- **Dependent Types（依赖类型）**：GHC 9.x实验性支持，类型依赖于值，进一步接近范畴论中的依赖范畴。
+- **QuantifiedConstraints/RankNTypes**：更高阶的类型抽象。
+- **GHC 2021/2022**：标准化更多类型系统扩展。
+
+- **English**:
+  - GADTs: More expressive types, supporting complex categorical structures.
+  - Type Families/Type-level Programming: Type-level functions and computation, enabling categorical abstraction at the type level.
+  - Linear Types: Introduced in GHC 8.12+, resource-sensitive categorical structures.
+  - Dependent Types: Experimental in GHC 9.x, types depending on values, approaching dependent categories in category theory.
+  - QuantifiedConstraints/RankNTypes: Higher-order type abstraction.
+  - GHC 2021/2022: Standardizes more type system extensions.
+
+## 应用 Applications
+
+- **中文**：Haskell的范畴论思想广泛应用于泛型编程、抽象代数、DSL设计、并发与分布式系统、形式化验证等领域。
+- **English**: Category theory in Haskell is widely used in generic programming, abstract algebra, DSL design, concurrency and distributed systems, and formal verification.
+
+## 例子 Examples
+
+```haskell
+-- 依赖类型与GADT结合的例子（GHC 9.x）
+data Nat = Z | S Nat
+
+data Vec a n where
+  VNil  :: Vec a 'Z
+  VCons :: a -> Vec a n -> Vec a ('S n)
+
+-- 类型级编程：类型族
+{-# LANGUAGE TypeFamilies #-}
+type family F a where
+  F Int = Bool
+  F Bool = Int
+```
+
+## 相关理论 Related Theories
+
+- 依赖类型理论（Dependent Type Theory）
+- 线性类型理论（Linear Type Theory）
+- 范畴论与计算机科学（Category Theory in Computer Science）
+- 代数数据类型（Algebraic Data Types）
+- 形式化验证（Formal Verification）
+
+## 参考文献 References
+
+- [Wikipedia: Category Theory](https://en.wikipedia.org/wiki/Category_theory)
+- [Wikipedia: Haskell (programming language)](https://en.wikipedia.org/wiki/Haskell_(programming_language))
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Category Theory for Programmers](https://bartoszmilewski.com/category/category-theory/)
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)

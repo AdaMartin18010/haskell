@@ -90,4 +90,62 @@ graph TD
 
 ---
 
+## 1.6 历史与发展 History & Development
+
+- **中文**：函子（Functor）概念源自范畴论，20世纪中叶提出。Haskell自设计之初即引入Functor类型类，成为函数式编程中最基础的抽象之一。GHC不断扩展Functor相关特性，如派生、泛型编程、Higher-Kinded Types等。
+- **English**: The concept of functor originates from category theory, introduced in the mid-20th century. Haskell has included the Functor type class since its inception, making it one of the most fundamental abstractions in functional programming. GHC has continuously extended Functor-related features, such as deriving, generic programming, and higher-kinded types.
+
+## 1.7 Haskell 相关特性 Haskell Features
+
+### 经典特性 Classic Features
+
+- Functor类型类、fmap、派生实例、容器抽象。
+- Functor type class, fmap, deriving instances, container abstraction.
+
+### 最新特性 Latest Features
+
+- **Higher-Kinded Types（高阶类型）**
+- **DerivingVia/DerivingStrategies**
+- **QuantifiedConstraints/RankNTypes**
+- **GHC 2021/2022**：标准化更多Functor相关扩展。
+
+- **English**:
+  - Higher-Kinded Types
+  - DerivingVia/DerivingStrategies
+  - QuantifiedConstraints/RankNTypes
+  - GHC 2021/2022: Standardizes more Functor extensions
+
+## 1.8 应用 Applications
+
+- **中文**：数据结构抽象、泛型编程、函数式设计模式、DSL、并发与异步编程等。
+- **English**: Data structure abstraction, generic programming, functional design patterns, DSLs, concurrency and asynchronous programming, etc.
+
+## 1.9 例子 Examples
+
+```haskell
+{-# LANGUAGE DeriveFunctor #-}
+data Tree a = Leaf a | Node (Tree a) (Tree a) deriving (Functor)
+
+-- 使用fmap对Tree结构映射
+exampleTree :: Tree Int
+exampleTree = Node (Leaf 1) (Leaf 2)
+
+mappedTree :: Tree String
+mappedTree = fmap show exampleTree
+```
+
+## 1.10 相关理论 Related Theories
+
+- 范畴论（Category Theory）
+- 类型类（Type Classes）
+- 泛型编程（Generic Programming）
+- 代数数据类型（Algebraic Data Types）
+
+## 1.11 参考文献 References
+
+- [Wikipedia: Functor (category theory)](https://en.wikipedia.org/wiki/Functor_(category_theory))
+- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+- [Category Theory for Programmers](https://bartoszmilewski.com/category/category-theory/)
+
 > 本文档为函子与Haskell类型系统的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。
