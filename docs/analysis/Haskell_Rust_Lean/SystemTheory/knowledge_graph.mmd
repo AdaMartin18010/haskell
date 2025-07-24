@@ -1,0 +1,31 @@
+graph TD
+  A["系统理论\nSystem Theory"]
+  B["控制论\nCybernetics"]
+  C["信息论\nInformation Theory"]
+  D["复杂性科学\nComplexity Science"]
+  E["Haskell"]
+  F["Rust"]
+  G["Lean"]
+  H["分层结构\nHierarchy"]
+  I["反馈\nFeedback"]
+  J["动态行为\nDynamic Behavior"]
+  K["稳定性\nStability"]
+  L["适应性\nAdaptation"]
+
+  A -- "理论基础 Foundation" --> B
+  A -- "信息流 Information Flow" --> C
+  A -- "复杂性分析 Complexity Analysis" --> D
+  A -- "分层结构 Hierarchy" --> H
+  A -- "反馈 Feedback" --> I
+  A -- "动态行为 Dynamic Behavior" --> J
+  A -- "稳定性 Stability" --> K
+  A -- "适应性 Adaptation" --> L
+  A -- "Haskell实现 Implementation" --> E
+  A -- "Rust实现 Implementation" --> F
+  A -- "Lean实现 Implementation" --> G
+  B -- "反馈与调节 Feedback & Regulation" --> A
+  C -- "系统与信息 System & Information" --> A
+  D -- "复杂系统建模 Complex System Modeling" --> A
+  E -- "函数式系统建模 Functional Modeling" --> A
+  F -- "嵌入式系统 Embedded Systems" --> A
+  G -- "形式化系统证明 Formal System Proof" --> A 

@@ -4,7 +4,7 @@
 
 针对 rust, haskel 和 lean 的语言的对比分析
 
-1. 包括从形式科学理论的视角分析，Type-theory, Linear-Type-theory, Affine-Type-theory, Temporal-Type-theory, HOTT-同伦类型论, Category-Theory, **Proof Theory 证明论, Model Theory 模型论, Formal Language Theory 形式语言理论, Automata Theory 自动机理论, System Theory 系统理论, Recursion & Computability Theory 递归-可计算理论** 等
+1. 包括从形式科学理论的视角分析，Type-theory, Linear-Type-theory, Affine-Type-theory, Temporal-Type-theory, HOTT-同伦类型论, Category-Theory, **Proof Theory 证明论, Model Theory 模型论, Formal Language Theory 形式语言理论, Automata Theory 自动机理论, System Theory 系统理论, Recursion & Computability Theory 递归-可计算理论, Cybernetics 控制论, Information Theory 信息论** 等
 2. 包括从形式语言分析，语法语义分析，类型系统对比分析，语义模型分析，语义模型对比分析,控制流执行流数据流分析等
 3. 包括从语言的功能用途分析，实用价值分析等
 4. 包含理论的历史，知识体系结构全面论证，形式化的论证, 证明等结合理论模型和语言模型进行证明

@@ -1,0 +1,31 @@
+graph TD
+  A["控制论\nCybernetics"]
+  B["系统理论\nSystem Theory"]
+  C["信息论\nInformation Theory"]
+  D["自动化\nAutomation"]
+  E["Haskell"]
+  F["Rust"]
+  G["Lean"]
+  H["反馈\nFeedback"]
+  I["自组织\nSelf-Organization"]
+  J["信号处理\nSignal Processing"]
+  K["稳定性\nStability"]
+  L["调节机制\nRegulation"]
+
+  A -- "理论基础 Foundation" --> B
+  A -- "信息流 Information Flow" --> C
+  A -- "工程实现 Engineering Implementation" --> D
+  A -- "反馈 Feedback" --> H
+  A -- "自组织 Self-Organization" --> I
+  A -- "信号处理 Signal Processing" --> J
+  A -- "稳定性 Stability" --> K
+  A -- "调节机制 Regulation" --> L
+  A -- "Haskell实现 Implementation" --> E
+  A -- "Rust实现 Implementation" --> F
+  A -- "Lean实现 Implementation" --> G
+  B -- "系统建模 System Modeling" --> A
+  C -- "信息流与反馈 Information & Feedback" --> A
+  D -- "自动化控制 Automation Control" --> A
+  E -- "高阶函数反馈 High-order Feedback" --> A
+  F -- "嵌入式控制 Embedded Control" --> A
+  G -- "形式化反馈 Formal Feedback" --> A 

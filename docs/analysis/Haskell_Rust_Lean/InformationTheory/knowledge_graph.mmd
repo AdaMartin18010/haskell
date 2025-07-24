@@ -1,0 +1,33 @@
+graph TD
+  A["信息论\nInformation Theory"]
+  B["控制论\nCybernetics"]
+  C["系统理论\nSystem Theory"]
+  D["概率论\nProbability Theory"]
+  E["Haskell"]
+  F["Rust"]
+  G["Lean"]
+  H["熵\nEntropy"]
+  I["信道容量\nChannel Capacity"]
+  J["编码\nCoding"]
+  K["压缩\nCompression"]
+  L["噪声\nNoise"]
+  M["纠错\nError Correction"]
+
+  A -- "理论基础 Foundation" --> B
+  A -- "系统建模 System Modeling" --> C
+  A -- "概率建模 Probability Modeling" --> D
+  A -- "熵 Entropy" --> H
+  A -- "信道容量 Channel Capacity" --> I
+  A -- "编码 Coding" --> J
+  A -- "压缩 Compression" --> K
+  A -- "噪声 Noise" --> L
+  A -- "纠错 Error Correction" --> M
+  A -- "Haskell实现 Implementation" --> E
+  A -- "Rust实现 Implementation" --> F
+  A -- "Lean实现 Implementation" --> G
+  B -- "反馈与信息流 Feedback & Information Flow" --> A
+  C -- "系统与信息 System & Information" --> A
+  D -- "概率分布 Probability Distribution" --> A
+  E -- "概率模型与编码 Probabilistic Coding" --> A
+  F -- "高效编码 Efficient Coding" --> A
+  G -- "形式化熵与信道 Formal Entropy & Channel" --> A 
