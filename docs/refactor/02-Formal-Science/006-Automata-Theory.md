@@ -1,4 +1,4 @@
-# 自动机理论
+# 自动机理论（Automata Theory）
 
 ## 概述
 
@@ -313,6 +313,63 @@ regexMatch pattern text =
   let dfa = regexToDFA pattern
   in runDFA dfa text
 ```
+
+---
+
+## 哲科视角与国际化扩展 Philosophical-Scientific Perspective & Internationalization
+
+### 定义 Definition
+
+- **中文**：自动机理论是研究抽象计算模型（如有限自动机、下推自动机、图灵机等）及其识别、生成和变换能力的理论，是计算机科学、语言学和逻辑学的基础。
+- **English**: Automata theory is the study of abstract computational models (such as finite automata, pushdown automata, Turing machines, etc.) and their capabilities for recognition, generation, and transformation. It is foundational to computer science, linguistics, and logic.
+
+### 历史与发展 History & Development
+
+- **中文**：自动机理论起源于20世纪初，Kleene、Turing、Shannon等人奠定了有限自动机、正则表达式、图灵机等基础。Chomsky提出文法分层，推动了自动机与形式语言理论的融合。现代自动机理论与编译原理、人工智能、复杂性理论等深度结合。
+- **English**: Automata theory originated in the early 20th century, with foundational work by Kleene, Turing, Shannon, and others on finite automata, regular expressions, and Turing machines. Chomsky's hierarchy of grammars further integrated automata with formal language theory. Modern automata theory is deeply connected with compiler theory, artificial intelligence, and complexity theory.
+
+### 哲学科学特性分析 Philosophical-Scientific Feature Analysis
+
+- **中文**：自动机理论不仅关注计算模型的技术细节，更关涉可计算性、信息论、结构主义、认知科学等哲学基础。它与形式语言理论、证明论、模型论、类型理论等共同构成现代形式科学的基石。
+- **English**: Automata theory is concerned not only with the technical details of computational models, but also with philosophical foundations such as computability, information theory, structuralism, and cognitive science. Together with formal language theory, proof theory, model theory, and type theory, it forms the cornerstone of modern formal science.
+
+### 应用 Applications
+
+- **中文**：编译原理、词法分析、语法分析、正则表达式、模式匹配、自然语言处理、形式化验证、人工智能等。
+- **English**: Compiler theory, lexical analysis, syntax analysis, regular expressions, pattern matching, natural language processing, formal verification, artificial intelligence, etc.
+
+### 例子 Examples
+
+```haskell
+-- Haskell: DFA的极简建模
+import qualified Data.Set as Set
+import qualified Data.Map as Map
+
+data DFA = DFA
+  { states :: Set.Set String
+  , alphabet :: Set.Set Char
+  , transition :: Map.Map (String, Char) String
+  , startState :: String
+  , acceptStates :: Set.Set String
+  }
+```
+
+### 相关理论 Related Theories
+
+- 形式语言理论 Formal Language Theory
+- 证明论 Proof Theory
+- 模型论 Model Theory
+- 类型理论 Type Theory
+- 系统理论 System Theory
+- 计算复杂性理论 Computational Complexity Theory
+
+### 参考文献 References
+
+- [1] Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006). Introduction to Automata Theory, Languages, and Computation.
+- [2] Turing, A. M. (1936). On Computable Numbers, with an Application to the Entscheidungsproblem.
+- [3] Chomsky, N. (1956). Three models for the description of language.
+- [4] Wikipedia: Automata Theory <https://en.wikipedia.org/wiki/Automata_theory>
+- [5] Types and Programming Languages, Benjamin C. Pierce
 
 ---
 

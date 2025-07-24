@@ -5,7 +5,7 @@
 针对 rust, haskel 和 lean 的语言的对比分析
 
 1. 包括从形式科学理论的视角分析，Type-theory, Linear-Type-theory, Affine-Type-theory, Temporal-Type-theory, HOTT-同伦类型论, Category-Theory, **Proof Theory 证明论, Model Theory 模型论, Formal Language Theory 形式语言理论, Automata Theory 自动机理论, System Theory 系统理论** 等
-2. 包括从形式语言分析，语法语义分析，类型系统对比分析，语义模型分析，语义模型对比分析等
+2. 包括从形式语言分析，语法语义分析，类型系统对比分析，语义模型分析，语义模型对比分析,控制流执行流数据流分析等
 3. 包括从语言的功能用途分析，实用价值分析等
 4. 包含理论的历史，知识体系结构全面论证，形式化的论证, 证明等结合理论模型和语言模型进行证明
 5. 对标wiki的国际化标准，包括概念定义解释论证的中英双语
@@ -27,33 +27,37 @@
 
 1. **引言与方法论 Introduction & Methodology**
 2. **理论基础与历史脉络 Theoretical Foundations & History**
-   - 类型理论 Type Theory
-   - 线性/仿射/时序类型理论 Linear/Affine/Temporal Type Theory
-   - 范畴论 Category Theory
-   - HOTT/同伦类型论 Homotopy Type Theory
-   - **证明论 Proof Theory**
-   - **模型论 Model Theory**
-   - **形式语言理论 Formal Language Theory**
-   - **自动机理论 Automata Theory**
-   - **系统理论 System Theory**
-   - 相关历史人物与哲学思脉 Key Figures & Philosophical Context
+   - [类型理论 Type Theory](./TypeTheory/README.md)
+   - [线性类型理论 Linear Type Theory](./LinearTypeTheory/README.md)
+   - [仿射类型理论 Affine Type Theory](./AffineTypeTheory/README.md)
+   - [时序类型理论 Temporal Type Theory](./TemporalTypeTheory/README.md)
+   - [范畴论 Category Theory](./CategoryTheory/README.md)
+   - [同伦类型论 HOTT](./HOTT/README.md)
+   - [证明论 Proof Theory](./ProofTheory/README.md)
+   - [模型论 Model Theory](./ModelTheory/README.md)
+   - [形式语言理论 Formal Language Theory](./FormalLanguageTheory/README.md)
+   - [自动机理论 Automata Theory](./AutomataTheory/README.md)
+   - [系统理论 System Theory](./SystemTheory/README.md)
+   - [相关历史人物与哲学思脉 Key Figures & Philosophical Context](./KeyFigures_PhilContext/README.md)
 3. **语言核心对比 Core Language Comparison**
-   - 语法与语义 Syntax & Semantics
-   - 类型系统 Type Systems
-   - 语义模型 Semantic Models
-   - 理论模型与语言模型映射 Mapping Theory to Language
+   - [语法与语义 Syntax & Semantics](./Syntax_Semantics/README.md)
+   - [类型系统 Type Systems](./TypeSystems/README.md)
+   - [语义模型 Semantic Models](./SemanticModels/README.md)
+   - [理论模型与语言模型映射 Mapping Theory to Language](./MappingTheory_Language/README.md)
+   - [控制流、执行流与数据流分析 Control Flow, Execution Flow & Data Flow Analysis](./ControlFlow_ExecutionFlow_DataFlow/README.md)
 4. **功能与用途分析 Functionality & Use Cases**
-   - 工程应用 Engineering Applications
-   - 实用价值 Practical Value
+   - [工程应用 Engineering Applications](./EngineeringApplications/README.md)
+   - [实用价值 Practical Value](./PracticalValue/README.md)
 5. **形式化论证与证明 Formal Reasoning & Proofs**
-   - 形式化定义 Formal Definitions
-   - 定理与证明 Theorems & Proofs
-   - 结合理论与语言模型的证明 Proofs Combining Theory & Language
+   - [形式化定义 Formal Definitions](./FormalDefinitions/README.md)
+   - [定理与证明 Theorems & Proofs](./Theorems_Proofs/README.md)
+   - [结合理论与语言模型的证明 Proofs Combining Theory & Language](./Proofs_Theory_Language/README.md)
 6. **国际化对标与中英双语扩展 Internationalization & Bilingual Expansion**
-   - 概念定义、结构化对比、Wiki风格
+   - [概念定义、结构化对比、Wiki风格](./Internationalization_Bilingual/README.md)
 7. **哲科思脉与知识体系结构 Philosophical Context & Knowledge Structure**
-   - 经典思想、上下文、知识图谱
+   - [经典思想、上下文、知识图谱](./Philosophy_KnowledgeGraph/README.md)
 8. **总结与展望 Conclusion & Outlook**
+   - [总结与展望 Conclusion & Outlook](./Conclusion_Outlook/README.md)
 
 ### 3. 持续推进与中断点计划 Sustainable Advancement & Checkpoints
 
