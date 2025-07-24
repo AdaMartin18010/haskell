@@ -1,0 +1,16 @@
+graph TD
+  A["仿射类型理论\nAffine Type Theory"]
+  B["Rust"]
+  C["Haskell"]
+  D["Lean"]
+  E["线性类型理论\nLinear Type Theory"]
+  F["系统理论\nSystem Theory"]
+  G["类型理论\nType Theory"]
+
+  A -- "所有权系统 Ownership System" --> B
+  A -- "线性类型模拟 Linear Type Simulation" --> C
+  A -- "理论模拟 Theoretical Modeling" --> D
+  A -- "资源有限性 Resource Finiteness" --> E
+  A -- "资源管理 Resource Management" --> F
+  G -- "扩展 Extension" --> A
+  E -- "资源唯一性 Resource Uniqueness" --> A 

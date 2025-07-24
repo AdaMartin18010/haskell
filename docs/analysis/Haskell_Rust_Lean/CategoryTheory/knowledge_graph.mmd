@@ -1,0 +1,19 @@
+graph TD
+  A["范畴论\nCategory Theory"]
+  B["类型理论\nType Theory"]
+  C["Haskell"]
+  D["Rust"]
+  E["Lean"]
+  F["同伦类型论\nHOTT"]
+  G["证明论\nProof Theory"]
+
+  A -- "理论基础 Foundation" --> B
+  A -- "结构抽象 Structural Abstraction" --> C
+  A -- "结构抽象 Structural Abstraction" --> D
+  A -- "结构抽象 Structural Abstraction" --> E
+  A -- "高阶结构 Higher Structure" --> F
+  B -- "类型系统 Type Systems" --> C
+  B -- "类型系统 Type Systems" --> D
+  B -- "依赖类型 Dependent Types" --> E
+  F -- "等价 Equivalence" --> A
+  G -- "形式化证明 Formal Proofs" --> A 
