@@ -1,20 +1,24 @@
 # 8.13 前沿趋势 Frontier Trends #ModelTheory-8.13
 
-## 8.13.1 AI与自动化建模 AI & Automated Modeling #ModelTheory-8.13.1
+## 8.13.1 AI与自动化推理 AI & Automated Reasoning #ModelTheory-8.13.1
 
-- AI辅助模型构建、自动化验证、符号推理。
+- 模型论在AI知识表示、自动化推理、语义网中的新应用。
+- 形式化模型在机器学习、知识图谱中的作用。
 
-## 8.13.2 跨学科融合 Interdisciplinary Integration #ModelTheory-8.13.2
+## 8.13.2 复杂系统与多模型集成 Complex Systems & Multi-model Integration #ModelTheory-8.13.2
 
-- 模型论与生物、社会、经济、物理等领域深度融合。
+- 多模型集成、异构系统建模、跨域语义映射。
+- 复杂系统中模型一致性与可验证性的新挑战。
 
-## 8.13.3 复杂系统与大数据 Complex Systems & Big Data #ModelTheory-8.13.3
+## 8.13.3 跨学科融合 Interdisciplinary Integration #ModelTheory-8.13.3
 
-- 大规模模型、复杂网络、数据驱动建模。
+- 模型论与类型论、范畴论、系统论、认知科学等领域的交叉。
+- 语义互操作、知识集成、跨学科模型验证。
 
-## 8.13.4 工程应用新方向 New Engineering Applications #ModelTheory-8.13.4
+## 8.13.4 工程实现新方向 New Engineering Applications #ModelTheory-8.13.4
 
-- 智能系统、自动化推理、形式化验证与AI结合。
+- 形式化建模、模型驱动开发、自动化验证工具的创新。
+- 类型驱动的模型集成、语义一致性分析、工程可扩展性。
 
 ## 8.13.5 相关Tag
 
