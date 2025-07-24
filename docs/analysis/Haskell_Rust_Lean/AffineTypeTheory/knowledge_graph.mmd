@@ -1,16 +1,27 @@
 graph TD
   A["仿射类型理论\nAffine Type Theory"]
-  B["Rust"]
-  C["Haskell"]
-  D["Lean"]
-  E["线性类型理论\nLinear Type Theory"]
-  F["系统理论\nSystem Theory"]
-  G["类型理论\nType Theory"]
+  B["类型理论\nType Theory"]
+  C["线性类型理论\nLinear Type Theory"]
+  D["资源唯一性\nResource Uniqueness"]
+  E["分布式系统\nDistributed Systems"]
+  F["Rust"]
+  G["Haskell"]
+  H["Lean"]
+  I["生命周期管理\nLifetime Management"]
+  J["垃圾回收\nGarbage Collection"]
+  K["区块链与智能合约\nBlockchain & Smart Contracts"]
 
-  A -- "所有权系统 Ownership System" --> B
-  A -- "线性类型模拟 Linear Type Simulation" --> C
-  A -- "理论模拟 Theoretical Modeling" --> D
-  A -- "资源有限性 Resource Finiteness" --> E
-  A -- "资源管理 Resource Management" --> F
-  G -- "扩展 Extension" --> A
-  E -- "资源唯一性 Resource Uniqueness" --> A 
+  A -- "理论基础 Foundation" --> B
+  A -- "分支 Branch" --> C
+  A -- "资源唯一性 Resource Uniqueness" --> D
+  A -- "分布式系统 Distributed" --> E
+  A -- "Rust实现 Implementation" --> F
+  A -- "Haskell实现 Implementation" --> G
+  A -- "Lean实现 Implementation" --> H
+  A -- "生命周期管理 Lifetime" --> I
+  A -- "垃圾回收 GC" --> J
+  A -- "区块链/智能合约 Blockchain/Smart Contracts" --> K
+  F -- "所有权与借用 Ownership & Borrowing" --> A
+  G -- "类型级资源丢弃 Type-level Resource Drop" --> A
+  H -- "形式化资源丢弃证明 Formal Resource Drop Proofs" --> A
+  %% #AffineTypeTheory-4 #AffineTypeTheory-4.10 知识图谱 Knowledge Graph 

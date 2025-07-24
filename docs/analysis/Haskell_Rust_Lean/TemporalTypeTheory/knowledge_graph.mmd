@@ -1,15 +1,29 @@
 graph TD
   A["时序类型理论\nTemporal Type Theory"]
-  B["Haskell"]
-  C["Rust"]
-  D["Lean"]
-  E["系统理论\nSystem Theory"]
-  F["线性类型理论\nLinear Type Theory"]
-  G["类型理论\nType Theory"]
+  B["类型理论\nType Theory"]
+  C["线性类型理论\nLinear Type Theory"]
+  D["分布式系统\nDistributed Systems"]
+  E["时序逻辑\nTemporal Logic"]
+  F["事件驱动\nEvent-driven"]
+  G["Haskell"]
+  H["Rust"]
+  I["Lean"]
+  J["一致性\nConsistency"]
+  K["调度与资源管理\nScheduling & Resource Management"]
+  L["智能合约\nSmart Contracts"]
 
-  A -- "GADT/类型级编程 GADT/Type-level" --> B
-  A -- "状态机 State Machine" --> C
-  A -- "理论模拟 Theoretical Modeling" --> D
-  A -- "动态建模 Dynamic Modeling" --> E
-  A -- "资源建模 Resource Modeling" --> F
-  G -- "扩展 Extension" --> A 
+  A -- "理论基础 Foundation" --> B
+  A -- "分支 Branch" --> C
+  A -- "分布式系统 Distributed" --> D
+  A -- "时序逻辑 Temporal Logic" --> E
+  A -- "事件驱动 Event-driven" --> F
+  A -- "Haskell实现 Implementation" --> G
+  A -- "Rust实现 Implementation" --> H
+  A -- "Lean实现 Implementation" --> I
+  A -- "一致性 Consistency" --> J
+  A -- "调度与资源管理 Scheduling" --> K
+  A -- "智能合约 Smart Contracts" --> L
+  G -- "惰性求值与事件驱动 Lazy & Event-driven" --> A
+  H -- "生命周期与并发管理 Lifetime & Concurrency" --> A
+  I -- "时序归纳与证明 Temporal Induction & Proof" --> A
+  %% #TemporalTypeTheory-5 #TemporalTypeTheory-5.10 知识图谱 Knowledge Graph 

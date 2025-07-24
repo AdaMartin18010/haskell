@@ -1,27 +1,17 @@
 # 7.11 交叉引用 Cross References #ProofTheory-7.11
 
-## 7.11.1 相关理论 Related Theories #ProofTheory-7.11.1
+- 7.11.1 [与类型理论的关系 Relation to Type Theory](../TypeTheory/definition.md)
+- 7.11.2 [与范畴论的关系 Relation to Category Theory](../CategoryTheory/definition.md)
+- 7.11.3 [与自动化证明的关系 Relation to Automated Proofs](../ProofTheory/frontier_trends.md)
+- 7.11.4 [与归纳原理的关系 Relation to Induction Principle](../ProofTheory/definition.md)
+- 7.11.5 [与一致性的关系 Relation to Consistency](../ProofTheory/definition.md)
+- 7.11.6 [与完备性的关系 Relation to Completeness](../ProofTheory/definition.md)
+- 7.11.7 [与Curry-Howard同构的关系 Relation to Curry-Howard Correspondence](../ProofTheory/definition.md)
+- 7.11.8 [与定理证明器的关系 Relation to Theorem Provers](../ProofTheory/frontier_trends.md)
+- 7.11.9 [与Haskell类型级证明的关系 Relation to Haskell Type-level Proof](../ProofTheory/comparison.md)
+- 7.11.10 [与Rust安全属性证明的关系 Relation to Rust Safety Properties](../ProofTheory/comparison.md)
+- 7.11.11 [与Lean依赖类型的关系 Relation to Lean Dependent Types](../ProofTheory/comparison.md)
 
-- [类型理论 Type Theory](../TypeTheory/README.md)
-- [范畴论 Category Theory](../CategoryTheory/README.md)
-- [模型论 Model Theory](../ModelTheory/README.md)
-- [自动化证明 Automated Theorem Proving](../Theorems_Proofs/README.md)
+---
 
-## 7.11.2 相关语言与实现 Related Languages & Implementations #ProofTheory-7.11.2
-
-- [Haskell 类型级证明 Type-level Proof](../TypeSystems/README.md)
-- [Rust 安全属性 Safety Properties](../TypeSystems/README.md)
-- [Lean 依赖类型与证明 Dependent Types & Proof](../TypeSystems/README.md)
-
-## 7.11.3 工程应用 Engineering Applications #ProofTheory-7.11.3
-
-- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
-- [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
-
-## 7.11.4 推荐阅读 Recommended Reading #ProofTheory-7.11.4
-
-- [Proof Theory (Wikipedia)](https://en.wikipedia.org/wiki/Proof_theory)
-- [Lean Theorem Prover Documentation](https://leanprover.github.io/)
-- [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/)
-
-`# ProofTheory #ProofTheory-7 #ProofTheory-7.11 #ProofTheory-7.11.1 #ProofTheory-7.11.2 #ProofTheory-7.11.3 #ProofTheory-7.11.4`
+`# ProofTheory #ProofTheory-7 #ProofTheory-7.11 #ProofTheory-7.11.1 #ProofTheory-7.11.2 #ProofTheory-7.11.3 #ProofTheory-7.11.4 #ProofTheory-7.11.5 #ProofTheory-7.11.6 #ProofTheory-7.11.7 #ProofTheory-7.11.8 #ProofTheory-7.11.9 #ProofTheory-7.11.10 #ProofTheory-7.11.11`

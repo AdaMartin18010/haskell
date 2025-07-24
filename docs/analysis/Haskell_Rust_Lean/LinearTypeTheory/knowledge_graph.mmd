@@ -1,16 +1,29 @@
 graph TD
   A["线性类型理论\nLinear Type Theory"]
-  B["Haskell"]
-  C["Rust"]
-  D["Lean"]
-  E["仿射类型理论\nAffine Type Theory"]
-  F["系统理论\nSystem Theory"]
-  G["类型理论\nType Theory"]
+  B["类型理论\nType Theory"]
+  C["仿射类型理论\nAffine Type Theory"]
+  D["资源敏感计算\nResource-sensitive Computing"]
+  E["并发与分布式\nConcurrency & Distributed"]
+  F["Rust"]
+  G["Haskell"]
+  H["Lean"]
+  I["所有权与借用\nOwnership & Borrowing"]
+  J["生命周期管理\nLifetime Management"]
+  K["零拷贝系统\nZero-copy Systems"]
+  L["安全协议\nSecurity Protocols"]
 
-  A -- "GHC扩展 GHC Extension" --> B
-  A -- "所有权 Ownership" --> C
-  A -- "理论模拟 Theoretical Modeling" --> D
-  A -- "资源唯一性 Resource Uniqueness" --> E
-  A -- "动态建模 Dynamic Modeling" --> F
-  G -- "扩展 Extension" --> A
-  E -- "资源有限性 Resource Finiteness" --> A 
+  A -- "理论基础 Foundation" --> B
+  A -- "分支 Branch" --> C
+  A -- "资源敏感 Resource Sensitivity" --> D
+  A -- "并发/分布式 Concurrency/Distributed" --> E
+  A -- "Rust实现 Implementation" --> F
+  A -- "Haskell实现 Implementation" --> G
+  A -- "Lean实现 Implementation" --> H
+  A -- "所有权 Ownership" --> I
+  A -- "生命周期管理 Lifetime" --> J
+  A -- "零拷贝 Zero-copy" --> K
+  A -- "安全协议 Security" --> L
+  F -- "所有权与借用 Ownership & Borrowing" --> A
+  G -- "类型级资源建模 Type-level Resource Modeling" --> A
+  H -- "形式化资源证明 Formal Resource Proofs" --> A
+  %% #LinearTypeTheory-3 #LinearTypeTheory-3.10 知识图谱 Knowledge Graph 

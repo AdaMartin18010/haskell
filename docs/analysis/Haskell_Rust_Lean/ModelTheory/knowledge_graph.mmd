@@ -1,31 +1,31 @@
 graph TD
   A["模型论\nModel Theory"]
   B["类型理论\nType Theory"]
-  C["范畴论\nCategory Theory"]
-  D["证明论\nProof Theory"]
-  E["Haskell"]
-  F["Rust"]
-  G["Lean"]
-  H["结构\nStructure"]
-  I["解释\nInterpretation"]
-  J["紧致性定理\nCompactness Theorem"]
-  K["完全性定理\nCompleteness Theorem"]
-  L["Löwenheim–Skolem定理"]
+  C["证明论\nProof Theory"]
+  D["范畴论\nCategory Theory"]
+  E["可满足性\nSatisfiability"]
+  F["结构\nStructure"]
+  G["解释\nInterpretation"]
+  H["完备性\nCompleteness"]
+  I["紧致性\nCompactness"]
+  J["Haskell"]
+  K["Rust"]
+  L["Lean"]
+  M["自动化验证\nAutomated Verification"]
 
   A -- "理论基础 Foundation" --> B
-  A -- "结构建模 Structure Modeling" --> C
-  A -- "逻辑推理 Logical Reasoning" --> D
-  A -- "结构 Structure" --> H
-  A -- "解释 Interpretation" --> I
-  A -- "紧致性 Compactness" --> J
-  A -- "完全性 Completeness" --> K
-  A -- "Löwenheim–Skolem" --> L
-  A -- "Haskell实现 Implementation" --> E
-  A -- "Rust实现 Implementation" --> F
-  A -- "Lean实现 Implementation" --> G
-  B -- "类型建模 Type Modeling" --> A
-  G -- "依赖类型 Dependent Types" --> B
-  E -- "类型级建模 Type-level Modeling" --> A
-  F -- "系统建模 System Modeling" --> A
-  D -- "结构与证明 Structure & Proof" --> A
-  C -- "结构等价 Structure Equivalence" --> A 
+  A -- "结构建模 Structure Modeling" --> D
+  A -- "与证明论关联 Related to Proof Theory" --> C
+  A -- "可满足性 Satisfiability" --> E
+  A -- "结构 Structure" --> F
+  A -- "解释 Interpretation" --> G
+  A -- "完备性 Completeness" --> H
+  A -- "紧致性 Compactness" --> I
+  A -- "Haskell实现 Implementation" --> J
+  A -- "Rust实现 Implementation" --> K
+  A -- "Lean实现 Implementation" --> L
+  A -- "自动化验证 Automated Verification" --> M
+  J -- "类型级模型 Type-level Model" --> A
+  K -- "结构一致性 Structural Consistency" --> A
+  L -- "形式化模型证明 Formal Model Proofs" --> A
+  %% #ModelTheory-8 #ModelTheory-8.10 知识图谱 Knowledge Graph 

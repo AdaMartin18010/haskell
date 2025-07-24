@@ -1,28 +1,21 @@
-# 1.14 交叉引用 Cross References #TypeTheory-1.14
+# 1.11 交叉引用 Cross References #TypeTheory-1.11
 
-## 相关理论 Related Theories
+- 1.11.1 [与线性类型理论的关系 Relation to Linear Type Theory](../LinearTypeTheory/definition.md)
+- 1.11.2 [与仿射类型理论的关系 Relation to Affine Type Theory](../AffineTypeTheory/definition.md)
+- 1.11.3 [与依赖类型理论的关系 Relation to Dependent Type Theory](../HOTT/definition.md)
+- 1.11.4 [与范畴论的关系 Relation to Category Theory](../CategoryTheory/definition.md)
+- 1.11.5 [与证明论的关系 Relation to Proof Theory](../ProofTheory/definition.md)
+- 1.11.6 [与模型论的关系 Relation to Model Theory](../ModelTheory/definition.md)
+- 1.11.7 [与形式语言理论的关系 Relation to Formal Language Theory](../FormalLanguageTheory/definition.md)
+- 1.11.8 [与自动机理论的关系 Relation to Automata Theory](../AutomataTheory/definition.md)
+- 1.11.9 [与系统理论的关系 Relation to System Theory](../SystemTheory/definition.md)
+- 1.11.10 [与递归-可计算理论的关系 Relation to Recursion & Computability Theory](../Recursion_Computability_Theory/definition.md)
+- 1.11.11 [与控制论的关系 Relation to Cybernetics](../Cybernetics/definition.md)
+- 1.11.12 [与信息论的关系 Relation to Information Theory](../InformationTheory/definition.md)
+- 1.11.13 [Haskell中的类型系统 Type System in Haskell](../TypeTheory/comparison.md)
+- 1.11.14 [Rust中的类型系统 Type System in Rust](../TypeTheory/comparison.md)
+- 1.11.15 [Lean中的类型系统 Type System in Lean](../TypeTheory/comparison.md)
 
-- [范畴论 Category Theory](../CategoryTheory/README.md)
-- [同伦类型论 HOTT](../HOTT/README.md)
-- [证明论 Proof Theory](../ProofTheory/README.md)
-- [线性类型理论 Linear Type Theory](../LinearTypeTheory/README.md)
-- [仿射类型理论 Affine Type Theory](../AffineTypeTheory/README.md)
-- [时序类型理论 Temporal Type Theory](../TemporalTypeTheory/README.md)
+---
 
-## 相关语言与实现 Related Languages & Implementations
-
-- [Haskell 类型系统与多态](../TypeSystems/README.md)
-- [Rust 所有权与类型安全](../TypeSystems/README.md)
-- [Lean 依赖类型与证明](../TypeSystems/README.md)
-
-## 工程应用 Engineering Applications
-
-- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
-- [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
-
-## 推荐阅读 Recommended Reading
-
-- [类型系统 Type Systems](../TypeSystems/README.md)
-- [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
-- [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/)
-- [Lean Reference Manual](https://leanprover.github.io/reference/)
+`# TypeTheory #TypeTheory-1 #TypeTheory-1.11 #TypeTheory-1.11.1 #TypeTheory-1.11.2 #TypeTheory-1.11.3 #TypeTheory-1.11.4 #TypeTheory-1.11.5 #TypeTheory-1.11.6 #TypeTheory-1.11.7 #TypeTheory-1.11.8 #TypeTheory-1.11.9 #TypeTheory-1.11.10 #TypeTheory-1.11.11 #TypeTheory-1.11.12 #TypeTheory-1.11.13 #TypeTheory-1.11.14 #TypeTheory-1.11.15`

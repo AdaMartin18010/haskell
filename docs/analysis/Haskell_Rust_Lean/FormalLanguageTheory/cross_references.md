@@ -1,28 +1,18 @@
 # 9.11 交叉引用 Cross References #FormalLanguageTheory-9.11
 
-## 9.11.1 相关理论 Related Theories #FormalLanguageTheory-9.11.1
+- 9.11.1 [与类型理论的关系 Relation to Type Theory](../TypeTheory/definition.md)
+- 9.11.2 [与自动机理论的关系 Relation to Automata Theory](../AutomataTheory/definition.md)
+- 9.11.3 [与语法的关系 Relation to Syntax](../FormalLanguageTheory/definition.md)
+- 9.11.4 [与语义的关系 Relation to Semantics](../FormalLanguageTheory/definition.md)
+- 9.11.5 [与语用的关系 Relation to Pragmatics](../FormalLanguageTheory/definition.md)
+- 9.11.6 [与正则语言的关系 Relation to Regular Languages](../FormalLanguageTheory/definition.md)
+- 9.11.7 [与上下文无关语言的关系 Relation to Context-free Languages](../FormalLanguageTheory/definition.md)
+- 9.11.8 [与不可判定性的关系 Relation to Undecidability](../FormalLanguageTheory/definition.md)
+- 9.11.9 [与泵引理的关系 Relation to Pumping Lemma](../FormalLanguageTheory/definition.md)
+- 9.11.10 [与Haskell解析器组合子的关系 Relation to Haskell Parser Combinators](../FormalLanguageTheory/comparison.md)
+- 9.11.11 [与Rust高性能语法分析的关系 Relation to Rust High-performance Parsing](../FormalLanguageTheory/comparison.md)
+- 9.11.12 [与Lean形式化语言证明的关系 Relation to Lean Formal Language Proofs](../FormalLanguageTheory/comparison.md)
 
-- [自动机理论 Automata Theory](../AutomataTheory/README.md)
-- [递归-可计算理论 Recursion & Computability Theory](../Recursion_Computability_Theory/README.md)
-- [编译原理 Compiler Theory](../EngineeringApplications/README.md)
-- [类型理论 Type Theory](../TypeTheory/README.md)
+---
 
-## 9.11.2 相关语言与实现 Related Languages & Implementations #FormalLanguageTheory-9.11.2
-
-- [Haskell 解析器组合子 Parser Combinator](../TypeSystems/README.md)
-- [Rust 状态机 State Machine](../TypeSystems/README.md)
-- [Lean 归纳定义 Inductive Definition](../TypeSystems/README.md)
-
-## 9.11.3 工程应用 Engineering Applications #FormalLanguageTheory-9.11.3
-
-- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
-- [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
-
-## 9.11.4 推荐阅读 Recommended Reading #FormalLanguageTheory-9.11.4
-
-- [Formal Language (Wikipedia)](https://en.wikipedia.org/wiki/Formal_language)
-- [Automata Theory (Wikipedia)](https://en.wikipedia.org/wiki/Automata_theory)
-- [Lean Theorem Prover Documentation](https://leanprover.github.io/)
-- [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/)
-
-`# FormalLanguageTheory #FormalLanguageTheory-9 #FormalLanguageTheory-9.11 #FormalLanguageTheory-9.11.1 #FormalLanguageTheory-9.11.2 #FormalLanguageTheory-9.11.3 #FormalLanguageTheory-9.11.4`
+`# FormalLanguageTheory #FormalLanguageTheory-9 #FormalLanguageTheory-9.11 #FormalLanguageTheory-9.11.1 #FormalLanguageTheory-9.11.2 #FormalLanguageTheory-9.11.3 #FormalLanguageTheory-9.11.4 #FormalLanguageTheory-9.11.5 #FormalLanguageTheory-9.11.6 #FormalLanguageTheory-9.11.7 #FormalLanguageTheory-9.11.8 #FormalLanguageTheory-9.11.9 #FormalLanguageTheory-9.11.10 #FormalLanguageTheory-9.11.11 #FormalLanguageTheory-9.11.12`

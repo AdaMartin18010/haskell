@@ -1,23 +1,14 @@
-# 4.14 交叉引用 Cross References #AffineTypeTheory-4.14
+# 4.11 交叉引用 Cross References #AffineTypeTheory-4.11
 
-## 相关理论 Related Theories
+- 4.11.1 [与类型理论的关系 Relation to Type Theory](../TypeTheory/definition.md)
+- 4.11.2 [与线性类型理论的关系 Relation to Linear Type Theory](../LinearTypeTheory/definition.md)
+- 4.11.3 [与资源唯一性的关系 Relation to Resource Uniqueness](../AffineTypeTheory/frontier_trends.md)
+- 4.11.4 [与分布式系统的关系 Relation to Distributed Systems](../AffineTypeTheory/frontier_trends.md)
+- 4.11.5 [与Rust所有权与借用的关系 Relation to Rust Ownership & Borrowing](../AffineTypeTheory/comparison.md)
+- 4.11.6 [与Haskell类型级资源丢弃的关系 Relation to Haskell Type-level Resource Drop](../AffineTypeTheory/comparison.md)
+- 4.11.7 [与Lean形式化资源丢弃证明的关系 Relation to Lean Formal Resource Drop Proofs](../AffineTypeTheory/comparison.md)
+- 4.11.8 [与区块链与智能合约的关系 Relation to Blockchain & Smart Contracts](../AffineTypeTheory/frontier_trends.md)
 
-- [线性类型理论 Linear Type Theory](../LinearTypeTheory/README.md)
-- [类型理论 Type Theory](../TypeTheory/README.md)
-- [系统理论 System Theory](../SystemTheory/README.md)
+---
 
-## 相关语言与实现 Related Languages & Implementations
-
-- [Rust 所有权系统](../TypeSystems/README.md)
-- [Haskell 线性类型模拟](../TypeSystems/README.md)
-- [Lean 依赖类型模拟](../TypeSystems/README.md)
-
-## 工程应用 Engineering Applications
-
-- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
-- [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
-
-## 推荐阅读 Recommended Reading
-
-- [Rust Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
-- [GHC Linear Types](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/linear-types.html)
+`# AffineTypeTheory #AffineTypeTheory-4 #AffineTypeTheory-4.11 #AffineTypeTheory-4.11.1 #AffineTypeTheory-4.11.2 #AffineTypeTheory-4.11.3 #AffineTypeTheory-4.11.4 #AffineTypeTheory-4.11.5 #AffineTypeTheory-4.11.6 #AffineTypeTheory-4.11.7 #AffineTypeTheory-4.11.8`

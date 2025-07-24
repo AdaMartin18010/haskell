@@ -1,33 +1,31 @@
 graph TD
   A["自动机理论\nAutomata Theory"]
   B["形式语言理论\nFormal Language Theory"]
-  C["递归-可计算理论\nRecursion & Computability Theory"]
-  D["复杂性理论\nComplexity Theory"]
-  E["Haskell"]
-  F["Rust"]
-  G["Lean"]
-  H["有限自动机\nFinite Automata"]
-  I["下推自动机\nPushdown Automata"]
-  J["图灵机\nTuring Machine"]
-  K["正则语言\nRegular Language"]
-  L["上下文无关语言\nContext-Free Language"]
-  M["不可判定性\nUndecidability"]
+  C["类型理论\nType Theory"]
+  D["正则自动机\nRegular Automata"]
+  E["上下文无关自动机\nContext-free Automata"]
+  F["图灵机\nTuring Machine"]
+  G["可判定性\nDecidability"]
+  H["不可判定性\nUndecidability"]
+  I["Haskell"]
+  J["Rust"]
+  K["Lean"]
+  L["状态爆炸\nState Explosion"]
+  M["并发自动机\nConcurrent Automata"]
 
   A -- "理论基础 Foundation" --> B
-  A -- "可计算性分析 Computability Analysis" --> C
-  A -- "复杂性分析 Complexity Analysis" --> D
-  A -- "有限自动机 Finite Automata" --> H
-  A -- "下推自动机 Pushdown Automata" --> I
-  A -- "图灵机 Turing Machine" --> J
-  A -- "正则语言 Regular Language" --> K
-  A -- "上下文无关语言 Context-Free Language" --> L
-  A -- "不可判定性 Undecidability" --> M
-  A -- "Haskell实现 Implementation" --> E
-  A -- "Rust实现 Implementation" --> F
-  A -- "Lean实现 Implementation" --> G
-  B -- "文法与自动机 Grammar & Automata" --> A
-  C -- "可判定性 Decidability" --> A
-  D -- "复杂性边界 Complexity Boundaries" --> A
-  E -- "自动机建模 Automata Modeling" --> A
-  F -- "状态机 State Machine" --> A
-  G -- "归纳定义 Inductive Definition" --> A 
+  A -- "类型建模 Type Modeling" --> C
+  A -- "正则自动机 Regular" --> D
+  A -- "上下文无关自动机 Context-free" --> E
+  A -- "图灵机 Turing Machine" --> F
+  A -- "可判定性 Decidability" --> G
+  A -- "不可判定性 Undecidability" --> H
+  A -- "Haskell实现 Implementation" --> I
+  A -- "Rust实现 Implementation" --> J
+  A -- "Lean实现 Implementation" --> K
+  A -- "状态爆炸 State Explosion" --> L
+  A -- "并发自动机 Concurrent Automata" --> M
+  I -- "类型级自动机 Type-level Automata" --> A
+  J -- "高性能自动机实现 High-performance Automata" --> A
+  K -- "形式化自动机证明 Formal Automata Proofs" --> A
+  %% #AutomataTheory-10 #AutomataTheory-10.10 知识图谱 Knowledge Graph 

@@ -1,18 +1,29 @@
 graph TD
-  A["同伦类型论\nHOTT"]
-  B["Lean"]
-  C["Haskell"]
-  D["Rust"]
-  E["类型理论\nType Theory"]
-  F["范畴论\nCategory Theory"]
-  G["模型论\nModel Theory"]
+  A["同伦类型论\nHomotopy Type Theory (HOTT)"]
+  B["类型理论\nType Theory"]
+  C["范畴论\nCategory Theory"]
+  D["依赖类型\nDependent Types"]
+  E["Univalence 公理\nUnivalence Axiom"]
+  F["高阶路径\nHigher Paths"]
+  G["Haskell"]
+  H["Rust"]
+  I["Lean"]
+  J["形式化证明\nFormal Proofs"]
+  K["拓扑学\nTopology"]
+  L["自动化证明\nAutomated Proofs"]
 
-  A -- "内建 Built-in" --> B
-  A -- "理论模拟 Theoretical Modeling" --> C
-  A -- "有限支持 Limited Support" --> D
-  A -- "等价 Equivalence" --> E
-  A -- "高阶结构 Higher Structure" --> F
-  A -- "结构建模 Structure Modeling" --> G
-  E -- "扩展 Extension" --> A
-  F -- "高阶结构 Higher Structure" --> A
-  G -- "结构建模 Structure Modeling" --> A 
+  A -- "理论基础 Foundation" --> B
+  A -- "结构建模 Structure Modeling" --> C
+  A -- "依赖类型 Dependent Types" --> D
+  A -- "Univalence公理 Univalence" --> E
+  A -- "高阶路径 Higher Paths" --> F
+  A -- "Haskell实现 Implementation" --> G
+  A -- "Rust实现 Implementation" --> H
+  A -- "Lean实现 Implementation" --> I
+  A -- "形式化证明 Formal Proofs" --> J
+  A -- "拓扑学 Topology" --> K
+  A -- "自动化证明 Automated Proofs" --> L
+  G -- "类型级同伦 Type-level Homotopy" --> A
+  H -- "类型系统扩展 Type System Extension" --> A
+  I -- "Univalence实现 Univalence Implementation" --> A
+  %% #HOTT-6 #HOTT-6.10 知识图谱 Knowledge Graph 

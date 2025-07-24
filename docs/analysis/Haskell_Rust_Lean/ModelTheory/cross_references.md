@@ -1,27 +1,18 @@
 # 8.11 交叉引用 Cross References #ModelTheory-8.11
 
-## 8.11.1 相关理论 Related Theories #ModelTheory-8.11.1
+- 8.11.1 [与类型理论的关系 Relation to Type Theory](../TypeTheory/definition.md)
+- 8.11.2 [与证明论的关系 Relation to Proof Theory](../ProofTheory/definition.md)
+- 8.11.3 [与范畴论的关系 Relation to Category Theory](../CategoryTheory/definition.md)
+- 8.11.4 [与可满足性的关系 Relation to Satisfiability](../ModelTheory/definition.md)
+- 8.11.5 [与结构的关系 Relation to Structure](../ModelTheory/definition.md)
+- 8.11.6 [与解释的关系 Relation to Interpretation](../ModelTheory/definition.md)
+- 8.11.7 [与完备性的关系 Relation to Completeness](../ModelTheory/definition.md)
+- 8.11.8 [与紧致性的关系 Relation to Compactness](../ModelTheory/definition.md)
+- 8.11.9 [与Haskell类型级模型的关系 Relation to Haskell Type-level Model](../ModelTheory/comparison.md)
+- 8.11.10 [与Rust结构一致性的关系 Relation to Rust Structural Consistency](../ModelTheory/comparison.md)
+- 8.11.11 [与Lean形式化模型证明的关系 Relation to Lean Formal Model Proofs](../ModelTheory/comparison.md)
+- 8.11.12 [与自动化验证的关系 Relation to Automated Verification](../ModelTheory/frontier_trends.md)
 
-- [类型理论 Type Theory](../TypeTheory/README.md)
-- [范畴论 Category Theory](../CategoryTheory/README.md)
-- [证明论 Proof Theory](../ProofTheory/README.md)
-- [自动化证明 Automated Theorem Proving](../Theorems_Proofs/README.md)
+---
 
-## 8.11.2 相关语言与实现 Related Languages & Implementations #ModelTheory-8.11.2
-
-- [Haskell 类型级建模 Type-level Modeling](../TypeSystems/README.md)
-- [Rust 系统建模 System Modeling](../TypeSystems/README.md)
-- [Lean 依赖类型与结构 Dependent Types & Structure](../TypeSystems/README.md)
-
-## 8.11.3 工程应用 Engineering Applications #ModelTheory-8.11.3
-
-- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
-- [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
-
-## 8.11.4 推荐阅读 Recommended Reading #ModelTheory-8.11.4
-
-- [Model Theory (Wikipedia)](https://en.wikipedia.org/wiki/Model_theory)
-- [Lean Theorem Prover Documentation](https://leanprover.github.io/)
-- [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/)
-
-`# ModelTheory #ModelTheory-8 #ModelTheory-8.11 #ModelTheory-8.11.1 #ModelTheory-8.11.2 #ModelTheory-8.11.3 #ModelTheory-8.11.4`
+`# ModelTheory #ModelTheory-8 #ModelTheory-8.11 #ModelTheory-8.11.1 #ModelTheory-8.11.2 #ModelTheory-8.11.3 #ModelTheory-8.11.4 #ModelTheory-8.11.5 #ModelTheory-8.11.6 #ModelTheory-8.11.7 #ModelTheory-8.11.8 #ModelTheory-8.11.9 #ModelTheory-8.11.10 #ModelTheory-8.11.11 #ModelTheory-8.11.12`

@@ -1,19 +1,29 @@
 graph TD
   A["范畴论\nCategory Theory"]
   B["类型理论\nType Theory"]
-  C["Haskell"]
-  D["Rust"]
-  E["Lean"]
-  F["同伦类型论\nHOTT"]
-  G["证明论\nProof Theory"]
+  C["同伦类型论\nHomotopy Type Theory (HOTT)"]
+  D["函子\nFunctor"]
+  E["自然变换\nNatural Transformation"]
+  F["Haskell"]
+  G["Rust"]
+  H["Lean"]
+  I["结构建模\nStructure Modeling"]
+  J["单子\nMonad"]
+  K["高阶结构\nHigher Structures"]
+  L["自动化证明\nAutomated Proofs"]
 
   A -- "理论基础 Foundation" --> B
-  A -- "结构抽象 Structural Abstraction" --> C
-  A -- "结构抽象 Structural Abstraction" --> D
-  A -- "结构抽象 Structural Abstraction" --> E
-  A -- "高阶结构 Higher Structure" --> F
-  B -- "类型系统 Type Systems" --> C
-  B -- "类型系统 Type Systems" --> D
-  B -- "依赖类型 Dependent Types" --> E
-  F -- "等价 Equivalence" --> A
-  G -- "形式化证明 Formal Proofs" --> A 
+  A -- "结构建模 Structure Modeling" --> I
+  A -- "分支 Branch" --> C
+  A -- "函子 Functor" --> D
+  A -- "自然变换 Natural Transformation" --> E
+  A -- "单子 Monad" --> J
+  A -- "高阶结构 Higher Structures" --> K
+  A -- "Haskell实现 Implementation" --> F
+  A -- "Rust实现 Implementation" --> G
+  A -- "Lean实现 Implementation" --> H
+  A -- "自动化证明 Automated Proofs" --> L
+  F -- "类型类与范畴 Typeclasses & Category" --> A
+  G -- "trait与范畴 Traits & Category" --> A
+  H -- "形式化范畴证明 Formal Category Proofs" --> A
+  %% #CategoryTheory-6 #CategoryTheory-6.10 知识图谱 Knowledge Graph 
