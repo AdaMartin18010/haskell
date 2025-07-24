@@ -1,0 +1,33 @@
+graph TD
+  A["自动机理论\nAutomata Theory"]
+  B["形式语言理论\nFormal Language Theory"]
+  C["递归-可计算理论\nRecursion & Computability Theory"]
+  D["复杂性理论\nComplexity Theory"]
+  E["Haskell"]
+  F["Rust"]
+  G["Lean"]
+  H["有限自动机\nFinite Automata"]
+  I["下推自动机\nPushdown Automata"]
+  J["图灵机\nTuring Machine"]
+  K["正则语言\nRegular Language"]
+  L["上下文无关语言\nContext-Free Language"]
+  M["不可判定性\nUndecidability"]
+
+  A -- "理论基础 Foundation" --> B
+  A -- "可计算性分析 Computability Analysis" --> C
+  A -- "复杂性分析 Complexity Analysis" --> D
+  A -- "有限自动机 Finite Automata" --> H
+  A -- "下推自动机 Pushdown Automata" --> I
+  A -- "图灵机 Turing Machine" --> J
+  A -- "正则语言 Regular Language" --> K
+  A -- "上下文无关语言 Context-Free Language" --> L
+  A -- "不可判定性 Undecidability" --> M
+  A -- "Haskell实现 Implementation" --> E
+  A -- "Rust实现 Implementation" --> F
+  A -- "Lean实现 Implementation" --> G
+  B -- "文法与自动机 Grammar & Automata" --> A
+  C -- "可判定性 Decidability" --> A
+  D -- "复杂性边界 Complexity Boundaries" --> A
+  E -- "自动机建模 Automata Modeling" --> A
+  F -- "状态机 State Machine" --> A
+  G -- "归纳定义 Inductive Definition" --> A 

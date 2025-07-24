@@ -1,0 +1,33 @@
+graph TD
+  A["形式语言理论\nFormal Language Theory"]
+  B["自动机理论\nAutomata Theory"]
+  C["递归-可计算理论\nRecursion & Computability Theory"]
+  D["编译原理\nCompiler Theory"]
+  E["Haskell"]
+  F["Rust"]
+  G["Lean"]
+  H["文法\nGrammar"]
+  I["自动机\nAutomata"]
+  J["正则语言\nRegular Language"]
+  K["上下文无关语言\nContext-Free Language"]
+  L["泵引理\nPumping Lemma"]
+  M["Chomsky层级\nChomsky Hierarchy"]
+
+  A -- "理论基础 Foundation" --> B
+  A -- "可计算性分析 Computability Analysis" --> C
+  A -- "工程实现 Engineering Implementation" --> D
+  A -- "文法 Grammar" --> H
+  A -- "自动机 Automata" --> I
+  A -- "正则语言 Regular Language" --> J
+  A -- "上下文无关语言 Context-Free Language" --> K
+  A -- "泵引理 Pumping Lemma" --> L
+  A -- "Chomsky层级 Chomsky Hierarchy" --> M
+  A -- "Haskell实现 Implementation" --> E
+  A -- "Rust实现 Implementation" --> F
+  A -- "Lean实现 Implementation" --> G
+  B -- "自动机建模 Automata Modeling" --> A
+  C -- "可判定性 Decidability" --> A
+  D -- "语法分析 Syntax Analysis" --> A
+  E -- "解析器组合子 Parser Combinator" --> A
+  F -- "状态机 State Machine" --> A
+  G -- "归纳定义 Inductive Definition" --> A 

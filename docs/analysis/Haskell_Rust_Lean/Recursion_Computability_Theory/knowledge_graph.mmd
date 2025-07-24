@@ -1,0 +1,33 @@
+graph TD
+  A["递归-可计算理论\nRecursion & Computability Theory"]
+  B["类型理论\nType Theory"]
+  C["自动机理论\nAutomata Theory"]
+  D["复杂性理论\nComplexity Theory"]
+  E["Haskell"]
+  F["Rust"]
+  G["Lean"]
+  H["图灵机\nTuring Machine"]
+  I["λ演算\nLambda Calculus"]
+  J["递归函数\nRecursive Functions"]
+  K["停机问题\nHalting Problem"]
+  L["不可判定性\nUndecidability"]
+  M["哥德尔不完备性\nGödel Incompleteness"]
+
+  A -- "理论基础 Foundation" --> B
+  A -- "自动化建模 Automata Modeling" --> C
+  A -- "复杂性分析 Complexity Analysis" --> D
+  A -- "图灵机 Turing Machine" --> H
+  A -- "λ演算 Lambda Calculus" --> I
+  A -- "递归函数 Recursive Functions" --> J
+  A -- "停机问题 Halting Problem" --> K
+  A -- "不可判定性 Undecidability" --> L
+  A -- "不完备性 Incompleteness" --> M
+  A -- "Haskell实现 Implementation" --> E
+  A -- "Rust实现 Implementation" --> F
+  A -- "Lean实现 Implementation" --> G
+  B -- "类型级递归 Type-level Recursion" --> A
+  C -- "可判定性 Decidability" --> A
+  D -- "复杂性边界 Complexity Boundaries" --> A
+  E -- "递归函数 Recursion" --> A
+  F -- "系统递归 System Recursion" --> A
+  G -- "归纳递归 Inductive Recursion" --> A 

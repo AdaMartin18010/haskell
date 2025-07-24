@@ -1,0 +1,30 @@
+graph TD
+  A["证明论\nProof Theory"]
+  B["类型理论\nType Theory"]
+  C["范畴论\nCategory Theory"]
+  D["自动化证明\nAutomated Theorem Proving"]
+  E["Haskell"]
+  F["Rust"]
+  G["Lean"]
+  H["归纳原理\nInduction Principle"]
+  I["Curry-Howard同构\nCurry-Howard Correspondence"]
+  J["一致性定理\nConsistency Theorem"]
+  K["完备性定理\nCompleteness Theorem"]
+
+  A -- "理论基础 Foundation" --> B
+  A -- "结构建模 Structure Modeling" --> C
+  A -- "自动化实现 Automation" --> D
+  A -- "归纳 Induction" --> H
+  A -- "同构 Correspondence" --> I
+  A -- "一致性 Consistency" --> J
+  A -- "完备性 Completeness" --> K
+  A -- "Haskell实现 Implementation" --> E
+  A -- "Rust实现 Implementation" --> F
+  A -- "Lean实现 Implementation" --> G
+  B -- "Curry-Howard" --> I
+  G -- "依赖类型 Dependent Types" --> B
+  E -- "类型级证明 Type-level Proof" --> A
+  F -- "安全属性 Safety Properties" --> A
+  D -- "Lean/Haskell/Rust" --> G
+  D -- "Lean/Haskell/Rust" --> E
+  D -- "Lean/Haskell/Rust" --> F 
