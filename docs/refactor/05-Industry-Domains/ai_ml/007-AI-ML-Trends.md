@@ -28,7 +28,7 @@
 - [Rust for AI](https://github.com/rust-ml)
 - [Lean for AI](https://leanprover-community.github.io/)
 
-# AI/ML趋势展望
+## AI/ML趋势展望
 
 ## 1. 技术趋势
 

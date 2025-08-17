@@ -109,7 +109,7 @@ crossEntropyLoss (Vector yTrue) (Vector yPred) =
 
 ## Rust 实现
 
-### 1. 基础数据结构
+### 1.1 基础数据结构
 
 ```rust
 use ndarray::{Array1, Array2, Axis};
@@ -193,7 +193,7 @@ impl Activation {
 }
 ```
 
-### 3. 前向传播
+### 3.1 前向传播
 
 ```rust
 impl NeuralNetwork {
@@ -225,7 +225,7 @@ impl NeuralNetwork {
 }
 ```
 
-### 4. 损失函数
+### 4.1 损失函数
 
 ```rust
 pub trait Loss {

@@ -152,17 +152,17 @@ def cosineSimilarity (ratings1 : List (Nat × Float)) (ratings2 : List (Nat × F
 
 ## 案例2：自然语言处理
 
-### 业务背景
+### 2业务背景
 
 客服系统需要自动分类用户问题，提高响应效率和服务质量。
 
-### 技术方案
+### 2技术方案
 
 - **数据源**：历史客服对话、问题分类标签
 - **算法**：TF-IDF、词向量、BERT、Transformer
 - **架构**：文本预处理、特征提取、分类模型、API服务
 
-### Haskell实现
+### 2Haskell实现
 
 ```haskell
 -- 文本预处理
@@ -193,7 +193,7 @@ naiveBayes features labels testFeatures =
   in fst $ maximumBy (comparing snd) scores
 ```
 
-### Rust实现
+### 2Rust实现
 
 ```rust
 use std::collections::HashMap;
@@ -313,7 +313,7 @@ impl NaiveBayesClassifier {
 }
 ```
 
-### Lean实现
+### 2Lean实现
 
 ```lean
 -- 文本预处理
@@ -347,17 +347,17 @@ def naiveBayes (features : List (List Float)) (labels : List String) (testFeatur
 
 ## 案例3：计算机视觉
 
-### 业务背景
+### 3业务背景
 
 制造业需要自动检测产品质量，提高生产效率和产品质量。
 
-### 技术方案
+### 3技术方案
 
 - **数据源**：产品图像、缺陷标注、质量标准
 - **算法**：CNN、YOLO、ResNet、图像分割
 - **架构**：图像预处理、特征提取、检测模型、结果输出
 
-### Haskell实现
+### 3Haskell实现
 
 ```haskell
 -- 图像数据结构
@@ -398,7 +398,7 @@ maxPooling image poolSize =
       i <- [0..outputHeight-1]]
 ```
 
-### Rust实现
+### 3Rust实现
 
 ```rust
 #[derive(Debug, Clone)]
@@ -508,7 +508,7 @@ impl MaxPoolingLayer {
 }
 ```
 
-### Lean实现
+### 3Lean实现
 
 ```lean
 -- 图像数据结构
