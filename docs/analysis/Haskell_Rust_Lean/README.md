@@ -111,6 +111,58 @@
 - [常见误区 Common Pitfalls](./InformationTheory/common_pitfalls.md)
 - [前沿趋势 Frontier Trends](./InformationTheory/frontier_trends.md)
 
+### 15. 语法与语义 Syntax & Semantics #SyntaxSemantics-15
+
+- [目录与子主题 Catalog & Subtopics](./Syntax_Semantics/README.md)
+
+### 16. 类型系统 Type Systems #TypeSystems-16
+
+- [目录与子主题 Catalog & Subtopics](./TypeSystems/README.md)
+
+### 17. 语义模型 Semantic Models #SemanticModels-17
+
+- [目录与子主题 Catalog & Subtopics](./SemanticModels/README.md)
+
+### 18. 理论到语言映射 Mapping Theory to Language #MappingTheoryLanguage-18
+
+- [目录与子主题 Catalog & Subtopics](./MappingTheory_Language/README.md)
+
+### 19. 工程应用 Engineering Applications #EngineeringApplications-19
+
+- [目录与子主题 Catalog & Subtopics](./EngineeringApplications/README.md)
+
+### 20. 实践价值 Practical Value #PracticalValue-20
+
+- [目录与子主题 Catalog & Subtopics](./PracticalValue/README.md)
+
+### 21. 形式化定义 Formal Definitions #FormalDefinitions-21
+
+- [目录与子主题 Catalog & Subtopics](./FormalDefinitions/README.md)
+
+### 22. 定理与证明 Theorems & Proofs #TheoremsProofs-22
+
+- [目录与子主题 Catalog & Subtopics](./Theorems_Proofs/README.md)
+
+### 23. 理论-语言联合证明 Proofs Combining Theory & Language #ProofsTheoryLanguage-23
+
+- [目录与子主题 Catalog & Subtopics](./Proofs_Theory_Language/README.md)
+
+### 24. 国际化与双语 Internationalization & Bilingual #InternationalizationBilingual-24
+
+- [目录与子主题 Catalog & Subtopics](./Internationalization_Bilingual/README.md)
+
+### 25. 哲学与知识图谱 Philosophy & Knowledge Graph #PhilosophyKnowledgeGraph-25
+
+- [目录与子主题 Catalog & Subtopics](./Philosophy_KnowledgeGraph/README.md)
+
+### 26. 结论与展望 Conclusion & Outlook #ConclusionOutlook-26
+
+- [目录与子主题 Catalog & Subtopics](./Conclusion_Outlook/README.md)
+
+### 27. 控制流 / 执行流 / 数据流 Control Flow / Execution Flow / Data Flow #ControlExecutionDataFlow-27
+
+- [目录与子主题 Catalog & Subtopics](./ControlFlow_ExecutionFlow_DataFlow/README.md)
+
 ---
 
 > 所有分支均已覆盖“定义、历史、特性、应用、例子、对比、争议、证明、小结、知识图谱、交叉引用、常见误区、前沿趋势”等主题，内容持续递归完善，欢迎批判性反馈与补充。

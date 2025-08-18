@@ -1,0 +1,13 @@
+%% 1.10 知识图谱 Knowledge Graph #TypeSystems-1.10
+
+graph TD
+  A[Judgments Γ ⊢ e : T] --> B[Rules 规则]
+  B --> C[Progress]
+  B --> D[Preservation]
+  D --> E[Soundness 健全性]
+  A --> F[Polymorphism 多态]
+  A --> G[Linear/Affine]
+  A --> H[Dependent Types]
+  I[Haskell] --> F
+  J[Rust] --> G
+  K[Lean] --> H 

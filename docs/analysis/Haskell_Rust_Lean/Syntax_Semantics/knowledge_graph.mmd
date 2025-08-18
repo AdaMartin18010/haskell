@@ -1,0 +1,12 @@
+%% 1.10 知识图谱 Knowledge Graph #SyntaxSemantics-1.10
+
+graph TD
+  A[Syntax 语法] --> B[AST 抽象语法树]
+  B --> C[Operational Semantics 操作语义]
+  B --> D[Denotational Semantics 指称语义]
+  B --> E[Axiomatic Semantics 公理语义]
+  D --> F[Categorical Semantics 范畴语义]
+  C --> G[Progress/Preservation]
+  H[Haskell] --> C
+  I[Rust] --> C
+  J[Lean] --> E 
