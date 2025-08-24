@@ -223,11 +223,11 @@ end
 
 ## 案例2：车辆诊断系统
 
-### 问题建模
+### 2问题建模
 
 - 目标：实现一个可形式化验证的车辆诊断系统，确保故障检测和诊断的准确性。
 
-### Haskell实现
+### 2Haskell实现
 
 ```haskell
 data DiagnosticCode = DiagnosticCode
@@ -279,7 +279,7 @@ analyzeEngineData sensorData =
   ]
 ```
 
-### Rust实现
+### 2Rust实现
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -422,7 +422,7 @@ const MIN_OIL_PRESSURE: f64 = 20.0;
 const MAX_ENGINE_RPM: f64 = 7000.0;
 ```
 
-### Lean形式化
+### 2Lean形式化
 
 ```lean
 def run_diagnostics (vehicle_state : VehicleState) (sensor_data : list SensorData) : list DiagnosticResult :=
@@ -446,11 +446,11 @@ begin
 end
 ```
 
-### 对比分析
+### 2对比分析
 
 - Haskell提供清晰的函数式抽象和类型安全，Rust确保高性能计算和内存安全，Lean可形式化证明诊断系统的正确性。
 
-### 工程落地
+### 2工程落地
 
 - 适用于车载诊断系统、预测性维护、车队管理等场景。
 
