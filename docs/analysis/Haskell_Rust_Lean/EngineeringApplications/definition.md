@@ -24,6 +24,7 @@
 $$Q(A) = \alpha \cdot V(A) + \beta \cdot R(A) + \gamma \cdot M(A) + \delta \cdot P(A)$$
 
 其中：
+
 - $V(A)$ 是可验证性
 - $R(A)$ 是可靠性
 - $M(A)$ 是可维护性
