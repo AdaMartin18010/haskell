@@ -23,6 +23,7 @@
 $$\mathcal{P} = (F, R, \vdash, \text{cut})$$
 
 其中：
+
 - $F$ 是公式集合
 - $R$ 是推理规则集合
 - $\vdash$ 是推导关系
@@ -35,6 +36,7 @@ $$\mathcal{P} = (F, R, \vdash, \text{cut})$$
 $$\mathcal{ND} = (\text{Intro}, \text{Elim}, \text{Assumption})$$
 
 其中：
+
 - $\text{Intro}$ 是引入规则
 - $\text{Elim}$ 是消除规则
 - $\text{Assumption}$ 是假设规则
@@ -46,6 +48,7 @@ $$\mathcal{ND} = (\text{Intro}, \text{Elim}, \text{Assumption})$$
 $$\mathcal{SC} = (\text{Left}, \text{Right}, \text{Structural})$$
 
 其中：
+
 - $\text{Left}$ 是左规则
 - $\text{Right}$ 是右规则
 - $\text{Structural}$ 是结构规则
@@ -69,7 +72,7 @@ $$\mathcal{SC} = (\text{Left}, \text{Right}, \text{Structural})$$
 
 ## 7.4 核心概念 Core Concepts
 
-### 自然演绎 Natural Deduction
+### 7.4.1 自然演绎 Natural Deduction
 
 #### 基本推理规则
 
@@ -147,7 +150,7 @@ inductive proof : prop → Type
 | and_elim_r {p q : prop} : proof (prop.and p q) → proof q
 ```
 
-### 序列演算 Sequent Calculus
+### 7.4.2 序列演算 Sequent Calculus
 
 #### 序列定义
 
@@ -496,10 +499,10 @@ checkProofConsistency proofSystem =
 
 3. **Lean证明论**
    - de Moura, L., et al. (2015). The Lean theorem prover. CADE, 378-388.
-   - Lean Team. (2021). Lean Reference Manual. https://leanprover.github.io/reference/
+   - Lean Team. (2021). Lean Reference Manual. <https://leanprover.github.io/reference/>
 
 4. **Haskell证明论**
-   - GHC Team. (2021). GHC User's Guide - Type Families. https://downloads.haskell.org/ghc/latest/docs/html/users_guide/type-families.html
+   - GHC Team. (2021). GHC User's Guide - Type Families. <https://downloads.haskell.org/ghc/latest/docs/html/users_guide/type-families.html>
 
 5. **在线资源**
    - [Wikipedia: Proof Theory](https://en.wikipedia.org/wiki/Proof_theory)

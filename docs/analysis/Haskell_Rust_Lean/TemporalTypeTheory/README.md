@@ -23,6 +23,7 @@
 $$\mathcal{T} = (T, \Gamma, \vdash, \text{time}, \text{next}, \text{until})$$
 
 其中：
+
 - $T$ 是类型集合
 - $\Gamma$ 是类型环境
 - $\vdash$ 是类型推导关系
@@ -61,7 +62,7 @@ $$A \xrightarrow{t} B = \{f : A \to B \mid \text{time}(f) = t\}$$
 
 ## 4.4 核心概念 Core Concepts
 
-### 时序类型 Temporal Types
+### 4.4.1 时序类型 Temporal Types
 
 #### 基本时序类型
 
@@ -493,14 +494,14 @@ checkTemporalConsistency temporalType =
    - Nanevski, A., et al. (2008). Hoare type theory, polymorphism and separation. Journal of Functional Programming, 18(5-6), 865-911.
 
 3. **Haskell时序类型**
-   - GHC Team. (2021). GHC User's Guide - Temporal Types. https://downloads.haskell.org/ghc/latest/docs/html/users_guide/temporal-types.html
+   - GHC Team. (2021). GHC User's Guide - Temporal Types. <https://downloads.haskell.org/ghc/latest/docs/html/users_guide/temporal-types.html>
 
 4. **Rust时序系统**
-   - Rust Team. (2021). The Rust Programming Language - Async/Await. https://doc.rust-lang.org/book/ch16-00-concurrency.html
+   - Rust Team. (2021). The Rust Programming Language - Async/Await. <https://doc.rust-lang.org/book/ch16-00-concurrency.html>
 
 5. **Lean时序逻辑**
    - de Moura, L., et al. (2015). The Lean theorem prover. CADE, 378-388.
-   - Lean Team. (2021). Lean Reference Manual. https://leanprover.github.io/reference/
+   - Lean Team. (2021). Lean Reference Manual. <https://leanprover.github.io/reference/>
 
 6. **在线资源**
    - [Wikipedia: Temporal Logic](https://en.wikipedia.org/wiki/Temporal_logic)

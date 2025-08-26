@@ -23,6 +23,7 @@
 $$L \subseteq \Sigma^*$$
 
 其中：
+
 - $\Sigma$ 是有限字母表
 - $\Sigma^*$ 是所有可能字符串的集合
 - $L$ 是语言（字符串的子集）
@@ -34,6 +35,7 @@ $$L \subseteq \Sigma^*$$
 $$G = (V, T, P, S)$$
 
 其中：
+
 - $V$ 是非终结符集合
 - $T$ 是终结符集合
 - $P$ 是产生式规则集合
@@ -680,10 +682,10 @@ checkLanguageConsistency lang =
 
 3. **Lean形式语言理论**
    - de Moura, L., et al. (2015). The Lean theorem prover. CADE, 378-388.
-   - Lean Team. (2021). Lean Reference Manual. https://leanprover.github.io/reference/
+   - Lean Team. (2021). Lean Reference Manual. <https://leanprover.github.io/reference/>
 
 4. **Haskell形式语言理论**
-   - GHC Team. (2021). GHC User's Guide - Type Families. https://downloads.haskell.org/ghc/latest/docs/html/users_guide/type-families.html
+   - GHC Team. (2021). GHC User's Guide - Type Families. <https://downloads.haskell.org/ghc/latest/docs/html/users_guide/type-families.html>
 
 5. **在线资源**
    - [Wikipedia: Formal Language](https://en.wikipedia.org/wiki/Formal_language)

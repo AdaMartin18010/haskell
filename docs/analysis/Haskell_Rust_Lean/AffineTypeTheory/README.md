@@ -23,6 +23,7 @@
 $$\mathcal{A} = (T, \Gamma, \vdash, \text{use}_{\text{affine}})$$
 
 其中：
+
 - $T$ 是类型集合
 - $\Gamma$ 是类型环境
 - $\vdash$ 是类型推导关系
@@ -418,15 +419,15 @@ checkAffineConsistency affineType =
 
 3. **Haskell仿射类型**
    - Bernardy, J. P., et al. (2018). Linear Haskell: Practical linearity in a higher-order polymorphic language. POPL, 5:1-5:29.
-   - GHC Team. (2021). GHC User's Guide - Linear Types. https://downloads.haskell.org/ghc/latest/docs/html/users_guide/linear-types.html
+   - GHC Team. (2021). GHC User's Guide - Linear Types. <https://downloads.haskell.org/ghc/latest/docs/html/users_guide/linear-types.html>
 
 4. **Rust所有权系统**
    - Jung, R., et al. (2021). RustBelt: Securing the foundations of the Rust programming language. Journal of the ACM, 68(1), 1-34.
-   - Rust Team. (2021). The Rust Programming Language - Ownership. https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html
+   - Rust Team. (2021). The Rust Programming Language - Ownership. <https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html>
 
 5. **Lean仿射逻辑**
    - de Moura, L., et al. (2015). The Lean theorem prover. CADE, 378-388.
-   - Lean Team. (2021). Lean Reference Manual. https://leanprover.github.io/reference/
+   - Lean Team. (2021). Lean Reference Manual. <https://leanprover.github.io/reference/>
 
 6. **在线资源**
    - [Wikipedia: Affine Type System](https://en.wikipedia.org/wiki/Affine_type_system)

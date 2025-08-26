@@ -23,6 +23,7 @@
 $$\mathcal{H} = (T, \Gamma, \vdash, \text{Path}, \text{Equiv}, \text{Univalence})$$
 
 其中：
+
 - $T$ 是类型集合
 - $\Gamma$ 是类型环境
 - $\vdash$ 是类型推导关系
@@ -67,7 +68,7 @@ $$(A \simeq B) \simeq (A = B)$$
 
 ## 6.4 核心概念 Core Concepts
 
-### 路径类型 Path Types
+### 6.4.1 路径类型 Path Types
 
 #### 基本路径类型
 
@@ -133,7 +134,7 @@ def path.symm {α : Type} {a b : α} :
   λ p, p.symm
 ```
 
-### 等价类型 Equivalence Types
+### 6.4.2 等价类型 Equivalence Types
 
 #### 等价定义
 
@@ -201,7 +202,7 @@ def equiv.inv_fun {α β : Type} (e : equiv α β) : β → α :=
   e.inv_fun
 ```
 
-### 单值性公理 Univalence Axiom
+### 6.4.3 单值性公理 Univalence Axiom
 
 #### 单值性实现
 
@@ -332,7 +333,7 @@ $$[\![e]\!]_{\text{equiv}} = \text{equiv}_{\text{semantics}}(e)$$
 
 $$\mathcal{D}_{\text{homotopy}} = \{(d, p) \mid d \in \mathcal{D}, p \text{ is a path}\}$$
 
-#### 等价语义
+#### 等价语义1
 
 等价 $e : A \simeq B$ 的语义定义为：
 
@@ -503,10 +504,10 @@ checkHOTTConsistency hottType =
 
 3. **Lean HOTT**
    - de Moura, L., et al. (2015). The Lean theorem prover. CADE, 378-388.
-   - Lean Team. (2021). Lean Reference Manual. https://leanprover.github.io/reference/
+   - Lean Team. (2021). Lean Reference Manual. <https://leanprover.github.io/reference/>
 
 4. **Haskell HOTT**
-   - GHC Team. (2021). GHC User's Guide - Path Types. https://downloads.haskell.org/ghc/latest/docs/html/users_guide/path-types.html
+   - GHC Team. (2021). GHC User's Guide - Path Types. <https://downloads.haskell.org/ghc/latest/docs/html/users_guide/path-types.html>
 
 5. **在线资源**
    - [Wikipedia: Homotopy Type Theory](https://en.wikipedia.org/wiki/Homotopy_type_theory)

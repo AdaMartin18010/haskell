@@ -23,6 +23,7 @@
 $$\mathcal{M} \models \mathcal{L} \iff \mathcal{M} \text{ satisfies } \mathcal{L}$$
 
 其中：
+
 - $\mathcal{L}$ 是形式语言
 - $\mathcal{M}$ 是结构
 - $\models$ 是满足关系
@@ -34,6 +35,7 @@ $$\mathcal{M} \models \mathcal{L} \iff \mathcal{M} \text{ satisfies } \mathcal{L
 $$\mathcal{M} = (M, R, F, c)$$
 
 其中：
+
 - $M$ 是论域
 - $R$ 是关系集合
 - $F$ 是函数集合
@@ -46,6 +48,7 @@ $$\mathcal{M} = (M, R, F, c)$$
 $$I : \mathcal{L} \to \mathcal{M}$$
 
 满足：
+
 - $I(\text{constant}) \in M$
 - $I(\text{function}) : M^n \to M$
 - $I(\text{relation}) \subseteq M^n$
@@ -640,10 +643,10 @@ checkModelConsistency model =
 
 3. **Lean模型论**
    - de Moura, L., et al. (2015). The Lean theorem prover. CADE, 378-388.
-   - Lean Team. (2021). Lean Reference Manual. https://leanprover.github.io/reference/
+   - Lean Team. (2021). Lean Reference Manual. <https://leanprover.github.io/reference/>
 
 4. **Haskell模型论**
-   - GHC Team. (2021). GHC User's Guide - Type Families. https://downloads.haskell.org/ghc/latest/docs/html/users_guide/type-families.html
+   - GHC Team. (2021). GHC User's Guide - Type Families. <https://downloads.haskell.org/ghc/latest/docs/html/users_guide/type-families.html>
 
 5. **在线资源**
    - [Wikipedia: Model Theory](https://en.wikipedia.org/wiki/Model_theory)

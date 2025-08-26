@@ -23,6 +23,7 @@
 $$\mathcal{C} = (\text{Ob}(\mathcal{C}), \text{Hom}(\mathcal{C}), \circ, \text{id})$$
 
 其中：
+
 - $\text{Ob}(\mathcal{C})$ 是对象集合
 - $\text{Hom}(\mathcal{C})$ 是态射集合
 - $\circ$ 是复合运算
@@ -36,6 +37,7 @@ $$F : \text{Ob}(\mathcal{C}) \to \text{Ob}(\mathcal{D})$$
 $$F : \text{Hom}(\mathcal{C}) \to \text{Hom}(\mathcal{D})$$
 
 满足：
+
 - $F(\text{id}_A) = \text{id}_{F(A)}$
 - $F(f \circ g) = F(f) \circ F(g)$
 
@@ -370,6 +372,7 @@ def Free (F : Type u → Type u) (α : Type u) : Type u :=
 $$\mathcal{C} \text{ is CCC} \iff \mathcal{C} \text{ has products and exponentials}$$
 
 其中：
+
 - 积：$A \times B$
 - 指数：$B^A = \text{Hom}(A, B)$
 
@@ -380,6 +383,7 @@ $$\mathcal{C} \text{ is CCC} \iff \mathcal{C} \text{ has products and exponentia
 $$T : \mathcal{C} \to \mathcal{C}$$
 
 满足：
+
 - 单位：$\eta : \text{Id} \Rightarrow T$
 - 乘法：$\mu : T^2 \Rightarrow T$
 
@@ -568,14 +572,14 @@ checkCategoryConsistency category =
    - Milewski, B. (2018). Category theory for programmers. Blurb.
 
 3. **Haskell范畴论**
-   - GHC Team. (2021). GHC User's Guide - Category Theory. https://downloads.haskell.org/ghc/latest/docs/html/users_guide/category-theory.html
+   - GHC Team. (2021). GHC User's Guide - Category Theory. <https://downloads.haskell.org/ghc/latest/docs/html/users_guide/category-theory.html>
 
 4. **Rust范畴论**
-   - Rust Team. (2021). The Rust Programming Language - Traits. https://doc.rust-lang.org/book/ch10-02-traits.html
+   - Rust Team. (2021). The Rust Programming Language - Traits. <https://doc.rust-lang.org/book/ch10-02-traits.html>
 
 5. **Lean范畴论**
    - de Moura, L., et al. (2015). The Lean theorem prover. CADE, 378-388.
-   - Lean Team. (2021). Lean Reference Manual. https://leanprover.github.io/reference/
+   - Lean Team. (2021). Lean Reference Manual. <https://leanprover.github.io/reference/>
 
 6. **在线资源**
    - [nLab: Category Theory](https://ncatlab.org/nlab/show/category+theory)

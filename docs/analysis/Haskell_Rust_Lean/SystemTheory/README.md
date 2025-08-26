@@ -23,6 +23,7 @@
 $$S = (E, R, B)$$
 
 其中：
+
 - $E$ 是系统元素集合
 - $R$ 是元素间关系集合
 - $B$ 是系统行为函数
@@ -34,6 +35,7 @@ $$S = (E, R, B)$$
 $$\sigma : E \to V$$
 
 其中：
+
 - $\Sigma$ 是状态空间
 - $V$ 是值域
 
@@ -44,6 +46,7 @@ $$\sigma : E \to V$$
 $$\sigma_{t+1} = f(\sigma_t, i_t)$$
 
 其中：
+
 - $\sigma_t$ 是时刻 $t$ 的状态
 - $i_t$ 是时刻 $t$ 的输入
 
@@ -744,10 +747,10 @@ checkSystemConsistency system =
 
 3. **Lean系统理论**
    - de Moura, L., et al. (2015). The Lean theorem prover. CADE, 378-388.
-   - Lean Team. (2021). Lean Reference Manual. https://leanprover.github.io/reference/
+   - Lean Team. (2021). Lean Reference Manual. <https://leanprover.github.io/reference/>
 
 4. **Haskell系统理论**
-   - GHC Team. (2021). GHC User's Guide - Type Families. https://downloads.haskell.org/ghc/latest/docs/html/users_guide/type-families.html
+   - GHC Team. (2021). GHC User's Guide - Type Families. <https://downloads.haskell.org/ghc/latest/docs/html/users_guide/type-families.html>
 
 5. **在线资源**
    - [Wikipedia: Systems Theory](https://en.wikipedia.org/wiki/Systems_theory)

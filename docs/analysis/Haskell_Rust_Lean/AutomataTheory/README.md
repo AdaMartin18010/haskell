@@ -23,6 +23,7 @@
 $$M = (Q, \Sigma, \delta, q_0, F)$$
 
 其中：
+
 - $Q$ 是有限状态集合
 - $\Sigma$ 是输入字母表
 - $\delta : Q \times \Sigma \to Q$ 是转移函数
@@ -36,6 +37,7 @@ $$M = (Q, \Sigma, \delta, q_0, F)$$
 $$TM = (Q, \Sigma, \Gamma, \delta, q_0, q_{accept}, q_{reject})$$
 
 其中：
+
 - $Q$ 是有限状态集合
 - $\Sigma$ 是输入字母表
 - $\Gamma$ 是磁带字母表
@@ -285,7 +287,7 @@ def run_pda_from_state (m : pda) (current : state) (stack : list char) (input : 
   end
 ```
 
-### 图灵机 Turing Machine
+### 1图灵机 Turing Machine
 
 #### 通用图灵机
 
@@ -798,10 +800,10 @@ checkAutomatonConsistency automaton =
 
 3. **Lean自动机理论**
    - de Moura, L., et al. (2015). The Lean theorem prover. CADE, 378-388.
-   - Lean Team. (2021). Lean Reference Manual. https://leanprover.github.io/reference/
+   - Lean Team. (2021). Lean Reference Manual. <https://leanprover.github.io/reference/>
 
 4. **Haskell自动机理论**
-   - GHC Team. (2021). GHC User's Guide - Type Families. https://downloads.haskell.org/ghc/latest/docs/html/users_guide/type-families.html
+   - GHC Team. (2021). GHC User's Guide - Type Families. <https://downloads.haskell.org/ghc/latest/docs/html/users_guide/type-families.html>
 
 5. **在线资源**
    - [Wikipedia: Automata Theory](https://en.wikipedia.org/wiki/Automata_theory)
