@@ -101,16 +101,14 @@ trait Functor {
         F: FnMut(Self::Item) -> U;
 }
 
-// Option 实现
-impl<T> Option<T> {
-    fn map<U, F>(self, f: F) -> Option<U>
+// 实现
+impl<T> Functor for Vec<T> {
+    type Output = Vec<U>;
+    fn fmap<F>(self, f: F) -> Self::Output
     where
-        F: FnOnce(T) -> U,
+        F: FnMut(T) -> U,
     {
-        match self {
-            Some(x) => Some(f(x)),
-            None => None,
-        }
+        self.into_iter().map(f).collect()
     }
 }
 ```
@@ -125,252 +123,306 @@ def map {α β : Type} (f : α → β) : List α → List β
 
 -- 类型类
 class Functor (f : Type → Type) where
-  map : ∀ {α β : Type}, (α → β) → f α → f β
+  fmap : {α β : Type} → (α → β) → f α → f β
 
+-- 实例
 instance : Functor List where
-  map := map
+  fmap := map
 
 -- 单子
 class Monad (m : Type → Type) where
-  pure : ∀ {α : Type}, α → m α
-  bind : ∀ {α β : Type}, m α → (α → m β) → m β
+  pure : {α : Type} → α → m α
+  bind : {α β : Type} → m α → (α → m β) → m β
 ```
 
-### 案例2：类型安全 Type Safety
+### 案例2：类型系统 Type Systems
 
-#### Haskell 类型安全
+#### Haskell 类型系统
 
 ```haskell
--- 长度索引向量
-{-# LANGUAGE DataKinds, GADTs, KindSignatures #-}
+-- 高级类型
+data GADT a where
+  IntVal :: Int -> GADT Int
+  BoolVal :: Bool -> GADT Bool
+  StringVal :: String -> GADT String
 
-data Nat = Z | S Nat
+-- 类型族
+type family ElementType (f :: * -> *) :: *
+type instance ElementType [] = a
+type instance ElementType Maybe = a
 
+-- 数据种类
+data Nat = Zero | Succ Nat
 data Vec (n :: Nat) a where
-  VNil  :: Vec 'Z a
-  VCons :: a -> Vec n a -> Vec ('S n) a
-
--- 类型安全的head函数
-headVec :: Vec ('S n) a -> a
-headVec (VCons x _) = x
-
--- 编译时检查
-safeHead :: Vec n a -> Maybe a
-safeHead VNil = Nothing
-safeHead (VCons x _) = Just x
+  Nil :: Vec Zero a
+  Cons :: a -> Vec n a -> Vec (Succ n) a
 ```
 
-#### Rust 类型安全
+#### Rust 类型系统
 
 ```rust
-// 所有权系统
-fn main() {
-    let s1 = String::from("hello");
-    let s2 = s1; // s1 被移动到 s2
-    // println!("{}", s1); // 编译错误：s1 已被移动
-    
-    let s3 = &s2; // 借用
-    println!("{}", s2); // 可以访问
-    println!("{}", s3); // 可以访问
+// 泛型
+struct Container<T> {
+    value: T,
+}
+
+// Trait 约束
+trait Display {
+    fn display(&self) -> String;
+}
+
+impl<T: Display> Container<T> {
+    fn show(&self) -> String {
+        self.value.display()
+    }
 }
 
 // 生命周期
-fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() { x } else { y }
+struct RefContainer<'a, T> {
+    reference: &'a T,
+}
+
+// 关联类型
+trait Iterator {
+    type Item;
+    fn next(&mut self) -> Option<Self::Item>;
 }
 ```
 
-#### Lean 类型安全
+#### Lean 类型系统
 
 ```lean
 -- 依赖类型
-inductive Vec (α : Type) : Nat → Type
-| nil : Vec α 0
-| cons : ∀ {n : Nat}, α → Vec α n → Vec α (n + 1)
+def Vector (α : Type) : Nat → Type
+  | 0 => Unit
+  | n + 1 => α × Vector α n
 
--- 类型安全的head函数
-def head {α : Type} {n : Nat} (v : Vec α (n + 1)) : α :=
-match v with
-| Vec.cons x _ => x
+-- 归纳类型
+inductive Nat where
+  | zero : Nat
+  | succ : Nat → Nat
 
--- 证明类型安全
-theorem head_safe {α : Type} {n : Nat} (v : Vec α (n + 1)) :
-  ∃ x : α, head v = x :=
-⟨head v, rfl⟩
+-- 类型族
+def List (α : Type) : Type :=
+  | nil : List α
+  | cons : α → List α → List α
+
+-- 宇宙
+universe u
+def TypeVec (α : Type u) : Nat → Type u
+  | 0 => PUnit
+  | n + 1 => α × TypeVec α n
 ```
 
-## 1形式化映射关系 Formal Mapping Relations
+## 形式化映射 Formal Mapping
 
-### 理论构造映射 Theoretical Construction Mapping
-
-#### 范畴论构造 Category Theory Constructions
+### 映射函数 Mapping Functions
 
 ```haskell
--- Haskell: 范畴论映射
-class Category cat where
-  id :: cat a a
-  (.) :: cat b c -> cat a b -> cat a c
+-- 理论到语言的映射函数
+data MappingFunction = MappingFunction
+  { theoryDomain :: TheoryDomain
+  , languageCodomain :: LanguageCodomain
+  , mappingRules :: [MappingRule]
+  , validationCriteria :: [ValidationCriterion]
+  }
 
-class Functor f where
-  fmap :: (a -> b) -> f a -> f b
+-- 理论域
+data TheoryDomain = TheoryDomain
+  { mathematicalTheories :: [MathematicalTheory]
+  , logicalTheories :: [LogicalTheory]
+  , computationalTheories :: [ComputationalTheory]
+  }
 
-class Applicative f where
-  pure :: a -> f a
-  (<*>) :: f (a -> b) -> f a -> f b
+-- 语言陪域
+data LanguageCodomain = LanguageCodomain
+  { haskellFeatures :: [HaskellFeature]
+  , rustFeatures :: [RustFeature]
+  , leanFeatures :: [LeanFeature]
+  }
 
-class Monad m where
-  return :: a -> m a
-  (>>=) :: m a -> (a -> m b) -> m b
+-- 映射规则
+data MappingRule = MappingRule
+  { sourceTheory :: Theory
+  , targetLanguage :: Language
+  , mappingMethod :: MappingMethod
+  , constraints :: [Constraint]
+  }
+
+-- 映射验证
+validateMapping :: MappingFunction -> Theory -> Language -> ValidationResult
+validateMapping mapping theory language = ValidationResult
+  { correctness = checkCorrectness mapping theory language
+  , completeness = checkCompleteness mapping theory language
+  , consistency = checkConsistency mapping theory language
+  , efficiency = checkEfficiency mapping theory language
+  }
 ```
 
-```rust
-// Rust: 范畴论映射
-trait Functor {
-    type Output;
-    fn fmap<F>(self, f: F) -> Self::Output;
-}
-
-trait Applicative: Functor {
-    fn pure<T>(value: T) -> Self;
-    fn apply<F>(self, f: Self) -> Self::Output;
-}
-
-trait Monad: Applicative {
-    fn bind<F>(self, f: F) -> Self::Output;
-}
-```
-
-```lean
--- Lean: 范畴论映射
-class Category (obj : Type) (hom : obj → obj → Type) where
-  id : ∀ a : obj, hom a a
-  comp : ∀ {a b c : obj}, hom b c → hom a b → hom a c
-
-class Functor (F : Type → Type) where
-  map : ∀ {α β : Type}, (α → β) → F α → F β
-```
-
-### 1类型理论映射 Type Theory Mapping
-
-#### 依赖类型映射 Dependent Type Mapping
+### 映射关系 Mapping Relations
 
 ```haskell
--- Haskell: 依赖类型（通过扩展）
-{-# LANGUAGE DataKinds, GADTs, TypeFamilies #-}
+-- 映射关系类型
+data MappingRelation = MappingRelation
+  { oneToOne :: OneToOneMapping
+  , oneToMany :: OneToManyMapping
+  , manyToOne :: ManyToOneMapping
+  , manyToMany :: ManyToManyMapping
+  }
 
-data Nat = Z | S Nat
+-- 一对一映射
+data OneToOneMapping = OneToOneMapping
+  { source :: Theory
+  , target :: LanguageFeature
+  , bijection :: Bijection
+  , inverse :: InverseMapping
+  }
 
-type family Add (n :: Nat) (m :: Nat) :: Nat where
-  Add 'Z m = m
-  Add ('S n) m = 'S (Add n m)
+-- 一对多映射
+data OneToManyMapping = OneToManyMapping
+  { source :: Theory
+  , targets :: [LanguageFeature]
+  , distribution :: Distribution
+  , coordination :: Coordination
+  }
 
-data Vec (n :: Nat) a where
-  VNil  :: Vec 'Z a
-  VCons :: a -> Vec n a -> Vec ('S n) a
-```
+-- 多对一映射
+data ManyToOneMapping = ManyToOneMapping
+  { sources :: [Theory]
+  , target :: LanguageFeature
+  , aggregation :: Aggregation
+  , conflictResolution :: ConflictResolution
+  }
 
-```lean
--- Lean: 原生依赖类型
-inductive Nat
-| zero : Nat
-| succ : Nat → Nat
-
-def add : Nat → Nat → Nat
-| Nat.zero, m => m
-| Nat.succ n, m => Nat.succ (add n m)
-
-inductive Vec (α : Type) : Nat → Type
-| nil : Vec α Nat.zero
-| cons : ∀ {n : Nat}, α → Vec α n → Vec α (Nat.succ n)
+-- 多对多映射
+data ManyToManyMapping = ManyToManyMapping
+  { sources :: [Theory]
+  , targets :: [LanguageFeature]
+  , mappingMatrix :: MappingMatrix
+  , optimization :: Optimization
+  }
 ```
 
 ## 工程实践对比 Engineering Practice Comparison
 
-### 开发效率 Development Efficiency
-
-#### Haskell 开发效率
-
-- **优势**：高级抽象、类型推导、快速原型
-- **挑战**：学习曲线陡峭、调试复杂
-- **工具链**：GHC、Cabal、Stack、HLS
+### 开发效率对比
 
 ```haskell
--- 快速原型示例
-quickSort :: Ord a => [a] -> [a]
-quickSort [] = []
-quickSort (x:xs) = 
-  quickSort [y | y <- xs, y <= x] ++ 
-  [x] ++ 
-  quickSort [y | y <- xs, y > x]
+-- 开发效率指标
+data DevelopmentEfficiency = DevelopmentEfficiency
+  { haskellEfficiency :: HaskellEfficiency
+  , rustEfficiency :: RustEfficiency
+  , leanEfficiency :: LeanEfficiency
+  }
+
+-- Haskell 效率
+data HaskellEfficiency = HaskellEfficiency
+  { typeInference :: TypeInferenceEfficiency
+  , abstractionLevel :: AbstractionEfficiency
+  , toolingMaturity :: ToolingEfficiency
+  , learningCurve :: LearningEfficiency
+  }
+
+-- Rust 效率
+data RustEfficiency = RustEfficiency
+  { ownershipSystem :: OwnershipEfficiency
+  , compilationSpeed :: CompilationEfficiency
+  , errorHandling :: ErrorHandlingEfficiency
+  , ecosystemGrowth :: EcosystemEfficiency
+  }
+
+-- Lean 效率
+data LeanEfficiency = LeanEfficiency
+  { proofAutomation :: ProofEfficiency
+  , mathematicalLibraries :: LibraryEfficiency
+  , formalVerification :: VerificationEfficiency
+  , researchIntegration :: ResearchEfficiency
+  }
 ```
 
-#### Rust 开发效率
+### 性能对比
 
-- **优势**：内存安全、性能、并发安全
-- **挑战**：所有权学习、编译时间长
-- **工具链**：Cargo、rustc、Clippy、rust-analyzer
+```haskell
+-- 性能指标
+data PerformanceMetrics = PerformanceMetrics
+  { haskellPerformance :: HaskellPerformance
+  , rustPerformance :: RustPerformance
+  , leanPerformance :: LeanPerformance
+  }
 
-```rust
-// 内存安全示例
-fn process_data(data: Vec<i32>) -> Vec<i32> {
-    data.into_iter()
-        .filter(|&x| x > 0)
-        .map(|x| x * 2)
-        .collect()
-}
+-- Haskell 性能
+data HaskellPerformance = HaskellPerformance
+  { runtimePerformance :: RuntimePerformance
+  , memoryEfficiency :: MemoryEfficiency
+  , concurrencyPerformance :: ConcurrencyPerformance
+  , optimizationLevel :: OptimizationLevel
+  }
+
+-- Rust 性能
+data RustPerformance = RustPerformance
+  { zeroCostAbstractions :: ZeroCostEfficiency
+  , memorySafety :: MemorySafetyPerformance
+  , compilationOptimization :: CompilationOptimization
+  , runtimeGuarantees :: RuntimeGuarantees
+  }
+
+-- Lean 性能
+data LeanPerformance = LeanPerformance
+  { proofChecking :: ProofCheckingPerformance
+  , mathematicalComputation :: MathematicalPerformance
+  , typeChecking :: TypeCheckingPerformance
+  , automationEfficiency :: AutomationEfficiency
+  }
 ```
-
-#### Lean 开发效率
-
-- **优势**：形式化证明、类型安全
-- **挑战**：证明负担、学习成本高
-- **工具链**：Lean、Mathlib、VSCode
-
-```lean
--- 形式化证明示例
-theorem add_zero (n : Nat) : add n Nat.zero = n :=
-by induction n with
-| zero => rw [add]
-| succ n ih => rw [add, ih]
-```
-
-### 性能对比 Performance Comparison
-
-| 语言 Language | 内存管理 Memory | 运行时开销 Runtime | 编译时间 Compile | 执行速度 Execution |
-|---|---|---|---|---|
-| Haskell | GC | 中等 | 快 | 快 |
-| Rust | 零开销 | 低 | 慢 | 很快 |
-| Lean | GC | 中等 | 中等 | 中等 |
 
 ## 结构图 Structure Diagram
 
 ```mermaid
 graph TD
-  A[理论构造 Theoretical] --> B[Haskell]
-  A --> C[Rust]
-  A --> D[Lean]
+  A[映射理论与语言 Mapping Theory & Language] --> B[理论映射 Theoretical Mapping]
+  A --> C[语言对比 Language Comparison]
+  A --> D[形式化映射 Formal Mapping]
+  A --> E[工程实践 Engineering Practice]
   
-  B --> E[范畴论 Category Theory]
-  B --> F[类型类 Type Classes]
-  B --> G[单子 Monads]
+  B --> F[范畴论映射 Category Theory Mapping]
+  B --> G[类型论映射 Type Theory Mapping]
+  B --> H[线性论映射 Linear Theory Mapping]
+  B --> I[证明论映射 Proof Theory Mapping]
   
-  C --> H[所有权 Ownership]
-  C --> I[借用 Borrowing]
-  C --> J[生命周期 Lifetimes]
+  C --> J[Haskell 特征]
+  C --> K[Rust 特征]
+  C --> L[Lean 特征]
+  C --> M[对比分析]
   
-  D --> K[依赖类型 Dependent Types]
-  D --> L[归纳类型 Inductive Types]
-  D --> M[证明构造 Proof Construction]
+  D --> N[映射函数 Mapping Functions]
+  D --> O[映射关系 Mapping Relations]
+  D --> P[验证标准 Validation Criteria]
+  D --> Q[优化策略 Optimization Strategies]
   
-  E --> N[工程实践 Engineering]
-  F --> N
-  G --> N
-  H --> N
-  I --> N
-  J --> N
-  K --> N
-  L --> N
-  M --> N
+  E --> R[开发效率 Development Efficiency]
+  E --> S[性能对比 Performance Comparison]
+  E --> T[工具链对比 Toolchain Comparison]
+  E --> U[生态系统 Ecosystem]
+  
+  F --> V[Monad/Applicative/Functor]
+  G --> W[GADTs/Type Families/DataKinds]
+  H --> X[Ownership/Borrowing/Lifetimes]
+  I --> Y[Dependent Types/Inductive Types]
+  
+  J --> Z[函数式编程]
+  K --> AA[系统编程]
+  L --> BB[定理证明]
+  M --> CC[表达能力对比]
+  
+  N --> DD[理论到语言映射]
+  O --> EE[一对一/一对多映射]
+  P --> FF[正确性/完备性验证]
+  Q --> GG[性能/可维护性优化]
+  
+  R --> HH[Haskell 类型推断]
+  S --> II[Rust 零成本抽象]
+  T --> JJ[Lean 证明自动化]
+  U --> KK[社区/库/工具支持]
 ```
 
 ## 交叉引用 Cross References
