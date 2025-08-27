@@ -234,7 +234,7 @@ data ClassificationMethod = ClassificationMethod
   }
 ```
 
-### 知识图谱 Knowledge Graph
+### 1知识图谱 Knowledge Graph
 
 #### 图谱构建 Graph Construction
 
