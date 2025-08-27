@@ -23,6 +23,12 @@ type family IsZero (n :: Nat) :: Bool where
   IsZero n = 'False
 ```
 
+### 机制与一致性 Mechanism & Consistency
+
+- 机制：以类型族刻画属性（长度、排序、去重、维度等），以约束 `Prop xs ~ 'True` 驱动编译期验证
+- 一致性：封闭族带来可预期的归约；开放族需保证全局实例不冲突；可逆族提升推断能力
+- 与类型等价：结合 `:~:`/`~` 进行类型改写，实现“验证即约束化”的证明风格
+
 ## 泛型验证机制 Generic Verification Mechanism
 
 - 类型族递归验证、类型类泛型约束检查
@@ -49,6 +55,7 @@ graph TD
   A["类型级泛型验证 Type-level Generic Verification"] --> B["泛型属性验证 Generic Property Verification"]
   B --> C["一致性检查 Consistency Check"]
   C --> D["类型安全 Type Safety"]
+  D --> E["库/框架 Library/Framework"]
 ```
 
 ## 本地跳转 Local References

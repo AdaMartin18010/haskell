@@ -30,6 +30,21 @@ data Expr a where
   - 每个构造器可返回不同的类型参数，提升类型安全。
   - 支持更精细的类型检查和推断。
 
+### 1.2.1 模式匹配与索引精化（Pattern Matching and Index Refinement）
+
+- 对 `Expr a` 模式匹配时，构造器会精化 `a` 的具体形态（如 `LitInt` 精化为 `Int`）
+- 编译器在每个分支内使用精化后的索引进行类型检查，确保分支类型安全
+
+### 1.2.2 存在类型与带证据的数据（Existentials and Evidence Carrying Data）
+
+- 可通过 GADT 在构造器中隐藏类型参数，形成存在量化；并携带证明/约束（如 `Show a => Pack a`）
+- 常用于“以数据承载不变量”与“以构造器捆绑证据”
+
+### 1.2.3 对推断的影响（Impact on Inference）
+
+- GADT 引入局部等式与索引精化，可能需要显式签名帮助推断
+- 与 `TypeFamilies/FunctionalDependencies/RankNTypes` 协作时，更需要明确的类型边界
+
 - **GADT模式匹配（Pattern Matching with GADT）**
 
 ```haskell
@@ -60,6 +75,11 @@ eval (If c t f)    = if eval c then eval t else eval f
 - **表达能力证明**
   - **中文**：证明GADT可表达依赖类型和更复杂的类型关系。
   - **English**: Prove that GADTs can express dependent types and more complex type relations.
+
+### 1.4.1 证明模式（Proof Patterns）
+
+- 以构造器分解进行结构归纳；在每个分支使用索引精化的归纳假设
+- 携带等式/约束的构造器（evidence carrying）用于在类型层改写（rewrite）
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -128,6 +148,13 @@ eval (Lit (VInt n))  = n
 eval (Lit (VBool b)) = b
 eval (Add e1 e2)     = eval e1 + eval e2
 eval (If c t f)      = if eval c then eval t else eval f
+
+-- 存在类型封装与证据示例
+data Some where
+  Some :: Show a => a -> Some
+
+printSome :: Some -> String
+printSome (Some x) = show x
 ```
 
 ## 1.10 相关理论 Related Theories

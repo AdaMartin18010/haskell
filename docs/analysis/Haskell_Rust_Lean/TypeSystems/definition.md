@@ -242,6 +242,36 @@ preservation expr expr' typ =
     _ -> True
 ```
 
+### 健全性与完备性 Soundness and Completeness
+
+- 健全性（Soundness）：类型系统证明的陈述在操作语义下成立。典型由“保持 + 进展”给出。
+- 完备性（Completeness）：若在语义上成立，类型系统能推导出相应类型或性质（实际语言常不完全以换取判定性/推断性能）。
+
+### 操作语义与指称语义 Operational vs. Denotational
+
+- 操作语义：以归约/求值关系定义程序行为（小步/大步），用于证明保持/进展。
+- 指称语义：以数学对象解释类型与项（域论/范畴语义），用于证明程序等价、健全性与规范化等。
+
+### Haskell/Rust/Lean 对照 Haskell vs. Rust vs. Lean
+
+- Haskell：以强类型、类型类、GADTs、Type Families、LinearTypes（可选）实现静态保证；有 TypeLits/DataKinds/Dependent Haskell 提案。
+- Rust：所有权/借用/生命周期在类型系统中编码资源安全与并发内存安全，偏向仿射/线性约束与可预测性能。
+- Lean（或 Coq/Agda）：原生依赖类型与证明内核，类型即命题、程序即证明，适合形式验证与可机检证明。
+
+### 结构图 Structure Diagram
+
+```mermaid
+graph TD
+  A[类型规则 Rules] --> B[类型推导 Inference]
+  B --> C[进展 Progress]
+  B --> D[保持 Preservation]
+  C --> E[健全性 Soundness]
+  D --> E
+  A --> F[语义 Semantics]
+  F --> G[操作 Operational]
+  F --> H[指称 Denotational]
+```
+
 ## 历史发展 Historical Development
 
 ### 理论基础 Theoretical Foundation

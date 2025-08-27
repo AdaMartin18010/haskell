@@ -1,59 +1,75 @@
 # 类型级归纳证明（Type-Level Inductive Proof in Haskell）
 
+> 对标 Wikipedia/nLab 与教材：给出定义、原理、证明模式、Haskell 示例与工程应用，双语。
+
 ## 定义 Definition
 
-- **中文**：类型级归纳证明是指在类型系统层面通过归纳法对类型关系、类型等价、类型安全等性质进行形式化证明的方法。
-- **English**: Type-level inductive proof refers to formal methods at the type system level for proving properties such as type relations, type equivalence, and type safety using induction in Haskell.
+- 中文：类型级归纳证明是在类型系统层面对索引数据/类型族递归进行归纳，以证明不变量（等价、安全、覆盖等）。
+- English: Type-level inductive proof performs induction at the type level over indexed data/type-family recursion to establish invariants (equality, safety, coverage, etc.).
+
+## 归纳原理 Induction Principles
+
+- 基础情形 Base case：对最小构造（如 Z、[]、Unit）直接证明性质
+- 归纳情形 Inductive step：假设对较小结构成立，推出对组合构造成立
+- 结构归纳/强归纳 Structural/Strong induction：对 GADT/索引族根据构造器进行分类证明
 
 ## Haskell 语法与实现 Syntax & Implementation
 
 ```haskell
-{-# LANGUAGE TypeFamilies, DataKinds, TypeOperators, UndecidableInstances #-}
-import GHC.TypeLits
+{-# LANGUAGE DataKinds, GADTs, TypeFamilies, TypeOperators, UndecidableInstances #-}
 
--- 类型级归纳证明示例：类型级加法的归纳证明
+data Nat = Z | S Nat
 
+-- 类型级加法（以归纳定义）
 type family Add (a :: Nat) (b :: Nat) :: Nat where
-  Add 0 b = b
-  Add a b = 1 + Add (a - 1) b
+  Add 'Z     b = b
+  Add ('S a) b = 'S (Add a b)
 
--- 归纳证明 Add a b = Add b a
--- 省略具体证明代码，理论上可用类型等价与归纳法表达
+-- 归纳证明样式：证明 Add a 'Z = a
+-- 以布尔性质刻画证明目标（可与等价证据 :~: 配合）
+type family AddZeroRight (a :: Nat) :: Bool where
+  AddZeroRight 'Z     = 'True
+  AddZeroRight ('S a) = AddZeroRight a
+
+-- 单例桥接：在值层复用类型层的归纳结构
+
+data SNat (n :: Nat) where
+  SZ :: SNat 'Z
+  SS :: SNat n -> SNat ('S n)
+
+replicateVec :: SNat n -> a -> [a]  -- 示例：利用单例进行结构化递归
+replicateVec SZ     _ = []
+replicateVec (SS k) x = x : replicateVec k x
 ```
 
-## 归纳证明方法 Inductive Proof Methods
+### 证明模式 Proof Patterns
 
-- 基础情形与归纳情形分解
-- 类型等价与类型安全的归纳证明
-- 类型族递归归纳
+- 等式重写（rewrite with :~:）：以 Refl 作为同一性证据实现替换
+- 单例（Singletons）桥接：以 SNat n 见证类型层的归纳假设在值层展开
+- 封闭类型族：以穷举分支进行“按构造器归纳”的等式约简
 
 ## 形式化推理 Formal Reasoning
 
-- **类型级归纳证明的严谨性**：每一步都需保证类型系统一致性
-- **Rigorousness of type-level inductive proof**: Each step must preserve type system consistency
-
-### 证明示例 Proof Example
-
-- 对 `Add a b`，对 `a` 归纳：
-  - 基础：`a=0`，`Add 0 b = b` 成立
-  - 归纳：假设 `Add (a-1) b` 成立，则 `Add a b = 1 + Add (a-1) b` 也成立
+- 严谨性：保持一致性（coherence）与终止性（termination）
+- 覆盖性：每个构造器均被证明覆盖
+- 与 GADTs/TF 的协同：在构造器上精化索引，归纳假设随之细化
 
 ## 工程应用 Engineering Application
 
-- 类型安全性证明、类型等价性验证、泛型算法正确性证明
-- Type safety proofs, type equivalence validation, generic algorithm correctness proofs
+- 向量/矩阵维度、协议状态机、权限/能力、AST 不变量的编译期证明
+- 泛型库安全化：以类型级证明约束暴露 API 的可用状态
 
 ## 范畴论映射 Category Theory Mapping
 
-- 类型级归纳证明对应于初始代数（Initial algebra）上的归纳原理
+- 初始代数上的归纳原理；W‑types 与归纳族对应普遍性
 
 ## 结构图 Structure Diagram
 
 ```mermaid
 graph TD
-  A["类型级归纳 Type-level Induction"] --> B["归纳证明 Inductive Proof"]
-  B --> C["类型等价 Type Equivalence"]
-  C --> D["类型安全 Type Safety"]
+  A[类型级归纳 Type-level Induction] --> B[证明模式 Proof Patterns]
+  B --> C[等式重写/单例/封闭族 Rewrite/Singletons/CTF]
+  C --> D[工程不变量 Engineering Invariants]
 ```
 
 ## 本地跳转 Local References

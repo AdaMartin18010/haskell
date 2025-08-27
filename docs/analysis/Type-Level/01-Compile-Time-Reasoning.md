@@ -23,6 +23,12 @@ type family Reason (e :: Expr a) :: Bool where
   Reason ('Add x y) = Reason x && Reason y
 ```
 
+### 语义与规则 Semantics & Rules
+
+- 属性归纳：按构造器对 `Expr` 结构进行归纳，保证覆盖性
+- 类型检查：以 GADT 精化 `Expr a` 的索引，确保操作类型一致
+- 约束求解：`Reason e ~ 'True` 作为前提条件参与编译期证明
+
 ## 类型级属性归纳与类型检查 Property Induction & Type Checking
 
 - 类型级表达式的属性归纳、类型检查、语义推理
@@ -49,6 +55,7 @@ graph TD
   A["类型级编译期推理 Type-level Compile-Time Reasoning"] --> B["属性归纳 Property Induction"]
   B --> C["类型检查 Type Checking"]
   C --> D["语义推理 Semantic Reasoning"]
+  D --> E["工程应用 Engineering Uses"]
 ```
 
 ## 本地跳转 Local References

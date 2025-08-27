@@ -1,117 +1,113 @@
-# 线性类型理论与Haskell实现（Linear Type Theory in Haskell）
+# 线性类型理论（Linear Type Theory）与Haskell/Rust/Lean实践
 
-## 定义 Definition
+> 对标 Wikipedia、SEP、nLab 与线性逻辑文献；中英双语；覆盖形式系统、乘法度量（multiplicities）、工程化实践。
 
-- **中文**：线性类型理论是一种类型系统，要求每个变量（资源）在作用域内恰好使用一次，广泛用于资源管理、并发和内存安全。Haskell通过LinearTypes扩展支持线性类型。
-- **English**: Linear type theory is a type system that requires each variable (resource) to be used exactly once in its scope. Haskell supports linear types via the LinearTypes extension, widely used for resource management, concurrency, and memory safety.
+## 1. 定义 Definition
 
-## 线性类型系统核心概念 Core Concepts
+- 中文：线性类型理论要求变量（资源）在其作用域内按受控次数使用，典型为“恰好一次”。其动机源自 Girard 的线性逻辑：资源不可随意复制与丢弃。
+- English: Linear type theory constrains how many times a variable (resource) may be used within its scope, typically exactly once. It is motivated by Girard’s linear logic: resources cannot be duplicated or discarded arbitrarily.
 
-- **线性类型上下文（Linear Type Context）**：变量唯一使用。
-- **线性类型构造（Linear Type Constructors）**：线性函数类型（`a %1 -> b`）、张量积类型、可重复使用类型等。
-- **线性推理规则（Inference Rules）**：变量、线性抽象、线性应用。
+线性类型通过类型系统追踪资源流向，确保 API 在编译期满足使用纪律，从而实现内存/句柄/能力的安全释放与转移。
 
-## Haskell实现与现代语言对比 Haskell & Modern Language Comparison
+## 2. 形式系统 Formal System
 
-- Haskell：`LinearTypes` 扩展，`a %1 -> b`，资源唯一性保证。
-- Rust：所有权与借用系统，强制资源唯一性。
-- OCaml/F#：无原生线性类型，但可通过模块系统模拟。
+### 2.1 线性上下文与分裂 Linear Context and Splitting
 
-### Haskell 线性类型示例
+- Judgement forms 区分线性与非线性上下文：Γ; Δ ⊢ e : A，其中 Γ 可复制（非线性/仿射），Δ 需精确消费（线性）。
+- 上下文分裂（context splitting）约束应用与并行组合时的资源分配。
+
+### 2.2 线性逻辑—类型对应 Linear Logic as Types
+
+- 乘法 Multiplicative: ⊗（tensor）对应并行组合，⅋（par）对应线性函数空间的对偶结构
+- 加法 Additive: & 与 ⊕ 对应受限选择与合取
+- 指数 Exponentials: !（of course）与 ?（why not）允许从线性世界“逃逸”到可复制/可丢弃的世界
+
+### 2.3 线性函数与多重性 Linear Arrows and Multiplicities
+
+- Haskell 以 a %p -> b 表示多重性为 p 的函数，p=1 表示线性；p=ω 表示常规（可复制）；编译器检查使用次数。
+- Preservation/Progress 在标准小步/大步语义中同样成立，且需在代换中维护使用计数的一致性。
+
+## 3. 与相关理论关系 Relations
+
+- 仿射类型（Affine）：允许“至多一次”使用；线性是“恰好一次”的特例
+- 依赖/时序类型：可与线性叠加表达资源与时间/状态的不变量
+- 范畴/幺半范畴：张量与线性函数空间与对称单闭结构相关
+
+## 4. 历史与发展 History & Development
+
+- 1987 Girard 提出线性逻辑；随后出现线性 λ‑演算与类型系统
+- 语言支持：Clean/Linear Lisp（早期思想）、Rust（所有权/借用与线性/仿射亲缘）、Haskell（LinearTypes，GHC 9.x 完善）
+- 研究方向：multiplicity polymorphism、线性状态机/协议类型、IO/并行/FFI 资源管控
+
+## 5. Haskell/Rust/Lean 对照 Haskell vs. Rust vs. Lean
+
+- Haskell：LinearTypes（a %1 -> b）、multiplicities、System.IO.Linear、线性容器与线性状态变换
+- Rust：ownership/borrowing/lifetimes 实现“独占或可共享只读”的资源纪律，接近仿射/线性范式
+- Lean：可在依赖类型下刻画线性结构与定理；以定理方式验证资源使用性质
+
+## 6. Haskell 实践 Haskell Practice
+
+### 6.1 基本用法 Basic Usage
 
 ```haskell
 {-# LANGUAGE LinearTypes #-}
 
-f :: a %1 -> (a, a)
-f x = (x, x)  -- 错误：x 被用两次，违反线性约束
+f :: a %1 -> a
+f x = x  -- ok: 恰好一次
+
+dup :: a %1 -> (a, a)
+dup x = (x, x)  -- 编译错误：x 被使用两次
 ```
 
-## 结构图 Structure Diagram
+### 6.2 线性 IO 与文件句柄 Linear IO and Handles
+
+```haskell
+{-# LANGUAGE LinearTypes #-}
+import System.IO.Linear (withFile, Ur(..))
+
+copyOnce :: FilePath %1 -> FilePath %1 -> Ur ()
+copyOnce src dst = withFile src (\h1 -> withFile dst (\h2 ->
+  -- 在线性区域内对句柄进行一次性使用
+  Ur ()))
+```
+
+### 6.3 多重性参数与多态 Multiplicity Polymorphism (概念)
+
+- 概念：允许对使用次数进行抽象，从而编写同时适用于线性与非线性场景的通用库。
+
+## 7. 证明与性质 Proofs and Properties
+
+- Preservation/Progress：与常规类型系统类似，但需对上下文分裂与使用计数进行归纳证明
+- 资源正确性：以类型编码“使用次数=1”，构造非法用法不可通过类型检查
+- 与仿射比较：仿射允许丢弃，线性要求消费；二者在编译器规则上表现不同
+
+## 8. 工程应用 Engineering Applications
+
+- 内存/句柄/网络连接/锁/事务：静态地保证获取—使用—释放的完整生命周期
+- 并发与管道：借助张量与上下文分裂确保无共享可变状态下的安全组合
+- FFI 与系统编程：线性封装“不安全能力”，以安全接口暴露
+
+## 9. 结构图 Structure Diagram
 
 ```mermaid
 graph TD
-  A[线性类型上下文 Linear Type Context] --> B[线性类型判断 Linear Type Judgement]
-  B --> C[线性推理规则 Inference Rules]
-  C --> D[线性类型安全性 Linear Type Safety]
-  D --> E[Haskell线性类型推断 Linear Type Inference]
+  A[线性类型 Linear Types] --> B[上下文分裂 Context Splitting]
+  B --> C[乘法/加法/指数 ⊗ ⊕ !]
+  C --> D[Haskell LinearTypes]
+  D --> E[资源安全 API / 线性 IO]
 ```
 
-## 形式化论证与证明 Formal Reasoning & Proofs
-
-- **线性类型保持性（Preservation）**：归约后线性类型不变。
-- **进展性（Progress）**：类型正确的表达式要么是值，要么可归约。
-- **资源唯一性证明**：每个线性变量在作用域内恰好用一次。
-
-### 证明示例 Proof Example
-
-- 对每个推理规则，证明线性类型在归约后保持不变。
-- 对每个语法构造，证明要么是值，要么可以继续归约。
-
-## 工程应用 Engineering Application
-
-- 资源安全API、并发编程、内存安全、文件/句柄管理、跨语言资源模型。
-
-## 本地跳转 Local References
+## 10. 本地跳转 Local References
 
 - [类型理论基础 Type Theory Foundation](../01-Type-Theory/01-Type-Theory-Foundation.md)
 - [仿射类型理论 Affine Type Theory](../03-Affine-Type-Theory/01-Affine-Type-Theory-Foundation.md)
 - [时序类型理论 Temporal Type Theory](../04-Temporal-Type-Theory/01-Temporal-Type-Theory-Foundation.md)
 - [类型安全 Type Safety](../14-Type-Safety/01-Type-Safety-in-Haskell.md)
 
----
+## 11. 参考文献 References
 
-## 历史与发展 History & Development
-
-- **中文**：线性类型理论由Jean-Yves Girard于1987年提出，最初用于逻辑学，后广泛应用于资源管理、并发和编程语言。Haskell自GHC 8.12引入LinearTypes扩展后，成为主流函数式语言中率先支持线性类型的代表。
-- **English**: Linear type theory was introduced by Jean-Yves Girard in 1987, initially for logic, and later widely applied to resource management, concurrency, and programming languages. Since GHC 8.12, Haskell has been a leading functional language supporting linear types via the LinearTypes extension.
-
-## Haskell 相关特性 Haskell Features
-
-### 经典特性 Classic Features
-
-- 资源敏感类型、不可变数据结构、类型安全的内存管理等。
-- Resource-sensitive types, immutable data structures, type-safe memory management, etc.
-
-### 最新特性 Latest Features
-
-- **Linear Types（线性类型）**：GHC 8.12+正式支持，变量必须恰好使用一次。
-- **Multiplicities**：支持多重性类型参数。
-- **Type-level Programming**：类型级资源管理与约束。
-- **GHC 2021/2022**：标准化线性类型相关扩展。
-
-- **English**:
-  - Linear Types: Officially supported since GHC 8.12, variables must be used exactly once.
-  - Multiplicities: Support for multiplicity type parameters.
-  - Type-level programming: Type-level resource management and constraints.
-  - GHC 2021/2022: Standardizes linear type extensions.
-
-## 应用 Applications
-
-- **中文**：资源安全的API、并发与分布式系统、内存安全、文件句柄管理、不可变数据结构等。
-- **English**: Resource-safe APIs, concurrency and distributed systems, memory safety, file handle management, immutable data structures, etc.
-
-## 例子 Examples
-
-```haskell
-{-# LANGUAGE LinearTypes #-}
-f :: a %1 -> (a, a)
-f x = (x, x)  -- 错误：x被用两次，违反线性约束
-
-import System.IO.Linear
-withFile :: FilePath %1 -> (File %1 -> Ur b) %1 -> Ur b
-```
-
-## 相关理论 Related Theories
-
-- 线性逻辑（Linear Logic）
-- 资源敏感类型系统（Resource-sensitive Type Systems）
-- 不可变数据结构（Immutable Data Structures）
-- 并发与分布式系统（Concurrency and Distributed Systems）
-
-## 参考文献 References
-
-- [Wikipedia: Linear Type](https://en.wikipedia.org/wiki/Linear_type)
-- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
-- [Linear Haskell](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/linear_types.html)
-- [Jean-Yves Girard: Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)
-- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+- Wikipedia: Linear type；Linear logic（Girard）
+- nLab: Linear type theory, Linear logic
+- GHC User's Guide; Linear Haskell（LinearTypes, System.IO.Linear）
+- Rust Reference（ownership/borrowing）
+- Pierce: Types and Programming Languages（资源敏感系统相关章节）

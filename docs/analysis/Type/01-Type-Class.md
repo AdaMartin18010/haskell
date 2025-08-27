@@ -41,6 +41,41 @@ elem x (y:ys) = x == y || elem x ys
 - **多态与类型推断**
   - 类型类约束实现受限多态，类型推断自动传播约束。
 
+### 1.2.1 字典传递语义（Dictionary-passing Semantics）
+
+- 编译器将 `Eq a => ...` 转换为“字典参数”传递；实例解析对应字典构造与选取
+- 直观语义：类型类是接口，实例是字典；约束是形参需要的字典类型
+
+### 1.2.2 法则与公理（Laws & Axioms）
+
+- Eq：自反性、对称性、传递性；与 `(/=)` 一致
+- Ord：全序；与 Eq 一致；`compare`/`(<)`/`(<=)` 等一致
+- Semigroup/Monoid：结合律；单位律
+- Functor：恒等、合成；Applicative/Monad 相容律
+- Foldable/Traversable：自然性、融合律
+
+### 1.2.3 实例选择与一致性（Instance Resolution & Coherence）
+
+- 实例选择：基于类型头最匹配与约束可解
+- 一致性/相合性：一个类型在单一模块集中应有唯一一致实例（避免全局歧义）
+- 孤儿实例（Orphan）：实例声明不在类型或类所属模块，可能破坏一致性，应避免
+
+### 1.2.4 重叠/不一致实例（Overlapping/Incoherent Instances）
+
+- Overlapping/Overlappable/OverlappingInstances：允许选择更具体实例；易导致不可预测解析
+- IncoherentInstances：禁用一致性保证；仅在受控边界使用
+
+### 1.2.5 派生与新类型派生（Deriving Strategies & Newtype Deriving）
+
+- deriving stock/newtype/anyclass/via：选择派生策略，控制语义来源
+- Newtype deriving：零成本复用底层实例；配合 DerivingVia 精准重用
+
+### 1.2.6 多参数/函数依赖/关联类型（MPTCs/FDs/ATs）
+
+- MPTCs：`class C a b where ...`
+- FunctionalDependencies：`class C a b | a -> b` 改善推断与等式信息
+- Associated Type Families：在类内声明类型族，作为等式约束的替代/补充
+
 ## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
 - **类型类与函子/范畴的关系**
@@ -62,6 +97,12 @@ elem x (y:ys) = x == y || elem x ys
 - **实例一致性证明**
   - **中文**：证明同一类型的所有实例实现满足类型类公理（如等价关系）。
   - **English**: Prove that all instance implementations for a type satisfy the type class axioms (e.g., equivalence for Eq).
+
+### 1.4.1 证明模式（Proof Patterns）
+
+- 定律测试（law-checking）与 QuickCheck/inspection-testing 验证语义一致
+- 相合性（coherence）分析与重叠边界证明实例选择的确定性
+- 与类型等价/类型族配合，证明约束解的唯一化
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -130,6 +171,12 @@ instance Convertible Int String where
 class Collection c where
   type Elem c
   insert :: Elem c -> c -> c
+
+-- DerivingVia / Newtype deriving 示例（示意）
+{-# LANGUAGE DerivingVia, GeneralizedNewtypeDeriving #-}
+newtype SumInt = SumInt Int
+  deriving (Eq, Ord, Show)
+  deriving (Semigroup, Monoid) via Data.Monoid.Sum Int
 ```
 
 ## 1.10 相关理论 Related Theories
@@ -146,4 +193,9 @@ class Collection c where
 - [Types and Programming Languages, Benjamin C. Pierce]
 - [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
 
-> 本文档为类型类在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。
+## 1.12 工程实践要点（Engineering Pitfalls & Tips）
+
+- 避免孤儿与不必要重叠；将实例集中在类型或类的主模块暴露
+- 为“定律”编写属性测试；为复杂实例添加文档化不变量
+- 使用 DerivingStrategies/DerivingVia 明确派生来源；避免语义歧义
+- 当推断困难时，添加显式签名或使用 FunctionalDependencies/ATs 提升可解性

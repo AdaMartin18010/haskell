@@ -37,6 +37,26 @@ unify (TArrow t1 t2) (TArrow t1' t2') =
 unify (TCon a) (TCon b) = if a == b then [] else fail
 ```
 
+### 1.2.1 Algorithm W 关键步骤（Key Steps）
+
+- 环境查找：从类型环境 Γ 取变量最泛类型（scheme）并实例化为具体类型
+- 应用与合成：对函数与参数分别推断并统一（unify）生成替换 σ；合成替换保持顺序
+- let-绑定：先在局部对右式推断，再对自由类型变量做“泛化”形成多态类型方案，再扩展 Γ
+- 泛型实例化：使用处将多态方案实例化为新类型变量，保持“最泛类型（principal types）”性质
+
+### 1.2.2 let-泛化与类型类约束（Let-generalization and Constraints）
+
+- let-多态（Damas–Milner）：仅在 let 处进行泛化；lambda 形参不泛化
+- 类型类约束：约束收集与求解（constraint solving）在 W 的基础上进行扩展
+- 默认化（defaulting）：数值类（Num/Fractional）可能触发默认化以消除歧义
+
+### 1.2.3 高级特性对推断的影响（Impact of Advanced Features）
+
+- GADTs：局部精化类型，推断不再纯 HM；通常需要显式注解以辅助求解
+- RankNTypes：高阶多态引入注解边界；函数参数多态常需签名
+- Type Families / Functional Dependencies：引入等式约束与改写，需与约束求解器协同
+- Overlapping/Incoherent Instances：破坏一致性和可预测性，应谨慎使用
+
 ## 1.3 Haskell中的多态（Polymorphism in Haskell）
 
 - **参数多态（Parametric Polymorphism）**
@@ -78,6 +98,11 @@ elem :: Eq a => a -> [a] -> Bool
   - **中文**：证明参数多态和类型类多态的表达能力和安全性。
   - **English**: Prove the expressiveness and safety of parametric and type class polymorphism.
 
+### 1.5.1 主类型与健全性（Principal Types & Soundness）
+
+- 主类型（Principal type）：若 e : τ，则存在最泛 τ₀，使得任意 τ 由实例化 τ₀ 获得
+- 健全性/完备性：算法 W 对 HM 体系给出健全且完备的推断；扩展后通常保持健全，完备性视扩展而定
+
 ## 1.6 多表征与本地跳转（Multi-representation & Local Reference）
 
 - **类型推断与多态结构图（Type Inference and Polymorphism Structure Diagram）**
@@ -103,6 +128,8 @@ graph TD
 
 - **中文**：类型推断理论起源于20世纪60年代，Hindley和Milner提出了著名的Hindley-Milner类型系统。Haskell自诞生以来采用该系统，并不断扩展支持类型类多态、RankNTypes、GADTs等。类型推断和多态极大提升了代码的抽象性和安全性。
 - **English**: Type inference theory originated in the 1960s, with the Hindley-Milner type system proposed by Hindley and Milner. Haskell has adopted and extended this system since its inception, supporting type class polymorphism, RankNTypes, GADTs, etc. Type inference and polymorphism greatly enhance code abstraction and safety.
+
+补充：Damas–Milner（Algorithm W）确立 let-多态；随后在约束求解、类型类、GADT、闭包/区域推断等方向发展。
 
 ## 1.8 Haskell 相关特性 Haskell Features
 
@@ -151,6 +178,12 @@ applyTwice f = (f 1, f True)
    F Bool = Int
 ```
 
+## 1.13 工程实践要点（Engineering Pitfalls & Tips）
+
+- 明确边界：GADTs/RankNTypes/TF 会降低“自动推断度”，适时加上类型签名
+- 避免歧义：含有未约束类型变量与数值类约束时，使用 Proxy/TypeApplications 或显式默认化
+- 约束爆炸：复杂类型族/约束链可导致编译缓慢，需分层设计与合理拆分
+
 ## 1.11 相关理论 Related Theories
 
 - Hindley-Milner类型系统（Hindley-Milner Type System）
@@ -165,5 +198,11 @@ applyTwice f = (f 1, f True)
 - [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
 - [Types and Programming Languages, Benjamin C. Pierce]
 - [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+
+补充：
+
+- Damas, Milner. Principal type-schemes for functional programs
+- Jones. Qualified Types: A Theory of Type Classes
+- Peyton Jones et al. Practical type inference for arbitrary-rank types
 
 > 本文档为类型推断与多态在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。

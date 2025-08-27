@@ -26,8 +26,7 @@ data Color = Red | Green | Blue
 -- 类型级颜色：'Red, 'Green, 'Blue
 
 -- 类型级布尔
-:type True  -- True :: Bool
-:type 'True -- 'True :: Bool (类型级)
+-- 说明：在类型层使用需加前缀引号，如 'True, 'Z
 ```
 
 - **类型级编程与类型推广**
@@ -40,10 +39,20 @@ data Vec :: * -> Nat -> * where
   VCons :: a -> Vec a n -> Vec a ('S n)
 
 -- 类型级布尔与类型族
-:type family And (a :: Bool) (b :: Bool) :: Bool where
+type family And (a :: Bool) (b :: Bool) :: Bool where
   And 'True  'True  = 'True
   And _      _      = 'False
 ```
+
+### 1.2.1 种类与提升（Kinds and Promotion）
+
+- 提升后，值构造器变为类型构造器，其“种类”从 * 提升到对应的 kind（如 `Nat`、`Bool`）
+- 符号字面量（TypeLits）：`Nat` 与 `Symbol` 在类型层表示自然数与符号
+
+### 1.2.2 单例与桥接（Singletons Bridge）
+
+- 单例类型/值（SNat/SBool）在类型与值之间形成一一对应，支持在值层复用类型层结构
+- 常与 GADTs 搭配以进行安全的索引数据编程
 
 ## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
@@ -128,6 +137,11 @@ data Vec (a :: *) (n :: Nat) where
    Or 'True  _      = 'True
    Or _      'True  = 'True
    Or _      _      = 'False
+
+-- 单例示例
+data SNat (n :: Nat) where
+  SZ :: SNat 'Z
+  SS :: SNat n -> SNat ('S n)
 ```
 
 ## 1.10 相关理论 Related Theories

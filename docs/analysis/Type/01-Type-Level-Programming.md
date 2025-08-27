@@ -1,20 +1,17 @@
 # 01. 类型级编程（Type-Level Programming in Haskell）
 
-> **中英双语核心定义 | Bilingual Core Definitions**
+> 中英双语；对标 Wikipedia/nLab/教材；补齐范畴论语义、依赖/线性协同、工程案例与结构图。
 
-## 1.1 类型级编程简介（Introduction to Type-Level Programming）
+## 1.1 定义与动机 Definition & Motivation
 
-- **定义（Definition）**：
-  - **中文**：类型级编程是指在类型系统层面进行计算、推导和约束的编程范式。Haskell通过类型族、GADT、DataKinds等机制支持类型级编程。
-  - **English**: Type-level programming refers to the paradigm of computation, inference, and constraint at the type system level. Haskell supports type-level programming via type families, GADTs, DataKinds, etc.
+- 中文：类型级编程是在类型系统层面进行计算与推导，使编译期能表达约束、规格与不变量，从而提升安全性与自动化。
+- English: Type-level programming performs computation and inference at the type system level, enabling compile-time specifications and invariants for safety and automation.
 
-- **Wiki风格国际化解释（Wiki-style Explanation）**：
-  - 类型级编程极大提升了类型系统的表达力和自动化能力。
-  - Type-level programming greatly enhances the expressiveness and automation of the type system.
+核心机制：DataKinds、GADTs、Type Families、TypeLits、Singletons、Promoted kinds 等。
 
-## 1.2 Haskell中的类型级编程语法与语义（Syntax and Semantics of Type-Level Programming in Haskell）
+## 1.2 语法与语义 Syntax and Semantics
 
-- **类型族与类型级计算**
+### 1.2.1 类型族与类型级函数 Type Families
 
 ```haskell
 {-# LANGUAGE TypeFamilies, DataKinds #-}
@@ -26,118 +23,68 @@ type family Add n m where
   Add ('S n) m = 'S (Add n m)
 ```
 
-- **GADT与类型级结构**
+### 1.2.2 GADTs 与索引数据 GADTs and Indexed Data
 
 ```haskell
-{-# LANGUAGE GADTs #-}
-
-data Vec n a where
-  VNil  :: Vec 'Z a
-  VCons :: a -> Vec n a -> Vec ('S n) a
-```
-
-## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
-
-- **类型级编程与范畴论关系**
-  - 类型级编程可视为范畴中的对象、函子与自然变换。
-
-| 概念 | Haskell实现 | 代码示例 | 中文解释 |
-|------|-------------|----------|----------|
-| 类型级计算 | 类型族 | `Add n m` | 类型级计算 |
-| 类型级结构 | GADT | `Vec n a` | 类型级结构 |
-| 类型级推导 | 类型族+GADT | `Add n m` | 类型级推导 |
-
-## 1.4 形式化证明与论证（Formal Proofs & Reasoning）
-
-- **类型级计算正确性证明**
-  - **中文**：证明类型级计算的正确性和一致性。
-  - **English**: Prove the correctness and consistency of type-level computation.
-
-- **类型级结构归纳证明**
-  - **中文**：通过归纳证明类型级结构的性质。
-  - **English**: Use induction to prove properties of type-level structures.
-
-## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
-
-- **类型级编程结构图（Type-Level Programming Structure Diagram）**
-
-```mermaid
-graph TD
-  A[类型级计算 Type-Level Computation] --> B[类型级结构 Type-Level Structure]
-  B --> C[类型级推导 Type-Level Inference]
-  C --> D[类型级编程 Type-Level Programming]
-```
-
-- **相关主题跳转**：
-  - [类型级证明 Type-Level Proof](./01-Type-Level-Proof.md)
-  - [类型级验证 Type-Level Verification](./01-Type-Level-Verification.md)
-  - [类型安全 Type Safety](./01-Type-Safety.md)
-
----
-
-## 1.6 历史与发展 History & Development
-
-- **中文**：类型级编程思想起源于类型理论和元编程。Haskell自GADT、Type Families、DataKinds等特性引入后，成为类型级编程的主流平台。GHC不断扩展类型级能力，如Singletons、TypeLits、Dependent Types等，极大提升了类型系统的表达力和自动化能力。
-- **English**: The idea of type-level programming originates from type theory and metaprogramming. With the introduction of GADTs, Type Families, and DataKinds, Haskell has become a mainstream platform for type-level programming. GHC has continuously extended type-level capabilities, such as Singletons, TypeLits, and Dependent Types, greatly enhancing the expressiveness and automation of the type system.
-
-## 1.7 Haskell 相关特性 Haskell Features
-
-### 经典特性 Classic Features
-
-- 类型族、GADTs、DataKinds、类型推断、类型级归纳。
-- Type families, GADTs, DataKinds, type inference, type-level induction.
-
-### 最新特性 Latest Features
-
-- **Singletons**：类型与值的单例化，桥接类型级与值级。
-- **TypeLits**：类型级自然数与符号。
-- **Dependent Types（依赖类型）**：GHC 9.x实验性支持，类型依赖于值。
-- **QuantifiedConstraints/RankNTypes**：高阶类型与约束。
-- **GHC 2021/2022**：标准化更多类型级编程相关扩展。
-
-- **English**:
-  - Singletons: Singletonization of types and values, bridging type and value levels.
-  - TypeLits: Type-level naturals and symbols.
-  - Dependent Types: Experimental in GHC 9.x, types depending on values.
-  - QuantifiedConstraints/RankNTypes: Higher-order types and constraints.
-  - GHC 2021/2022: Standardizes more type-level programming extensions.
-
-## 1.8 应用 Applications
-
-- **中文**：类型安全DSL、编译期验证、不可变数据结构、泛型编程、形式化验证、类型安全API等。
-- **English**: Type-safe DSLs, compile-time verification, immutable data structures, generic programming, formal verification, type-safe APIs, etc.
-
-## 1.9 例子 Examples
-
-```haskell
-{-# LANGUAGE DataKinds, TypeFamilies, GADTs, TypeOperators, KindSignatures #-}
-data Nat = Z | S Nat
-type family Mul n m where
-  Mul 'Z     m = 'Z
-  Mul ('S n) m = Add m (Mul n m)
+{-# LANGUAGE GADTs, DataKinds, KindSignatures #-}
 
 data Vec (n :: Nat) a where
   VNil  :: Vec 'Z a
   VCons :: a -> Vec n a -> Vec ('S n) a
 
--- 类型级约束与类型安全操作
 tailVec :: Vec ('S n) a -> Vec n a
 tailVec (VCons _ xs) = xs
 ```
 
-## 1.10 相关理论 Related Theories
+### 1.2.3 单例与桥接 Singletons Bridge
 
-- 类型理论（Type Theory）
-- 依赖类型理论（Dependent Type Theory）
-- 范畴论（Category Theory）
-- 形式化验证（Formal Verification）
-- 泛型编程（Generic Programming）
+```haskell
+{-# LANGUAGE GADTs, DataKinds #-}
 
-## 1.11 参考文献 References
+data SNat (n :: Nat) where
+  SZ :: SNat 'Z
+  SS :: SNat n -> SNat ('S n)
+```
 
-- [Wikipedia: Type-level programming](https://en.wikipedia.org/wiki/Type-level_programming)
-- [GHC User's Guide](https://downloads.haskell.org/ghc/latest/docs/html/users_guide/)
-- [Types and Programming Languages, Benjamin C. Pierce]
-- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+## 1.3 范畴论与语义 Category-theoretic Semantics
 
-> 本文档为类型级编程在Haskell中的中英双语、Haskell语义模型与形式化证明规范化输出，适合学术研究与工程实践参考。
+- 类型作为对象，类型构造视作函子，约束/变换对应自然变换
+- 依赖类型扩展下，Π/Σ 与函子极限/余极限相关；在 Haskell 中以 GADT/TF 近似
+
+## 1.4 与依赖/线性类型的协同 Synergy with Dependent/Linear Types
+
+- 与依赖类型：以索引与约束在类型层表达不变量；与证明环境（Agda/Coq/Lean）高度契合
+- 与线性/仿射：在类型级同时追踪资源使用次数与结构性质，形成更强静态保证
+
+## 1.5 工程应用 Engineering Applications
+
+- 类型安全 DSL 与协议/状态机编译期验证
+- 编译期数据布局/维度与单位检查（矩阵维度、物理单位）
+- API 兼容性、版本与能力模型的类型级约束
+
+## 1.6 结构图 Structure Diagram
+
+```mermaid
+graph TD
+  A[类型级计算 Type-level Computation] --> B[索引结构 Indexed Data]
+  B --> C[归纳/证明 Induction & Proof]
+  C --> D[工程应用 Engineering Uses]
+```
+
+## 1.7 历史与发展 History & Development
+
+- Haskell 自 GADTs/Type Families/DataKinds 起形成体系；后续引入 Singletons、TypeLits、QuantifiedConstraints；Dependent Haskell 正在推进
+
+## 1.8 相关理论 Related Theories
+
+- 类型理论、依赖类型理论、范畴论、形式化验证、泛型编程、线性/仿射类型
+
+## 1.9 参考文献 References
+
+- Wikipedia: Type-level programming
+- nLab: type-level programming, GADT, type family
+- GHC User’s Guide
+- Pierce: Types and Programming Languages
+- Learn You a Haskell for Great Good!
+
+> 本文面向学术与工程读者，示例与术语对齐国际百科与教材。

@@ -42,6 +42,17 @@ type family EqType a b where
   EqType a b = False
 ```
 
+### 1.2.1 判等、约简与相合（Definitional Equality, Reduction and Coherence）
+
+- 定义等价（definitional equality）：通过 βη‑约简、类型族归约等在编译期判定
+- 命题等价（propositional equality）：以证据（Refl / :~:）表达的可构造证明对象
+- 相合性（coherence）：多路径归约的结果一致；GHC 对类型族提供一致性检查（injectivity/coherence）
+
+### 1.2.2 类型等式与约束求解（Type Equations and Constraint Solving）
+
+- 约束求解器将 (a ~ b)、类型族等式、种类等式统一处理
+- 与 GADTs/Type Families 搭配时，花式等式推导常需显式类型签名或使用 Proxy/TypeApplications
+
 ## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
 - **类型等价与范畴论关系**
@@ -62,6 +73,12 @@ type family EqType a b where
 - **等价关系证明**
   - **中文**：证明类型等价关系满足自反性、对称性、传递性。
   - **English**: Prove that type equality is reflexive, symmetric, and transitive.
+
+### 1.4.1 证明模式（Proof Patterns）
+
+- 重写（rewrite）：给定 a :~: b，可在类型中将 a 位置替换为 b
+- 异质等价（heterogeneous equality）：a :~~: b（跨种类/类型时的等价，需谨慎）
+- 同构与等价：在范畴意义下，以 isomorphism 作为“可逆变换”的证据
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -134,6 +151,11 @@ safeCast Refl x = x
    EqType a a = True
    EqType a b = False
 ```
+
+-- 等价重写示例（使用 Data.Type.Equality.rewrite）
+{-
+  给定 pf :: x :~: y，可令含 x 的类型位置改写为 y，从而实现安全转换。
+-}
 
 ## 1.10 相关理论 Related Theories
 

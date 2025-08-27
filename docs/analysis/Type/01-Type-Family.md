@@ -36,6 +36,23 @@ class Collection c where
 - **类型级编程（Type-Level Programming）**
   - 类型族可实现类型级映射、约束、运算等。
 
+### 1.2.1 开放/封闭/可逆（Open/Closed/Injective）
+
+- 开放类型族（Open TF）：实例可分散定义；适合可扩展生态
+- 封闭类型族（Closed TF）：在单一定义处给出穷举分支，便于一致性与约简推理
+- 可逆（Injective TF）：以 `type family F a = r | r -> a` 声明，提高推断能力
+
+```haskell
+{-# LANGUAGE TypeFamilies, TypeFamilyDependencies #-}
+type family F a = r | r -> a
+```
+
+### 1.2.2 一致性与归约（Consistency and Reduction）
+
+- 一致性：不同实例不应在同一输入上给出冲突结果
+- 归约顺序：封闭族自上而下匹配；开放族依赖全局实例集合
+- 与约束求解：类型等式 `(F a ~ b)` 参与求解；与 GADTs/TypeInType 协作
+
 ## 1.3 范畴论建模与结构映射（Category-Theoretic Modeling and Mapping）
 
 - **类型族与范畴论关系**
@@ -56,6 +73,11 @@ class Collection c where
 - **类型级编程能力证明**
   - **中文**：证明类型族可实现类型级映射、约束和复杂类型关系。
   - **English**: Prove that type families can implement type-level mapping, constraints, and complex type relations.
+
+### 1.4.1 相合与相等（Coherence & Equality）
+
+- 与类型等价协同：通过 :~: / ~ 进行改写；保持相合性避免多路径不一致
+- 与函数依赖（FD）比较：FD 在类型类层表达等式约束；TF 在族层给出函数式改写
 
 ## 1.5 多表征与本地跳转（Multi-representation & Local Reference）
 
@@ -123,6 +145,12 @@ type family Elem c :: *
 type instance Elem [a] = a
 type instance Elem (Maybe a) = a
 ```
+
+-- 可逆族示例
+{-# LANGUAGE TypeFamilyDependencies #-}
+type family G a = r | r -> a
+type instance G Int  = Bool
+type instance G Bool = Int
 
 ## 1.10 相关理论 Related Theories
 
