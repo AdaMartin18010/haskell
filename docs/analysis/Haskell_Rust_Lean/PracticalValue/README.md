@@ -66,12 +66,23 @@
 - [类型系统 Type Systems](../TypeSystems/README.md)
 - [国际化对标与中英双语扩展 Internationalization & Bilingual Expansion](../Internationalization_Bilingual/README.md)
 
-## 6.13 参考文献 References #PracticalValue-6.13
+## 6.20 交叉引用 Cross References #PracticalValue-6.20
+
+- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
+- [类型系统 Type Systems](../TypeSystems/README.md)
+- [国际化对标与中英双语扩展 Internationalization & Bilingual Expansion](../Internationalization_Bilingual/README.md)
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+
+## 6.21 参考文献 References #PracticalValue-6.21
 
 - [Wikipedia: Programming productivity](https://en.wikipedia.org/wiki/Programming_productivity)
 - [The Rust Programming Language](https://doc.rust-lang.org/book/)
 - [Haskell in Industry](https://wiki.haskell.org/Haskell_in_industry)
 - [Lean Community Projects](https://leanprover-community.github.io/)
+- Hughes, J. (1989). Why functional programming matters. The Computer Journal, 32(2), 98-107.
+- Jung, R., et al. (2018). RustBelt: Securing the foundations of the Rust programming language. Proceedings of the ACM on Programming Languages, 2(POPL), 1-34.
+- de Moura, L., & Ullrich, S. (2021). The Lean 4 theorem prover and programming language. Automated Deduction–CADE 28, 625-635.
+- Peyton Jones, S. (2003). The Haskell 98 language and libraries: the revised report. Journal of functional programming, 13(1), 0-255.
 
 ## 6.14 批判性小结 Critical Summary #PracticalValue-6.14
 
