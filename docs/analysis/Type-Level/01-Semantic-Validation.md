@@ -1,4 +1,4 @@
-# 类型级语义验证（Type-Level Semantic Validation in Haskell）
+# 24-类型级语义验证（Type-Level Semantic Validation in Haskell）
 
 ## 定义 Definition
 

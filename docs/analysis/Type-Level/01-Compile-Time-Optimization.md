@@ -1,4 +1,4 @@
-# 编译时优化（Compile-Time Optimization in Haskell）
+# 07-编译时优化（Compile-Time Optimization in Haskell）
 
 ## 目录 Table of Contents
 

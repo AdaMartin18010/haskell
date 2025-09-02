@@ -1,4 +1,4 @@
-# 类型级语义归纳（Type-Level Semantic Induction in Haskell）
+# 25-类型级语义归纳（Type-Level Semantic Induction in Haskell）
 
 ## 定义 Definition
 

@@ -1,8 +1,8 @@
-# 类型级归纳（Type-Level Induction）in Haskell
+# 08-类型级归纳（Type-Level Induction）in Haskell
 
 ## 目录 Table of Contents
 
-- [类型级归纳（Type-Level Induction）in Haskell](#类型级归纳type-level-inductionin-haskell)
+- [08-类型级归纳（Type-Level Induction）in Haskell](#08-类型级归纳type-level-inductionin-haskell)
   - [目录 Table of Contents](#目录-table-of-contents)
   - [1. 定义 Definition](#1-定义-definition)
   - [2. 理论基础 Theoretical Foundation](#2-理论基础-theoretical-foundation)

@@ -1,4 +1,4 @@
-# 类型级证明（Type-Level Proof）in Haskell
+# 04-类型级证明（Type-Level Proof）in Haskell
 
 ## 目录 Table of Contents
 
@@ -25,16 +25,19 @@
 ## 2. 理论基础 Theoretical Foundation
 
 ### 2.1 证明理论 Proof Theory
+
 - **证明原理**：类型级证明基于数学证明原理，通过公理、推理规则和证明步骤进行验证
 - **证明结构**：支持归纳证明、构造性证明、反证法等证明方法
 - **证明完备性**：证明应该能够处理所有可能的证明情况
 
 ### 2.2 类型理论 Type Theory
+
 - **类型系统**：类型级证明基于强类型系统，通过类型检查进行程序验证
 - **类型安全**：通过类型系统保证程序的安全性和正确性
 - **类型推导**：自动推导表达式的类型，减少显式类型注解
 
 ### 2.3 逻辑理论 Logic Theory
+
 - **逻辑推理**：类型级证明基于逻辑推理，通过逻辑规则进行证明
 - **逻辑完备性**：逻辑系统应该能够证明所有真命题
 - **逻辑一致性**：逻辑系统不应该产生矛盾
@@ -490,16 +493,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 9. 哲学思脉 Philosophical Context
 
 ### 9.1 证明哲学 Proof Philosophy
+
 - **证明的本质**：类型级证明体现了证明的本质，通过形式化方法验证程序
 - **证明的方法**：通过归纳证明、构造性证明、反证法等方法进行证明
 - **证明的可靠性**：证明应该能够可靠地验证程序的正确性
 
 ### 9.2 逻辑哲学 Logic Philosophy
+
 - **逻辑的本质**：类型级证明体现了逻辑的本质，通过逻辑推理进行证明
 - **逻辑的方法**：通过逻辑规则、推理步骤等方法进行逻辑推理
 - **逻辑的完备性**：逻辑系统应该能够证明所有真命题
 
 ### 9.3 验证哲学 Verification Philosophy
+
 - **验证的本质**：类型级证明验证体现了验证的本质，通过证明验证程序
 - **验证的方法**：通过正确性验证、完备性验证、一致性验证等方法进行验证
 - **验证的可靠性**：验证应该能够可靠地保证程序的正确性
@@ -507,16 +513,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 10. 相关理论 Related Theories
 
 ### 10.1 证明理论 Proof Theory
+
 - **形式化证明**：类型级证明的理论基础
 - **构造性证明**：类型级证明的实现方法
 - **归纳证明**：类型级证明的扩展
 
 ### 10.2 逻辑理论 Logic Theory
+
 - **逻辑推理**：类型级证明的逻辑基础
 - **逻辑完备性**：类型级证明的完备性保证
 - **逻辑一致性**：类型级证明的一致性保证
 
 ### 10.3 验证理论 Verification Theory
+
 - **程序验证**：类型级证明验证的理论基础
 - **正确性验证**：类型级证明验证的实现方法
 - **完备性验证**：类型级证明验证的扩展
@@ -524,16 +533,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 11. 未来发展方向 Future Development
 
 ### 11.1 理论扩展 Theoretical Extensions
+
 - **高阶证明**：支持更高阶的证明能力
 - **概率证明**：支持不确定性的证明
 - **量子证明**：支持量子计算的证明
 
 ### 11.2 技术改进 Technical Improvements
+
 - **性能优化**：提高类型级证明的效率
 - **内存优化**：减少类型级证明的内存占用
 - **并行化**：支持类型级证明的并行处理
 
 ### 11.3 应用扩展 Application Extensions
+
 - **领域特定语言**：为特定领域定制类型级证明系统
 - **交互式开发**：支持交互式的类型级证明调试
 - **可视化工具**：提供类型级证明过程的可视化
@@ -575,16 +587,19 @@ graph TD
 ## 14. 参考文献 References
 
 ### 14.1 学术资源 Academic Resources
+
 - Wikipedia: [Proof theory](https://en.wikipedia.org/wiki/Proof_theory)
 - Wikipedia: [Type-level programming](https://en.wikipedia.org/wiki/Type-level_programming)
 - The Stanford Encyclopedia of Philosophy: [Type Theory](https://plato.stanford.edu/entries/type-theory/)
 
 ### 14.2 技术文档 Technical Documentation
+
 - [GHC User's Guide](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/)
 - [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/)
 - [Type-Level Proof Documentation](https://gitlab.haskell.org/ghc/ghc/-/wikis/type-level-proof)
 
 ### 14.3 学术论文 Academic Papers
+
 - "Type-Level Proofs in Haskell" by Richard Eisenberg
 - "Type Families with Class" by Simon Peyton Jones
 - "Fun with Type Functions" by Oleg Kiselyov

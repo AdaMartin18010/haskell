@@ -1,4 +1,4 @@
-# 编译时属性分析（Compile-Time Property Analysis in Haskell）
+# 02-编译时属性分析（Compile-Time Property Analysis in Haskell）
 
 ## 目录 Table of Contents
 
@@ -25,16 +25,19 @@
 ## 2. 理论基础 Theoretical Foundation
 
 ### 2.1 属性理论 Property Theory
+
 - **属性定义**：程序属性是程序必须满足的条件和规范
 - **属性分类**：包括不变量、约束条件、行为规范等
 - **属性验证**：通过形式化方法验证程序属性
 
 ### 2.2 类型理论 Type Theory
+
 - **类型系统**：编译时属性分析基于强类型系统，通过类型检查进行程序验证
 - **类型安全**：通过类型系统保证程序的安全性和正确性
 - **类型推导**：自动推导表达式的类型，减少显式类型注解
 
 ### 2.3 形式化验证 Formal Verification
+
 - **形式化方法**：编译时属性分析使用形式化方法进行程序验证
 - **定理证明**：通过定理证明验证程序属性
 - **模型检查**：通过模型检查验证程序属性
@@ -490,16 +493,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 9. 哲学思脉 Philosophical Context
 
 ### 9.1 属性哲学 Property Philosophy
+
 - **属性的本质**：编译时属性分析体现了属性的本质，通过属性分析保证程序正确性
 - **属性的方法**：通过形式化方法、定理证明等方法进行属性分析
 - **属性的边界**：属性分析定义了程序正确性的边界
 
 ### 9.2 验证哲学 Verification Philosophy
+
 - **验证的本质**：编译时验证是编译时属性分析的核心特征
 - **验证的方法**：通过定理证明、模型检查等方法进行验证
 - **验证的可靠性**：验证应该能够可靠地保证程序的正确性
 
 ### 9.3 分析哲学 Analysis Philosophy
+
 - **分析的本质**：编译时分析是理解程序属性的过程
 - **分析的方法**：通过类型检查、约束检查等方法进行分析
 - **分析的深度**：分析应该能够深入理解程序的本质
@@ -507,16 +513,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 10. 相关理论 Related Theories
 
 ### 10.1 属性理论 Property Theory
+
 - **程序属性**：编译时属性分析的理论基础
 - **形式化属性**：编译时属性分析的扩展理论
 - **行为属性**：编译时属性分析的现代发展
 
 ### 10.2 验证理论 Verification Theory
+
 - **形式化验证**：编译时验证的理论基础
 - **定理证明**：编译时验证的证明方法
 - **模型检查**：编译时验证的检查方法
 
 ### 10.3 分析理论 Analysis Theory
+
 - **静态分析**：编译时分析的理论基础
 - **类型分析**：编译时分析的实现方法
 - **约束分析**：编译时分析的扩展
@@ -524,16 +533,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 11. 未来发展方向 Future Development
 
 ### 11.1 理论扩展 Theoretical Extensions
+
 - **高阶属性分析**：支持更高阶的属性分析能力
 - **概率属性分析**：支持不确定性的属性分析
 - **量子属性分析**：支持量子计算的属性分析
 
 ### 11.2 技术改进 Technical Improvements
+
 - **性能优化**：提高编译时属性分析的效率
 - **内存优化**：减少编译时属性分析的内存占用
 - **并行化**：支持编译时属性分析的并行处理
 
 ### 11.3 应用扩展 Application Extensions
+
 - **领域特定语言**：为特定领域定制编译时属性分析系统
 - **交互式开发**：支持交互式的编译时属性分析调试
 - **可视化工具**：提供编译时属性分析过程的可视化
@@ -575,16 +587,19 @@ graph TD
 ## 14. 参考文献 References
 
 ### 14.1 学术资源 Academic Resources
+
 - Wikipedia: [Formal verification](https://en.wikipedia.org/wiki/Formal_verification)
 - Wikipedia: [Type-level programming](https://en.wikipedia.org/wiki/Type-level_programming)
 - The Stanford Encyclopedia of Philosophy: [Type Theory](https://plato.stanford.edu/entries/type-theory/)
 
 ### 14.2 技术文档 Technical Documentation
+
 - [GHC User's Guide](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/)
 - [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/)
 - [Property-Based Testing Documentation](https://gitlab.haskell.org/ghc/ghc/-/wikis/property-based-testing)
 
 ### 14.3 学术论文 Academic Papers
+
 - "Property-Based Testing with QuickCheck" by John Hughes
 - "Type Families with Class" by Simon Peyton Jones
 - "Fun with Type Functions" by Oleg Kiselyov

@@ -1,4 +1,4 @@
-# 编译时安全（Compile-Time Safety in Haskell）
+# 06-编译时安全（Compile-Time Safety in Haskell）
 
 ## 目录 Table of Contents
 
@@ -25,16 +25,19 @@
 ## 2. 理论基础 Theoretical Foundation
 
 ### 2.1 安全理论 Safety Theory
+
 - **安全定义**：程序安全是程序必须满足的安全条件和规范
 - **安全分类**：包括类型安全、内存安全、并发安全等
 - **安全验证**：通过形式化方法验证程序安全
 
 ### 2.2 类型理论 Type Theory
+
 - **类型系统**：编译时安全基于强类型系统，通过类型检查进行程序验证
 - **类型安全**：通过类型系统保证程序的安全性和正确性
 - **类型推导**：自动推导表达式的类型，减少显式类型注解
 
 ### 2.3 形式化验证 Formal Verification
+
 - **形式化方法**：编译时安全使用形式化方法进行程序验证
 - **定理证明**：通过定理证明验证程序安全
 - **模型检查**：通过模型检查验证程序安全
@@ -490,16 +493,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 9. 哲学思脉 Philosophical Context
 
 ### 9.1 安全哲学 Safety Philosophy
+
 - **安全的本质**：编译时安全体现了安全的本质，通过类型系统保证程序安全
 - **安全的方法**：通过类型检查、内存检查、并发检查等方法保证程序安全
 - **安全的边界**：类型系统定义了程序安全的边界
 
 ### 9.2 验证哲学 Verification Philosophy
+
 - **验证的本质**：编译时验证是编译时安全的核心特征
 - **验证的方法**：通过类型检查、内存检查、并发检查等方法进行验证
 - **验证的可靠性**：验证应该能够可靠地保证程序的安全
 
 ### 9.3 检查哲学 Checking Philosophy
+
 - **检查的本质**：安全检查是理解程序安全的过程
 - **检查的方法**：通过类型检查、内存检查、并发检查等方法进行检查
 - **检查的深度**：检查应该能够深入理解程序的安全性质
@@ -507,16 +513,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 10. 相关理论 Related Theories
 
 ### 10.1 安全理论 Safety Theory
+
 - **程序安全**：编译时安全的理论基础
 - **类型安全**：编译时安全的实现方法
 - **内存安全**：编译时安全的扩展
 
 ### 10.2 验证理论 Verification Theory
+
 - **形式化验证**：编译时验证的理论基础
 - **类型验证**：编译时验证的实现方法
 - **安全验证**：编译时验证的扩展
 
 ### 10.3 检查理论 Checking Theory
+
 - **静态检查**：编译时检查的理论基础
 - **类型检查**：编译时检查的实现方法
 - **安全检查**：编译时检查的扩展
@@ -524,16 +533,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 11. 未来发展方向 Future Development
 
 ### 11.1 理论扩展 Theoretical Extensions
+
 - **高阶安全**：支持更高阶的安全能力
 - **概率安全**：支持不确定性的安全
 - **量子安全**：支持量子计算的安全
 
 ### 11.2 技术改进 Technical Improvements
+
 - **性能优化**：提高编译时安全的效率
 - **内存优化**：减少编译时安全的内存占用
 - **并行化**：支持编译时安全的并行处理
 
 ### 11.3 应用扩展 Application Extensions
+
 - **领域特定语言**：为特定领域定制编译时安全系统
 - **交互式开发**：支持交互式的编译时安全调试
 - **可视化工具**：提供编译时安全过程的可视化
@@ -575,16 +587,19 @@ graph TD
 ## 14. 参考文献 References
 
 ### 14.1 学术资源 Academic Resources
+
 - Wikipedia: [Type safety](https://en.wikipedia.org/wiki/Type_safety)
 - Wikipedia: [Memory safety](https://en.wikipedia.org/wiki/Memory_safety)
 - The Stanford Encyclopedia of Philosophy: [Type Theory](https://plato.stanford.edu/entries/type-theory/)
 
 ### 14.2 技术文档 Technical Documentation
+
 - [GHC User's Guide](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/)
 - [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/)
 - [Safety Documentation](https://gitlab.haskell.org/ghc/ghc/-/wikis/safety)
 
 ### 14.3 学术论文 Academic Papers
+
 - "Type Safety and Memory Safety" by Simon Peyton Jones
 - "Concurrency Safety in Haskell" by Oleg Kiselyov
 - "Security Verification in Functional Programming" by Simon Peyton Jones

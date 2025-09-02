@@ -1,4 +1,4 @@
-# 类型级语义一致性（Type-Level Semantic Consistency in Haskell）
+# 23-类型级语义一致性（Type-Level Semantic Consistency in Haskell）
 
 ## 定义 Definition
 

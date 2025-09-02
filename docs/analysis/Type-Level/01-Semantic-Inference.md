@@ -1,4 +1,4 @@
-# 类型级语义推断（Type-Level Semantic Inference in Haskell）
+# 26-类型级语义推断（Type-Level Semantic Inference in Haskell）
 
 ## 定义 Definition
 

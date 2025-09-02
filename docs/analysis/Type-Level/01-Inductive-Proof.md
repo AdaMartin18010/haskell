@@ -1,4 +1,4 @@
-# 类型级归纳证明（Type-Level Inductive Proof in Haskell）
+# 13-类型级归纳证明（Type-Level Inductive Proof in Haskell）
 
 > 对标 Wikipedia/nLab 与教材：给出定义、原理、证明模式、Haskell 示例与工程应用，双语。
 

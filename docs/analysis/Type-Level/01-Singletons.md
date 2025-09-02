@@ -1,4 +1,4 @@
-# 单例类型（Singletons）in Haskell
+# 05-单例类型（Singletons）in Haskell
 
 ## 目录 Table of Contents
 
@@ -25,16 +25,19 @@
 ## 2. 理论基础 Theoretical Foundation
 
 ### 2.1 类型理论 Type Theory
+
 - **类型系统**：单例类型基于强类型系统，通过类型检查进行程序验证
 - **类型安全**：通过类型系统保证程序的安全性和正确性
 - **类型推导**：自动推导表达式的类型，减少显式类型注解
 
 ### 2.2 提升理论 Promotion Theory
+
 - **值提升**：单例类型通过值提升将值转换为类型
 - **类型提升**：通过类型提升将类型转换为值
 - **提升一致性**：值提升和类型提升应该保持一致性
 
 ### 2.3 依赖类型理论 Dependent Type Theory
+
 - **依赖类型**：单例类型支持依赖类型，类型可以依赖于值
 - **类型族**：通过类型族实现类型级别的函数
 - **类型级计算**：支持在类型级别进行复杂的计算
@@ -490,16 +493,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 9. 哲学思脉 Philosophical Context
 
 ### 9.1 提升哲学 Promotion Philosophy
+
 - **提升的本质**：单例类型体现了提升的本质，通过提升连接值和类型
 - **提升的方法**：通过值提升、类型提升等方法进行提升
 - **提升的一致性**：提升应该保持值和类型之间的一致性
 
 ### 9.2 桥梁哲学 Bridge Philosophy
+
 - **桥梁的本质**：单例类型体现了桥梁的本质，连接不同的概念领域
 - **桥梁的方法**：通过类型系统、类型族等方法构建桥梁
 - **桥梁的稳定性**：桥梁应该能够稳定地连接不同的概念
 
 ### 9.3 计算哲学 Computation Philosophy
+
 - **计算的本质**：编译时计算是单例类型的核心特征
 - **计算的方法**：通过类型级编程、值级编程等方法进行计算
 - **计算的效率**：编译时计算不占用运行时资源
@@ -507,16 +513,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 10. 相关理论 Related Theories
 
 ### 10.1 类型理论 Type Theory
+
 - **简单类型理论**：单例类型的基础理论
 - **依赖类型理论**：单例类型的扩展理论
 - **同伦类型理论**：单例类型的现代发展
 
 ### 10.2 提升理论 Promotion Theory
+
 - **值提升**：单例类型的提升基础
 - **类型提升**：单例类型的提升实现
 - **提升一致性**：单例类型的提升扩展
 
 ### 10.3 计算理论 Computation Theory
+
 - **编译时计算**：单例类型的计算模型
 - **类型级计算**：单例类型的计算能力
 - **混合计算**：单例类型的计算扩展
@@ -524,16 +533,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 11. 未来发展方向 Future Development
 
 ### 11.1 理论扩展 Theoretical Extensions
+
 - **高阶单例类型**：支持更高阶的单例类型能力
 - **概率单例类型**：支持不确定性的单例类型
 - **量子单例类型**：支持量子计算的单例类型
 
 ### 11.2 技术改进 Technical Improvements
+
 - **性能优化**：提高单例类型的效率
 - **内存优化**：减少单例类型的内存占用
 - **并行化**：支持单例类型的并行处理
 
 ### 11.3 应用扩展 Application Extensions
+
 - **领域特定语言**：为特定领域定制单例类型系统
 - **交互式开发**：支持交互式的单例类型调试
 - **可视化工具**：提供单例类型过程的可视化
@@ -575,16 +587,19 @@ graph TD
 ## 14. 参考文献 References
 
 ### 14.1 学术资源 Academic Resources
+
 - Wikipedia: [Singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern)
 - Wikipedia: [Type-level programming](https://en.wikipedia.org/wiki/Type-level_programming)
 - The Stanford Encyclopedia of Philosophy: [Type Theory](https://plato.stanford.edu/entries/type-theory/)
 
 ### 14.2 技术文档 Technical Documentation
+
 - [GHC User's Guide](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/)
 - [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/)
 - [Singletons Documentation](https://gitlab.haskell.org/ghc/ghc/-/wikis/singletons)
 
 ### 14.3 学术论文 Academic Papers
+
 - "Dependently Typed Programming with Singletons" by Richard Eisenberg
 - "Type Families with Class" by Simon Peyton Jones
 - "Fun with Type Functions" by Oleg Kiselyov

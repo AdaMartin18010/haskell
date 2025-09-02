@@ -1,8 +1,8 @@
-# 类型级约束求解器（Type-Level Constraint Solver in Haskell）
+# 10-类型级约束求解器（Type-Level Constraint Solver in Haskell）
 
 ## 目录 Table of Contents
 
-- [类型级约束求解器（Type-Level Constraint Solver in Haskell）](#类型级约束求解器type-level-constraint-solver-in-haskell)
+- [10-类型级约束求解器（Type-Level Constraint Solver in Haskell）](#10-类型级约束求解器type-level-constraint-solver-in-haskell)
   - [目录 Table of Contents](#目录-table-of-contents)
   - [1. 定义 Definition](#1-定义-definition)
   - [2. 理论基础 Theoretical Foundation](#2-理论基础-theoretical-foundation)

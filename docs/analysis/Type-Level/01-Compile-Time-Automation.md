@@ -1,4 +1,4 @@
-# 编译时自动化（Compile-Time Automation in Haskell）
+# 03-编译时自动化（Compile-Time Automation in Haskell）
 
 ## 目录 Table of Contents
 
@@ -25,16 +25,19 @@
 ## 2. 理论基础 Theoretical Foundation
 
 ### 2.1 自动化理论 Automation Theory
+
 - **自动化目标**：编译时自动化的目标是减少手工编程工作，提高程序质量
 - **自动化策略**：通过不同的自动化策略实现不同的自动化目标
 - **自动化效果**：自动化应该能够显著提高编程效率
 
 ### 2.2 类型理论 Type Theory
+
 - **类型系统**：编译时自动化基于强类型系统，通过类型检查进行程序验证
 - **类型安全**：通过类型系统保证程序的安全性和正确性
 - **类型推导**：自动推导表达式的类型，减少显式类型注解
 
 ### 2.3 编译时计算 Compile-Time Computation
+
 - **编译时计算**：编译时自动化在编译时进行计算，不占用运行时资源
 - **类型级计算**：通过类型级编程实现复杂的类型计算
 - **代码生成**：通过编译时计算自动生成代码
@@ -490,16 +493,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 9. 哲学思脉 Philosophical Context
 
 ### 9.1 自动化哲学 Automation Philosophy
+
 - **自动化的本质**：编译时自动化体现了自动化的本质，通过自动化减少手工工作
 - **自动化的方法**：通过类型系统、类型族、类型类等机制实现自动化
 - **自动化的效果**：自动化应该能够显著提高编程效率
 
 ### 9.2 生成哲学 Generation Philosophy
+
 - **生成的本质**：代码生成是编译时自动化的核心特征
 - **生成的方法**：通过编译时计算、类型级编程等方法实现代码生成
 - **生成的质量**：生成的代码应该具有高质量和正确性
 
 ### 9.3 验证哲学 Verification Philosophy
+
 - **验证的本质**：自动化验证是编译时自动化的重要特征
 - **验证的方法**：通过类型检查、约束检查等方法进行自动化验证
 - **验证的可靠性**：自动化验证应该提供可靠的程序验证
@@ -507,16 +513,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 10. 相关理论 Related Theories
 
 ### 10.1 自动化理论 Automation Theory
+
 - **编译时自动化**：编译时自动化的基础理论
 - **类型级自动化**：类型级自动化的扩展理论
 - **代码生成自动化**：代码生成自动化的现代发展
 
 ### 10.2 代码生成理论 Code Generation Theory
+
 - **类型级代码生成**：代码生成的理论基础
 - **函数代码生成**：函数代码生成的实现方法
 - **数据结构代码生成**：数据结构代码生成的扩展
 
 ### 10.3 验证理论 Verification Theory
+
 - **自动化验证**：自动化验证的理论基础
 - **类型级验证**：类型级验证的实现方法
 - **性能验证**：性能验证的扩展
@@ -524,16 +533,19 @@ instance CategoryTheoryMapping (Vector n a) where
 ## 11. 未来发展方向 Future Development
 
 ### 11.1 理论扩展 Theoretical Extensions
+
 - **高阶自动化**：支持更高阶的自动化能力
 - **概率自动化**：支持不确定性的自动化
 - **量子自动化**：支持量子计算的自动化
 
 ### 11.2 技术改进 Technical Improvements
+
 - **性能优化**：提高编译时自动化的效率
 - **内存优化**：减少编译时自动化的内存占用
 - **并行化**：支持编译时自动化的并行处理
 
 ### 11.3 应用扩展 Application Extensions
+
 - **领域特定语言**：为特定领域定制编译时自动化系统
 - **交互式开发**：支持交互式的编译时自动化调试
 - **可视化工具**：提供编译时自动化过程的可视化
@@ -575,16 +587,19 @@ graph TD
 ## 14. 参考文献 References
 
 ### 14.1 学术资源 Academic Resources
+
 - Wikipedia: [Code generation](https://en.wikipedia.org/wiki/Code_generation)
 - Wikipedia: [Type-level programming](https://en.wikipedia.org/wiki/Type-level_programming)
 - The Stanford Encyclopedia of Philosophy: [Type Theory](https://plato.stanford.edu/entries/type-theory/)
 
 ### 14.2 技术文档 Technical Documentation
+
 - [GHC User's Guide](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/)
 - [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/)
 - [Template Haskell Documentation](https://gitlab.haskell.org/ghc/ghc/-/wikis/template-haskell)
 
 ### 14.3 学术论文 Academic Papers
+
 - "Template Meta-programming for Haskell" by Tim Sheard
 - "Type Families with Class" by Simon Peyton Jones
 - "Fun with Type Functions" by Oleg Kiselyov
