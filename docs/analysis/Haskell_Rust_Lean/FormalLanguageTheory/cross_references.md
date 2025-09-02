@@ -5,6 +5,7 @@
 ### 9.11.1 与类型理论的关系 Relation to Type Theory
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：形式语言理论为类型理论提供了语法基础，定义了类型表达式的形式规则。类型系统本质上是一种形式语言，具有特定的语法和语义规则。通过形式语言理论，我们可以理解类型系统的语法结构和形式化表示。
 - **English**: Formal language theory provides syntactic foundations for type theory, defining formal rules for type expressions. Type systems are essentially formal languages with specific syntactic and semantic rules. Through formal language theory, we can understand the syntactic structure and formal representation of type systems.
 
@@ -67,6 +68,7 @@ impl TypeSyntax {
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **符号学哲学**：研究符号系统的意义和功能
 - **结构主义哲学**：关注语言结构的系统性
 - **形式主义哲学**：通过形式规则定义语言
@@ -74,6 +76,7 @@ impl TypeSyntax {
 ### 9.11.2 与自动机理论的关系 Relation to Automata Theory
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：形式语言理论与自动机理论紧密相连，每种形式语言类都有对应的自动机模型。正则语言对应有限自动机，上下文无关语言对应下推自动机，递归可枚举语言对应图灵机。这种对应关系建立了语言和计算模型的桥梁。
 - **English**: Formal language theory is closely connected to automata theory, with each formal language class having corresponding automaton models. Regular languages correspond to finite automata, context-free languages correspond to pushdown automata, and recursively enumerable languages correspond to Turing machines. This correspondence builds bridges between languages and computational models.
 
@@ -182,6 +185,7 @@ impl LanguageRecognizer for FiniteAutomaton {
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **计算哲学**：研究计算的本质和边界
 - **语言哲学**：关注语言的本质和功能
 - **模型哲学**：研究抽象模型与现实的关系
@@ -189,6 +193,7 @@ impl LanguageRecognizer for FiniteAutomaton {
 ### 9.11.3 与语法的关系 Relation to Syntax
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：语法是形式语言理论的核心概念，定义了语言中合法表达式的结构规则。语法包括终结符、非终结符、产生式规则等组成部分，为语言的生成和识别提供了形式化基础。
 - **English**: Syntax is a core concept in formal language theory, defining structural rules for legal expressions in languages. Syntax includes terminal symbols, non-terminal symbols, production rules, and other components, providing formal foundations for language generation and recognition.
 
@@ -282,6 +287,7 @@ def generate_from_symbol (G : Grammar) (s : Symbol) : List String :=
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **结构主义哲学**：关注语言结构的系统性
 - **生成哲学**：研究生成过程的本质
 - **规则哲学**：关注规则在语言中的作用
@@ -289,6 +295,7 @@ def generate_from_symbol (G : Grammar) (s : Symbol) : List String :=
 ### 9.11.4 与语义的关系 Relation to Semantics
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：语义是形式语言理论的重要组成部分，定义了语言表达式的含义和解释。语义包括操作语义、指称语义、公理语义等不同方法，为语言的正确性提供了理论基础。
 - **English**: Semantics is an important component of formal language theory, defining the meaning and interpretation of language expressions. Semantics includes operational semantics, denotational semantics, axiomatic semantics, and other methods, providing theoretical foundations for language correctness.
 
@@ -372,6 +379,7 @@ trait SemanticInterpreter {
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **语义哲学**：关注语言和现实之间的关系
 - **解释学哲学**：研究意义的理解和解释
 - **指称哲学**：研究符号与对象的关系
@@ -379,6 +387,7 @@ trait SemanticInterpreter {
 ### 9.11.5 与语用的关系 Relation to Pragmatics
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：语用学研究语言在具体语境中的使用和效果。虽然形式语言理论主要关注语法和语义，但语用学为理解语言的实用性和有效性提供了重要视角。
 - **English**: Pragmatics studies the use and effects of language in specific contexts. While formal language theory mainly focuses on syntax and semantics, pragmatics provides important perspectives for understanding the practicality and effectiveness of languages.
 
@@ -463,6 +472,7 @@ trait PragmaticAnalyzer {
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **实用主义哲学**：强调理论的实用性
 - **语境哲学**：关注语境在理解中的作用
 - **效果哲学**：研究语言使用的实际效果
@@ -470,6 +480,7 @@ trait PragmaticAnalyzer {
 ### 9.11.6 与正则语言的关系 Relation to Regular Languages
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：正则语言是形式语言理论中最基础的层次，具有简单的结构和强大的表达能力。正则语言可以通过正则表达式、有限自动机、正则文法等多种方式定义，在编程语言、文本处理等领域有广泛应用。
 - **English**: Regular languages are the most basic level in formal language theory, with simple structures and powerful expressive capabilities. Regular languages can be defined through regular expressions, finite automata, regular grammars, and other methods, with wide applications in programming languages, text processing, and other fields.
 
@@ -565,6 +576,7 @@ impl RegularExpression {
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **基础哲学**：研究基础概念的本质
 - **表达哲学**：关注语言的表达能力
 - **应用哲学**：强调理论的实用性
@@ -572,6 +584,7 @@ impl RegularExpression {
 ### 9.11.7 与上下文无关语言的关系 Relation to Context-free Languages
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：上下文无关语言是形式语言理论中的重要层次，比正则语言具有更强的表达能力。上下文无关语言可以通过上下文无关文法、下推自动机等方式定义，在编程语言语法、自然语言处理等领域有重要应用。
 - **English**: Context-free languages are an important level in formal language theory, with stronger expressive capabilities than regular languages. Context-free languages can be defined through context-free grammars, pushdown automata, and other methods, with important applications in programming language syntax, natural language processing, and other fields.
 
@@ -646,6 +659,7 @@ def generate_from_production (cfg : ContextFreeGrammar) (prod : ContextFreeProdu
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **层次哲学**：研究不同层次的关系
 - **生成哲学**：关注生成过程的本质
 - **结构哲学**：研究语言结构的性质
@@ -653,6 +667,7 @@ def generate_from_production (cfg : ContextFreeGrammar) (prod : ContextFreeProdu
 ### 9.11.8 与不可判定性的关系 Relation to Undecidability
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：不可判定性是形式语言理论中的重要概念，指某些问题在理论上无法通过算法解决。不可判定性问题与停机问题、Post对应问题等经典问题相关，揭示了计算的本质边界。
 - **English**: Undecidability is an important concept in formal language theory, referring to problems that cannot be solved by algorithms in theory. Undecidable problems are related to classic problems like the halting problem and Post's correspondence problem, revealing the essential boundaries of computation.
 
@@ -743,6 +758,7 @@ struct UndecidabilityProof {
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **极限哲学**：关注理论系统的能力和边界
 - **可计算性哲学**：研究计算的本质和边界
 - **矛盾哲学**：研究矛盾在证明中的作用
@@ -750,6 +766,7 @@ struct UndecidabilityProof {
 ### 9.11.9 与泵引理的关系 Relation to Pumping Lemma
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：泵引理是形式语言理论中的重要工具，用于证明某些语言不属于特定的语言类。泵引理通过分析语言的重复结构，为语言分类提供了有力的证明方法。
 - **English**: The pumping lemma is an important tool in formal language theory, used to prove that certain languages do not belong to specific language classes. The pumping lemma analyzes the repetitive structure of languages, providing powerful proof methods for language classification.
 
@@ -828,6 +845,7 @@ def repeat (s : String) (n : Nat) : String :=
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **证明哲学**：关注证明的本质和方法
 - **分类哲学**：研究分类的标准和方法
 - **结构哲学**：关注语言结构的性质
@@ -835,6 +853,7 @@ def repeat (s : String) (n : Nat) : String :=
 ### 9.11.10 与Haskell解析器组合子的关系 Relation to Haskell Parser Combinators
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：Haskell的解析器组合子为形式语言理论提供了函数式编程的实现。通过组合子模式，可以构建复杂的解析器，体现了形式语言理论中语法分析的思想。
 - **English**: Haskell's parser combinators provide functional programming implementations for formal language theory. Through the combinator pattern, complex parsers can be constructed, embodying the ideas of syntactic analysis in formal language theory.
 
@@ -910,6 +929,7 @@ mulOp = char '*' *> return Multiply <|> char '/' *> return (\x y -> Multiply x (
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **函数式哲学**：强调函数的纯粹性和不可变性
 - **组合哲学**：关注组合在构建中的作用
 - **解析哲学**：研究语言解析的本质
@@ -917,6 +937,7 @@ mulOp = char '*' *> return Multiply <|> char '/' *> return (\x y -> Multiply x (
 ### 9.11.11 与Rust高性能语法分析的关系 Relation to Rust High-performance Parsing
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：Rust的高性能语法分析为形式语言理论提供了系统级编程的实现。通过零成本抽象和内存安全，可以实现高效的解析器，体现了形式语言理论中性能优化的思想。
 - **English**: Rust's high-performance parsing provides systems-level programming implementations for formal language theory. Through zero-cost abstractions and memory safety, efficient parsers can be implemented, embodying the ideas of performance optimization in formal language theory.
 
@@ -1044,6 +1065,7 @@ pub enum ParseError {
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **性能哲学**：关注性能的本质和意义
 - **系统哲学**：研究系统级编程的特点
 - **安全哲学**：强调内存安全和并发安全
@@ -1051,6 +1073,7 @@ pub enum ParseError {
 ### 9.11.12 与Lean形式化语言证明的关系 Relation to Lean Formal Language Proofs
 
 #### 理论基础 Theoretical Foundation
+
 - **中文**：Lean的依赖类型系统为形式语言理论提供了形式化证明的基础。通过类型级编程和证明构造，可以严格验证形式语言理论中的定理和性质。
 - **English**: Lean's dependent type system provides foundations for formal proofs in formal language theory. Through type-level programming and proof construction, theorems and properties in formal language theory can be strictly verified.
 
@@ -1151,6 +1174,7 @@ theorem concatenation_language_membership (L1 L2 : Language) (s : String) :
 ```
 
 #### 哲学思脉 Philosophical Context
+
 - **形式主义哲学**：通过形式化系统表达数学真理
 - **构造主义哲学**：强调构造性证明和可计算性
 - **证明哲学**：关注证明的本质和意义
