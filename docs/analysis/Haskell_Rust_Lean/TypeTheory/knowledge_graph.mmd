@@ -1,35 +1,201 @@
 graph TD
-  A["类型理论\nType Theory"]
-  B["线性类型理论\nLinear Type Theory"]
-  C["仿射类型理论\nAffine Type Theory"]
-  D["依赖类型理论\nDependent Type Theory"]
-  E["范畴论\nCategory Theory"]
-  F["Haskell"]
-  G["Rust"]
-  H["Lean"]
-  I["类型推断\nType Inference"]
-  J["类型安全\nType Safety"]
-  K["归纳原理\nInduction Principle"]
-  L["一致性\nConsistency"]
-  M["表达能力\nExpressiveness"]
-
-  A -- "理论分支 Branch" --> B
-  A -- "理论分支 Branch" --> C
-  A -- "理论分支 Branch" --> D
-  A -- "结构建模 Structure Modeling" --> E
-  A -- "类型推断 Type Inference" --> I
-  A -- "类型安全 Type Safety" --> J
-  A -- "归纳原理 Induction" --> K
-  A -- "一致性 Consistency" --> L
-  A -- "表达能力 Expressiveness" --> M
-  A -- "Haskell实现 Implementation" --> F
-  A -- "Rust实现 Implementation" --> G
-  A -- "Lean实现 Implementation" --> H
-  B -- "资源敏感 Resource Sensitivity" --> G
-  C -- "资源可丢弃 Affinity" --> G
-  D -- "高阶类型 Higher Types" --> H
-  E -- "结构抽象 Abstraction" --> F
-  F -- "类型级编程 Type-level Programming" --> A
-  G -- "所有权 Ownership" --> B
-  H -- "形式化证明 Formal Proofs" --> D
-  %% #TypeTheory-1 #TypeTheory-1.10 知识图谱 Knowledge Graph 
+  %% 核心理论节点 Core Theory Nodes
+  A["类型理论\nType Theory\n#TypeTheory"]
+  B["线性类型理论\nLinear Type Theory\n#LinearTypeTheory"]
+  C["仿射类型理论\nAffine Type Theory\n#AffineTypeTheory"]
+  D["依赖类型理论\nDependent Type Theory\n#DependentTypeTheory"]
+  E["范畴论\nCategory Theory\n#CategoryTheory"]
+  F["同伦类型论\nHomotopy Type Theory\n#HOTT"]
+  
+  %% 编程语言实现 Programming Language Implementations
+  G["Haskell\n#Haskell"]
+  H["Rust\n#Rust"]
+  I["Lean\n#Lean"]
+  J["Coq\n#Coq"]
+  K["Agda\n#Agda"]
+  
+  %% 核心概念 Core Concepts
+  L["类型推断\nType Inference\n#TypeInference"]
+  M["类型安全\nType Safety\n#TypeSafety"]
+  N["类型检查\nType Checking\n#TypeChecking"]
+  O["类型系统\nType System\n#TypeSystem"]
+  P["类型环境\nType Environment\n#TypeEnvironment"]
+  
+  %% 数学基础 Mathematical Foundations
+  Q["归纳原理\nInduction Principle\n#InductionPrinciple"]
+  R["递归原理\nRecursion Principle\n#RecursionPrinciple"]
+  S["一致性\nConsistency\n#Consistency"]
+  T["完备性\nCompleteness\n#Completeness"]
+  U["表达能力\nExpressiveness\n#Expressiveness"]
+  
+  %% 哲学思脉 Philosophical Context
+  V["本体论\nOntology\n#Ontology"]
+  W["认识论\nEpistemology\n#Epistemology"]
+  X["结构主义\nStructuralism\n#Structuralism"]
+  Y["构造主义\nConstructivism\n#Constructivism"]
+  Z["形式主义\nFormalism\n#Formalism"]
+  
+  %% 应用领域 Application Domains
+  AA["形式化验证\nFormal Verification\n#FormalVerification"]
+  BB["程序语言设计\nProgramming Language Design\n#PLDesign"]
+  CC["数学基础\nMathematical Foundations\n#MathFoundations"]
+  DD["人工智能\nArtificial Intelligence\n#AI"]
+  EE["区块链\nBlockchain\n#Blockchain"]
+  
+  %% 理论分支 Theoretical Branches
+  FF["证明论\nProof Theory\n#ProofTheory"]
+  GG["模型论\nModel Theory\n#ModelTheory"]
+  HH["形式语言理论\nFormal Language Theory\n#FormalLanguageTheory"]
+  II["自动机理论\nAutomata Theory\n#AutomataTheory"]
+  JJ["系统理论\nSystem Theory\n#SystemTheory"]
+  
+  %% 核心关系 Core Relationships
+  A -- "理论分支\nTheoretical Branch" --> B
+  A -- "理论分支\nTheoretical Branch" --> C
+  A -- "理论分支\nTheoretical Branch" --> D
+  A -- "理论分支\nTheoretical Branch" --> F
+  A -- "结构建模\nStructure Modeling" --> E
+  
+  %% 类型理论层次 Type Theory Hierarchy
+  B -- "弱化版本\nWeakened Version" --> C
+  D -- "扩展版本\nExtended Version" --> A
+  F -- "高阶扩展\nHigher-order Extension" --> D
+  
+  %% 编程语言实现关系 Programming Language Implementation Relations
+  A -- "Haskell实现\nHaskell Implementation" --> G
+  A -- "Rust实现\nRust Implementation" --> H
+  A -- "Lean实现\nLean Implementation" --> I
+  A -- "Coq实现\nCoq Implementation" --> J
+  A -- "Agda实现\nAgda Implementation" --> K
+  
+  %% 语言特性映射 Language Feature Mapping
+  G -- "类型级编程\nType-level Programming" --> A
+  H -- "所有权系统\nOwnership System" --> B
+  I -- "依赖类型\nDependent Types" --> D
+  J -- "证明助手\nProof Assistant" --> F
+  K -- "依赖类型\nDependent Types" --> D
+  
+  %% 核心概念关系 Core Concept Relations
+  A -- "类型推断\nType Inference" --> L
+  A -- "类型安全\nType Safety" --> M
+  A -- "类型检查\nType Checking" --> N
+  A -- "类型系统\nType System" --> O
+  A -- "类型环境\nType Environment" --> P
+  
+  %% 数学基础关系 Mathematical Foundation Relations
+  A -- "归纳原理\nInduction Principle" --> Q
+  A -- "递归原理\nRecursion Principle" --> R
+  A -- "一致性\nConsistency" --> S
+  A -- "完备性\nCompleteness" --> T
+  A -- "表达能力\nExpressiveness" --> U
+  
+  %% 哲学思脉关系 Philosophical Context Relations
+  A -- "本体论基础\nOntological Foundation" --> V
+  A -- "认识论基础\nEpistemological Foundation" --> W
+  A -- "结构主义基础\nStructuralist Foundation" --> X
+  A -- "构造主义基础\nConstructivist Foundation" --> Y
+  A -- "形式主义基础\nFormalist Foundation" --> Z
+  
+  %% 应用领域关系 Application Domain Relations
+  A -- "形式化验证\nFormal Verification" --> AA
+  A -- "程序语言设计\nProgramming Language Design" --> BB
+  A -- "数学基础\nMathematical Foundations" --> CC
+  A -- "人工智能\nArtificial Intelligence" --> DD
+  A -- "区块链\nBlockchain" --> EE
+  
+  %% 理论分支关系 Theoretical Branch Relations
+  A -- "证明论\nProof Theory" --> FF
+  A -- "模型论\nModel Theory" --> GG
+  A -- "形式语言理论\nFormal Language Theory" --> HH
+  A -- "自动机理论\nAutomata Theory" --> II
+  A -- "系统理论\nSystem Theory" --> JJ
+  
+  %% 交叉理论关系 Cross-theoretical Relations
+  E -- "抽象框架\nAbstract Framework" --> A
+  FF -- "Curry-Howard对应\nCurry-Howard Correspondence" --> A
+  GG -- "语义基础\nSemantic Foundation" --> A
+  HH -- "语法基础\nSyntactic Foundation" --> A
+  II -- "计算模型\nComputational Model" --> A
+  JJ -- "系统视角\nSystem Perspective" --> A
+  
+  %% 哲学思脉层次 Philosophical Context Hierarchy
+  V -- "存在性\nExistence" --> A
+  W -- "知识性\nKnowledge" --> A
+  X -- "结构性\nStructure" --> A
+  Y -- "构造性\nConstruction" --> A
+  Z -- "形式性\nFormality" --> A
+  
+  %% 应用层次关系 Application Hierarchy Relations
+  AA -- "程序正确性\nProgram Correctness" --> A
+  BB -- "语言设计\nLanguage Design" --> A
+  CC -- "数学形式化\nMathematical Formalization" --> A
+  DD -- "知识表示\nKnowledge Representation" --> A
+  EE -- "智能合约\nSmart Contracts" --> A
+  
+  %% 理论发展脉络 Theoretical Development Lineage
+  A -- "历史发展\nHistorical Development" --> B
+  B -- "理论演化\nTheoretical Evolution" --> C
+  A -- "理论扩展\nTheoretical Extension" --> D
+  D -- "高阶发展\nHigher-order Development" --> F
+  
+  %% 实现技术关系 Implementation Technology Relations
+  G -- "函数式编程\nFunctional Programming" --> A
+  H -- "系统编程\nSystems Programming" --> A
+  I -- "定理证明\nTheorem Proving" --> A
+  J -- "交互式证明\nInteractive Proof" --> A
+  K -- "依赖类型编程\nDependent Type Programming" --> A
+  
+  %% 概念层次关系 Concept Hierarchy Relations
+  L -- "自动推导\nAutomatic Derivation" --> O
+  M -- "错误预防\nError Prevention" --> O
+  N -- "语法检查\nSyntax Checking" --> O
+  P -- "上下文管理\nContext Management" --> O
+  
+  %% 数学原理层次 Mathematical Principle Hierarchy
+  Q -- "归纳证明\nInductive Proof" --> S
+  R -- "递归定义\nRecursive Definition" --> S
+  T -- "理论完备\nTheoretical Completeness" --> S
+  U -- "表达能力\nExpressive Power" --> S
+  
+  %% 哲学层次关系 Philosophical Hierarchy Relations
+  V -- "存在哲学\nExistence Philosophy" --> X
+  W -- "知识哲学\nKnowledge Philosophy" --> X
+  X -- "结构哲学\nStructural Philosophy" --> Y
+  Y -- "构造哲学\nConstructive Philosophy" --> Z
+  
+  %% 应用层次关系 Application Hierarchy Relations
+  AA -- "验证技术\nVerification Technology" --> BB
+  BB -- "语言理论\nLanguage Theory" --> CC
+  CC -- "数学基础\nMathematical Foundation" --> DD
+  DD -- "智能系统\nIntelligent Systems" --> EE
+  
+  %% 理论交叉关系 Theoretical Cross Relations
+  FF -- "逻辑基础\nLogical Foundation" --> GG
+  GG -- "语义理论\nSemantic Theory" --> HH
+  HH -- "语法理论\nSyntactic Theory" --> II
+  II -- "计算理论\nComputational Theory" --> JJ
+  
+  %% 样式定义 Style Definitions
+  classDef coreTheory fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+  classDef language fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+  classDef concept fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+  classDef math fill:#fff3e0,stroke:#e65100,stroke-width:2px
+  classDef philosophy fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+  classDef application fill:#f1f8e9,stroke:#33691e,stroke-width:2px
+  classDef branch fill:#e0f2f1,stroke:#004d40,stroke-width:2px
+  
+  %% 应用样式 Apply Styles
+  class A,B,C,D,E,F coreTheory
+  class G,H,I,J,K language
+  class L,M,N,O,P concept
+  class Q,R,S,T,U math
+  class V,W,X,Y,Z philosophy
+  class AA,BB,CC,DD,EE application
+  class FF,GG,HH,II,JJ branch
+  
+  %% 知识图谱元信息 Knowledge Graph Metadata
+  %% #TypeTheory-1 #TypeTheory-1.10 知识图谱 Knowledge Graph
+  %% 理论层次 Theoretical Hierarchy: 核心理论 -> 分支理论 -> 应用理论
+  %% 哲学思脉 Philosophical Context: 本体论 -> 认识论 -> 方法论
+  %% 技术实现 Technical Implementation: 理论 -> 语言 -> 工具
+  %% 应用领域 Application Domains: 验证 -> 设计 -> 基础 -> 智能 -> 区块链 
