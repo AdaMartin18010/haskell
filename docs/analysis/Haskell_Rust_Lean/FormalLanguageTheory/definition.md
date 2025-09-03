@@ -1,5 +1,19 @@
 # 9.1 形式语言理论的定义 Definition of Formal Language Theory #FormalLanguageTheory-9.1
 
+## 目录 Table of Contents
+
+- 9.1 定义 Definition
+- 9.2 哲学背景 Philosophical Background
+- 9.3 核心概念 Core Concepts
+- 9.4 历史发展 Historical Development
+- 9.5 形式化语义 Formal Semantics
+- 9.6 关键定理 Key Theorems
+- 9.7 与其他理论的关系 Relationship to Other Theories
+- 9.8 交叉引用 Cross References
+- 9.9 参考文献 References
+- 9.10 定义-属性-关系-解释-论证-形式化证明骨架
+- 9.11 课程与行业案例对齐 Courses & Industry Alignment
+
 ## 定义 Definition
 
 ### 基本定义 Basic Definition
@@ -365,6 +379,19 @@ $$[\![L]\!] = \{w \mid w \in L\}$$
 
 $$[\![G]\!] = L(G)$$
 
+### 关键定理 Key Theorems（陈述/骨架）
+
+- **正则语言泵引理 Pumping Lemma (Regular)**:
+  若语言 L 为正则，则存在 p，使任意 |w|≥p 的 w∈L，可分解为 w=xyz，满足 |xy|≤p，|y|>0，且 ∀i≥0，xy^i z ∈ L。
+
+- **上下文无关语言泵引理 Pumping Lemma (CFG)**:
+  若 L 为上下文无关，则存在 p，使任意 |w|≥p 的 w∈L，可写作 w=uvxyz，满足 |vxy|≤p，|vy|>0，且 ∀i≥0，u v^i x y^i z ∈ L。
+
+- **Myhill–Nerode 定理**:
+  L 正则 ⇔ L 的 Nerode 等价类有限 ⇔ 存在最小 DFA 识别 L。
+
+（形式化方向）在 Coq/Lean 中以归纳关系定义推导与等价关系，证明泵引理与 Myhill–Nerode 的蕴含关系与构造。
+
 ## 与其他理论的关系 Relationship to Other Theories
 
 ### 与自动机理论的关系
@@ -400,3 +427,19 @@ $$[\![G]\!] = L(G)$$
 6. Salomaa, A. (1973). Formal languages. Academic Press.
 7. Rozenberg, G., & Salomaa, A. (1997). Handbook of formal languages. Springer.
 8. Aho, A. V., & Ullman, J. D. (1972). The theory of parsing, translation, and compiling. Prentice Hall.
+
+## 定义-属性-关系-解释-论证-形式化证明骨架
+
+- **定义 Definition**: 字母表/字符串/语言/文法/推导/自动机。
+- **属性 Properties**: 闭包性质、判定性、正则/上下文无关等类的闭包与泵引理。
+- **关系 Relations**: 乔姆斯基层次与自动机对应（DFA/PDA/TM）。
+- **解释 Explanation**: 生成/识别视角、语法-语义映射、编程语言语法基础。
+- **论证 Arguments**: 典型定理（Myhill–Nerode、泵引理）之直观与形式化陈述。
+- **形式化证明 Formal Proofs**: 在 Coq/Lean 以归纳定义文法与推导，证明闭包与识别等价。
+
+## 课程与行业案例对齐 Courses & Industry Alignment
+
+- **课程**: MIT/Sipser 计算理论课程；编译原理（Aho/Dragon Book）语法/自动机构建。
+- **行业**: 解析器生成器、正则引擎、协议状态机、静态分析（抽象解释）。
+
+参考模板：参见 `../course_case_alignment_template.md`

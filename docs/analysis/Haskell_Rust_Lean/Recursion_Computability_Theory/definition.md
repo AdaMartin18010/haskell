@@ -1,5 +1,18 @@
 # 12.1 递归-可计算理论的定义 Definition of Recursion & Computability Theory #RecursionComputabilityTheory-12.1
 
+## 目录 Table of Contents
+
+- 12.1 定义 Definition
+- 12.2 哲学背景 Philosophical Background
+- 12.3 核心概念 Core Concepts
+- 12.4 历史发展 Historical Development
+- 12.5 形式化语义 Formal Semantics
+- 12.6 定义-属性-关系-解释-论证-形式化证明骨架
+- 12.7 课程与行业案例对齐 Courses & Industry Alignment
+- 12.8 与其他理论的关系 Relationship to Other Theories
+- 12.9 交叉引用 Cross References
+- 12.10 参考文献 References
+
 ## 定义 Definition
 
 ### 基本定义 Basic Definition
@@ -380,6 +393,22 @@ $$[\![f]\!] = \{(x, y) \mid f(x) = y\}$$
 对于可计算函数 $f$，其语义定义为：
 
 $$[\![f]\!] = \{(x, y) \mid \exists M. M(x) = y\}$$
+
+## 定义-属性-关系-解释-论证-形式化证明骨架
+
+- **定义 Definition**: 可计算函数、递归函数（原始/μ）、图灵机、λ演算、可判定性。
+- **属性 Properties**: Church–Turing 论题、可判定/半判定、归约关系、Rice 定理。
+- **关系 Relations**: 递归函数、图灵机、λ演算的可计算性等价；与自动机/复杂性联系。
+- **解释 Explanation**: 不可判定性的直观与对工程的影响（验证边界、规约思维）。
+- **论证 Arguments**: 停机不可判定、Rice 定理、不可计算函数的存在性（对角化）。
+- **形式化证明 Formal Proofs**: 在 Coq/Lean 以可归约关系与可计算定义化，形式化停机不可判定与 Rice 定理框架。
+
+## 课程与行业案例对齐 Courses & Industry Alignment
+
+- **课程**: 计算理论课程（Sipser）；λ演算/递归函数专题。
+- **行业**: 程序验证与模型检查的边界、编译优化/分析的不可判定性、SAT/SMT 在可判定片段中的应用。
+
+参考模板：参见 `../course_case_alignment_template.md`
 
 ## 与其他理论的关系 Relationship to Other Theories
 

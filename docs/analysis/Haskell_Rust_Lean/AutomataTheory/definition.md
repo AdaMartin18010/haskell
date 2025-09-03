@@ -1,5 +1,19 @@
 # 10.1 自动机理论的定义 Definition of Automata Theory #AutomataTheory-10.1
 
+## 目录 Table of Contents
+
+- 10.1 定义 Definition
+- 10.2 哲学背景 Philosophical Background
+- 10.3 核心概念 Core Concepts
+- 10.4 历史发展 Historical Development
+- 10.5 形式化语义 Formal Semantics
+- 10.6 关键定理 Key Theorems
+- 10.7 与其他理论的关系 Relationship to Other Theories
+- 10.8 交叉引用 Cross References
+- 10.9 参考文献 References
+- 10.10 定义-属性-关系-解释-论证-形式化证明骨架
+- 10.11 课程与行业案例对齐 Courses & Industry Alignment
+
 ## 定义 Definition
 
 ### 基本定义 Basic Definition
@@ -360,6 +374,19 @@ $$[\![A]\!] = L(A)$$
 
 $$[\![A_1 \times A_2]\!] = [\![A_1]\!] \cap [\![A_2]\!]$$
 
+### 关键定理 Key Theorems（陈述/骨架）
+
+- **Kleene 定理（表达式-自动机等价）**:
+  正则表达式与有限自动机识别的语言类相同；存在相互构造。
+
+- **NFA-DFA 等价**:
+  ∀NFA 存在等价 DFA（子集构造）；最小化 DFA 唯一（至同构）。
+
+- **PDA 与 CFG 对应**:
+  上下文无关语言与下推自动机识别语言类相同；CFG 与 PDA 可相互构造。
+
+（形式化方向）以接受关系/转换闭包定义自动机语义，证明构造保语言等价与闭包性质。
+
 ## 与其他理论的关系 Relationship to Other Theories
 
 ### 与形式语言理论的关系
@@ -395,3 +422,19 @@ $$[\![A_1 \times A_2]\!] = [\![A_1]\!] \cap [\![A_2]\!]$$
 6. Clarke, E. M., Grumberg, O., & Peled, D. A. (1999). Model checking. MIT Press.
 7. Angluin, D. (1987). Learning regular sets from queries and counterexamples. Information and Computation, 75(2), 87-106.
 8. Myhill, J. (1957). Finite automata and the representation of events. WADC Technical Report, 57-624.
+
+## 定义-属性-关系-解释-论证-形式化证明骨架
+
+- **定义 Definition**: DFA/NFA/PDA/TM 的状态机构成、执行、识别语言。
+- **属性 Properties**: 等价性（NFA↔DFA）、闭包、判定性、可计算性界限。
+- **关系 Relations**: 语言类与自动机层次的同构映射；模型检测/学习联系。
+- **解释 Explanation**: 识别 vs 生成、构造算法、复杂性影响。
+- **论证 Arguments**: Myhill–Nerode 定理、Kleene 定理、泵引理关联。
+- **形式化证明 Formal Proofs**: 在 Coq/Lean 形式化自动机与接受关系，证明等价与闭包。
+
+## 课程与行业案例对齐 Courses & Industry Alignment
+
+- **课程**: 计算理论/自动机课程（Sipser/Hopcroft-Ullman）；编译原理词法/语法分析。
+- **行业**: 正则/解析器引擎、模型检测、协议验证、模糊测试反馈自动机。
+
+参考模板：参见 `../course_case_alignment_template.md`

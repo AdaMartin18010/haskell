@@ -1,5 +1,12 @@
 # 9.6 三语言对比 Comparison (Haskell/Rust/Lean) #FormalLanguageTheory-9.6
 
+## 目录 Table of Contents
+
+- 9.6.1 对比表格 Comparison Table
+- 9.6.2 典型代码对比 Typical Code Comparison
+- 9.6.3 哲学与工程意义 Philosophical & Engineering Significance
+- 9.6.4 国际标准与Wiki对标 International Standards & Wiki
+
 ## 9.6.1 对比表格 Comparison Table #FormalLanguageTheory-9.6.1
 
 | 特性/语言 | Haskell | Rust | Lean |

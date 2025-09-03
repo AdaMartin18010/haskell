@@ -234,6 +234,16 @@ $$[\![A \multimap B]\!] = [\![A]\!] \multimap [\![B]\!]$$
 
 ## 参考文献 References
 
+## 课程与行业案例对标 Courses & Industry Alignment
+
+- **课程**:
+  - CMU 15-312/814：资源语义、弱化规则与仿射/线性对比。
+  - MIT 6.821/6.822：类型安全证明作业中包含仿射/线性变体。
+
+- **行业**:
+  - RustBelt：形式化刻画 Rust 安全性；仿射“至多一次”与 move 语义对应。
+  - 工程资产：文件句柄、临时密钥、一次性 token 的安全销毁与丢弃。
+
 1. Girard, J. Y. (1987). Linear logic. Theoretical Computer Science, 50(1), 1-101.
 2. Wadler, P. (1990). Linear types can change the world! Programming Concepts and Methods, 347-359.
 3. Pfenning, F., & Walker, D. (1991). Higher-order logic programming. Theoretical Aspects of Computer Software, 1-15.

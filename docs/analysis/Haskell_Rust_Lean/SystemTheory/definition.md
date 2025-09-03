@@ -1,5 +1,19 @@
 # 11.1 系统理论的定义 Definition of System Theory #SystemTheory-11.1
 
+## 目录 Table of Contents
+
+- 11.1 定义 Definition
+- 11.2 哲学背景 Philosophical Background
+- 11.3 核心概念 Core Concepts
+- 11.4 历史发展 Historical Development
+- 11.5 形式化语义 Formal Semantics
+- 11.6 关键定理 Key Theorems
+- 11.7 与其他理论的关系 Relationship to Other Theories
+- 11.8 交叉引用 Cross References
+- 11.9 参考文献 References
+- 11.10 定义-属性-关系-解释-论证-形式化证明骨架
+- 11.11 课程与行业案例对齐 Courses & Industry Alignment
+
 ## 定义 Definition
 
 ### 基本定义 Basic Definition
@@ -376,6 +390,19 @@ $$[\![S]\!] = \{(u, y) \mid y = S(u)\}$$
 
 $$[\![S_1]\!] = [\![S_2]\!]$$
 
+### 关键定理 Key Theorems（陈述/骨架）
+
+- **李雅普诺夫稳定判据 Lyapunov Criterion**:
+  存在正定函数 V(x)，其沿轨迹导数非正/负定，则系统稳定/渐近稳定。
+
+- **不变式 Invariants**:
+  若集合 I 对系统转移闭合，则 I 为不变集；用于安全性证明。
+
+- **可控/可观性**（线性系统）:
+  Kalman 秩条件刻画可控/可观；用于控制器/观测器设计。
+
+（形式化方向）在 Coq/Lean 中把系统建模为转移关系，定义不变式并证明闭合；离散/连续两类引理骨架。
+
 ## 与其他理论的关系 Relationship to Other Theories
 
 ### 与控制论的关系
@@ -411,3 +438,19 @@ $$[\![S_1]\!] = [\![S_2]\!]$$
 6. Haken, H. (1983). Synergetics: An introduction. Springer.
 7. Bar-Yam, Y. (1997). Dynamics of complex systems. Addison-Wesley.
 8. Newman, M. E. J. (2010). Networks: An introduction. Oxford University Press.
+
+## 定义-属性-关系-解释-论证-形式化证明骨架
+
+- **定义 Definition**: 系统五元组、连续/离散动态、响应/输出、组合。
+- **属性 Properties**: 稳定性（李雅普诺夫）、可控/可观、鲁棒性、复杂性度量。
+- **关系 Relations**: 与控制论/信息论/复杂性科学/CS 架构的相互映射。
+- **解释 Explanation**: 层次/模块化/反馈/网络等工程语义。
+- **论证 Arguments**: 稳定性判据、BIBO 稳定、最优性与权衡。
+- **形式化证明 Formal Proofs**: 在 Coq/Lean 对状态转移系统建模，证明不变式/稳定性引理。
+
+## 课程与行业案例对齐 Courses & Industry Alignment
+
+- **课程**: 控制理论、系统工程、复杂系统课程；CS 架构/分布式系统课程中的系统视角。
+- **行业**: 控制系统安全、网络弹性、微服务拓扑与可观测性、鲁棒控制与故障安全。
+
+参考模板：参见 `../course_case_alignment_template.md`

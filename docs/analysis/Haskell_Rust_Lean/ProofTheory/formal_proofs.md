@@ -1,5 +1,14 @@
 # 7.8 形式化证明 Formal Proofs #ProofTheory-7.8
 
+## 目录 Table of Contents
+
+- 7.8.1 核心定理 Core Theorems
+- 7.8.2 典型证明 Typical Proofs
+- 7.8.3 三语言实现 Proofs in Haskell/Rust/Lean
+- 7.8.4 相关Tag
+- 7.8.5 定义-属性-关系-解释-论证-形式化证明骨架
+- 7.8.6 课程与行业案例对齐 Courses & Industry Alignment
+
 ## 7.8.1 核心定理 Core Theorems #ProofTheory-7.8.1
 
 - 完备性定理（Completeness Theorem）
@@ -59,3 +68,26 @@ lemma add_comm (m n : ℕ) : m + n = n + m :=
 ## 7.8.4 相关Tag
 
 `# ProofTheory #ProofTheory-7 #ProofTheory-7.8 #ProofTheory-7.8.1 #ProofTheory-7.8.2 #ProofTheory-7.8.3`
+
+## 7.8.5 定义-属性-关系-解释-论证-形式化证明骨架
+
+- **定义 Definition**: 语法/推导关系、可证明性、语义（模型）与可满足性。
+- **属性 Properties**: 正确性（Soundness）、完备性（Completeness）、归约/归一化、切割消除（Cut-elimination）。
+- **关系 Relations**: Curry–Howard 同构；与类型系统、范畴语义的对应。
+- **解释 Explanation**: 证明对象、证明过程与程序/类型的双向映射；归纳/协代数视角。
+- **论证 Arguments**: 典型定理（哥德尔完备性、Gentzen 切割消除、弱归约/强归约）。
+- **形式化证明 Formal Proofs**: 在 Lean/Coq 以归纳规则建模推导，给出 Soundness/Completeness 骨架与 Cut-elim 结构。
+
+### 关键定理陈述 Key Theorems (Statements)
+
+- **Soundness 正确性**: 若 Γ ⊢ φ，则 Γ ⊨ φ。
+- **Completeness 完备性**: 若 Γ ⊨ φ，则 Γ ⊢ φ（在一阶逻辑语境）。
+- **Cut-elimination 切割消除**: 任一可证序列有无 cut 的证明；推导归一化、弱一致性。
+- **Normalization 归一化**: 某些演算中，归约序列终止或具有标准形。
+
+## 7.8.6 课程与行业案例对齐 Courses & Industry Alignment
+
+- **课程**: 证明论/逻辑学课程；Lean/Coq 战术与证明工程课程。
+- **行业/研究**: 证明助手生态、形式化验证管线、CI 中自动证明/SMT 集成。
+
+参考模板：参见 `../course_case_alignment_template.md`

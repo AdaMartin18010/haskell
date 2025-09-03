@@ -1,5 +1,11 @@
 # 9.4 应用 Applications of Formal Language Theory #FormalLanguageTheory-9.4
 
+## 目录 Table of Contents
+
+- 9.4.1 中文
+- 9.4.2 English
+- 9.4.3 三语言应用对比 Haskell/Rust/Lean Application Comparison
+
 ## 9.4.1 中文
 
 - 编译器的语法分析与语义分析。

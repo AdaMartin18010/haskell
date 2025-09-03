@@ -1,5 +1,20 @@
 # 2. 语法与语义 Syntax & Semantics
 
+## 目录 Table of Contents
+
+- 2.1 表达式与语句 Expressions & Statements
+- 2.2 模式匹配 Pattern Matching
+- 2.3 类型声明 Type Declarations
+- 2.4 求值策略 Evaluation Strategies
+- 2.5 语法语义框架 Syntax-Semantics Framework
+- 2.6 语言对比 Language Comparison
+- 2.7 结构图 Structure Diagram
+- 2.8 交叉引用 Cross References
+- 2.9 参考文献 References
+- 2.10 批判性小结 Critical Summary
+- 2.11 定义-属性-关系-解释-论证-形式化证明骨架
+- 2.12 课程与行业案例对齐 Courses & Industry Alignment
+
 ## 2.1 表达式与语句 Expressions & Statements #SyntaxSemantics-2.1
 
 ### 2.1.1 定义 Definition
@@ -494,3 +509,19 @@ graph TD
 
 - **中文**：语法语义框架为编程语言提供理论基础，需平衡形式化严谨性与工程实用性，未来需关注多语言语义统一与工具链支持。
 - **English**: The syntax-semantics framework provides theoretical foundations for programming languages, requiring balance between formal rigor and engineering practicality; future work should focus on multi-language semantic unification and toolchain support.
+
+## 2.11 定义-属性-关系-解释-论证-形式化证明骨架
+
+- **定义 Definition**: 抽象/具体语法、操作/指称/公理语义、类型系统与语义关系。
+- **属性 Properties**: 语义保留、进展/保持、健全/完备、等价/重写一致性。
+- **关系 Relations**: 与类型系统、范畴语义、语义模型（域论/代数语义）对应。
+- **解释 Explanation**: 语法到语义的映射与验证；实现与验证之间的桥接。
+- **论证 Arguments**: 小步/大步语义一致性、编译器正确性（前后端语义对齐）。
+- **形式化证明 Formal Proofs**: 在 Lean/Coq 建模语法与语义，证明进展/保持、编译正确性骨架。
+
+## 2.12 课程与行业案例对齐 Courses & Industry Alignment
+
+- **课程**: 语义学（Winskel）、TAPL、PLDI/POPL 课程实验（小语言语义/编译器正确性）。
+- **行业**: 编译器验证（CompCert 启发）、解释器/VM 形式化、静态分析与验证工具链。
+
+参考模板：参见 `../course_case_alignment_template.md`

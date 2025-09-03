@@ -1,5 +1,11 @@
 # 9.12 常见误区 Common Pitfalls #FormalLanguageTheory-9.12
 
+## 目录 Table of Contents
+
+- 9.12.1 理论误区 Theoretical Pitfalls
+- 9.12.2 工程陷阱 Engineering Pitfalls
+- 9.12.3 三语言相关注意事项 Language-specific Notes
+
 ## 9.12.1 理论误区 Theoretical Pitfalls #FormalLanguageTheory-9.12.1
 
 - 误解形式语言仅为“编程语言”，忽视其在计算理论、自动机理论中的基础地位。
