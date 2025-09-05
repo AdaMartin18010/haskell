@@ -1,12 +1,34 @@
 # Healthcare 行业应用案例
 
+## 目录速览
+
+- [案例1：类型安全的医疗数据分析系统](#案例1类型安全的医疗数据分析系统)
+- [案例2：生物信息学中的序列分析](#案例2生物信息学中的序列分析)
+- [参考文献](#参考文献)
+
+## 交付清单（可勾选）
+
+- [ ] 增补 EHR/HL7/FHIR 数据流示例
+- [ ] 增补合规隐私小节（HIPAA/GDPR）
+- [ ] 增补诊疗流程与时序建模案例
+- [ ] 与 Overview 的回链与指标对齐
+
+## 案例模板
+
+1) 背景与目标（数据/安全/合规/KPI）
+2) 架构设计（数据/服务/合规/追踪）
+3) 实现要点（Haskell/Rust/Lean）
+4) 验证与评估（准确性/召回/可审计）
+5) 运维与监控（告警/审计/追踪）
+6) 经验与复盘
+
 ## 案例1：类型安全的医疗数据分析系统
 
-### 问题建模
+### 问题建模（案例1）
 
 - 目标：实现一个可形式化验证的医疗数据分析系统，确保数据处理的安全性和准确性。
 
-### Haskell实现
+### Haskell实现（案例1）
 
 ```haskell
 {-# LANGUAGE GADTs, DataKinds, KindSignatures #-}
@@ -29,7 +51,7 @@ analyzeVitalSigns vitals
   | otherwise = LowRisk
 ```
 
-### Rust实现
+### Rust实现（案例1）
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -61,7 +83,7 @@ impl VitalSigns {
 }
 ```
 
-### Lean形式化
+### Lean形式化（案例1）
 
 ```lean
 def analyze_vital_signs (vitals : VitalSigns) : RiskAssessment :=
@@ -80,11 +102,11 @@ begin
 end
 ```
 
-### 对比分析
+### 对比分析（案例1）
 
 - Haskell强调类型级安全和业务逻辑抽象，Rust注重高性能和内存安全，Lean可形式化证明医疗算法的正确性。
 
-### 工程落地
+### 工程落地（案例1）
 
 - 适用于医院信息系统、远程医疗、健康监测等场景。
 
@@ -92,11 +114,11 @@ end
 
 ## 案例2：生物信息学中的序列分析
 
-### 问题建模
+### 问题建模（案例2）
 
 - 目标：实现一个可形式化验证的DNA序列分析系统，确保分析结果的准确性。
 
-### Haskell实现
+### Haskell实现（案例2）
 
 ```haskell
 data DNASequence = DNASequence [Nucleotide]
@@ -119,7 +141,7 @@ findPattern (DNASequence pattern) (DNASequence sequence) =
       window == pattern]
 ```
 
-### Rust实现
+### Rust实现（案例2）
 
 ```rust
 #[derive(Debug, Clone, PartialEq)]
@@ -166,7 +188,7 @@ impl DNASequence {
 }
 ```
 
-### Lean形式化
+### Lean形式化（案例2）
 
 ```lean
 inductive Nucleotide
@@ -188,11 +210,11 @@ begin
 end
 ```
 
-### 对比分析
+### 对比分析（案例2）
 
 - Haskell提供清晰的函数式抽象和类型安全，Rust确保高性能计算和内存安全，Lean可形式化证明生物信息学算法的数学性质。
 
-### 工程落地
+### 工程落地（案例2）
 
 - 适用于基因组学、蛋白质组学、药物发现等生物信息学场景。
 

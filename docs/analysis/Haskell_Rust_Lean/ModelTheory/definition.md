@@ -356,3 +356,52 @@ typeCheck ts term typ =
 6. Vaught, R. L. (1974). Model theory before 1945. Model theory and algebra, 153-172.
 7. Henkin, L. (1949). The completeness of the first-order functional calculus. The Journal of Symbolic Logic, 14(3), 159-166.
 8. Shelah, S. (1990). Classification theory and the number of non-isomorphic models. Elsevier.
+
+## 对比分析 Comparison
+
+- **中文**：模型论 vs 证明论 vs 范畴语义
+  - 关注点：模型论强调语义与满足关系；证明论关注推导与可证性；范畴语义强调结构与态射。
+  - 方法论：模型存在性与紧致性技术；归纳/共归纳证明；函子/自然变换。
+- **English**: Model Theory vs Proof Theory vs Categorical Semantics
+  - Focus: semantics/satisfaction vs derivability vs structure/morphisms.
+  - Methods: compactness/existence vs induction/coinduction vs functors/natural transformations.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 现实系统中的可判定性与可计算边界；
+  - 语义与实现间的鸿沟（理想模型假设 vs 工程约束）。
+- **English**:
+  - Decidability and computability limits in real systems;
+  - Gap between semantic ideals and engineering constraints.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 可验证编译、形式化规范到实现的一致性（refinement-based semantics）。
+  - 与类型理论/HoTT 的交叉：语义等价、同伦语义。
+  - SMT/定理证明器与模型构造自动化。
+- **English**:
+  - Verified compilation and refinement-based semantics.
+  - Crossovers with type theory/HoTT: semantic equivalence and homotopy semantics.
+  - Automation via SMT/provers for model construction.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 将语法等价混同为语义等价；忽视域大小假设对定理的影响；遗漏 Skolem 化前提。
+- **English**:
+  - Confusing syntactic and semantic equivalence; ignoring domain-size assumptions; missing Skolemization preconditions.
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  MT[Model Theory] --> Lang[Formal Languages]
+  MT --> Struct[Structures]
+  MT --> Sat[Satisfaction]
+  Sat --> Compact[Compactness]
+  Struct --> Iso[Isomorphism]
+  MT --> Proof[Proof Theory]
+  MT --> Cat[Categorical Semantics]
+```

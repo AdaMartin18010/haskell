@@ -105,7 +105,7 @@ fn main() {
 
 ## 2. 工厂方法模式（Factory Method Pattern）
 
-### 通用/多线程实现
+### 通用/多线程实现1
 
 ```rust
 trait Product {
@@ -150,7 +150,7 @@ fn main() {
 }
 ```
 
-### 异步实现
+### 异步实现1
 
 ```rust
 trait Product {
@@ -189,7 +189,7 @@ async fn main() {
 }
 ```
 
-### 同步实现
+### 同步实现1
 
 ```rust
 trait Product {
@@ -231,7 +231,7 @@ fn main() {
 
 （后续可继续补充抽象工厂、建造者、原型、对象池等模式的多实现代码）
 
-# Haskell 典型实现片段
+## Haskell 典型实现片段
 
 ## 类型系统与数据结构
 
@@ -293,7 +293,7 @@ prop_reverse xs = reverse (reverse xs) == xs
 
 （可按需在各模式下补充更细致的Haskell实现）
 
-# Lean 典型实现片段
+## Lean 典型实现片段
 
 ## 依赖类型与命题即类型
 

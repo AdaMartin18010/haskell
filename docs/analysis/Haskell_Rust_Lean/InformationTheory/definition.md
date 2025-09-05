@@ -439,3 +439,49 @@ $$[\![W]\!] = C$$
 6. Cover, T. M., & Thomas, J. A. (2006). Elements of information theory. Wiley.
 7. MacKay, D. J. C. (2003). Information theory, inference, and learning algorithms. Cambridge University Press.
 8. Gallager, R. G. (1968). Information theory and reliable communication. Wiley.
+
+## 对比分析 Comparison
+
+- **中文**：信息论 vs 概率论 vs 编码/通信 vs 统计学习
+  - 概率给工具；信息论给度量与极限；编码/通信给实现；统计学习给推断。
+- **English**: Probability provides tools; information theory gives metrics/limits; coding/communication implement; statistical learning infers.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 实际系统的非理想信道/相关性破坏独立假设；深度学习中的“信息瓶颈”解释争议。
+- **English**: Non-ideal channels/correlations; debates around the information bottleneck view in deep learning.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 量子信息、网络信息论、隐私与差分隐私、联邦学习中的信息流；
+  - 代码与模型压缩、率失真在多模态模型中的落地。
+- **English**: Quantum/network information; privacy and DP; information flow in federated learning; code/model compression; rate–distortion in multimodal models.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 熵/互信息估计偏差；忽视先验导致的伪容量；把相关性当因果。
+- **English**: Entropy/MI estimation bias; ignoring priors inflating capacity; mistaking correlation for causation.
+
+## 扩展交叉引用 Extended Cross References
+
+- [概率论 Probability Theory](../ProbabilityTheory/README.md)
+- [通信理论 Communication Theory](../CommunicationTheory/README.md)
+- [编码理论 Coding Theory](../CodingTheory/README.md)
+- [统计学习 Statistical Learning](../../model/AI/Statistical_Learning.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  IT[Information Theory] --> Entropy[Entropy]
+  IT --> MI[Mutual Information]
+  IT --> Channel[Channel Capacity]
+  IT --> Coding[Coding]
+  Coding --> Source[Source Coding]
+  Coding --> ChannelC[Channel Coding]
+  IT --> Privacy[Privacy & DP]
+  IT --> Quantum[Quantum Info]
+```

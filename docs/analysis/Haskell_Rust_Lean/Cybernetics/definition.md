@@ -593,3 +593,61 @@ checkConsistency cs =
 - **智能控制论**：结合人工智能技术，实现智能化的控制理论
 - **复杂系统控制**：发展复杂系统的控制理论和方法
 - **人文控制论**：关注控制系统中的人文因素和伦理问题
+
+## 对比分析 Comparison
+
+- **中文**：控制论 vs 系统论 vs 信息论 vs 人工智能
+  - 控制论关注反馈与调节；系统论关注结构与层次；信息论关注传输与编码；AI关注智能与学习。
+  - 方法：反馈回路、层次分析、信息度量、机器学习。
+- **English**: Cybernetics vs System Theory vs Information Theory vs AI
+  - Focus: feedback/regulation vs structure/hierarchy vs transmission/coding vs intelligence/learning.
+  - Methods: feedback loops, hierarchical analysis, information metrics, machine learning.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 控制与自主性的张力；技术决定论与人文关怀的平衡；
+  - 复杂系统的可预测性边界；反馈延迟与系统稳定性。
+- **English**:
+  - Tension between control and autonomy; balance of technological determinism and humanistic care;
+  - Predictability limits of complex systems; feedback delays and stability.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 智能控制与自适应系统；人机协作与增强智能；
+  - 分布式控制与边缘计算；量子控制与生物控制。
+- **English**:
+  - Intelligent control and adaptive systems; human-machine collaboration and augmented intelligence;
+  - Distributed control and edge computing; quantum and biological control.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 过度控制导致系统僵化；忽视非线性与延迟效应；
+  - 反馈回路设计不当导致振荡；参数调节缺乏理论指导。
+- **English**:
+  - Over-control leading to system rigidity; ignoring nonlinearity and delay effects;
+  - Poor feedback loop design causing oscillations; parameter tuning without theoretical guidance.
+
+## 扩展交叉引用 Extended Cross References
+
+- [系统理论 System Theory](../SystemTheory/README.md)
+- [信息论 Information Theory](../InformationTheory/README.md)
+- [人工智能 Artificial Intelligence](../AI/README.md)
+- [分布式系统 Distributed Systems](../../model/Software/Distributed_Systems.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  CYB[Cybernetics] --> Feedback[Feedback Loops]
+  CYB --> Control[Control Systems]
+  CYB --> Adaptation[Adaptation]
+  CYB --> Stability[Stability]
+  Feedback --> PID[PID Control]
+  Control --> OpenLoop[Open Loop]
+  Control --> ClosedLoop[Closed Loop]
+  Adaptation --> Learning[Learning Systems]
+  CYB --> AI[Artificial Intelligence]
+```

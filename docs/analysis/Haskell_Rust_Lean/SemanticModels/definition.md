@@ -401,3 +401,62 @@ $$\mathcal{S}(C[e]) = \mathcal{C}(\mathcal{S}(e))$$
 6. Abramsky, S., & McCusker, G. (1999). Game semantics. Computational Logic, 1-55.
 7. Cousot, P., & Cousot, R. (1977). Abstract interpretation: A unified lattice model for static analysis of programs by construction or approximation of fixpoints. POPL, 238-252.
 8. Mitchell, J. C. (1996). Foundations for programming languages. MIT Press.
+
+## 对比分析 Comparison
+
+- **中文**：语义模型 vs 类型系统 vs 程序验证 vs 编译器
+  - 语义模型给出含义；类型系统给出约束；程序验证给出正确性；编译器给出实现。
+  - 方法：数学对象、类型规则、逻辑断言、代码生成。
+- **English**: Semantic models vs type systems vs program verification vs compilers
+  - Purpose: meaning vs constraints vs correctness vs implementation.
+  - Methods: mathematical objects, type rules, logical assertions, code generation.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 语义模型与实现间的鸿沟；不同语义模型间的一致性；
+  - 形式化语义的复杂性与工程可用性；语义组合性的限制。
+- **English**:
+  - Gap between semantic models and implementation; consistency across semantic models;
+  - Complexity vs engineering usability; limitations of semantic compositionality.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 概率语义与量子语义；并发语义与分布式语义；
+  - 机器学习辅助的语义推理；可验证编译与语义保持。
+- **English**:
+  - Probabilistic and quantum semantics; concurrent and distributed semantics;
+  - ML-assisted semantic reasoning; verified compilation with semantic preservation.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 语义模型选择不当导致验证困难；忽视语义组合性假设；
+  - 抽象解释中的精度损失；博弈语义中的策略复杂性。
+- **English**:
+  - Poor semantic model choice hindering verification; ignoring compositionality assumptions;
+  - Precision loss in abstract interpretation; strategy complexity in game semantics.
+
+## 扩展交叉引用 Extended Cross References
+
+- [类型理论 Type Theory](../TypeTheory/README.md)
+- [程序验证 Program Verification](../ProgramVerification/README.md)
+- [编译器理论 Compiler Theory](../CompilerTheory/README.md)
+- [抽象解释 Abstract Interpretation](../../model/Software/Abstract_Interpretation.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  SM[Semantic Models] --> Op[Operational]
+  SM --> Den[Denotational]
+  SM --> Ax[Axiomatic]
+  SM --> Cat[Categorical]
+  Op --> Small[Small-Step]
+  Op --> Big[Big-Step]
+  Den --> Domain[Domain Theory]
+  Ax --> Hoare[Hoare Logic]
+  Cat --> CCC[Cartesian Closed]
+  SM --> AI[Abstract Interpretation]
+```

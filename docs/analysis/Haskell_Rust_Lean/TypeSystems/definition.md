@@ -381,3 +381,66 @@ $$\forall e, e', T. \Gamma \vdash e : T \text{ and } e \rightarrow e' \Rightarro
 6. Wadler, P. (1990). Linear types can change the world! Programming Concepts and Methods, 347-359.
 7. Pierce, B. C. (2002). Types and programming languages. MIT Press.
 8. Cardelli, L., & Wegner, P. (1985). On understanding types, data abstraction, and polymorphism. ACM Computing Surveys, 17(4), 471-523.
+
+## 对比分析 Comparison
+
+- **中文**：类型系统 vs 语法语义 vs 程序验证 vs 编译器
+  - 类型系统提供约束与安全；语法语义定义结构与意义；程序验证确保正确性；编译器实现转换与优化。
+  - 方法：类型规则、形式化语法、逻辑推理、代码生成。
+- **English**: Type Systems vs Syntax & Semantics vs Program Verification vs Compilers
+  - Purpose: constraints/safety vs structure/meaning vs correctness vs transformation/optimization.
+  - Methods: type rules, formal grammars, logical reasoning, code generation.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 类型复杂性与开发效率的平衡；静态类型与动态类型的争议；
+  - 类型系统的表达能力与判定性的权衡；类型安全与性能的冲突。
+- **English**:
+  - Balance between type complexity and development efficiency; static vs dynamic typing debates;
+  - Trade-offs between expressiveness and decidability; conflicts between type safety and performance.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 依赖类型与证明即程序；线性类型与资源管理；
+  - 效应类型与并发编程；会话类型与通信协议。
+- **English**:
+  - Dependent types and proofs-as-programs; linear types and resource management;
+  - Effect types and concurrent programming; session types and communication protocols.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 类型系统设计中的表达能力限制；类型推导算法的复杂度问题；
+  - 类型安全证明中的假设违反；类型系统与运行时行为的不一致。
+- **English**:
+  - Expressiveness limitations in type system design; complexity issues in type inference algorithms;
+  - Assumption violations in type safety proofs; inconsistencies between type systems and runtime behavior.
+
+## 扩展交叉引用 Extended Cross References
+
+- [类型理论 Type Theory](../TypeTheory/README.md)
+- [程序验证 Program Verification](../ProgramVerification/README.md)
+- [编译器理论 Compiler Theory](../CompilerTheory/README.md)
+- [形式化定义 Formal Definitions](../FormalDefinitions/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  TS[Type Systems] --> Simple[Simple Types]
+  TS --> Poly[Polymorphic Types]
+  TS --> Dep[Dependent Types]
+  TS --> Linear[Linear Types]
+  Simple --> Basic[Basic Types]
+  Poly --> HM[Hindley-Milner]
+  Dep --> Pi[Pi Types]
+  Dep --> Sigma[Sigma Types]
+  Linear --> Affine[Affine Types]
+  TS --> Inference[Type Inference]
+  TS --> Safety[Type Safety]
+  Inference --> Unify[Unification]
+  Safety --> Progress[Progress]
+  Safety --> Preserve[Preservation]
+```

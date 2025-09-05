@@ -1,12 +1,34 @@
 # Blockchain Web3 行业应用案例
 
+## 目录速览
+
+- [案例1：类型安全的智能合约实现](#案例1类型安全的智能合约实现)
+- [案例2：共识算法的形式化验证](#案例2共识算法的形式化验证)
+- [参考文献](#参考文献)
+
+## 交付清单（可勾选）
+
+- [ ] 增补 UTXO vs Account 交易/状态示例
+- [ ] 增补共识（PoW/PoS/BFT）对比表
+- [ ] 增补合约安全检查清单（可重入/溢出/权限）
+- [ ] 与 Overview 的回链与指标对齐
+
+## 案例模板
+
+1) 背景与目标
+2) 架构与数据流/协议流
+3) 实现要点（Haskell/Rust/Lean）
+4) 安全与验证（形式化/测试）
+5) 性能与扩展性
+6) 经验与复盘
+
 ## 案例1：类型安全的智能合约实现
 
-### 问题建模
+### 问题建模（案例1）
 
 - 目标：实现一个可形式化验证的智能合约，确保合约逻辑的安全性和正确性。
 
-### Haskell实现
+### Haskell实现（案例1）
 
 ```haskell
 {-# LANGUAGE GADTs, DataKinds, KindSignatures #-}
@@ -35,7 +57,7 @@ executeTransaction tx state
   | otherwise = Nothing
 ```
 
-### Rust实现
+### Rust实现（案例1）
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -71,7 +93,7 @@ impl ContractState {
 }
 ```
 
-### Lean形式化
+### Lean形式化（案例1）
 
 ```lean
 def validate_transaction (tx : Transaction) (state : ContractState) : Prop :=
@@ -91,11 +113,11 @@ begin
 end
 ```
 
-### 对比分析
+### 对比分析（案例1）
 
 - Haskell提供强类型安全和函数式抽象，Rust确保内存安全和并发安全，Lean可形式化证明合约逻辑的正确性。
 
-### 工程落地
+### 工程落地（案例1）
 
 - 适用于DeFi、NFT、DAO等区块链应用场景。
 
@@ -103,11 +125,11 @@ end
 
 ## 案例2：共识算法的形式化验证
 
-### 问题建模
+### 问题建模（案例2）
 
 - 目标：实现一个可形式化验证的共识算法，确保分布式系统的一致性。
 
-### Haskell实现
+### Haskell实现（案例2）
 
 ```haskell
 data Block = Block
@@ -144,7 +166,7 @@ mineBlockWithDifficulty block difficulty =
   in minedBlock { hash = calculateHash minedBlock }
 ```
 
-### Rust实现
+### Rust实现（案例2）
 
 ```rust
 use sha2::{Sha256, Digest};
@@ -194,7 +216,7 @@ impl Block {
 }
 ```
 
-### Lean形式化
+### Lean形式化（案例2）
 
 ```lean
 def mine_block (block : Block) (difficulty : ℕ) : Block :=

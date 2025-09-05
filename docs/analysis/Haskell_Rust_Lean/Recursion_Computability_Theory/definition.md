@@ -445,3 +445,49 @@ $$[\![f]\!] = \{(x, y) \mid \exists M. M(x) = y\}$$
 6. Rogers, H. (1987). Theory of recursive functions and effective computability. MIT Press.
 7. Sipser, M. (2012). Introduction to the theory of computation. Cengage Learning.
 8. Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006). Introduction to automata theory, languages, and computation. Pearson.
+
+## 对比分析 Comparison
+
+- **中文**：可计算性 vs 自动机/复杂性/PL 语义
+  - 可计算性刻画“能否算”；复杂性刻画“代价几何”；自动机提供“模型”；PL 语义提供“意义与证明”。
+- **English**: Computability vs automata/complexity/PL semantics — computability asks possibility, complexity asks cost, automata are models, PL semantics gives meaning/proofs.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - Church–Turing 论题的经验性与可物理计算边界；
+  - 现实系统中不可判定性与工程可用性的折衷。
+- **English**: Empirical status of Church–Turing thesis; trade-offs between undecidability and engineering usefulness.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 量子/分布式/生物计算对可计算性边界的启示；
+  - 可判定片段设计（SMT/LIA/Array）与验证实践；
+  - 交互式/在线可计算性与反应式系统。
+- **English**: Quantum/distributed/biological computing; decidable fragments for verification; interactive/online computability.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 将半判定误作判定；归约方向写反；混淆编码与解释；对角化中集合/函数域界定不严。
+- **English**: Confusing semi-decidable with decidable; wrong reduction direction; conflating encoding vs interpretation; sloppy domains in diagonalization.
+
+## 扩展交叉引用 Extended Cross References
+
+- [自动机理论 Automata Theory](../AutomataTheory/README.md)
+- [复杂性理论 Complexity Theory](../Recursion_Computability_Theory/README.md)
+- [类型与语义 Type & Semantics](../Syntax_Semantics/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  RCT[Recursion & Computability] --> TM[Turing Machines]
+  RCT --> Lambda[Lambda Calculus]
+  RCT --> Recur[Recursive Functions]
+  RCT --> Decidability[Decidability]
+  Decidability --> Halting[Halting Problem]
+  RCT --> Reductions[Reductions]
+  RCT --> Rice[Rice's Theorem]
+```

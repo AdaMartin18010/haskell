@@ -454,3 +454,63 @@ $$[\![S_1]\!] = [\![S_2]\!]$$
 - **行业**: 控制系统安全、网络弹性、微服务拓扑与可观测性、鲁棒控制与故障安全。
 
 参考模板：参见 `../course_case_alignment_template.md`
+
+## 对比分析 Comparison
+
+- **中文**：系统理论 vs 控制论 vs 信息论
+  - 关注点：系统结构与层次；反馈与稳定；编码与传输。
+  - 方法：系统建模与组合；控制律与不变式；熵与互信息。
+- **English**: System Theory vs Cybernetics vs Information Theory
+  - Focus: structure/hierarchy; feedback/stability; coding/transmission.
+  - Methods: modeling/composition; control laws/invariants; entropy/mutual info.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 复杂系统的可建模性/可验证性边界；统计规律与个体行为的张力；
+  - 过度抽象可能弱化工程可操作性。
+- **English**:
+  - Limits of modeling/verifiability for complex systems; statistics vs individuals;
+  - Excessive abstraction may reduce engineering operability.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 自适应与学习型控制；网络化与分布式系统弹性；
+  - 时空逻辑+模型检测在系统安全/可靠中的落地；
+  - 数字孪生与形式化同步的系统设计流。
+- **English**:
+  - Adaptive/learning control; resilience of networked/distributed systems;
+  - Spatio-temporal logic + model checking in safety/assurance;
+  - Digital twins with formal co-simulation pipelines.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 忽视非线性与不确定性；未明确边界与环境假设；
+  - 组合系统中接口/协议不一致导致的涌现故障。
+- **English**:
+  - Ignoring nonlinearity/uncertainty; missing boundary/environment assumptions;
+  - Emergent failures from interface/protocol mismatches in composition.
+
+## 扩展交叉引用 Extended Cross References
+
+- [控制论 Cybernetics](../Cybernetics/README.md)
+- [信息论 Information Theory](../InformationTheory/README.md)
+- [复杂性科学 Complexity Science](../ComplexityScience/README.md)
+- [分布式系统 Distributed Systems](../../model/Software/Distributed_Systems.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  ST[System Theory] --> Structure[Structure]
+  ST --> Dynamics[Dynamics]
+  ST --> Feedback[Feedback]
+  ST --> Stability[Stability]
+  ST --> Complexity[Complexity]
+  Feedback --> Control[Control]
+  Dynamics --> Composition[Composition]
+  Stability --> Lyap[Lyapunov]
+  Complexity --> Network[Networks]
+```

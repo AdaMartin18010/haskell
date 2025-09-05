@@ -1,12 +1,35 @@
 # Game Development 行业应用案例
 
+## 目录速览
+
+- [案例1：类型安全的游戏状态管理](#案例1类型安全的游戏状态管理)
+- [案例2：物理引擎的形式化验证](#案例2物理引擎的形式化验证)
+- [案例3：多人网络同步的形式化建模](#案例3多人网络同步的形式化建模)
+- [参考文献](#参考文献)
+
+## 交付清单（可勾选）
+
+- [ ] 上线 ECS 微案例（最小可运行）
+- [ ] 增补网络同步基准与一致性实验
+- [ ] 增补渲染/资源管理工程化要点
+- [ ] 与 Overview 的回链与指标对齐
+
+## 案例模板
+
+1) 背景与目标
+2) 架构与数据流/系统流
+3) 实现要点（Haskell/Rust/Lean）
+4) 实验与指标（FPS/延迟/一致性）
+5) 工程化与运维
+6) 经验与复盘
+
 ## 案例1：类型安全的游戏状态管理
 
-### 问题建模
+### 问题建模（案例1）
 
 - 目标：实现一个可形式化验证的游戏状态管理系统，确保游戏逻辑的正确性和一致性。
 
-### Haskell实现
+### Haskell实现（案例1）
 
 ```haskell
 {-# LANGUAGE GADTs, DataKinds, KindSignatures #-}
@@ -43,7 +66,7 @@ updatePlayer dt player = player
   }
 ```
 
-### Rust实现
+### Rust实现（案例1）
 
 ```rust
 use bevy::prelude::*;
@@ -79,7 +102,7 @@ impl GameState {
 }
 ```
 
-### Lean形式化
+### Lean形式化（案例1）
 
 ```lean
 def update_game (dt : ℝ) (state : GameState) : GameState :=
@@ -96,11 +119,11 @@ begin
 end
 ```
 
-### 对比分析
+### 对比分析（案例1）
 
 - Haskell强调类型级安全和函数式抽象，Rust注重高性能和内存安全，Lean可形式化证明游戏逻辑的正确性。
 
-### 工程落地
+### 工程落地（案例1）
 
 - 适用于实时游戏、策略游戏、模拟游戏等场景。
 
@@ -108,11 +131,11 @@ end
 
 ## 案例2：物理引擎的形式化验证
 
-### 问题建模
+### 问题建模（案例2）
 
 - 目标：实现一个可形式化验证的物理引擎，确保物理计算的准确性和稳定性。
 
-### Haskell实现
+### Haskell实现（案例2）
 
 ```haskell
 data PhysicsObject = PhysicsObject
@@ -143,7 +166,7 @@ calculateAcceleration force mass =
   Acceleration (magnitude force / mass) (direction force)
 ```
 
-### Rust实现
+### Rust实现（案例2）
 
 ```rust
 use nalgebra::Vector3;
@@ -176,7 +199,7 @@ impl PhysicsObject {
 }
 ```
 
-### Lean形式化
+### Lean形式化（案例2）
 
 ```lean
 def apply_force (force : Force) (obj : PhysicsObject) : PhysicsObject :=
@@ -197,11 +220,11 @@ begin
 end
 ```
 
-### 对比分析
+### 对比分析（案例2）
 
 - Haskell提供清晰的数学表达和类型安全，Rust确保高性能计算和内存安全，Lean可形式化证明物理定律的数学性质。
 
-### 工程落地
+### 工程落地（案例2）
 
 - 适用于3D游戏、物理仿真、VR/AR等场景。
 
@@ -209,11 +232,11 @@ end
 
 ## 案例3：多人网络同步的形式化建模
 
-### 问题建模
+### 问题建模（案例3）
 
 - 目标：实现一个可形式化验证的多人网络同步系统，确保数据一致性和网络效率。
 
-### Haskell实现
+### Haskell实现（案例3）
 
 ```haskell
 data NetworkMessage = NetworkMessage
@@ -240,7 +263,7 @@ updatePlayerPosition msg state =
   in state { players = map (updatePlayerPositionById playerId newPosition) (players state) }
 ```
 
-### Rust实现
+### Rust实现（案例3）
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -287,7 +310,7 @@ impl GameState {
 }
 ```
 
-### Lean形式化
+### Lean形式化（案例3）
 
 ```lean
 def process_network_message (msg : NetworkMessage) (state : GameState) : GameState :=
@@ -305,11 +328,11 @@ begin
 end
 ```
 
-### 对比分析
+### 对比分析（案例3）
 
 - Haskell提供强类型安全和函数式抽象，Rust确保高性能网络处理和内存安全，Lean可形式化证明网络同步的正确性。
 
-### 工程落地
+### 工程落地（案例3）
 
 - 适用于MMO、MOBA、FPS等多人游戏场景。
 

@@ -438,3 +438,62 @@ $$[\![A_1 \times A_2]\!] = [\![A_1]\!] \cap [\![A_2]\!]$$
 - **行业**: 正则/解析器引擎、模型检测、协议验证、模糊测试反馈自动机。
 
 参考模板：参见 `../course_case_alignment_template.md`
+
+## 对比分析 Comparison
+
+- **中文**：自动机 vs 形式语言 vs 计算复杂性
+  - 关系：自动机给出识别模型，文法给出生成模型，复杂性衡量资源边界。
+  - 取舍：表达力↑→可判定性/可构造性↓；工程上需选安全子集。
+- **English**: Automata vs formal languages vs complexity
+  - Relation: automata recognize, grammars generate, complexity bounds resources.
+  - Trade-off: more expressive ⇒ less decidable/constructible; pick safe subsets.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 真实系统非确定性/并发/时序特性难以用经典自动机直接刻画；
+  - 高表达力模型（如 TM）缺乏工程可验证性与工具链支撑。
+- **English**:
+  - Nondeterminism/concurrency/temporal aspects challenge classic models;
+  - Highly expressive models (TM) lack verification/tooling practicality.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 时序/概率/混杂自动机与模型检测；
+  - 学习型自动机（L* 等）在协议推断与模糊测试中的应用；
+  - 以范畴/代数视角统一自动机组合与并发。
+- **English**:
+  - Temporal/probabilistic/hybrid automata with model checking;
+  - Automata learning (e.g., L*) for protocol inference and fuzzing;
+  - Categorical/algebraic views for composition and concurrency.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 子集构造遗漏 ε-闭包；最小化时合并不可达/等价类错误；
+  - PDA 转换 CFG 时遗失栈操作约束；TM 转换边界条件处理不当。
+- **English**:
+  - Missing epsilon-closure in subset construction; faulty DFA minimization;
+  - Losing stack constraints in PDA↔CFG; mishandling TM boundary conditions.
+
+## 扩展交叉引用 Extended Cross References
+
+- [形式语言理论 Formal Language Theory](../FormalLanguageTheory/README.md)
+- [计算复杂性 Complexity Theory](../Recursion_Computability_Theory/README.md)
+- [范畴论 Category Theory](../CategoryTheory/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  AT[Automata Theory] --> DFA[DFA]
+  AT --> NFA[NFA]
+  AT --> PDA[PDA]
+  AT --> TM[TM]
+  DFA --> Reg[Regular Languages]
+  PDA --> CFL[Context-Free]
+  TM --> RE[Recursively Enumerable]
+  AT --> MC[Model Checking]
+  AT --> Learn[Automata Learning]
+```

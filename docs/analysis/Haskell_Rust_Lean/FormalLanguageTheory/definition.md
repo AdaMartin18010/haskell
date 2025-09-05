@@ -409,7 +409,7 @@ $$[\![G]\!] = L(G)$$
 - **中文**：形式语言理论为语言学提供形式化工具，用于描述和分析自然语言的结构。
 - **English**: Formal language theory provides formal tools for linguistics, used to describe and analyze the structure of natural languages.
 
-## 交叉引用 Cross References
+## 扩展交叉引用 Extended Cross References
 
 - [自动机理论 Automata Theory](../AutomataTheory/README.md)
 - [计算理论 Computation Theory](../Recursion_Computability_Theory/README.md)
@@ -443,3 +443,52 @@ $$[\![G]\!] = L(G)$$
 - **行业**: 解析器生成器、正则引擎、协议状态机、静态分析（抽象解释）。
 
 参考模板：参见 `../course_case_alignment_template.md`
+
+## 对比分析 Comparison
+
+- **中文**：形式语言 vs 自动机 vs 编程语言语义
+  - 生成/识别：文法生成语言，自动机识别语言，语义为程序赋予意义。
+  - 粒度：文法/自动机偏语法结构，语义侧重可观察行为与含义。
+- **English**: Formal languages vs automata vs PL semantics
+  - Generation/recognition vs meaning assignment.
+  - Grammar/automata are syntactic; semantics emphasizes observable behavior and meaning.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 自然语言适配的局限；工程实现中的二义性与可维护性；复杂度界导致的实用性折衷。
+- **English**:
+  - Limits for natural language; ambiguity/maintainability in engineering; complexity-driven trade-offs.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 可验证解析与语法制导编辑；基于代数效应的语法-语义一体化；图灵完备正则扩展的安全子集。
+- **English**:
+  - Verified parsing and syntax-directed editing; algebraic-effects-based unified grammar-semantics; safe subsets of powerful regex engines.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 用正则刻画非正则语言；忽视 ε-产生式/左递归处理；自动机转换中丢失接受条件。
+- **English**:
+  - Using regex for non-regular languages; ignoring epsilon-productions/left recursion; losing acceptance conditions in automata conversions.
+
+## 交叉引用 Cross References
+
+- [自动机理论 Automata Theory](../AutomataTheory/README.md)
+- [编程语言语义 Programming Language Semantics](../Syntax_Semantics/README.md)
+- [模型论 Model Theory](../ModelTheory/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  FLT[Formal Language Theory] --> Gram[Grammars]
+  FLT --> Automata[Automata]
+  FLT --> Chomsky[Chomsky Hierarchy]
+  Automata --> DFA[DFA]
+  Automata --> PDA[PDA]
+  Automata --> TM[TM]
+  FLT --> PL[Programming Languages]
+```
