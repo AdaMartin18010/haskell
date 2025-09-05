@@ -525,3 +525,67 @@ graph TD
 - **行业**: 编译器验证（CompCert 启发）、解释器/VM 形式化、静态分析与验证工具链。
 
 参考模板：参见 `../course_case_alignment_template.md`
+
+## 对比分析 Comparison
+
+- **中文**：语法与语义 vs 语法分析 vs 语义分析 vs 编译器设计
+  - 语法与语义关注"语言结构与含义的关系"；语法分析聚焦"结构识别"；语义分析强调"含义理解"；编译器设计注重"语言实现"。
+- **English**: Syntax & semantics vs syntax analysis vs semantic analysis vs compiler design
+  - Syntax & semantics focus on "relationship between language structure and meaning"; syntax analysis on "structure recognition"; semantic analysis on "meaning understanding"; compiler design on "language implementation".
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 语法 vs 语义的优先性争议；形式化语义 vs 非形式化语义；
+  - 操作语义 vs 指称语义；语法糖 vs 核心语法的设计哲学。
+- **English**:
+  - Controversies over priority of syntax vs semantics; formal semantics vs informal semantics;
+  - Operational semantics vs denotational semantics; syntactic sugar vs core syntax design philosophy.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 多模态语法与语义；AI辅助的语法语义分析；
+  - 量子编程语言的语法语义；分布式系统的语法语义。
+- **English**:
+  - Multimodal syntax and semantics; AI-assisted syntax-semantic analysis;
+  - Syntax and semantics of quantum programming languages; syntax and semantics for distributed systems.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 混淆语法与语义；忽视语义的形式化定义；
+  - 过度复杂化语法设计；语义一致性问题。
+- **English**:
+  - Confusing syntax with semantics; ignoring formal definition of semantics;
+  - Over-complicating syntax design; semantic consistency issues.
+
+## 扩展交叉引用 Extended Cross References
+
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [类型系统 Type Systems](../TypeSystems/README.md)
+- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
+- [实践价值 Practical Value](../PracticalValue/README.md)
+- [系统理论 System Theory](../SystemTheory/README.md)
+- [形式语言理论 Formal Language Theory](../FormalLanguageTheory/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  SS[Syntax & Semantics] --> Syntax[Syntax]
+  SS --> Semantics[Semantics]
+  Syntax --> Grammar[Grammar]
+  Syntax --> AST[Abstract Syntax Tree]
+  Semantics --> OpSem[Operational Semantics]
+  Semantics --> DenSem[Denotational Semantics]
+  Semantics --> AxSem[Axiomatic Semantics]
+  Grammar --> CFG[Context-Free Grammar]
+  AST --> Parse[Parsing]
+  OpSem --> SmallStep[Small-Step]
+  OpSem --> BigStep[Big-Step]
+  DenSem --> Domain[Domain Theory]
+  AxSem --> Hoare[Hoare Logic]
+  SS --> TypeCheck[Type Checking]
+  SS --> Compiler[Compiler Design]
+```

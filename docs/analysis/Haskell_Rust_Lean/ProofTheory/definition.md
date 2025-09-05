@@ -282,6 +282,58 @@ normalizationTheorem term = isNormalForm (normalize term)
 - [形式化定义 Formal Definitions](../FormalDefinitions/README.md)
 - [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
 
+## 对比分析 Comparison
+
+- **中文**：证明论 vs 模型论 vs 语义模型 vs 类型理论
+  - 证明论侧重语法层面的推理规则与构造；模型论给出语义解释；语义模型给出程序含义；类型理论建立命题-程序同构。
+- **English**: Proof theory vs model theory vs semantic models vs type theory
+  - Proof theory focuses on syntactic inference and construction; model theory on semantic interpretation; semantic models on program meaning; type theory on propositions-as-types.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 语法主义 vs 语义主义之争；强规范化假设与可计算性界限；
+  - 证明复杂度与可读性；自动化证明的可解释性。
+- **English**:
+  - Syntactic vs semantic primacy; strong normalization assumptions vs computability limits;
+  - Proof complexity and readability; explainability of automated proofs.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 交互式定理证明（ITP）与自动定理证明（ATP）的协同；
+  - 依赖类型与证明重用；程序合成与证据携带代码；概率证明与可验证机器学习。
+- **English**:
+  - Synergy of ITP and ATP; dependent types and proof reuse; program synthesis and proof-carrying code; probabilistic proofs and verifiable ML.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 漏掉结构规则或侧条件；混淆自然演绎与序列演算；
+  - 证明归约与等价的混用；未区分内在证明与外在证明。
+- **English**:
+  - Missing structural rules or side conditions; conflating natural deduction with sequent calculus;
+  - Mixing proof reduction with equivalence; not distinguishing intrinsic vs extrinsic proofs.
+
+## 扩展交叉引用 Extended Cross References
+
+- [类型理论 Type Theory](../TypeTheory/README.md)
+- [模型论 Model Theory](../ModelTheory/README.md)
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [程序验证 Program Verification](../ProgramVerification/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  PT[Proof Theory] --> ND[Natural Deduction]
+  PT --> SC[Sequent Calculus]
+  PT --> CH[Curry-Howard]
+  CH --> TT[Type Theory]
+  PT --> Norm[Normalization]
+  PT --> ITP[Interactive TP]
+```
+
 ## 参考文献 References
 
 1. Gentzen, G. (1934). Untersuchungen über das logische Schließen. Mathematische Zeitschrift, 39(1), 176-210.

@@ -491,3 +491,63 @@ graph TD
   RCT --> Reductions[Reductions]
   RCT --> Rice[Rice's Theorem]
 ```
+
+## 对比分析 Comparison
+
+- **中文**：递归-可计算理论 vs 算法理论 vs 复杂性理论 vs 程序验证理论
+  - 递归-可计算理论关注"计算的本质与极限"；算法理论聚焦"具体计算方法"；复杂性理论强调"计算资源需求"；程序验证理论注重"程序正确性"。
+- **English**: Recursion & Computability Theory vs algorithm theory vs complexity theory vs program verification theory
+  - Recursion & Computability focuses on "nature and limits of computation"; algorithm theory on "specific computational methods"; complexity on "computational resource requirements"; verification on "program correctness".
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 丘奇-图灵论题的有效性争议；可计算性的哲学基础；
+  - 递归 vs 迭代的计算模型；不可判定问题的实际意义。
+- **English**:
+  - Controversies over validity of Church-Turing thesis; philosophical foundations of computability;
+  - Recursive vs iterative computational models; practical significance of undecidable problems.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 量子可计算性理论；超计算与超图灵机；
+  - 生物计算与DNA计算；分布式可计算性。
+- **English**:
+  - Quantum computability theory; hypercomputation and hyper-Turing machines;
+  - Biological computation and DNA computing; distributed computability.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 混淆可计算性与复杂性；忽视不可判定问题的存在；
+  - 过度依赖递归模型；误解图灵机的表达能力。
+- **English**:
+  - Confusing computability with complexity; ignoring existence of undecidable problems;
+  - Over-reliance on recursive models; misunderstanding expressiveness of Turing machines.
+
+## 扩展交叉引用 Extended Cross References
+
+- [自动机理论 Automata Theory](../AutomataTheory/README.md)
+- [形式语言理论 Formal Language Theory](../FormalLanguageTheory/README.md)
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
+- [实践价值 Practical Value](../PracticalValue/README.md)
+- [系统理论 System Theory](../SystemTheory/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  RCT[Recursion & Computability Theory] --> Computability[Computability]
+  RCT --> Decidability[Decidability]
+  RCT --> TM[Turing Machines]
+  Computability --> Recursive[Recursive Functions]
+  Computability --> Lambda[Lambda Calculus]
+  Decidability --> Halting[Halting Problem]
+  RCT --> Reductions[Reductions]
+  RCT --> Rice[Rice's Theorem]
+  RCT --> Algorithms[Algorithms]
+  RCT --> Complexity[Complexity Theory]
+  RCT --> Verification[Program Verification]
+```

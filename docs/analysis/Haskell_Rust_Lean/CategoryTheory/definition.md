@@ -202,6 +202,59 @@ instance Monad (State s) where
 - [形式化定义 Formal Definitions](../FormalDefinitions/README.md)
 - [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
 
+## 对比分析 Comparison
+
+- **中文**：范畴论 vs 集合论 vs 类型论 vs 语义模型
+  - 范畴论以态射与普遍性为核心；集合论以元素隶属为核心；类型论以证明/程序为核心；语义模型以含义赋值为核心。
+- **English**: Category theory vs set theory vs type theory vs semantic models
+  - Category theory centers on morphisms and universality; set theory on membership; type theory on proofs/programs; semantic models on meaning assignment.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 范畴化是否过度抽象；与具体数学计算的距离；
+  - 公理层次（宇宙、公理选择）带来的基础性争论。
+- **English**:
+  - Over-abstraction concerns; distance to concrete calculations;
+  - Foundational debates around universes and axioms.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 同伦类型论与高阶范畴；量子计算的范畴语义；
+  - 可验证编程的范畴化构造（单子/伴随/代数效应）。
+- **English**:
+  - HoTT and higher categories; categorical semantics for quantum computing;
+  - Categorical constructions for verified programming (monads/adjunctions/algebraic effects).
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 把“对象本体论”套到“态射本体论”；忽视普遍性质的最小性/唯一性条件；
+  - 混淆等价与同构。
+- **English**:
+  - Forcing object-centric ontology onto arrow-centric thinking; ignoring minimality/uniqueness in universal properties;
+  - Confusing equivalence with isomorphism.
+
+## 扩展交叉引用 Extended Cross References
+
+- [类型理论 Type Theory](../TypeTheory/README.md)
+- [HOTT](../HOTT/README.md)
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [信息论 Information Theory](../InformationTheory/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  CT[Category Theory] --> Obj[Objects]
+  CT --> Mor[Morphisms]
+  CT --> Fun[Functors]
+  CT --> Nat[Nat. Transform]
+  CT --> Adj[Adjunctions]
+  CT --> Mon[Monads]
+```
+
 ## 参考文献 References
 
 1. Eilenberg, S., & Mac Lane, S. (1945). General theory of natural equivalences. Transactions of the American Mathematical Society, 58(2), 231-294.

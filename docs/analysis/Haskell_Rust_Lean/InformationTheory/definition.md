@@ -485,3 +485,63 @@ graph TD
   IT --> Privacy[Privacy & DP]
   IT --> Quantum[Quantum Info]
 ```
+
+## 对比分析 Comparison1
+
+- **中文**：信息论 vs 通信理论 vs 编码理论 vs 统计学习理论
+  - 信息论关注"信息的度量与传输"；通信理论聚焦"信号传输技术"；编码理论强调"错误检测与纠正"；统计学习理论注重"从数据中学习"。
+- **English**: Information theory vs communication theory vs coding theory vs statistical learning theory
+  - Information theory focuses on "measurement and transmission of information"; communication theory on "signal transmission technology"; coding theory on "error detection and correction"; statistical learning on "learning from data".
+
+## 争议与批判 Controversies & Critique1
+
+- **中文**：
+  - 信息定义的哲学争议；熵与复杂性的关系；
+  - 香农信息论 vs 语义信息论；信息论在AI中的适用性。
+- **English**:
+  - Philosophical controversies over information definition; relationship between entropy and complexity;
+  - Shannon information theory vs semantic information theory; applicability of information theory in AI.
+
+## 前沿趋势 Frontier Trends1
+
+- **中文**：
+  - 量子信息论与量子计算；信息论在机器学习中的应用；
+  - 分布式信息处理；信息论与神经科学的交叉。
+- **English**:
+  - Quantum information theory and quantum computing; applications of information theory in machine learning;
+  - Distributed information processing; intersection of information theory and neuroscience.
+
+## 常见陷阱 Common Pitfalls1
+
+- **中文**：
+  - 混淆信息与数据；忽视信息的语义维度；
+  - 过度依赖熵作为复杂性度量；信息论模型的简化假设。
+- **English**:
+  - Confusing information with data; ignoring semantic dimensions of information;
+  - Over-reliance on entropy as complexity measure; simplifying assumptions in information theory models.
+
+## 扩展交叉引用 Extended Cross References1
+
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
+- [实践价值 Practical Value](../PracticalValue/README.md)
+- [系统理论 System Theory](../SystemTheory/README.md)
+- [控制论 Cybernetics](../Cybernetics/README.md)
+- [形式语言理论 Formal Language Theory](../FormalLanguageTheory/README.md)
+
+## 知识图谱 Knowledge Graph1
+
+```mermaid
+graph TD
+  IT[Information Theory] --> Entropy[Entropy]
+  IT --> MI[Mutual Information]
+  IT --> Channel[Channel Capacity]
+  IT --> Coding[Coding]
+  Coding --> Source[Source Coding]
+  Coding --> ChannelC[Channel Coding]
+  IT --> Privacy[Privacy & DP]
+  IT --> Quantum[Quantum Info]
+  IT --> ML[Machine Learning]
+  IT --> Comm[Communication]
+  IT --> Comp[Compression]
+```

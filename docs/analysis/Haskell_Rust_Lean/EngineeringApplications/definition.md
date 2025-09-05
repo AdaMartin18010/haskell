@@ -483,6 +483,67 @@ $$[\![P]\!] = \{(i, t) \mid i \text{ is input, } t \text{ is execution time}\}$$
 - [形式化定义 Formal Definitions](../FormalDefinitions/README.md)
 - [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
 
+## 对比分析 Comparison
+
+- **中文**：工程应用 vs 语义模型 vs 编译器 vs 程序验证
+  - 工程应用关注“把理论落到工程产物与流程”；语义模型聚焦含义；编译器聚焦可实现与优化；程序验证聚焦正确性与证据。
+- **English**: Engineering applications vs semantic models vs compilers vs program verification
+  - Engineering focuses on translating theory into artifacts and processes; semantics on meaning; compilers on implementability and optimization; verification on correctness and evidence.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 形式化深度与交付效率的权衡；“证明驱动设计”与“经验驱动迭代”的张力；
+  - 安全/合规成本与性能/上市时间之间的冲突；工具链锁定与可迁移性问题。
+- **English**:
+  - Trade-off between formal depth and delivery speed; tension between proof-driven design and experience-driven iteration;
+  - Security/compliance cost vs performance/time-to-market; toolchain lock-in and portability.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 可验证编译（Vellvm/CompCert）、证明携带代码（PCC）、可验证基础设施（SeL4/Drive-by proofs）；
+  - 依赖类型在工业（Lean/Idris/Coq extraction）、Rust 类型化资源模型在系统软件；
+  - AI for SE：缺陷预测、自动修复与形式合成结合。
+- **English**:
+  - Verified compilation (Vellvm/CompCert), proof-carrying code (PCC), verified infrastructure (seL4/drive-by proofs);
+  - Industrial dependent types (Lean/Idris/Coq extraction), Rust-typed resource models in systems software;
+  - AI for SE: defect prediction, auto-fix with formal synthesis.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 只做“概念映射”而缺少“端到端验证路径”；忽视非功能性需求（性能、可观测性、SLO）；
+  - 形式化与实现的语义漂移；跨团队工具链与流程不一致。
+- **English**:
+  - Concept mapping without end-to-end verification path; ignoring non-functional requirements (performance, observability, SLO);
+  - Semantic drift between formalization and implementation; cross-team tool/process inconsistency.
+
+## 扩展交叉引用 Extended Cross References
+
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [编译器理论 Compiler Theory](../CompilerTheory/README.md)
+- [程序验证 Program Verification](../ProgramVerification/README.md)
+- [系统架构 System Architecture](../SystemArchitecture/README.md)
+- [质量保证 Quality Assurance](../QualityAssurance/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  EA[Engineering Applications] --> LD[Language Design]
+  EA --> CD[Compiler Design]
+  EA --> TC[Toolchains]
+  EA --> FV[Formal Verification]
+  EA --> DEP[Deployment]
+  LD --> TS[Type Systems]
+  CD --> OPT[Optimizations]
+  FV --> MC[Model Checking]
+  FV --> TP[Theorem Proving]
+  TC --> CI[CI/CD]
+  DEP --> Cloud[Cloud Native]
+```
+
 ## 参考文献 References
 
 1. Dijkstra, E. W. (1968). Go to statement considered harmful. Communications of the ACM, 11(3), 147-148.

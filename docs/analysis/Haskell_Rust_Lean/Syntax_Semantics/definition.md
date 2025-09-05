@@ -479,5 +479,3 @@ graph TD
   AxSem --> Hoare[Hoare Logic]
   SS --> TypeCheck[Type Checking]
 ```
- 
- 

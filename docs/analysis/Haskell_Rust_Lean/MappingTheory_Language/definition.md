@@ -374,6 +374,61 @@ $$\forall T. [\![T]\!] = [\![\mathcal{M}(T)]\!]$$
 - [形式化定义 Formal Definitions](../FormalDefinitions/README.md)
 - [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
 
+## 对比分析 Comparison
+
+- **中文**：理论→语言映射 vs 语义模型 vs 编译器实现 vs 验证
+  - 映射关注“从理论到特性”的系统化路径；语义模型关注含义；编译器关注可实现与优化；验证关注正确性与一致性。
+- **English**: Theory→Language mapping vs semantic models vs compiler implementation vs verification
+  - Mapping emphasizes the systematic path from theory to features; semantics focuses on meaning; compilers on implementability/optimization; verification on correctness/consistency.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 表达力与可判定性的取舍；理论纯度与工程可用性的张力；
+  - 语义保持的边界与等价判定的复杂性。
+- **English**:
+  - Trade-offs between expressiveness and decidability; tension between theoretical purity and engineering usability;
+  - Limits of semantic preservation and complexity of equivalence checking.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 依赖类型/会话类型的工业化；可验证编译与证据携带代码；
+  - 形式化与机器学习的结合（合成/验证）。
+- **English**:
+  - Industrial adoption of dependent/session types; verified compilation and PCC;
+  - Integrating formal methods with ML (synthesis/verification).
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 漏掉副作用/并发/资源模型的系统化映射；
+  - 未提供从定理到测试/工具链的一致路径；
+  - 只给“点状对照”，缺少“组合性保持”的全局策略。
+- **English**:
+  - Missing systematic mapping for effects/concurrency/resources;
+  - No consistent path from theorems to tests/toolchains;
+  - Pointwise correspondences without global compositionality strategy.
+
+## 扩展交叉引用 Extended Cross References
+
+- [类型系统 Type Systems](../TypeSystems/README.md)
+- [语法与语义 Syntax & Semantics](../Syntax_Semantics/README.md)
+- [编译器理论 Compiler Theory](../CompilerTheory/README.md)
+- [程序验证 Program Verification](../ProgramVerification/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  MTL[Mapping Theory -> Language] --> TT[Type Theory]
+  MTL --> CT[Category]
+  MTL --> Logic[Logic]
+  MTL --> Sem[Semantics]
+  MTL --> Comp[Compiler]
+  MTL --> Verify[Verification]
+```
+
 ## 参考文献 References
 
 1. Strachey, C. (1967). Fundamental concepts in programming languages. Oxford University.

@@ -375,6 +375,65 @@ $$\forall P. V(T_1, P) \geq V(T_2, P) \Rightarrow V(\text{Apply}(T_1), P) \geq V
 - [形式化定义 Formal Definitions](../FormalDefinitions/README.md)
 - [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
 
+## 对比分析 Comparison
+
+- **中文**：实践价值 vs 理论价值 vs 工程价值 vs 商业价值
+  - 实践价值关注“理论在工程中的可量化收益”；理论价值聚焦知识本身；工程价值聚焦技术实现；商业价值聚焦市场回报。
+- **English**: Practical value vs theoretical value vs engineering value vs business value
+  - Practical focuses on quantifiable benefits of theory in engineering; theoretical on knowledge itself; engineering on technical implementation; business on market returns.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 价值量化的客观性与主观性争议；短期收益与长期价值的权衡；
+  - 理论深度与工程效率的张力；成本效益分析的局限性。
+- **English**:
+  - Objectivity vs subjectivity in value quantification; short-term gains vs long-term value;
+  - Tension between theoretical depth and engineering efficiency; limitations of cost-benefit analysis.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 基于数据的价值评估（A/B测试、指标驱动）；AI辅助的价值预测与优化；
+  - 可持续性价值评估（ESG、技术债务）；价值驱动的架构决策（Value-Driven Architecture）。
+- **English**:
+  - Data-driven value assessment (A/B testing, metrics-driven); AI-assisted value prediction and optimization;
+  - Sustainability value assessment (ESG, technical debt); value-driven architectural decisions.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 过度量化导致忽视定性价值；短期指标误导长期决策；
+  - 忽视隐性成本与机会成本；价值评估的偏见与不完整性。
+- **English**:
+  - Over-quantification ignoring qualitative value; short-term metrics misleading long-term decisions;
+  - Ignoring hidden costs and opportunity costs; bias and incompleteness in value assessment.
+
+## 扩展交叉引用 Extended Cross References
+
+- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
+- [决策理论 Decision Theory](../DecisionTheory/README.md)
+- [经济学 Economics](../Economics/README.md)
+- [工程管理 Engineering Management](../EngineeringManagement/README.md)
+- [质量保证 Quality Assurance](../QualityAssurance/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  PV[Practical Value] --> DE[Development Efficiency]
+  PV --> QA[Quality Assurance]
+  PV --> CC[Cost Control]
+  PV --> RM[Risk Mitigation]
+  DE --> TGE[Theory-Guided Efficiency]
+  QA --> FVQ[Formal Verification Quality]
+  CC --> TAC[Theory Application Cost]
+  RM --> TGRM[Theory-Guided Risk Mitigation]
+  PV --> ROI[Return on Investment]
+  PV --> TTM[Time to Market]
+  PV --> MTBF[Mean Time Between Failures]
+```
+
 ## 参考文献 References
 
 1. Simon, H. A. (1957). Models of man: Social and rational. Wiley.

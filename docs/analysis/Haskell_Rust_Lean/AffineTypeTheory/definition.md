@@ -244,6 +244,69 @@ $$[\![A \multimap B]\!] = [\![A]\!] \multimap [\![B]\!]$$
   - RustBelt：形式化刻画 Rust 安全性；仿射“至多一次”与 move 语义对应。
   - 工程资产：文件句柄、临时密钥、一次性 token 的安全销毁与丢弃。
 
+## 对比分析 Comparison
+
+- **中文**：仿射类型理论 vs 线性类型理论 vs 非线性类型理论 vs 依赖类型理论
+  - 仿射类型理论关注"至多一次使用"；线性类型理论强调"恰好一次使用"；非线性类型理论允许"任意次使用"；依赖类型理论聚焦"类型依赖值"。
+- **English**: Affine type theory vs linear type theory vs non-linear type theory vs dependent type theory
+  - Affine focuses on "at most once usage"; linear on "exactly once usage"; non-linear on "arbitrary usage"; dependent on "types depending on values".
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 仿射类型与线性类型的实用性争议；弱化规则对类型安全性的影响；
+  - 资源管理的复杂性 vs 类型系统的简洁性；工程实践中的过度约束问题。
+- **English**:
+  - Controversies over practicality of affine vs linear types; impact of weakening rules on type safety;
+  - Complexity of resource management vs simplicity of type systems; over-constraint issues in engineering practice.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 混合类型系统（仿射+线性+非线性）；AI辅助的资源管理优化；
+  - 量子计算中的仿射类型；分布式系统中的资源一致性。
+- **English**:
+  - Hybrid type systems (affine+linear+non-linear); AI-assisted resource management optimization;
+  - Affine types in quantum computing; resource consistency in distributed systems.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 过度使用仿射类型导致代码复杂化；忽视资源生命周期管理；
+  - 类型推断的复杂性；与现有代码库的兼容性问题。
+- **English**:
+  - Overuse of affine types leading to code complexity; ignoring resource lifecycle management;
+  - Complexity of type inference; compatibility issues with existing codebases.
+
+## 扩展交叉引用 Extended Cross References
+
+- [线性类型理论 Linear Type Theory](../LinearTypeTheory/README.md)
+- [时间类型理论 Temporal Type Theory](../TemporalTypeTheory/README.md)
+- [类型系统 Type Systems](../TypeSystems/README.md)
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
+- [实践价值 Practical Value](../PracticalValue/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  ATT[Affine Type Theory] --> AT[Affine Types]
+  ATT --> AR[Affine Rules]
+  ATT --> AL[Affine Logic]
+  AT --> AF[Affine Functions]
+  AT --> AP[Affine Pairs]
+  AR --> WR[Weakening Rule]
+  AR --> UR[Usage Rules]
+  AL --> ML[Multiplicative Logic]
+  AL --> AL2[Additive Logic]
+  ATT --> RM[Resource Management]
+  ATT --> TS[Type Safety]
+  ATT --> CP[Concurrency Programming]
+```
+
+## 参考文献 References1
+
 1. Girard, J. Y. (1987). Linear logic. Theoretical Computer Science, 50(1), 1-101.
 2. Wadler, P. (1990). Linear types can change the world! Programming Concepts and Methods, 347-359.
 3. Pfenning, F., & Walker, D. (1991). Higher-order logic programming. Theoretical Aspects of Computer Software, 1-15.

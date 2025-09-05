@@ -492,3 +492,65 @@ graph TD
   Automata --> TM[TM]
   FLT --> PL[Programming Languages]
 ```
+
+## 对比分析 Comparison1
+
+- **中文**：形式语言理论 vs 自然语言理论 vs 编程语言理论 vs 计算语言学
+  - 形式语言理论关注"数学化的语言结构"；自然语言理论聚焦"人类语言现象"；编程语言理论强调"计算机语言设计"；计算语言学注重"语言的计算处理"。
+- **English**: Formal language theory vs natural language theory vs programming language theory vs computational linguistics
+  - Formal focuses on "mathematical language structures"; natural language on "human language phenomena"; programming language on "computer language design"; computational linguistics on "computational language processing".
+
+## 争议与批判 Controversies & Critique1
+
+- **中文**：
+  - 乔姆斯基层次结构的表达能力限制；上下文无关文法的实用性争议；
+  - 形式化方法 vs 经验主义方法；语言复杂性与计算复杂性的关系。
+- **English**:
+  - Expressiveness limitations of Chomsky hierarchy; controversies over practicality of context-free grammars;
+  - Formal methods vs empirical methods; relationship between language complexity and computational complexity.
+
+## 前沿趋势 Frontier Trends1
+
+- **中文**：
+  - 神经符号语言学习；量子语言理论；
+  - 分布式语言处理；多模态语言理论。
+- **English**:
+  - Neuro-symbolic language learning; quantum language theory;
+  - Distributed language processing; multimodal language theory.
+
+## 常见陷阱 Common Pitfalls1
+
+- **中文**：
+  - 过度简化自然语言为形式语言；忽视语言的语义和语用维度；
+  - 文法设计的表达能力不足；语言学习的过拟合问题。
+- **English**:
+  - Over-simplifying natural languages as formal languages; ignoring semantic and pragmatic dimensions of language;
+  - Insufficient expressiveness in grammar design; overfitting in language learning.
+
+## 扩展交叉引用 Extended Cross References1
+
+- [自动机理论 Automata Theory](../AutomataTheory/README.md)
+- [递归与可计算性理论 Recursion & Computability Theory](../Recursion_Computability_Theory/README.md)
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
+- [实践价值 Practical Value](../PracticalValue/README.md)
+- [系统理论 System Theory](../SystemTheory/README.md)
+
+## 知识图谱 Knowledge Graph1
+
+```mermaid
+graph TD
+  FLT[Formal Language Theory] --> Grammar[Grammar]
+  FLT --> Language[Language]
+  FLT --> Automata[Automata]
+  Grammar --> CFG[Context-Free Grammar]
+  Grammar --> CSG[Context-Sensitive Grammar]
+  Language --> Regular[Regular Languages]
+  Language --> CFL[Context-Free Languages]
+  Automata --> DFA[DFA]
+  Automata --> PDA[PDA]
+  Automata --> TM[TM]
+  FLT --> PL[Programming Languages]
+  FLT --> NLP[Natural Language Processing]
+  FLT --> AI[Artificial Intelligence]
+```

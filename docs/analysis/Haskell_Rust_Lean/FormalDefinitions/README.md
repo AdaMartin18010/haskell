@@ -469,6 +469,72 @@ checkConsistency fs =
   in not (hasContradiction theorems)
 ```
 
+## 对比分析 Comparison
+
+- **中文**：形式化定义 vs 非形式化定义 vs 半形式化定义 vs 自然语言定义
+  - 形式化定义关注“严格数学语言与符号系统”；非形式化定义聚焦自然语言描述；半形式化定义介于两者之间；自然语言定义强调可理解性。
+- **English**: Formal definitions vs informal definitions vs semi-formal definitions vs natural language definitions
+  - Formal focuses on rigorous mathematical language and symbolic systems; informal on natural language descriptions; semi-formal between the two; natural language emphasizes comprehensibility.
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 形式化程度与可理解性的权衡；过度形式化可能阻碍工程应用；
+  - 形式化定义的完备性与一致性挑战；不同形式化系统间的互操作性。
+- **English**:
+  - Trade-off between formalization level and comprehensibility; excessive formalization may hinder engineering applications;
+  - Challenges of completeness and consistency in formal definitions; interoperability between different formal systems.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 自动化形式化定义生成（AI辅助、模板驱动）；可视化形式化定义工具；
+  - 跨范式形式化定义（函数式+命令式+逻辑式）；形式化定义的版本控制与演化。
+- **English**:
+  - Automated formal definition generation (AI-assisted, template-driven); visual formal definition tools;
+  - Cross-paradigm formal definitions (functional+imperative+logical); version control and evolution of formal definitions.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 形式化过度导致可读性差；形式化不足导致歧义性；
+  - 忽视形式化定义的可验证性；缺乏形式化定义的工程指导。
+- **English**:
+  - Over-formalization leading to poor readability; under-formalization leading to ambiguity;
+  - Ignoring verifiability of formal definitions; lack of engineering guidance for formal definitions.
+
+## 扩展交叉引用 Extended Cross References
+
+- [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)
+- [类型系统 Type Systems](../TypeSystems/README.md)
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [证明论 Proof Theory](../ProofTheory/README.md)
+- [模型论 Model Theory](../ModelTheory/README.md)
+- [语法与语义 Syntax & Semantics](../Syntax_Semantics/README.md)
+- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
+- [实践价值 Practical Value](../PracticalValue/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  FD[Formal Definitions] --> AS[Axiomatic System]
+  FD --> FS[Formal Semantics]
+  FD --> PS[Proof System]
+  AS --> L[Language]
+  AS --> A[Axioms]
+  AS --> IR[Inference Rules]
+  FS --> S[Syntax]
+  FS --> Sem[Semantics]
+  FS --> I[Interpretation]
+  PS --> ND[Natural Deduction]
+  PS --> SC[Sequent Calculus]
+  PS --> Auto[Automation]
+  FD --> TS[Type Systems]
+  FD --> SM[Semantic Models]
+  FD --> PT[Proof Theory]
+```
+
 ## 8.21 交叉引用 Cross References
 
 - [定理与证明 Theorems & Proofs](../Theorems_Proofs/README.md)

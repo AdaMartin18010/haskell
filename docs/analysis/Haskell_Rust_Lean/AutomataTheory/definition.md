@@ -497,3 +497,64 @@ graph TD
   AT --> MC[Model Checking]
   AT --> Learn[Automata Learning]
 ```
+
+## 对比分析 Comparison
+
+- **中文**：自动机理论 vs 形式语言理论 vs 计算复杂性理论 vs 程序验证理论
+  - 自动机理论关注"抽象计算模型"；形式语言理论聚焦"语言结构"；计算复杂性理论强调"计算资源"；程序验证理论注重"程序正确性"。
+- **English**: Automata theory vs formal language theory vs computational complexity theory vs program verification theory
+  - Automata focuses on "abstract computational models"; formal language on "language structures"; complexity on "computational resources"; verification on "program correctness".
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 有限状态模型的表达能力限制；非确定性 vs 确定性的实用性争议；
+  - 自动机学习中的可解释性问题；模型检查的状态爆炸问题。
+- **English**:
+  - Expressiveness limitations of finite state models; controversies over nondeterminism vs determinism;
+  - Interpretability issues in automata learning; state explosion in model checking.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 量子自动机与量子计算；神经符号自动机学习；
+  - 分布式自动机与区块链验证；自动机在AI中的新应用。
+- **English**:
+  - Quantum automata and quantum computing; neuro-symbolic automata learning;
+  - Distributed automata and blockchain verification; new applications of automata in AI.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 过度简化复杂系统为有限状态模型；忽视自动机的表达能力限制；
+  - 状态空间设计不当导致模型不可用；自动机学习中的过拟合问题。
+- **English**:
+  - Over-simplifying complex systems as finite state models; ignoring expressiveness limitations of automata;
+  - Poor state space design leading to unusable models; overfitting in automata learning.
+
+## 扩展交叉引用 Extended Cross References
+
+- [形式语言理论 Formal Language Theory](../FormalLanguageTheory/README.md)
+- [递归与可计算性理论 Recursion & Computability Theory](../Recursion_Computability_Theory/README.md)
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
+- [实践价值 Practical Value](../PracticalValue/README.md)
+- [系统理论 System Theory](../SystemTheory/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  AT[Automata Theory] --> DFA[DFA]
+  AT --> NFA[NFA]
+  AT --> PDA[PDA]
+  AT --> TM[TM]
+  DFA --> Reg[Regular Languages]
+  PDA --> CFL[Context-Free]
+  TM --> RE[Recursively Enumerable]
+  AT --> MC[Model Checking]
+  AT --> Learn[Automata Learning]
+  AT --> FL[Formal Languages]
+  AT --> CC[Computational Complexity]
+  AT --> PV[Program Verification]
+```

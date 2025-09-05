@@ -197,4 +197,72 @@ $$[\![A \multimap B]\!] = [\![A]\!] \multimap [\![B]\!]$$
 2. Wadler, P. (1990). Linear types can change the world! Programming Concepts and Methods, 347-359.
 3. Pfenning, F., & Walker, D. (1991). Higher-order logic programming. Theoretical Aspects of Computer Software, 1-15.
 4. Peyton Jones, S., et al. (2021). Linear types can change the world! (revisited). Haskell Symposium, 1-15.
+
+## 对比分析 Comparison
+
+- **中文**：线性类型理论 vs 仿射类型理论 vs 非线性类型理论 vs 所有权类型理论
+  - 线性类型理论强调"恰好一次使用"；仿射类型理论允许"至多一次使用"；非线性类型理论支持"任意次使用"；所有权类型理论关注"资源所有权"。
+- **English**: Linear type theory vs affine type theory vs non-linear type theory vs ownership type theory
+  - Linear emphasizes "exactly once usage"; affine allows "at most once usage"; non-linear supports "arbitrary usage"; ownership focuses on "resource ownership".
+
+## 争议与批判 Controversies & Critique
+
+- **中文**：
+  - 线性类型的实用性 vs 编程便利性；资源管理的复杂性 vs 类型系统的简洁性；
+  - 线性逻辑与经典逻辑的兼容性；工程实践中的过度约束问题。
+- **English**:
+  - Practicality of linear types vs programming convenience; complexity of resource management vs simplicity of type systems;
+  - Compatibility between linear logic and classical logic; over-constraint issues in engineering practice.
+
+## 前沿趋势 Frontier Trends
+
+- **中文**：
+  - 混合线性类型系统；AI辅助的线性类型推断；
+  - 量子计算中的线性类型；分布式系统中的线性资源管理。
+- **English**:
+  - Hybrid linear type systems; AI-assisted linear type inference;
+  - Linear types in quantum computing; linear resource management in distributed systems.
+
+## 常见陷阱 Common Pitfalls
+
+- **中文**：
+  - 过度使用线性类型导致代码复杂化；忽视线性值的生命周期管理；
+  - 类型推断的复杂性；与现有代码库的兼容性问题。
+- **English**:
+  - Overuse of linear types leading to code complexity; ignoring lifecycle management of linear values;
+  - Complexity of type inference; compatibility issues with existing codebases.
+
+## 扩展交叉引用 Extended Cross References
+
+- [仿射类型理论 Affine Type Theory](../AffineTypeTheory/README.md)
+- [时间类型理论 Temporal Type Theory](../TemporalTypeTheory/README.md)
+- [类型系统 Type Systems](../TypeSystems/README.md)
+- [语义模型 Semantic Models](../SemanticModels/README.md)
+- [工程应用 Engineering Applications](../EngineeringApplications/README.md)
+- [实践价值 Practical Value](../PracticalValue/README.md)
+
+## 知识图谱 Knowledge Graph
+
+```mermaid
+graph TD
+  LTT[Linear Type Theory] --> LT[Linear Types]
+  LTT --> LR[Linear Rules]
+  LTT --> LL[Linear Logic]
+  LT --> LF[Linear Functions]
+  LT --> LP[Linear Pairs]
+  LR --> UR[Usage Rules]
+  LR --> CR[Consumption Rules]
+  LL --> ML[Multiplicative Logic]
+  LL --> AL[Additive Logic]
+  LTT --> RM[Resource Management]
+  LTT --> TS[Type Safety]
+  LTT --> CP[Concurrency Programming]
+```
+
+## 参考文献 References1
+
+1. Girard, J. Y. (1987). Linear logic. Theoretical Computer Science, 50(1), 1-101.
+2. Wadler, P. (1990). Linear types can change the world! Programming Concepts and Methods, 347-359.
+3. Pfenning, F., & Walker, D. (1991). Higher-order logic programming. Theoretical Aspects of Computer Software, 1-15.
+4. Launchbury, J. (1993). A natural semantics for lazy evaluation. POPL, 1-15.
 5. Jung, R., et al. (2021). RustBelt: Securing the foundations of the Rust programming language. Journal of the ACM, 68(1), 1-34.
