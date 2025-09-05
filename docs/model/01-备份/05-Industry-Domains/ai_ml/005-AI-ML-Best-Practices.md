@@ -1,0 +1,31 @@
+# AI/ML 行业最佳实践
+
+## 类型安全建模
+
+- 使用Haskell的GADT、TypeFamilies等特性，确保模型结构和数据流的类型安全。
+- Rust中利用trait和泛型实现高性能与安全性。
+
+## 工程可验证性
+
+- 结合Lean对关键算法进行形式化证明，提升系统可靠性。
+- Haskell QuickCheck等工具进行属性测试。
+
+## 跨语言协作
+
+- 采用FFI（Foreign Function Interface）实现Haskell与Rust的高效互操作。
+- 统一数据结构定义，减少序列化/反序列化损耗。
+
+## 性能优化
+
+- Rust用于性能瓶颈模块，Haskell负责高层抽象与业务逻辑。
+- 并行与分布式训练：Haskell的STM、Rust的多线程。
+
+## 形式化验证流程
+
+- 需求建模→类型设计→实现→Lean/Coq等定理证明→集成测试。
+
+## 推荐工具
+
+- Haskell: hmatrix, QuickCheck, STM
+- Rust: ndarray, rayon, candle
+- Lean: mathlib, Lean 4
